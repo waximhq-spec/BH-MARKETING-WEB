@@ -38,14 +38,34 @@ export default function Estimate() {
   const [currentStep, setCurrentStep] = useState(1);
   const [selections, setSelections] = useState<Record<number, string>>({});
 
-  const handleSelect = (optionId: string) => {
-    setSelections(prev => ({ ...prev, [currentStep]: optionId }));
+  const handleSelect = async (optionId: string) => {
+    const newSelections = { ...selections, [currentStep]: optionId };
+    setSelections(newSelections);
     
     if (currentStep < steps.length) {
       setTimeout(() => {
         setCurrentStep(prev => prev + 1);
       }, 500);
     } else {
+      // Final step reached, let's assemble the data payload and send it via email
+      try {
+        await fetch("https://formsubmit.co/ajax/myflow.rep@gmail.com", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                Service: steps[0].options.find(o => o.id === newSelections[1])?.label || "Unknown",
+                Scale: steps[1].options.find(o => o.id === newSelections[2])?.label || "Unknown",
+                Target: steps[2].options.find(o => o.id === newSelections[3])?.label || "Unknown",
+                _subject: "New Project Target Locked | 10 Bit Production"
+            })
+        });
+      } catch (error) {
+        console.error("Failed to forward lead data:", error);
+      }
+
       setTimeout(() => {
         setCurrentStep(4);
       }, 500);

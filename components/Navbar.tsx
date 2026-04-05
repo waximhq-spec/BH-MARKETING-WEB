@@ -42,17 +42,14 @@ export default function Navbar() {
           <Link href="/" onClick={() => setMenuOpen(false)} className="text-sm tracking-widest font-bold uppercase transition-colors relative z-50">
             10 Bit Production
           </Link>
-          <Link href="/services" className="hidden lg:flex items-center text-xs tracking-[0.2em] uppercase font-light text-white/50 hover:text-white transition-colors">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold-500 mr-3"></span>
-            Expertise
-          </Link>
         </div>
 
         {/* Desktop Nav */}
         <ul className="hidden md:flex items-center space-x-10 text-xs tracking-[0.2em] uppercase">
           {navLinks.map((link) => (
             <li key={link.name}>
-               <Link href={link.href} className="hover:text-gold-500 transition-colors">
+               <Link href={link.href} className="flex items-center hover:text-gold-500 transition-colors">
+                 {link.name === "Services" && <span className="w-1.5 h-1.5 rounded-full bg-gold-500 mr-3"></span>}
                  {link.name}
                </Link>
             </li>
@@ -60,10 +57,15 @@ export default function Navbar() {
         </ul>
 
         {/* Mobile menu toggle button */}
-        <button 
-          className="md:hidden flex flex-col items-center justify-center space-y-1.5 z-50 relative w-8 h-8 focus:outline-none"
+        <motion.button 
+          className="md:hidden flex flex-col items-center justify-center space-y-1.5 z-[100] relative w-10 h-10 focus:outline-none rounded-full bg-black/20 backdrop-blur-sm"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle mobile menu"
+          animate={{
+            boxShadow: ["0px 0px 0px rgba(255,255,255,0)", "0px 0px 12px rgba(255,255,255,0.5)", "0px 0px 0px rgba(255,255,255,0)"]
+          }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          whileTap={{ scale: 0.8 }}
         >
           <motion.span 
             animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7.5 : 0 }}
@@ -77,7 +79,7 @@ export default function Navbar() {
             animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7.5 : 0 }}
             className="block w-6 h-[1.5px] bg-white rounded-full"
           />
-        </button>
+        </motion.button>
       </nav>
 
       {/* Mobile Menu Overlay */}
@@ -88,42 +90,28 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 bg-[#0b0b0b] flex flex-col items-center justify-center min-h-screen"
+            className="fixed inset-0 z-50 bg-[#0b0b0b] flex flex-col items-center justify-center min-h-screen"
           >
-            <ul className="flex flex-col items-center space-y-10 text-xl tracking-[0.2em] uppercase font-light">
+            <ul className="flex flex-col items-center justify-center space-y-12 text-3xl sm:text-4xl tracking-[0.2em] uppercase font-light text-center w-full px-6">
               {navLinks.map((link, i) => (
                 <motion.li 
                   key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ delay: 0.1 + i * 0.1, duration: 0.4 }}
                 >
                   <Link 
                     href={link.href} 
-                    className="hover:text-gold-500 transition-colors text-white"
+                    className="flex items-center hover:text-gold-500 transition-colors text-white"
                     onClick={() => setMenuOpen(false)}
                   >
+                    {link.name === "Services" && <span className="w-2 h-2 rounded-full bg-gold-500 mr-4"></span>}
                     {link.name}
                   </Link>
                 </motion.li>
               ))}
-              <motion.li
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ delay: 0.2 + navLinks.length * 0.1, duration: 0.5 }}
-                className="pt-10"
-              >
-                <Link 
-                    href="/services" 
-                    className="flex items-center hover:text-gold-500 transition-colors text-white/50"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <span className="w-2 h-2 rounded-full bg-gold-500 mr-4"></span>
-                    Expertise
-                  </Link>
-              </motion.li>
+
             </ul>
           </motion.div>
         )}

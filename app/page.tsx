@@ -1,43 +1,38 @@
 import Navbar from "@/components/Navbar";
 import AnimatedText from "@/components/AnimatedText";
+import ParticleHero from "@/components/ParticleHero";
 
 export default function Home() {
   return (
-    <main className="w-full relative px-6 md:px-12 lg:px-16 z-10 mx-auto">
+    <main className="w-full relative z-10 mx-auto">
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full h-[100svh] pt-32 pb-4 flex flex-col justify-end">
-        <div className="relative w-full h-[60vh] rounded-2xl overflow-hidden shadow-2xl mb-8 bg-[#111]">
-          <div className="absolute inset-0 w-full h-full bg-black/40 z-10" />
-          <video 
-            autoPlay muted loop playsInline
-            className="absolute inset-0 w-full h-full object-cover z-0"
-            poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2675"
-          >
-            <source src="https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=1280&hash=8cb4eb4501a4e10115049a405a2cd0ea7abdf1a5" type="video/mp4" />
-          </video>
-        </div>
+      <section className="relative w-full h-[100svh] flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+        {/* Interactive Particle Vortex Background */}
+        <ParticleHero />
 
-        <div className="z-20 w-full flex flex-col md:flex-row justify-between items-end pb-8">
-          <div>
-             <AnimatedText 
-               text="10 BIT" 
-               className="text-[clamp(4rem,14vw,16rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-white" 
-             />
-             <AnimatedText 
-               text="PRODUCTION" 
-               className="text-[clamp(3rem,8vw,12rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-gold-500" 
-             />
-          </div>
-          <div className="hidden md:block text-[10px] tracking-[0.2em] leading-normal uppercase font-medium text-white/50 max-w-[200px] text-right mb-6">
-            BAHRAIN'S FINEST REAL ESTATE DRONE TOURS AND CINEMATIC UI.
-          </div>
+        <div className="z-20 w-full px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center">
+            <AnimatedText 
+              text="10 BIT" 
+              className="text-[clamp(4rem,14vw,16rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-white justify-center" 
+            />
+            <AnimatedText 
+              text="PRODUCTION" 
+              className="text-[clamp(3rem,8vw,12rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-white/80 justify-center mt-2" 
+            />
+            
+            <div className="mt-12 text-[10px] tracking-[0.3em] leading-normal uppercase font-medium text-white/40 max-w-[400px]">
+              BAHRAIN'S FINEST REAL ESTATE DRONE TOURS AND CINEMATIC UI.
+            </div>
         </div>
       </section>
 
+      {/* PAGE CONTENT CONTAINER */}
+      <div className="w-full px-6 md:px-12 lg:px-16">
+
       {/* INTRODUCTION */}
-      <section className="relative w-full min-h-[60vh] flex items-center justify-start py-32 border-t border-white/10">
+      <section className="relative w-full min-h-[60vh] flex items-center justify-start py-32">
         <div className="max-w-5xl">
           <AnimatedText 
             text="Defining modern luxury through high-bitrate architecture." 
@@ -85,6 +80,7 @@ export default function Home() {
         <AnimatedText text="READY FOR FLIGHT?" className="text-[clamp(3rem,8vw,10rem)] leading-[0.85] font-bold uppercase mb-8 tracking-[-0.05em] text-center" />
         <a href="mailto:hello@10bit.com" className="text-sm md:text-lg font-medium hover:text-gold-500 transition-colors uppercase tracking-[0.3em] text-[#a0a0a0]">hello@10bit.com</a>
       </footer>
+      </div>
     </main>
   );
 }

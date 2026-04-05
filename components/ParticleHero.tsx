@@ -23,7 +23,8 @@ class Particle {
     
     this.color = color;
     this.history = [];
-    this.size = Math.random() * 1.2 + 0.2; 
+    const isMobile = canvasWidth < 768;
+    this.size = isMobile ? Math.random() * 2.5 + 0.8 : Math.random() * 1.2 + 0.2; 
     this.centerX = canvasWidth / 2;
     this.centerY = canvasHeight / 2;
     this.offsetX = 0;

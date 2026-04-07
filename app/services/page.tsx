@@ -6,75 +6,142 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    id: 1,
-    title: "Cinematic Production",
-    desc: "Experience 10-bit color depth and dynamic FPV drone footage that captures architectural scale in breathless parity. Unmatched visual precision tailored for premium developers.",
-    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2675&auto=format&fit=crop",
-    colSpan: "md:col-span-12 lg:col-span-8",
-    height: "h-[65vh]"
+    title: "Brand Identity & Strategy",
+    description: "We craft brands from the ground up — defining how they look, feel, and communicate with the world.",
+    includes: [
+      "Brand positioning",
+      "Visual identity design",
+      "Creative direction",
+      "Brand guidelines"
+    ]
   },
   {
-    id: 2,
-    title: "3D Reality & Digital Twins",
-    desc: "Unlocking global investor access. Allow buyers worldwide to seamlessly walk through unbuilt towers and opulent waterfront villas.",
-    img: "https://images.unsplash.com/photo-1542361345-89e58247f2d5?q=80&w=2670&auto=format&fit=crop",
-    colSpan: "md:col-span-12 lg:col-span-4",
-    height: "h-[65vh]"
+    title: "Cinematic Content Production",
+    description: "High-end visuals designed to elevate your brand presence and create impact.",
+    includes: [
+      "Brand films",
+      "Product cinematics",
+      "Commercial shoots",
+      "Lifestyle visuals"
+    ]
   },
   {
-    id: 3,
-    title: "Property Branding & UI/UX",
-    desc: "Bespoke sales portals for elite developers. We build immersive digital environments and touch interfaces that perfectly mirror the physical prestige of the property itself.",
-    img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2680&auto=format&fit=crop",
-    colSpan: "md:col-span-12",
-    height: "h-[50vh]"
+    title: "Visual Storytelling",
+    description: "We turn ideas into compelling narratives that connect with your audience.",
+    includes: [
+      "Campaign storytelling",
+      "Concept development",
+      "Narrative-driven shoots",
+      "Storyboarding"
+    ]
+  },
+  {
+    title: "Post-Production & Editing",
+    description: "Precision editing that brings your visuals to life with a polished, cinematic finish.",
+    includes: [
+      "Video editing",
+      "Color grading",
+      "Sound design",
+      "Motion graphics"
+    ]
+  },
+  {
+    title: "Social Media Content",
+    description: "Content built for attention, engagement, and consistent brand growth.",
+    includes: [
+      "Short-form videos (Reels)",
+      "Platform-specific edits",
+      "Content planning",
+      "Trend-based creatives"
+    ]
+  },
+  {
+    title: "Creative Direction",
+    description: "We lead the vision behind every project to ensure a cohesive and premium outcome.",
+    includes: [
+      "Shoot planning",
+      "Moodboards",
+      "Art direction",
+      "On-set supervision"
+    ]
+  },
+  {
+    title: "Brand Launch Packages",
+    description: "Everything you need to launch or relaunch your brand with impact.",
+    isSpecial: true,
+    includes: [
+      "Full brand identity",
+      "Launch campaign visuals",
+      "Content bundle for social media",
+      "Marketing-ready assets"
+    ]
   }
 ];
 
 export default function Services() {
   return (
-    <main className="w-full relative px-6 md:px-12 lg:px-16 z-10 mx-auto">
+    <main className="w-full relative px-6 md:px-12 lg:px-16 z-10 mx-auto bg-[#0b0b0b] min-h-screen pb-32 font-sans">
       <Navbar />
 
-      <section className="pt-48 pb-16 border-b border-white/5" >
-         <AnimatedText text="OUR EXPERTISE" className="text-[clamp(4rem,14vw,16rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-white" />
-         <p className="mt-6 tracking-[0.3em] uppercase text-[10px] text-gold-500 font-bold">The Minimalist Hub</p>
+      {/* Header Section */}
+      <section className="pt-48 pb-24">
+        <div className="max-w-5xl">
+          <AnimatedText 
+            text="OUR SERVICES" 
+            className="text-[clamp(3.5rem,12vw,14rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-white mb-8" 
+          />
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-lg md:text-2xl text-[#a0a0a0] font-light max-w-2xl tracking-wide leading-relaxed uppercase"
+          >
+            We build brands through strategy, visuals, and storytelling.
+          </motion.p>
+        </div>
       </section>
 
-      {/* Bento Layout Grid */}
-      <section className="w-full py-24 min-h-screen">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full">
-          {services.map((item, idx) => (
-            <motion.div 
-              key={item.id} 
-              className={`${item.colSpan} ${item.height} relative overflow-hidden group rounded-[2rem] bg-[#111] shadow-2xl`}
-              initial={{ opacity: 0, y: 70 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1.2, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }} // smooth exponential ease
-            >
-              {/* Background Plate */}
-              <img 
-                src={item.img} 
-                className="w-full h-full object-cover opacity-50 transition-transform duration-[2000ms] group-hover:scale-110 ease-out grayscale-[20%]" 
-                alt={item.title} 
-              />
+      {/* Services Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24 border-t border-white/10 pt-24">
+        {services.map((service, idx) => (
+          <motion.div 
+            key={service.title}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: idx * 0.1 }}
+            className={`flex flex-col ${service.isSpecial ? "lg:col-span-3 bg-white/5 p-12 rounded-3xl border border-white/10" : ""}`}
+          >
+            <div className="flex flex-col h-full">
+              <span className="text-gold-500 text-[10px] tracking-[0.3em] font-bold uppercase mb-4">
+                Service {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+              </span>
+              <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-white mb-6 leading-none">
+                {service.title}
+              </h3>
+              <p className="text-[#a0a0a0] font-light leading-relaxed mb-8 max-w-sm">
+                {service.description}
+              </p>
               
-              {/* Overlay Content */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0b] via-transparent to-transparent flex flex-col justify-end p-8 md:p-16">
-                 <div className="transform translate-y-6 opacity-80 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-out">
-                   <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-[-0.04em] uppercase text-white mb-6 leading-[0.9]">
-                     {item.title}
-                   </h3>
-                   <div className="w-12 h-[1px] bg-gold-500 mb-6 origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-100 ease-out" />
-                   <p className="text-sm md:text-lg text-[#a0a0a0] max-w-2xl font-light tracking-wide leading-relaxed">
-                     {item.desc}
-                   </p>
-                 </div>
+              <div className="mt-auto">
+                <p className="text-white/40 text-[10px] tracking-[0.2em] font-bold uppercase mb-4">Includes</p>
+                <ul className="space-y-3">
+                  {service.includes.map((item) => (
+                    <li key={item} className="flex items-center text-sm text-[#e5e5e5] font-light">
+                      <span className="w-1 h-1 rounded-full bg-gold-500/60 mr-3 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* Final CTA or Footer Spacer */}
+      <section className="mt-48 pt-24 border-t border-white/5 text-center">
+         <p className="text-sm tracking-[0.4em] uppercase text-white/20">Experience the 10 Bit standard.</p>
       </section>
     </main>
   );

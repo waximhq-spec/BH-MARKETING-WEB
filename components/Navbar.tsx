@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <>
       <nav className={clsx(
-        "fixed top-0 left-0 w-full z-[60] flex items-center justify-between px-6 md:px-12 lg:px-16 text-white transition-all duration-500",
+        "fixed top-0 left-0 w-full z-[100] flex items-center justify-between px-6 md:px-12 lg:px-16 text-white transition-all duration-500",
         scrolled ? "bg-[#0b0b0b]/80 backdrop-blur-md border-b border-white/10 py-5 shadow-2xl" : "bg-transparent border-b border-transparent py-6"
       )}>
         <div className="flex items-center space-x-12">
@@ -56,9 +56,11 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Mobile menu toggle button */}
         <motion.button 
-          className="md:hidden flex flex-col items-center justify-center space-y-1.5 z-[100] relative w-10 h-10 focus:outline-none rounded-full bg-black/20 backdrop-blur-sm"
+          className={clsx(
+            "md:hidden flex flex-col items-center justify-center space-y-1.5 z-[110] relative w-10 h-10 focus:outline-none rounded-full transition-colors",
+            menuOpen ? "bg-white/10" : "bg-black/20 backdrop-blur-sm"
+          )}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle mobile menu"
           animate={{
@@ -90,7 +92,8 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-50 bg-[#0b0b0b] flex flex-col items-center justify-center min-h-screen"
+            className="fixed inset-0 z-[90] bg-[#0b0b0b] flex flex-col items-center justify-center min-h-screen"
+            onClick={() => setMenuOpen(false)}
           >
             <ul className="flex flex-col items-center justify-center space-y-12 text-3xl sm:text-4xl tracking-[0.2em] uppercase font-light text-center w-full px-6">
               {navLinks.map((link, i) => (

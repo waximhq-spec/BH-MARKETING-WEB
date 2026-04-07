@@ -23,7 +23,7 @@ export default function Home() {
             />
             
             <div className="mt-12 text-[10px] tracking-[0.3em] leading-normal uppercase font-medium text-white/40 max-w-[400px]">
-              BAHRAIN'S FINEST REAL ESTATE DRONE TOURS AND CINEMATIC UI.
+              BAHRAIN'S PREMIER CREATIVE STUDIO FOR HIGH-END BRAND BUILDING AND CINEMATIC STORYTELLING.
             </div>
         </div>
       </section>
@@ -35,11 +35,11 @@ export default function Home() {
       <section className="relative w-full min-h-[60vh] flex items-center justify-start py-32">
         <div className="max-w-5xl">
           <AnimatedText 
-            text="Defining modern luxury through high-bitrate architecture." 
+            text="Crafting immersive brand narratives and visually profound modern identities." 
             className="text-[clamp(2.5rem,5vw,5rem)] font-bold tracking-[-0.03em] mb-12 uppercase leading-[0.9]"
           />
           <AnimatedText 
-            text="We craft immersive 3D drone tours and visually profound digital experiences for Bahrain's most exclusive real estate developments." 
+            text="We elevate global brands through strategic creative direction and cinema-grade visual storytelling for Bahrain's most exclusive developments." 
             className="text-xl md:text-2xl text-[#a0a0a0] font-light max-w-3xl leading-relaxed tracking-wide"
           />
         </div>
@@ -68,7 +68,7 @@ export default function Home() {
                  />
                  <div className="absolute inset-0 bg-obsidian/20 group-hover:bg-transparent transition-colors duration-700" />
                </div>
-               <div className="uppercase tracking-[0.2em] text-[10px] text-gold-500 mb-2 font-bold">Cinematic Tour</div>
+               <div className="uppercase tracking-[0.2em] text-[10px] text-gold-500 mb-2 font-bold">Brand Narrative</div>
                <h3 className="text-2xl md:text-4xl font-medium tracking-tight uppercase leading-none">{item.title}</h3>
              </div>
           ))}

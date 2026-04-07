@@ -8,10 +8,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const categories = ["All Projects", "Residential", "Commercial", "360° Tours"];
 
 const projects = [
-  { id: 1, title: "Manama Bay Skyline", category: "Commercial", type: "Drone Film", thumbnail: "https://images.unsplash.com/photo-1596404988451-bceebc8531e2?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
+  { id: 1, title: "Manama Bay Skyline", category: "Commercial", type: "Cinematic Film", thumbnail: "https://images.unsplash.com/photo-1596404988451-bceebc8531e2?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
   { id: 2, title: "Diyar Al Muharraq Villas", category: "Residential", type: "Full Branding", thumbnail: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
   { id: 3, title: "Bahrain Financial Harbour", category: "Commercial", type: "3D Capture", thumbnail: "https://images.unsplash.com/photo-1542361345-89e58247f2d5?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
-  { id: 4, title: "Amwaj Islands Villa", category: "Residential", type: "Drone Film", thumbnail: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
+  { id: 4, title: "Amwaj Islands Villa", category: "Residential", type: "Cinematic Film", thumbnail: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
   { id: 5, title: "Seef Digital Twin", category: "360° Tours", type: "3D Capture", thumbnail: "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
   { id: 6, title: "Reef Island Highrise", category: "Residential", type: "Full Branding", thumbnail: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
 ];

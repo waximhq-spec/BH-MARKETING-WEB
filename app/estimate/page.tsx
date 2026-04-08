@@ -59,7 +59,7 @@ export default function Estimate() {
                 Service: steps[0].options.find(o => o.id === newSelections[1])?.label || "Unknown",
                 Scale: steps[1].options.find(o => o.id === newSelections[2])?.label || "Unknown",
                 Target: steps[2].options.find(o => o.id === newSelections[3])?.label || "Unknown",
-                _subject: "New Project Target Locked | 10 Bit Production"
+                _subject: "New Project Target Locked | Cinmach Productions"
             })
         });
       } catch (error) {

@@ -39,27 +39,12 @@ export default function Navbar() {
         scrolled ? "bg-[#0b0b0b]/80 backdrop-blur-md border-b border-white/10 py-5 shadow-2xl" : "bg-transparent border-b border-transparent py-6"
       )}>
         <div className="flex items-center space-x-12">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center space-x-3 group relative z-50">
-            <svg 
-              width="40" 
-              height="32" 
-              viewBox="0 0 40 32" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="w-10 h-auto sm:w-12"
-            >
-              <path 
-                d="M8.5 2L1 18.5L8.5 30H15L7.5 18.5L15 2H8.5Z" 
-                fill="white" 
-                className="group-hover:fill-gold-500 transition-colors"
-              />
-              <path 
-                d="M18.5 2L11 18.5L18.5 30H39L31.5 18.5C31.5 18.5 36.5 17 38.5 14C40.5 11 39.5 7 37 4C34.5 1 30 2 30 2H18.5ZM25.5 8H31.5C33 8 34 10 33 11.5C32.5 12.5 31.5 13.5 29.5 13.5H23L25.5 8ZM21.5 17.5H30.5L28 23.5H20.5L21.5 17.5Z" 
-                fill="white" 
-                className="group-hover:fill-gold-500 transition-colors opacity-90"
-              />
-            </svg>
-            <span className="hidden sm:inline-block font-bold tracking-widest text-[10px] uppercase">10Bit</span>
+          <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center group relative z-50">
+            <img 
+              src="/logo.png" 
+              alt="Cinmach Logo" 
+              className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-500"
+            />
           </Link>
         </div>
 
@@ -77,7 +62,7 @@ export default function Navbar() {
 
         <motion.button 
           className={clsx(
-            "md:hidden flex flex-col items-center justify-center space-y-1.5 z-[110] relative w-10 h-10 focus:outline-none rounded-full transition-colors",
+            "md:hidden flex flex-col items-center justify-center space-y-1.5 z-[110] relative w-10 h-10 focus:outline-none rounded-none transition-colors border border-white/10",
             menuOpen ? "bg-white/10" : "bg-black/20 backdrop-blur-sm"
           )}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -86,19 +71,19 @@ export default function Navbar() {
             boxShadow: ["0px 0px 0px rgba(255,255,255,0)", "0px 0px 12px rgba(255,255,255,0.5)", "0px 0px 0px rgba(255,255,255,0)"]
           }}
           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-          whileTap={{ scale: 0.8 }}
+          whileTap={{ scale: 0.9 }}
         >
           <motion.span 
             animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7.5 : 0 }}
-            className="block w-6 h-[1.5px] bg-white rounded-full"
+            className="block w-5 h-[1.5px] bg-white rounded-none"
           />
           <motion.span 
             animate={{ opacity: menuOpen ? 0 : 1 }}
-            className="block w-6 h-[1.5px] bg-white rounded-full"
+            className="block w-5 h-[1.5px] bg-white rounded-none"
           />
           <motion.span 
             animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7.5 : 0 }}
-            className="block w-6 h-[1.5px] bg-white rounded-full"
+            className="block w-5 h-[1.5px] bg-white rounded-none"
           />
         </motion.button>
       </nav>

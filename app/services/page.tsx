@@ -141,7 +141,7 @@ export default function Services() {
 
       {/* Final CTA or Footer Spacer */}
       <section className="mt-48 pt-24 border-t border-white/5 text-center">
-         <p className="text-sm tracking-[0.4em] uppercase text-white/20">Experience the 10 Bit standard.</p>
+         <p className="text-sm tracking-[0.4em] uppercase text-white/20">Experience the Cinmach standard.</p>
       </section>
     </main>
   );

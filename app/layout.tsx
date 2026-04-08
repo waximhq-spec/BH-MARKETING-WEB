@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import GridOverlay from "@/components/GridOverlay";
 import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
+import SecurityLayer from "@/components/SecurityLayer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -11,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "10 Bit Production | High-End Cinematic Storytelling & Brand Strategy",
+  title: "Cinmach Productions | High-End Cinematic Storytelling & Brand Strategy",
   description: "Bahrain's premier creative studio for luxury brand building and cinematic visuals.",
 };
 
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} antialiased bg-[#0b0b0b]`}>
       <body className="min-h-full flex flex-col font-sans text-[#e5e5e5] relative">
         <ServiceWorkerUnregister />
+        <SecurityLayer />
         <GridOverlay />
         <SmoothScroll>
           {children}

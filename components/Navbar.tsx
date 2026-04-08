@@ -39,8 +39,27 @@ export default function Navbar() {
         scrolled ? "bg-[#0b0b0b]/80 backdrop-blur-md border-b border-white/10 py-5 shadow-2xl" : "bg-transparent border-b border-transparent py-6"
       )}>
         <div className="flex items-center space-x-12">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="text-sm tracking-widest font-bold uppercase transition-colors relative z-50">
-            10 Bit Production
+          <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center space-x-3 group relative z-50">
+            <svg 
+              width="40" 
+              height="32" 
+              viewBox="0 0 40 32" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="w-10 h-auto sm:w-12"
+            >
+              <path 
+                d="M8.5 2L1 18.5L8.5 30H15L7.5 18.5L15 2H8.5Z" 
+                fill="white" 
+                className="group-hover:fill-gold-500 transition-colors"
+              />
+              <path 
+                d="M18.5 2L11 18.5L18.5 30H39L31.5 18.5C31.5 18.5 36.5 17 38.5 14C40.5 11 39.5 7 37 4C34.5 1 30 2 30 2H18.5ZM25.5 8H31.5C33 8 34 10 33 11.5C32.5 12.5 31.5 13.5 29.5 13.5H23L25.5 8ZM21.5 17.5H30.5L28 23.5H20.5L21.5 17.5Z" 
+                fill="white" 
+                className="group-hover:fill-gold-500 transition-colors opacity-90"
+              />
+            </svg>
+            <span className="hidden sm:inline-block font-bold tracking-widest text-[10px] uppercase">10Bit</span>
           </Link>
         </div>
 

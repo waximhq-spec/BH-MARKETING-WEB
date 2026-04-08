@@ -9,47 +9,49 @@ export default function Home() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full h-[100svh] flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+      <section className="relative w-full h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a]">
         {/* Interactive Particle Vortex Background */}
         <ParticleHero />
 
-        <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center mt-0">
+        <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24">
           
-          {/* Availability Bar */}
-          <div className="mb-6 sm:mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+          {/* Availability Bar - Pushed down from Navbar */}
+          <div className="mb-10 sm:mb-12 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
             <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 relative">
               <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
             </span>
-            <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-[0.12em] sm:tracking-[0.15em] text-white/80 uppercase">Available for new projects — Limited slots</span>
+            <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-[0.15em] text-white/80 uppercase">Available for new projects — Limited slots</span>
           </div>
 
-          <AnimatedText 
-            text="10 BIT" 
-            className="text-[clamp(2.8rem,14vw,9rem)] leading-[0.8] font-bold tracking-tighter uppercase text-white justify-center" 
-          />
-          <AnimatedText 
-            text="PRODUCTION" 
-            className="text-[clamp(2.2rem,11vw,8rem)] leading-[0.8] font-bold tracking-tighter uppercase text-white/90 justify-center mt-1 sm:mt-2" 
-          />
+          <div className="flex flex-col items-center justify-center w-full max-w-[90vw] sm:max-w-4xl">
+            <AnimatedText 
+              text="10 BIT" 
+              className="text-[clamp(4.5rem,18vw,14rem)] leading-[0.75] font-bold tracking-tighter uppercase text-white justify-center" 
+            />
+            <AnimatedText 
+              text="PRODUCTION" 
+              className="text-[clamp(1rem,4.5vw,2.5rem)] leading-none font-black tracking-[1.4em] sm:tracking-[1.5em] md:tracking-[2em] uppercase text-white/60 justify-center mt-3 sm:mt-4 ml-[1.5em]" 
+            />
+          </div>
           
           {/* Dynamic Slogan */}
-          <div className="mt-8 sm:mt-12 text-lg sm:text-3xl md:text-4xl font-medium tracking-tight text-white/90 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
+          <div className="mt-12 sm:mt-16 text-lg sm:text-2xl md:text-4xl font-medium tracking-tight text-white/95 flex flex-wrap items-center justify-center gap-1.5 sm:gap-3">
             <span>We make</span>
             <DynamicWord />
             <span>stand out.</span>
           </div>
           
           {/* Short Description */}
-          <div className="mt-5 sm:mt-8 text-[12px] sm:text-sm md:text-base text-white/50 max-w-2xl mx-auto font-light leading-relaxed tracking-wide px-4">
+          <div className="mt-8 text-[12px] sm:text-sm md:text-base text-white/40 max-w-2xl mx-auto font-light leading-relaxed tracking-wide px-4">
             We architect visually profound identities and cinematic narratives that elevate businesses into iconic brands. Specializing in luxury real estate and corporate storytelling.
           </div>
 
-          {/* Buttons */}
-          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center gap-3 sm:gap-6 w-full sm:w-auto px-10 sm:px-0">
-            <button className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-xs sm:text-sm uppercase shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+          {/* Buttons - Added bottom breathing room */}
+          <div className="mt-10 sm:mt-12 mb-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto px-10 sm:px-0 pb-10">
+            <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-xs sm:text-sm uppercase shadow-[0_0_20px_rgba(255,255,255,0.15)]">
               View Our Work
             </button>
-            <button className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-transparent border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-xs sm:text-sm uppercase">
+            <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-xs sm:text-sm uppercase">
               Get a Quote
             </button>
           </div>

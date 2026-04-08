@@ -20,32 +20,32 @@ export default function Home() {
             <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 relative">
               <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
             </span>
-            <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-[0.15em] text-white/80 uppercase">Available for new projects — Limited slots</span>
+            <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-[0.12em] sm:tracking-[0.15em] text-white/80 uppercase">Available for new projects — Limited slots</span>
           </div>
 
           <AnimatedText 
             text="10 BIT" 
-            className="text-[clamp(3.5rem,12vw,9rem)] leading-[0.8] font-bold tracking-tighter uppercase text-white justify-center" 
+            className="text-[clamp(2.8rem,14vw,9rem)] leading-[0.8] font-bold tracking-tighter uppercase text-white justify-center" 
           />
           <AnimatedText 
             text="PRODUCTION" 
-            className="text-[clamp(3rem,10vw,8rem)] leading-[0.8] font-bold tracking-tighter uppercase text-white/90 justify-center mt-1 sm:mt-2" 
+            className="text-[clamp(2.2rem,11vw,8rem)] leading-[0.8] font-bold tracking-tighter uppercase text-white/90 justify-center mt-1 sm:mt-2" 
           />
           
           {/* Dynamic Slogan */}
-          <div className="mt-8 sm:mt-10 text-xl sm:text-3xl md:text-4xl font-medium tracking-tight text-white/90 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+          <div className="mt-8 sm:mt-12 text-lg sm:text-3xl md:text-4xl font-medium tracking-tight text-white/90 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
             <span>We make</span>
             <DynamicWord />
             <span>stand out.</span>
           </div>
           
           {/* Short Description */}
-          <div className="mt-6 sm:mt-8 text-[13px] sm:text-sm md:text-base text-white/50 max-w-2xl mx-auto font-light leading-relaxed tracking-wide px-4">
-            We architect visually profound identities and cinematic narratives that elevate businesses into iconic brands. Specializing in luxury real estate, hospitality, and corporate storytelling.
+          <div className="mt-5 sm:mt-8 text-[12px] sm:text-sm md:text-base text-white/50 max-w-2xl mx-auto font-light leading-relaxed tracking-wide px-4">
+            We architect visually profound identities and cinematic narratives that elevate businesses into iconic brands. Specializing in luxury real estate and corporate storytelling.
           </div>
 
           {/* Buttons */}
-          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto px-6 sm:px-0">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center gap-3 sm:gap-6 w-full sm:w-auto px-10 sm:px-0">
             <button className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-xs sm:text-sm uppercase shadow-[0_0_20px_rgba(255,255,255,0.15)]">
               View Our Work
             </button>

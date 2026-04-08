@@ -26,15 +26,15 @@ export default function DynamicWord() {
   }, []);
 
   return (
-    <span className="inline-grid [grid-template-areas:'content'] justify-center font-bold text-white mx-1.5 md:mx-2 border-b-[3px] border-white/40 pb-1 leading-none align-bottom overflow-hidden transition-[width] duration-300">
+    <span className="inline-grid [grid-template-areas:'content'] justify-center font-bold text-white mx-1 sm:mx-2 border-b-2 sm:border-b-[3px] border-white/40 pb-0.5 sm:pb-1 leading-none align-bottom overflow-hidden transition-[width] duration-300 min-h-[1.2em]">
       <AnimatePresence mode="popLayout">
         <motion.span
           key={index}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
+          exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="[grid-area:content] inline-block whitespace-nowrap text-center pt-1"
+          className="[grid-area:content] inline-block whitespace-nowrap text-center pt-0.5 sm:pt-1"
         >
           {words[index]}
         </motion.span>

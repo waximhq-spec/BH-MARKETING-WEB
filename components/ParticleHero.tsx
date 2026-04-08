@@ -32,26 +32,52 @@ class Particle {
     this.maxHistory = Math.floor(Math.random() * 6) + 3; 
   }
 
-  update(mouseX: number, mouseY: number) {
+  update(mouseX: number, mouseY: number, canvasWidth: number, canvasHeight: number) {
     this.angle += this.speed;
     
     const baseX = this.centerX + Math.cos(this.angle) * this.radius;
     const baseY = this.centerY + Math.sin(this.angle) * this.radius;
 
-    // Fluid Repulsion physics
-    const dx = (baseX + this.offsetX) - mouseX;
-    const dy = (baseY + this.offsetY) - mouseY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    const threshold = 400; // Wide footprint to part smoothly
+    // 1. Mouse Fluid Repulsion
+    const dxMouse = (baseX + this.offsetX) - mouseX;
+    const dyMouse = (baseY + this.offsetY) - mouseY;
+    const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+    const mouseThreshold = 400;
 
-    if (dist < threshold && mouseX > 0) {
-      const force = Math.pow((threshold - dist) / threshold, 2); 
-      // Push more deliberately
-      this.offsetX += (dx / Math.max(dist, 1)) * force * 12;
-      this.offsetY += (dy / Math.max(dist, 1)) * force * 12;
+    if (distMouse < mouseThreshold && mouseX > 0) {
+      const force = Math.pow((mouseThreshold - distMouse) / mouseThreshold, 2); 
+      this.offsetX += (dxMouse / Math.max(distMouse, 1)) * force * 12;
+      this.offsetY += (dyMouse / Math.max(distMouse, 1)) * force * 12;
     }
 
-    // Heavy fluid dampening (springs back slowly, like thick liquid)
+    // 2. Static Clear Zone (Center)
+    const isMobile = canvasWidth < 768;
+    const dxCenter = (baseX + this.offsetX) - (canvasWidth / 2);
+    const dyCenter = (baseY + this.offsetY) - (canvasHeight / 2);
+    const distCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
+    const centerThreshold = isMobile ? 300 : 500;
+
+    if (distCenter < centerThreshold) {
+      const force = Math.pow((centerThreshold - distCenter) / centerThreshold, 2); 
+      this.offsetX += (dxCenter / Math.max(distCenter, 1)) * force * 6;
+      this.offsetY += (dyCenter / Math.max(distCenter, 1)) * force * 6;
+    }
+
+    // 3. Static Clear Zone (Right side on Mobile)
+    if (isMobile) {
+      const dxRight = (baseX + this.offsetX) - (canvasWidth);
+      const dyRight = (baseY + this.offsetY) - (canvasHeight / 2);
+      const distRight = Math.sqrt(dxRight * dxRight + dyRight * dyRight);
+      const rightThreshold = 250;
+
+      if (distRight < rightThreshold) {
+        const force = Math.pow((rightThreshold - distRight) / rightThreshold, 2); 
+        this.offsetX += (dxRight / Math.max(distRight, 1)) * force * 8;
+        this.offsetY += (dyRight / Math.max(distRight, 1)) * force * 8;
+      }
+    }
+
+    // Heavy fluid dampening
     this.offsetX *= 0.96;
     this.offsetY *= 0.96;
 
@@ -139,7 +165,7 @@ export default function ParticleHero() {
       }
 
       particles.forEach((p) => {
-        p.update(fluidMouseRef.current.x, fluidMouseRef.current.y);
+        p.update(fluidMouseRef.current.x, fluidMouseRef.current.y, canvas.width, canvas.height);
         p.draw(ctx);
       });
 

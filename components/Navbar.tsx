@@ -107,13 +107,19 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 30 }}
                   transition={{ delay: 0.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
+                  className="w-full flex justify-center"
                 >
                   <Link 
                     href={link.href} 
-                    className="flex items-center hover:text-gold-500 transition-colors text-white"
+                    className={clsx(
+                      "transition-colors",
+                      link.name === "Estimate" 
+                        ? "bg-white text-black px-8 py-4 rounded-full text-2xl sm:text-3xl w-full max-w-[300px]" 
+                        : "hover:text-gold-500 text-white"
+                    )}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {link.name}
+                    {link.name === "Estimate" ? "Get a Quote" : link.name}
                   </Link>
                 </motion.li>
               ))}

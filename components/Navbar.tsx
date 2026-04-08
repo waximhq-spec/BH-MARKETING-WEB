@@ -62,28 +62,28 @@ export default function Navbar() {
 
         <motion.button 
           className={clsx(
-            "md:hidden flex flex-col items-center justify-center space-y-1.5 z-[110] relative w-10 h-10 focus:outline-none rounded-none transition-colors border border-white/10",
+            "md:hidden flex flex-col items-center justify-center space-y-1.5 z-[110] relative w-14 h-14 focus:outline-none rounded-full transition-colors border border-white/10",
             menuOpen ? "bg-white/10" : "bg-black/20 backdrop-blur-sm"
           )}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle mobile menu"
           animate={{
-            boxShadow: ["0px 0px 0px rgba(255,255,255,0)", "0px 0px 12px rgba(255,255,255,0.5)", "0px 0px 0px rgba(255,255,255,0)"]
+            boxShadow: menuOpen ? ["0px 0px 0px rgba(255,255,255,0)", "0px 0px 0px rgba(255,255,255,0)"] : ["0px 0px 0px rgba(255,255,255,0)", "0px 0px 20px rgba(255,255,255,0.2)", "0px 0px 0px rgba(255,255,255,0)"]
           }}
-          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           whileTap={{ scale: 0.9 }}
         >
           <motion.span 
             animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7.5 : 0 }}
-            className="block w-5 h-[1.5px] bg-white rounded-none"
+            className="block w-6 h-[2px] bg-white rounded-none"
           />
           <motion.span 
             animate={{ opacity: menuOpen ? 0 : 1 }}
-            className="block w-5 h-[1.5px] bg-white rounded-none"
+            className="block w-6 h-[2px] bg-white rounded-none"
           />
           <motion.span 
             animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7.5 : 0 }}
-            className="block w-5 h-[1.5px] bg-white rounded-none"
+            className="block w-6 h-[2px] bg-white rounded-none"
           />
         </motion.button>
       </nav>
@@ -95,30 +95,28 @@ export default function Navbar() {
             initial={{ opacity: 0, y: "-100%" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[90] bg-[#0b0b0b] flex flex-col items-center justify-center min-h-screen"
             onClick={() => setMenuOpen(false)}
           >
-            <ul className="flex flex-col items-center justify-center space-y-12 text-3xl sm:text-4xl tracking-[0.2em] uppercase font-light text-center w-full px-6">
+            <ul className="flex flex-col items-center justify-center space-y-10 text-5xl sm:text-6xl tracking-tight uppercase font-black text-center w-full px-6">
               {navLinks.map((link, i) => (
                 <motion.li 
                   key={link.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ delay: 0.1 + i * 0.1, duration: 0.4 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 30 }}
+                  transition={{ delay: 0.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
                 >
                   <Link 
                     href={link.href} 
                     className="flex items-center hover:text-gold-500 transition-colors text-white"
                     onClick={() => setMenuOpen(false)}
                   >
-                    {link.name === "Services" && <span className="w-2 h-2 rounded-full bg-gold-500 mr-4"></span>}
                     {link.name}
                   </Link>
                 </motion.li>
               ))}
-
             </ul>
           </motion.div>
         )}

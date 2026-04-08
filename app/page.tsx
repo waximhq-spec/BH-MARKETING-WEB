@@ -17,9 +17,9 @@ export default function Home() {
         <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center">
           
           {/* Availability Bar */}
-          <div className="mb-6 sm:mb-10 inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-1.5 sm:py-2 border border-white/10 bg-transparent rounded-none">
-            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 relative shrink-0"></span>
-            <span className="text-[9px] sm:text-[10px] md:text-xs font-medium tracking-[0.15em] sm:tracking-[0.2em] text-white/60 uppercase">
+          <div className="mt-8 sm:mt-0 mb-6 sm:mb-10 inline-flex self-start sm:self-center ml-0 sm:ml-0 items-center gap-2 sm:gap-3 px-3 sm:px-6 py-1 sm:py-2 border border-white/10 bg-transparent rounded-none">
+            <span className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-green-500 relative shrink-0"></span>
+            <span className="text-[7px] sm:text-[10px] md:text-xs font-medium tracking-[0.1em] sm:tracking-[0.2em] text-white/60 uppercase">
               AVAILABLE — Q2 2026 <span className="mx-1 sm:mx-2 text-white/20">|</span> LIMITED SLOTS
             </span>
           </div>

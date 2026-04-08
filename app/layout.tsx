@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import GridOverlay from "@/components/GridOverlay";
 import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
 import SecurityLayer from "@/components/SecurityLayer";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans text-[#e5e5e5] relative">
         <ServiceWorkerUnregister />
         <SecurityLayer />
+        <CustomCursor />
         <GridOverlay />
         <SmoothScroll>
           {children}

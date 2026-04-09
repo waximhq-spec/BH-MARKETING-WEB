@@ -114,8 +114,8 @@ export default function Navbar() {
                     className={clsx(
                       "transition-colors",
                       link.name === "Estimate" 
-                        ? "bg-white text-black px-8 py-4 rounded-full text-2xl sm:text-3xl w-full max-w-[300px]" 
-                        : "hover:text-gold-500 text-white"
+                        ? "bg-[#f97316] text-white px-8 py-4 rounded-full text-2xl sm:text-3xl w-full max-w-[300px] hover:bg-[#ea6a0a] transition-colors" 
+                        : "hover:text-[#f97316] text-white"
                     )}
                     onClick={() => setMenuOpen(false)}
                   >

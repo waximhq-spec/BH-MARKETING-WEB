@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 
 const timeZones = [
+  { label: "BAHRAIN", zone: "Asia/Bahrain" },
   { label: "AMERICA", zone: "America/New_York" },
   { label: "EUROPE", zone: "Europe/London" },
-  { label: "GULF", zone: "Asia/Dubai" },
   { label: "JAPAN", zone: "Asia/Tokyo" }
 ];
 
@@ -20,6 +20,7 @@ export default function WorldClocks() {
           timeZone: zone,
           hour: '2-digit',
           minute: '2-digit',
+          second: '2-digit',
           hour12: true
         });
         newTimes[zone] = formatter.format(new Date());
@@ -28,7 +29,7 @@ export default function WorldClocks() {
     };
 
     updateTimes();
-    const interval = setInterval(updateTimes, 1000 * 60); // Update every minute
+    const interval = setInterval(updateTimes, 1000); // Update every second
     return () => clearInterval(interval);
   }, []);
 

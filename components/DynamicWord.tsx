@@ -36,11 +36,14 @@ export default function DynamicWord() {
             animate={{ rotateX: 0, opacity: 1, scale: 1, y: 0 }}
             exit={{ rotateX: -110, opacity: 0, scale: 0.9, y: -12 }}
             transition={{ 
-              duration: 0.7, 
-              ease: [0.76, 0, 0.24, 1], // Sturdier mechanical feel
-              opacity: { duration: 0.25 }
+              duration: 0.8, 
+              ease: [0.76, 0, 0.24, 1], 
+              opacity: { 
+                duration: 1.2, // Much slower opacity ease-in for a 'ghostly' feel
+                ease: "easeOut" 
+              }
             }}
-            className="inline-block whitespace-nowrap leading-none font-bold text-white origin-center translate-z-0"
+            className="inline-block whitespace-nowrap leading-none font-bold text-white origin-center translate-z-0 font-[var(--font-outfit)]"
           >
             {words[index]}
           </motion.span>

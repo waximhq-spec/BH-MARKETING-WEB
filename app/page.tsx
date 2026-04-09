@@ -14,39 +14,39 @@ export default function Home() {
         {/* Interactive Particle Vortex Background */}
         <ParticleHero />
 
-        <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center">
+        <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-start justify-center text-left">
           
           {/* Availability Bar */}
-          <div className="mt-8 sm:mt-0 mb-6 sm:mb-10 inline-flex self-start sm:self-center ml-0 sm:ml-0 items-center gap-2 sm:gap-3 px-3 sm:px-6 py-1 sm:py-2 border border-white/10 bg-transparent rounded-none">
+          <div className="mt-8 sm:mt-0 mb-6 sm:mb-10 inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-6 py-1 sm:py-2 border border-white/10 bg-transparent rounded-none">
             <span className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-green-500 relative shrink-0"></span>
-            <span className="text-[7px] sm:text-[10px] md:text-xs font-medium tracking-[0.1em] sm:tracking-[0.2em] text-white/60 uppercase">
+            <span className="text-[7px] sm:text-[10px] md:text-xs font-medium tracking-[0.1em] sm:tracking-[0.2em] text-white/60 uppercase font-mono">
               AVAILABLE — Q2 2026 <span className="mx-1 sm:mx-2 text-white/20">|</span> LIMITED SLOTS
             </span>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full mb-8 sm:mb-10">
+          <div className="flex flex-col items-start justify-start w-full mb-8 sm:mb-10">
             <AnimatedText 
               text="CINMACH PRODUCTIONS." 
-              className="text-[clamp(2.5rem,7vw,8rem)] leading-[0.95] md:leading-[1.1] font-extrabold tracking-[-0.02em] uppercase text-white text-center" 
+              className="text-[clamp(2.5rem,7vw,8rem)] leading-[0.95] md:leading-[1.1] font-extrabold tracking-[-0.04em] uppercase text-white text-left font-sans" 
             />
           </div>
           
-          {/* Dynamic Slogan */}
-          <div className="mb-6 sm:mb-8 text-lg sm:text-2xl md:text-[2.5rem] font-normal tracking-tight text-white flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-            <span>We make</span>
+          {/* Dynamic Slogan - Left Aligned with Outfit Font */}
+          <div className="mb-6 sm:mb-8 text-lg sm:text-2xl md:text-[2.5rem] font-bold tracking-tight text-white flex flex-wrap items-center justify-start gap-1.5 sm:gap-4 font-[var(--font-outfit)]">
+            <span className="opacity-90">We make</span>
             <div className="relative">
               <DynamicWord />
             </div>
-            <span>stand out.</span>
+            <span className="opacity-90">stand out.</span>
           </div>
           
-          {/* Short Description */}
-          <div className="mb-10 sm:mb-14 text-xs sm:text-sm md:text-lg text-white/50 max-w-2xl mx-auto font-light leading-relaxed tracking-wide px-4">
+          {/* Short Description - Left Aligned with Space Grotesk Font */}
+          <div className="mb-10 sm:mb-14 text-xs sm:text-sm md:text-xl text-white/60 max-w-2xl text-left font-light leading-relaxed tracking-wider font-[var(--font-space-grotesk)]">
             We strip away everything that doesn't serve your brand. What remains is strategy, clarity, and cinematic design that works.
           </div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
+          {/* Buttons - Left Aligned */}
+          <div className="flex flex-col sm:flex-row items-start justify-start gap-3 sm:gap-4 w-full px-0">
             <button className="w-full sm:w-auto min-w-0 sm:min-w-[220px] px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold rounded-none hover:bg-white/90 transition-colors flex items-center justify-center gap-2 sm:gap-3 tracking-[0.1em] sm:tracking-[0.15em] text-[9px] sm:text-xs uppercase">
               Get a Quote <span className="text-base sm:text-lg leading-none">→</span>
             </button>
@@ -55,7 +55,10 @@ export default function Home() {
             </button>
           </div>
           
-          <WorldClocks />
+          {/* World Clocks - Left Aligned Row */}
+          <div className="w-full flex justify-start">
+            <WorldClocks />
+          </div>
 
         </div>
       </section>

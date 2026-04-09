@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import GridOverlay from "@/components/GridOverlay";
@@ -9,6 +8,16 @@ import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -23,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased bg-[#0b0b0b]`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} antialiased bg-[#0b0b0b]`}>
       <body className="min-h-full flex flex-col font-sans text-[#e5e5e5] relative">
         <ServiceWorkerUnregister />
         <SecurityLayer />

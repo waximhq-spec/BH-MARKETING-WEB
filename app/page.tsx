@@ -34,7 +34,7 @@ export default function Home() {
           {/* Dynamic Slogan */}
           <div className="mb-6 sm:mb-8 text-lg sm:text-2xl md:text-[2.5rem] font-normal tracking-tight text-white flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
             <span>We make</span>
-            <div className="border-b-2 border-white/20 pb-1">
+            <div className="relative">
               <DynamicWord />
             </div>
             <span>stand out.</span>

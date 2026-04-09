@@ -1,8 +1,11 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import AnimatedText from "@/components/AnimatedText";
 import ParticleHero from "@/components/ParticleHero";
 import DynamicWord from "@/components/DynamicWord";
 import WorldClocks from "@/components/WorldClocks";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -18,7 +21,11 @@ export default function Home() {
           
           {/* Availability Bar */}
           <div className="mt-8 sm:mt-0 mb-6 sm:mb-10 inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-6 py-1 sm:py-2 border border-white/10 bg-transparent rounded-none">
-            <span className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-green-500 relative shrink-0"></span>
+            <motion.span 
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-green-500 relative shrink-0 shadow-[0_0_8px_rgba(34,197,94,0.6)]"
+            ></motion.span>
             <span className="text-[7px] sm:text-[10px] md:text-xs font-medium tracking-[0.1em] sm:tracking-[0.2em] text-white/60 uppercase font-mono">
               AVAILABLE — Q2 2026 <span className="mx-1 sm:mx-2 text-white/20">|</span> LIMITED SLOTS
             </span>

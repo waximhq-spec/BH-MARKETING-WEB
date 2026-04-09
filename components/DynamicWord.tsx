@@ -17,7 +17,7 @@ export default function DynamicWord() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 2800);
+    }, 2200); // Shorter cycle for better flow
     return () => clearInterval(interval);
   }, []);
 
@@ -32,14 +32,14 @@ export default function DynamicWord() {
           <motion.span
             key={index}
             layout
-            initial={{ rotateX: 110, opacity: 0, scale: 0.9, y: 12 }}
+            initial={{ rotateX: 90, opacity: 0, scale: 0.95, y: 10 }}
             animate={{ rotateX: 0, opacity: 1, scale: 1, y: 0 }}
-            exit={{ rotateX: -110, opacity: 0, scale: 0.9, y: -12 }}
+            exit={{ opacity: 0 }} // Smooth fade out only, no flip
             transition={{ 
-              duration: 0.8, 
-              ease: [0.76, 0, 0.24, 1], 
+              duration: 0.5, 
+              ease: [0.23, 1, 0.32, 1], // Slicker entry
               opacity: { 
-                duration: 1.2, // Much slower opacity ease-in for a 'ghostly' feel
+                duration: 0.7, 
                 ease: "easeOut" 
               }
             }}

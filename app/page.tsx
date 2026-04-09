@@ -32,9 +32,10 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col items-start sm:items-center justify-start sm:justify-center w-full mb-8 sm:mb-10">
-            <AnimatedText 
-              text="CINMACH PRODUCTIONS." 
-              className="text-[clamp(2.5rem,7vw,8rem)] leading-[0.95] md:leading-[1.1] font-extrabold tracking-[-0.04em] uppercase text-white text-left sm:text-center font-sans" 
+            <img
+              src="/HERO-LOGO.svg"
+              alt="Cinmach Productions"
+              className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[800px] lg:max-w-[1000px] h-auto object-contain"
             />
           </div>
           

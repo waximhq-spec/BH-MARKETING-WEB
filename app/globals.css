@@ -9,6 +9,7 @@
 :root {
   --background: var(--color-obsidian);
   --foreground: #e5e5e5;
+  --color-gold-500: #f97316;
 }
 
 body {

@@ -51,7 +51,7 @@ export default function WorldClocks() {
           <div className="w-full sm:w-auto text-center px-4 sm:px-5 py-2 sm:py-2.5 border border-white/20 bg-white/5 backdrop-blur-md rounded-md mb-2.5 sm:mb-3 text-white font-medium tracking-widest text-[10px] sm:text-xs md:text-sm shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all group-hover:bg-white/10 group-hover:border-white/30 whitespace-nowrap">
             {times[zone] || "--:--"}
           </div>
-          <span className="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-bold tracking-[0.2em] sm:tracking-[0.25em] text-white/50 group-hover:text-gold-500 transition-colors">
+          <span className="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-bold tracking-[0.2em] sm:tracking-[0.25em] text-white/50 group-hover:text-[#f97316] transition-colors">
             {label}
           </span>
         </div>

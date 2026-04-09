@@ -35,7 +35,7 @@ export default function Home() {
             <img
               src="/HERO-LOGO.svg"
               alt="Cinmach Productions"
-              className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[800px] lg:max-w-[1000px] h-auto object-contain"
+              className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[800px] lg:max-w-[1000px] h-auto object-contain drop-shadow-[0_0_20px_rgba(255,106,0,0.8)] drop-shadow-[0_0_40px_rgba(255,60,0,0.4)]"
             />
           </div>
           
@@ -55,7 +55,7 @@ export default function Home() {
 
           {/* Buttons - Left on Mobile, Center on PC */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-center gap-3 sm:gap-4 w-full px-0">
-            <button className="w-full sm:w-auto min-w-0 sm:min-w-[220px] px-6 py-3.5 sm:px-8 sm:py-4 bg-[#39ff14] text-black font-semibold rounded-none hover:bg-[#2bcc0f] transition-colors flex items-center justify-center gap-2 sm:gap-3 tracking-[0.1em] sm:tracking-[0.15em] text-[9px] sm:text-xs uppercase">
+            <button className="w-full sm:w-auto min-w-0 sm:min-w-[220px] px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold rounded-none hover:bg-white/90 transition-colors flex items-center justify-center gap-2 sm:gap-3 tracking-[0.1em] sm:tracking-[0.15em] text-[9px] sm:text-xs uppercase">
               Get a Quote <span className="text-base sm:text-lg leading-none">→</span>
             </button>
             <button className="w-full sm:w-auto min-w-0 sm:min-w-[220px] px-6 py-3.5 sm:px-8 sm:py-4 bg-transparent border border-white/20 text-white font-semibold rounded-none hover:border-white transition-colors flex items-center justify-center gap-2 sm:gap-3 tracking-[0.1em] sm:tracking-[0.15em] text-[9px] sm:text-xs uppercase">

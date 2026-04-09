@@ -3,114 +3,63 @@
 import { useEffect, useRef } from "react";
 
 class Particle {
-  angle: number;
-  radius: number;
-  speed: number;
-  color: string;
-  history: { x: number; y: number }[];
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
   size: number;
-  centerX: number;
-  centerY: number;
-  offsetX: number;
-  offsetY: number;
-  maxHistory: number;
+  color: string;
+  glowColor: string;
 
-  constructor(canvasWidth: number, canvasHeight: number, color: string) {
-    this.angle = Math.random() * Math.PI * 2;
-    this.radius = Math.random() * (Math.max(canvasWidth, canvasHeight)) + 20;
-    this.speed = (Math.random() * 0.0004) + 0.0001; 
-    if (Math.random() > 0.6) this.speed *= -0.7; 
-    
-    this.color = color;
-    this.history = [];
-    const isMobile = canvasWidth < 768;
-    this.size = isMobile ? Math.random() * 1.0 + 0.3 : Math.random() * 1.2 + 0.2; 
-    this.centerX = canvasWidth / 2;
-    this.centerY = canvasHeight / 2;
-    this.offsetX = 0;
-    this.offsetY = 0;
-    this.maxHistory = Math.floor(Math.random() * 6) + 3; 
+  constructor(width: number, height: number) {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random() - 0.5) * 0.4;
+    this.vy = (Math.random() - 0.5) * 0.4;
+    this.size = Math.random() * 1.5 + 0.5;
+    this.color = "#ffffff";
+    this.glowColor = "rgba(255, 106, 0, 0.8)";
   }
 
-  update(mouseX: number, mouseY: number, canvasWidth: number, canvasHeight: number) {
-    this.angle += this.speed;
-    
-    const baseX = this.centerX + Math.cos(this.angle) * this.radius;
-    const baseY = this.centerY + Math.sin(this.angle) * this.radius;
+  update(width: number, height: number, mouseX: number, mouseY: number) {
+    this.x += this.vx;
+    this.y += this.vy;
 
-    // 1. Mouse Fluid Repulsion
-    const dxMouse = (baseX + this.offsetX) - mouseX;
-    const dyMouse = (baseY + this.offsetY) - mouseY;
-    const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-    const mouseThreshold = 400;
+    if (this.x < 0 || this.x > width) this.vx *= -1;
+    if (this.y < 0 || this.y > height) this.vy *= -1;
 
-    if (distMouse < mouseThreshold && mouseX > 0) {
-      const force = Math.pow((mouseThreshold - distMouse) / mouseThreshold, 2); 
-      this.offsetX += (dxMouse / Math.max(distMouse, 1)) * force * 12;
-      this.offsetY += (dyMouse / Math.max(distMouse, 1)) * force * 12;
+    const dx = this.x - mouseX;
+    const dy = this.y - mouseY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 200) {
+      const force = (200 - dist) / 2000;
+      this.vx += (dx / dist) * force;
+      this.vy += (dy / dist) * force;
     }
 
-    // 2. Static Clear Zone (Center)
-    const isMobile = canvasWidth < 768;
-    const dxCenter = (baseX + this.offsetX) - (canvasWidth / 2);
-    const dyCenter = (baseY + this.offsetY) - (canvasHeight / 2);
-    const distCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
-    const centerThreshold = isMobile ? 300 : 500;
-
-    if (distCenter < centerThreshold) {
-      const force = Math.pow((centerThreshold - distCenter) / centerThreshold, 2); 
-      this.offsetX += (dxCenter / Math.max(distCenter, 1)) * force * 6;
-      this.offsetY += (dyCenter / Math.max(distCenter, 1)) * force * 6;
-    }
-
-    // 3. Static Clear Zone (Right side on Mobile)
-    if (isMobile) {
-      const dxRight = (baseX + this.offsetX) - (canvasWidth);
-      const dyRight = (baseY + this.offsetY) - (canvasHeight / 2);
-      const distRight = Math.sqrt(dxRight * dxRight + dyRight * dyRight);
-      const rightThreshold = 250;
-
-      if (distRight < rightThreshold) {
-        const force = Math.pow((rightThreshold - distRight) / rightThreshold, 2); 
-        this.offsetX += (dxRight / Math.max(distRight, 1)) * force * 8;
-        this.offsetY += (dyRight / Math.max(distRight, 1)) * force * 8;
-      }
-    }
-
-    // Heavy fluid dampening
-    this.offsetX *= 0.96;
-    this.offsetY *= 0.96;
-
-    const finalX = baseX + this.offsetX;
-    const finalY = baseY + this.offsetY;
-
-    this.history.push({ x: finalX, y: finalY });
-    if (this.history.length > this.maxHistory) {
-        this.history.shift();
+    const maxSpeed = 0.8;
+    const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+    if (speed > maxSpeed) {
+      this.vx = (this.vx / speed) * maxSpeed;
+      this.vy = (this.vy / speed) * maxSpeed;
     }
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    if (this.history.length < 2) return;
-    
+    // Draw glow
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = this.glowColor;
+    ctx.fillStyle = this.color;
     ctx.beginPath();
-    ctx.strokeStyle = this.color;
-    ctx.lineWidth = this.size;
-    ctx.lineCap = "round";
-    
-    ctx.moveTo(this.history[0].x, this.history[0].y);
-    for (let i = 1; i < this.history.length; i++) {
-        ctx.lineTo(this.history[i].x, this.history[i].y);
-    }
-    ctx.stroke();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0; // Reset for lines
   }
 }
 
 export default function ParticleHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
-  // Used to interpolate mouse movement so the glow feels like a fluid trail
-  const fluidMouseRef = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -120,66 +69,76 @@ export default function ParticleHero() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = 1200;
-    const colors = ["#ffffff", "#e0e0e0", "#8a9bb8", "#5a6a8a", "#303a50"];
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 50 : 100;
+    const connectionDistance = isMobile ? 120 : 180;
 
     const init = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
       for (let i = 0; i < particleCount; i++) {
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        particles.push(new Particle(canvas.width, canvas.height, color));
+        particles.push(new Particle(canvas.width, canvas.height));
+      }
+    };
+
+    const drawLines = () => {
+      ctx.globalAlpha = 1;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distSq = dx * dx + dy * dy;
+          const minDistSq = connectionDistance * connectionDistance;
+
+          if (distSq < minDistSq) {
+            const dist = Math.sqrt(distSq);
+            ctx.beginPath();
+            const opacity = (1 - dist / connectionDistance) * 0.6;
+            ctx.strokeStyle = `rgba(255, 106, 0, ${opacity})`;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
       }
     };
 
     const animate = () => {
-      // Clear canvas fully to maintain transparency
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Interpolate the fluid mouse position
+      // Draw interactive mouse glow
       if (mouseRef.current.x > 0) {
-         fluidMouseRef.current.x += (mouseRef.current.x - fluidMouseRef.current.x) * 0.15;
-         fluidMouseRef.current.y += (mouseRef.current.y - fluidMouseRef.current.y) * 0.15;
-      } else {
-         fluidMouseRef.current.x = -1000;
-         fluidMouseRef.current.y = -1000;
-      }
-
-      // Draw the fluid subtle white glow
-      if (fluidMouseRef.current.x > 0) {
+        ctx.save();
+        ctx.globalCompositeOperation = "screen";
         const gradient = ctx.createRadialGradient(
-          fluidMouseRef.current.x, fluidMouseRef.current.y, 0,
-          fluidMouseRef.current.x, fluidMouseRef.current.y, 400
+          mouseRef.current.x, mouseRef.current.y, 0,
+          mouseRef.current.x, mouseRef.current.y, 250
         );
-        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.08)');
-        gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.03)');
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        
-        ctx.globalCompositeOperation = "lighter";
+        gradient.addColorStop(0, 'rgba(255, 106, 0, 0.12)');
+        gradient.addColorStop(1, 'rgba(255, 106, 0, 0)');
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(fluidMouseRef.current.x, fluidMouseRef.current.y, 400, 0, Math.PI * 2);
+        ctx.arc(mouseRef.current.x, mouseRef.current.y, 250, 0, Math.PI * 2);
         ctx.fill();
-        ctx.globalCompositeOperation = "source-over"; // Reset blend mode for particles
+        ctx.restore();
       }
 
       particles.forEach((p) => {
-        p.update(fluidMouseRef.current.x, fluidMouseRef.current.y, canvas.width, canvas.height);
+        p.update(canvas.width, canvas.height, mouseRef.current.x, mouseRef.current.y);
         p.draw(ctx);
       });
+
+      drawLines();
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Snap fluid mouse immediately on first entrance to avoid flying across screen
-      if (mouseRef.current.x < 0) {
-          fluidMouseRef.current = { x: e.clientX, y: e.clientY };
-      }
       mouseRef.current = { x: e.clientX, y: e.clientY };
     };
-    
+
     const handleMouseLeave = () => {
       mouseRef.current = { x: -1000, y: -1000 };
     };
@@ -204,12 +163,21 @@ export default function ParticleHero() {
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#03050a]">
-      {/* The Stars / Particles Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 block w-full h-full pointer-events-none z-10" />
+    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#050301]">
+      {/* Permanent background glow layers (Low performance impact) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-40">
+        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-orange-900/10 blur-[180px] rounded-full" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-red-900/10 blur-[150px] rounded-full" />
+      </div>
+
+      <canvas 
+        ref={canvasRef} 
+        className="absolute inset-0 block w-full h-full pointer-events-none z-10" 
+      />
       
-      {/* Depth Shadow to blend typography nicely */}
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#03050a]/20 via-transparent to-[#03050a]/90 z-20 pointer-events-none" />
+      {/* Vignette for cinematic finish */}
+      <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_transparent_0%,_#000000_100%)] opacity-70 z-20 pointer-events-none" />
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-black/80 via-transparent to-black/95 z-25 pointer-events-none" />
     </div>
   );
 }

@@ -57,7 +57,7 @@ export default function Navbar() {
             className="flex items-center mr-2 pl-1 shrink-0"
           >
             <img
-              src="/logo.svg?v=2"
+              src="/logo.svg?v=3"
               alt="Cinmach Logo"
               className="h-7 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
             />
@@ -156,7 +156,7 @@ export default function Navbar() {
             }}
           >
             Get a Quote
-            <span style={{ color: "#F67011" }} className="text-xs leading-none">→</span>
+            <span style={{ color: "#050505" }} className="text-xs leading-none">→</span>
           </Link>
 
           {/* Mobile Hamburger */}

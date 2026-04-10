@@ -12,14 +12,42 @@
   --foreground: #F5F5F5;
   --color-premium-red: #D91616;
   --color-teal: #00A8AB;
+
+  /* ── Typography Scale ─────────────────────────────────── */
+  /* Display: hero eyebrow / section labels */
+  --text-label:        0.625rem;    /* 10px */
+  --ls-label:          0.4em;
+  --lh-label:          1;
+
+  /* Body: descriptions, paragraphs */
+  --text-body-sm:      0.8125rem;   /* 13px */
+  --text-body:         0.9375rem;   /* 15px */
+  --ls-body:           0.01em;
+  --lh-body:           1.75;
+
+  /* Subheading */
+  --text-sub:          1.125rem;    /* 18px on mobile, up to 3xl on desktop */
+  --ls-sub:            -0.01em;
+  --lh-sub:            1.4;
+
+  /* Section heading */
+  --ls-heading:        -0.03em;
+  --lh-heading:        1.1;
+
+  /* Buttons */
+  --text-btn:          0.6875rem;   /* 11px */
+  --ls-btn:            0.15em;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  /* Global base */
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
 }
-
 
 /* Lenis overrides */
 html.lenis, html.lenis body { height: auto; }
@@ -51,13 +79,45 @@ h1, h2, h3, img, button, .motion-gpu {
   text-orientation: mixed;
 }
 
+/* ── Typography Utilities ──────────────────────────────── */
+
+/* Section eyebrow labels */
+.type-label {
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Body text */
+.type-body {
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  font-weight: 300;
+}
+
+.type-body-sm {
+  font-size: var(--text-body-sm);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  font-weight: 300;
+}
+
+/* Section headings */
+.type-heading {
+  letter-spacing: var(--ls-heading);
+  line-height: var(--lh-heading);
+}
+
 /* Off-screen sections — defer rendering cost until near viewport */
 .content-section {
   content-visibility: auto;
   contain-intrinsic-size: 0 600px;
 }
 
-/* Respect prefers-reduced-motion — disable all transitions */
+/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -67,7 +127,7 @@ h1, h2, h3, img, button, .motion-gpu {
   }
 }
 
-/* Mobile: strip out expensive backdrop blurs to reduce GPU overdraw */
+/* Mobile: strip out expensive backdrop blurs */
 @media (max-width: 768px) {
   .mobile-no-blur {
     backdrop-filter: none !important;

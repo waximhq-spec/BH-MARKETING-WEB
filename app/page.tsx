@@ -7,6 +7,33 @@ import HeroLogo from "@/components/HeroLogo";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 
+// ─── Section label (eyebrow) ─────────────────────────────────────────────────
+function Label({ children }: { children: React.ReactNode }) {
+  return (
+    <p
+      className="type-label text-[#D91616] mb-5"
+      style={{ textShadow: "0 0 18px rgba(217,22,22,0.4)" }}
+    >
+      {children}
+    </p>
+  );
+}
+
+// ─── Reusable section heading ─────────────────────────────────────────────────
+function SectionHeading({
+  light,
+  bold,
+}: {
+  light: string;
+  bold: string;
+}) {
+  return (
+    <h2 className="type-heading text-2xl md:text-[2.75rem] lg:text-5xl font-light text-white">
+      {light} <span className="font-bold">{bold}</span>
+    </h2>
+  );
+}
+
 // ─── Reusable section fade-up wrapper ────────────────────────────────────────
 function FadeUp({
   children,
@@ -48,29 +75,37 @@ function ServiceCard({
       transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 22 } }}
       className="group relative flex flex-col p-8 md:p-10 rounded-[24px] bg-[#1a0505]/40 border border-white/5 overflow-hidden cursor-none"
-      style={{ boxShadow: "0 0 0 0 rgba(217,22,22,0)" }}
     >
       {/* Hover overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#D91616]/0 to-[#D91616]/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[24px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#D91616]/0 to-[#D91616]/[0.07] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[24px]" />
       {/* Hover border glow */}
-      <div className="absolute inset-0 rounded-[24px] border border-white/5 group-hover:border-white/10 group-hover:shadow-[0_0_40px_rgba(217,22,22,0.12)] transition-all duration-500 pointer-events-none" />
+      <div className="absolute inset-0 rounded-[24px] border border-white/5 group-hover:border-white/10 group-hover:shadow-[0_0_40px_rgba(217,22,22,0.1)] transition-all duration-500 pointer-events-none" />
 
-      <div className="w-12 h-12 rounded-full bg-black/50 border border-white/5 flex items-center justify-center mb-16 group-hover:bg-[#D91616]/10 group-hover:border-[#D91616]/30 transition-all duration-500 group-hover:shadow-[inset_0_0_15px_rgba(217,22,22,0.3)]">
-        <span className="text-xs font-bold text-white/50 group-hover:text-[#D91616] transition-colors">
+      {/* Index badge */}
+      <div className="w-10 h-10 rounded-full bg-black/50 border border-white/5 flex items-center justify-center mb-10 group-hover:bg-[#D91616]/10 group-hover:border-[#D91616]/30 transition-all duration-500">
+        <span
+          className="type-label text-white/40 group-hover:text-[#D91616] transition-colors"
+          style={{ letterSpacing: "0" }}
+        >
           0{index + 1}
         </span>
       </div>
-      <h4 className="text-md sm:text-lg font-black text-white mb-3 relative z-10 tracking-tight">
+
+      {/* Card heading */}
+      <h3
+        className="text-base md:text-lg font-bold text-white mb-3 relative z-10"
+        style={{ letterSpacing: "-0.02em", lineHeight: 1.25 }}
+      >
         {title}
-      </h4>
-      <p className="text-xs sm:text-sm font-normal text-white/50 leading-relaxed relative z-10">
-        {desc}
-      </p>
+      </h3>
+
+      {/* Card body */}
+      <p className="type-body-sm text-white/45 relative z-10">{desc}</p>
     </motion.div>
   );
 }
 
-// ─── CTA Button ───────────────────────────────────────────────────────────────
+// ─── CTA Pill Button ──────────────────────────────────────────────────────────
 function CTAButton({
   children,
   variant = "primary",
@@ -86,11 +121,13 @@ function CTAButton({
       whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 340, damping: 22 }}
       onClick={onClick}
-      className={
+      className={[
+        "px-7 py-3 rounded-full transition-shadow duration-300",
+        "type-label", // consistent size + spacing from token
         variant === "primary"
-          ? "px-8 py-3 bg-[#D91616] text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:shadow-[0_0_28px_rgba(217,22,22,0.45)] transition-shadow duration-300"
-          : "px-8 py-3 bg-transparent border border-white/30 text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:border-white hover:bg-white/5 transition-colors duration-300"
-      }
+          ? "bg-[#D91616] text-white hover:shadow-[0_0_28px_rgba(217,22,22,0.45)]"
+          : "bg-transparent border border-white/25 text-white/80 hover:border-white/60 hover:text-white hover:bg-white/[0.04]",
+      ].join(" ")}
     >
       {children}
     </motion.button>
@@ -101,7 +138,7 @@ export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // ── Scroll-based hero parallax (desktop only, GPU safe) ──────────────────
+  // ── Scroll-based hero parallax ──────────────────────────────────────────
   const { scrollY } = useScroll();
   const rawParallax = useTransform(scrollY, [0, 600], [0, shouldReduceMotion ? 0 : 60]);
   const smoothParallax = useSpring(rawParallax, { stiffness: 80, damping: 30 });
@@ -109,15 +146,15 @@ export default function Home() {
   const services = [
     {
       title: "Brand Strategy",
-      desc: "Positioning your brand as a market leader with clear, powerful narratives.",
+      desc: "We position your brand with clarity and intent — building narratives that lead markets.",
     },
     {
       title: "Cinematic Visuals",
-      desc: "High-end video and photography that captures the premium essence of your business.",
+      desc: "Premium video and photography that translates your brand essence into visual language.",
     },
     {
       title: "Digital Experiences",
-      desc: "Immersive, modern websites built for conversion and lasting impressions.",
+      desc: "Precision-crafted websites and interfaces that convert attention into lasting trust.",
     },
   ];
 
@@ -125,9 +162,9 @@ export default function Home() {
     <main className="w-full relative z-10 mx-auto bg-transparent">
       <Navbar />
 
-      {/* Desktop FlipClock — fixed bottom-right */}
-      <div className="hidden md:flex fixed right-10 lg:right-14 bottom-24 z-30 flex-col items-end gap-2">
-        <span className="text-[9px] uppercase tracking-[0.4em] text-white/30">
+      {/* Desktop FlipClock — fixed bottom-right, above back-to-top */}
+      <div className="hidden md:flex fixed right-10 lg:right-14 bottom-24 z-30 flex-col items-end gap-1.5">
+        <span className="type-label text-white/25" style={{ letterSpacing: "0.35em" }}>
           Current Time
         </span>
         <FlipClock />
@@ -138,12 +175,11 @@ export default function Home() {
         ref={heroRef}
         className="relative w-full min-h-[100svh] flex flex-col items-start justify-center overflow-hidden"
       >
-        {/* ── Background image with subtle parallax ─────────── */}
+        {/* ── Background image + subtle parallax ─────────── */}
         <motion.div
           className="absolute inset-0 z-0"
           style={{ y: smoothParallax }}
         >
-          {/* Scale up slightly to prevent parallax gap at bottom */}
           <div className="absolute inset-[-10%] w-[120%] h-[120%]">
             <img
               src="https://i.pinimg.com/1200x/61/84/32/61843271b3d9b48cf8a5e7e9364e9d75.jpg"
@@ -155,107 +191,89 @@ export default function Home() {
             />
           </div>
 
-          {/* Cinematic left-to-right dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-[#0B0B0B]/20" />
+          {/* Left-to-right dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-[#0B0B0B]/15" />
 
-          {/* Ambient red wash */}
+          {/* Red ambient wash */}
           <div className="absolute inset-0 bg-[#D91616]/30 mix-blend-color z-0" />
           <div className="absolute inset-0 bg-gradient-to-bl from-[#D91616]/40 to-transparent mix-blend-overlay z-0" />
         </motion.div>
 
         {/* ── Vignette + glows ──────────────────────────────── */}
         <div className="absolute inset-0 pointer-events-none z-0">
-          {/* Radial vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0B0B0B_150%)] opacity-90 z-10" />
 
-          {/* Core breathing glow — always visible */}
+          {/* Core breathing glow */}
           <motion.div
-            animate={
-              shouldReduceMotion
-                ? {}
-                : { opacity: [0.15, 0.35, 0.15], scale: [1, 1.1, 1] }
-            }
+            animate={shouldReduceMotion ? {} : { opacity: [0.15, 0.32, 0.15], scale: [1, 1.08, 1] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-1/2 left-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
-            style={{ background: "radial-gradient(circle, rgba(217,22,22,0.4) 0%, transparent 65%)" }}
+            style={{ background: "radial-gradient(circle, rgba(217,22,22,0.38) 0%, transparent 65%)" }}
           />
 
-          {/* Drifting glows — desktop only (heavy on mobile GPUs) */}
+          {/* Drifting glows — desktop only */}
           <div className="hidden md:block">
             <motion.div
-              animate={
-                shouldReduceMotion
-                  ? {}
-                  : {
-                      opacity: [0.08, 0.22, 0.08],
-                      scale: [1, 1.3, 1],
-                      x: ["-50%", "-30%", "-50%"],
-                      y: ["-50%", "-60%", "-50%"],
-                    }
-              }
+              animate={shouldReduceMotion ? {} : { opacity: [0.07, 0.2, 0.07], scale: [1, 1.25, 1], x: ["-50%", "-32%", "-50%"], y: ["-50%", "-58%", "-50%"] }}
               transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-1/4 left-[30%] w-[55vw] max-w-[550px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform blur-3xl mix-blend-screen"
-              style={{ background: "radial-gradient(circle, rgba(217,22,22,0.2) 0%, transparent 60%)" }}
+              style={{ background: "radial-gradient(circle, rgba(217,22,22,0.18) 0%, transparent 60%)" }}
             />
             <motion.div
-              animate={
-                shouldReduceMotion
-                  ? {}
-                  : {
-                      opacity: [0.04, 0.16, 0.04],
-                      scale: [1, 1.2, 1],
-                      x: ["0%", "-20%", "0%"],
-                      y: ["0%", "20%", "0%"],
-                    }
-              }
+              animate={shouldReduceMotion ? {} : { opacity: [0.04, 0.14, 0.04], scale: [1, 1.18, 1], x: ["0%", "-18%", "0%"], y: ["0%", "18%", "0%"] }}
               transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
               className="absolute bottom-1/4 right-[10%] w-[44vw] max-w-[440px] aspect-square rounded-full z-0 will-change-transform blur-3xl mix-blend-screen"
-              style={{ background: "radial-gradient(circle, rgba(217,22,22,0.15) 0%, transparent 60%)" }}
+              style={{ background: "radial-gradient(circle, rgba(217,22,22,0.14) 0%, transparent 60%)" }}
             />
           </div>
         </div>
 
-        {/* ── Hero content ──────────────────────────────────── */}
-        <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-start justify-center text-left pt-20">
+        {/* ── Hero text content ─────────────────────────────── */}
+        <div className="z-20 w-full px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-start justify-center text-left pt-24">
           <motion.div
             animate={shouldReduceMotion ? {} : { y: [0, -4, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-start justify-center w-full relative max-w-4xl"
+            className="flex flex-col items-start w-full max-w-3xl"
           >
-            {/* Logo */}
+            {/* Logo / wordmark */}
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[500px] h-auto relative z-10 origin-left scale-110"
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-[260px] sm:max-w-[380px] md:max-w-[480px] h-auto mb-8 origin-left"
             >
               <HeroLogo />
             </motion.div>
 
-            {/* Tagline */}
+            {/* Tagline — concise, confident */}
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8 text-white/80 text-sm sm:text-lg font-light tracking-wide max-w-2xl"
+              transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              className="text-white/70 mb-10 max-w-[520px]"
+              style={{
+                fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)",
+                lineHeight: 1.65,
+                letterSpacing: "0.005em",
+                fontWeight: 300,
+              }}
             >
-              Building luxury brands step by step. We craft bold, cinematic experiences
-              for modern visionaries.
+              We craft cinematic brand experiences for modern visionaries.
             </motion.p>
 
-            {/* CTA buttons */}
+            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-10 flex flex-wrap gap-4"
+              transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-wrap gap-3"
             >
               <CTAButton variant="primary">Our Work</CTAButton>
               <CTAButton variant="outline">Contact Us</CTAButton>
             </motion.div>
 
             {/* Mobile FlipClock */}
-            <div className="mt-12 md:hidden self-start">
+            <div className="mt-14 md:hidden self-start">
               <FlipClock />
             </div>
           </motion.div>
@@ -263,33 +281,25 @@ export default function Home() {
 
         {/* ── Scroll indicator ─────────────────────────────── */}
         <motion.div
-          animate={
-            shouldReduceMotion
-              ? {}
-              : { y: [0, 8, 0], opacity: [0.3, 0.8, 0.3] }
-          }
+          animate={shouldReduceMotion ? {} : { y: [0, 7, 0], opacity: [0.3, 0.7, 0.3] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
+          className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
         >
-          <span className="text-[9px] uppercase font-bold tracking-[0.3em] text-white/60">
+          <span className="type-label text-white/40" style={{ letterSpacing: "0.35em" }}>
             Scroll
           </span>
-          <div className="w-px h-6 bg-gradient-to-b from-white/50 to-transparent" />
+          <div className="w-px h-6 bg-gradient-to-b from-white/40 to-transparent" />
         </motion.div>
       </section>
 
       {/* ════════════════════════════════════════════════ SERVICES */}
-      <section className="content-section relative w-full py-32 px-6 md:px-16 flex flex-col items-center z-20">
-        <FadeUp className="w-full max-w-6xl mb-16 text-left">
-          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#D91616] mb-4 drop-shadow-[0_0_10px_rgba(217,22,22,0.5)]">
-            Our Expertise
-          </h2>
-          <h3 className="text-2xl md:text-5xl font-light tracking-tight text-white mb-6">
-            Cinematic <span className="font-bold">Services.</span>
-          </h3>
+      <section className="content-section relative w-full py-28 md:py-36 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
+        <FadeUp className="w-full max-w-6xl mb-14">
+          <Label>Our Expertise</Label>
+          <SectionHeading light="Cinematic" bold="Services." />
         </FadeUp>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full max-w-6xl">
           {services.map((service, i) => (
             <ServiceCard key={i} title={service.title} desc={service.desc} index={i} />
           ))}
@@ -297,85 +307,115 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════ WORK */}
-      <section className="content-section relative w-full py-32 px-6 md:px-16 flex flex-col items-center z-20">
-        <FadeUp className="w-full max-w-6xl mb-16 text-left">
-          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#D91616] mb-4 drop-shadow-[0_0_10px_rgba(217,22,22,0.5)]">
-            Selected Case Studies
-          </h2>
-          <h3 className="text-2xl md:text-5xl font-light tracking-tight text-white mb-6">
-            Our <span className="font-bold">Work.</span>
-          </h3>
+      <section className="content-section relative w-full py-28 md:py-36 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
+        <FadeUp className="w-full max-w-6xl mb-14">
+          <Label>Selected Case Studies</Label>
+          <SectionHeading light="Our" bold="Work." />
         </FadeUp>
 
         <FadeUp className="w-full max-w-6xl" delay={0.1}>
           <motion.div
             whileHover={{ scale: 1.005, transition: { type: "spring", stiffness: 200, damping: 25 } }}
-            className="w-full aspect-[4/3] md:aspect-[21/9] rounded-[24px] bg-[#1a0505]/40 border border-white/5 flex items-center justify-center group overflow-hidden relative cursor-none hover:border-white/10 hover:shadow-[0_0_50px_rgba(217,22,22,0.1)] transition-all duration-700"
+            className="w-full aspect-[4/3] md:aspect-[21/9] rounded-[20px] bg-[#1a0505]/40 border border-white/5 flex items-center justify-center group overflow-hidden relative cursor-none hover:border-white/10 hover:shadow-[0_0_50px_rgba(217,22,22,0.08)] transition-all duration-700"
           >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#0B0B0B_120%)] z-10 opacity-60 pointer-events-none" />
-            {/* Background tile with subtle zoom on hover */}
             <motion.div
               className="absolute w-full h-full bg-[#181818] pointer-events-none"
               whileHover={{ scale: 1.04 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             />
 
-            <div className="relative z-20 flex flex-col items-center pointer-events-none">
-              <motion.span
-                initial={{ opacity: 0, y: 8 }}
-                whileHover={{ opacity: 1, y: 0 }}
-                className="text-[#D91616] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_10px_rgba(217,22,22,0.5)]"
-              >
+            <div className="relative z-20 flex flex-col items-center pointer-events-none gap-2">
+              <span className="type-label text-[#D91616] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                 View Project
-              </motion.span>
-              <h4 className="text-xl sm:text-2xl md:text-5xl font-bold text-white tracking-tight">
+              </span>
+              <h3
+                className="text-2xl sm:text-3xl md:text-5xl font-bold text-white"
+                style={{ letterSpacing: "-0.03em", lineHeight: 1.05 }}
+              >
                 Luxury Real Estate Campaign
-              </h4>
+              </h3>
             </div>
           </motion.div>
         </FadeUp>
       </section>
 
       {/* ════════════════════════════════════════════════ ABOUT */}
-      <section className="content-section relative w-full py-40 px-6 md:px-16 flex flex-col items-center z-20 bg-gradient-to-b from-transparent to-[#111111]/30">
-        <FadeUp className="w-full max-w-4xl text-center flex flex-col items-center">
-          <div className="w-16 h-px bg-[#D91616] mb-8 shadow-[0_0_10px_rgba(217,22,22,1)]" />
-          <h3 className="text-2xl md:text-4xl lg:text-5xl font-light text-white leading-tight mb-8">
+      <section className="content-section relative w-full py-32 md:py-44 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20 bg-gradient-to-b from-transparent to-[#111111]/20">
+        <FadeUp className="w-full max-w-3xl text-center flex flex-col items-center">
+          {/* Accent rule */}
+          <div className="w-10 h-px bg-[#D91616] mb-10 shadow-[0_0_12px_rgba(217,22,22,0.9)]" />
+
+          <h2
+            className="text-white mb-7"
+            style={{
+              fontSize: "clamp(1.5rem, 3.2vw, 2.9rem)",
+              lineHeight: 1.2,
+              letterSpacing: "-0.025em",
+              fontWeight: 300,
+            }}
+          >
             We are an independent{" "}
-            <span className="font-bold text-[#D91616] drop-shadow-[0_0_15px_rgba(217,22,22,0.4)]">
+            <span
+              className="font-bold text-[#D91616]"
+              style={{ textShadow: "0 0 18px rgba(217,22,22,0.3)" }}
+            >
               creative agency
-            </span>{" "}
-            driven by the pursuit of aesthetic perfection and cinematic storytelling.
-          </h3>
-          <p className="text-sm md:text-base text-white/50 max-w-2xl font-light leading-relaxed">
-            Our mission is to elevate luxury brands to their highest potential. Through
-            cutting-edge visuals, sophisticated design systems, and unparalleled strategic
-            positioning, we help our partners transcend the ordinary. Every frame we shoot,
-            every interface we build, is crafted with obsessive attention to detail.
+            </span>
+            {" "}driven by the pursuit of aesthetic perfection.
+          </h2>
+
+          <p
+            className="text-white/45 max-w-xl"
+            style={{
+              fontSize: "clamp(0.85rem, 1.1vw, 1rem)",
+              lineHeight: 1.8,
+              letterSpacing: "0.008em",
+              fontWeight: 300,
+            }}
+          >
+            From luxury brand identities to precision digital systems — every project we
+            take on is treated as a singular work. Crafted with obsessive attention to
+            detail, built to endure.
           </p>
         </FadeUp>
       </section>
 
       {/* ════════════════════════════════════════════════ CONTACT */}
-      <section className="content-section relative w-full py-32 px-6 pb-48 flex justify-center z-20">
-        <FadeUp className="w-full max-w-3xl">
+      <section className="content-section relative w-full py-28 md:py-36 px-5 sm:px-8 pb-44 flex justify-center z-20">
+        <FadeUp className="w-full max-w-2xl">
           <motion.div
             whileHover={{ scale: 1.008, transition: { type: "spring", stiffness: 200, damping: 28 } }}
-            className="rounded-[32px] p-12 md:p-16 bg-[#1a0505]/50 border border-white/5 mobile-no-blur backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(217,22,22,0.05)]"
+            className="rounded-[28px] p-10 md:p-16 bg-[#1a0505]/50 border border-white/5 mobile-no-blur backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(217,22,22,0.04)]"
           >
-            {/* Internal corner glows */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#D91616]/20 blur-[80px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#D91616]/10 blur-[60px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2" />
+            {/* Corner glows */}
+            <div className="absolute top-0 right-0 w-56 h-56 bg-[#D91616]/15 blur-[70px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#D91616]/8 blur-[50px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2" />
 
-            <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#D91616] mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(217,22,22,0.5)]">
-              Start a Project
-            </h2>
-            <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-8 relative z-10">
+            <Label>Start a Project</Label>
+
+            <h2
+              className="text-white mb-5 relative z-10"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3.25rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+              }}
+            >
               Ready to Elevate?
-            </h3>
-            <p className="text-white/50 mb-10 text-sm max-w-md relative z-10">
-              Let&apos;s craft something unforgettable. Reach out to our team to discuss your
-              brand&apos;s cinematic journey.
+            </h2>
+
+            <p
+              className="text-white/45 mb-10 max-w-sm relative z-10"
+              style={{
+                fontSize: "clamp(0.85rem, 1vw, 0.95rem)",
+                lineHeight: 1.75,
+                letterSpacing: "0.005em",
+                fontWeight: 300,
+              }}
+            >
+              Let&apos;s build something that lasts. Tell us about your brand.
             </p>
 
             <motion.div
@@ -386,7 +426,8 @@ export default function Home() {
             >
               <Link
                 href="/estimate"
-                className="inline-flex items-center px-10 py-4 bg-white text-black text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-[#D91616] hover:text-white hover:shadow-[0_0_30px_rgba(217,22,22,0.6)] transition-colors duration-300"
+                className="inline-flex items-center px-9 py-3.5 bg-white text-black type-label hover:bg-[#D91616] hover:text-white hover:shadow-[0_0_28px_rgba(217,22,22,0.55)] rounded-full transition-colors duration-300"
+                style={{ letterSpacing: "0.14em" }}
               >
                 Get in Touch
               </Link>

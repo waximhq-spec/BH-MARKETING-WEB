@@ -27,16 +27,16 @@ export default function Home() {
           {/* Breathing Orange Glow - Optimized for Performance (No CSS blur filter) */}
           <motion.div
             animate={{
-              opacity: [0.15, 0.35, 0.15],
-              scale: [1, 1.1, 1],
+              opacity: [0.4, 0.7, 0.4],
+              scale: [1, 1.15, 1],
             }}
             transition={{
               duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
-            style={{ background: "radial-gradient(circle, rgba(255,140,0,0.3) 0%, transparent 65%)" }}
+            className="absolute top-1/2 left-1/2 w-[90vw] max-w-[1200px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
+            style={{ background: "radial-gradient(circle, rgba(255,140,0,0.5) 0%, transparent 80%)" }}
           />
         </div>
         

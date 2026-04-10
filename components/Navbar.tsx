@@ -140,26 +140,24 @@ export default function Navbar() {
           {/* CTA Button (desktop) */}
           <Link
             href="/estimate"
-            className="hidden md:flex items-center gap-2 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase shrink-0 transition-all duration-300 group"
+            className="hidden md:flex items-center gap-2 px-5 py-2 text-[11px] font-bold tracking-[0.18em] uppercase shrink-0 transition-all duration-300 group shadow-sm active:scale-95"
             style={{
-              background: "rgba(0, 0, 0, 0.03)",
-              border: "1px solid rgba(0, 0, 0, 0.1)",
+              background: "#F67011",
+              border: "1px solid rgba(0, 0, 0, 0.05)",
               borderRadius: "9999px",
-              color: "#050505",
+              color: "#FFFFFF",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(0, 0, 0, 0.05)";
-              e.currentTarget.style.borderColor = "rgba(0, 0, 0, 0.2)";
-              e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.05)";
+              e.currentTarget.style.background = "#e5650d";
+              e.currentTarget.style.boxShadow = "0 8px 20px rgba(246, 112, 17, 0.2)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(0, 0, 0, 0.03)";
-              e.currentTarget.style.borderColor = "rgba(0, 0, 0, 0.1)";
+              e.currentTarget.style.background = "#F67011";
               e.currentTarget.style.boxShadow = "none";
             }}
           >
             Get a Quote
-            <span style={{ color: "#050505" }} className="text-xs leading-none">→</span>
+            <span style={{ color: "#FFFFFF" }} className="text-xs leading-none group-hover:translate-x-0.5 transition-transform duration-300">→</span>
           </Link>
 
           {/* Mobile Hamburger */}
@@ -224,7 +222,8 @@ export default function Navbar() {
               >
                 <Link
                   href="/estimate"
-                  className="text-sm tracking-[0.2em] uppercase font-semibold px-8 py-4 rounded-full border border-black/20 text-[#050505] hover:border-black/50 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300"
+                  className="text-sm tracking-[0.2em] uppercase font-bold px-10 py-5 rounded-full text-white hover:shadow-[0_12px_32px_rgba(246,112,17,0.2)] active:scale-95 transition-all duration-300"
+                  style={{ background: "#F67011" }}
                   onClick={() => setMenuOpen(false)}
                 >
                   Get a Quote →

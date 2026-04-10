@@ -98,16 +98,16 @@ export default function Navbar() {
           <div className="hidden md:flex items-center shrink-0 relative">
             <Link
               href="/estimate"
-              className="flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98] relative z-10 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+              className="flex items-center gap-2 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[1px] active:scale-[0.98] relative z-10 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
               style={{
                 background: "transparent",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 color: "#FFFFFF",
-                border: "1px solid rgba(255,255,255,0.4)",
+                border: "1px solid rgba(255,255,255,0.3)",
               }}
             >
               Get a Quote
-              <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-white">→</span>
+              <span className="text-[10px] leading-none group-hover:translate-x-1 duration-300 ease-out text-white">→</span>
             </Link>
           </div>
 
@@ -182,7 +182,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/estimate"
-                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-[16px] text-white bg-transparent border border-white/30 hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
+                  className="text-sm tracking-[0.25em] uppercase font-black px-8 py-4 rounded-[12px] text-white bg-transparent border border-white/20 hover:border-white/50 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 transition-all duration-300"
                   onClick={() => setMenuOpen(false)}
                 >
                   Get a Quote →

@@ -140,7 +140,7 @@ export default function Navbar() {
           {/* CTA Button (desktop) */}
           <Link
             href="/estimate"
-            className="hidden md:flex items-center gap-2 px-5 py-2 text-[11px] font-bold tracking-[0.18em] uppercase shrink-0 transition-all duration-300 group shadow-sm active:scale-95"
+            className="hidden md:flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase shrink-0 transition-all duration-300 group shadow-sm active:scale-95 scale-y-[1.1]"
             style={{
               background: "#181818",
               borderRadius: "9999px",
@@ -221,7 +221,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/estimate"
-                  className="text-sm tracking-[0.2em] uppercase font-bold px-10 py-5 rounded-full text-white bg-[#181818] hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)] active:scale-95 transition-all duration-300"
+                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-full text-white bg-[#181818] hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
                   onClick={() => setMenuOpen(false)}
                 >
                   Get a Quote →

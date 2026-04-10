@@ -163,11 +163,11 @@ export default function ParticleHero() {
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#050301]">
+    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#010502]">
       {/* Permanent background glow layers (Low performance impact) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-40">
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-orange-900/10 blur-[180px] rounded-full" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-red-900/10 blur-[150px] rounded-full" />
+        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-emerald-900/10 blur-[180px] rounded-full" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-emerald-950/10 blur-[150px] rounded-full" />
       </div>
 
       <canvas 

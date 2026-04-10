@@ -168,7 +168,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
-              className="group relative flex flex-col p-8 md:p-10 rounded-[24px] bg-[#111111]/40 border border-white/5 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-white/10 hover:shadow-[0_0_40px_rgba(0, 96, 57,0.15)] cursor-none"
+              className="group relative flex flex-col p-8 md:p-10 rounded-[24px] bg-[#011a0d]/40 border border-white/5 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-white/10 hover:shadow-[0_0_40px_rgba(0, 96, 57,0.15)] cursor-none"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-[#006039]/0 to-[#006039]/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
@@ -200,7 +200,7 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-6xl aspect-[4/3] md:aspect-[21/9] rounded-[24px] bg-[#111111]/40 border border-white/5 backdrop-blur-md flex items-center justify-center group overflow-hidden relative cursor-none hover:border-white/10 hover:shadow-[0_0_50px_rgba(0, 96, 57,0.1)] transition-all duration-700"
+          className="w-full max-w-6xl aspect-[4/3] md:aspect-[21/9] rounded-[24px] bg-[#011a0d]/40 border border-white/5 backdrop-blur-md flex items-center justify-center group overflow-hidden relative cursor-none hover:border-white/10 hover:shadow-[0_0_50px_rgba(0, 96, 57,0.1)] transition-all duration-700"
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#0B0B0B_120%)] z-10 opacity-60 pointer-events-none" />
           <div className="absolute w-full h-full bg-[#181818] transition-transform duration-700 group-hover:scale-105 pointer-events-none" />
@@ -238,7 +238,7 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-3xl rounded-[32px] p-12 md:p-16 bg-[#111111]/50 border border-white/5 backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(0, 96, 57,0.05)]"
+          className="w-full max-w-3xl rounded-[32px] p-12 md:p-16 bg-[#011a0d]/50 border border-white/5 backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(0, 96, 57,0.05)]"
         >
           {/* Internal Glow Effects */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#006039]/20 blur-[80px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />

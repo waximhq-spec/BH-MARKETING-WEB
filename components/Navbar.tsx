@@ -109,15 +109,6 @@ export default function Navbar() {
               Get a Quote
               <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#00A138]">→</span>
             </Link>
-
-            {/* Green Frost / Glow Effect (Right side) */}
-            <div 
-              className="absolute -right-4 top-1/2 -translate-y-1/2 w-20 h-20 bg-[#00A138]/20 blur-[30px] rounded-full pointer-events-none z-0"
-              style={{
-                maskImage: "radial-gradient(circle at center, black, transparent 70%)",
-                WebkitMaskImage: "radial-gradient(circle at center, black, transparent 70%)"
-              }}
-            />
           </div>
 
           {/* Mobile Hamburger */}
@@ -140,6 +131,15 @@ export default function Navbar() {
             />
           </button>
         </motion.div>
+
+        {/* Green Frost / Glow Effect (Right side - Floating behind the edge) */}
+        <div 
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#00A138]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
+          style={{
+            maskImage: "radial-gradient(circle at center, black, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(circle at center, black, transparent 80%)"
+          }}
+        />
       </nav>
 
       {/* Mobile Menu Overlay */}

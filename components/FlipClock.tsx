@@ -17,11 +17,11 @@ const Digit = ({ value, isAccent = false }: { value: string | number, isAccent?:
             ease: [0.23, 1, 0.32, 1] 
           }}
           className={`absolute text-sm sm:text-base font-bold tabular-nums tracking-tighter ${
-            isAccent ? "text-[#006039]" : "text-white/80"
+            isAccent ? "text-[#D91616]" : "text-white/80"
           }`}
           style={{
             textShadow: isAccent 
-              ? "0 0 12px rgba(0, 96, 57, 0.4)" 
+              ? "0 0 12px rgba(217, 22, 22, 0.4)" 
               : "0 0 10px rgba(255,255,255,0.15)"
           }}
         >

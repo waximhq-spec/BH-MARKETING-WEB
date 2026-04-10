@@ -18,7 +18,7 @@ class Particle {
     this.vy = (Math.random() - 0.5) * 0.4;
     this.size = Math.random() * 1.5 + 0.5;
     this.color = "#ffffff";
-    this.glowColor = "rgba(0, 96, 57, 0.8)";
+    this.glowColor = "rgba(217, 22, 22, 0.8)";
   }
 
   update(width: number, height: number, mouseX: number, mouseY: number) {
@@ -95,7 +95,7 @@ export default function ParticleHero() {
             const dist = Math.sqrt(distSq);
             ctx.beginPath();
             const opacity = (1 - dist / connectionDistance) * 0.6;
-            ctx.strokeStyle = `rgba(0, 96, 57, ${opacity})`;
+            ctx.strokeStyle = `rgba(217, 22, 22, ${opacity})`;
             ctx.lineWidth = 0.8;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -116,8 +116,8 @@ export default function ParticleHero() {
           mouseRef.current.x, mouseRef.current.y, 0,
           mouseRef.current.x, mouseRef.current.y, 250
         );
-        gradient.addColorStop(0, 'rgba(0, 96, 57, 0.12)');
-        gradient.addColorStop(1, 'rgba(0, 96, 57, 0)');
+        gradient.addColorStop(0, 'rgba(217, 22, 22, 0.12)');
+        gradient.addColorStop(1, 'rgba(217, 22, 22, 0)');
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(mouseRef.current.x, mouseRef.current.y, 250, 0, Math.PI * 2);
@@ -163,11 +163,11 @@ export default function ParticleHero() {
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#010502]">
+    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#050101]">
       {/* Permanent background glow layers (Low performance impact) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-40">
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-emerald-900/10 blur-[180px] rounded-full" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-emerald-950/10 blur-[150px] rounded-full" />
+        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-red-900/10 blur-[180px] rounded-full" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-red-950/10 blur-[150px] rounded-full" />
       </div>
 
       <canvas 

@@ -103,15 +103,6 @@ export default function Navbar() {
               borderRadius: "16px",
               color: "#FFFFFF",
               border: "1px solid rgba(255,255,255,0.05)",
-              boxShadow: "0 0 20px rgba(255,140,0,0.15)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 24px rgba(255, 140, 0, 0.45)";
-              e.currentTarget.style.background = "#222222";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 20px rgba(255,140,0,0.15)";
-              e.currentTarget.style.background = "#181818";
             }}
           >
             Get a Quote

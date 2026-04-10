@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Inter, Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -6,6 +7,8 @@ import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
 import SecurityLayer from "@/components/SecurityLayer";
 import CustomCursor from "@/components/CustomCursor";
 import FilmGrain from "@/components/FilmGrain";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import BackToTop from "@/components/BackToTop";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,6 +43,9 @@ export default function RootLayout({
         <CustomCursor />
         <GridOverlay />
         <FilmGrain />
+        {/* Global UI chrome — always visible across all pages */}
+        <ScrollProgressBar />
+        <BackToTop />
         <SmoothScroll>
           {children}
         </SmoothScroll>

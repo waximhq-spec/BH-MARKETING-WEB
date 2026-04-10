@@ -29,13 +29,17 @@ export default function Home() {
           />
           {/* Professional Overlay to maintain cinematic dark mode */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-[#0B0B0B]/20" />
+          
+          {/* Ambient Premium Red Wash over the background guy */}
+          <div className="absolute inset-0 bg-[#D91616]/10 mix-blend-color z-0" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-[#D91616]/20 to-transparent mix-blend-overlay z-0" />
         </div>
 
         {/* Vignette & Glow Background */}
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0B0B0B_150%)] transition-all duration-1000 opacity-90 z-10" />
           
-          {/* Breathing red glow - Optimized for Performance */}
+          {/* Core Breathing Red Glow - Optimized for Performance */}
           <motion.div
             animate={{
               opacity: [0.15, 0.35, 0.15],
@@ -48,6 +52,40 @@ export default function Home() {
             }}
             className="absolute top-1/2 left-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
             style={{ background: "radial-gradient(circle, rgba(217, 22, 22, 0.4) 0%, transparent 65%)" }}
+          />
+
+          {/* Drifting Red Animation 1 */}
+          <motion.div
+            animate={{
+              opacity: [0.1, 0.25, 0.1],
+              scale: [1, 1.3, 1],
+              x: ["-50%", "-30%", "-50%"],
+              y: ["-50%", "-60%", "-50%"],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-1/4 left-[30%] w-[60vw] max-w-[600px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform blur-3xl mix-blend-screen"
+            style={{ background: "radial-gradient(circle, rgba(217, 22, 22, 0.25) 0%, transparent 60%)" }}
+          />
+
+          {/* Drifting Red Animation 2 */}
+          <motion.div
+            animate={{
+              opacity: [0.05, 0.2, 0.05],
+              scale: [1, 1.2, 1],
+              x: ["0%", "-20%", "0%"],
+              y: ["0%", "20%", "0%"],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-1/4 right-[10%] w-[50vw] max-w-[500px] aspect-square rounded-full z-0 will-change-transform blur-3xl mix-blend-screen"
+            style={{ background: "radial-gradient(circle, rgba(217, 22, 22, 0.2) 0%, transparent 60%)" }}
           />
         </div>
         

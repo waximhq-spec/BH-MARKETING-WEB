@@ -8,12 +8,9 @@ export default function Home() {
     <main className="w-full relative z-10 mx-auto">
       <Navbar />
       
-      {/* Desktop FlipClock - Fixed Right Guage */}
-      <div className="hidden md:flex fixed right-4 lg:right-6 top-[60%] -translate-y-1/2 z-30 flex-row items-center gap-2">
-        <span 
-          className="text-[9px] uppercase tracking-[0.4em] text-[#353535]/50 whitespace-nowrap"
-          style={{ transform: 'rotate(-90deg)', transformOrigin: 'center', marginBottom: '20px' }}
-        >
+      {/* Desktop FlipClock - Bottom Right of Hero */}
+      <div className="hidden md:flex fixed right-10 lg:right-14 bottom-10 z-30 flex-col items-end gap-2">
+        <span className="text-[9px] uppercase tracking-[0.4em] text-[#353535]/40">
           Current Time
         </span>
         <FlipClock />

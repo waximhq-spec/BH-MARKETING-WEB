@@ -20,6 +20,17 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center overflow-hidden">
+        {/* Background Image / Texture Layer */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/download.png" 
+            alt="Hero Background" 
+            className="w-full h-full object-cover opacity-100"
+          />
+          {/* Professional Overlay to maintain cinematic dark mode */}
+          <div className="absolute inset-0 bg-[#0a0a0a]/80" />
+        </div>
+
         {/* Vignette & Glow Background */}
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0a0a0a_150%)] transition-all duration-1000 opacity-90 z-10" />

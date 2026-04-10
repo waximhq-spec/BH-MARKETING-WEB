@@ -151,7 +151,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[90] flex flex-col items-center justify-center min-h-screen"
-            style={{ background: "rgba(255, 255, 255, 0.98)", backdropFilter: "blur(20px)" }}
+            style={{ background: "rgba(11, 11, 11, 0.75)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
             onClick={() => setMenuOpen(false)}
           >
             <ul className="flex flex-col items-center justify-center gap-10 text-5xl sm:text-6xl tracking-tight uppercase font-black text-center w-full px-6">
@@ -166,7 +166,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-[#050505] hover:text-black/50 transition-colors duration-200"
+                    className="text-white hover:text-[#FF6A00] transition-colors duration-200 drop-shadow-md cursor-none"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.name}

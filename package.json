@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_TELEMETRY_DISABLED=1 NEXT_DISABLE_SPAWN_WORKER=1 UV_THREADPOOL_SIZE=1 next build",
-    "start": "next start",
+    "build": "NEXT_TELEMETRY_DISABLED=1 UV_THREADPOOL_SIZE=1 NEXT_DISABLE_SPAWN_WORKER=1 next build",
+    "start": "node entry.js",
     "lint": "eslint"
   },
   "dependencies": {

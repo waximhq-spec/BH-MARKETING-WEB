@@ -8,15 +8,19 @@ const nextConfig: NextConfig = {
   // Set output to standalone for lightweight production builds
   output: 'standalone',
 
-  // Disable SWC minification if it spawns too many Rust threads
-  // swcMinify: false, 
+  // Disable powered by header to save small overhead
+  poweredByHeader: false,
+  
+  // Disable compression as Hostinger's LiteSpeed server handles this more efficiently
+  compress: false,
+
+  // Disable image optimization to avoid spawning heavy 'sharp' processes
+  images: { unoptimized: true },
 
   // Hard limit Next.js to use only 1 CPU core and disable worker threads
-  // This prevents it from instantly spawning 7+ worker processes/threads and hitting Hostinger's 120 process cap.
   experimental: {
     cpus: 1,
     workerThreads: false,
-    memoryBasedWorkersCount: true,
   },
 
   async headers() {

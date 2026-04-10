@@ -74,7 +74,7 @@ function ServiceCard({
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 22 } }}
-      className="group relative flex flex-col p-8 md:p-10 rounded-[24px] bg-[#1a0505]/40 border border-white/5 overflow-hidden cursor-none"
+      className="group relative flex flex-col p-9 md:p-12 rounded-[24px] bg-[#1a0505]/40 border border-white/5 overflow-hidden cursor-none"
     >
       {/* Hover overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#D91616]/0 to-[#D91616]/[0.07] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[24px]" />
@@ -250,7 +250,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/70 mb-10 max-w-[520px]"
+              className="text-white/85 mb-10 max-w-[520px]"
               style={{
                 fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)",
                 lineHeight: 1.65,
@@ -273,7 +273,10 @@ export default function Home() {
             </motion.div>
 
             {/* Mobile FlipClock */}
-            <div className="mt-14 md:hidden self-start">
+            <div className="mt-16 md:hidden self-start flex flex-col gap-2">
+              <span className="type-label text-white/30" style={{ letterSpacing: "0.3em" }}>
+                Current Time
+              </span>
               <FlipClock />
             </div>
           </motion.div>
@@ -293,7 +296,7 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════ SERVICES */}
-      <section className="content-section relative w-full py-28 md:py-36 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
+      <section className="content-section relative w-full py-32 md:py-48 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
         <FadeUp className="w-full max-w-6xl mb-14">
           <Label>Our Expertise</Label>
           <SectionHeading light="Cinematic" bold="Services." />
@@ -307,7 +310,7 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════ WORK */}
-      <section className="content-section relative w-full py-28 md:py-36 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
+      <section className="content-section relative w-full py-32 md:py-48 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
         <FadeUp className="w-full max-w-6xl mb-14">
           <Label>Selected Case Studies</Label>
           <SectionHeading light="Our" bold="Work." />
@@ -341,7 +344,7 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════ ABOUT */}
-      <section className="content-section relative w-full py-32 md:py-44 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20 bg-gradient-to-b from-transparent to-[#111111]/20">
+      <section className="content-section relative w-full py-40 md:py-60 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20 bg-gradient-to-b from-transparent to-[#111111]/20">
         <FadeUp className="w-full max-w-3xl text-center flex flex-col items-center">
           {/* Accent rule */}
           <div className="w-10 h-px bg-[#D91616] mb-10 shadow-[0_0_12px_rgba(217,22,22,0.9)]" />
@@ -382,7 +385,7 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════ CONTACT */}
-      <section className="content-section relative w-full py-28 md:py-36 px-5 sm:px-8 pb-44 flex justify-center z-20">
+      <section className="content-section relative w-full py-32 md:py-48 px-5 sm:px-8 pb-56 flex justify-center z-20">
         <FadeUp className="w-full max-w-2xl">
           <motion.div
             whileHover={{ scale: 1.008, transition: { type: "spring", stiffness: 200, damping: 28 } }}

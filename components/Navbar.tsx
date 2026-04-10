@@ -33,9 +33,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", updateScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
+  // Prevent body scroll and hide floating UI when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "unset";
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("menu-open");
+    } else {
+      document.body.style.overflow = "unset";
+      document.body.classList.remove("menu-open");
+    }
   }, [menuOpen]);
 
   return (
@@ -150,8 +156,8 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[90] flex flex-col items-center justify-center min-h-screen"
-            style={{ background: "rgba(11, 11, 11, 0.75)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
+            className="fixed inset-0 z-[110] flex flex-col items-center justify-center min-h-screen"
+            style={{ background: "rgba(11, 11, 11, 0.85)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
             onClick={() => setMenuOpen(false)}
           >
             <ul className="flex flex-col items-center justify-center gap-10 text-5xl sm:text-6xl tracking-tight uppercase font-black text-center w-full px-6">

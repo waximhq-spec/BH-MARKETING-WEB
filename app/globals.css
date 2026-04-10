@@ -134,3 +134,22 @@ h1, h2, h3, img, button, .motion-gpu {
     -webkit-backdrop-filter: none !important;
   }
 }
+
+/* Hide Next.js Dev Indicator (N logo) and other systemic overlays for a clean premium preview */
+nextjs-portal,
+#__next-prerender-indicator,
+.nextjs-toast,
+[data-nextjs-toast],
+[data-nextjs-portal] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide floating UI when mobile menu is open */
+body.menu-open .back-to-top-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}

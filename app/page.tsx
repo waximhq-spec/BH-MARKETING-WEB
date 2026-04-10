@@ -23,7 +23,7 @@ export default function Home() {
         {/* Background Image / Texture Layer */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/bg-or.png" 
+            src="/bg-or.jpg" 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-100"
           />

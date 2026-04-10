@@ -98,12 +98,12 @@ export default function Navbar() {
           <div className="hidden md:flex items-center shrink-0 relative">
             <Link
               href="/estimate"
-              className="flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98] relative z-10 hover:shadow-[0_0_20px_rgba(255,106,0,0.4)]"
+              className="flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98] relative z-10 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
               style={{
-                background: "#FF6A00",
+                background: "transparent",
                 borderRadius: "16px",
                 color: "#FFFFFF",
-                border: "1px solid rgba(255,106,0,1)",
+                border: "1px solid rgba(255,255,255,0.4)",
               }}
             >
               Get a Quote
@@ -182,7 +182,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/estimate"
-                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-[16px] text-white bg-[#FF6A00] hover:shadow-[0_0_30px_rgba(255,106,0,0.5)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
+                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-[16px] text-white bg-transparent border border-white/30 hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
                   onClick={() => setMenuOpen(false)}
                 >
                   Get a Quote →

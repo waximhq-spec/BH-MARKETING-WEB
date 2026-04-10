@@ -41,7 +41,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-12">
           <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center group relative z-50">
             <img 
-              src="/logo.svg" 
+              src="/logo.svg?v=2" 
               alt="Cinmach Logo" 
               className="h-9 sm:h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-500"
             />

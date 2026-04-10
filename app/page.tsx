@@ -14,7 +14,7 @@ export default function Home() {
           
           <div className="flex flex-col items-center justify-center w-full">
             <img
-              src="/HERO-LOGO.svg"
+              src="/HERO-LOGO.svg?v=2"
               alt="Cinmach Productions"
               className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[800px] lg:max-w-[1000px] h-auto object-contain"
             />

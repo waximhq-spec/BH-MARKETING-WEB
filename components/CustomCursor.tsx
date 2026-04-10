@@ -56,7 +56,7 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-2 h-2 bg-[#F67011] rounded-full pointer-events-none z-[99999] hidden md:block"
+      className="fixed top-0 left-0 w-2 h-2 bg-[#00A138] rounded-full pointer-events-none z-[99999] hidden md:block"
       style={{
         x: cursorX,
         y: cursorY,
@@ -73,7 +73,7 @@ export default function CustomCursor() {
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1.5, opacity: 1 }}
-          className="absolute inset-x-[-10px] inset-y-[-10px] border border-[#F67011]/30 rounded-full"
+          className="absolute inset-x-[-10px] inset-y-[-10px] border border-[#00A138]/30 rounded-full"
         />
       )}
     </motion.div>

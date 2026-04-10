@@ -81,7 +81,7 @@ export default function HeroLogo() {
           cx="64.5"
           cy="14.6"
           r="0.5"
-          fill="#F67011"
+          fill="#00A138"
           animate={{
             opacity: [1, 0.35, 1],
             scale: [1, 1.1, 1],

@@ -106,7 +106,7 @@ export default function Navbar() {
             }}
           >
             Get a Quote
-            <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#F67011]">→</span>
+            <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#00A138]">→</span>
           </Link>
 
           {/* Mobile Hamburger */}

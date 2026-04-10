@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
 
   // Disable image optimization to avoid spawning heavy 'sharp' processes
   images: { unoptimized: true },
+  
+  // Disable memory-heavy features to prevent Hostinger thread limit crashes
+  swcMinify: false,
+  optimizeFonts: false,
 
   // Hard limit Next.js to use only 1 CPU core and disable worker threads
   experimental: {

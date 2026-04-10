@@ -5,22 +5,24 @@
  * required for stable operation on Hostinger shared hosting environments.
  */
 
-// Force the Node.js thread pool to stay at 1.
-// This is the most critical setting to prevent 503 errors on Hostinger.
-process.env.UV_THREADPOOL_SIZE = '1';
-
-// Disable Next.js telemetry at runtime to save memory and network overhead.
-process.env.NEXT_TELEMETRY_DISABLED = '1';
-
-// Ensure the port is set (Hostinger usually uses 3000 by default, but we'll be explicit)
-process.env.PORT = process.env.PORT || '3000';
-
 // Set production environment
 process.env.NODE_ENV = 'production';
 
-console.log('--- Starting Production Server (Hostinger Mode) ---');
-console.log('Resource Limits: UV_THREADPOOL_SIZE = 1');
-console.log('Memory Limit: --max-old-space-size=400');
+// Critical: Force single-threading before anything else
+process.env.UV_THREADPOOL_SIZE = '1';
+process.env.NEXT_TELEMETRY_DISABLED = '1';
+
+console.log('--- Cinmach Productions: Stability Layer ---');
+
+// Diagnostic Check: Verify local files
+const fs = require('fs');
+const path = require('path');
+const rootFiles = fs.readdirSync(__dirname);
+console.log('Directory contents:', rootFiles.join(', '));
+
+if (!rootFiles.includes('.next')) {
+  console.warn('WARNING: .next folder not found in root. Next.js standalone requires the .next folder to be in the same directory as the startup file.');
+}
 
 // List of potential paths for the standalone server
 const serverPaths = [

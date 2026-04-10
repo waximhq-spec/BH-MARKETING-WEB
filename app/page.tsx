@@ -35,7 +35,7 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0B0B0B_150%)] transition-all duration-1000 opacity-90 z-10" />
           
-          {/* Breathing Orange Glow - Optimized for Performance */}
+          {/* Breathing red glow - Optimized for Performance */}
           <motion.div
             animate={{
               opacity: [0.15, 0.35, 0.15],
@@ -47,7 +47,7 @@ export default function Home() {
               ease: "easeInOut",
             }}
             className="absolute top-1/2 left-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
-            style={{ background: "radial-gradient(circle, rgba(255, 106, 0, 0.4) 0%, transparent 65%)" }}
+            style={{ background: "radial-gradient(circle, rgba(217, 22, 22, 0.4) 0%, transparent 65%)" }}
           />
         </div>
         
@@ -78,7 +78,7 @@ export default function Home() {
               transition={{ duration: 1, delay: 1, ease: "easeOut" }}
               className="mt-10 flex flex-wrap gap-4"
             >
-              <button className="px-8 py-3 bg-[#FF6A00] text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:shadow-[0_0_30px_rgba(255,106,0,0.5)] transition-all duration-300 hover:-translate-y-1 active:scale-95">
+              <button className="px-8 py-3 bg-[#D91616] text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:shadow-[0_0_30px_rgba(217, 22, 22,0.5)] transition-all duration-300 hover:-translate-y-1 active:scale-95">
                 Our Work
               </button>
               <button className="px-8 py-3 bg-transparent border border-white/30 text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:border-white hover:bg-white/5 transition-all duration-300 hover:-translate-y-1 active:scale-95">
@@ -114,7 +114,7 @@ export default function Home() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full max-w-6xl mb-16 text-left"
         >
-          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#FF6A00] mb-4 drop-shadow-[0_0_10px_rgba(255,106,0,0.5)]">Our Expertise</h2>
+          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#D91616] mb-4 drop-shadow-[0_0_10px_rgba(217, 22, 22,0.5)]">Our Expertise</h2>
           <h3 className="text-2xl md:text-5xl font-light tracking-tight text-white mb-6">Cinematic <span className="font-bold">Services.</span></h3>
         </motion.div>
 
@@ -130,12 +130,12 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
-              className="group relative flex flex-col p-8 md:p-10 rounded-[24px] bg-[#111111]/40 border border-white/5 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-white/10 hover:shadow-[0_0_40px_rgba(255,106,0,0.15)] cursor-none"
+              className="group relative flex flex-col p-8 md:p-10 rounded-[24px] bg-[#111111]/40 border border-white/5 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-white/10 hover:shadow-[0_0_40px_rgba(217, 22, 22,0.15)] cursor-none"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-[#FF6A00]/0 to-[#FF6A00]/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#D91616]/0 to-[#D91616]/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
-              <div className="w-12 h-12 rounded-full bg-black/50 border border-white/5 flex items-center justify-center mb-16 group-hover:bg-[#FF6A00]/10 group-hover:border-[#FF6A00]/30 transition-all duration-500 group-hover:shadow-[inset_0_0_15px_rgba(255,106,0,0.3)]">
-                <span className="text-xs font-bold text-white/50 group-hover:text-[#FF6A00] transition-colors">0{i + 1}</span>
+              <div className="w-12 h-12 rounded-full bg-black/50 border border-white/5 flex items-center justify-center mb-16 group-hover:bg-[#D91616]/10 group-hover:border-[#D91616]/30 transition-all duration-500 group-hover:shadow-[inset_0_0_15px_rgba(217, 22, 22,0.3)]">
+                <span className="text-xs font-bold text-white/50 group-hover:text-[#D91616] transition-colors">0{i + 1}</span>
               </div>
               <h4 className="text-md sm:text-lg font-black text-white mb-3 relative z-10 tracking-tight">{service.title}</h4>
               <p className="text-xs sm:text-sm font-normal text-white/50 leading-relaxed relative z-10">{service.desc}</p>
@@ -153,7 +153,7 @@ export default function Home() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full max-w-6xl mb-16 text-left"
         >
-          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#FF6A00] mb-4 drop-shadow-[0_0_10px_rgba(255,106,0,0.5)]">Selected Case Studies</h2>
+          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#D91616] mb-4 drop-shadow-[0_0_10px_rgba(217, 22, 22,0.5)]">Selected Case Studies</h2>
           <h3 className="text-2xl md:text-5xl font-light tracking-tight text-white mb-6">Our <span className="font-bold">Work.</span></h3>
         </motion.div>
 
@@ -162,13 +162,13 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-6xl aspect-[4/3] md:aspect-[21/9] rounded-[24px] bg-[#111111]/40 border border-white/5 backdrop-blur-md flex items-center justify-center group overflow-hidden relative cursor-none hover:border-white/10 hover:shadow-[0_0_50px_rgba(255,106,0,0.1)] transition-all duration-700"
+          className="w-full max-w-6xl aspect-[4/3] md:aspect-[21/9] rounded-[24px] bg-[#111111]/40 border border-white/5 backdrop-blur-md flex items-center justify-center group overflow-hidden relative cursor-none hover:border-white/10 hover:shadow-[0_0_50px_rgba(217, 22, 22,0.1)] transition-all duration-700"
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#0B0B0B_120%)] z-10 opacity-60 pointer-events-none" />
           <div className="absolute w-full h-full bg-[#181818] transition-transform duration-700 group-hover:scale-105 pointer-events-none" />
           
           <div className="relative z-20 flex flex-col items-center pointer-events-none">
-            <span className="text-[#FF6A00] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0 drop-shadow-[0_0_10px_rgba(255,106,0,0.5)]">View Project</span>
+            <span className="text-[#D91616] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0 drop-shadow-[0_0_10px_rgba(217, 22, 22,0.5)]">View Project</span>
             <h4 className="text-xl sm:text-2xl md:text-5xl font-bold text-white tracking-tight">Luxury Real Estate Campaign</h4>
           </div>
         </motion.div>
@@ -183,9 +183,9 @@ export default function Home() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="w-full max-w-4xl text-center flex flex-col items-center"
         >
-          <div className="w-16 h-px bg-[#FF6A00] mb-8 shadow-[0_0_10px_rgba(255,106,0,1)]" />
+          <div className="w-16 h-px bg-[#D91616] mb-8 shadow-[0_0_10px_rgba(217, 22, 22,1)]" />
           <h3 className="text-2xl md:text-4xl lg:text-5xl font-light text-white leading-tight mb-8">
-            We are an independent <span className="font-bold text-[#FF6A00] drop-shadow-[0_0_15px_rgba(255,106,0,0.4)]">creative agency</span> driven by the pursuit of aesthetic perfection and cinematic storytelling.
+            We are an independent <span className="font-bold text-[#D91616] drop-shadow-[0_0_15px_rgba(217, 22, 22,0.4)]">creative agency</span> driven by the pursuit of aesthetic perfection and cinematic storytelling.
           </h3>
           <p className="text-sm md:text-base text-white/50 max-w-2xl font-light leading-relaxed">
             Our mission is to elevate luxury brands to their highest potential. Through cutting-edge visuals, sophisticated design systems, and unparalleled strategic positioning, we help our partners transcend the ordinary. Every frame we shoot, every interface we build, is crafted with obsessive attention to detail.
@@ -200,18 +200,18 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-3xl rounded-[32px] p-12 md:p-16 bg-[#111111]/50 border border-white/5 backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(255,106,0,0.05)]"
+          className="w-full max-w-3xl rounded-[32px] p-12 md:p-16 bg-[#111111]/50 border border-white/5 backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(217, 22, 22,0.05)]"
         >
           {/* Internal Glow Effects */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6A00]/20 blur-[80px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FF6A00]/10 blur-[60px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#D91616]/20 blur-[80px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#D91616]/10 blur-[60px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2" />
           
-          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#FF6A00] mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(255,106,0,0.5)]">Start a Project</h2>
+          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#D91616] mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(217, 22, 22,0.5)]">Start a Project</h2>
           <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-8 relative z-10">Ready to Elevate?</h3>
           <p className="text-white/50 mb-10 text-sm max-w-md relative z-10">
             Let's craft something unforgettable. Reach out to our team to discuss your brand's cinematic journey.
           </p>
-          <button className="px-10 py-4 bg-white text-black text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-[#FF6A00] hover:text-white hover:shadow-[0_0_30px_rgba(255,106,0,0.6)] transition-all duration-300 active:scale-95 relative z-10">
+          <button className="px-10 py-4 bg-white text-black text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-[#D91616] hover:text-white hover:shadow-[0_0_30px_rgba(217, 22, 22,0.6)] transition-all duration-300 active:scale-95 relative z-10">
             Get in Touch
           </button>
         </motion.div>

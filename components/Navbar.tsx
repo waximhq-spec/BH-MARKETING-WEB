@@ -24,7 +24,7 @@ export default function Navbar() {
   const navBorder = useTransform(
     scrollY,
     [0, 50],
-    ["1px solid rgba(255, 255, 255, 0.05)", "1px solid rgba(255, 106, 0, 0.15)"]
+    ["1px solid rgba(255, 255, 255, 0.05)", "1px solid rgba(217, 22, 22, 0.15)"]
   );
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Navbar() {
             WebkitBackdropFilter: "blur(12px)",
             border: navBorder,
             borderRadius: "16px",
-            boxShadow: isScrolled ? "0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -10px 30px rgba(255,106,0,0.03)" : "none",
+            boxShadow: isScrolled ? "0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -10px 30px rgba(217, 22, 22,0.03)" : "none",
           }}
         >
           {/* Logo */}
@@ -83,7 +83,7 @@ export default function Navbar() {
                     {link.name}
                     {/* Left-sliding underline */}
                     <span 
-                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#FF6A00] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
+                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#D91616] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
                     />
                   </span>
                 </Link>
@@ -134,7 +134,7 @@ export default function Navbar() {
 
         {/* Orange Frost / Glow Effect (Right side - Floating behind the edge) */}
         <div 
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#FF6A00]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#D91616]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
           style={{
             maskImage: "radial-gradient(circle at center, black, transparent 80%)",
             WebkitMaskImage: "radial-gradient(circle at center, black, transparent 80%)"
@@ -166,7 +166,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-white hover:text-[#FF6A00] transition-colors duration-200 drop-shadow-md cursor-none"
+                    className="text-white hover:text-[#D91616] transition-colors duration-200 drop-shadow-md cursor-none"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.name}

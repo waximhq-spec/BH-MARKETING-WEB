@@ -18,7 +18,7 @@ class Particle {
     this.vy = (Math.random() - 0.5) * 0.4;
     this.size = Math.random() * 1.5 + 0.5;
     this.color = "#ffffff";
-    this.glowColor = "rgba(255, 106, 0, 0.8)";
+    this.glowColor = "rgba(217, 22, 22, 0.8)";
   }
 
   update(width: number, height: number, mouseX: number, mouseY: number) {
@@ -95,7 +95,7 @@ export default function ParticleHero() {
             const dist = Math.sqrt(distSq);
             ctx.beginPath();
             const opacity = (1 - dist / connectionDistance) * 0.6;
-            ctx.strokeStyle = `rgba(255, 106, 0, ${opacity})`;
+            ctx.strokeStyle = `rgba(217, 22, 22, ${opacity})`;
             ctx.lineWidth = 0.8;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -116,8 +116,8 @@ export default function ParticleHero() {
           mouseRef.current.x, mouseRef.current.y, 0,
           mouseRef.current.x, mouseRef.current.y, 250
         );
-        gradient.addColorStop(0, 'rgba(255, 106, 0, 0.12)');
-        gradient.addColorStop(1, 'rgba(255, 106, 0, 0)');
+        gradient.addColorStop(0, 'rgba(217, 22, 22, 0.12)');
+        gradient.addColorStop(1, 'rgba(217, 22, 22, 0)');
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(mouseRef.current.x, mouseRef.current.y, 250, 0, Math.PI * 2);

@@ -45,6 +45,13 @@ export default function HeroLogo() {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
       >
+        <defs>
+          <linearGradient id="productionsGradient" x1="0" y1="0" x2="66" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="30%" stopColor="#FFFFFF" />
+            <stop offset="100%" stopColor="#888888" />
+          </linearGradient>
+        </defs>
+
         {/* Main Brand: CINMACH (White) */}
         <motion.path
           variants={itemVariants}
@@ -52,11 +59,12 @@ export default function HeroLogo() {
           fill="#FFFFFF"
         />
 
-        {/* Dynamic Sub-brand: PRODUCTIONS (Charcoal Gray) */}
+        {/* Dynamic Sub-brand: PRODUCTIONS (Faded Gradient + Spaced Feel) */}
         <motion.path
           variants={itemVariants}
           d={productionsPath}
-          fill="#353535"
+          fill="url(#productionsGradient)"
+          opacity={0.8}
         />
 
         {/* Global Signature: Orange Dot (Blinking) */}

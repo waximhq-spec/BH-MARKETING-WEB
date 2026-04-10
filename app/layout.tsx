@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} antialiased bg-[#0b0b0b]`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} antialiased`}>
       <body className="min-h-full flex flex-col font-sans text-[#e5e5e5] relative">
         <ServiceWorkerUnregister />
         <SecurityLayer />

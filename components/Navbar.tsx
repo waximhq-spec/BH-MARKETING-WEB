@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 
 const navLinks = [
   { name: "Services", href: "/services" },
@@ -12,23 +12,26 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [highlightStyle, setHighlightStyle] = useState({ left: 0, width: 0 });
-  const navRef = useRef<HTMLUListElement>(null);
-  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  const { scrollY } = useScroll();
+  const navBackground = useTransform(
+    scrollY,
+    [0, 50],
+    ["rgba(255, 255, 255, 0.05)", "rgba(255, 255, 255, 0.08)"]
+  );
+  
+  const navBorder = useTransform(
+    scrollY,
+    [0, 50],
+    ["1px solid rgba(255, 255, 255, 0.08)", "1px solid rgba(255, 255, 255, 0.12)"]
+  );
 
-  // Calculate highlight position based on hovered item
   useEffect(() => {
-    if (hoveredIndex === null || !navRef.current) return;
-    const item = itemRefs.current[hoveredIndex];
-    if (!item) return;
-    const navRect = navRef.current.getBoundingClientRect();
-    const itemRect = item.getBoundingClientRect();
-    setHighlightStyle({
-      left: itemRect.left - navRect.left,
-      width: itemRect.width,
-    });
-  }, [hoveredIndex]);
+    const updateScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", updateScroll);
+    return () => window.removeEventListener("scroll", updateScroll);
+  }, []);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -37,17 +40,16 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating Pill Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] w-full px-4 sm:px-6 lg:px-10 pt-4 pb-2">
-        <div
-          className="flex items-center justify-between gap-2 px-5 sm:px-6 py-3"
+      <nav className="fixed top-0 left-0 right-0 z-[100] w-full px-4 sm:px-6 lg:px-10 pt-4 pb-2 transition-transform duration-500">
+        <motion.div
+          className="flex items-center justify-between gap-2 px-5 sm:px-6 py-3 transition-shadow duration-500"
           style={{
-            background: "rgba(255, 255, 255, 0.85)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(0, 0, 0, 0.08)",
+            background: navBackground,
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: navBorder,
             borderRadius: "16px",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.8) inset",
+            boxShadow: isScrolled ? "0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)" : "none",
           }}
         >
           {/* Logo */}
@@ -59,74 +61,29 @@ export default function Navbar() {
             <img
               src="/logo.svg?v=3"
               alt="Cinmach Logo"
-              className="h-7 w-auto object-contain hover:scale-105 transition-transform duration-300"
+              className="h-7 w-auto object-contain hover:scale-105 transition-transform duration-300 brightness-0 invert"
             />
-            <span className="ml-2.5 text-[13px] font-black tracking-[-0.03em] uppercase text-[#050505]">
+            <span className="ml-2.5 text-[13px] font-black tracking-[-0.03em] uppercase text-white">
               Cinmach
             </span>
           </Link>
 
           {/* Divider */}
-          <div className="hidden md:block w-px h-4 bg-black/10 mx-1 shrink-0" />
+          <div className="hidden md:block w-px h-4 bg-white/10 mx-1 shrink-0" />
 
           {/* Desktop Nav Items */}
-          <ul
-            ref={navRef}
-            className="hidden md:flex items-center relative"
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            {/* Sliding Highlight */}
-            <AnimatePresence>
-              {hoveredIndex !== null && (
-                <motion.div
-                  key="highlight"
-                  className="absolute top-0 bottom-0 rounded-full pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    left: highlightStyle.left,
-                    width: highlightStyle.width,
-                  }}
-                  exit={{ opacity: 0 }}
-                  transition={{
-                    left: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
-                    width: { duration: 0.2, ease: "easeOut" },
-                    opacity: { duration: 0.15 },
-                  }}
-                  style={{
-                    background: "rgba(0, 0, 0, 0.04)",
-                    boxShadow: "0 0 12px rgba(246, 112, 17, 0.04), inset 0 0 8px rgba(0, 0, 0, 0.02)",
-                  }}
-                />
-              )}
-            </AnimatePresence>
-
-            {navLinks.map((link, i) => (
-              <li
-                key={link.name}
-                ref={(el) => { itemRefs.current[i] = el; }}
-                onMouseEnter={() => setHoveredIndex(i)}
-                className="relative"
-              >
+          <ul className="hidden md:flex items-center relative gap-2">
+            {navLinks.map((link) => (
+              <li key={link.name} className="relative group">
                 <Link
                   href={link.href}
-                  className="relative z-10 flex items-center px-4 py-2 text-[11px] font-medium tracking-[0.18em] uppercase transition-colors duration-200"
-                  style={{
-                    color: hoveredIndex === i ? "#050505" : "rgba(5, 5, 5, 0.5)",
-                  }}
+                  className="relative z-10 flex items-center px-4 py-2 text-[11px] font-medium tracking-[0.18em] uppercase text-white/70 group-hover:text-white transition-colors duration-300"
                 >
-                  {/* Subtle orange underline on hover */}
                   <span className="relative">
                     {link.name}
-                    <motion.span
-                      className="absolute -bottom-0.5 left-0 right-0 h-px rounded-full"
-                      style={{ background: "#F67011" }}
-                      initial={{ scaleX: 0, opacity: 0 }}
-                      animate={{
-                        scaleX: hoveredIndex === i ? 1 : 0,
-                        opacity: hoveredIndex === i ? 1 : 0,
-                      }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
+                    {/* Left-sliding underline */}
+                    <span 
+                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-orange-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
                     />
                   </span>
                 </Link>
@@ -135,50 +92,52 @@ export default function Navbar() {
           </ul>
 
           {/* Divider before CTA */}
-          <div className="hidden md:block w-px h-4 bg-black/10 mx-1 shrink-0" />
+          <div className="hidden md:block w-px h-4 bg-white/10 mx-1 shrink-0" />
 
           {/* CTA Button (desktop) */}
           <Link
             href="/estimate"
-            className="hidden md:flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase shrink-0 transition-all duration-300 group shadow-sm active:scale-95 scale-y-[1.1]"
+            className="hidden md:flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase shrink-0 transition-all duration-300 group scale-[1] hover:scale-105 active:scale-95"
             style={{
               background: "#181818",
               borderRadius: "16px",
               color: "#FFFFFF",
+              border: "1px solid rgba(255,255,255,0.05)",
+              boxShadow: "0 4px 14px rgba(246, 112, 17, 0.15)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#000000";
-              e.currentTarget.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.2)";
+              e.currentTarget.style.boxShadow = "0 8px 24px rgba(246, 112, 17, 0.4)";
+              e.currentTarget.style.background = "#222222";
             }}
             onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "0 4px 14px rgba(246, 112, 17, 0.15)";
               e.currentTarget.style.background = "#181818";
-              e.currentTarget.style.boxShadow = "none";
             }}
           >
             Get a Quote
-            <span style={{ color: "#FFFFFF" }} className="text-xs leading-none group-hover:translate-x-0.5 transition-transform duration-300">→</span>
+            <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#F67011]">→</span>
           </Link>
 
           {/* Mobile Hamburger */}
           <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 min-w-[40px] min-h-[40px] aspect-square rounded-full border border-black/10 bg-black/5 ml-auto"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 min-w-[40px] min-h-[40px] aspect-square rounded-full border border-white/10 bg-white/5 ml-auto"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
             <motion.span
               animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }}
-              className="block w-5 h-[1.5px] bg-black/80 rounded-full"
+              className="block w-5 h-[1.5px] bg-white rounded-full"
             />
             <motion.span
               animate={{ opacity: menuOpen ? 0 : 1 }}
-              className="block w-5 h-[1.5px] bg-black/80 rounded-full"
+              className="block w-5 h-[1.5px] bg-white rounded-full"
             />
             <motion.span
               animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }}
-              className="block w-5 h-[1.5px] bg-black/80 rounded-full"
+              className="block w-5 h-[1.5px] bg-white rounded-full"
             />
           </button>
-        </div>
+        </motion.div>
       </nav>
 
       {/* Mobile Menu Overlay */}

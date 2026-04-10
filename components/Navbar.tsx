@@ -83,7 +83,7 @@ export default function Navbar() {
                     {link.name}
                     {/* Left-sliding underline */}
                     <span 
-                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#00A138] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
+                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#F67011] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
                     />
                   </span>
                 </Link>
@@ -107,7 +107,7 @@ export default function Navbar() {
               }}
             >
               Get a Quote
-              <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#00A138]">→</span>
+              <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#F67011]">→</span>
             </Link>
           </div>
 
@@ -132,9 +132,9 @@ export default function Navbar() {
           </button>
         </motion.div>
 
-        {/* Green Frost / Glow Effect (Right side - Floating behind the edge) */}
+        {/* Orange Frost / Glow Effect (Right side - Floating behind the edge) */}
         <div 
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#00A138]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#F67011]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
           style={{
             maskImage: "radial-gradient(circle at center, black, transparent 80%)",
             WebkitMaskImage: "radial-gradient(circle at center, black, transparent 80%)"

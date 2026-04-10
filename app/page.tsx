@@ -47,7 +47,7 @@ export default function Home() {
               ease: "easeInOut",
             }}
             className="absolute top-1/2 left-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
-            style={{ background: "radial-gradient(circle, rgba(0, 161, 56, 0.3) 0%, transparent 65%)" }}
+            style={{ background: "radial-gradient(circle, rgba(246, 112, 17, 0.3) 0%, transparent 65%)" }}
           />
         </div>
         
@@ -110,7 +110,7 @@ export default function Home() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full max-w-6xl mb-16 text-center md:text-left"
         >
-          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#00A138] mb-4">Our Expertise</h2>
+          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#F67011] mb-4">Our Expertise</h2>
           <h3 className="text-2xl md:text-4xl font-light tracking-tight text-white">Cinematic <span className="font-bold">Services.</span></h3>
         </motion.div>
 
@@ -128,11 +128,11 @@ export default function Home() {
               transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
               className="group relative flex flex-col p-8 md:p-10 rounded-[24px] bg-white/[0.02] border border-white/5 backdrop-blur-md overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(246,112,17,0.05)] cursor-none"
             >
-              {/* Optional Green Accent on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#00A138]/0 to-[#00A138]/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              {/* Optional Orange Accent on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#F67011]/0 to-[#F67011]/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
               <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-16 group-hover:scale-110 transition-transform duration-500">
-                <span className="text-xs font-bold text-white/50 group-hover:text-[#00A138] transition-colors">0{i + 1}</span>
+                <span className="text-xs font-bold text-white/50 group-hover:text-[#F67011] transition-colors">0{i + 1}</span>
               </div>
               <h4 className="text-md sm:text-lg font-black text-white mb-3 relative z-10 tracking-tight">{service.title}</h4>
               <p className="text-xs sm:text-sm font-normal text-white/40 leading-relaxed relative z-10">{service.desc}</p>
@@ -150,7 +150,7 @@ export default function Home() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full max-w-6xl mb-16 text-center md:text-left"
         >
-          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#00A138] mb-4">Selected Case Studies</h2>
+          <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#F67011] mb-4">Selected Case Studies</h2>
           <h3 className="text-2xl md:text-4xl font-light tracking-tight text-white">Our <span className="font-bold">Work.</span></h3>
         </motion.div>
 
@@ -165,7 +165,7 @@ export default function Home() {
           <div className="absolute w-full h-full bg-[#111111] transition-transform duration-700 group-hover:scale-105 pointer-events-none" />
           
           <div className="relative z-20 flex flex-col items-center pointer-events-none">
-            <span className="text-[#00A138] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">View Project</span>
+            <span className="text-[#F67011] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">View Project</span>
             <h4 className="text-xl sm:text-2xl md:text-4xl font-bold text-white tracking-tight">Luxury Real Estate Campaign</h4>
           </div>
         </motion.div>

@@ -83,7 +83,7 @@ export default function Navbar() {
                     {link.name}
                     {/* Left-sliding underline */}
                     <span 
-                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-orange-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
+                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#00A138] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
                     />
                   </span>
                 </Link>
@@ -95,19 +95,30 @@ export default function Navbar() {
           <div className="hidden md:block w-px h-4 bg-white/10 mx-1 shrink-0" />
 
           {/* CTA Button (desktop) */}
-          <Link
-            href="/estimate"
-            className="hidden md:flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase shrink-0 transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98]"
-            style={{
-              background: "#181818",
-              borderRadius: "16px",
-              color: "#FFFFFF",
-              border: "1px solid rgba(255,255,255,0.05)",
-            }}
-          >
-            Get a Quote
-            <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#00A138]">→</span>
-          </Link>
+          <div className="hidden md:flex items-center shrink-0 relative">
+            <Link
+              href="/estimate"
+              className="flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98] relative z-10"
+              style={{
+                background: "#181818",
+                borderRadius: "16px",
+                color: "#FFFFFF",
+                border: "1px solid rgba(255,255,255,0.05)",
+              }}
+            >
+              Get a Quote
+              <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#00A138]">→</span>
+            </Link>
+
+            {/* Green Frost / Glow Effect (Right side) */}
+            <div 
+              className="absolute -right-4 top-1/2 -translate-y-1/2 w-20 h-20 bg-[#00A138]/20 blur-[30px] rounded-full pointer-events-none z-0"
+              style={{
+                maskImage: "radial-gradient(circle at center, black, transparent 70%)",
+                WebkitMaskImage: "radial-gradient(circle at center, black, transparent 70%)"
+              }}
+            />
+          </div>
 
           {/* Mobile Hamburger */}
           <button

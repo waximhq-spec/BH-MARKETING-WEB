@@ -38,15 +38,15 @@ export default function Navbar() {
   return (
     <>
       {/* Floating Pill Navbar */}
-      <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-[100] w-auto">
+      <nav className="fixed top-0 left-0 right-0 z-[100] w-full px-4 sm:px-6 lg:px-10 pt-4 pb-2">
         <div
-          className="flex items-center gap-2 px-3 py-2.5"
+          className="flex items-center justify-between gap-2 px-5 sm:px-6 py-3"
           style={{
             background: "rgba(255, 255, 255, 0.85)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
             border: "1px solid rgba(0, 0, 0, 0.08)",
-            borderRadius: "9999px",
+            borderRadius: "16px",
             boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.8) inset",
           }}
         >
@@ -164,7 +164,7 @@ export default function Navbar() {
 
           {/* Mobile Hamburger */}
           <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 rounded-full border border-black/10 bg-black/5 ml-1"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 min-w-[40px] min-h-[40px] aspect-square rounded-full border border-black/10 bg-black/5 ml-auto"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >

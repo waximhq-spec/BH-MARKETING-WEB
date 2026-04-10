@@ -143,7 +143,7 @@ export default function Navbar() {
             className="hidden md:flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase shrink-0 transition-all duration-300 group shadow-sm active:scale-95 scale-y-[1.1]"
             style={{
               background: "#181818",
-              borderRadius: "9999px",
+              borderRadius: "16px",
               color: "#FFFFFF",
             }}
             onMouseEnter={(e) => {
@@ -221,7 +221,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/estimate"
-                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-full text-white bg-[#181818] hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
+                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-[16px] text-white bg-[#181818] hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
                   onClick={() => setMenuOpen(false)}
                 >
                   Get a Quote →

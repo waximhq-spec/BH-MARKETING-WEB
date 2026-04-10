@@ -59,8 +59,11 @@ export default function Navbar() {
             <img
               src="/logo.svg?v=3"
               alt="Cinmach Logo"
-              className="h-7 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
+              className="h-7 w-auto object-contain hover:scale-105 transition-transform duration-300"
             />
+            <span className="ml-2.5 text-[13px] font-black tracking-[-0.03em] uppercase text-[#050505]">
+              Cinmach
+            </span>
           </Link>
 
           {/* Divider */}

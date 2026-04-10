@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import AnimatedText from "@/components/AnimatedText";
-import ParticleHero from "@/components/ParticleHero";
+import VideoHero from "@/components/VideoHero";
 import DynamicWord from "@/components/DynamicWord";
 import WorldClocks from "@/components/WorldClocks";
 import { motion } from "framer-motion";
@@ -15,7 +15,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] pt-[60px] sm:pt-[80px] pb-16 sm:pb-24">
         {/* Interactive Particle Vortex Background */}
-        <ParticleHero />
+        <VideoHero />
 
         <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-start sm:items-center justify-center text-left sm:text-center">
           

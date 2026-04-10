@@ -42,12 +42,12 @@ export default function Navbar() {
         <div
           className="flex items-center gap-2 px-3 py-2.5"
           style={{
-            background: "rgba(5, 5, 5, 0.75)",
+            background: "rgba(255, 255, 255, 0.85)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(53, 53, 53, 0.5)",
+            border: "1px solid rgba(0, 0, 0, 0.08)",
             borderRadius: "9999px",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.04) inset",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.8) inset",
           }}
         >
           {/* Logo */}
@@ -64,7 +64,7 @@ export default function Navbar() {
           </Link>
 
           {/* Divider */}
-          <div className="hidden md:block w-px h-4 bg-white/10 mx-1 shrink-0" />
+          <div className="hidden md:block w-px h-4 bg-black/10 mx-1 shrink-0" />
 
           {/* Desktop Nav Items */}
           <ul
@@ -91,8 +91,8 @@ export default function Navbar() {
                     opacity: { duration: 0.15 },
                   }}
                   style={{
-                    background: "rgba(53, 53, 53, 0.5)",
-                    boxShadow: "0 0 12px rgba(246, 112, 17, 0.08), inset 0 0 8px rgba(246, 112, 17, 0.04)",
+                    background: "rgba(0, 0, 0, 0.04)",
+                    boxShadow: "0 0 12px rgba(246, 112, 17, 0.04), inset 0 0 8px rgba(0, 0, 0, 0.02)",
                   }}
                 />
               )}
@@ -109,7 +109,7 @@ export default function Navbar() {
                   href={link.href}
                   className="relative z-10 flex items-center px-4 py-2 text-[11px] font-medium tracking-[0.18em] uppercase transition-colors duration-200"
                   style={{
-                    color: hoveredIndex === i ? "#F3F5F3" : "rgba(243, 245, 243, 0.6)",
+                    color: hoveredIndex === i ? "#050505" : "rgba(5, 5, 5, 0.5)",
                   }}
                 >
                   {/* Subtle orange underline on hover */}
@@ -132,26 +132,26 @@ export default function Navbar() {
           </ul>
 
           {/* Divider before CTA */}
-          <div className="hidden md:block w-px h-4 bg-white/10 mx-1 shrink-0" />
+          <div className="hidden md:block w-px h-4 bg-black/10 mx-1 shrink-0" />
 
           {/* CTA Button (desktop) */}
           <Link
             href="/estimate"
             className="hidden md:flex items-center gap-2 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase shrink-0 transition-all duration-300 group"
             style={{
-              background: "rgba(255, 255, 255, 0.07)",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
+              background: "rgba(0, 0, 0, 0.03)",
+              border: "1px solid rgba(0, 0, 0, 0.1)",
               borderRadius: "9999px",
-              color: "#F3F5F3",
+              color: "#050505",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.12)";
-              e.currentTarget.style.borderColor = "rgba(246,112,17,0.4)";
-              e.currentTarget.style.boxShadow = "0 0 16px rgba(246,112,17,0.12)";
+              e.currentTarget.style.background = "rgba(0, 0, 0, 0.05)";
+              e.currentTarget.style.borderColor = "rgba(0, 0, 0, 0.2)";
+              e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.05)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.07)";
-              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
+              e.currentTarget.style.background = "rgba(0, 0, 0, 0.03)";
+              e.currentTarget.style.borderColor = "rgba(0, 0, 0, 0.1)";
               e.currentTarget.style.boxShadow = "none";
             }}
           >
@@ -161,21 +161,21 @@ export default function Navbar() {
 
           {/* Mobile Hamburger */}
           <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 rounded-full border border-white/10 bg-white/5 ml-1"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 rounded-full border border-black/10 bg-black/5 ml-1"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
             <motion.span
               animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }}
-              className="block w-5 h-[1.5px] bg-white/80 rounded-full"
+              className="block w-5 h-[1.5px] bg-black/80 rounded-full"
             />
             <motion.span
               animate={{ opacity: menuOpen ? 0 : 1 }}
-              className="block w-5 h-[1.5px] bg-white/80 rounded-full"
+              className="block w-5 h-[1.5px] bg-black/80 rounded-full"
             />
             <motion.span
               animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }}
-              className="block w-5 h-[1.5px] bg-white/80 rounded-full"
+              className="block w-5 h-[1.5px] bg-black/80 rounded-full"
             />
           </button>
         </div>
@@ -190,7 +190,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[90] flex flex-col items-center justify-center min-h-screen"
-            style={{ background: "rgba(5, 5, 5, 0.97)", backdropFilter: "blur(20px)" }}
+            style={{ background: "rgba(255, 255, 255, 0.98)", backdropFilter: "blur(20px)" }}
             onClick={() => setMenuOpen(false)}
           >
             <ul className="flex flex-col items-center justify-center gap-10 text-5xl sm:text-6xl tracking-tight uppercase font-black text-center w-full px-6">
@@ -205,7 +205,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-[#F3F5F3] hover:text-white/60 transition-colors duration-200"
+                    className="text-[#050505] hover:text-black/50 transition-colors duration-200"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.name}
@@ -221,7 +221,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/estimate"
-                  className="text-sm tracking-[0.2em] uppercase font-semibold px-8 py-4 rounded-full border border-white/20 text-[#F3F5F3] hover:border-[rgba(255,106,0,0.5)] hover:shadow-[0_0_24px_rgba(255,106,0,0.15)] transition-all duration-300"
+                  className="text-sm tracking-[0.2em] uppercase font-semibold px-8 py-4 rounded-full border border-black/20 text-[#050505] hover:border-black/50 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300"
                   onClick={() => setMenuOpen(false)}
                 >
                   Get a Quote →

@@ -8,14 +8,15 @@ export default function Home() {
     <main className="w-full relative z-10 mx-auto">
       <Navbar />
       
-      {/* Desktop FlipClock - Side Anchor */}
-      <div className="hidden md:block fixed left-10 lg:left-14 top-1/2 -translate-y-1/2 z-30">
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-[10px] uppercase tracking-[0.2em] text-[#353535]/60 vertical-text mb-4">
-            Current Time
-          </span>
-          <FlipClock />
-        </div>
+      {/* Desktop FlipClock - Fixed Right Guage */}
+      <div className="hidden md:flex fixed right-4 lg:right-6 top-[60%] -translate-y-1/2 z-30 flex-row items-center gap-2">
+        <span 
+          className="text-[9px] uppercase tracking-[0.4em] text-[#353535]/50 whitespace-nowrap"
+          style={{ transform: 'rotate(-90deg)', transformOrigin: 'center', marginBottom: '20px' }}
+        >
+          Current Time
+        </span>
+        <FlipClock />
       </div>
 
       {/* HERO SECTION */}
@@ -25,9 +26,9 @@ export default function Home() {
           
           <div className="flex flex-col items-center justify-center w-full">
             <img
-              src="/HERO-LOGO.svg?v=4"
+              src="/HERO-LOGO.svg?v=6"
               alt="Cinmach Productions"
-              className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[800px] lg:max-w-[1000px] h-auto object-contain"
+              className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[650px] lg:max-w-[800px] h-auto object-contain"
             />
             
             {/* Mobile FlipClock - Centered below logo */}

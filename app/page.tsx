@@ -1,7 +1,6 @@
-"use client";
-
 import Navbar from "@/components/Navbar";
 import FlipClock from "@/components/FlipClock";
+import HeroLogo from "@/components/HeroLogo";
 
 export default function Home() {
   return (
@@ -22,11 +21,9 @@ export default function Home() {
         <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center">
           
           <div className="flex flex-col items-center justify-center w-full">
-            <img
-              src="/HERO-LOGO.svg?v=6"
-              alt="Cinmach Productions"
-              className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[650px] lg:max-w-[800px] h-auto object-contain"
-            />
+            <div className="w-full max-w-[320px] sm:max-w-[560px] md:max-w-[650px] lg:max-w-[800px] h-auto">
+              <HeroLogo />
+            </div>
             
             {/* Mobile FlipClock - Centered below logo */}
             <div className="mt-8 md:hidden">

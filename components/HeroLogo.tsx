@@ -62,23 +62,25 @@ export default function HeroLogo() {
         {/* Dynamic Sub-brand: PRODUCTIONS (Faded Gradient + True Letter Spacing) */}
         <motion.text
           variants={itemVariants}
-          x="49"
+          x="63"
           y="15.5"
           fill="url(#productionsGradient)"
           opacity={0.65}
           fontSize="4.2"
           fontWeight="900"
           fontFamily="var(--font-inter), sans-serif"
-          textAnchor="middle"
-          letterSpacing="0.25em"
+          textAnchor="end"
+          letterSpacing="0.22em"
           className="uppercase"
         >
           Productions
         </motion.text>
 
         {/* Global Signature: Orange Dot (Blinking) */}
-        <motion.path
-          d={orangeDotPath}
+        <motion.circle
+          cx="64.5"
+          cy="14.6"
+          r="0.5"
           fill="#F67011"
           animate={{
             opacity: [1, 0.35, 1],
@@ -88,9 +90,9 @@ export default function HeroLogo() {
             duration: 2.2,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1.5, // Start blinking after reveal
+            delay: 1.5,
           }}
-          style={{ transformOrigin: "64.48px 14.58px" }}
+          style={{ transformOrigin: "64.5px 14.6px" }}
         />
       </svg>
     </motion.div>

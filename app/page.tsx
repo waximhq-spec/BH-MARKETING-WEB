@@ -24,7 +24,7 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0a0a0a_150%)] transition-all duration-1000 opacity-90 z-10" />
           
-          {/* Breathing Orange Glow */}
+          {/* Breathing Orange Glow - Optimized for Performance (No CSS blur filter) */}
           <motion.div
             animate={{
               opacity: [0.15, 0.35, 0.15],
@@ -35,15 +35,15 @@ export default function Home() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full blur-[120px] z-0"
-            style={{ background: "radial-gradient(circle, rgba(255,140,0,0.25), transparent 70%)" }}
+            className="absolute top-1/2 left-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
+            style={{ background: "radial-gradient(circle, rgba(255,140,0,0.3) 0%, transparent 65%)" }}
           />
         </div>
         
         <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center mt-[-5vh]">
           
           <div className="flex flex-col items-center justify-center w-full relative">
-            <div className="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] h-auto drop-shadow-2xl">
+            <div className="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] h-auto">
               <HeroLogo />
             </div>
             
@@ -134,7 +134,7 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-6xl aspect-[4/3] md:aspect-[21/9] rounded-[24px] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex items-center justify-center group overflow-hidden relative"
+          className="w-full max-w-6xl aspect-[4/3] md:aspect-[21/9] rounded-[24px] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex items-center justify-center group overflow-hidden relative cursor-none"
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#0a0a0a_120%)] z-10 opacity-60 pointer-events-none" />
           <div className="absolute w-full h-full bg-[#111111] transition-transform duration-700 group-hover:scale-105 pointer-events-none" />

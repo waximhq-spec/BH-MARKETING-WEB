@@ -92,7 +92,7 @@ export default function Navbar() {
                   }}
                   style={{
                     background: "rgba(53, 53, 53, 0.5)",
-                    boxShadow: "0 0 12px rgba(255, 106, 0, 0.08), inset 0 0 8px rgba(255, 106, 0, 0.04)",
+                    boxShadow: "0 0 12px rgba(246, 112, 17, 0.08), inset 0 0 8px rgba(246, 112, 17, 0.04)",
                   }}
                 />
               )}
@@ -117,7 +117,7 @@ export default function Navbar() {
                     {link.name}
                     <motion.span
                       className="absolute -bottom-0.5 left-0 right-0 h-px rounded-full"
-                      style={{ background: "rgba(255, 106, 0, 0.7)" }}
+                      style={{ background: "#F67011" }}
                       initial={{ scaleX: 0, opacity: 0 }}
                       animate={{
                         scaleX: hoveredIndex === i ? 1 : 0,
@@ -146,8 +146,8 @@ export default function Navbar() {
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "rgba(255, 255, 255, 0.12)";
-              e.currentTarget.style.borderColor = "rgba(255,106,0,0.4)";
-              e.currentTarget.style.boxShadow = "0 0 16px rgba(255,106,0,0.12)";
+              e.currentTarget.style.borderColor = "rgba(246,112,17,0.4)";
+              e.currentTarget.style.boxShadow = "0 0 16px rgba(246,112,17,0.12)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "rgba(255, 255, 255, 0.07)";
@@ -156,7 +156,7 @@ export default function Navbar() {
             }}
           >
             Get a Quote
-            <span className="text-[rgba(255,106,0,0.8)] text-xs leading-none">→</span>
+            <span style={{ color: "#F67011" }} className="text-xs leading-none">→</span>
           </Link>
 
           {/* Mobile Hamburger */}

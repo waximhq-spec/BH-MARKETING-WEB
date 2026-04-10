@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   
+  // Set output to standalone for lightweight production builds
+  output: 'standalone',
+
   // Hard limit Next.js to use only 1 CPU core during build
   // This prevents it from instantly spawning 7+ worker processes and hitting Hostinger's 400 process cap.
   experimental: {

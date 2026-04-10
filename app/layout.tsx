@@ -5,6 +5,7 @@ import GridOverlay from "@/components/GridOverlay";
 import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
 import SecurityLayer from "@/components/SecurityLayer";
 import CustomCursor from "@/components/CustomCursor";
+import FilmGrain from "@/components/FilmGrain";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <SecurityLayer />
         <CustomCursor />
         <GridOverlay />
+        <FilmGrain />
         <SmoothScroll>
           {children}
         </SmoothScroll>

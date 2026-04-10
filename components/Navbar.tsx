@@ -18,13 +18,13 @@ export default function Navbar() {
   const navBackground = useTransform(
     scrollY,
     [0, 50],
-    ["rgba(255, 255, 255, 0.05)", "rgba(255, 255, 255, 0.08)"]
+    ["rgba(11, 11, 11, 0.2)", "rgba(11, 11, 11, 0.65)"]
   );
   
   const navBorder = useTransform(
     scrollY,
     [0, 50],
-    ["1px solid rgba(255, 255, 255, 0.08)", "1px solid rgba(255, 255, 255, 0.12)"]
+    ["1px solid rgba(255, 255, 255, 0.05)", "1px solid rgba(255, 106, 0, 0.15)"]
   );
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Navbar() {
             WebkitBackdropFilter: "blur(12px)",
             border: navBorder,
             borderRadius: "16px",
-            boxShadow: isScrolled ? "0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)" : "none",
+            boxShadow: isScrolled ? "0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -10px 30px rgba(255,106,0,0.03)" : "none",
           }}
         >
           {/* Logo */}
@@ -83,7 +83,7 @@ export default function Navbar() {
                     {link.name}
                     {/* Left-sliding underline */}
                     <span 
-                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#F67011] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
+                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#FF6A00] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
                     />
                   </span>
                 </Link>
@@ -98,16 +98,16 @@ export default function Navbar() {
           <div className="hidden md:flex items-center shrink-0 relative">
             <Link
               href="/estimate"
-              className="flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98] relative z-10"
+              className="flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98] relative z-10 hover:shadow-[0_0_20px_rgba(255,106,0,0.4)]"
               style={{
-                background: "#181818",
+                background: "#FF6A00",
                 borderRadius: "16px",
                 color: "#FFFFFF",
-                border: "1px solid rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,106,0,1)",
               }}
             >
               Get a Quote
-              <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-[#F67011]">→</span>
+              <span className="text-xs leading-none group-hover:translate-x-1 duration-300 ease-out text-white">→</span>
             </Link>
           </div>
 
@@ -134,7 +134,7 @@ export default function Navbar() {
 
         {/* Orange Frost / Glow Effect (Right side - Floating behind the edge) */}
         <div 
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#F67011]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#FF6A00]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
           style={{
             maskImage: "radial-gradient(circle at center, black, transparent 80%)",
             WebkitMaskImage: "radial-gradient(circle at center, black, transparent 80%)"
@@ -182,7 +182,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/estimate"
-                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-[16px] text-white bg-[#181818] hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
+                  className="text-md tracking-[0.3em] uppercase font-black px-12 py-6 rounded-[16px] text-white bg-[#FF6A00] hover:shadow-[0_0_30px_rgba(255,106,0,0.5)] active:scale-95 transition-all duration-300 scale-y-[1.1]"
                   onClick={() => setMenuOpen(false)}
                 >
                   Get a Quote →

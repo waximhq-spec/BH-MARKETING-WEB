@@ -42,8 +42,22 @@ export default function Home() {
         
         <div className="z-20 w-full px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center text-center mt-[-5vh]">
           
-          <div className="flex flex-col items-center justify-center w-full relative">
-            <div className="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] h-auto">
+          {/* Subtle Floating Motion Wrapper */}
+          <motion.div 
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center justify-center w-full relative"
+          >
+            {/* Frosted Glass Layer behind text */}
+            <div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[120%] h-[150%] rounded-[100%] bg-white/[0.015] backdrop-blur-[15px] pointer-events-none z-[-1]"
+              style={{
+                maskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
+                WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)"
+              }}
+            />
+
+            <div className="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] h-auto relative z-10">
               <HeroLogo />
             </div>
             
@@ -52,7 +66,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1, ease: "easeOut" }}
-              className="mt-6 sm:mt-10 text-white/50 text-[10px] sm:text-xs font-light tracking-[0.15em] sm:tracking-[0.25em] uppercase pointer-events-none"
+              className="mt-6 sm:mt-10 text-white/60 text-[10px] sm:text-[11px] font-normal tracking-[0.25em] sm:tracking-[0.3em] uppercase pointer-events-none drop-shadow-md"
             >
               We craft cinematic brands for modern businesses.
             </motion.p>
@@ -61,7 +75,7 @@ export default function Home() {
             <div className="mt-12 md:hidden">
               <FlipClock />
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

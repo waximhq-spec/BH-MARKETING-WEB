@@ -3,31 +3,37 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Digit = ({ value }: { value: string | number }) => {
+const Digit = ({ value, isAccent = false }: { value: string | number, isAccent?: boolean }) => {
   return (
-    <div className="relative w-6 h-8 sm:w-7 sm:h-9 bg-[#1a1a1a] rounded-[2px] overflow-hidden flex items-center justify-center">
+    <div className="relative w-3 sm:w-4 flex items-center justify-center overflow-hidden h-6">
       <AnimatePresence mode="popLayout">
         <motion.span
           key={value}
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
+          exit={{ y: -15, opacity: 0 }}
           transition={{ 
-            duration: 0.4, 
+            duration: 0.5, 
             ease: [0.23, 1, 0.32, 1] 
           }}
-          className="text-[#353535] text-sm sm:text-base font-medium tracking-tighter"
+          className={`absolute text-sm sm:text-base font-bold tabular-nums tracking-tighter ${
+            isAccent ? "text-[#F67011]" : "text-white/80"
+          }`}
+          style={{
+            textShadow: isAccent 
+              ? "0 0 12px rgba(246,112,17,0.4)" 
+              : "0 0 10px rgba(255,255,255,0.15)"
+          }}
         >
           {value}
         </motion.span>
       </AnimatePresence>
-      <div className="absolute inset-0 border-[0.5px] border-white/5 pointer-events-none rounded-[2px]" />
     </div>
   );
 };
 
 const Separator = () => (
-  <span className="text-[#353535]/40 text-[10px] mx-0.5 animate-pulse">:</span>
+  <span className="text-white/40 text-xs sm:text-sm mx-0.5 mt-[-2px] animate-[pulse_2s_ease-in-out_Infinity]">:</span>
 );
 
 export default function FlipClock() {
@@ -48,20 +54,20 @@ export default function FlipClock() {
   const seconds = time.getSeconds().toString().padStart(2, "0");
 
   return (
-    <div className="flex items-center gap-1 select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity">
-      <div className="flex gap-0.5">
+    <div className="flex items-center gap-0.5 px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/[0.05] backdrop-blur-md opacity-80 hover:opacity-100 transition-opacity">
+      <div className="flex">
         <Digit value={hours[0]} />
         <Digit value={hours[1]} />
       </div>
       <Separator />
-      <div className="flex gap-0.5">
+      <div className="flex">
         <Digit value={minutes[0]} />
         <Digit value={minutes[1]} />
       </div>
       <Separator />
-      <div className="flex gap-0.5">
-        <Digit value={seconds[0]} />
-        <Digit value={seconds[1]} />
+      <div className="flex">
+        <Digit value={seconds[0]} isAccent />
+        <Digit value={seconds[1]} isAccent />
       </div>
     </div>
   );

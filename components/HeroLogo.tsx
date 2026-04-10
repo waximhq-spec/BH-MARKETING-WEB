@@ -59,13 +59,22 @@ export default function HeroLogo() {
           fill="#FFFFFF"
         />
 
-        {/* Dynamic Sub-brand: PRODUCTIONS (Faded Gradient + Spaced Feel) */}
-        <motion.path
+        {/* Dynamic Sub-brand: PRODUCTIONS (Faded Gradient + True Letter Spacing) */}
+        <motion.text
           variants={itemVariants}
-          d={productionsPath}
+          x="49"
+          y="15.5"
           fill="url(#productionsGradient)"
-          opacity={0.8}
-        />
+          opacity={0.65}
+          fontSize="4.2"
+          fontWeight="900"
+          fontFamily="var(--font-inter), sans-serif"
+          textAnchor="middle"
+          letterSpacing="0.25em"
+          className="uppercase"
+        >
+          Productions
+        </motion.text>
 
         {/* Global Signature: Orange Dot (Blinking) */}
         <motion.path

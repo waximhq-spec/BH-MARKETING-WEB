@@ -97,20 +97,20 @@ export default function Navbar() {
           {/* CTA Button (desktop) */}
           <Link
             href="/estimate"
-            className="hidden md:flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase shrink-0 transition-all duration-300 group scale-[1] hover:scale-105 active:scale-95"
+            className="hidden md:flex items-center gap-2 px-6 py-2.5 text-[12px] font-black tracking-[0.25em] uppercase shrink-0 transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[2px] active:scale-[0.98]"
             style={{
               background: "#181818",
               borderRadius: "16px",
               color: "#FFFFFF",
               border: "1px solid rgba(255,255,255,0.05)",
-              boxShadow: "0 4px 14px rgba(246, 112, 17, 0.15)",
+              boxShadow: "0 0 20px rgba(255,140,0,0.15)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 8px 24px rgba(246, 112, 17, 0.4)";
+              e.currentTarget.style.boxShadow = "0 0 24px rgba(255, 140, 0, 0.45)";
               e.currentTarget.style.background = "#222222";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "0 4px 14px rgba(246, 112, 17, 0.15)";
+              e.currentTarget.style.boxShadow = "0 0 20px rgba(255,140,0,0.15)";
               e.currentTarget.style.background = "#181818";
             }}
           >

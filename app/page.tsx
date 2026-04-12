@@ -123,7 +123,7 @@ function CTAButton({
       transition={{ type: "spring", stiffness: 340, damping: 22 }}
       onClick={onClick}
       className={[
-        "px-7 py-3 rounded-full transition-shadow duration-300",
+        "px-7 py-3 rounded-md transition-shadow duration-300 w-full",
         "type-label", // consistent size + spacing from token
         variant === "primary"
           ? "bg-[#D91616] text-white hover:shadow-[0_0_28px_rgba(217,22,22,0.45)]"
@@ -265,12 +265,12 @@ export default function Home() {
               We craft cinematic brand experiences for modern visionaries.
             </motion.p>
 
-            {/* CTAs */}
+            {/* CTAs - Stacked and matching logo width */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-wrap gap-3"
+              className="flex flex-col gap-4 w-full max-w-[260px] sm:max-w-[380px] md:max-w-[480px]"
             >
               <CTAButton variant="primary">Our Work</CTAButton>
               <CTAButton variant="outline">Contact Us</CTAButton>

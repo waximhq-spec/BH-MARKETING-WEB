@@ -11,8 +11,8 @@ export default function CustomCursor() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Use Spring for smooth 'lag' follow effect
-  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
+  // Use Spring for smooth 'lag' follow effect - Tuned for high responsiveness
+  const springConfig = { damping: 30, stiffness: 450, mass: 0.4 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
@@ -67,7 +67,7 @@ export default function CustomCursor() {
         backgroundColor: isHovering ? "rgba(217, 22, 22, 0.4)" : "rgba(217, 22, 22, 1)",
         boxShadow: isHovering ? "0 0 15px rgba(217, 22, 22, 0.4)" : "0 0 0px rgba(217, 22, 22, 0)",
       }}
-      transition={{ type: "spring", damping: 25, stiffness: 250, mass: 0.5 }}
+      transition={{ type: "spring", damping: 30, stiffness: 400, mass: 0.3 }}
     >
       {/* Refined Outer ring on hover */}
       <AnimatePresence>

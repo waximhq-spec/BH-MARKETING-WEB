@@ -65,16 +65,21 @@ export default function HeroTypographyLayer() {
           WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 80%)",
         }}
       >
-        <div className="relative flex flex-row rotate-90 md:rotate-0 items-center justify-center w-full h-full font-sans tracking-tighter font-bold">
+        <div className="relative flex flex-row rotate-90 md:rotate-0 items-center justify-center w-full h-full font-sans tracking-tighter font-bold will-change-transform">
           
-          {/* Layer 1: Sharpest/Primary */}
-          <div className="absolute text-[80vh] md:text-[35vw] text-white/[0.08] blur-[3px]" style={{ transform: "scaleY(1.1)" }}>
+          {/* Layer 1: Sharpest/Primary - High performance glow using text-shadow */}
+          <div className="absolute text-[80vh] md:text-[35vw] text-white/[0.08]" 
+               style={{ 
+                 transform: "scaleY(1.1) translateZ(0)", 
+                 textShadow: "0 0 15px rgba(255,255,255,0.05)" 
+               }}>
             202
             <Digit value={year[3]} />
           </div>
 
-          {/* Layer 2: Deeply blurred atmospheric glow */}
-          <div className="absolute text-[80vh] md:text-[35vw] text-[#D91616]/[0.1] blur-[10px] translate-x-4 translate-y-2 opacity-60" style={{ transform: "scaleY(1.1)" }}>
+          {/* Layer 2: Deeply blurred atmospheric glow - Reduced blur radius */}
+          <div className="absolute text-[80vh] md:text-[35vw] text-[#D91616]/[0.1] blur-[6px] translate-x-4 translate-y-2 opacity-50" 
+               style={{ transform: "scaleY(1.1) translateZ(0)" }}>
             202
             <Digit value={year[3]} />
           </div>

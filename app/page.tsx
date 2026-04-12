@@ -187,7 +187,7 @@ export default function Home() {
               alt="Hero Background"
               fetchPriority="high"
               decoding="async"
-              className="w-full h-full object-cover opacity-90 object-center sepia saturate-200 -hue-rotate-30 brightness-60"
+              className="w-full h-full object-cover opacity-90 object-center grayscale brightness-[0.4] contrast-[1.1]"
               style={{ willChange: "transform" }}
             />
           </div>

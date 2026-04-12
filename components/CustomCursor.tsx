@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 
 export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
@@ -56,26 +56,35 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-2 h-2 bg-[#D91616] rounded-full pointer-events-none z-[99999] hidden md:block"
+      className="fixed top-0 left-0 w-[6px] h-[6px] bg-[#D91616] rounded-full pointer-events-none z-[99999] hidden md:block"
       style={{
         x: cursorX,
         y: cursorY,
         opacity: isVisible ? 1 : 0,
       }}
       animate={{
-        scale: isHovering ? 5 : 1,
-        backgroundColor: isHovering ? "rgba(217, 22, 22, 0.3)" : "rgba(217, 22, 22, 1)",
+        scale: isHovering ? 1.5 : 1,
+        backgroundColor: isHovering ? "rgba(217, 22, 22, 0.4)" : "rgba(217, 22, 22, 1)",
+        boxShadow: isHovering ? "0 0 15px rgba(217, 22, 22, 0.4)" : "0 0 0px rgba(217, 22, 22, 0)",
       }}
-      transition={{ type: "spring", damping: 20, stiffness: 300, mass: 0.5 }}
+      transition={{ type: "spring", damping: 25, stiffness: 250, mass: 0.5 }}
     >
-      {/* Outer ring on hover */}
-      {isHovering && (
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1.5, opacity: 1 }}
-          className="absolute inset-x-[-10px] inset-y-[-10px] border border-[#D91616]/30 rounded-full"
-        />
-      )}
+      {/* Refined Outer ring on hover */}
+      <AnimatePresence>
+        {isHovering && (
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1.2, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="absolute inset-x-[-14px] inset-y-[-14px] border border-[#D91616]/40 rounded-full"
+            style={{ 
+              boxShadow: "inset 0 0 8px rgba(217, 22, 22, 0.15)",
+              filter: "drop-shadow(0 0 4px rgba(217, 22, 22, 0.2))"
+            }}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

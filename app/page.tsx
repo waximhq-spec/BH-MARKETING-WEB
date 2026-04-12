@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import FlipClock from "@/components/FlipClock";
 import HeroLogo from "@/components/HeroLogo";
+import HeroTypographyLayer from "@/components/HeroTypographyLayer";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 
@@ -227,6 +228,9 @@ export default function Home() {
             />
           </div>
         </div>
+
+        {/* ── Cinematic Typography Layer ────────────────────── */}
+        <HeroTypographyLayer />
 
         {/* ── Hero text content ─────────────────────────────── */}
         <div className="z-20 w-full px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-start justify-center text-left pt-24">

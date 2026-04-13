@@ -239,21 +239,16 @@ export default function Home() {
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             className="flex flex-col items-start w-full max-w-3xl"
           >
-            {/* Logo / wordmark */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full max-w-[260px] sm:max-w-[380px] md:max-w-[480px] h-auto mb-8 origin-left"
-            >
+            {/* Logo / wordmark - Entrance driven internally by HeroLogo */}
+            <div className="w-full max-w-[260px] sm:max-w-[380px] md:max-w-[480px] h-auto mb-8 origin-left">
               <HeroLogo />
-            </motion.div>
+            </div>
 
             {/* Tagline — concise, confident */}
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="text-white/85 mb-10 max-w-[520px]"
               style={{
                 fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)",
@@ -269,7 +264,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col gap-4 w-full max-w-[260px] sm:max-w-[380px] md:max-w-[480px]"
             >
               <CTAButton variant="primary">Our Work</CTAButton>

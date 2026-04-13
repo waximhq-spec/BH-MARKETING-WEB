@@ -5,7 +5,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import GridOverlay from "@/components/GridOverlay";
 import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
 import SecurityLayer from "@/components/SecurityLayer";
-import CustomCursor from "@/components/CustomCursor";
 import FilmGrain from "@/components/FilmGrain";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import BackToTop from "@/components/BackToTop";
@@ -40,7 +39,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans text-[#e5e5e5] relative">
         <ServiceWorkerUnregister />
         <SecurityLayer />
-        <CustomCursor />
         <GridOverlay />
         <FilmGrain />
         {/* Global UI chrome — always visible across all pages */}

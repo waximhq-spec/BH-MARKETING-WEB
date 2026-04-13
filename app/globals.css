@@ -55,12 +55,6 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 
-/* Custom Cursor & Performance */
-@media (hover: hover) and (pointer: fine) {
-  * { 
-    cursor: none !important; 
-  }
-}
 
 /* Force GPU acceleration for smooth motion */
 * {

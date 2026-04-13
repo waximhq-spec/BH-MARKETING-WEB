@@ -343,43 +343,56 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════ ABOUT */}
-      <section className="content-section relative w-full py-40 md:py-60 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20 bg-gradient-to-b from-transparent to-[#111111]/20">
-        <FadeUp className="w-full max-w-3xl text-center flex flex-col items-center">
-          {/* Accent rule */}
-          <div className="w-10 h-px bg-[#D91616] mb-10 shadow-[0_0_12px_rgba(217,22,22,0.9)]" />
+      <section id="about" className="content-section relative w-full py-40 md:py-60 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
+        <FadeUp className="w-full max-w-6xl">
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 items-start">
+            
+            <div className="flex flex-col items-start lg:w-1/2">
+              <Label>About Us</Label>
+              <h2
+                className="text-white mb-8"
+                style={{
+                  fontSize: "clamp(2rem, 3.5vw, 3.5rem)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.03em",
+                  fontWeight: 300,
+                }}
+              >
+                We are an <span className="font-bold">independent</span> <span className="text-[#D91616]">creative agency</span> driven by aesthetic perfection.
+              </h2>
+              <div className="w-12 h-px bg-[#D91616] mb-10 shadow-[0_0_12px_rgba(217,22,22,0.8)]" />
+              <p
+                className="text-white/50 max-w-xl mb-12"
+                style={{
+                  fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)",
+                  lineHeight: 1.7,
+                  letterSpacing: "0.01em",
+                  fontWeight: 300,
+                }}
+              >
+                Based in Bahrain and serving global visionaries, we operate at the intersection of high-end cinematography and strategic brand building. Every project we take on is treated as a singular work of art — crafted with obsessive attention to detail and a commitment to cinematic excellence.
+              </p>
+            </div>
 
-          <h2
-            className="text-white mb-7"
-            style={{
-              fontSize: "clamp(1.5rem, 3.2vw, 2.9rem)",
-              lineHeight: 1.2,
-              letterSpacing: "-0.025em",
-              fontWeight: 300,
-            }}
-          >
-            We are an independent{" "}
-            <span
-              className="font-bold text-[#D91616]"
-              style={{ textShadow: "0 0 18px rgba(217,22,22,0.3)" }}
-            >
-              creative agency
-            </span>
-            {" "}driven by the pursuit of aesthetic perfection.
-          </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12 lg:w-1/2 pt-4">
+              {[
+                { label: "Strategy", detail: "Market positioning, visual narrative, and brand identity architecture." },
+                { label: "Cinematography", detail: "High-end brand films, product cinematics, and lifestyle visuals." },
+                { label: "Design", detail: "Precision digital systems, editorial layouts, and visual direction." },
+                { label: "Post-Production", detail: "Cinematic color grading, sound design, and precision editing." }
+              ].map((cap, i) => (
+                <div key={i} className="flex flex-col gap-3 group">
+                  <span className="text-[#D91616] text-[10px] tracking-[0.3em] font-bold uppercase transition-spacing duration-300 group-hover:tracking-[0.4em]">
+                    {cap.label}
+                  </span>
+                  <p className="text-white/40 text-sm leading-relaxed font-light">
+                    {cap.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-          <p
-            className="text-white/45 max-w-xl"
-            style={{
-              fontSize: "clamp(0.85rem, 1.1vw, 1rem)",
-              lineHeight: 1.8,
-              letterSpacing: "0.008em",
-              fontWeight: 300,
-            }}
-          >
-            From luxury brand identities to precision digital systems — every project we
-            take on is treated as a singular work. Crafted with obsessive attention to
-            detail, built to endure.
-          </p>
+          </div>
         </FadeUp>
       </section>
 

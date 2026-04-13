@@ -172,7 +172,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-white hover:text-[#D91616] transition-colors duration-200 drop-shadow-md cursor-none"
+                    className="text-white hover:text-[#D91616] transition-colors duration-200 drop-shadow-md"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.name}

@@ -75,7 +75,7 @@ function ServiceCard({
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 22 } }}
-      className="group relative flex flex-col p-9 md:p-12 rounded-[24px] bg-[#1a0505]/40 border border-white/5 overflow-hidden cursor-none"
+      className="group relative flex flex-col p-9 md:p-12 rounded-[24px] bg-[#1a0505]/40 border border-white/5 overflow-hidden"
     >
       {/* Hover overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#D91616]/0 to-[#D91616]/[0.07] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[24px]" />
@@ -318,7 +318,7 @@ export default function Home() {
         <FadeUp className="w-full max-w-6xl" delay={0.1}>
           <motion.div
             whileHover={{ scale: 1.005, transition: { type: "spring", stiffness: 200, damping: 25 } }}
-            className="w-full aspect-[4/3] md:aspect-[21/9] rounded-[20px] bg-[#1a0505]/40 border border-white/5 flex items-center justify-center group overflow-hidden relative cursor-none hover:border-white/10 hover:shadow-[0_0_50px_rgba(217,22,22,0.08)] transition-all duration-700"
+            className="w-full aspect-[4/3] md:aspect-[21/9] rounded-[20px] bg-[#1a0505]/40 border border-white/5 flex items-center justify-center group overflow-hidden relative hover:border-white/10 hover:shadow-[0_0_50px_rgba(217,22,22,0.08)] transition-all duration-700"
           >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#0B0B0B_120%)] z-10 opacity-60 pointer-events-none" />
             <motion.div

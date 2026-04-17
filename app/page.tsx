@@ -1,38 +1,56 @@
 "use client";
 
-import { useRef } from "react";
-import Navbar from "@/components/Navbar";
-import FlipClock from "@/components/FlipClock";
-import HeroLogo from "@/components/HeroLogo";
-import PortfolioSplit from "@/components/PortfolioSplit";
-import TechStrip from "@/components/TechStrip";
-import StartProjectButton from "@/components/StartProjectButton";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { useState, useRef } from "react";
 
-// ─── Section label ────────────────────────────────────────────────────────────
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <p
-      className="type-label text-[#D91616] mb-5"
-      style={{ textShadow: "0 0 18px rgba(217,22,22,0.4)" }}
-    >
-      {children}
-    </p>
-  );
-}
+/* ─────────────────────────────────────────────────────────────
+   Project data
+   ─────────────────────────────────────────────────────────── */
+const FEATURED = [
+  {
+    id: "dilmunia-waterfront",
+    category: "Real Estate",
+    title: "Dilmunia Waterfront",
+    thumb: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=75",
+    aspectRatio: "4/3",
+  },
+  {
+    id: "khaleej-co",
+    category: "F&B",
+    title: "Khaleej & Co.",
+    thumb: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=75",
+    aspectRatio: "4/3",
+  },
+  {
+    id: "palm-villa-al-areen",
+    category: "Real Estate",
+    title: "The Palm Villa — Al Areen",
+    thumb: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=75",
+    aspectRatio: "4/3",
+  },
+  {
+    id: "flame-and-salt",
+    category: "F&B",
+    title: "Flame & Salt",
+    thumb: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=75",
+    aspectRatio: "4/3",
+  },
+];
 
-// ─── Section heading ──────────────────────────────────────────────────────────
-function SectionHeading({ light, bold }: { light: string; bold: string }) {
-  return (
-    <h2 className="type-heading text-2xl md:text-[2.75rem] lg:text-5xl font-light text-white">
-      {light} <span className="font-bold">{bold}</span>
-    </h2>
-  );
-}
+const SERVICES = [
+  "Brand Film & Cinematography",
+  "Aerial & Drone Capture",
+  "Colour Grading & Post-Production",
+  "Product & Editorial Photography",
+  "Motion Graphics & Titles",
+  "Brand Identity & Visual Strategy",
+];
 
-// ─── Fade-up wrapper ──────────────────────────────────────────────────────────
-function FadeUp({
+/* ─────────────────────────────────────────────────────────────
+   Scroll-triggered fade wrapper (viewport-only, no layout shift)
+   ─────────────────────────────────────────────────────────── */
+function Reveal({
   children,
   delay = 0,
   className = "",
@@ -43,10 +61,10 @@ function FadeUp({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -54,286 +72,321 @@ function FadeUp({
   );
 }
 
-// ─── Service Card ─────────────────────────────────────────────────────────────
-function ServiceCard({ title, desc, index }: { title: string; desc: string; index: number }) {
+/* ─────────────────────────────────────────────────────────────
+   Work card — hover scales image
+   ─────────────────────────────────────────────────────────── */
+function WorkCard({ item }: { item: (typeof FEATURED)[0] }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 22 } }}
-      className="group relative flex flex-col p-9 md:p-12 rounded-[24px] bg-[#1a0505]/40 border border-white/5 overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#D91616]/0 to-[#D91616]/[0.07] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[24px]" />
-      <div className="absolute inset-0 rounded-[24px] border border-white/5 group-hover:border-white/10 group-hover:shadow-[0_0_40px_rgba(217,22,22,0.1)] transition-all duration-500 pointer-events-none" />
-      <div className="w-10 h-10 rounded-full bg-black/50 border border-white/5 flex items-center justify-center mb-10 group-hover:bg-[#D91616]/10 group-hover:border-[#D91616]/30 transition-all duration-500">
-        <span className="type-label text-white/40 group-hover:text-[#D91616] transition-colors" style={{ letterSpacing: "0" }}>
-          0{index + 1}
-        </span>
+    <Link href={`/work/${item.id}`} className="group block">
+      <div
+        className="overflow-hidden mb-4 bg-[#111]"
+        style={{ aspectRatio: item.aspectRatio }}
+      >
+        <img
+          src={item.thumb}
+          alt={item.title}
+          width={900}
+          height={675}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover:scale-105"
+          style={{ aspectRatio: item.aspectRatio }}
+        />
       </div>
-      <h3 className="text-base md:text-lg font-bold text-white mb-3 relative z-10" style={{ letterSpacing: "-0.02em", lineHeight: 1.25 }}>
-        {title}
-      </h3>
-      <p className="type-body-sm text-white/45 relative z-10">{desc}</p>
-    </motion.div>
+      <p className="label mb-1">{item.category}</p>
+      <p className="text-sm font-medium text-[#EDEDED] group-hover:text-white transition-colors">
+        {item.title}
+      </p>
+    </Link>
   );
 }
 
-// ─── CTA Button ───────────────────────────────────────────────────────────────
-function CTAButton({
-  children,
-  variant = "primary",
-  href,
-}: {
-  children: React.ReactNode;
-  variant?: "primary" | "outline";
-  href?: string;
-}) {
-  const cls = [
-    "px-7 py-3.5 rounded-md transition-all duration-300 w-full type-label inline-flex items-center justify-center",
-    variant === "primary"
-      ? "bg-[#D91616] text-white hover:shadow-[0_0_32px_rgba(217,22,22,0.55)] hover:bg-[#c01212]"
-      : "bg-transparent border border-white/25 text-white/80 hover:border-white/50 hover:text-white hover:bg-white/[0.04]",
-  ].join(" ");
+/* ─────────────────────────────────────────────────────────────
+   Split section — Spaces / Tastes (no layout-shifting)
+   ─────────────────────────────────────────────────────────── */
+function SplitSection() {
+  const [active, setActive] = useState<"spaces" | "tastes" | null>(null);
+  return (
+    <section className="defer-render w-full" style={{ minHeight: "70vh" }}>
+      <div className="flex flex-col md:flex-row" style={{ minHeight: "70vh" }}>
+        {/* The Spaces */}
+        <div
+          className="relative flex-1 overflow-hidden cursor-pointer group/s min-h-[50vh] md:min-h-0"
+          onMouseEnter={() => setActive("spaces")}
+          onMouseLeave={() => setActive(null)}
+        >
+          <div
+            className="absolute inset-0 transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover/s:scale-[1.03]"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=70"
+              alt="The Spaces"
+              width={1200}
+              height={800}
+              className="w-full h-full object-cover"
+              style={{ filter: "brightness(0.4)", aspectRatio: "3/2" }}
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 to-transparent" />
+          {/* Content */}
+          <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-14 z-10">
+            <p className="label mb-3">Category 01</p>
+            <h2
+              className="text-white font-black mb-3 transition-colors"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.92 }}
+            >
+              The<br />Spaces
+            </h2>
+            <p
+              className="text-[#aaa] text-sm max-w-[260px] leading-relaxed transition-opacity duration-500"
+              style={{ opacity: active === "spaces" ? 1 : 0 }}
+            >
+              Real estate cinematics crafted to sell a feeling, not just a property.
+            </p>
+            <div
+              className="mt-5 transition-all duration-500"
+              style={{ opacity: active === "spaces" ? 1 : 0, transform: active === "spaces" ? "translateY(0)" : "translateY(8px)" }}
+            >
+              <Link href="/work?filter=real-estate" className="text-[11px] tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-white transition-colors">
+                Explore →
+              </Link>
+            </div>
+          </div>
+          {/* Divider */}
+          <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-24 bg-white/10 z-20" />
+        </div>
 
-  if (href) {
-    return (
-      <Link href={href} className={cls}>
-        {children}
-      </Link>
-    );
-  }
-
-  return <button className={cls}>{children}</button>;
+        {/* The Tastes */}
+        <div
+          className="relative flex-1 overflow-hidden cursor-pointer group/t min-h-[50vh] md:min-h-0"
+          onMouseEnter={() => setActive("tastes")}
+          onMouseLeave={() => setActive(null)}
+        >
+          <div
+            className="absolute inset-0 transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover/t:scale-[1.03]"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=1200&q=70"
+              alt="The Tastes"
+              width={1200}
+              height={800}
+              className="w-full h-full object-cover"
+              style={{ filter: "brightness(0.4)", aspectRatio: "3/2" }}
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-14 z-10">
+            <p className="label mb-3">Category 02</p>
+            <h2
+              className="text-white font-black mb-3"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.92 }}
+            >
+              The<br />Tastes
+            </h2>
+            <p
+              className="text-[#aaa] text-sm max-w-[260px] leading-relaxed transition-opacity duration-500"
+              style={{ opacity: active === "tastes" ? 1 : 0 }}
+            >
+              F&B campaigns with flavour, texture, and appetite-driven storytelling.
+            </p>
+            <div
+              className="mt-5 transition-all duration-500"
+              style={{ opacity: active === "tastes" ? 1 : 0, transform: active === "tastes" ? "translateY(0)" : "translateY(8px)" }}
+            >
+              <Link href="/work?filter=fb" className="text-[11px] tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-white transition-colors">
+                Explore →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Home Page
+   ─────────────────────────────────────────────────────────── */
 export default function Home() {
-  const heroRef = useRef<HTMLElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  const { scrollY } = useScroll();
-  const rawParallax = useTransform(scrollY, [0, 600], [0, shouldReduceMotion ? 0 : 60]);
-  const smoothParallax = useSpring(rawParallax, { stiffness: 80, damping: 30 });
-  const year2026Parallax = useTransform(scrollY, [0, 600], [0, shouldReduceMotion ? 0 : -30]);
-
-  const services = [
-    {
-      title: "Brand Strategy",
-      desc: "We position your brand with clarity and intent — building narratives that lead markets.",
-    },
-    {
-      title: "Cinematic Visuals",
-      desc: "Premium video and photography that translates your brand essence into visual language.",
-    },
-    {
-      title: "Digital Experiences",
-      desc: "Precision-crafted websites and interfaces that convert attention into lasting trust.",
-    },
-  ];
-
   return (
-    <main className="w-full relative z-10 mx-auto bg-transparent">
-      <Navbar />
-      <StartProjectButton />
+    <>
+      {/* ══ HERO ══════════════════════════════════════════════ */}
+      <section className="relative min-h-[100svh] flex flex-col justify-end pb-16 md:pb-20 pt-32">
+        <div className="container">
+          {/* Eyebrow */}
+          <p className="label-red mb-8 anim-fade-up">
+            Cinematic Studio · Bahrain
+          </p>
 
-      {/* Desktop FlipClock — fixed bottom-right */}
-      <div className="hidden md:flex fixed right-10 lg:right-14 bottom-24 z-30 flex-col items-end gap-1.5">
-        <span className="type-label text-white/25" style={{ letterSpacing: "0.35em" }}>
-          Current Time
-        </span>
-        <FlipClock />
-      </div>
-
-      {/* ════════════════════════════════════════════════════ HERO */}
-      <section
-        ref={heroRef}
-        className="relative w-full min-h-[100svh] flex flex-col items-start justify-center overflow-hidden bg-[#0B0B0B]"
-      >
-        {/* Simple Vignette for depth - optional, but user said remove components in background */}
-        
-        {/* Hero text content */}
-        <div className="z-20 w-full px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-start justify-center text-left pt-24">
-          <div className="flex flex-col items-start w-full max-w-3xl">
-            {/* Logo */}
-            <div className="w-full max-w-[260px] sm:max-w-[380px] md:max-w-[480px] h-auto mb-8 origin-left">
-              <HeroLogo />
-            </div>
-
-            {/* Tagline */}
-            <p
-              className="text-white/85 mb-10 max-w-[520px] hero-entrance"
-              style={{
-                fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)",
-                lineHeight: 1.65,
-                letterSpacing: "0.005em",
-                fontWeight: 300,
-              }}
-            >
-              We craft cinematic brand experiences for modern visionaries.
-            </p>
-
-            {/* CTAs */}
-            <div
-              className="flex flex-col sm:flex-row gap-4 w-full max-w-[260px] sm:max-w-[440px] md:max-w-[480px] hero-entrance"
-              style={{ animationDelay: "0.15s" }}
-            >
-              <CTAButton variant="primary" href="/work">Our Work</CTAButton>
-              <CTAButton variant="outline" href="/estimate">Contact Us</CTAButton>
-            </div>
-
-            {/* Mobile FlipClock */}
-            <div className="mt-16 md:hidden self-start flex flex-col gap-2">
-              <span className="type-label text-white/30" style={{ letterSpacing: "0.3em" }}>
-                Current Time
-              </span>
-              <FlipClock />
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll indicator - simplified */}
-        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20 opacity-40">
-          <span className="type-label text-white/40" style={{ letterSpacing: "0.35em" }}>
-            Scroll
-          </span>
-          <div className="w-px h-6 bg-gradient-to-b from-white/40 to-transparent" />
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════ TECH STRIP */}
-      <TechStrip />
-
-      {/* ════════════════════════════════════════════════ SERVICES */}
-      <section className="content-section relative w-full py-32 md:py-48 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20">
-        <FadeUp className="w-full max-w-6xl mb-14">
-          <Label>Our Expertise</Label>
-          <SectionHeading light="Cinematic" bold="Services." />
-        </FadeUp>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full max-w-6xl">
-          {services.map((service, i) => (
-            <ServiceCard key={i} title={service.title} desc={service.desc} index={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════ PORTFOLIO SPLIT */}
-      <PortfolioSplit />
-
-      {/* ════════════════════════════════════════════════ TECH STRIP 2 */}
-      <TechStrip />
-
-      {/* ════════════════════════════════════════════════ ABOUT */}
-      <section
-        id="about"
-        className="content-section relative w-full py-40 md:py-60 px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-center z-20"
-      >
-        <FadeUp className="w-full max-w-6xl">
-          <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 items-start">
-            <div className="flex flex-col items-start lg:w-1/2">
-              <Label>About Us</Label>
-              <h2
-                className="text-white mb-8"
-                style={{
-                  fontSize: "clamp(2rem, 3.5vw, 3.5rem)",
-                  lineHeight: 1.1,
-                  letterSpacing: "-0.03em",
-                  fontWeight: 300,
-                }}
-              >
-                We are an <span className="font-bold">independent</span>{" "}
-                <span className="text-[#D91616]">creative agency</span> driven by aesthetic perfection.
-              </h2>
-              <div className="w-12 h-px bg-[#D91616] mb-10 shadow-[0_0_12px_rgba(217,22,22,0.8)]" />
-              <p
-                className="text-white/50 max-w-xl mb-12"
-                style={{
-                  fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)",
-                  lineHeight: 1.7,
-                  letterSpacing: "0.01em",
-                  fontWeight: 300,
-                }}
-              >
-                Based in Bahrain and serving global visionaries, we operate at the intersection of
-                high-end cinematography and strategic brand building. Every project we take on is
-                treated as a singular work of art — crafted with obsessive attention to detail and a
-                commitment to cinematic excellence.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12 lg:w-1/2 pt-4">
-              {[
-                { label: "Strategy", detail: "Market positioning, visual narrative, and brand identity architecture." },
-                { label: "Cinematography", detail: "High-end brand films, product cinematics, and lifestyle visuals." },
-                { label: "Design", detail: "Precision digital systems, editorial layouts, and visual direction." },
-                { label: "Post-Production", detail: "Cinematic color grading, sound design, and precision editing." },
-              ].map((cap, i) => (
-                <div key={i} className="flex flex-col gap-3 group">
-                  <span className="text-[#D91616] text-[10px] tracking-[0.3em] font-bold uppercase transition-all duration-300 group-hover:tracking-[0.4em]">
-                    {cap.label}
-                  </span>
-                  <p className="text-white/40 text-sm leading-relaxed font-light">{cap.detail}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeUp>
-      </section>
-
-      {/* ════════════════════════════════════════════════ CONTACT */}
-      <section className="content-section relative w-full py-32 md:py-48 px-5 sm:px-8 pb-56 flex justify-center z-20">
-        <FadeUp className="w-full max-w-2xl">
-          <motion.div
-            whileHover={{ scale: 1.008, transition: { type: "spring", stiffness: 200, damping: 28 } }}
-            className="rounded-[28px] p-10 md:p-16 bg-[#1a0505]/50 border border-white/5 mobile-no-blur relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(217,22,22,0.04)]"
+          {/* Title */}
+          <h1
+            className="text-[#EDEDED] font-black leading-none mb-8 anim-fade-up anim-delay-1"
+            style={{
+              fontSize: "clamp(3.2rem, 10vw, 9rem)",
+              letterSpacing: "-0.04em",
+              maxWidth: "14ch",
+            }}
           >
-            <div className="absolute top-0 right-0 w-56 h-56 bg-[#D91616]/15 blur-[70px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#D91616]/8 blur-[50px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2" />
+            Cinmach<br />Productions
+          </h1>
 
-            <Label>Start a Project</Label>
+          {/* Subtitle */}
+          <p
+            className="text-[#888] font-light max-w-md mb-12 anim-fade-up anim-delay-2"
+            style={{ fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)", lineHeight: 1.7 }}
+          >
+            We craft cinematic visual stories for spaces, brands, and experiences
+            that demand to be remembered.
+          </p>
 
-            <h2
-              className="text-white mb-5 relative z-10"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 3.25rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
-                fontWeight: 700,
-              }}
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-4 anim-fade-up anim-delay-3">
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-[#EDEDED]/20 text-[#EDEDED] text-[11px] tracking-[0.2em] uppercase hover:border-white hover:text-white transition-all duration-300"
             >
-              Ready to Elevate?
-            </h2>
-
-            <p
-              className="text-white/45 mb-10 max-w-sm relative z-10"
-              style={{
-                fontSize: "clamp(0.85rem, 1vw, 0.95rem)",
-                lineHeight: 1.75,
-                letterSpacing: "0.005em",
-                fontWeight: 300,
-              }}
+              Our Work →
+            </Link>
+            <Link
+              href="/estimate"
+              className="inline-flex items-center gap-2 px-7 py-3.5 text-[#666] text-[11px] tracking-[0.2em] uppercase hover:text-[#EDEDED] transition-colors duration-300"
             >
-              Let&apos;s build something that lasts. Tell us about your brand.
-            </p>
-
-            <motion.div
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 340, damping: 22 }}
-              className="relative z-10"
-            >
-              <Link
-                href="/estimate"
-                className="inline-flex items-center px-9 py-3.5 bg-white text-black type-label hover:bg-[#D91616] hover:text-white hover:shadow-[0_0_28px_rgba(217,22,22,0.55)] rounded-full transition-colors duration-300"
-                style={{ letterSpacing: "0.14em" }}
-              >
-                Get in Touch
-              </Link>
-            </motion.div>
-          </motion.div>
-        </FadeUp>
+              Contact Us
+            </Link>
+          </div>
+        </div>
       </section>
-    </main>
+
+      {/* ══ FEATURED WORK ════════════════════════════════════ */}
+      <section className="defer-render py-24 md:py-36">
+        <div className="container">
+          <Reveal className="flex items-end justify-between mb-12">
+            <div>
+              <p className="label mb-4">Selected Work</p>
+              <h2
+                className="text-[#EDEDED] font-black"
+                style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+              >
+                Where we've been.
+              </h2>
+            </div>
+            <Link
+              href="/work"
+              className="hidden md:block text-[11px] tracking-[0.2em] uppercase text-[#666] hover:text-[#EDEDED] transition-colors pb-1 border-b border-transparent hover:border-[#EDEDED]/30"
+            >
+              View All →
+            </Link>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
+            {FEATURED.map((item, i) => (
+              <Reveal key={item.id} delay={i * 0.08}>
+                <WorkCard item={item} />
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-12 md:hidden">
+            <Link href="/work" className="text-[11px] tracking-[0.2em] uppercase text-[#666] hover:text-[#EDEDED] transition-colors border-b border-transparent hover:border-current pb-0.5">
+              View All Work →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ DUAL CATEGORY (Spaces / Tastes) ═════════════════ */}
+      <SplitSection />
+
+      {/* ══ ABOUT ════════════════════════════════════════════ */}
+      <section className="defer-render py-24 md:py-36" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="container">
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
+            {/* Left: big editorial text */}
+            <Reveal className="lg:w-1/2">
+              <p className="label mb-8">About</p>
+              <h2
+                className="text-[#EDEDED] font-black"
+                style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 1.02 }}
+              >
+                We believe<br />the best stories<br />are felt — not<br />just seen.
+              </h2>
+            </Reveal>
+
+            {/* Right: supporting copy + capabilities */}
+            <Reveal delay={0.15} className="lg:w-1/2 flex flex-col justify-end">
+              <p className="text-[#888] font-light max-w-md mb-10" style={{ lineHeight: 1.8 }}>
+                Based in Bahrain, Cinmach Productions is an independent creative studio operating at
+                the intersection of high-end cinematography and strategic brand building. Every frame
+                we capture is deliberate. Every cut is intentional.
+              </p>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-8">
+                {["Strategy", "Cinematography", "Design", "Post-Production"].map((cap) => (
+                  <div key={cap}>
+                    <p className="label-red mb-2">{cap}</p>
+                    <div className="w-8 h-px bg-[#8B0000]" />
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SERVICES ═════════════════════════════════════════ */}
+      <section className="defer-render py-24 md:py-36" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="container">
+          <Reveal className="mb-16">
+            <p className="label mb-4">Services</p>
+            <h2
+              className="text-[#EDEDED] font-black"
+              style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "-0.03em" }}
+            >
+              What we do.
+            </h2>
+          </Reveal>
+
+          <ul>
+            {SERVICES.map((service, i) => (
+              <Reveal key={service} delay={i * 0.06}>
+                <li
+                  className="flex items-center justify-between py-5 text-[#EDEDED] group cursor-default"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+                >
+                  <span
+                    className="font-light text-lg md:text-xl group-hover:text-white transition-colors"
+                    style={{ letterSpacing: "-0.01em" }}
+                  >
+                    {service}
+                  </span>
+                  <span className="text-[#333] group-hover:text-[#8B0000] transition-colors text-xl font-light">
+                    →
+                  </span>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ══ CTA ══════════════════════════════════════════════ */}
+      <section className="defer-render py-24 md:py-40" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="container text-center">
+          <Reveal>
+            <p className="label mb-8" style={{ letterSpacing: "0.35em" }}>Start a Project</p>
+            <h2
+              className="text-[#EDEDED] font-black mb-10 mx-auto"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.95, maxWidth: "12ch" }}
+            >
+              Ready to elevate?
+            </h2>
+            <Link
+              href="/estimate"
+              className="inline-flex items-center gap-3 px-8 py-4 border border-[#EDEDED]/20 text-[#EDEDED] text-[11px] tracking-[0.25em] uppercase hover:border-white hover:text-white transition-all duration-300"
+            >
+              Get in Touch →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }

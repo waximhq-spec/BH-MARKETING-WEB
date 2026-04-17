@@ -1,110 +1,163 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
-import AnimatedText from "@/components/AnimatedText";
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-const categories = ["All Projects", "Residential", "Commercial", "360° Tours"];
-
-const projects = [
-  { id: 1, title: "Manama Bay Skyline", category: "Commercial", type: "Cinematic Film", thumbnail: "https://images.unsplash.com/photo-1596404988451-bceebc8531e2?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
-  { id: 2, title: "Diyar Al Muharraq Villas", category: "Residential", type: "Full Branding", thumbnail: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
-  { id: 3, title: "Bahrain Financial Harbour", category: "Commercial", type: "3D Capture", thumbnail: "https://images.unsplash.com/photo-1542361345-89e58247f2d5?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
-  { id: 4, title: "Amwaj Islands Villa", category: "Residential", type: "Cinematic Film", thumbnail: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
-  { id: 5, title: "Seef Digital Twin", category: "360° Tours", type: "3D Capture", thumbnail: "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
-  { id: 6, title: "Reef Island Highrise", category: "Residential", type: "Full Branding", thumbnail: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600", video: "https://cdn.pixabay.com/vimeo/328224716/buildings-22340.mp4?width=640" },
+const ALL_PROJECTS = [
+  {
+    id: "dilmunia-waterfront",
+    category: "real-estate",
+    categoryLabel: "Real Estate",
+    title: "Dilmunia Waterfront Residences",
+    tags: ["Drone", "HDR", "Interior"],
+    thumb: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=75",
+    year: "2024",
+  },
+  {
+    id: "palm-villa-al-areen",
+    category: "real-estate",
+    categoryLabel: "Real Estate",
+    title: "The Palm Villa — Al Areen",
+    tags: ["Aerial", "Twilight", "4K"],
+    thumb: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=75",
+    year: "2024",
+  },
+  {
+    id: "seef-district-tower",
+    category: "real-estate",
+    categoryLabel: "Real Estate",
+    title: "Seef District Tower",
+    tags: ["Interior", "Slow Motion"],
+    thumb: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=75",
+    year: "2023",
+  },
+  {
+    id: "khaleej-co",
+    category: "fb",
+    categoryLabel: "F&B",
+    title: "Khaleej & Co.",
+    tags: ["Food Motion", "Brand Film"],
+    thumb: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=75",
+    year: "2024",
+  },
+  {
+    id: "flame-and-salt",
+    category: "fb",
+    categoryLabel: "F&B",
+    title: "Flame & Salt",
+    tags: ["Texture", "Colour Graded"],
+    thumb: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=75",
+    year: "2023",
+  },
+  {
+    id: "zafran-house",
+    category: "fb",
+    categoryLabel: "F&B",
+    title: "Zafran House",
+    tags: ["Identity", "Motion"],
+    thumb: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900&q=75",
+    year: "2023",
+  },
 ];
 
-function ProjectCard({ project }: { project: typeof projects[0] }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  };
+type Filter = "all" | "real-estate" | "fb";
 
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-  };
+const FILTERS: { id: Filter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "real-estate", label: "Real Estate" },
+  { id: "fb", label: "Restaurants & F&B" },
+];
 
-  return (
-    <motion.div 
-      layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="relative overflow-hidden group rounded-2xl bg-[#111] aspect-[4/5] cursor-pointer shadow-2xl"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <img 
-        src={project.thumbnail} 
-        alt={project.title} 
-        className="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-70 group-hover:opacity-0 transition-opacity duration-700 ease-out" 
-      />
-      
-      {/* Preload "none" explicitly prevents bandwidth drain until hover or programmatic fetching occurs. */}
-      <video
-         ref={videoRef}
-         src={project.video}
-         muted
-         loop
-         playsInline
-         preload="none"
-         className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out scale-105 group-hover:scale-100"
-      />
-      
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0b]/90 via-[#0b0b0b]/10 to-transparent flex flex-col justify-end p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-out">
-         <span className="text-[10px] tracking-[0.2em] text-gold-500 mb-2 uppercase font-bold">{project.type}</span>
-         <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-[-0.04em] text-white leading-tight">{project.title}</h3>
-      </div>
-    </motion.div>
-  );
-}
+export default function WorkPage() {
+  const [active, setActive] = useState<Filter>("all");
 
-export default function Work() {
-  const [filter, setFilter] = useState("All Projects");
-
-  const filteredProjects = filter === "All Projects" 
-    ? projects 
-    : projects.filter(p => p.category === filter);
+  const filtered =
+    active === "all"
+      ? ALL_PROJECTS
+      : ALL_PROJECTS.filter((p) => p.category === active);
 
   return (
-    <main className="w-full relative px-6 md:px-12 lg:px-16 z-10 mx-auto min-h-[120vh] pb-32">
-      <Navbar />
-
-      <section className="pt-48 pb-16 border-b border-white/5" >
-         <AnimatedText text="LIVE DEMO" className="text-[clamp(4rem,14vw,16rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-white" />
-         <p className="mt-8 tracking-[0.3em] uppercase text-[10px] font-bold text-white/50">Immersive Real Estate Experiences</p>
-      </section>
-
-      {/* Filter Bar */}
-      <section className="w-full py-12 flex flex-wrap gap-8 items-center border-b border-white/5">
-        {categories.map(cat => (
-          <button 
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`text-[10px] md:text-xs uppercase tracking-[0.2em] transition-all duration-300 pb-3 border-b-2 ${filter === cat ? 'border-gold-500 text-gold-500 font-bold' : 'border-transparent text-white/50 hover:text-white'}`}
+    <div className="pt-32 pb-24 md:pb-36">
+      <div className="container">
+        {/* Header */}
+        <div className="mb-16">
+          <p className="label mb-5">Selected Work</p>
+          <h1
+            className="text-[#EDEDED] font-black mb-6"
+            style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
           >
-            {cat}
-          </button>
-        ))}
-      </section>
+            Our portfolio.
+          </h1>
+          <p className="text-[#666] font-light" style={{ maxWidth: "40ch", lineHeight: 1.75 }}>
+            From high-altitude drone shots to macro food cinematics — we move between worlds with precision.
+          </p>
+        </div>
 
-      <section className="w-full pt-16">
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-           <AnimatePresence mode="popLayout">
-             {filteredProjects.map(project => (
-               <ProjectCard key={project.id} project={project} />
-             ))}
-           </AnimatePresence>
+        {/* Filters */}
+        <div
+          className="flex items-center gap-0 mb-16 overflow-x-auto pb-2"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          {FILTERS.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setActive(f.id)}
+              className="shrink-0 mr-8 pb-3 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 relative"
+              style={{ color: active === f.id ? "#EDEDED" : "#666" }}
+            >
+              {f.label}
+              {active === f.id && (
+                <motion.div
+                  layoutId="filter-bar"
+                  className="absolute bottom-0 left-0 right-0 h-px bg-[#B11226]"
+                  transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14"
+        >
+          {filtered.map((project, i) => (
+            <motion.div
+              key={project.id}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+            >
+              <Link href={`/work/${project.id}`} className="group block">
+                {/* Thumb */}
+                <div
+                  className="overflow-hidden mb-4 bg-[#111]"
+                  style={{ aspectRatio: "4/3" }}
+                >
+                  <img
+                    src={project.thumb}
+                    alt={project.title}
+                    width={900}
+                    height={675}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover:scale-105"
+                    style={{ aspectRatio: "4/3" }}
+                  />
+                </div>
+                {/* Meta */}
+                <p className="label mb-1.5">{project.categoryLabel} · {project.year}</p>
+                <p className="text-sm font-medium text-[#EDEDED] group-hover:text-white transition-colors">
+                  {project.title}
+                </p>
+              </Link>
+            </motion.div>
+          ))}
         </motion.div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }

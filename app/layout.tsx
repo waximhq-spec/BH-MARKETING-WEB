@@ -1,35 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import GridOverlay from "@/components/GridOverlay";
 import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
-import SecurityLayer from "@/components/SecurityLayer";
-import FilmGrain from "@/components/FilmGrain";
-import ScrollProgressBar from "@/components/ScrollProgressBar";
-import BackToTop from "@/components/BackToTop";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["300", "400", "700", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "Cinmach Productions | High-End Cinematic Storytelling & Brand Strategy",
-  description: "Bahrain's premier creative studio for luxury brand building and cinematic visuals.",
+  title: "Cinmach Productions | Cinematic Brand Studio — Bahrain",
+  description: "A cinematic creative studio based in Bahrain, crafting high-end visual stories for luxury brands.",
 };
 
 export default function RootLayout({
@@ -38,17 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} antialiased`}>
-      <body className="min-h-full flex flex-col font-sans text-[#e5e5e5] relative">
+    <html lang="en" className={`${inter.variable}`}>
+      <body className="min-h-screen flex flex-col">
         <ServiceWorkerUnregister />
-        {/* <SecurityLayer /> */}
-        {/* <GridOverlay /> */}
-        {/* <FilmGrain /> */}
-        {/* Global UI chrome — always visible across all pages */}
-        {/* <ScrollProgressBar /> */}
-        <BackToTop />
+        <Navbar />
         <SmoothScroll>
-          {children}
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
         </SmoothScroll>
       </body>
     </html>

@@ -1,178 +1,122 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
-import AnimatedText from "@/components/AnimatedText";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-const steps = [
-  {
-    id: 1,
-    title: "Select Service Architecture",
-    options: [
-      { id: "single", label: "Single Service", desc: "Targeted dynamic capture for specific deliverables." },
-      { id: "full", label: "Full Campaign", desc: "End-to-end cinematic production & immersive UI branding." }
-    ]
-  },
-  {
-    id: 2,
-    title: "Define Property Scale",
-    options: [
-      { id: "villa", label: "Luxury Villa", desc: "Private multi-story residential estates and isolated compounds." },
-      { id: "tower", label: "Commercial Tower", desc: "High-rise structural captures and penthouse arrays." },
-      { id: "interior", label: "Interior Design", desc: "Precision lighting profiles and highly detailed spatial mapping." }
-    ]
-  },
-  {
-    id: 3,
-    title: "Geographic Target",
-    options: [
-      { id: "manama", label: "Manama Center", desc: "Bahrain Financial Harbour, Seef, and Diplomatic Area." },
-      { id: "muharraq", label: "Diyar Al Muharraq", desc: "Amwaj Islands, Diyar, and coastal expansion plots." },
-      { id: "southern", label: "Southern Governorate", desc: "Awali, Zallaq, and luxury desert estates." }
-    ]
+export default function ContactPage() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitted(true);
   }
-];
-
-export default function Estimate() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [selections, setSelections] = useState<Record<number, string>>({});
-
-  const handleSelect = async (optionId: string) => {
-    const newSelections = { ...selections, [currentStep]: optionId };
-    setSelections(newSelections);
-    
-    if (currentStep < steps.length) {
-      setTimeout(() => {
-        setCurrentStep(prev => prev + 1);
-      }, 500);
-    } else {
-      // Final step reached, let's assemble the data payload and send it via email
-      try {
-        await fetch("https://formsubmit.co/ajax/myflow.rep@gmail.com", {
-            method: "POST",
-            headers: { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                Service: steps[0].options.find(o => o.id === newSelections[1])?.label || "Unknown",
-                Scale: steps[1].options.find(o => o.id === newSelections[2])?.label || "Unknown",
-                Target: steps[2].options.find(o => o.id === newSelections[3])?.label || "Unknown",
-                _subject: "New Project Target Locked | Cinmach Productions"
-            })
-        });
-      } catch (error) {
-        console.error("Failed to forward lead data:", error);
-      }
-
-      setTimeout(() => {
-        setCurrentStep(4);
-      }, 500);
-    }
-  };
-
-  const currentStepData = steps.find(s => s.id === currentStep);
-  const progress = (Math.min(currentStep, steps.length) / steps.length) * 100;
 
   return (
-    <main className="w-full relative px-6 md:px-12 lg:px-16 z-10 mx-auto min-h-screen pb-32 flex flex-col">
-      <Navbar />
+    <div className="pt-32 pb-24 md:pb-36">
+      <div className="container">
+        {/* Header */}
+        <div className="mb-20 max-w-2xl">
+          <p className="label mb-8">Contact</p>
+          <h1
+            className="text-[#EDEDED] font-black mb-6"
+            style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+          >
+            Let&apos;s make something.
+          </h1>
+          <p className="text-[#666] font-light" style={{ lineHeight: 1.8 }}>
+            Tell us what you&apos;re working on. We&apos;ll get back to you within 48 hours.
+          </p>
+        </div>
 
-      <section className="pt-48 pb-12 border-b border-white/5" >
-         <AnimatedText text="THE QUOTE" className="text-[clamp(4rem,14vw,16rem)] leading-[0.8] font-bold tracking-[-0.05em] uppercase text-white" />
-         <p className="mt-8 tracking-[0.3em] uppercase text-[10px] font-bold text-white/50">Architecting Your Digital Twin</p>
-      </section>
-
-      {/* Progress Bar */}
-      <div className="w-full h-[2px] bg-white/5 mt-16 relative overflow-hidden">
-        <motion.div 
-          className="absolute top-0 left-0 h-full bg-gold-500"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-        />
-      </div>
-
-      <section className="flex-grow w-full relative mt-24 max-w-5xl">
-        <AnimatePresence mode="wait">
-          {currentStep < 4 ? (
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col w-full"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-[-0.04em] mb-12 text-white">
-                <span className="text-gold-500 mr-6">0{currentStep}</span>
-                {currentStepData?.title}
-              </h2>
-
-              <div className="flex flex-col gap-6">
-                {currentStepData?.options.map(opt => {
-                  const isSelected = selections[currentStep] === opt.id;
-                  return (
-                    <button
-                      key={opt.id}
-                      onClick={() => handleSelect(opt.id)}
-                      className={`group relative flex flex-col text-left p-8 md:p-12 w-full rounded-[2rem] border transition-all duration-500 ${
-                        isSelected 
-                          ? "border-gold-500 bg-[#c5a059]/10 shadow-[0_0_60px_rgba(197,160,89,0.15)]" 
-                          : "border-white/10 hover:border-white/30 bg-[#111] hover:bg-[#151515]"
-                      }`}
-                    >
-                      <h3 className={`text-2xl md:text-4xl font-bold tracking-[-0.03em] uppercase mb-4 transition-colors ${isSelected ? "text-gold-500" : "text-white"}`}>
-                        {opt.label}
-                      </h3>
-                      <p className="text-[#a0a0a0] font-light text-sm md:text-lg tracking-wide max-w-2xl">
-                        {opt.desc}
-                      </p>
-                    </button>
-                  );
-                })}
+        {/* Form + Info */}
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+          {/* Form */}
+          <div className="flex-1">
+            {submitted ? (
+              <div className="py-16">
+                <p className="label-red mb-4">Message received</p>
+                <p className="text-[#EDEDED] text-xl font-light">
+                  Thank you. We&apos;ll be in touch soon.
+                </p>
               </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="complete"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col items-start pt-12"
-            >
-              <h2 className="text-[clamp(3.5rem,8vw,8rem)] font-bold uppercase tracking-[-0.05em] text-white leading-[0.85] mb-12">
-                Parameters <span className="text-gold-500"><br/>Locked</span>
-              </h2>
-              <p className="text-xl md:text-2xl text-[#a0a0a0] font-light mb-16 tracking-wide max-w-3xl leading-relaxed">
-                Our operations team has secured your architecture payload. We will coordinate a physical reconnaissance protocol shortly.
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="label block mb-2">Name</label>
+                    <input type="text" name="name" required placeholder="Your full name" />
+                  </div>
+                  <div>
+                    <label className="label block mb-2">Email</label>
+                    <input type="email" name="email" required placeholder="your@email.com" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="label block mb-2">Project Type</label>
+                  <select name="type">
+                    <option value="">Select…</option>
+                    <option value="real-estate">Real Estate Cinematics</option>
+                    <option value="fb">Restaurant / F&amp;B</option>
+                    <option value="brand-film">Brand Film</option>
+                    <option value="photography">Photography</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="label block mb-2">Message</label>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    required
+                    placeholder="Tell us about your project…"
+                  />
+                </div>
+
+                <div className="flex items-center gap-6 pt-2">
+                  <button
+                    type="submit"
+                    className="inline-flex items-center gap-3 px-8 py-3.5 border border-[#EDEDED]/20 text-[#EDEDED] text-[11px] tracking-[0.25em] uppercase hover:border-white hover:text-white transition-all duration-300"
+                  >
+                    Send Message →
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+
+          {/* Info sidebar */}
+          <div className="lg:w-72 shrink-0 flex flex-col gap-10">
+            <div>
+              <p className="label mb-3">Studio</p>
+              <p className="text-[#888] text-sm font-light leading-relaxed">
+                Cinmach Productions<br />
+                Manama, Kingdom of Bahrain
               </p>
-              
-              <div className="flex flex-col gap-8 w-full max-w-lg bg-[#111] p-12 rounded-[2rem] border border-white/10 shadow-2xl">
-                <div className="flex justify-between items-center border-b border-white/5 pb-6">
-                  <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Service</span>
-                  <span className="font-bold text-gold-500 uppercase tracking-tighter text-lg md:text-xl text-right">
-                    {steps[0].options.find(o => o.id === selections[1])?.label}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-6">
-                  <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Scale</span>
-                  <span className="font-bold text-gold-500 uppercase tracking-tighter text-lg md:text-xl text-right">
-                    {steps[1].options.find(o => o.id === selections[2])?.label}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Target</span>
-                  <span className="font-bold text-gold-500 uppercase tracking-tighter text-lg md:text-xl text-right">
-                    {steps[2].options.find(o => o.id === selections[3])?.label}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </section>
-    </main>
+            </div>
+            <div>
+              <p className="label mb-3">WhatsApp</p>
+              <a
+                href="https://wa.me/97300000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#888] text-sm font-light hover:text-[#EDEDED] transition-colors"
+              >
+                +973 0000 0000 →
+              </a>
+            </div>
+            <div>
+              <p className="label mb-3">Email</p>
+              <a
+                href="mailto:hello@cinmach.com"
+                className="text-[#888] text-sm font-light hover:text-[#EDEDED] transition-colors"
+              >
+                hello@cinmach.com →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -2,197 +2,124 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
-const navLinks = [
-  { name: "Services", href: "/services" },
-  { name: "Work", href: "/work" },
-  { name: "Estimate", href: "/estimate" },
+const NAV_LINKS = [
+  { label: "Work", href: "/work" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/estimate" },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  
-  const { scrollY } = useScroll();
-  const navBackground = useTransform(
-    scrollY,
-    [0, 50],
-    ["rgba(11, 11, 11, 0.2)", "rgba(11, 11, 11, 0.65)"]
-  );
-  
-  const navBorder = useTransform(
-    scrollY,
-    [0, 50],
-    ["1px solid rgba(255, 255, 255, 0.05)", "1px solid rgba(217, 22, 22, 0.15)"]
-  );
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const updateScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", updateScroll);
-    return () => window.removeEventListener("scroll", updateScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Prevent body scroll and hide floating UI when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
-      document.body.classList.add("menu-open");
     } else {
-      document.body.style.overflow = "unset";
-      document.body.classList.remove("menu-open");
+      document.body.style.overflow = "";
     }
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  // Close on route change
+  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-[100] w-full px-4 sm:px-6 lg:px-10 pt-4 pb-2 transition-transform duration-500">
-        <motion.div
-          className="flex items-center justify-between gap-2 px-5 sm:px-6 py-3 transition-shadow duration-500"
-          style={{
-            background: navBackground,
-            border: navBorder,
-            borderRadius: "16px",
-            boxShadow: isScrolled ? "0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -10px 30px rgba(217, 22, 22,0.03)" : "none",
-          }}
-        >
-          {/* Logo */}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        style={{
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
+          background: scrolled ? "rgba(5,5,5,0.9)" : "transparent",
+        }}
+      >
+        <div className="container h-16 flex items-center justify-between">
+          {/* Wordmark */}
           <Link
             href="/"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center mr-2 pl-1 shrink-0"
+            className="text-[11px] font-black tracking-[0.28em] uppercase text-[#EDEDED] hover:text-white transition-colors"
           >
-            <img
-              src="/logo.svg?v=3"
-              alt="Cinmach Logo"
-              className="h-7 w-auto object-contain hover:scale-105 transition-transform duration-300 brightness-0 invert"
-            />
-            <span className="ml-2.5 text-[13px] font-black tracking-[-0.03em] uppercase text-white">
-              Cinmach
-            </span>
+            Cinmach
           </Link>
 
-          {/* Divider */}
-          <div className="hidden md:block w-px h-4 bg-white/10 mx-1 shrink-0" />
-
-          {/* Desktop Nav Items */}
-          <ul className="hidden md:flex items-center relative gap-2">
-            {navLinks.map((link) => (
-              <li key={link.name} className="relative group">
-                <Link
-                  href={link.href}
-                  className="relative z-10 flex items-center px-4 py-2 text-[11px] font-medium tracking-[0.18em] uppercase text-white/70 group-hover:text-white transition-colors duration-300"
-                >
-                  <span className="relative">
-                    {link.name}
-                    {/* Left-sliding underline */}
-                    <span 
-                      className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#D91616] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[0.22,1,0.36,1]"
-                    />
-                  </span>
-                </Link>
-              </li>
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 ${
+                  pathname === link.href
+                    ? "text-white"
+                    : "text-[#666] hover:text-[#EDEDED]"
+                }`}
+              >
+                {link.label}
+              </Link>
             ))}
-          </ul>
+          </nav>
 
-          {/* Divider before CTA */}
-          <div className="hidden md:block w-px h-4 bg-white/10 mx-1 shrink-0" />
-
-          {/* CTA Button (desktop) */}
-          <div className="hidden md:flex items-center shrink-0 relative">
-            <Link
-              href="/estimate"
-              className="flex items-center gap-2 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase transition-all duration-300 ease-out group hover:scale-[1.05] hover:-translate-y-[1px] active:scale-[0.98] relative z-10 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-              style={{
-                background: "transparent",
-                borderRadius: "12px",
-                color: "#FFFFFF",
-                border: "1px solid rgba(255,255,255,0.3)",
-              }}
-            >
-              Get a Quote
-              <span className="text-[10px] leading-none group-hover:translate-x-1 duration-300 ease-out text-white">→</span>
-            </Link>
-          </div>
-
-          {/* Mobile Hamburger */}
+          {/* Mobile toggle */}
           <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 min-w-[40px] min-h-[40px] aspect-square rounded-full border border-white/10 bg-white/5 ml-auto"
+            className="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation"
           >
-            <motion.span
-              animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }}
-              className="block w-5 h-[1.5px] bg-white rounded-full"
+            <span
+              className="block w-5 h-px bg-[#EDEDED] transition-transform duration-300 origin-center"
+              style={{ transform: menuOpen ? "translateY(6px) rotate(45deg)" : "" }}
             />
-            <motion.span
-              animate={{ opacity: menuOpen ? 0 : 1 }}
-              className="block w-5 h-[1.5px] bg-white rounded-full"
+            <span
+              className="block w-5 h-px bg-[#EDEDED] transition-opacity duration-300"
+              style={{ opacity: menuOpen ? 0 : 1 }}
             />
-            <motion.span
-              animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }}
-              className="block w-5 h-[1.5px] bg-white rounded-full"
+            <span
+              className="block w-5 h-px bg-[#EDEDED] transition-transform duration-300 origin-center"
+              style={{ transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "" }}
             />
           </button>
-        </motion.div>
+        </div>
+      </header>
 
-        {/* Orange Frost / Glow Effect (Right side - Floating behind the edge) */}
-        <div 
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-[#D91616]/25 blur-[45px] rounded-full pointer-events-none z-[-1]"
-          style={{
-            maskImage: "radial-gradient(circle at center, black, transparent 80%)",
-            WebkitMaskImage: "radial-gradient(circle at center, black, transparent 80%)"
-          }}
-        />
-      </nav>
-
-      {/* Mobile Menu Overlay */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[110] flex flex-col items-center justify-center min-h-screen"
-            style={{ background: "rgba(11, 11, 11, 0.85)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 flex flex-col items-start justify-end pb-16 px-6"
+            style={{ background: "#050505" }}
             onClick={() => setMenuOpen(false)}
           >
-            <ul className="flex flex-col items-center justify-center gap-10 text-5xl sm:text-6xl tracking-tight uppercase font-black text-center w-full px-6">
-              {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.name}
-                  initial={{ opacity: 0, y: 30 }}
+            <nav className="flex flex-col gap-6" onClick={(e) => e.stopPropagation()}>
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 30 }}
-                  transition={{ delay: 0.15 + i * 0.08, duration: 0.45, ease: "easeOut" }}
-                  className="w-full flex justify-center"
+                  transition={{ delay: i * 0.07 + 0.1, duration: 0.45 }}
                 >
                   <Link
                     href={link.href}
-                    className="text-white hover:text-[#D91616] transition-colors duration-200 drop-shadow-md"
-                    onClick={() => setMenuOpen(false)}
+                    className="text-5xl font-black tracking-tight text-[#EDEDED] hover:text-white"
                   >
-                    {link.name}
+                    {link.label}
                   </Link>
-                </motion.li>
+                </motion.div>
               ))}
-              <motion.li
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 30 }}
-                transition={{ delay: 0.15 + navLinks.length * 0.08, duration: 0.45, ease: "easeOut" }}
-                className="w-full flex justify-center"
-              >
-                <Link
-                  href="/estimate"
-                  className="text-sm tracking-[0.25em] uppercase font-black px-8 py-4 rounded-[12px] text-white bg-transparent border border-white/20 hover:border-white/50 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 transition-all duration-300"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Get a Quote →
-                </Link>
-              </motion.li>
-            </ul>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

@@ -14,6 +14,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -21,6 +22,36 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Theme detection logic (Intersection Observer)
+  useEffect(() => {
+    if (pathname !== "/") {
+      setTheme("dark");
+      return;
+    }
+
+    const observerOptions = {
+      root: null,
+      // Intersection happens as soon as the section touches the top 80px (navbar height-ish)
+      rootMargin: "-80px 0px -90% 0px",
+      threshold: 0,
+    };
+
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionTheme = entry.target.getAttribute("data-theme") as "dark" | "light";
+          if (sectionTheme) setTheme(sectionTheme);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+    const sections = document.querySelectorAll("[data-theme]");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [pathname]);
 
   useEffect(() => {
     if (menuOpen) {
@@ -31,23 +62,32 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // Close on route change
   useEffect(() => { setMenuOpen(false); }, [pathname]);
+
+  // Dynamic colors
+  const isLight = theme === "light";
+  const textColor = isLight ? "#000000" : "#FAFAFA";
+  const mutedColor = isLight ? "#666666" : "rgba(250,250,250,0.6)";
+  const activeColor = isLight ? "#C50022" : "#C50022";
+  const bgColor = isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
+  const borderColor = isLight ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.1)";
+  const burgerColor = isLight ? "#000000" : "#FAFAFA";
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ease-in-out"
         style={{
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
-          background: scrolled ? "rgba(5,5,5,0.9)" : "transparent",
+          borderBottom: scrolled ? `1px solid ${borderColor}` : "1px solid transparent",
+          background: scrolled ? bgColor : "transparent",
         }}
       >
         <div className="container h-16 flex items-center justify-between">
           {/* Wordmark */}
           <Link
             href="/"
-            className="text-[11px] font-black tracking-[0.28em] uppercase text-[#EDEDED] hover:text-white transition-colors"
+            className="text-[11px] font-black tracking-[0.28em] uppercase transition-colors duration-500"
+            style={{ color: textColor }}
           >
             Cinmach
           </Link>
@@ -58,11 +98,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 ${
-                  pathname === link.href
-                    ? "text-white"
-                    : "text-[#666] hover:text-[#EDEDED]"
-                }`}
+                className="text-[11px] tracking-[0.2em] uppercase transition-colors duration-500"
+                style={{
+                  color: pathname === link.href ? activeColor : mutedColor,
+                }}
               >
                 {link.label}
               </Link>
@@ -75,18 +114,18 @@ export default function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
           >
-            <span
-              className="block w-5 h-px bg-[#EDEDED] transition-transform duration-300 origin-center"
-              style={{ transform: menuOpen ? "translateY(6px) rotate(45deg)" : "" }}
-            />
-            <span
-              className="block w-5 h-px bg-[#EDEDED] transition-opacity duration-300"
-              style={{ opacity: menuOpen ? 0 : 1 }}
-            />
-            <span
-              className="block w-5 h-px bg-[#EDEDED] transition-transform duration-300 origin-center"
-              style={{ transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "" }}
-            />
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="block w-5 h-px transition-all duration-300 origin-center"
+                style={{
+                  background: burgerColor,
+                  opacity: i === 1 && menuOpen ? 0 : 1,
+                  transform: i === 0 && menuOpen ? "translateY(6px) rotate(45deg)" : 
+                             i === 2 && menuOpen ? "translateY(-6px) rotate(-45deg)" : "",
+                }}
+              />
+            ))}
           </button>
         </div>
       </header>

@@ -225,26 +225,60 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Tier 1: Cinematic Films (16:9) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {[
-              { label: "01", title: "The Crown Residences",  cat: "Real Estate",               tall: true,  bg: "bg-neutral-900" },
-              { label: "02", title: "Al Fanar Restaurant",   cat: "Restaurant Cinematography",  tall: false, bg: "bg-neutral-800" },
-              { label: "03", title: "Harbour Row Dining",    cat: "Restaurant Cinematography",  tall: false, bg: "bg-neutral-700" },
-              { label: "04", title: "Ebrahim Corp Identity", cat: "Brand Film",                 tall: true,  bg: "bg-neutral-900" },
+              { label: "01", title: "Lee Heritage",          cat: "Hospitality",               vimeo: "1183128960" },
+              { label: "02", title: "Heaven View Villa",     cat: "Hospitality",               vimeo: "1183128507" },
+            ].map((video) => (
+              <Reveal key={video.label} delay={0.1}>
+                <div className="group relative aspect-video overflow-hidden bg-black cursor-pointer">
+                  <div className="absolute inset-0 pointer-events-none">
+                    <iframe
+                      src={`https://player.vimeo.com/video/${video.vimeo}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1`}
+                      className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+                    <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase mb-2">{video.cat}</p>
+                    <h4 className="text-white font-black text-xl md:text-2xl tracking-tight">{video.title}</h4>
+                  </div>
+                  <div className="absolute top-6 left-6">
+                    <span className="text-white/30 font-mono text-[10px] tracking-[0.2em]">{video.label}</span>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Tier 2: Image Showcase (Square Boxes) */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { label: "03", title: "Harbour Row Dining",    cat: "Hospitality",   driveId: "1LGbCekMBgMNNIyabVbFiTkVO6-brJgAe", bg: "bg-neutral-800" },
+              { label: "04", title: "Ebrahim Corp Identity", cat: "Brand Film",    driveId: "1TZB5T-PnWl2-cePCrcC4tdsJAz2PSI3w", bg: "bg-neutral-900" },
+              { label: "05", title: "Corporate Assets",      cat: "Hospitality",   driveId: "1-b48lZJ5UFnpe6QG639kJAiB0O6yqGBI", bg: "bg-neutral-700" },
+              { label: "06", title: "Brand Vision",          cat: "Hospitality",   driveId: "1Ex9QPsfx6VsIX8GhiDqmSNStOrg76OHp", bg: "bg-neutral-800" },
             ].map((project) => (
               <motion.div
                 key={project.label}
-                className={`group relative overflow-hidden ${project.tall ? "md:row-span-2" : ""} ${project.bg} cursor-pointer`}
-                style={{ minHeight: project.tall ? "520px" : "240px" }}
+                className={`group relative aspect-square overflow-hidden ${project.bg} cursor-pointer`}
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
-                  <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase mb-2">{project.cat}</p>
-                  <h4 className="text-white font-black text-xl md:text-2xl tracking-tight">{project.title}</h4>
+                <img
+                  src={`https://drive.google.com/thumbnail?sz=w1000&id=${project.driveId}`}
+                  alt={project.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                  <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase mb-1">{project.cat}</p>
+                  <h4 className="text-white font-black text-sm md:text-lg tracking-tight leading-tight">{project.title}</h4>
                 </div>
-                <div className="absolute top-6 left-6">
-                  <span className="text-white/30 font-mono text-[10px] tracking-[0.2em]">{project.label}</span>
+                <div className="absolute top-4 left-4">
+                  <span className="text-white/30 font-mono text-[9px] tracking-[0.2em]">{project.label}</span>
                 </div>
               </motion.div>
             ))}

@@ -8,93 +8,72 @@ export default function HeroLogo() {
   const productionsPath = "M34.56 12.2C35.324 12.2 35.804 12.596 35.804 13.236C35.804 13.872 35.324 14.268 34.56 14.268H34.072V15H33.28V12.2H34.56ZM34.512 13.644C34.84 13.644 35.004 13.492 35.004 13.236C35.004 12.976 34.84 12.824 34.512 12.824H34.072V13.644H34.512ZM37.8422 15L37.3342 14.256H36.9022V15H36.1102V12.2H37.3902C38.1542 12.2 38.6342 12.596 38.6342 13.236C38.6342 13.648 38.4342 13.952 38.0862 14.12L38.6902 15H37.8422ZM37.8342 13.236C37.8342 12.976 37.6702 12.824 37.3422 12.824H36.9022V13.644H37.3422C37.6702 13.644 37.8342 13.492 37.8342 13.236ZM40.4031 15.056C39.5071 15.056 38.8471 14.44 38.8471 13.6C38.8471 12.76 39.5071 12.144 40.4031 12.144C41.2991 12.144 41.9591 12.76 41.9591 13.6C41.9591 14.44 41.2991 15.056 40.4031 15.056ZM40.4031 14.4C40.8271 14.4 41.1591 14.084 41.1591 13.6C41.1591 13.116 40.8271 12.8 40.4031 12.8C39.9791 12.8 39.6471 13.116 39.6471 13.6C39.6471 14.084 39.9791 14.4 40.4031 14.4ZM42.2939 15V12.2H43.6179C44.5459 12.2 45.1819 12.74 45.1819 13.6C45.1819 14.46 44.5459 15 43.6179 15H42.2939ZM43.0859 14.368H43.5859C44.0619 14.368 44.3819 14.084 44.3819 13.6C44.3819 13.116 44.0619 12.832 43.5859 12.832H43.0859V14.368ZM46.8106 15.056C45.9826 15.056 45.4946 14.588 45.4946 13.752V12.2H46.2866V13.728C46.2866 14.208 46.4866 14.4 46.8186 14.4C47.1466 14.4 47.3466 14.208 47.3466 13.728V12.2H48.1266V13.752C48.1266 14.588 47.6386 15.056 46.8106 15.056ZM49.9791 15.056C49.0911 15.056 48.4391 14.452 48.4391 13.6C48.4391 12.748 49.0911 12.144 49.9791 12.144C50.4951 12.144 50.9111 12.332 51.1831 12.672L50.6791 13.128C50.5031 12.916 50.2871 12.8 50.0191 12.8C49.5591 12.8 49.2391 13.12 49.2391 13.6C49.2391 14.08 49.5591 14.4 50.0191 14.4C50.2871 14.4 50.5031 14.284 50.6791 14.072L51.1831 14.528C50.9111 14.868 50.4951 15.056 49.9791 15.056ZM52.0288 15V12.828H51.1688V12.2H53.6768V12.828H52.8208V15H52.0288ZM53.8919 15V12.2H54.6839V15H53.8919ZM56.5793 15.056C55.6833 15.056 55.0233 14.44 55.0233 13.6C55.0233 12.76 55.6833 12.144 56.5793 12.144C57.4753 12.144 58.1353 12.76 58.1353 13.6C58.1353 14.44 57.4753 15.056 56.5793 15.056ZM56.5793 14.4C57.0033 14.4 57.3353 14.084 57.3353 13.6C57.3353 13.116 57.0033 12.8 56.5793 12.8C56.1553 12.8 55.8233 13.116 55.8233 13.6C55.8233 14.084 56.1553 14.4 56.5793 14.4ZM60.3582 12.2H61.1342V15H60.4822L59.2462 13.508V15H58.4702V12.2H59.1222L60.3582 13.692V12.2ZM62.5968 15.056C62.1368 15.056 61.6808 14.932 61.4168 14.748L61.6768 14.164C61.9248 14.328 62.2768 14.44 62.6008 14.44C62.9288 14.44 63.0568 14.348 63.0568 14.212C63.0568 13.768 61.4648 14.092 61.4648 13.052C61.4648 12.552 61.8728 12.144 62.7048 12.144C63.0688 12.144 63.4448 12.228 63.7208 12.388L63.4768 12.976C63.2088 12.832 62.9448 12.76 62.7008 12.76C62.3688 12.76 62.2488 12.872 62.2488 13.012C62.2488 13.44 63.8368 13.12 63.8368 14.152C63.8368 14.64 63.4288 15.056 62.5968 15.056ZM64.4848 15.036C64.2288 15.036 64.0288 14.848 64.0288 14.584C64.0288 14.312 64.2288 14.136 64.4848 14.136C64.7448 14.136 64.9408 14.312 64.9408 14.584C64.9408 14.848 64.7448 15.036 64.4848 15.036Z";
   const orangeDotPath = "M64.4848 15.036C64.2288 15.036 64.0288 14.848 64.0288 14.584C64.0288 14.312 64.2288 14.136 64.4848 14.136C64.7448 14.136 64.9408 14.312 64.9408 14.584C64.9408 14.848 64.7448 15.036 64.4848 15.036Z";
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 1, 0.5, 1], // Premium ease-out
-      },
-    },
-  };
-
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="w-full flex justify-center"
+    <div 
+      className="w-full h-full relative" 
+      style={{ aspectRatio: "66 / 16" }}
     >
-      <svg
-        viewBox="0 0 66 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+        className="w-full h-full flex justify-center"
       >
-        <defs>
-          <linearGradient id="productionsGradient" x1="0" y1="0" x2="66" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="30%" stopColor="#FFFFFF" />
-            <stop offset="100%" stopColor="#888888" />
-          </linearGradient>
-        </defs>
-
-        {/* Main Brand: CINMACH (White) */}
-        <motion.path
-          variants={itemVariants}
-          d={cinmachPath}
-          fill="#FFFFFF"
-        />
-
-        {/* Dynamic Sub-brand: PRODUCTIONS (Faded Gradient + True Letter Spacing) */}
-        <motion.text
-          variants={itemVariants}
-          x="63"
-          y="15.5"
-          fill="url(#productionsGradient)"
-          opacity={0.65}
-          fontSize="4.2"
-          fontWeight="900"
-          fontFamily="var(--font-inter), sans-serif"
-          textAnchor="end"
-          letterSpacing="0.22em"
-          className="uppercase"
+        <svg
+          viewBox="0 0 66 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
         >
-          Productions
-        </motion.text>
+          <defs>
+            <linearGradient id="productionsGradient" x1="0" y1="0" x2="66" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="30%" stopColor="#FFFFFF" />
+              <stop offset="100%" stopColor="#888888" />
+            </linearGradient>
+          </defs>
 
-        {/* Global Signature: Orange Dot (Blinking) */}
-        <motion.circle
-          cx="64.5"
-          cy="14.6"
-          r="0.5"
-          fill="#D91616"
-          animate={{
-            opacity: [1, 0.35, 1],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 2.2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5,
-          }}
-          style={{ transformOrigin: "64.5px 14.6px" }}
-        />
-      </svg>
-    </motion.div>
+          {/* Main Brand: CINMACH (White) */}
+          <path
+            d={cinmachPath}
+            fill="#FFFFFF"
+          />
+
+          {/* Dynamic Sub-brand: PRODUCTIONS (Faded Gradient + True Letter Spacing) */}
+          <text
+            x="63"
+            y="15.5"
+            fill="url(#productionsGradient)"
+            opacity={0.65}
+            fontSize="4.2"
+            fontWeight="900"
+            fontFamily="var(--font-inter), sans-serif"
+            textAnchor="end"
+            letterSpacing="0.22em"
+            className="uppercase"
+          >
+            Productions
+          </text>
+
+          {/* Global Signature: Orange Dot (Blinking) */}
+          <motion.circle
+            cx="64.5"
+            cy="14.6"
+            r="0.5"
+            fill="#D91616"
+            animate={{
+              opacity: [1, 0.35, 1],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 2.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1.5,
+            }}
+            style={{ transformOrigin: "64.5px 14.6px" }}
+          />
+        </svg>
+      </motion.div>
+    </div>
   );
 }

@@ -20,7 +20,7 @@ export default function TechStrip() {
   const tickerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative w-full overflow-hidden border-y border-white/[0.06] bg-[#0a0202] py-5 select-none">
+    <div className="relative w-full overflow-hidden border-y border-white/[0.06] bg-[#0a0202] py-5 select-none h-[52px] min-h-[52px]">
       {/* Left fade */}
       <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#0a0202] to-transparent pointer-events-none" />
       {/* Right fade */}

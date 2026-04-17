@@ -14,15 +14,14 @@ export default function StartProjectButton() {
       <Link href="/estimate">
         <motion.div
           whileHover={{
-            scale: 1.06,
-            boxShadow: "0 0 30px rgba(217,22,22,0.5), 0 0 60px rgba(217,22,22,0.2)",
+            scale: 1.05,
+            boxShadow: "0 0 25px rgba(217,22,22,0.4)",
           }}
-          whileTap={{ scale: 0.96 }}
-          transition={{ type: "spring", stiffness: 350, damping: 20 }}
-          className="flex items-center gap-2.5 px-5 py-3 bg-[#D91616] text-white rounded-full border border-[#D91616]/50 shadow-[0_0_20px_rgba(217,22,22,0.3)]"
-          style={{ backdropFilter: "blur(8px)" }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          className="flex items-center gap-2.5 px-5 py-3 bg-[#D91616] text-white rounded-full border border-white/10 shadow-[0_0_15px_rgba(217,22,22,0.2)]"
         >
-          <span className="w-2 h-2 rounded-full bg-white animate-pulse shrink-0" />
+          <span className="w-2 h-2 rounded-full bg-white shrink-0" />
           <span
             style={{
               fontSize: "0.6rem",

@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Digit = ({ value, isAccent = false }: { value: string | number, isAccent?: boolean }) => {
+const Digit = memo(({ value, isAccent = false }: { value: string | number, isAccent?: boolean }) => {
   return (
     <div className="relative w-3 sm:w-4 flex items-center justify-center overflow-hidden h-6">
       <AnimatePresence mode="popLayout">
@@ -30,13 +30,29 @@ const Digit = ({ value, isAccent = false }: { value: string | number, isAccent?:
       </AnimatePresence>
     </div>
   );
-};
+});
 
-const Separator = () => (
+Digit.displayName = "Digit";
+
+const Separator = memo(() => (
   <span className="text-white/40 text-xs sm:text-sm mx-0.5 mt-[-2px] animate-[pulse_2s_ease-in-out_Infinity]">:</span>
-);
+));
 
-export default function FlipClock() {
+Separator.displayName = "Separator";
+
+const ClockSkeleton = memo(() => (
+  <div className="flex items-center gap-0.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] opacity-40">
+    <div className="w-8 h-6 bg-white/5 rounded-sm animate-pulse" />
+    <span className="text-white/20 text-xs mx-0.5">:</span>
+    <div className="w-8 h-6 bg-white/5 rounded-sm animate-pulse" />
+    <span className="text-white/20 text-xs mx-0.5">:</span>
+    <div className="w-8 h-6 bg-[#D91616]/10 rounded-sm animate-pulse" />
+  </div>
+));
+
+ClockSkeleton.displayName = "ClockSkeleton";
+
+export default memo(function FlipClock() {
   const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -47,14 +63,14 @@ export default function FlipClock() {
     return () => clearInterval(timer);
   }, []);
 
-  if (!time) return null;
+  if (!time) return <ClockSkeleton />;
 
   const hours = time.getHours().toString().padStart(2, "0");
   const minutes = time.getMinutes().toString().padStart(2, "0");
   const seconds = time.getSeconds().toString().padStart(2, "0");
 
   return (
-    <div className="flex items-center gap-0.5 px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/[0.05] backdrop-blur-md opacity-80 hover:opacity-100 transition-opacity">
+    <div className="flex items-center gap-0.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] opacity-80 hover:opacity-100 transition-opacity">
       <div className="flex">
         <Digit value={hours[0]} />
         <Digit value={hours[1]} />
@@ -71,4 +87,4 @@ export default function FlipClock() {
       </div>
     </div>
   );
-}
+});

@@ -72,8 +72,11 @@ function ProjectCard({
       <img
         src={thumb}
         alt={title}
+        width="900"
+        height="506"
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover:scale-105 brightness-75"
+        style={{ aspectRatio: "16/9" }}
       />
 
       {/* Overlay gradient */}
@@ -98,7 +101,7 @@ function ProjectCard({
 
       {/* Hover play indicator */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
             <path d="M4 2l10 6-10 6V2z" />
           </svg>
@@ -139,35 +142,32 @@ export default function PortfolioSplit() {
       {/* ── Fullscreen Split (desktop) ── */}
       <div className="hidden md:flex flex-1 relative overflow-hidden min-h-[85vh]">
         {/* THE SPACES */}
-        <motion.div
-          className="relative overflow-hidden cursor-pointer group/spaces"
-          animate={{ width: spacesWidth }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          onHoverStart={() => setHovered("spaces")}
-          onHoverEnd={() => setHovered(null)}
+        <div
+          className="relative flex-1 overflow-hidden cursor-pointer group/spaces"
+          onMouseEnter={() => setHovered("spaces")}
+          onMouseLeave={() => setHovered(null)}
         >
           {/* BG video/image */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover/spaces:scale-105">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&q=80"
               alt="The Spaces"
+              width="1400"
+              height="800"
               className="w-full h-full object-cover"
-              style={{ filter: "brightness(0.35) saturate(0.8)" }}
+              style={{ filter: "brightness(0.35) saturate(0.8)", aspectRatio: "14/8" }}
             />
             {/* Subtle red wash on hover */}
-            <motion.div
-              animate={{ opacity: hovered === "spaces" ? 0.18 : 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 bg-[#D91616] mix-blend-color"
+            <div
+              className={`absolute inset-0 bg-[#D91616] mix-blend-color transition-opacity duration-500 ${hovered === "spaces" ? "opacity-15" : "opacity-0"}`}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0d0303]/80 via-transparent to-[#0d0303]/40" />
           </div>
 
           {/* Content */}
-          <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-14 z-10">
-            <motion.div
-              animate={{ opacity: hovered === "tastes" ? 0.4 : 1 }}
-              transition={{ duration: 0.4 }}
+          <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-14 z-10 transition-opacity duration-400">
+            <div
+              className={`transition-opacity duration-400 ${hovered === "tastes" ? "opacity-30" : "opacity-100"}`}
             >
               <p className="type-label text-white/40 mb-3">Category 01</p>
               <h3
@@ -183,13 +183,8 @@ export default function PortfolioSplit() {
               <p className="text-white/40 text-sm max-w-[280px] leading-relaxed">
                 Crafted with cinematic lighting and spatial storytelling.
               </p>
-              <motion.div
-                animate={{
-                  opacity: hovered === "spaces" ? 1 : 0,
-                  y: hovered === "spaces" ? 0 : 8,
-                }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="mt-6"
+              <div
+                className={`mt-6 transition-all duration-400 ${hovered === "spaces" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
               >
                 <Link
                   href="/work"
@@ -197,43 +192,40 @@ export default function PortfolioSplit() {
                 >
                   Explore Real Estate →
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
 
           {/* Vertical divider label */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-white/15 to-transparent z-20" />
-        </motion.div>
+        </div>
 
         {/* THE TASTES */}
-        <motion.div
-          className="relative overflow-hidden cursor-pointer group/tastes"
-          animate={{ width: tastesWidth }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          onHoverStart={() => setHovered("tastes")}
-          onHoverEnd={() => setHovered(null)}
+        <div
+          className="relative flex-1 overflow-hidden cursor-pointer group/tastes"
+          onMouseEnter={() => setHovered("tastes")}
+          onMouseLeave={() => setHovered(null)}
         >
           {/* BG image */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover/tastes:scale-105">
             <img
               src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=1400&q=80"
               alt="The Tastes"
+              width="1400"
+              height="800"
               className="w-full h-full object-cover"
-              style={{ filter: "brightness(0.35) saturate(1.1)" }}
+              style={{ filter: "brightness(0.35) saturate(1.1)", aspectRatio: "14/8" }}
             />
-            <motion.div
-              animate={{ opacity: hovered === "tastes" ? 0.2 : 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 bg-[#D91616] mix-blend-color"
+            <div
+              className={`absolute inset-0 bg-[#D91616] mix-blend-color transition-opacity duration-500 ${hovered === "tastes" ? "opacity-15" : "opacity-0"}`}
             />
             <div className="absolute inset-0 bg-gradient-to-l from-[#0d0303]/80 via-transparent to-[#0d0303]/10" />
           </div>
 
           {/* Content */}
           <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-14 z-10">
-            <motion.div
-              animate={{ opacity: hovered === "spaces" ? 0.4 : 1 }}
-              transition={{ duration: 0.4 }}
+            <div
+              className={`transition-opacity duration-400 ${hovered === "spaces" ? "opacity-30" : "opacity-100"}`}
             >
               <p className="type-label text-white/40 mb-3">Category 02</p>
               <h3
@@ -249,13 +241,8 @@ export default function PortfolioSplit() {
               <p className="text-white/40 text-sm max-w-[280px] leading-relaxed">
                 Designed for appetite, engagement, and brand identity.
               </p>
-              <motion.div
-                animate={{
-                  opacity: hovered === "tastes" ? 1 : 0,
-                  y: hovered === "tastes" ? 0 : 8,
-                }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="mt-6"
+              <div
+                className={`mt-6 transition-all duration-400 ${hovered === "tastes" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
               >
                 <Link
                   href="/work"
@@ -263,10 +250,10 @@ export default function PortfolioSplit() {
                 >
                   Explore F&amp;B →
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* ── Mobile: Stacked ── */}
@@ -276,7 +263,10 @@ export default function PortfolioSplit() {
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80"
             alt="The Spaces"
+            width="900"
+            height="600"
             className="absolute inset-0 w-full h-full object-cover brightness-[0.35]"
+            style={{ aspectRatio: "9/6" }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           <div className="relative z-10 p-8">
@@ -298,7 +288,10 @@ export default function PortfolioSplit() {
           <img
             src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=900&q=80"
             alt="The Tastes"
+            width="900"
+            height="600"
             className="absolute inset-0 w-full h-full object-cover brightness-[0.35]"
+            style={{ aspectRatio: "9/6" }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           <div className="relative z-10 p-8">

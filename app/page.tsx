@@ -4,7 +4,6 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import FlipClock from "@/components/FlipClock";
 import HeroLogo from "@/components/HeroLogo";
-import HeroTypographyLayer from "@/components/HeroTypographyLayer";
 import PortfolioSplit from "@/components/PortfolioSplit";
 import TechStrip from "@/components/TechStrip";
 import StartProjectButton from "@/components/StartProjectButton";
@@ -149,83 +148,21 @@ export default function Home() {
       {/* ════════════════════════════════════════════════════ HERO */}
       <section
         ref={heroRef}
-        className="relative w-full min-h-[100svh] flex flex-col items-start justify-center overflow-hidden"
+        className="relative w-full min-h-[100svh] flex flex-col items-start justify-center overflow-hidden bg-[#0B0B0B]"
       >
-        {/* BG parallax */}
-        <motion.div className="absolute inset-0 z-0" style={{ y: smoothParallax }}>
-          <div className="absolute inset-[-10%] w-[120%] h-[120%]">
-            <img
-              src="https://i.pinimg.com/1200x/61/84/32/61843271b3d9b48cf8a5e7e9364e9d75.jpg"
-              alt="Hero Background"
-              fetchPriority="high"
-              decoding="async"
-              className="w-full h-full object-cover opacity-90 object-center grayscale brightness-[0.4] contrast-[1.1]"
-              style={{ willChange: "transform" }}
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-[#0B0B0B]/15" />
-          <div className="absolute inset-0 bg-[#D91616]/30 mix-blend-color z-0" />
-          <div className="absolute inset-0 bg-gradient-to-bl from-[#D91616]/40 to-transparent mix-blend-overlay z-0" />
-        </motion.div>
-
-        {/* Vignette + glows */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0B0B0B_150%)] opacity-90 z-10" />
-          <motion.div
-            animate={shouldReduceMotion ? {} : { opacity: [0.15, 0.32, 0.15], scale: [1, 1.08, 1] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/2 left-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform"
-            style={{ background: "radial-gradient(circle, rgba(217,22,22,0.38) 0%, transparent 65%)" }}
-          />
-          <div className="hidden md:block">
-            <motion.div
-              animate={shouldReduceMotion ? {} : { opacity: [0.07, 0.2, 0.07], scale: [1, 1.25, 1], x: ["-50%", "-32%", "-50%"], y: ["-50%", "-58%", "-50%"] }}
-              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 left-[30%] w-[55vw] max-w-[550px] aspect-square rounded-full z-0 translate-x-[-50%] translate-y-[-50%] will-change-transform blur-3xl mix-blend-screen"
-              style={{ background: "radial-gradient(circle, rgba(217,22,22,0.18) 0%, transparent 60%)" }}
-            />
-          </div>
-        </div>
-
-        {/* Large background "2026" */}
-        <motion.div
-          style={{ y: year2026Parallax }}
-          className="absolute right-[-2vw] bottom-[-4vh] z-0 pointer-events-none select-none hidden md:block"
-        >
-          <span
-            className="text-white font-black"
-            style={{
-              fontSize: "clamp(10rem, 25vw, 24rem)",
-              lineHeight: 1,
-              opacity: 0.025,
-              letterSpacing: "-0.05em",
-            }}
-          >
-            2026
-          </span>
-        </motion.div>
-
-        {/* Typography layer */}
-        <HeroTypographyLayer />
-
+        {/* Simple Vignette for depth - optional, but user said remove components in background */}
+        
         {/* Hero text content */}
         <div className="z-20 w-full px-5 sm:px-8 md:px-14 lg:px-20 flex flex-col items-start justify-center text-left pt-24">
-          <motion.div
-            animate={shouldReduceMotion ? {} : { y: [0, -4, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-start w-full max-w-3xl"
-          >
+          <div className="flex flex-col items-start w-full max-w-3xl">
             {/* Logo */}
             <div className="w-full max-w-[260px] sm:max-w-[380px] md:max-w-[480px] h-auto mb-8 origin-left">
               <HeroLogo />
             </div>
 
             {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/85 mb-10 max-w-[520px]"
+            <p
+              className="text-white/85 mb-10 max-w-[520px] hero-entrance"
               style={{
                 fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)",
                 lineHeight: 1.65,
@@ -234,18 +171,16 @@ export default function Home() {
               }}
             >
               We craft cinematic brand experiences for modern visionaries.
-            </motion.p>
+            </p>
 
             {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col sm:flex-row gap-4 w-full max-w-[260px] sm:max-w-[440px] md:max-w-[480px]"
+            <div
+              className="flex flex-col sm:flex-row gap-4 w-full max-w-[260px] sm:max-w-[440px] md:max-w-[480px] hero-entrance"
+              style={{ animationDelay: "0.15s" }}
             >
               <CTAButton variant="primary" href="/work">Our Work</CTAButton>
               <CTAButton variant="outline" href="/estimate">Contact Us</CTAButton>
-            </motion.div>
+            </div>
 
             {/* Mobile FlipClock */}
             <div className="mt-16 md:hidden self-start flex flex-col gap-2">
@@ -254,20 +189,16 @@ export default function Home() {
               </span>
               <FlipClock />
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { y: [0, 7, 0], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
-        >
+        {/* Scroll indicator - simplified */}
+        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20 opacity-40">
           <span className="type-label text-white/40" style={{ letterSpacing: "0.35em" }}>
             Scroll
           </span>
           <div className="w-px h-6 bg-gradient-to-b from-white/40 to-transparent" />
-        </motion.div>
+        </div>
       </section>
 
       {/* ════════════════════════════════════════════════ TECH STRIP */}
@@ -355,7 +286,7 @@ export default function Home() {
         <FadeUp className="w-full max-w-2xl">
           <motion.div
             whileHover={{ scale: 1.008, transition: { type: "spring", stiffness: 200, damping: 28 } }}
-            className="rounded-[28px] p-10 md:p-16 bg-[#1a0505]/50 border border-white/5 mobile-no-blur backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(217,22,22,0.04)]"
+            className="rounded-[28px] p-10 md:p-16 bg-[#1a0505]/50 border border-white/5 mobile-no-blur relative overflow-hidden flex flex-col items-center text-center shadow-[0_0_80px_rgba(217,22,22,0.04)]"
           >
             <div className="absolute top-0 right-0 w-56 h-56 bg-[#D91616]/15 blur-[70px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#D91616]/8 blur-[50px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2" />

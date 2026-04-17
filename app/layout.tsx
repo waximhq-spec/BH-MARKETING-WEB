@@ -12,16 +12,19 @@ import BackToTop from "@/components/BackToTop";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -38,11 +41,11 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} antialiased`}>
       <body className="min-h-full flex flex-col font-sans text-[#e5e5e5] relative">
         <ServiceWorkerUnregister />
-        <SecurityLayer />
-        <GridOverlay />
-        <FilmGrain />
+        {/* <SecurityLayer /> */}
+        {/* <GridOverlay /> */}
+        {/* <FilmGrain /> */}
         {/* Global UI chrome — always visible across all pages */}
-        <ScrollProgressBar />
+        {/* <ScrollProgressBar /> */}
         <BackToTop />
         <SmoothScroll>
           {children}

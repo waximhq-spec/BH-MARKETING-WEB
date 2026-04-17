@@ -51,8 +51,6 @@ export default function Navbar() {
           className="flex items-center justify-between gap-2 px-5 sm:px-6 py-3 transition-shadow duration-500"
           style={{
             background: navBackground,
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
             border: navBorder,
             borderRadius: "16px",
             boxShadow: isScrolled ? "0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -10px 30px rgba(217, 22, 22,0.03)" : "none",

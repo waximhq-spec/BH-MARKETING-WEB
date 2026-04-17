@@ -225,14 +225,40 @@ export default function Home() {
             </div>
           </Reveal>
 
-          {/* Tier 1: Cinematic Films (16:9) */}
+          {/* Tier 1: Vertical Reels (9:16) */}
+          <div className="grid grid-cols-2 gap-4 md:gap-8 mb-8">
+            {[
+              { id: 1, title: "Automotive Showcase", url: "https://www.pexels.com/download/video/31588827/" },
+              { id: 2, title: "Speed & Motion", url: "https://www.pexels.com/download/video/35696639/" },
+            ].map((reel, i) => (
+              <Reveal key={reel.id} delay={i * 0.1}>
+                <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">
+                  <video 
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline 
+                    className="absolute inset-0 w-full h-full object-cover"
+                  >
+                    <source src={reel.url} type="video/mp4" />
+                  </video> 
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                    <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase">Automotive</p>
+                    <h4 className="text-white font-bold text-lg md:text-2xl tracking-tight mt-1">{reel.title}</h4>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Tier 1.5: Cinematic Films (16:9) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {[
               { label: "01", title: "Lee Heritage",          cat: "Hospitality",               vimeo: "1183128960" },
               { label: "02", title: "Heaven View Villa",     cat: "Hospitality",               vimeo: "1183128507" },
             ].map((video) => (
               <Reveal key={video.label} delay={0.1}>
-                <div className="group relative aspect-video overflow-hidden bg-black cursor-pointer">
+                <div className="group relative aspect-video overflow-hidden bg-black cursor-pointer rounded-[16px]">
                   <div className="absolute inset-0 pointer-events-none">
                     <iframe
                       src={`https://player.vimeo.com/video/${video.vimeo}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1`}
@@ -263,7 +289,7 @@ export default function Home() {
             ].map((project) => (
               <motion.div
                 key={project.label}
-                className={`group relative aspect-square overflow-hidden ${project.bg} cursor-pointer`}
+                className={`group relative aspect-square overflow-hidden rounded-[16px] ${project.bg} cursor-pointer`}
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >

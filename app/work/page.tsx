@@ -66,6 +66,94 @@ function CarouselSlides() {
     return "hidden";
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  if (isMobile) {
+    // ─── MOBILE: Full-width, edge-to-edge, no peek, no radius ───
+    return (
+      <div
+        className="relative select-none"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
+        style={{ margin: "0 -1rem" }} /* cancel container padding on mobile */
+      >
+        {/* Full-bleed track */}
+        <div className="relative overflow-hidden w-full" style={{ aspectRatio: "16/9" }}>
+          {SLIDES.map((slide, i) => {
+            const isActive = i === active;
+            const offset = i - active;
+            return (
+              <div
+                key={slide.id}
+                className="absolute inset-0 w-full h-full transition-transform duration-600"
+                style={{
+                  transform: `translateX(${offset * 100}%)`,
+                  transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+                  transitionDuration: "600ms",
+                }}
+              >
+                <div className="w-full h-full bg-black relative overflow-hidden">
+                  {slide.type === "vimeo" ? (
+                    <iframe
+                      src={`https://player.vimeo.com/video/${slide.src}?background=1&autoplay=${isActive ? 1 : 0}&loop=1&byline=0&title=0&muted=1`}
+                      className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen"
+                      loading="lazy"
+                      title={slide.title}
+                    />
+                  ) : (
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${slide.src}?autoplay=${isActive ? 1 : 0}&mute=1&loop=1&playlist=${slide.src}&controls=0&showinfo=0&modestbranding=1`}
+                      className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen"
+                      loading="lazy"
+                      title={slide.title}
+                    />
+                  )}
+                  {/* Meta overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-5" style={{ background: "rgba(0,0,0,0.5)" }}>
+                    <p className="text-[#8B0016] font-mono text-[8px] tracking-[0.3em] uppercase mb-1">{slide.cat}</p>
+                    <h4 className="text-white font-black text-lg tracking-tight leading-tight">{slide.title}</h4>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Dots — shown below video */}
+        <div className="flex items-center justify-center gap-3 mt-5">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="transition-all duration-500"
+              style={{
+                width: i === active ? "24px" : "7px",
+                height: "7px",
+                borderRadius: "999px",
+                background: i === active ? "#0A0A0A" : "rgba(0,0,0,0.2)",
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // ─── DESKTOP: Premium centered-peek carousel ───
   return (
     <div
       className="relative select-none"
@@ -85,7 +173,6 @@ function CarouselSlides() {
             const isRight = state === "right";
             const isHidden = state === "hidden";
 
-            // Center=0%, Left=-74%, Right=+74%
             const tx = isCenter ? 0 : isLeft ? -74 : isRight ? 74 : (i < active ? -150 : 150);
             const scale = isCenter ? 1 : 0.88;
             const opacity = isCenter ? 1 : isHidden ? 0 : 0.55;
@@ -111,7 +198,6 @@ function CarouselSlides() {
                   className="w-full h-full rounded-[20px] overflow-hidden bg-black relative group/card"
                   style={{ boxShadow: isCenter ? "0 20px 60px rgba(0,0,0,0.22)" : "none" }}
                 >
-                  {/* Video */}
                   <div className="absolute inset-0 pointer-events-none">
                     {slide.type === "vimeo" ? (
                       <iframe
@@ -134,7 +220,6 @@ function CarouselSlides() {
                     )}
                   </div>
 
-                  {/* Meta Overlay */}
                   <div
                     className={`absolute inset-0 flex flex-col justify-end p-8 transition-opacity duration-500 ${isCenter ? "opacity-0 group-hover/card:opacity-100" : "opacity-100"}`}
                     style={{ background: "rgba(0,0,0,0.45)" }}
@@ -143,7 +228,6 @@ function CarouselSlides() {
                     <h4 className="text-white font-black text-xl md:text-2xl tracking-tight leading-tight">{slide.title}</h4>
                   </div>
 
-                  {/* Slide counter */}
                   <div className="absolute top-6 left-6">
                     <span className="text-white/30 font-mono text-[10px] tracking-[0.2em]">{slide.id}</span>
                   </div>
@@ -154,7 +238,7 @@ function CarouselSlides() {
         </div>
       </div>
 
-      {/* Arrow Controls — outside the overflow clip */}
+      {/* Arrow Controls */}
       <button
         onClick={prev}
         aria-label="Previous"
@@ -266,27 +350,26 @@ export default function WorkPage() {
             </Reveal>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-              {[1, 2, 3, 4].map((i) => (
-                <Reveal key={i} delay={i * 0.1}>
+              {[
+                { id: 1, title: "Modern Space", url: "https://www.pexels.com/download/video/31588827/" },
+                { id: 2, title: "Design Details", url: "https://www.pexels.com/download/video/35696639/" },
+                { id: 3, title: "Exterior Profile", url: "https://www.pexels.com/download/video/6466568/" },
+                { id: 4, title: "Lounge Area", url: "https://www.pexels.com/download/video/30225108/" },
+              ].map((reel, i) => (
+                <Reveal key={reel.id} delay={i * 0.1}>
                   <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">
-                    {/* Placeholder for future video element */}
-                    <div className="absolute inset-0 flex items-center justify-center text-black/10 font-mono text-[10px] tracking-widest uppercase">
-                      Reel {i}
-                    </div>
-                    {/* 
                     <video 
-                      autoplay 
+                      autoPlay 
                       muted 
                       loop 
-                      playsinline 
+                      playsInline 
                       className="absolute inset-0 w-full h-full object-cover"
                     >
-                      <source src="URL_HERE" type="video/mp4" />
+                      <source src={reel.url} type="video/mp4" />
                     </video> 
-                    */}
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
-                      <p className="text-white/60 font-mono text-[9px] tracking-[0.4em] uppercase">Cinematic</p>
-                      <h4 className="text-white font-bold text-lg tracking-tight">Project {i}</h4>
+                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                      <p className="text-white/80 font-mono text-[9px] tracking-[0.4em] uppercase">Cinematic</p>
+                      <h4 className="text-white font-bold text-lg tracking-tight mt-1">{reel.title}</h4>
                     </div>
                   </div>
                 </Reveal>

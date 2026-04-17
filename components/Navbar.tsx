@@ -25,11 +25,6 @@ export default function Navbar() {
 
   // Theme detection logic (Intersection Observer)
   useEffect(() => {
-    if (pathname !== "/") {
-      setTheme("dark");
-      return;
-    }
-
     const observerOptions = {
       root: null,
       rootMargin: "-80px 0px -90% 0px",

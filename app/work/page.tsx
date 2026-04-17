@@ -1,163 +1,350 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-const ALL_PROJECTS = [
-  {
-    id: "dilmunia-waterfront",
-    category: "real-estate",
-    categoryLabel: "Real Estate",
-    title: "Dilmunia Waterfront Residences",
-    tags: ["Drone", "HDR", "Interior"],
-    thumb: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=75",
-    year: "2024",
-  },
-  {
-    id: "palm-villa-al-areen",
-    category: "real-estate",
-    categoryLabel: "Real Estate",
-    title: "The Palm Villa — Al Areen",
-    tags: ["Aerial", "Twilight", "4K"],
-    thumb: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=75",
-    year: "2024",
-  },
-  {
-    id: "seef-district-tower",
-    category: "real-estate",
-    categoryLabel: "Real Estate",
-    title: "Seef District Tower",
-    tags: ["Interior", "Slow Motion"],
-    thumb: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=75",
-    year: "2023",
-  },
-  {
-    id: "khaleej-co",
-    category: "fb",
-    categoryLabel: "F&B",
-    title: "Khaleej & Co.",
-    tags: ["Food Motion", "Brand Film"],
-    thumb: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=75",
-    year: "2024",
-  },
-  {
-    id: "flame-and-salt",
-    category: "fb",
-    categoryLabel: "F&B",
-    title: "Flame & Salt",
-    tags: ["Texture", "Colour Graded"],
-    thumb: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=75",
-    year: "2023",
-  },
-  {
-    id: "zafran-house",
-    category: "fb",
-    categoryLabel: "F&B",
-    title: "Zafran House",
-    tags: ["Identity", "Motion"],
-    thumb: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900&q=75",
-    year: "2023",
-  },
+/* ─────────────────────────────────────────────────────────────
+   Premium Cinematic Carousel
+   ─────────────────────────────────────────────────────────── */
+const SLIDES = [
+  { id: "01", title: "Lee Heritage",      cat: "Hospitality",    type: "vimeo",   src: "1183128960" },
+  { id: "02", title: "Heaven View Villa", cat: "Hospitality",    type: "vimeo",   src: "1183128507" },
+  { id: "03", title: "Drone Master",      cat: "Cinematography", type: "youtube", src: "go1COYbNIdI" },
 ];
 
-type Filter = "all" | "real-estate" | "fb";
+function CarouselSlides() {
+  const [active, setActive] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStart = useRef<number | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const total = SLIDES.length;
 
-const FILTERS: { id: Filter; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "real-estate", label: "Real Estate" },
-  { id: "fb", label: "Restaurants & F&B" },
-];
+  // Autoplay
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActive((prev) => (prev + 1) % total);
+    }, 5000);
+  };
 
-export default function WorkPage() {
-  const [active, setActive] = useState<Filter>("all");
+  useEffect(() => {
+    startTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
 
-  const filtered =
-    active === "all"
-      ? ALL_PROJECTS
-      : ALL_PROJECTS.filter((p) => p.category === active);
+  const goTo = (i: number) => {
+    setActive(i);
+    startTimer();
+  };
+  const prev = () => goTo((active - 1 + total) % total);
+  const next = () => goTo((active + 1) % total);
+
+  // Drag / Swipe
+  const handlePointerDown = (e: React.PointerEvent) => {
+    dragStart.current = e.clientX;
+    setIsDragging(false);
+  };
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (dragStart.current !== null && Math.abs(e.clientX - dragStart.current) > 8) {
+      setIsDragging(true);
+    }
+  };
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (dragStart.current !== null) {
+      const delta = e.clientX - dragStart.current;
+      if (Math.abs(delta) > 50) { delta < 0 ? next() : prev(); }
+    }
+    dragStart.current = null;
+    setTimeout(() => setIsDragging(false), 50);
+  };
+
+  const getState = (i: number) => {
+    if (i === active) return "center";
+    if (i === (active - 1 + total) % total) return "left";
+    if (i === (active + 1) % total) return "right";
+    return "hidden";
+  };
 
   return (
-    <div className="pt-32 pb-24 md:pb-36">
-      <div className="container">
-        {/* Header */}
-        <div className="mb-16">
-          <p className="label mb-5">Selected Work</p>
-          <h1
-            className="text-[#EDEDED] font-black mb-6"
-            style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
-          >
-            Our portfolio.
-          </h1>
-          <p className="text-[#666] font-light" style={{ maxWidth: "40ch", lineHeight: 1.75 }}>
-            From high-altitude drone shots to macro food cinematics — we move between worlds with precision.
-          </p>
-        </div>
+    <div
+      className="relative select-none"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
+      {/* Outer clipping wrapper — allows peeking on edges */}
+      <div className="overflow-hidden" style={{ borderRadius: "20px" }}>
+        {/* Track: wider than container, centered slide is 76% of track */}
+        <div className="relative w-full" style={{ aspectRatio: "16 / 7.4" }}>
+          {SLIDES.map((slide, i) => {
+            const state = getState(i);
+            const isCenter = state === "center";
+            const isLeft = state === "left";
+            const isRight = state === "right";
+            const isHidden = state === "hidden";
 
-        {/* Filters */}
-        <div
-          className="flex items-center gap-0 mb-16 overflow-x-auto pb-2"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-        >
-          {FILTERS.map((f) => (
-            <button
-              key={f.id}
-              onClick={() => setActive(f.id)}
-              className="shrink-0 mr-8 pb-3 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 relative"
-              style={{ color: active === f.id ? "#EDEDED" : "#666" }}
-            >
-              {f.label}
-              {active === f.id && (
-                <motion.div
-                  layoutId="filter-bar"
-                  className="absolute bottom-0 left-0 right-0 h-px bg-[#B11226]"
-                  transition={{ type: "spring", stiffness: 400, damping: 35 }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
+            // Center=0%, Left=-74%, Right=+74%
+            const tx = isCenter ? 0 : isLeft ? -74 : isRight ? 74 : (i < active ? -150 : 150);
+            const scale = isCenter ? 1 : 0.88;
+            const opacity = isCenter ? 1 : isHidden ? 0 : 0.55;
 
-        {/* Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14"
-        >
-          {filtered.map((project, i) => (
-            <motion.div
-              key={project.id}
-              layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-            >
-              <Link href={`/work/${project.id}`} className="group block">
-                {/* Thumb */}
+            return (
+              <div
+                key={slide.id}
+                className="absolute top-[5%] h-[90%] transition-all duration-700"
+                style={{
+                  width: "76%",
+                  left: "12%",
+                  transform: `translateX(${tx}%) scale(${scale})`,
+                  transformOrigin: isCenter ? "center" : isLeft ? "right center" : "left center",
+                  opacity,
+                  zIndex: isCenter ? 10 : 2,
+                  transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+                  cursor: isCenter ? "grab" : "pointer",
+                  pointerEvents: isHidden ? "none" : "auto",
+                }}
+                onClick={() => { if (!isDragging && !isCenter) goTo(i); }}
+              >
                 <div
-                  className="overflow-hidden mb-4 bg-[#111]"
-                  style={{ aspectRatio: "4/3" }}
+                  className="w-full h-full rounded-[20px] overflow-hidden bg-black relative group/card"
+                  style={{ boxShadow: isCenter ? "0 20px 60px rgba(0,0,0,0.22)" : "none" }}
                 >
-                  <img
-                    src={project.thumb}
-                    alt={project.title}
-                    width={900}
-                    height={675}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover:scale-105"
-                    style={{ aspectRatio: "4/3" }}
-                  />
+                  {/* Video */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    {slide.type === "vimeo" ? (
+                      <iframe
+                        src={`https://player.vimeo.com/video/${slide.src}?background=1&autoplay=${isCenter ? 1 : 0}&loop=1&byline=0&title=0&muted=1`}
+                        className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen"
+                        loading="lazy"
+                        title={slide.title}
+                      />
+                    ) : (
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${slide.src}?autoplay=${isCenter ? 1 : 0}&mute=1&loop=1&playlist=${slide.src}&controls=0&showinfo=0&modestbranding=1`}
+                        className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen"
+                        loading="lazy"
+                        title={slide.title}
+                      />
+                    )}
+                  </div>
+
+                  {/* Meta Overlay */}
+                  <div
+                    className={`absolute inset-0 flex flex-col justify-end p-8 transition-opacity duration-500 ${isCenter ? "opacity-0 group-hover/card:opacity-100" : "opacity-100"}`}
+                    style={{ background: "rgba(0,0,0,0.45)" }}
+                  >
+                    <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase mb-2">{slide.cat}</p>
+                    <h4 className="text-white font-black text-xl md:text-2xl tracking-tight leading-tight">{slide.title}</h4>
+                  </div>
+
+                  {/* Slide counter */}
+                  <div className="absolute top-6 left-6">
+                    <span className="text-white/30 font-mono text-[10px] tracking-[0.2em]">{slide.id}</span>
+                  </div>
                 </div>
-                {/* Meta */}
-                <p className="label mb-1.5">{project.categoryLabel} · {project.year}</p>
-                <p className="text-sm font-medium text-[#EDEDED] group-hover:text-white transition-colors">
-                  {project.title}
-                </p>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Arrow Controls — outside the overflow clip */}
+      <button
+        onClick={prev}
+        aria-label="Previous"
+        className="absolute left-[8%] top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white border border-black/10 text-black hover:bg-black hover:text-white transition-all duration-300 text-sm opacity-0 hover:opacity-100 focus:opacity-100"
+        style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.12)" }}
+      >
+        ←
+      </button>
+      <button
+        onClick={next}
+        aria-label="Next"
+        className="absolute right-[8%] top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white border border-black/10 text-black hover:bg-black hover:text-white transition-all duration-300 text-sm opacity-0 hover:opacity-100 focus:opacity-100"
+        style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.12)" }}
+      >
+        →
+      </button>
+
+      {/* Pagination Dots */}
+      <div className="flex items-center justify-center gap-3 mt-8">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            className="transition-all duration-500"
+            style={{
+              width: i === active ? "28px" : "8px",
+              height: "8px",
+              borderRadius: "999px",
+              background: i === active ? "#0A0A0A" : "rgba(0,0,0,0.2)",
+            }}
+          />
+        ))}
       </div>
     </div>
+  );
+}
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Portfolio Page
+   ─────────────────────────────────────────────────────────── */
+export default function WorkPage() {
+  return (
+    <section 
+      data-theme="light" 
+      className="min-h-screen pt-[120px] pb-24" 
+      style={{ background: "#FAFAFA" }}
+    >
+      <div className="container">
+        
+        {/* Header */}
+        <Reveal className="mb-20">
+          <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-6">
+            Archive
+          </p>
+          <h1
+            className="text-black font-black leading-[0.95]"
+            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", letterSpacing: "-0.04em" }}
+          >
+            OUR<br />PORTFOLIO.
+          </h1>
+          <p className="mt-8 text-black/60 max-w-md font-light leading-relaxed">
+            A curated selection of cinematic assets, from high-end hospitality films to luxury real estate visuals.
+          </p>
+        </Reveal>
+
+        {/* SECTION 1: CINEMATIC CAROUSEL (16:9) */}
+        <div className="mb-24 px-4 sm:px-0 overflow-hidden">
+          <Reveal className="mb-10">
+            <h2 className="text-black font-black text-sm tracking-[0.1em] uppercase border-b border-black/10 pb-4">
+              Cinematic Films
+            </h2>
+          </Reveal>
+
+          <div className="relative">
+            <CarouselSlides />
+          </div>
+        </div>
+
+        {/* SECTION 2: VERTICAL REELS (9:16) */}
+        <div className="py-[120px]" style={{ background: "#FFFFFF", marginLeft: "-50vw", marginRight: "-50vw", paddingLeft: "50vw", paddingRight: "50vw" }}>
+          <div className="container px-4 sm:px-0">
+            <Reveal className="mb-10">
+              <h2 className="text-black font-black text-sm tracking-[0.1em] uppercase border-b border-black/10 pb-4">
+                Vertical Reels
+              </h2>
+            </Reveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {[1, 2, 3, 4].map((i) => (
+                <Reveal key={i} delay={i * 0.1}>
+                  <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">
+                    {/* Placeholder for future video element */}
+                    <div className="absolute inset-0 flex items-center justify-center text-black/10 font-mono text-[10px] tracking-widest uppercase">
+                      Reel {i}
+                    </div>
+                    {/* 
+                    <video 
+                      autoplay 
+                      muted 
+                      loop 
+                      playsinline 
+                      className="absolute inset-0 w-full h-full object-cover"
+                    >
+                      <source src="URL_HERE" type="video/mp4" />
+                    </video> 
+                    */}
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                      <p className="text-white/60 font-mono text-[9px] tracking-[0.4em] uppercase">Cinematic</p>
+                      <h4 className="text-white font-bold text-lg tracking-tight">Project {i}</h4>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* SECTION 3: IMAGE SHOWCASE (SQUARE) */}
+        <div className="mt-24 px-4 sm:px-0">
+          <Reveal className="mb-10">
+            <h2 className="text-black font-black text-sm tracking-[0.1em] uppercase border-b border-black/10 pb-4">
+              Visual Narrative
+            </h2>
+          </Reveal>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { label: "03", title: "Harbour Row Dining",    cat: "Hospitality",   driveId: "1LGbCekMBgMNNIyabVbFiTkVO6-brJgAe", bg: "bg-neutral-200" },
+              { label: "04", title: "Ebrahim Corp Identity", cat: "Brand Film",    driveId: "1TZB5T-PnWl2-cePCrcC4tdsJAz2PSI3w", bg: "bg-neutral-300" },
+              { label: "05", title: "Corporate Assets",      cat: "Hospitality",   driveId: "1-b48lZJ5UFnpe6QG639kJAiB0O6yqGBI", bg: "bg-neutral-200" },
+              { label: "06", title: "Brand Vision",          cat: "Hospitality",   driveId: "1Ex9QPsfx6VsIX8GhiDqmSNStOrg76OHp", bg: "bg-neutral-300" },
+            ].map((project) => (
+              <Reveal key={project.label} delay={0.1}>
+                <motion.div
+                  className={`group relative aspect-square overflow-hidden ${project.bg} cursor-pointer`}
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <img
+                    src={`https://drive.google.com/thumbnail?sz=w1000&id=${project.driveId}`}
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                    <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase mb-1">{project.cat}</p>
+                    <h4 className="text-white font-black text-sm md:text-lg tracking-tight leading-tight">{project.title}</h4>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="text-white/30 font-mono text-[9px] tracking-[0.2em]">{project.label}</span>
+                  </div>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* Additional Tier for legacy projects if needed */}
+        <div className="mt-24 border-t border-black/5 pt-16">
+          <Reveal>
+            <p className="text-black/40 text-[10px] font-mono tracking-[0.2em] uppercase">
+              More Work Coming Soon
+            </p>
+          </Reveal>
+        </div>
+
+      </div>
+    </section>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -29,6 +30,140 @@ function Reveal({
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Services Table Component (Interactive Accordion)
+   ─────────────────────────────────────────────────────────── */
+const SERVICES_DATA = [
+  {
+    num: "01",
+    title: "Real Estate Films",
+    desc: "Cinematic property visuals that sell the lifestyle, not just the space.",
+    sub: ["Interior Shoots", "Exterior Cinematics", "Drone Coverage"],
+  },
+  {
+    num: "02",
+    title: "Brand Commercials",
+    desc: "High-end brand stories that make your audience feel — not just watch.",
+    sub: ["Creative Direction", "Storyboarding", "Production"],
+  },
+  {
+    num: "03",
+    title: "Social Media Ads",
+    desc: "Scroll-stopping vertical content engineered for maximum retention.",
+    sub: ["Short-form Content", "Reels / TikTok Ads", "Campaign Content"],
+  },
+  {
+    num: "04",
+    title: "Video Editing",
+    desc: "Precision post-production — colour, sound, and cut to a premium standard.",
+    sub: ["Color Grading", "Sound Design", "Motion Graphics"],
+  },
+];
+
+function ServicesTable() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <div className="flex flex-col border-t border-black/10">
+      {SERVICES_DATA.map((svc, i) => {
+        const isOpen = openIndex === i;
+        return (
+          <Reveal key={svc.num} delay={i * 0.05}>
+            <div className="border-b border-black/10">
+              <button
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+                className="w-full text-left group flex flex-col md:flex-row md:items-center py-6 md:py-8 gap-3 md:gap-0 hover:bg-black/[0.02] transition-colors duration-300 px-4 md:px-0"
+              >
+                {/* Number */}
+                <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.3em] uppercase shrink-0 md:w-20 hidden md:block">
+                  {svc.num}
+                </span>
+
+                {/* Mobile Number + Title row */}
+                <div className="flex items-center gap-4 md:hidden w-full">
+                  <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.2em] uppercase shrink-0">
+                    {svc.num}
+                  </span>
+                  <h3
+                    className="text-black font-black flex-1 group-hover:text-black/60 transition-colors duration-300"
+                    style={{ fontSize: "1.2rem", letterSpacing: "-0.03em" }}
+                  >
+                    {svc.title}
+                  </h3>
+                   <div className="w-6 h-6 flex items-center justify-center rounded-full border border-black/10 transition-colors group-hover:bg-[#8B0016] group-hover:border-[#8B0016]">
+                     <motion.span
+                       animate={{ rotate: isOpen ? 135 : 0 }}
+                       transition={{ duration: 0.3 }}
+                       className="text-black/40 group-hover:text-white text-sm"
+                     >
+                       +
+                     </motion.span>
+                   </div>
+                </div>
+                
+                {/* Desktop Title */}
+                <h3
+                  className="hidden md:block text-black font-black md:w-72 shrink-0 group-hover:text-black/60 transition-colors duration-300"
+                  style={{ fontSize: "1.6rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+                >
+                  {svc.title}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-black/40 text-sm leading-relaxed md:flex-1 md:pr-12 md:pl-0">
+                  {svc.desc}
+                </p>
+                
+                {/* Desktop Interaction */}
+                <div className="shrink-0 hidden md:flex items-center justify-center w-8 h-8 rounded-full border border-black/10 group-hover:bg-[#8B0016] group-hover:border-[#8B0016] transition-all duration-300">
+                   <motion.div
+                     initial={false}
+                     animate={{ rotate: isOpen ? 135 : 0 }}
+                     transition={{ duration: 0.3 }}
+                     className="text-black/40 group-hover:text-white pb-0.5 text-lg flex items-center justify-center"
+                   >
+                     +
+                   </motion.div>
+                </div>
+              </button>
+
+              {/* Sub-services Accordion */}
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-8 pt-2 flex flex-col gap-3 pl-4 md:pl-20">
+                      {svc.sub.map((subItem, idx) => (
+                        <motion.div 
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -10 }}
+                          transition={{ delay: idx * 0.05 }}
+                          className="flex items-center gap-4 text-black/60 text-sm tracking-wide"
+                        >
+                          <div className="w-4 h-px bg-black/15 hidden md:block" />
+                          <span className="text-[#8B0016]/50 text-xs md:hidden">└</span>
+                          {subItem}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </Reveal>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
    Home Page
    ─────────────────────────────────────────────────────────── */
 export default function Home() {
@@ -39,7 +174,7 @@ export default function Home() {
       ══════════════════════════════════════════════════════ */}
       <section
         data-theme="red"
-        className="relative h-[100svh] flex flex-col justify-center overflow-hidden"
+        className="relative h-[100svh] flex flex-col justify-start overflow-hidden"
       >
         {/* Background Video */}
         <video
@@ -65,19 +200,27 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
 
-        {/* Content */}
-        <div className="container relative z-10 pt-[18svh] pb-32">
+        {/* Content — pt accounts for fixed 64px navbar + responsive breathing room */}
+        <div
+          className="container relative z-10 pb-32 flex flex-col justify-center"
+          style={{
+            paddingTop: "calc(64px + clamp(3rem, 8svh, 6rem))",
+            minHeight: "100svh",
+          }}
+        >
           <div className="flex flex-col items-start gap-6">
-            <p className="text-white font-mono tracking-[0.3em] uppercase text-[9px] mb-0.5 anim-fade-up">
-              [ Cinmach Productions · Manama ]
-            </p>
+            <div className="flex flex-col gap-[8px] mb-4">
+              <p className="text-white font-mono tracking-[0.15em] uppercase text-[9px] anim-fade-up -ml-[4px]">
+                [ Cinmach Productions · Manama ]
+              </p>
 
-            <h1
-              className="text-white font-black leading-[0.85] mb-4 anim-fade-up anim-delay-1"
-              style={{ fontSize: "clamp(3.5rem, 11vw, 9.5rem)", letterSpacing: "-0.05em" }}
-            >
-              MOVE<br />THE<br />WORLD.
-            </h1>
+              <h1
+                className="text-white font-black leading-[0.85] anim-fade-up anim-delay-1"
+                style={{ fontSize: "clamp(3.5rem, 11vw, 9.5rem)", letterSpacing: "-0.05em" }}
+              >
+                MOVE<br />THE<br />WORLD.
+              </h1>
+            </div>
 
             <p
               className="text-white/80 max-w-[500px] mb-4 anim-fade-up anim-delay-2"
@@ -105,17 +248,21 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          §2  PHILOSOPHY — WHITE
+          §2+3  ABOUT + SERVICES — WHITE (unified)
       ══════════════════════════════════════════════════════ */}
       <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
         <div className="container">
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-16 lg:gap-24">
+
+          {/* ── About Intro ── */}
+          <Reveal className="mb-8">
+            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px]">
+              The Collective
+            </p>
+          </Reveal>
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-16 lg:gap-24 mb-20 md:mb-28">
 
             {/* Left — Headline */}
             <Reveal className="lg:w-1/2 shrink-0">
-              <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-6">
-                The Collective
-              </p>
               <h2
                 className="font-black text-black"
                 style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
@@ -133,7 +280,7 @@ export default function Home() {
                 Cinmach Productions is a specialized visual powerhouse based in Bahrain. We build cinematic assets that become the heartbeat of your brand strategy.
               </p>
               <p
-                className="text-black/50 mb-12"
+                className="text-black/50 mb-10"
                 style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)", lineHeight: 1.7 }}
               >
                 No fluff. No filler. Just pure, intentional impact — crafted frame by frame.
@@ -146,61 +293,100 @@ export default function Home() {
               </Link>
             </Reveal>
           </div>
+
+          {/* ── Divider + Services Label ── */}
+          <Reveal>
+            <div className="flex items-center gap-6 mb-10">
+              <div className="h-px flex-1 bg-black/10" />
+              <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] shrink-0">Services</p>
+            </div>
+          </Reveal>
+
+          {/* ── Interactive Service Table ── */}
+          <ServicesTable />
+
+          {/* CTA */}
+          <Reveal className="mt-10 flex justify-end">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-3 text-black/40 font-mono text-[10px] tracking-[0.3em] uppercase border-b border-black/20 pb-1 hover:text-[#8B0016] hover:border-[#8B0016] transition-all duration-300"
+            >
+              View All Services →
+            </Link>
+          </Reveal>
+
         </div>
       </section>
 
+
       {/* ══════════════════════════════════════════════════════
-          §3  WHAT WE DO — BLACK
+          §4  PROCESS — BLACK
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="dark" className="py-24 md:py-32" style={{ background: "#000" }}>
+      <section data-theme="dark" className="py-32 md:py-48" style={{ background: "#050505" }}>
         <div className="container">
 
-          <Reveal className="mb-20">
-            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-4">Services</p>
+          <Reveal className="mb-24">
+            <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-6">
+              How We Work
+            </p>
             <h2
               className="text-white font-black"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+              style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
             >
-              WHAT WE DO.
+              THE PROCESS.
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:divide-x md:divide-white/10">
+          {/* Master Guide Line Container */}
+          <div className="relative border-l border-white/10 ml-4 md:ml-12 flex flex-col pt-4 pb-12">
             {[
-              {
-                num: "01",
-                title: "Real Estate\nMedia",
-                desc: "Cinematic property visuals that sell the lifestyle, not just the space. Aerial, interior, and lifestyle storytelling.",
-              },
-              {
-                num: "02",
-                title: "Restaurant\nCinematography",
-                desc: "Immersive food and ambiance films that turn menus into must-go experiences.",
-              },
-              {
-                num: "03",
-                title: "Brand\nFilms",
-                desc: "High-end brand stories that make your audience feel — not just watch.",
-              },
-            ].map((svc, i) => (
-              <Reveal key={svc.num} delay={i * 0.1} className="group px-0 md:px-12 first:pl-0 last:pr-0 py-12 md:py-0 border-t border-white/10 md:border-t-0 first:border-t-0">
-                <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.3em] uppercase block mb-8">{svc.num}</span>
-                <h3
-                  className="text-white font-black mb-6 whitespace-pre-line group-hover:text-white/80 transition-colors duration-300"
-                  style={{ fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
-                >
-                  {svc.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-8">{svc.desc}</p>
-                <div className="w-8 h-px bg-[#8B0016] group-hover:w-16 transition-all duration-500" />
+              { num: "01", title: "Strategy",       desc: "Deep-dive into your brand, audience, and goals. We define what the film needs to say before a single frame is shot." },
+              { num: "02", title: "Production",      desc: "On-location cinematic shooting with our crew. Precision lighting, composition, and movement — nothing is left to chance." },
+              { num: "03", title: "Post-Production", desc: "Color grading, sound design, and cut — all refined to match a premium visual signature unique to your brand." },
+              { num: "04", title: "Delivery",        desc: "Ready-to-publish assets across every format and platform. From social reels to full broadcast spots." },
+            ].map((step, i) => (
+              <Reveal key={step.num} delay={i * 0.1}>
+                {/* Row Wrapper */}
+                <div className="group relative pl-8 md:pl-20 py-12 md:py-16 -ml-[1px] hover:bg-white/[0.02] transition-colors duration-500 cursor-default border-b border-white/[0.03] last:border-0 rounded-r-3xl">
+                  
+                  {/* Hover Indicator Line (Replacing the basic border left) */}
+                  <div className="absolute top-0 bottom-0 left-0 w-[2px] bg-[#C50022] scale-y-0 group-hover:scale-y-100 group-hover:shadow-[0_0_20px_#C50022] origin-top transition-all duration-500 ease-out z-10" />
+                  
+                  {/* Small Notch */}
+                  <div className="absolute top-[4.5rem] md:top-[5.5rem] left-0 w-4 h-[1px] bg-white/20 group-hover:w-8 group-hover:bg-[#C50022] transition-all duration-500" />
+                  
+                  <div className="flex flex-col md:flex-row gap-6 md:gap-24 items-start">
+                    {/* Number */}
+                    <div className="shrink-0 w-16">
+                      <span className="text-[#8B0016] font-mono font-bold text-2xl md:text-3xl tracking-widest group-hover:text-[#FA002A] transition-colors duration-500">
+                        {step.num}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex flex-col gap-4 md:gap-6">
+                      <h3
+                        className="text-white/80 font-black tracking-tight group-hover:text-white transition-colors duration-500"
+                        style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", lineHeight: 1 }}
+                      >
+                        {step.title}
+                      </h3>
+                      <p className="text-white/30 text-base md:text-lg leading-relaxed max-w-xl group-hover:text-white/70 transition-colors duration-500">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
+
       {/* ══════════════════════════════════════════════════════
-          §4  FEATURED WORK — WHITE
+          §5  FEATURED WORK — WHITE
       ══════════════════════════════════════════════════════ */}
       <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
         <div className="container">
@@ -322,56 +508,18 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          §5  PROCESS — BLACK
-      ══════════════════════════════════════════════════════ */}
-      <section data-theme="dark" className="py-24 md:py-32" style={{ background: "#000" }}>
-        <div className="container">
-
-          <Reveal className="mb-20">
-            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-4">How We Work</p>
-            <h2
-              className="text-white font-black"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
-            >
-              THE PROCESS.
-            </h2>
-          </Reveal>
-
-          <div className="flex flex-col">
-            {[
-              { num: "01", title: "Strategy",       desc: "Deep-dive into your brand, audience, and goals. We define what the film needs to say before a single frame is shot." },
-              { num: "02", title: "Production",      desc: "On-location cinematic shooting with our crew. Precision lighting, composition, and movement — nothing is left to chance." },
-              { num: "03", title: "Post-Production", desc: "Color grading, sound design, and cut — all refined to match a premium visual signature unique to your brand." },
-              { num: "04", title: "Delivery",        desc: "Ready-to-publish assets across every format and platform. From social reels to full broadcast spots." },
-            ].map((step, i) => (
-              <Reveal key={step.num} delay={i * 0.08}>
-                <div className="border-t border-white/10 py-10 md:py-12 grid grid-cols-[64px_1fr] md:grid-cols-[96px_1fr_1fr] items-start gap-6 md:gap-16 group cursor-default">
-                  <span
-                    className="text-[#8B0016] font-black font-mono"
-                    style={{ fontSize: "clamp(1.2rem, 2vw, 1.6rem)" }}
-                  >{step.num}</span>
-                  <h3
-                    className="text-white font-black group-hover:text-white/80 transition-colors duration-300"
-                    style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)", letterSpacing: "-0.03em", lineHeight: 1 }}
-                  >{step.title}</h3>
-                  <p className="text-white/40 text-sm leading-relaxed hidden md:block">{step.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-            <div className="border-t border-white/10" />
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
           §6  ABOUT / POSITIONING — WHITE
       ══════════════════════════════════════════════════════ */}
       <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
         <div className="container">
+          <Reveal className="mb-8">
+            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px]">
+              About Us
+            </p>
+          </Reveal>
           <div className="flex flex-col lg:flex-row items-start justify-between gap-16 lg:gap-24">
 
             <Reveal className="lg:w-1/2 shrink-0">
-              <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-6">About Us</p>
               <h2
                 className="font-black text-black mb-8"
                 style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 1 }}
@@ -410,11 +558,13 @@ export default function Home() {
       ══════════════════════════════════════════════════════ */}
       <section data-theme="dark" className="py-32 md:py-48" style={{ background: "#000" }}>
         <div className="container">
+          <Reveal className="mb-12">
+            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px]">
+              Next Step
+            </p>
+          </Reveal>
           <Reveal>
             <div className="max-w-3xl">
-              <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-8">
-                Next Step
-              </p>
               <h2
                 className="text-white font-black mb-8"
                 style={{ fontSize: "clamp(3rem, 9vw, 7.5rem)", letterSpacing: "-0.05em", lineHeight: 0.88 }}

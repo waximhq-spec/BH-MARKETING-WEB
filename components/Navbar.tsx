@@ -14,7 +14,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light" | "red">("red");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,7 +32,6 @@ export default function Navbar() {
 
     const observerOptions = {
       root: null,
-      // Intersection happens as soon as the section touches the top 80px (navbar height-ish)
       rootMargin: "-80px 0px -90% 0px",
       threshold: 0,
     };
@@ -40,7 +39,7 @@ export default function Navbar() {
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const sectionTheme = entry.target.getAttribute("data-theme") as "dark" | "light";
+          const sectionTheme = entry.target.getAttribute("data-theme") as "dark" | "light" | "red";
           if (sectionTheme) setTheme(sectionTheme);
         }
       });
@@ -66,39 +65,61 @@ export default function Navbar() {
 
   // Dynamic colors
   const isLight = theme === "light";
+  const isRed = theme === "red";
+  
   const textColor = isLight ? "#000000" : "#FAFAFA";
-  const mutedColor = isLight ? "#666666" : "rgba(250,250,250,0.6)";
-  const activeColor = isLight ? "#C50022" : "#C50022";
-  const bgColor = isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
-  const borderColor = isLight ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.1)";
+  const mutedColor = isLight ? "#666666" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
+  const activeColor = isRed ? "#FFFFFF" : "#C50022";
+  
+  // Logic for Red theme (Hero): 
+  // - Unscrolled: Transparent with a thin white line
+  // - Scrolled: Frosted glass (blur + slight bg)
+  const redBg = scrolled ? "rgba(0, 0, 0, 0.4)" : "transparent";
+  const redBlur = scrolled ? "blur(20px)" : "none";
+  const redBorder = scrolled ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.15)";
+
+  const bgColor = isRed ? redBg : isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
+  const backdropBlur = isRed ? redBlur : scrolled ? "blur(12px)" : "none";
+  const borderColor = isRed ? redBorder : isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.08)";
   const burgerColor = isLight ? "#000000" : "#FAFAFA";
+
+  const shadow = "none";
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ease-in-out"
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
         style={{
-          borderBottom: scrolled ? `1px solid ${borderColor}` : "1px solid transparent",
-          background: scrolled ? bgColor : "transparent",
+          borderBottom: isRed || scrolled ? `1px solid ${borderColor}` : "1px solid transparent",
+          background: isRed || scrolled ? bgColor : "transparent",
+          backdropFilter: backdropBlur,
+          WebkitBackdropFilter: backdropBlur,
+          boxShadow: shadow,
         }}
       >
         <div className="container h-16 flex items-center justify-between">
-          {/* Wordmark */}
+          {/* Wordmark Logo */}
           <Link
             href="/"
-            className="text-[11px] font-black tracking-[0.28em] uppercase transition-colors duration-500"
-            style={{ color: textColor }}
+            className="block transition-all duration-500 hover:opacity-70"
           >
-            Cinmach
+            <img 
+              src="/HERO-LOGO.svg" 
+              alt="Cinmach" 
+              className="h-5 md:h-6 w-auto transition-all duration-500"
+              style={{
+                filter: isLight ? "brightness(0)" : "brightness(0) invert(1)"
+              }}
+            />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-12">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[11px] tracking-[0.2em] uppercase transition-colors duration-500"
+                className="text-[11px] font-black tracking-[0.35em] uppercase transition-colors duration-500"
                 style={{
                   color: pathname === link.href ? activeColor : mutedColor,
                 }}

@@ -62,95 +62,132 @@ const SERVICES_DATA = [
 function ServicesTable() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  // Unified Grid to ensure exact column alignment for both headers and sub-services
+  const gridLayout = "grid-cols-1 md:grid-cols-[60px_1.5fr_2fr_40px] lg:grid-cols-[80px_1fr_2fr_40px]";
+
   return (
     <div className="flex flex-col border-t border-black/10">
       {SERVICES_DATA.map((svc, i) => {
         const isOpen = openIndex === i;
+        const isDimmed = openIndex !== null && !isOpen;
+
         return (
           <Reveal key={svc.num} delay={i * 0.05}>
-            <div className="border-b border-black/10">
+            <div 
+              className={`relative border-b border-black/10 transition-all duration-700 ease-[0.16,1,0.3,1] 
+                ${isDimmed ? "opacity-50 saturate-0" : "opacity-100"}`}
+            >
+              {/* Active Left Accent Line */}
+              <div 
+                className={`absolute top-0 bottom-0 left-0 w-[3px] bg-[#8B0016] transition-transform duration-500 ease-out origin-top z-10
+                  ${isOpen ? "scale-y-100 shadow-[2px_0_15px_rgba(139,0,22,0.2)]" : "scale-y-0"}`} 
+              />
+              
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
-                className="w-full text-left group flex flex-col md:flex-row md:items-center py-6 md:py-8 gap-3 md:gap-0 hover:bg-black/[0.02] transition-colors duration-300 px-4 md:px-0"
+                className={`w-full text-left group grid items-start md:items-center py-8 md:py-10 gap-5 md:gap-8 transition-colors duration-500 px-5 md:px-8 lg:px-10
+                  ${gridLayout} 
+                  ${isOpen ? "bg-black/[0.015]" : "hover:bg-black/[0.03]"}`}
               >
-                {/* Number */}
-                <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.3em] uppercase shrink-0 md:w-20 hidden md:block">
+                {/* Desktop Number */}
+                <span className={`font-mono text-[11px] tracking-[0.3em] uppercase hidden md:block transition-colors duration-300 ${isOpen ? "text-[#8B0016]" : "text-black/40 group-hover:text-[#8B0016]"}`}>
                   {svc.num}
                 </span>
 
-                {/* Mobile Number + Title row */}
-                <div className="flex items-center gap-4 md:hidden w-full">
-                  <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.2em] uppercase shrink-0">
-                    {svc.num}
-                  </span>
-                  <h3
-                    className="text-black font-black flex-1 group-hover:text-black/60 transition-colors duration-300"
-                    style={{ fontSize: "1.2rem", letterSpacing: "-0.03em" }}
-                  >
-                    {svc.title}
-                  </h3>
-                   <div className="w-6 h-6 flex items-center justify-center rounded-full border border-black/10 transition-colors group-hover:bg-[#8B0016] group-hover:border-[#8B0016]">
-                     <motion.span
-                       animate={{ rotate: isOpen ? 135 : 0 }}
-                       transition={{ duration: 0.3 }}
-                       className="text-black/40 group-hover:text-white text-sm"
-                     >
-                       +
-                     </motion.span>
-                   </div>
+                {/* Mobile Single Row (Hidden on Desktop) */}
+                <div className="flex items-center justify-between w-full md:hidden">
+                  <div className="flex items-center gap-5">
+                    <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.2em] uppercase shrink-0">
+                      {svc.num}
+                    </span>
+                    <h3
+                      className={`font-black flex-1 transition-all duration-300 ${isOpen ? "text-black" : "text-black/80 group-hover:text-black"}`}
+                      style={{ fontSize: "1.35rem", letterSpacing: "-0.03em" }}
+                    >
+                      {svc.title}
+                    </h3>
+                  </div>
+                  <div className={`w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-500 ${isOpen ? "bg-[#8B0016] border-[#8B0016] text-white" : "border-black/10 text-black/40 group-hover:bg-[#8B0016] group-hover:border-[#8B0016] group-hover:text-white"}`}>
+                    <motion.div animate={{ rotate: isOpen ? 135 : 0 }} transition={{ duration: 0.4 }}>+</motion.div>
+                  </div>
                 </div>
-                
+
                 {/* Desktop Title */}
                 <h3
-                  className="hidden md:block text-black font-black md:w-72 shrink-0 group-hover:text-black/60 transition-colors duration-300"
-                  style={{ fontSize: "1.6rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+                  className={`hidden md:block font-black transition-all duration-300 pr-4 lg:pr-8
+                    ${isOpen ? "text-black" : "text-black/90 group-hover:text-black"}`}
+                  style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.8rem)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
                 >
                   {svc.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-black/40 text-sm leading-relaxed md:flex-1 md:pr-12 md:pl-0">
+                <p 
+                  className={`text-sm md:text-base leading-relaxed transition-colors duration-500 
+                    ${isOpen ? "text-black/90" : "text-black/60 group-hover:text-black/80"}`}
+                >
                   {svc.desc}
                 </p>
                 
-                {/* Desktop Interaction */}
-                <div className="shrink-0 hidden md:flex items-center justify-center w-8 h-8 rounded-full border border-black/10 group-hover:bg-[#8B0016] group-hover:border-[#8B0016] transition-all duration-300">
-                   <motion.div
-                     initial={false}
-                     animate={{ rotate: isOpen ? 135 : 0 }}
-                     transition={{ duration: 0.3 }}
-                     className="text-black/40 group-hover:text-white pb-0.5 text-lg flex items-center justify-center"
-                   >
-                     +
-                   </motion.div>
+                {/* Desktop Action Icon */}
+                <div className="hidden md:flex justify-end relative">
+                  <div className={`w-10 h-10 flex items-center justify-center rounded-full border transition-all duration-500 
+                    ${isOpen ? "bg-[#8B0016] border-[#8B0016] text-white" : "border-black/10 text-black/30 group-hover:bg-[#8B0016] group-hover:border-[#8B0016] group-hover:text-white group-hover:translate-x-1"}`}
+                  >
+                     <motion.div
+                       initial={false}
+                       animate={{ rotate: isOpen ? 135 : 0 }}
+                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                       className="pb-0.5 text-xl font-light"
+                     >
+                       +
+                     </motion.div>
+                  </div>
                 </div>
               </button>
 
-              {/* Sub-services Accordion */}
+              {/* Sub-services Accordion Grid */}
               <AnimatePresence>
                 {isOpen && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="overflow-hidden"
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden bg-black/[0.015]"
                   >
-                    <div className="pb-8 pt-2 flex flex-col gap-3 pl-4 md:pl-20">
-                      {svc.sub.map((subItem, idx) => (
-                        <motion.div 
-                          key={idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -10 }}
-                          transition={{ delay: idx * 0.05 }}
-                          className="flex items-center gap-4 text-black/60 text-sm tracking-wide"
-                        >
-                          <div className="w-4 h-px bg-black/15 hidden md:block" />
-                          <span className="text-[#8B0016]/50 text-xs md:hidden">└</span>
-                          {subItem}
-                        </motion.div>
-                      ))}
+                    {/* Maps flawlessly to the same grid layout as the button above */}
+                    <div className={`grid items-start gap-4 md:gap-8 px-5 md:px-8 lg:px-10 pb-12 ${gridLayout}`}>
+                      
+                      {/* Empty Col 1 (Offset Number) */}
+                      <div className="hidden md:block" />
+
+                      {/* Col 2: Sub-services strictly indented under the Title */}
+                      <div className="flex flex-col gap-5 pt-6 md:border-t border-black/5 md:mt-[-1.5rem]">
+                        <p className="text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-[#8B0016] font-mono font-bold mb-1">
+                          Scope of Work
+                        </p>
+                        <div className="flex flex-col gap-3.5">
+                          {svc.sub.map((subItem, idx) => (
+                            <motion.div 
+                              key={idx}
+                              initial={{ opacity: 0, y: 15 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ delay: idx * 0.06 + 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                              className="flex items-center gap-4 text-black/80 text-[14px] md:text-[15px] tracking-wide font-medium"
+                            >
+                              <div className="w-6 h-[1px] bg-black/10" />
+                              {subItem}
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Invisible divs to fill remaining structural columns on desktop */}
+                      <div className="hidden md:block border-t border-black/5 mt-[-1.5rem]" /> 
+                      <div className="hidden md:block border-t border-black/5 mt-[-1.5rem]" />
+
                     </div>
                   </motion.div>
                 )}
@@ -162,6 +199,7 @@ function ServicesTable() {
     </div>
   );
 }
+
 
 /* ─────────────────────────────────────────────────────────────
    Home Page
@@ -347,36 +385,69 @@ export default function Home() {
             ].map((step, i) => (
               <Reveal key={step.num} delay={i * 0.1}>
                 {/* Row Wrapper */}
-                <div className="group relative pl-8 md:pl-20 py-12 md:py-16 -ml-[1px] hover:bg-white/[0.02] transition-colors duration-500 cursor-default border-b border-white/[0.03] last:border-0 rounded-r-3xl">
+                <motion.div 
+                  initial="initial"
+                  whileInView="active"
+                  viewport={{ once: false, amount: 0.5 }}
+                  className="group relative pl-8 md:pl-20 py-12 md:py-16 -ml-[1px] hover:bg-white/[0.02] transition-colors duration-500 cursor-default border-b border-white/[0.03] last:border-0 rounded-r-3xl"
+                >
                   
-                  {/* Hover Indicator Line (Replacing the basic border left) */}
-                  <div className="absolute top-0 bottom-0 left-0 w-[2px] bg-[#C50022] scale-y-0 group-hover:scale-y-100 group-hover:shadow-[0_0_20px_#C50022] origin-top transition-all duration-500 ease-out z-10" />
+                  {/* Hover/Scroll Indicator Line */}
+                  <motion.div 
+                    variants={{
+                      initial: { scaleY: 0 },
+                      active: { scaleY: 1, boxShadow: "0 0 20px #C50022" }
+                    }}
+                    className="absolute top-0 bottom-0 left-0 w-[2px] bg-[#C50022] group-hover:scale-y-100 group-hover:shadow-[0_0_20px_#C50022] origin-top transition-all duration-500 ease-out z-10" 
+                  />
                   
                   {/* Small Notch */}
-                  <div className="absolute top-[4.5rem] md:top-[5.5rem] left-0 w-4 h-[1px] bg-white/20 group-hover:w-8 group-hover:bg-[#C50022] transition-all duration-500" />
+                  <motion.div 
+                    variants={{
+                      initial: { width: "1rem", backgroundColor: "rgba(255,255,255,0.2)" },
+                      active: { width: "2rem", backgroundColor: "#C50022" }
+                    }}
+                    className="absolute top-[4.5rem] md:top-[5.5rem] left-0 h-[1px] group-hover:w-8 group-hover:bg-[#C50022] transition-all duration-500" 
+                  />
                   
                   <div className="flex flex-col md:flex-row gap-6 md:gap-24 items-start">
                     {/* Number */}
                     <div className="shrink-0 w-16">
-                      <span className="text-[#8B0016] font-mono font-bold text-2xl md:text-3xl tracking-widest group-hover:text-[#FA002A] transition-colors duration-500">
+                      <motion.span 
+                        variants={{
+                          initial: { color: "#8B0016" },
+                          active: { color: "#FA002A" }
+                        }}
+                        className="font-mono font-bold text-2xl md:text-3xl tracking-widest group-hover:text-[#FA002A] transition-colors duration-500 block"
+                      >
                         {step.num}
-                      </span>
+                      </motion.span>
                     </div>
 
                     {/* Content */}
                     <div className="flex flex-col gap-4 md:gap-6">
-                      <h3
-                        className="text-white/80 font-black tracking-tight group-hover:text-white transition-colors duration-500"
+                      <motion.h3
+                        variants={{
+                          initial: { color: "rgba(255,255,255,0.8)" },
+                          active: { color: "rgba(255,255,255,1)" }
+                        }}
+                        className="font-black tracking-tight group-hover:text-white transition-colors duration-500"
                         style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", lineHeight: 1 }}
                       >
                         {step.title}
-                      </h3>
-                      <p className="text-white/30 text-base md:text-lg leading-relaxed max-w-xl group-hover:text-white/70 transition-colors duration-500">
+                      </motion.h3>
+                      <motion.p 
+                        variants={{
+                          initial: { color: "rgba(255,255,255,0.3)" },
+                          active: { color: "rgba(255,255,255,0.7)" }
+                        }}
+                        className="text-base md:text-lg leading-relaxed max-w-xl group-hover:text-white/70 transition-colors duration-500"
+                      >
                         {step.desc}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </Reveal>
             ))}
           </div>

@@ -350,10 +350,10 @@ export default function WorkPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {[
-                { id: 1, title: "Modern Space", url: "https://www.pexels.com/download/video/31588827/" },
-                { id: 2, title: "Design Details", url: "https://www.pexels.com/download/video/35696639/" },
-                { id: 3, title: "Exterior Profile", url: "https://www.pexels.com/download/video/6466568/" },
-                { id: 4, title: "Lounge Area", url: "https://www.pexels.com/download/video/30225108/" },
+                { id: 1, title: "Modern Space", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
+                { id: 2, title: "Design Details", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
+                { id: 3, title: "Exterior Profile", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
+                { id: 4, title: "Lounge Area", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
               ].map((reel, i) => (
                 <Reveal key={reel.id} delay={i * 0.1}>
                   <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">

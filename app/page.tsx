@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────────
@@ -58,6 +58,40 @@ const SERVICES_DATA = [
     sub: ["Color Grading", "Sound Design", "Motion Graphics"],
   },
 ];
+
+
+/* ─────────────────────────────────────────────────────────────
+   Local Time Component
+   ─────────────────────────────────────────────────────────── */
+function LocalTime() {
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Kolkata', // Based on the screenshot's IST reference
+      };
+      setTime(new Intl.DateTimeFormat('en-US', options).format(now));
+    };
+
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex flex-col">
+      <p className="text-black font-black text-lg md:text-xl tracking-tight uppercase">
+        {time || "00:00:00 AM"} IST
+      </p>
+    </div>
+  );
+}
 
 function ServicesTable() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -224,7 +258,7 @@ export default function Home() {
           poster="https://images.pexels.com/photos/8396974/pexels-photo-8396974.jpeg"
         >
           <source src="https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" type="video/mp4" />
-          <source src="https://www.pexels.com/download/video/8396974/" type="video/mp4" />
+          <source src="/539dba8bb34d6bfb174d33520e3c6041_720w.mp4" type="video/mp4" />
         </video>
 
         {/* Overlays */}
@@ -485,8 +519,8 @@ export default function Home() {
           {/* Tier 1: Vertical Reels (9:16) */}
           <div className="grid grid-cols-2 gap-4 md:gap-8 mb-8">
             {[
-              { id: 1, title: "Automotive Showcase", url: "https://www.pexels.com/download/video/31588827/" },
-              { id: 2, title: "Speed & Motion", url: "https://www.pexels.com/download/video/35696639/" },
+              { id: 1, title: "Automotive Showcase", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
+              { id: 2, title: "Speed & Motion", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
             ].map((reel, i) => (
               <Reveal key={reel.id} delay={i * 0.1}>
                 <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">
@@ -584,12 +618,9 @@ export default function Home() {
       <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
         <div className="container">
           <Reveal className="mb-8">
-            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px]">
-              About Us
-            </p>
+            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px]">About Us</p>
           </Reveal>
           <div className="flex flex-col lg:flex-row items-start justify-between gap-16 lg:gap-24">
-
             <Reveal className="lg:w-1/2 shrink-0">
               <h2
                 className="font-black text-black mb-8"
@@ -601,7 +632,6 @@ export default function Home() {
                 We are a boutique cinematic production studio rooted in Bahrain, creating high-end visual content for forward-thinking brands across the Gulf and beyond.
               </p>
             </Reveal>
-
             <Reveal delay={0.2} className="lg:w-[400px] shrink-0 grid grid-cols-1 gap-12">
               {[
                 { stat: "5+",  label: "Years of craft",     desc: "Visual storytelling refined into a precise, repeatable signature system." },
@@ -609,10 +639,7 @@ export default function Home() {
                 { stat: "BH",  label: "Based in Bahrain",   desc: "Serving the GCC region and international brands with local precision." },
               ].map((item) => (
                 <div key={item.stat} className="flex items-start gap-8">
-                  <span
-                    className="text-black font-black shrink-0"
-                    style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", letterSpacing: "-0.04em", lineHeight: 1 }}
-                  >{item.stat}</span>
+                  <span className="text-black font-black shrink-0" style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", letterSpacing: "-0.04em", lineHeight: 1 }}>{item.stat}</span>
                   <div>
                     <p className="text-black font-black text-sm tracking-tight mb-1">{item.label}</p>
                     <p className="text-black/50 text-xs leading-relaxed">{item.desc}</p>
@@ -625,44 +652,200 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          §7  FINAL CTA — BLACK
+          §6b  TESTIMONIALS — PREMIUM CARD LAYOUT
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="dark" className="py-32 md:py-48" style={{ background: "#000" }}>
+      <section data-theme="light" className="py-24 md:py-36" style={{ background: "#F5F5F5" }}>
         <div className="container">
-          <Reveal className="mb-12">
-            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px]">
-              Next Step
+
+          {/* Section Header */}
+          <Reveal className="mb-14 md:mb-20 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+            <div>
+              <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-4">Client Feedback</p>
+              <h2
+                className="font-black text-black"
+                style={{ fontSize: "clamp(2.2rem, 5.5vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+              >
+                WHAT OUR<br />CLIENTS SAY.
+              </h2>
+            </div>
+            <p className="text-black/40 text-sm max-w-[280px] leading-relaxed">
+              Trusted by real estate developers, brands, and creative agencies across the region.
             </p>
           </Reveal>
-          <Reveal>
-            <div className="max-w-3xl">
-              <h2
-                className="text-white font-black mb-8"
-                style={{ fontSize: "clamp(3rem, 9vw, 7.5rem)", letterSpacing: "-0.05em", lineHeight: 0.88 }}
+
+          {/* Featured Hero Card */}
+          <Reveal className="mb-6">
+            <div
+              className="relative w-full overflow-hidden rounded-2xl p-10 md:p-16"
+              style={{ background: "linear-gradient(135deg, #0A0A0A 0%, #1a0006 100%)", boxShadow: "0 32px 80px rgba(0,0,0,0.18)" }}
+            >
+              <span
+                className="absolute top-6 right-10 font-black text-white/5 select-none pointer-events-none leading-none"
+                style={{ fontSize: "clamp(8rem, 22vw, 18rem)" }}
               >
-                READY TO<br />ELEVATE?
-              </h2>
-              <p className="text-white/40 mb-16 max-w-md" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)", lineHeight: 1.7 }}>
-                Tell us about your brand. Let&apos;s build something cinematic together.
+                &#8220;
+              </span>
+              <div className="flex gap-1 mb-8">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-4 h-4 text-[#8B0016]" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p
+                className="text-white font-medium leading-[1.4] mb-12 relative z-10 max-w-3xl"
+                style={{ fontSize: "clamp(1.3rem, 3vw, 2.2rem)", letterSpacing: "-0.02em" }}
+              >
+                &ldquo;Cinmach completely transformed how we present our properties. The visuals didn&apos;t just look good &mdash; they sold the <em>lifestyle</em>. Their eye for composition and storytelling is the finest we&apos;ve seen anywhere in the Gulf.&rdquo;
               </p>
-              <div className="flex flex-wrap gap-5">
-                <Link
-                  href="/contact"
-                  className="px-12 py-5 bg-white text-black text-[10px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500"
-                >
-                  [ Start a Project ]
-                </Link>
-                <Link
-                  href="/work"
-                  className="px-12 py-5 border border-white/20 text-white text-[10px] font-mono font-bold tracking-[0.3em] uppercase hover:border-white/60 transition-all duration-500"
-                >
-                  View Our Work
-                </Link>
+              <div className="flex items-center gap-5">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 font-black text-white text-base" style={{ background: "#8B0016" }}>F</div>
+                <div>
+                  <p className="text-white font-black text-base tracking-tight uppercase">Faisal Al-Dosari</p>
+                  <p className="text-white/40 font-mono text-[9px] tracking-[0.3em] uppercase mt-0.5">Property Developer · Manama, Bahrain</p>
+                </div>
               </div>
             </div>
           </Reveal>
+
+          {/* 3-Column Supporting Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              { quote: "Working with Cinmach was seamless from day one. They understood the spirit of Bahraini hospitality and translated it into visuals that resonated with guests from around the world.", name: "Noor Al-Mannai", role: "Marketing Director · Gulf Hotel Bahrain", project: "Brand Film", initial: "N" },
+              { quote: "Our social media engagement doubled within a week of going live. The reels they produced were crisp, high-energy, and exactly on-brand. Truly a premium studio.", name: "Yousef Al-Khalifa", role: "Founder · Talah Restaurant Group", project: "Social Media Ads", initial: "Y" },
+              { quote: "Every frame was deliberate. The aerial sequences over our Amwaj development generated more enquiries in three days than our previous six months of marketing combined.", name: "Mariam Al-Zayani", role: "Head of Sales · Ithmaar Development", project: "Real Estate Film", initial: "M" },
+            ].map((item, idx) => (
+              <Reveal key={idx} delay={idx * 0.12}>
+                <div
+                  className="group relative bg-white rounded-2xl p-8 flex flex-col justify-between h-full transition-all duration-500 hover:-translate-y-1"
+                  style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.06)", border: "1px solid rgba(0,0,0,0.06)" }}
+                >
+                  <div className="absolute top-0 left-8 right-8 h-[2px] rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100" style={{ background: "#8B0016" }} />
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-3 h-3 text-[#8B0016]" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-black/75 text-[15px] leading-relaxed mb-8 flex-1">
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-4 pt-6 border-t border-black/5">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 font-black text-white text-sm" style={{ background: "#0A0A0A" }}>{item.initial}</div>
+                    <div>
+                      <p className="text-black font-black text-sm tracking-tight">{item.name}</p>
+                      <p className="text-black/35 font-mono text-[8px] tracking-[0.25em] uppercase mt-0.5">{item.role}</p>
+                    </div>
+                    <span className="ml-auto font-mono text-[8px] tracking-[0.2em] uppercase px-2.5 py-1 rounded" style={{ background: "#F0F0F0", color: "#8B0016" }}>{item.project}</span>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Section CTA */}
+          <Reveal className="mt-16 md:mt-20">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-5 text-black font-black hover:text-[#8B0016] transition-colors"
+              style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.8rem)", letterSpacing: "-0.02em" }}
+            >
+              Let&apos;s create something impactful together{" "}
+              <span className="transition-transform duration-500 group-hover:translate-x-3">→</span>
+            </Link>
+          </Reveal>
+
         </div>
       </section>
+
+
+
+      {/* ══════════════════════════════════════════════════════
+          §7  FINAL CTA — VISION LAYOUT (WHITE)
+      ══════════════════════════════════════════════════════ */}
+      <section data-theme="light" className="py-24 md:py-40 bg-white border-t border-black/5">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-16 lg:gap-24 items-start">
+            
+            {/* Left: Heading & Buttons */}
+            <div>
+              <Reveal>
+                <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-8 font-bold">
+                  Next Phase
+                </p>
+                <h2
+                  className="text-black font-black mb-12"
+                  style={{ fontSize: "clamp(3.5rem, 9vw, 8.5rem)", letterSpacing: "-0.05em", lineHeight: 0.88 }}
+                >
+                  READY TO BUILD<br />YOUR VISION?
+                </h2>
+              </Reveal>
+
+              <Reveal delay={0.2}>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href="/contact"
+                    className="group flex items-center gap-4 px-10 py-5 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] transition-all duration-500"
+                  >
+                    Start a Project <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                  </Link>
+                  <Link
+                    href="https://wa.me/yournumber"
+                    className="px-10 py-5 border border-black/10 text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-black/40 transition-all duration-500"
+                  >
+                    Whatsapp
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Right: Personal/Agency Info Slots */}
+            <div className="flex flex-col gap-12 pt-4 lg:pt-24 border-t lg:border-t-0 border-black/10">
+              <Reveal delay={0.3}>
+                <div className="space-y-2">
+                  <p className="text-black/30 font-mono text-[9px] tracking-[0.3em] uppercase">Location</p>
+                  <p className="text-black font-black text-lg md:text-xl tracking-tight uppercase">Manama, Bahrain</p>
+                  <p className="text-black/40 text-[10px] uppercase font-bold tracking-widest">Available Worldwide</p>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.4}>
+                <div className="space-y-2">
+                  <p className="text-black/30 font-mono text-[9px] tracking-[0.3em] uppercase">Local Time</p>
+                  <LocalTime />
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.5}>
+                <div className="space-y-2">
+                  <p className="text-black/30 font-mono text-[9px] tracking-[0.3em] uppercase">Email</p>
+                  <a 
+                    href="mailto:INFO@CINMACH.COM" 
+                    className="text-black font-black text-lg md:text-xl tracking-tight uppercase border-b-2 border-transparent hover:border-[#8B0016] transition-all"
+                  >
+                    INFO@CINMACH.COM
+                  </a>
+                </div>
+              </Reveal>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Footer / Copyright Minimal */}
+      <footer className="py-12 bg-white border-t border-black/5">
+        <div className="container flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-black/30 font-mono text-[9px] tracking-[0.3em] uppercase">
+            © 2024 Cinmach Productions. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+            <Link href="#" className="text-black/30 hover:text-black font-mono text-[9px] tracking-[0.3em] uppercase transition-colors">Instagram</Link>
+            <Link href="#" className="text-black/30 hover:text-black font-mono text-[9px] tracking-[0.3em] uppercase transition-colors">Vimeo</Link>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }

@@ -257,8 +257,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover grayscale brightness-50"
           poster="https://images.pexels.com/photos/8396974/pexels-photo-8396974.jpeg"
         >
-          <source src="https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" type="video/mp4" />
-          <source src="/539dba8bb34d6bfb174d33520e3c6041_720w.mp4" type="video/mp4" />
+          <source src="https://www.pexels.com/download/video/8396974/" type="video/mp4" />
         </video>
 
         {/* Overlays */}

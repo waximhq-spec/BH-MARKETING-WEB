@@ -79,12 +79,12 @@ function CarouselSlides() {
     // ─── MOBILE: Full-width, edge-to-edge, no peek, no radius ───
     return (
       <div
-        className="relative select-none"
+        className="relative select-none w-screen left-1/2 -translate-x-1/2"
+        style={{ touchAction: "pan-y" }} 
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
-        style={{ margin: "0 -1rem" }} /* cancel container padding on mobile */
       >
         {/* Full-bleed track */}
         <div className="relative overflow-hidden w-full" style={{ aspectRatio: "16/9" }}>
@@ -94,11 +94,10 @@ function CarouselSlides() {
             return (
               <div
                 key={slide.id}
-                className="absolute inset-0 w-full h-full transition-transform duration-600"
+                className="absolute inset-0 w-full h-full"
                 style={{
                   transform: `translateX(${offset * 100}%)`,
-                  transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-                  transitionDuration: "600ms",
+                  transition: isDragging ? "none" : "transform 600ms cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
               >
                 <div className="w-full h-full bg-black relative overflow-hidden">

@@ -89,13 +89,13 @@ export default function Home() {
             <div className="flex flex-wrap gap-5 anim-fade-up anim-delay-3">
               <Link
                 href="/work"
-                className="px-12 py-5 bg-[#8B0016] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-2xl"
+                className="w-56 py-5 bg-[#8B0016] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-2xl text-center"
               >
                 View Work
               </Link>
               <Link
                 href="/contact"
-                className="px-12 py-5 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl"
+                className="w-56 py-5 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl text-center"
               >
                 [ Let&apos;s Talk ]
               </Link>

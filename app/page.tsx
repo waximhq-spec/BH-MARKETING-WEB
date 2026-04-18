@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────────
@@ -239,6 +239,28 @@ function ServicesTable() {
    Home Page
    ─────────────────────────────────────────────────────────── */
 export default function Home() {
+  const testimonialRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const container = testimonialRef.current;
+      if (container && window.innerWidth < 768) {
+        const { scrollLeft, scrollWidth, clientWidth } = container;
+        const maxScroll = scrollWidth - clientWidth;
+
+        if (scrollLeft >= maxScroll - 10) {
+          container.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          // Calculate next position by finding the width of the first child + gap
+          const cardWidth = container.firstElementChild?.clientWidth || clientWidth;
+          const gap = 20; // gap-5 is 20px
+          container.scrollTo({ left: scrollLeft + cardWidth + gap, behavior: "smooth" });
+        }
+      }
+    }, 4500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       {/* ══════════════════════════════════════════════════════
@@ -708,7 +730,10 @@ export default function Home() {
           </Reveal>
 
           {/* 3-Column Supporting Cards */}
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 no-scrollbar pb-8 md:grid md:grid-cols-3 md:overflow-visible md:snap-none md:pb-0">
+          <div 
+            ref={testimonialRef}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-5 no-scrollbar pb-8 md:grid md:grid-cols-3 md:overflow-visible md:snap-none md:pb-0"
+          >
             {[
               { quote: "Working with Cinmach was seamless from day one. They understood the spirit of Bahraini hospitality and translated it into visuals that resonated with guests from around the world.", name: "Noor Al-Mannai", role: "Marketing Director · Gulf Hotel Bahrain", project: "Brand Film", initial: "N" },
               { quote: "Our social media engagement doubled within a week of going live. The reels they produced were crisp, high-energy, and exactly on-brand. Truly a premium studio.", name: "Yousef Al-Khalifa", role: "Founder · Talah Restaurant Group", project: "Social Media Ads", initial: "Y" },

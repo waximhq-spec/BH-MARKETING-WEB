@@ -708,7 +708,7 @@ export default function Home() {
           </Reveal>
 
           {/* 3-Column Supporting Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 no-scrollbar pb-8 md:grid md:grid-cols-3 md:overflow-visible md:snap-none md:pb-0">
             {[
               { quote: "Working with Cinmach was seamless from day one. They understood the spirit of Bahraini hospitality and translated it into visuals that resonated with guests from around the world.", name: "Noor Al-Mannai", role: "Marketing Director · Gulf Hotel Bahrain", project: "Brand Film", initial: "N" },
               { quote: "Our social media engagement doubled within a week of going live. The reels they produced were crisp, high-energy, and exactly on-brand. Truly a premium studio.", name: "Yousef Al-Khalifa", role: "Founder · Talah Restaurant Group", project: "Social Media Ads", initial: "Y" },
@@ -716,7 +716,7 @@ export default function Home() {
             ].map((item, idx) => (
               <Reveal key={idx} delay={idx * 0.12}>
                 <div
-                  className="group relative bg-white rounded-2xl p-8 flex flex-col justify-between h-full transition-all duration-500 hover:-translate-y-1"
+                  className="group relative bg-white rounded-2xl p-8 flex flex-col justify-between h-full transition-all duration-500 hover:-translate-y-1 min-w-[85vw] snap-center shrink-0 md:min-w-0 md:shrink"
                   style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.06)", border: "1px solid rgba(0,0,0,0.06)" }}
                 >
                   <div className="absolute top-0 left-8 right-8 h-[2px] rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100" style={{ background: "#8B0016" }} />

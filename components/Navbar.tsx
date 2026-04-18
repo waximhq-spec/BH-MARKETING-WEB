@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
-  { label: "Work", href: "/work" },
+  { label: "Services", href: "/services" },
+  { label: "Our Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/estimate" },
 ];
@@ -114,7 +115,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[11px] font-black tracking-[0.35em] uppercase transition-colors duration-500"
+                className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase transition-colors duration-500"
                 style={{
                   color: pathname === link.href ? activeColor : mutedColor,
                 }}

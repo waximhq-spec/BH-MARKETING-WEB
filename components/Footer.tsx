@@ -16,14 +16,15 @@ export default function Footer() {
 
         <nav className="flex flex-wrap gap-8">
           {[
-            { label: "Work", href: "/work" },
+            { label: "Services", href: "/services" },
+            { label: "Our Work", href: "/work" },
             { label: "About", href: "/about" },
             { label: "Contact", href: "/estimate" },
           ].map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[11px] font-black tracking-[0.25em] uppercase text-[#888] hover:text-[#C50022] transition-colors duration-300"
+              className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#888] hover:text-[#C50022] transition-colors duration-300"
             >
               {link.label}
             </Link>

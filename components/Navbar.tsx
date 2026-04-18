@@ -155,11 +155,15 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-start justify-end pb-16 px-6"
-            style={{ background: "#050505" }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center px-6"
+            style={{ 
+              background: "rgba(0, 0, 0, 0.4)", 
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)"
+            }}
             onClick={() => setMenuOpen(false)}
           >
-            <nav className="flex flex-col gap-6" onClick={(e) => e.stopPropagation()}>
+            <nav className="flex flex-col items-center gap-8" onClick={(e) => e.stopPropagation()}>
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -169,7 +173,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-5xl font-black tracking-tight text-[#EDEDED] hover:text-white"
+                    className="text-5xl font-mono font-bold tracking-tight text-[#EDEDED] hover:text-[#C50022] transition-colors duration-300 text-center block"
                   >
                     {link.label}
                   </Link>

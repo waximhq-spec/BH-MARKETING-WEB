@@ -157,9 +157,7 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center px-6"
             style={{ 
-              background: "rgba(0, 0, 0, 0.4)", 
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)"
+              background: "#FAFAFA", 
             }}
             onClick={() => setMenuOpen(false)}
           >
@@ -173,7 +171,8 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-5xl font-mono font-bold tracking-tight text-[#EDEDED] hover:text-[#C50022] transition-colors duration-300 text-center block"
+                    className="font-black text-black hover:text-[#8B0016] transition-colors duration-300 text-center block pt-1"
+                    style={{ fontSize: "clamp(3.5rem, 12vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
                   >
                     {link.label}
                   </Link>

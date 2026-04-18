@@ -518,8 +518,8 @@ export default function Home() {
           {/* Tier 1: Vertical Reels (9:16) */}
           <div className="grid grid-cols-2 gap-4 md:gap-8 mb-8">
             {[
-              { id: 1, title: "Automotive Showcase", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
-              { id: 2, title: "Speed & Motion", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
+              { id: 1, title: "Automotive Showcase", url: "https://www.pexels.com/download/video/31588827/" },
+              { id: 2, title: "Speed & Motion", url: "https://www.pexels.com/download/video/34076260/" },
             ].map((reel, i) => (
               <Reveal key={reel.id} delay={i * 0.1}>
                 <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">

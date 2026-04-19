@@ -154,30 +154,66 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center px-6"
-            style={{ 
-              background: "#FAFAFA", 
-            }}
-            onClick={() => setMenuOpen(false)}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[100] flex flex-col bg-[#FAFAFA]"
           >
-            <nav className="flex flex-col items-center gap-8" onClick={(e) => e.stopPropagation()}>
+            {/* Dedicated Overlay Header */}
+            <div className="container h-16 flex items-center justify-between shrink-0">
+              <Link href="/" onClick={() => setMenuOpen(false)}>
+                <img 
+                  src="/HERO-LOGO.svg" 
+                  alt="Cinmach" 
+                  className="h-5 md:h-6 w-auto" 
+                  style={{ filter: "brightness(0)" }} 
+                />
+              </Link>
+              <button 
+                onClick={() => setMenuOpen(false)} 
+                aria-label="Close menu" 
+                className="p-2 -mr-2 transition-transform hover:scale-90 active:scale-75"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1.5">
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Navigation Body */}
+            <nav className="flex-1 flex flex-col justify-center items-start px-6 pb-20 gap-5 lg:px-12">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.07 + 0.1, duration: 0.45 }}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ delay: i * 0.08 + 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Link
                     href={link.href}
-                    className="font-black text-black hover:text-[#8B0016] transition-colors duration-300 text-center block pt-1"
-                    style={{ fontSize: "clamp(3.5rem, 12vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+                    onClick={() => setMenuOpen(false)}
+                    className="font-bold text-black hover:text-[#8B0016] transition-colors duration-300 block"
+                    style={{ fontSize: "clamp(28px, 8vw, 36px)", letterSpacing: "-0.03em" }}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
+
+              <motion.div 
+                className="mt-8 w-full sm:w-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ delay: NAV_LINKS.length * 0.08 + 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-center w-full sm:w-auto h-[52px] px-10 bg-black text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] active:scale-[0.98] transition-all duration-500 shadow-2xl"
+                >
+                  Start a Project
+                </Link>
+              </motion.div>
             </nav>
           </motion.div>
         )}

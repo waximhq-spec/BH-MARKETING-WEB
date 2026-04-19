@@ -108,10 +108,10 @@ export default function ContactPage() {
             <div>
               <p className="label mb-3">Email</p>
               <a
-                href="mailto:hello@cinmach.com"
+                href="mailto:contact@cinmachproductions.com"
                 className="text-[#888] text-sm font-light hover:text-[#EDEDED] transition-colors"
               >
-                hello@cinmach.com →
+                contact@cinmachproductions.com →
               </a>
             </div>
           </div>

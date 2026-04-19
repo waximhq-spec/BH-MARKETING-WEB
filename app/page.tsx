@@ -295,46 +295,66 @@ export default function Home() {
 
         {/* Content — pt accounts for fixed 64px navbar + responsive breathing room */}
         <div
-          className="container relative z-10 pb-32 flex flex-col justify-center"
+          className="w-full max-w-[1536px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 pb-32 flex flex-col justify-center"
           style={{
             paddingTop: "calc(64px + clamp(3rem, 8svh, 6rem))",
             minHeight: "100svh",
           }}
         >
-          <div className="flex flex-col items-start gap-6">
-            <div className="flex flex-col gap-[8px] mb-4">
-              <p className="text-white font-mono tracking-[0.15em] uppercase text-[9px] anim-fade-up -ml-[4px]">
-                [ Cinmach Productions · Manama ]
-              </p>
+          {/* Pre-Header */}
+          <div className="w-full mb-4 lg:mb-6">
+            <p className="text-white font-mono tracking-[0.15em] uppercase text-[9px] anim-fade-up -ml-[4px] opacity-40">
+              [ Cinmach Productions · Manama ]
+            </p>
+          </div>
 
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-12 lg:gap-8 xl:gap-16">
+            {/* Left Column: Headline */}
+            <div className="flex flex-col items-start gap-6 lg:w-[60%] xl:w-[62%] flex-shrink-0 min-w-0">
               <h1
-                className="text-white font-black leading-[0.85] anim-fade-up anim-delay-1"
-                style={{ fontSize: "clamp(3.5rem, 11vw, 9.5rem)", letterSpacing: "-0.05em" }}
+                className="text-white font-black leading-[0.82] anim-fade-up anim-delay-1 break-words w-full"
+                style={{ fontSize: "clamp(4rem, 9.5vw, 10.5rem)", letterSpacing: "-0.05em" }}
               >
-                MOVE<br />THE<br />WORLD.
+                CREATE<br />YOUR<br />PRESENCE.
               </h1>
             </div>
 
-            <p
-              className="text-white/80 max-w-[500px] mb-4 anim-fade-up anim-delay-2"
-              style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)", lineHeight: 1.45, letterSpacing: "0.01em" }}
-            >
-              High-end cinematography for brands that refuse to be ignored. Precision assets. Pure impact. Cinematic storytelling at its most refined.
-            </p>
+            {/* Right Column: Supporting Content */}
+            <div className="flex flex-col items-start lg:w-[40%] xl:w-[35%] lg:-mt-[8px] xl:-mt-[12px]">
+              <div className="max-w-[480px] mb-12 lg:mb-16 anim-fade-up anim-delay-2">
+                <p 
+                  className="text-white font-black mb-5" 
+                  style={{ fontSize: "clamp(1.2rem, 2.5vw, 2.2rem)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
+                >
+                  We don’t just shoot — we build how your brand is seen.
+                </p>
+                <p
+                  className="text-white/40 font-light"
+                  style={{ fontSize: "clamp(0.9rem, 1.2vw, 1.1rem)", lineHeight: 1.75, letterSpacing: "0.01em" }}
+                >
+                  From strategy to final delivery, we create cinematic content that captures attention and positions you above the competition.
+                </p>
+              </div>
 
-            <div className="flex flex-wrap gap-5 anim-fade-up anim-delay-3">
-              <Link
-                href="/work"
-                className="w-56 py-5 bg-[#8B0016] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-2xl text-center"
-              >
-                View Work
-              </Link>
-              <Link
-                href="/contact"
-                className="w-56 py-5 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl text-center"
-              >
-                [ Let&apos;s Talk ]
-              </Link>
+              <div className="flex flex-col items-start gap-4 anim-fade-up anim-delay-3 w-full">
+                <div className="flex flex-row flex-wrap sm:flex-nowrap gap-3 w-full sm:w-auto">
+                  <Link
+                    href="/work"
+                    className="flex-1 sm:flex-none sm:w-52 py-4.5 px-8 bg-[#8B0016] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-2xl text-center flex items-center justify-center"
+                  >
+                    View Work
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="flex-1 sm:flex-none sm:w-52 py-4.5 px-8 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl text-center flex items-center justify-center"
+                  >
+                    Start a Project
+                  </Link>
+                </div>
+                <p className="text-white/20 font-mono text-[9px] tracking-[0.25em] uppercase pl-1 mt-2">
+                  Built for brands that want to stand out.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -845,10 +865,10 @@ export default function Home() {
                 <div className="space-y-2">
                   <p className="text-black/30 font-mono text-[9px] tracking-[0.3em] uppercase">Email</p>
                   <a 
-                    href="mailto:INFO@CINMACH.COM" 
+                    href="mailto:contact@cinmachproductions.com" 
                     className="text-black font-black text-lg md:text-xl tracking-tight uppercase border-b-2 border-transparent hover:border-[#8B0016] transition-all"
                   >
-                    INFO@CINMACH.COM
+                    CONTACT@CINMACHPRODUCTIONS.COM
                   </a>
                 </div>
               </Reveal>

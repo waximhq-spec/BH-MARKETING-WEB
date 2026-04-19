@@ -298,7 +298,7 @@ export default function Home() {
         <div
           className="w-full max-w-[1536px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 pb-32 flex flex-col justify-center"
           style={{
-            paddingTop: "calc(64px + clamp(3rem, 8svh, 6rem))",
+            paddingTop: "max(120px, calc(64px + clamp(3rem, 8svh, 6rem)))",
             minHeight: "100svh",
           }}
         >
@@ -311,49 +311,51 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-12 lg:gap-8 xl:gap-16">
             {/* Left Column: Headline */}
-            <div className="flex flex-col items-start gap-6 lg:w-[60%] xl:w-[62%] flex-shrink-0 min-w-0">
+            <div className="flex flex-col items-start gap-4 md:gap-6 lg:w-[60%] xl:w-[62%] flex-shrink-0 min-w-0">
               <h1
-                className="text-white font-black leading-[0.82] anim-fade-up anim-delay-1 break-words w-full"
-                style={{ fontSize: "clamp(2.5rem, 10vw, 10.5rem)", letterSpacing: "-0.05em" }}
+                className="text-white font-black flex flex-col w-full"
+                style={{ letterSpacing: "-0.05em" }}
               >
-                CREATE<br />YOUR<br />PRESENCE.
+                <span className="block anim-fade-up anim-delay-1 text-[46px] md:text-[clamp(4rem,9.5vw,10.5rem)] leading-[0.9] md:leading-[0.82]">CREATE</span>
+                <span className="block anim-fade-up anim-delay-2 text-[46px] md:text-[clamp(4rem,9.5vw,10.5rem)] leading-[0.9] md:leading-[0.82]">YOUR</span>
+                <span className="block anim-fade-up anim-delay-3 text-[46px] md:text-[clamp(4rem,9.5vw,10.5rem)] leading-[0.9] md:leading-[0.82]">PRESENCE.</span>
               </h1>
             </div>
 
             {/* Right Column: Supporting Content */}
-            <div className="flex flex-col items-start lg:w-[40%] xl:w-[35%] lg:-mt-[8px] xl:-mt-[12px]">
-              <div className="max-w-[480px] mb-12 lg:mb-16 anim-fade-up anim-delay-2">
+            <div className="flex flex-col items-start lg:w-[40%] xl:w-[35%] lg:-mt-[8px] xl:-mt-[12px] w-full">
+              <div className="max-w-[320px] md:max-w-[480px] mb-10 md:mb-16 anim-fade-up anim-delay-3">
                 <p 
-                  className="text-white font-black mb-5" 
+                  className="text-white font-black mb-2.5 md:mb-5" 
                   style={{ fontSize: "clamp(1.2rem, 2.5vw, 2.2rem)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
                 >
-                  We don’t just shoot — we build how your brand is seen.
+                  We don’t shoot content. We build perception.
                 </p>
                 <p
-                  className="text-white/40 font-light"
-                  style={{ fontSize: "clamp(0.9rem, 1.2vw, 1.1rem)", lineHeight: 1.75, letterSpacing: "0.01em" }}
+                  className="text-white/60 md:text-white/40 font-light text-[14px] md:text-[clamp(0.9rem,1.2vw,1.1rem)]"
+                  style={{ lineHeight: 1.75, letterSpacing: "0.01em" }}
                 >
                   From strategy to final delivery, we create cinematic content that captures attention and positions you above the competition.
                 </p>
               </div>
 
-              <div className="flex flex-col items-start gap-4 anim-fade-up anim-delay-3 w-full">
-                <div className="flex flex-row flex-wrap sm:flex-nowrap gap-3 w-full sm:w-auto">
+              <div className="flex flex-col items-start gap-6 md:gap-4 anim-fade-up anim-delay-4 w-full">
+                <div className="flex flex-col md:flex-row gap-3.5 md:gap-4 w-full md:w-auto">
                   <Link
                     href="/work"
-                    className="flex-1 sm:flex-none sm:w-52 py-4.5 px-8 bg-[#8B0016] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-2xl text-center flex items-center justify-center"
+                    className="w-full md:w-52 h-[52px] md:h-auto md:py-4.5 bg-[#8B0016] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black active:scale-[0.98] transition-all duration-500 shadow-2xl flex items-center justify-center"
                   >
                     View Work
                   </Link>
                   <Link
                     href="/contact"
-                    className="flex-1 sm:flex-none sm:w-52 py-4.5 px-8 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl text-center flex items-center justify-center"
+                    className="w-full md:w-52 h-[52px] md:h-auto md:py-4.5 bg-transparent border border-white/20 md:border-0 md:bg-white text-white md:text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black md:hover:bg-[#8B0016] md:hover:text-white active:scale-[0.98] transition-all duration-500 shadow-2xl flex items-center justify-center"
                   >
                     Start a Project
                   </Link>
                 </div>
-                <p className="text-white/20 font-mono text-[9px] tracking-[0.25em] uppercase pl-1 mt-2">
-                  Built for brands that want to stand out.
+                <p className="text-white/30 md:text-white/20 font-mono text-[9px] tracking-[0.25em] uppercase md:pl-1">
+                  Trusted by brands that want to stand out.
                 </p>
               </div>
             </div>
@@ -867,7 +869,7 @@ export default function Home() {
                   <p className="text-black/30 font-mono text-[9px] tracking-[0.3em] uppercase">Email</p>
                   <a 
                     href="mailto:contact@cinmachproductions.com" 
-                    className="text-black font-black text-lg md:text-xl tracking-tight uppercase border-b-2 border-transparent hover:border-[#8B0016] transition-all"
+                    className="text-black font-black text-[13px] sm:text-base md:text-xl tracking-tight uppercase border-b-2 border-transparent hover:border-[#8B0016] transition-all break-all"
                   >
                     CONTACT@CINMACHPRODUCTIONS.COM
                   </a>

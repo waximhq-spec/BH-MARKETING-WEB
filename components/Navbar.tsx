@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useModal } from "@/components/ModalContext";
 
 const NAV_LINKS = [
   { label: "Services", href: "/services" },
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light" | "red">("red");
   const pathname = usePathname();
+  const { openProjectModal } = useModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -206,13 +208,13 @@ export default function Navbar() {
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ delay: NAV_LINKS.length * 0.08 + 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <Link
-                  href="/contact"
-                  onClick={() => setMenuOpen(false)}
+                <button
+                  type="button"
+                  onClick={() => { setMenuOpen(false); openProjectModal(); }}
                   className="flex items-center justify-center w-full sm:w-auto h-[52px] px-10 bg-black text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] active:scale-[0.98] transition-all duration-500 shadow-2xl"
                 >
                   Start a Project
-                </Link>
+                </button>
               </motion.div>
             </nav>
           </motion.div>

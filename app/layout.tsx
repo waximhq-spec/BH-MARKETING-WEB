@@ -5,6 +5,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ModalProvider } from "@/components/ModalContext";
+import ProjectModal from "@/components/ProjectModal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,14 +28,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body className="min-h-screen flex flex-col">
-        <ServiceWorkerUnregister />
-        <Navbar />
-        <SmoothScroll>
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </SmoothScroll>
+        <ModalProvider>
+          <ServiceWorkerUnregister />
+          <Navbar />
+          <SmoothScroll>
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </SmoothScroll>
+          <ProjectModal />
+        </ModalProvider>
       </body>
     </html>
   );

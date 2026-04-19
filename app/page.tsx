@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useModal } from "@/components/ModalContext";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -240,6 +241,7 @@ function ServicesTable() {
    ─────────────────────────────────────────────────────────── */
 export default function Home() {
   const testimonialRef = useRef<HTMLDivElement>(null);
+  const { openProjectModal } = useModal();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -347,12 +349,13 @@ export default function Home() {
                   >
                     View Work
                   </Link>
-                  <Link
-                    href="/contact"
+                  <button
+                    onClick={openProjectModal}
+                    type="button"
                     className="w-full md:w-52 h-[52px] md:h-auto md:py-4.5 bg-transparent border border-white/20 md:border-0 md:bg-white text-white md:text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black md:hover:bg-[#8B0016] md:hover:text-white active:scale-[0.98] transition-all duration-500 shadow-2xl flex items-center justify-center"
                   >
                     Start a Project
-                  </Link>
+                  </button>
                 </div>
                 <p className="text-white/30 md:text-white/20 font-mono text-[9px] tracking-[0.25em] uppercase md:pl-1">
                   Trusted by brands that want to stand out.
@@ -831,12 +834,13 @@ export default function Home() {
 
               <Reveal delay={0.2}>
                 <div className="flex flex-wrap gap-4">
-                  <Link
-                    href="/contact"
+                  <button
+                    onClick={openProjectModal}
+                    type="button"
                     className="group flex items-center gap-4 px-10 py-5 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] transition-all duration-500"
                   >
                     Start a Project <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
-                  </Link>
+                  </button>
                   <Link
                     href="https://wa.me/yournumber"
                     className="px-10 py-5 border border-black/10 text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-black/40 transition-all duration-500"

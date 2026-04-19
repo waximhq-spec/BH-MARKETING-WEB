@@ -266,7 +266,8 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           §1  HERO
       ══════════════════════════════════════════════════════ */}
-      <section
+      <main className="relative bg-black min-h-screen overflow-x-hidden">
+        <section
         data-theme="red"
         className="relative h-[100svh] flex flex-col justify-start overflow-hidden"
       >
@@ -313,7 +314,7 @@ export default function Home() {
             <div className="flex flex-col items-start gap-6 lg:w-[60%] xl:w-[62%] flex-shrink-0 min-w-0">
               <h1
                 className="text-white font-black leading-[0.82] anim-fade-up anim-delay-1 break-words w-full"
-                style={{ fontSize: "clamp(4rem, 9.5vw, 10.5rem)", letterSpacing: "-0.05em" }}
+                style={{ fontSize: "clamp(2.5rem, 10vw, 10.5rem)", letterSpacing: "-0.05em" }}
               >
                 CREATE<br />YOUR<br />PRESENCE.
               </h1>
@@ -890,6 +891,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      </main>
     </>
   );
 }

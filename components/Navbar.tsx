@@ -70,13 +70,16 @@ export default function Navbar() {
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
-  // Dynamic colors
-  const isLight = theme === "light";
-  const isRed = theme === "red";
+  // Dynamic colors - derived from state but with a failsafe for secondary pages
+  const isHome = pathname === "/";
+  // If we're not on home, force isLight to true unless explicitly in a dark section
+  const isLight = theme === "light" || (!isHome && theme === "red");
+  const isRed = theme === "red" && isHome;
+  const isDark = theme === "dark";
   
   const textColor = isLight ? "#000000" : "#FAFAFA";
-  const mutedColor = isLight ? "#666666" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
-  const activeColor = isRed ? "#FFFFFF" : "#C50022";
+  const mutedColor = isLight ? "rgba(0,0,0,0.4)" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
+  const activeColor = isRed ? "#FFFFFF" : isLight ? "#000000" : "#C50022";
   
   // Logic for Red theme (Hero): 
   // - Unscrolled: Transparent with a thin white line
@@ -143,16 +146,16 @@ export default function Navbar() {
             aria-label="Toggle navigation"
           >
             {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className="block w-5 h-px transition-all duration-300 origin-center"
-                style={{
-                  background: burgerColor,
-                  opacity: i === 1 && menuOpen ? 0 : 1,
-                  transform: i === 0 && menuOpen ? "translateY(6px) rotate(45deg)" : 
-                             i === 2 && menuOpen ? "translateY(-6px) rotate(-45deg)" : "",
-                }}
-              />
+                <span
+                  key={i}
+                  className="block w-5 h-px transition-all duration-300 origin-center"
+                  style={{
+                    background: !isHome ? "#000000" : burgerColor,
+                    opacity: i === 1 && menuOpen ? 0 : 1,
+                    transform: i === 0 && menuOpen ? "translateY(6px) rotate(45deg)" : 
+                               i === 2 && menuOpen ? "translateY(-6px) rotate(-45deg)" : "",
+                  }}
+                />
             ))}
           </button>
         </div>

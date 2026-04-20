@@ -26,6 +26,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Seed theme based on page path before observer fires
+  useEffect(() => {
+    if (pathname === "/") {
+      setTheme("red");
+    } else {
+      setTheme("light");
+    }
+  }, [pathname]);
+
   // Theme detection logic (Intersection Observer)
   useEffect(() => {
     const observerOptions = {

@@ -743,13 +743,13 @@ export default function Home() {
                 className="text-white font-medium leading-[1.4] mb-12 relative z-10 max-w-3xl"
                 style={{ fontSize: "clamp(1.3rem, 3vw, 2.2rem)", letterSpacing: "-0.02em" }}
               >
-                &ldquo;Cinmach completely transformed how we present our properties. The visuals didn&apos;t just look good &mdash; they sold the <em>lifestyle</em>. Their eye for composition and storytelling is the finest we&apos;ve seen anywhere in the Gulf.&rdquo;
+                &ldquo;Cinmach completely transformed how we present our properties. The visuals didn&apos;t just look good &mdash; they sold the <em>lifestyle</em>. Their eye for composition and storytelling is the finest we&apos;ve seen in the region.&rdquo;
               </p>
               <div className="flex items-center gap-5">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 font-black text-white text-base" style={{ background: "#8B0016" }}>F</div>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 font-black text-white text-base" style={{ background: "#8B0016" }}>O</div>
                 <div>
-                  <p className="text-white font-black text-base tracking-tight uppercase">Faisal Al-Dosari</p>
-                  <p className="text-white/40 font-mono text-[9px] tracking-[0.3em] uppercase mt-0.5">Property Developer · Manama, Bahrain</p>
+                  <p className="text-white font-black text-base tracking-tight uppercase">Omar Hassan</p>
+                  <p className="text-white/40 font-mono text-[9px] tracking-[0.3em] uppercase mt-0.5">Director of Operations · Real Estate Group</p>
                 </div>
               </div>
             </div>
@@ -761,9 +761,9 @@ export default function Home() {
             className="flex overflow-x-auto snap-x snap-mandatory gap-5 no-scrollbar pb-8 md:grid md:grid-cols-3 md:overflow-visible md:snap-none md:pb-0"
           >
             {[
-              { quote: "Working with Cinmach was seamless from day one. They understood the spirit of Bahraini hospitality and translated it into visuals that resonated with guests from around the world.", name: "Noor Al-Mannai", role: "Marketing Director · Gulf Hotel Bahrain", project: "Brand Film", initial: "N" },
-              { quote: "Our social media engagement doubled within a week of going live. The reels they produced were crisp, high-energy, and exactly on-brand. Truly a premium studio.", name: "Yousef Al-Khalifa", role: "Founder · Talah Restaurant Group", project: "Social Media Ads", initial: "Y" },
-              { quote: "Every frame was deliberate. The aerial sequences over our Amwaj development generated more enquiries in three days than our previous six months of marketing combined.", name: "Mariam Al-Zayani", role: "Head of Sales · Ithmaar Development", project: "Real Estate Film", initial: "M" },
+              { quote: "Working with Cinmach was seamless from day one. They understood the spirit of local hospitality and translated it into visuals that resonated with guests from around the world.", name: "Ahmed Rahman", role: "Marketing Director · Luxury Hotel", project: "Brand Film", initial: "A" },
+              { quote: "Our social media engagement doubled within a week of going live. The reels they produced were crisp, high-energy, and exactly on-brand. Truly a premium studio.", name: "Daniel Noor", role: "Founder · Restaurant Group", project: "Social Media Ads", initial: "D" },
+              { quote: "Every frame was deliberate. The aerial sequences over our latest development generated more enquiries in three days than our previous six months of marketing combined.", name: "Sara Khan", role: "Head of Sales · Real Estate", project: "Real Estate Film", initial: "S" },
             ].map((item, idx) => (
               <Reveal key={idx} delay={idx * 0.12}>
                 <div

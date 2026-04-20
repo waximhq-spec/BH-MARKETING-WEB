@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -11,20 +12,22 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="pt-32 pb-24 md:pb-36">
+    <main data-theme="light" className="bg-white min-h-screen pt-32 pb-24 md:pb-36">
       <div className="container">
         {/* Header */}
         <div className="mb-20 max-w-2xl">
-          <p className="label mb-8">Contact</p>
-          <h1
-            className="text-[#EDEDED] font-black mb-6"
-            style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
-          >
-            Let&apos;s make something.
-          </h1>
-          <p className="text-[#666] font-light" style={{ lineHeight: 1.8 }}>
-            Tell us what you&apos;re working on. We&apos;ll get back to you within 48 hours.
-          </p>
+          <Reveal>
+            <p className="label mb-8 text-[#8B0016]">Contact</p>
+            <h1
+              className="text-black font-black mb-6"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+            >
+              Let&apos;s make something.
+            </h1>
+            <p className="text-black/50 font-light text-lg leading-relaxed">
+              Tell us what you&apos;re working on. We&apos;ll get back to you within 48 hours.
+            </p>
+          </Reveal>
         </div>
 
         {/* Form + Info */}
@@ -32,28 +35,45 @@ export default function ContactPage() {
           {/* Form */}
           <div className="flex-1">
             {submitted ? (
-              <div className="py-16">
-                <p className="label-red mb-4">Message received</p>
-                <p className="text-[#EDEDED] text-xl font-light">
-                  Thank you. We&apos;ll be in touch soon.
-                </p>
-              </div>
+              <Reveal>
+                <div className="py-16">
+                  <p className="label-red mb-4 text-[#8B0016]">Message received</p>
+                  <p className="text-black text-xl font-light">
+                    Thank you. We&apos;ll be in touch soon.
+                  </p>
+                </div>
+              </Reveal>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="label block mb-2">Name</label>
-                    <input type="text" name="name" required placeholder="Your full name" />
-                  </div>
-                  <div>
-                    <label className="label block mb-2">Email</label>
-                    <input type="email" name="email" required placeholder="your@email.com" />
-                  </div>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <Reveal delay={0.1}>
+                    <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Name</label>
+                    <input 
+                      type="text" 
+                      name="name" 
+                      required 
+                      placeholder="Your full name" 
+                      className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black placeholder:text-black/20 focus:border-[#8B0016]/20 transition-all outline-none"
+                    />
+                  </Reveal>
+                  <Reveal delay={0.15}>
+                    <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Email</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      required 
+                      placeholder="your@email.com" 
+                      className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black placeholder:text-black/20 focus:border-[#8B0016]/20 transition-all outline-none"
+                    />
+                  </Reveal>
                 </div>
 
-                <div>
-                  <label className="label block mb-2">Project Type</label>
-                  <select name="type">
+                <Reveal delay={0.2}>
+                  <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Project Type</label>
+                  <select 
+                    name="type"
+                    className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black transition-all outline-none appearance-none"
+                  >
                     <option value="">Select…</option>
                     <option value="real-estate">Real Estate Cinematics</option>
                     <option value="fb">Restaurant / F&amp;B</option>
@@ -61,62 +81,79 @@ export default function ContactPage() {
                     <option value="photography">Photography</option>
                     <option value="other">Other</option>
                   </select>
-                </div>
+                </Reveal>
 
-                <div>
-                  <label className="label block mb-2">Message</label>
+                <Reveal delay={0.25}>
+                  <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Message</label>
                   <textarea
                     name="message"
                     rows={5}
                     required
                     placeholder="Tell us about your project…"
+                    className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black placeholder:text-black/20 focus:border-[#8B0016]/20 transition-all outline-none"
                   />
-                </div>
+                </Reveal>
 
-                <div className="flex items-center gap-6 pt-2">
-                  <button
-                    type="submit"
-                    className="inline-flex items-center gap-3 px-8 py-3.5 border border-[#EDEDED]/20 text-[#EDEDED] text-[11px] tracking-[0.25em] uppercase hover:border-white hover:text-white transition-all duration-300"
-                  >
-                    Send Message →
-                  </button>
-                </div>
+                <Reveal delay={0.3}>
+                  <div className="flex items-center gap-6 pt-4">
+                    <button
+                      type="submit"
+                      className="group inline-flex items-center gap-6 px-12 py-5 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] transition-all duration-500 shadow-xl"
+                    >
+                      Send Message <span className="text-lg transition-transform group-hover:translate-x-3">→</span>
+                    </button>
+                  </div>
+                </Reveal>
               </form>
             )}
           </div>
 
           {/* Info sidebar */}
-          <div className="lg:w-72 shrink-0 flex flex-col gap-10">
-            <div>
-              <p className="label mb-3">Studio</p>
-              <p className="text-[#888] text-sm font-light leading-relaxed">
+          <div className="lg:w-80 shrink-0 flex flex-col gap-12">
+            <Reveal delay={0.4}>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#8B0016] mb-4">Studio</p>
+              <p className="text-black/60 text-sm md:text-base font-light leading-relaxed">
                 Cinmach Productions<br />
                 Manama, Kingdom of Bahrain
               </p>
-            </div>
-            <div>
-              <p className="label mb-3">WhatsApp</p>
+            </Reveal>
+            <Reveal delay={0.45}>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#8B0016] mb-4">WhatsApp</p>
               <a
                 href="https://wa.me/97300000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#888] text-sm font-light hover:text-[#EDEDED] transition-colors"
+                className="text-black/80 text-sm md:text-base font-light hover:text-[#8B0016] transition-colors flex items-center gap-2"
               >
-                +973 0000 0000 →
+                +973 0000 0000 <span className="text-xs">→</span>
               </a>
-            </div>
-            <div>
-              <p className="label mb-3">Email</p>
+            </Reveal>
+            <Reveal delay={0.5}>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#8B0016] mb-4">Email</p>
               <a
                 href="mailto:contact@cinmachproductions.com"
-                className="text-[#888] text-sm font-light hover:text-[#EDEDED] transition-colors"
+                className="text-black/80 text-sm md:text-base font-light hover:text-[#8B0016] transition-colors flex items-center gap-2"
               >
-                contact@cinmachproductions.com →
+                contact@cinmachproductions.com <span className="text-xs">→</span>
               </a>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+  );
+}
+
+function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
   );
 }

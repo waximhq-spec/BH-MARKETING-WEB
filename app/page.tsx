@@ -311,7 +311,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-12 lg:gap-8 xl:gap-16">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-12 lg:gap-8 xl:gap-16">
             {/* Left Column: Headline */}
             <div className="flex flex-col items-start gap-4 md:gap-6 lg:w-[60%] xl:w-[62%] flex-shrink-0 min-w-0">
               <h1
@@ -325,13 +325,13 @@ export default function Home() {
             </div>
 
             {/* Right Column: Supporting Content */}
-            <div className="flex flex-col items-start lg:w-[40%] xl:w-[35%] lg:-mt-[8px] xl:-mt-[12px] w-full">
+            <div className="flex flex-col items-start lg:w-[40%] xl:w-[35%] w-full lg:pt-[4vw]">
               <div className="max-w-[320px] md:max-w-[480px] mb-10 md:mb-16 anim-fade-up anim-delay-3">
                 <p 
                   className="text-white font-black mb-2.5 md:mb-5" 
-                  style={{ fontSize: "clamp(1.2rem, 2.5vw, 2.2rem)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
+                  style={{ fontSize: "clamp(1.4rem, 2.5vw, 2.3rem)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
                 >
-                  We don’t shoot content. We build perception.
+                  We don’t shoot content.<br className="hidden md:block" /> We build perception.
                 </p>
                 <p
                   className="text-white/60 md:text-white/40 font-light text-[14px] md:text-[clamp(0.9rem,1.2vw,1.1rem)]"

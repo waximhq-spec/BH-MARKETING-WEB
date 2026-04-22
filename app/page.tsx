@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
+import ProcessSection from "@/components/ProcessSection";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -236,6 +237,7 @@ function ServicesTable() {
 }
 
 
+
 /* ─────────────────────────────────────────────────────────────
    Home Page
    ─────────────────────────────────────────────────────────── */
@@ -268,7 +270,8 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           §1  HERO
       ══════════════════════════════════════════════════════ */}
-      <main className="relative bg-black min-h-screen overflow-x-hidden">
+      <main className="relative bg-black min-h-screen">
+
         <section
         data-theme="red"
         className="relative h-[100svh] flex flex-col justify-start overflow-hidden"
@@ -441,100 +444,12 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           §4  PROCESS — BLACK
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="dark" className="py-32 md:py-48" style={{ background: "#050505" }}>
-        <div className="container">
-
-          <Reveal className="mb-24">
-            <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-6">
-              How We Work
-            </p>
-            <h2
-              className="text-white font-black"
-              style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
-            >
-              THE PROCESS.
-            </h2>
-          </Reveal>
-
-          {/* Master Guide Line Container */}
-          <div className="relative border-l border-white/10 ml-4 md:ml-12 flex flex-col pt-4 pb-12">
-            {[
-              { num: "01", title: "Strategy",       desc: "Deep-dive into your brand, audience, and goals. We define what the film needs to say before a single frame is shot." },
-              { num: "02", title: "Production",      desc: "On-location cinematic shooting with our crew. Precision lighting, composition, and movement — nothing is left to chance." },
-              { num: "03", title: "Post-Production", desc: "Color grading, sound design, and cut — all refined to match a premium visual signature unique to your brand." },
-              { num: "04", title: "Delivery",        desc: "Ready-to-publish assets across every format and platform. From social reels to full broadcast spots." },
-            ].map((step, i) => (
-              <Reveal key={step.num} delay={i * 0.1}>
-                {/* Row Wrapper */}
-                <motion.div 
-                  initial="initial"
-                  whileInView="active"
-                  viewport={{ once: false, amount: 0.5 }}
-                  className="group relative pl-8 md:pl-20 py-12 md:py-16 -ml-[1px] hover:bg-white/[0.02] transition-colors duration-500 cursor-default border-b border-white/[0.03] last:border-0 rounded-r-3xl"
-                >
-                  
-                  {/* Hover/Scroll Indicator Line */}
-                  <motion.div 
-                    variants={{
-                      initial: { scaleY: 0 },
-                      active: { scaleY: 1, boxShadow: "0 0 20px #C50022" }
-                    }}
-                    className="absolute top-0 bottom-0 left-0 w-[2px] bg-[#C50022] group-hover:scale-y-100 group-hover:shadow-[0_0_20px_#C50022] origin-top transition-all duration-500 ease-out z-10" 
-                  />
-                  
-                  {/* Small Notch */}
-                  <motion.div 
-                    variants={{
-                      initial: { width: "1rem", backgroundColor: "rgba(255,255,255,0.2)" },
-                      active: { width: "2rem", backgroundColor: "#C50022" }
-                    }}
-                    className="absolute top-[4.5rem] md:top-[5.5rem] left-0 h-[1px] group-hover:w-8 group-hover:bg-[#C50022] transition-all duration-500" 
-                  />
-                  
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-24 items-start">
-                    {/* Number */}
-                    <div className="shrink-0 w-16">
-                      <motion.span 
-                        variants={{
-                          initial: { color: "#8B0016" },
-                          active: { color: "#FA002A" }
-                        }}
-                        className="font-mono font-bold text-2xl md:text-3xl tracking-widest group-hover:text-[#FA002A] transition-colors duration-500 block"
-                      >
-                        {step.num}
-                      </motion.span>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex flex-col gap-4 md:gap-6">
-                      <motion.h3
-                        variants={{
-                          initial: { color: "rgba(255,255,255,0.8)" },
-                          active: { color: "rgba(255,255,255,1)" }
-                        }}
-                        className="font-black tracking-tight group-hover:text-white transition-colors duration-500"
-                        style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", lineHeight: 1 }}
-                      >
-                        {step.title}
-                      </motion.h3>
-                      <motion.p 
-                        variants={{
-                          initial: { color: "rgba(255,255,255,0.3)" },
-                          active: { color: "rgba(255,255,255,0.7)" }
-                        }}
-                        className="text-base md:text-lg leading-relaxed max-w-xl group-hover:text-white/70 transition-colors duration-500"
-                      >
-                        {step.desc}
-                      </motion.p>
-                    </div>
-                  </div>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      {/* ══════════════════════════════════════════════════════
+          §4  PROCESS — BLACK (PRCPTIV STYLE)
+      ══════════════════════════════════════════════════════ */}
+      <div data-theme="dark">
+        <ProcessSection />
+      </div>
 
 
       {/* ══════════════════════════════════════════════════════

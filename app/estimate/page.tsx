@@ -72,14 +72,14 @@ export default function ContactPage() {
                   <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Project Type</label>
                   <select 
                     name="type"
-                    className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black transition-all outline-none appearance-none"
+                    className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black transition-all outline-none appearance-none cursor-pointer"
                   >
-                    <option value="">Select…</option>
-                    <option value="real-estate">Real Estate Cinematics</option>
-                    <option value="fb">Restaurant / F&amp;B</option>
-                    <option value="brand-film">Brand Film</option>
-                    <option value="photography">Photography</option>
-                    <option value="other">Other</option>
+                    <option value="" className="text-black">Select…</option>
+                    <option value="real-estate" className="text-black">Real Estate Cinematics</option>
+                    <option value="fb" className="text-black">Restaurant / F&amp;B</option>
+                    <option value="brand-film" className="text-black">Brand Film</option>
+                    <option value="photography" className="text-black">Photography</option>
+                    <option value="other" className="text-black">Other</option>
                   </select>
                 </Reveal>
 

@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Disable exhaustive checks to save memory/processes on Hostinger
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
-  
   // Set output to standalone for lightweight production builds
   output: 'standalone',
 
@@ -18,11 +14,8 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   
   // Disable memory-heavy features to prevent Hostinger thread limit crashes
-  swcMinify: false,
-  optimizeFonts: false,
-
-  // Hard limit Next.js to use only 1 CPU core and disable worker threads
   experimental: {
+
     cpus: 1,
     workerThreads: false,
   },
@@ -35,6 +28,21 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=0, must-revalidate",
+          },
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self';",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com;",
+              "style-src 'self' 'unsafe-inline';",
+              "img-src 'self' data: https:;",
+              "font-src 'self' data:;",
+              "frame-src 'self' https://challenges.cloudflare.com;",
+              "connect-src 'self' https://challenges.cloudflare.com;",
+              "worker-src 'self' blob:;",
+              "object-src 'none';",
+              "upgrade-insecure-requests;",
+            ].join(" "),
           },
         ],
       },

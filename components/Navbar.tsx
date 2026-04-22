@@ -22,42 +22,38 @@ export default function Navbar() {
   const { openProjectModal } = useModal();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40);
+
+          const sections = document.querySelectorAll("[data-theme]");
+          let activeTheme: "dark" | "light" | "red" | null = null;
+          
+          sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            // Check if section occupies the space just below the navbar (e.g., 100px from top)
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              activeTheme = section.getAttribute("data-theme") as "dark" | "light" | "red";
+            }
+          });
+
+          if (activeTheme) {
+            setTheme(activeTheme);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
+    // Trigger immediately to set initial state
+    onScroll();
+
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Seed theme based on page path before observer fires
-  useEffect(() => {
-    if (pathname === "/") {
-      setTheme("red");
-    } else {
-      setTheme("light");
-    }
-  }, [pathname]);
-
-  // Theme detection logic (Intersection Observer)
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-80px 0px -90% 0px",
-      threshold: 0,
-    };
-
-    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sectionTheme = entry.target.getAttribute("data-theme") as "dark" | "light" | "red";
-          if (sectionTheme) setTheme(sectionTheme);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const sections = document.querySelectorAll("[data-theme]");
-    sections.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
   }, [pathname]);
 
   useEffect(() => {

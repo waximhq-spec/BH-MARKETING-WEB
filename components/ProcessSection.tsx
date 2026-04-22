@@ -53,7 +53,8 @@ export default function ProcessSection() {
 
   return (
     <section ref={containerRef} className="relative bg-[#000000]">
-      <div className="flex flex-col lg:flex-row w-full items-start">
+      {/* DESKTOP (Split Sticky Scroll) */}
+      <div className="hidden lg:flex flex-col lg:flex-row w-full items-start">
         
         {/* Left Column: Sticky Editorial Header */}
         <div 
@@ -141,7 +142,105 @@ export default function ProcessSection() {
             ))}
           </div>
         </div>
+      </div>
 
+      {/* MOBILE (Old Vertical Line Expansion) */}
+      <div className="lg:hidden flex flex-col px-6 py-24">
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-6 font-bold"
+        >
+          The Methodology
+        </motion.p>
+        
+        <motion.h2
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="text-white font-black mb-16"
+          style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+        >
+          THE PROCESS.
+        </motion.h2>
+
+        <div className="relative border-l border-white/10 ml-4 flex flex-col pt-4 pb-12">
+          {STEPS.map((step, i) => (
+            <motion.div 
+              key={step.num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <motion.div 
+                initial="initial"
+                whileInView="active"
+                viewport={{ once: false, amount: 0.5 }}
+                className="group relative pl-8 py-10 -ml-[1px] border-b border-white/[0.03] last:border-0 rounded-r-3xl"
+              >
+                {/* Hover/Scroll Indicator Line */}
+                <motion.div 
+                  variants={{
+                    initial: { scaleY: 0 },
+                    active: { scaleY: 1, boxShadow: "0 0 20px #8B0016" }
+                  }}
+                  className="absolute top-0 bottom-0 left-0 w-[2px] bg-[#8B0016] origin-top transition-all duration-500 ease-out z-10" 
+                />
+                
+                {/* Small Notch */}
+                <motion.div 
+                  variants={{
+                    initial: { width: "1rem", backgroundColor: "rgba(255,255,255,0.2)" },
+                    active: { width: "2rem", backgroundColor: "#8B0016" }
+                  }}
+                  className="absolute top-[4rem] left-0 h-[1px] transition-all duration-500" 
+                />
+
+                <div className="flex flex-col gap-4 items-start">
+                  {/* Number */}
+                  <div className="shrink-0 w-16">
+                    <motion.span 
+                      variants={{
+                        initial: { color: "#8B0016" },
+                        active: { color: "#FA002A" }
+                      }}
+                      className="font-mono font-bold text-2xl tracking-widest transition-colors duration-500 block"
+                    >
+                      {step.num}
+                    </motion.span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex flex-col gap-4 max-w-[500px]">
+                    <motion.h3
+                      variants={{
+                        initial: { color: "rgba(255,255,255,0.8)" },
+                        active: { color: "rgba(255,255,255,1)" }
+                      }}
+                      className="font-black tracking-tight transition-colors duration-500"
+                      style={{ fontSize: "2rem", lineHeight: 1, letterSpacing: "-0.03em" }}
+                    >
+                      {step.title.toUpperCase()}
+                    </motion.h3>
+                    <motion.p 
+                      variants={{
+                        initial: { color: "rgba(255,255,255,0.3)" },
+                        active: { color: "rgba(255,255,255,0.7)" }
+                      }}
+                      className="text-[15px] font-light leading-[1.7] transition-colors duration-500"
+                    >
+                      {step.desc}
+                    </motion.p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

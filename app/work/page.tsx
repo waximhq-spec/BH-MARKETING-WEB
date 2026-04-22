@@ -3,14 +3,15 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import SmartVideo from "@/components/SmartVideo";
 
 /* ─────────────────────────────────────────────────────────────
    Premium Cinematic Carousel
    ─────────────────────────────────────────────────────────── */
 const SLIDES = [
-  { id: "01", title: "Lee Heritage",      cat: "Hospitality",    type: "vimeo",   src: "1183128960" },
-  { id: "02", title: "Heaven View Villa", cat: "Hospitality",    type: "vimeo",   src: "1183128507" },
-  { id: "03", title: "Drone Master",      cat: "Cinematography", type: "youtube", src: "go1COYbNIdI" },
+  { id: "01", title: "Lee Heritage",      cat: "Hospitality",    type: "native", vid: "https://www.pexels.com/download/video/3121459/" },
+  { id: "02", title: "Heaven View Villa", cat: "Hospitality",    type: "native", vid: "https://www.pexels.com/download/video/8422238/" },
+  { id: "03", title: "Drone Master",      cat: "Cinematography", type: "native", vid: "https://www.pexels.com/download/video/34076260/" },
 ];
 
 function CarouselSlides() {
@@ -101,25 +102,12 @@ function CarouselSlides() {
                 }}
               >
                 <div className="w-full h-full bg-black relative overflow-hidden">
-                  {slide.type === "vimeo" ? (
-                    <iframe
-                      src={`https://player.vimeo.com/video/${slide.src}?background=1&autoplay=${isActive ? 1 : 0}&loop=1&byline=0&title=0&muted=1`}
-                      className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen"
-                      loading="lazy"
-                      title={slide.title}
-                    />
-                  ) : (
-                    <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${slide.src}?autoplay=${isActive ? 1 : 0}&mute=1&loop=1&playlist=${slide.src}&controls=0&showinfo=0&modestbranding=1`}
-                      className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen"
-                      loading="lazy"
-                      title={slide.title}
-                    />
-                  )}
+                  <SmartVideo
+                    src={slide.vid}
+                    autoPlayViewport={isActive} // Play only if it is the active slide AND in viewport
+                    mobileFallback={true}
+                    className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover"
+                  />
                   {/* Meta overlay */}
                   <div className="absolute inset-0 flex flex-col justify-end p-5" style={{ background: "rgba(0,0,0,0.5)" }}>
                     <p className="text-[#8B0016] font-mono text-[8px] tracking-[0.3em] uppercase mb-1">{slide.cat}</p>
@@ -198,25 +186,12 @@ function CarouselSlides() {
                   style={{ boxShadow: isCenter ? "0 20px 60px rgba(0,0,0,0.22)" : "none" }}
                 >
                   <div className="absolute inset-0 pointer-events-none">
-                    {slide.type === "vimeo" ? (
-                      <iframe
-                        src={`https://player.vimeo.com/video/${slide.src}?background=1&autoplay=${isCenter ? 1 : 0}&loop=1&byline=0&title=0&muted=1`}
-                        className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2"
-                        frameBorder="0"
-                        allow="autoplay; fullscreen"
-                        loading="lazy"
-                        title={slide.title}
-                      />
-                    ) : (
-                      <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${slide.src}?autoplay=${isCenter ? 1 : 0}&mute=1&loop=1&playlist=${slide.src}&controls=0&showinfo=0&modestbranding=1`}
-                        className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2"
-                        frameBorder="0"
-                        allow="autoplay; fullscreen"
-                        loading="lazy"
-                        title={slide.title}
-                      />
-                    )}
+                    <SmartVideo
+                      src={slide.vid}
+                      autoPlayViewport={isCenter}
+                      mobileFallback={true}
+                      className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 object-cover"
+                    />
                   </div>
 
                   <div
@@ -357,15 +332,12 @@ export default function WorkPage() {
               ].map((reel, i) => (
                 <Reveal key={reel.id} delay={i * 0.1}>
                   <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">
-                    <video 
-                      autoPlay 
-                      muted 
-                      loop 
-                      playsInline 
+                    <SmartVideo 
+                      src={reel.url}
+                      hoverPlay={true}
+                      mobileFallback={true}
                       className="absolute inset-0 w-full h-full object-cover"
-                    >
-                      <source src={reel.url} type="video/mp4" />
-                    </video> 
+                    />
                     <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
                       <p className="text-white/80 font-mono text-[9px] tracking-[0.4em] uppercase">Cinematic</p>
                       <h4 className="text-white font-bold text-lg tracking-tight mt-1">{reel.title}</h4>

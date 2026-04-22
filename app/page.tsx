@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import ProcessSection from "@/components/ProcessSection";
+import SmartVideo from "@/components/SmartVideo";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -277,16 +278,13 @@ export default function Home() {
         className="relative h-[100svh] flex flex-col justify-start overflow-hidden"
       >
         {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover grayscale brightness-50"
+        <SmartVideo
+          src="https://www.pexels.com/download/video/8396974/"
           poster="https://images.pexels.com/photos/8396974/pexels-photo-8396974.jpeg"
-        >
-          <source src="https://www.pexels.com/download/video/8396974/" type="video/mp4" />
-        </video>
+          autoPlayViewport={true}
+          mobileFallback={true}
+          className="absolute inset-0 w-full h-full object-cover grayscale brightness-50"
+        />
 
         {/* Overlays */}
         <div className="absolute inset-0 bg-black/5 mix-blend-overlay" />
@@ -486,15 +484,12 @@ export default function Home() {
             ].map((reel, i) => (
               <Reveal key={reel.id} delay={i * 0.1}>
                 <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">
-                  <video 
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline 
+                  <SmartVideo 
+                    src={reel.url}
+                    hoverPlay={true}
+                    mobileFallback={true}
                     className="absolute inset-0 w-full h-full object-cover"
-                  >
-                    <source src={reel.url} type="video/mp4" />
-                  </video> 
+                  />
                   <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
                     <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase">Automotive</p>
                     <h4 className="text-white font-bold text-lg md:text-2xl tracking-tight mt-1">{reel.title}</h4>
@@ -507,17 +502,17 @@ export default function Home() {
           {/* Tier 1.5: Cinematic Films (16:9) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {[
-              { label: "01", title: "Lee Heritage",          cat: "Hospitality",               vimeo: "1183128960" },
-              { label: "02", title: "Heaven View Villa",     cat: "Hospitality",               vimeo: "1183128507" },
+              { label: "01", title: "Lee Heritage",          cat: "Hospitality",               vid: "https://www.pexels.com/download/video/3121459/" },
+              { label: "02", title: "Heaven View Villa",     cat: "Hospitality",               vid: "https://www.pexels.com/download/video/8422238/" },
             ].map((video) => (
               <Reveal key={video.label} delay={0.1}>
                 <div className="group relative aspect-video overflow-hidden bg-black cursor-pointer rounded-[16px]">
                   <div className="absolute inset-0 pointer-events-none">
-                    <iframe
-                      src={`https://player.vimeo.com/video/${video.vimeo}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1`}
-                      className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen"
+                    <SmartVideo
+                      src={video.vid}
+                      hoverPlay={true}
+                      mobileFallback={true}
+                      className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover"
                     />
                   </div>
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">

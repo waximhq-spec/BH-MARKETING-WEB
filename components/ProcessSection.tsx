@@ -6,23 +6,18 @@ import { motion, useScroll, useMotionValueEvent, MotionValue } from "framer-moti
 const STEPS = [
   {
     num: "01",
-    title: "Strategy",
-    desc: "Every decision is rooted in your business objectives. We don't design for aesthetics alone; we design for conversion, engagement, and growth.",
+    title: "Visual Direction",
+    desc: "Every project begins with defining how your brand should be perceived. We align visuals, messaging, and audience intent before anything is produced.",
   },
   {
     num: "02",
-    title: "Production",
-    desc: "We strip away the unnecessary, leaving only what drives impact. Clean lines, deliberate spacing, and intuitive user journeys.",
+    title: "Cinematic Production",
+    desc: "We produce cinematic content engineered to position your brand at a higher standard. Every frame is intentional, consistent, and built to elevate perception.",
   },
   {
     num: "03",
-    title: "Post-Production",
-    desc: "Applying high-end visual standards to every pixel. Smooth motion, refined typography, and pixel-perfect layouts.",
-  },
-  {
-    num: "04",
-    title: "Delivery",
-    desc: "Built on modern, robust architecture. Ready to handle traffic spikes and evolve seamlessly as your brand scales.",
+    title: "Brand Synergy",
+    desc: "We refine and systemize your visual identity across outputs, ensuring every piece of content reinforces a cohesive, premium brand presence.",
   },
 ];
 
@@ -80,11 +75,10 @@ export default function ProcessSection() {
               className="font-black leading-[0.92] tracking-tight text-white mb-6 lg:mb-8"
               style={{ fontSize: "clamp(2.5rem, 6vw, 5.2rem)", letterSpacing: "-0.04em" }}
             >
-              WE DON&apos;T<br />
-              <span className="text-white/25">DECORATE</span><br />
-              <span className="text-white/25">BRANDS.</span><br />
-              WE BUILD THEM TO<br />
-              LAST.
+              WE DESIGN<br />
+              PERCEPTION.<br />
+              <span className="text-white/25">FRAME BY</span><br />
+              <span className="text-white/25">FRAME.</span>
             </motion.h2>
 
             <motion.p
@@ -92,9 +86,10 @@ export default function ProcessSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-white/40 text-[12px] lg:text-[13px] font-medium tracking-wide"
+              className="text-white/40 text-[12px] lg:text-[13px] font-medium tracking-wide max-w-[280px]"
+              style={{ lineHeight: 1.6 }}
             >
-              Cinematic. More Intentional.
+              We don&apos;t guess. We understand, plan, and execute with intent.
             </motion.p>
           </div>
 
@@ -164,7 +159,8 @@ export default function ProcessSection() {
           className="text-white font-black mb-16"
           style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
         >
-          THE PROCESS.
+          WE DESIGN PERCEPTION.<br />
+          <span className="text-white/25">FRAME BY FRAME.</span>
         </motion.h2>
 
         <div className="relative border-l border-white/10 ml-4 flex flex-col pt-4 pb-12">

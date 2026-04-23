@@ -254,9 +254,9 @@ export default function Home() {
       <main className="relative bg-black min-h-screen">
 
         <section
-        data-theme="red"
-        className="relative h-[100svh] flex flex-col justify-start overflow-hidden"
-      >
+          data-theme="red"
+          className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden py-[100px] lg:py-[140px]"
+        >
         {/* Background Video */}
         <SmartVideo
           src="https://www.pexels.com/download/video/8396974/"
@@ -276,72 +276,61 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
 
-        {/* Content — pt accounts for fixed 64px navbar + responsive breathing room */}
-        <div
-          className="w-full max-w-[1536px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 pb-32 flex flex-col justify-center"
-          style={{
-            paddingTop: "max(120px, calc(64px + clamp(3rem, 8svh, 6rem)))",
-            minHeight: "100svh",
-          }}
-        >
-          {/* Pre-Header */}
-          <div className="w-full mb-4 lg:mb-6">
-            <p className="text-white font-mono tracking-[0.15em] uppercase text-[9px] anim-fade-up -ml-[4px] opacity-40">
+        {/* Content Wrapper */}
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 flex flex-col">
+          
+          <div className="w-full mb-6 md:mb-10 lg:mb-12">
+            <p className="text-white font-mono tracking-[0.2em] uppercase text-[10px] md:text-[11px] anim-fade-up opacity-40">
               [ Cinmach Productions · Manama ]
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-12 lg:gap-8 xl:gap-16">
-            {/* Left Column: Headline */}
-            <div className="flex flex-col items-start gap-4 md:gap-6 lg:w-[60%] xl:w-[62%] flex-shrink-0 min-w-0">
+          <div className="flex flex-col lg:flex-row w-full gap-12 lg:gap-[60px] xl:gap-[80px] items-start lg:items-center">
+            
+            {/* Left Column (60%) */}
+            <div className="w-full lg:w-[60%] flex flex-col shrink-0">
               <h1
-                className="text-white font-black flex flex-col w-full"
-                style={{ letterSpacing: "-0.05em" }}
+                className="text-white font-black leading-[0.9] tracking-tight"
+                style={{ fontSize: "clamp(48px, 8vw, 120px)" }}
               >
-                <span className="block anim-fade-up anim-delay-1 text-[46px] md:text-[clamp(4rem,9.5vw,10.5rem)] leading-[0.9] md:leading-[0.82]">CREATE</span>
-                <span className="block anim-fade-up anim-delay-2 text-[46px] md:text-[clamp(4rem,9.5vw,10.5rem)] leading-[0.9] md:leading-[0.82]">YOUR</span>
-                <span className="block anim-fade-up anim-delay-3 text-[46px] md:text-[clamp(4rem,9.5vw,10.5rem)] leading-[0.9] md:leading-[0.82]">PRESENCE.</span>
+                <span className="block anim-fade-up anim-delay-1">CREATE</span>
+                <span className="block anim-fade-up anim-delay-2">YOUR</span>
+                <span className="block anim-fade-up anim-delay-3">PRESENCE.</span>
               </h1>
             </div>
 
-            {/* Right Column: Supporting Content */}
-            <div className="flex flex-col items-start lg:w-[40%] xl:w-[35%] w-full lg:pt-[4vw]">
-              <div className="max-w-[320px] md:max-w-[480px] mb-10 md:mb-16 anim-fade-up anim-delay-3">
-                <p 
-                  className="text-white font-black mb-2.5 md:mb-5" 
-                  style={{ fontSize: "clamp(1.4rem, 2.5vw, 2.3rem)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
-                >
-                  We don’t shoot content.<br className="hidden md:block" /> We build perception.
-                </p>
-                <p
-                  className="text-white/60 md:text-white/40 font-light text-[14px] md:text-[clamp(0.9rem,1.2vw,1.1rem)]"
-                  style={{ lineHeight: 1.75, letterSpacing: "0.01em" }}
-                >
-                  From strategy to final delivery, we create cinematic content that captures attention and positions you above the competition.
-                </p>
-              </div>
+            {/* Right Column (40%) */}
+            <div className="w-full lg:w-[40%] flex flex-col items-start anim-fade-up anim-delay-3">
+               <p 
+                 className="text-white font-black leading-[1.1] tracking-tight mb-4 lg:mb-6"
+                 style={{ fontSize: "clamp(18px, 2vw, 24px)" }}
+               >
+                 We don’t shoot content.<br className="hidden lg:block lg:mb-1" /> We build perception.
+               </p>
+               <p
+                 className="text-white/60 font-medium tracking-wide mb-10"
+                 style={{ fontSize: "clamp(14px, 1.2vw, 16px)", lineHeight: 1.65 }}
+               >
+                 From strategy to final delivery, we create cinematic content that captures attention and positions you above the competition.
+               </p>
 
-              <div className="flex flex-col items-start gap-6 md:gap-4 anim-fade-up anim-delay-4 w-full">
-                <div className="flex flex-col md:flex-row gap-3.5 md:gap-4 w-full md:w-auto">
+               <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
                   <Link
                     href="/work"
-                    className="w-full md:w-52 h-[52px] md:h-auto md:py-4.5 bg-[#8B0016] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black active:scale-[0.98] transition-all duration-500 shadow-2xl flex items-center justify-center"
+                    className="w-full sm:w-[180px] py-[18px] bg-[#B11226] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-center border border-[#B11226] hover:border-white"
                   >
                     View Work
                   </Link>
                   <button
                     onClick={openProjectModal}
                     type="button"
-                    className="w-full md:w-52 h-[52px] md:h-auto md:py-4.5 bg-transparent border border-white/20 md:border-0 md:bg-white text-white md:text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black md:hover:bg-[#8B0016] md:hover:text-white active:scale-[0.98] transition-all duration-500 shadow-2xl flex items-center justify-center"
+                    className="w-full sm:w-[180px] py-[18px] bg-transparent border border-white/20 text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-center"
                   >
-                    Start a Project
+                    Start Project
                   </button>
-                </div>
-                <p className="text-white/30 md:text-white/20 font-mono text-[9px] tracking-[0.25em] uppercase md:pl-1">
-                  Trusted by brands that want to stand out.
-                </p>
-              </div>
+               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -694,11 +683,11 @@ export default function Home() {
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
                   {[
-                    { quote: "Cinmach didn't just deliver videos; they codified our brand's visual DNA. The results completely reshaped how our market perceives us.", name: "Omar Rahman", role: "Director of Operations · Real Estate Firm" },
-                    { quote: "Their team operates with a level of precision we haven't seen from other agencies to date. Flawless execution from top to bottom.", name: "Sara Malik", role: "Marketing Director · Creative Agency" },
-                    { quote: "The visual standards are uncompromising. They turned a complex service offering into a gorgeous, highly converting asset ecosystem.", name: "Ahmed Khan", role: "Founder · Technology Brand" },
-                    { quote: "We engaged Cinmach for a brand film and ended up redefining our entire positioning. Their strategic input is invaluable.", name: "Elena R.", role: "Managing Partner · Investment Group" },
-                    { quote: "Fast, deliberate, and exceptionally high-end. Selecting them was the absolute best marketing decision we made this year.", name: "Fahad A.", role: "Head of Creative · Development Company" }
+                    { quote: "The shift in our market positioning was immediate. Cinmach codified a visual DNA that moved us from a local player to a premium entity.", name: "Omar Rahman", role: "Director of Operations · Real Estate Firm" },
+                    { quote: "They didn't just produce content; they engineered a perception of excellence that has redefined our entire brand authority.", name: "Sara Malik", role: "Marketing Director · Creative Agency" },
+                    { quote: "Our brand perception underwent a total transformation. The cinematic ecosystem they built has positioned us as the default choice in our tier.", name: "Ahmed Khan", role: "Founder · Technology Brand" },
+                    { quote: "The visual framework Cinmach established has shifted how stakeholders engage with our firm. We finally look as formidable as we are.", name: "Elena R.", role: "Managing Partner · Investment Group" },
+                    { quote: "Cinematically, they are unmatched. They didn't just capture our projects; they built a visual standard that has elevated our entire portfolio.", name: "Fahad A.", role: "Head of Creative · Development Company" }
                   ].map((t, idx) => (
                     <div 
                       key={idx} 
@@ -729,11 +718,11 @@ export default function Home() {
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
                   {[
-                    { quote: "A boutique team that punches far above their weight. Every frame they produce feels like an intentional work of art.", name: "Daniel Carter", role: "VP of Growth · Digital Venture" },
-                    { quote: "Unmatched attention to detail. The resulting campaign outperformed our historical benchmarks by a staggering 300%.", name: "Aisha R.", role: "Marketing Manager · Hospitality Group" },
-                    { quote: "They don't just execute a brief—they challenge it, elevate it, and return with something exponentially more impactful.", name: "James C.", role: "CEO · Private Business" },
-                    { quote: "A seamless blend of aggressive strategy and minimalist design. They captured our exact vibe instantly.", name: "Layla Noor", role: "Owner · Lifestyle Brand" },
-                    { quote: "Top-tier reliability. When Cinmach takes on a project, we know the final product will immediately elevate our brand.", name: "Tariq Hassani", role: "General Manager · Logistics Firm" }
+                    { quote: "Every frame is an intentional move toward more premium positioning. Our audience response has shifted from interest to total trust.", name: "Daniel Carter", role: "VP of Growth · Digital Venture" },
+                    { quote: "The visual consistency across our assets has solidified a cohesive brand image that finally matches our high-end service standards.", name: "Aisha R.", role: "Marketing Manager · Hospitality Group" },
+                    { quote: "The perception shift was palpable. By prioritizing cinematic visual identity, our brand now commands a much higher authority in the market.", name: "James C.", role: "CEO · Private Business" },
+                    { quote: "They captured our exact essence and elevated it. Our brand identity now feels intentionally premium and globally competitive.", name: "Layla Noor", role: "Owner · Lifestyle Brand" },
+                    { quote: "A complete overhaul of our visual perception. Cinmach turned our technical operations into a cinematic story of reliability and scale.", name: "Tariq Hassani", role: "General Manager · Logistics Firm" }
                   ].map((t, idx) => (
                     <div 
                       key={idx} 

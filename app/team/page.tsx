@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useModal } from "@/components/ModalContext";
 
 /* ─────────────────────────────────────────────────────────────
@@ -29,80 +30,117 @@ function Reveal({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Team Data - Focusing exclusively on Leadership
+   Team Data
    ─────────────────────────────────────────────────────────── */
+const FEATURED_LEADERSHIP = {
+  name: "Suhail Ahmad Goni",
+  role: "Co-Founder & CEO",
+  badge: "CO-FOUNDER & CEO",
+  image: "/team-img/suhail.png",
+  desc: "The catalyst of Cinmach's architectural evolution. Suhail orchestrates the convergence of creative ambition and strategic scale, ensuring every production transcends traditional boundaries to establish a new standard of cinematic excellence.",
+};
+
 const LEADERSHIP = [
   {
     name: "Shayan Ahmad",
-    role: "Head of Pre-Production & Director",
+    role: "Head of Pre-Production",
+    badge: "PRE-PRODUCTION DIRECTOR",
     desc: "The architect of vision and narrative strategy. Shayan defines the soul of every project before the cameras roll. He conceptualizes complex visual worlds, crafts powerful narratives, and leads elite global crews on-set to capture raw, cinematic emotion with unparalleled precision and high-end aesthetic intent.",
   },
   {
     name: "Wasim Pakhtoon",
-    role: "Head of Post-Production & Digital Experience",
+    role: "Head of Post-Production",
+    badge: "POST-PRODUCTION DIRECTOR",
     desc: "The master of refined delivery and digital architecture. Wasim perfects the technical aesthetic of the final capture. He provides deep strategic oversight of the entire post-production pipeline, conducting the workflow from final color grade to premium UI/UX design to ensure flawless execution and visual continuity.",
   },
 ];
 
 /* ─────────────────────────────────────────────────────────────
+   Component: Featured Leadership (Primary Section)
+   ─────────────────────────────────────────────────────────── */
+function FeaturedLeadershipCard({ leader }: { leader: any }) {
+  return (
+    <Reveal className="w-full">
+      <div className="flex flex-col items-center text-center py-6 md:py-8 group">
+        {/* Elevated Visual Scale: Refined avatar with priority loading */}
+        <div className="relative w-48 md:w-64 mx-auto mb-10 group">
+          <div className="relative aspect-square overflow-hidden bg-neutral-100 rounded-full border border-black/10 transition-transform duration-1000 group-hover:scale-[1.02] flex items-center justify-center">
+            {leader.image ? (
+              <Image 
+                src={leader.image} 
+                alt={leader.name} 
+                fill 
+                priority
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+            ) : (
+              <div className="w-4 h-4 rounded-full bg-[#8B0016]/20 animate-pulse" />
+            )}
+          </div>
+
+          <div className="absolute -bottom-2 -right-2 md:-right-6 px-4 py-2 bg-[#8B0016] rounded-full flex items-center justify-center font-mono text-[8px] md:text-[9px] text-white border-2 border-white shadow-xl z-20 whitespace-nowrap">
+            {leader.badge}
+          </div>
+        </div>
+
+        {/* Refined Hierarchy Copy */}
+        <div className="max-w-2xl px-6">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="w-6 h-px bg-[#8B0016]/30" />
+            <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase font-bold">{leader.role}</p>
+            <span className="w-6 h-px bg-[#8B0016]/30" />
+          </div>
+          
+          <h3 className="text-black font-bold text-4xl md:text-6xl tracking-tighter leading-[0.9] mb-6">
+            {leader.name.split(" ").map((word: string, i: number) => (
+              <span key={i} className={i === 0 ? "block text-black" : "block text-black/20"}>{word}</span>
+            ))}
+          </h3>
+
+          <p className="text-black/60 text-sm md:text-base leading-relaxed font-light italic max-w-xl mx-auto">
+            "{leader.desc}"
+          </p>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
    Component: Leadership Card (Symmetrical Circular Equity)
    ─────────────────────────────────────────────────────────── */
 function LeadershipCard({ leader }: { leader: any }) {
-  const isShayan = leader.name === "Shayan Ahmad";
-  
   return (
     <Reveal className="h-full">
-      <div className="group relative bg-[#FBFBFB] border border-black/5 p-8 md:p-12 h-full transition-all duration-700 hover:border-black/10 hover:shadow-2xl hover:shadow-black/5 flex flex-col">
-        <div className="flex flex-col gap-10 flex-1">
-          {/* Circular Abstract Profile Placeholder */}
-          <div className="relative aspect-square w-48 mx-auto overflow-hidden bg-neutral-200 rounded-full border border-black/5 shrink-0 transition-transform duration-700 group-hover:scale-105 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-tr from-neutral-300 via-neutral-100 to-neutral-200 opacity-40" />
-            
-            {/* Center Aesthetic Dot */}
-            <div className="w-4 h-4 rounded-full bg-[#8B0016]/20 animate-pulse" />
-
-            <div className="absolute top-0 right-1/4 w-10 h-10 bg-[#8B0016] rounded-full flex items-center justify-center font-mono text-[9px] text-white border-2 border-[#FBFBFB]">
-              LEAD
-            </div>
+      <div className="flex flex-col items-center text-center py-6 group">
+        {/* Minimal Avatar Scale */}
+        <div className="relative w-40 md:w-52 mx-auto mb-8">
+          <div className="relative aspect-square overflow-hidden bg-neutral-100 rounded-full border border-black/5 transition-transform duration-1000 group-hover:scale-[1.02] flex items-center justify-center">
+            <div className="w-3 h-3 rounded-full bg-[#8B0016]/20 animate-pulse" />
           </div>
 
-          {/* Leadership Copy - Balanced Hierarchy */}
-          <div className="flex flex-col flex-1 justify-between">
-            <div>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex items-center justify-center w-6 h-6 shrink-0">
-                  {isShayan ? (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B0016" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="14.31" y1="8" x2="20.05" y2="17.94" />
-                      <line x1="9.69" y1="8" x2="21.17" y2="8" />
-                      <line x1="7.38" y1="12" x2="13.12" y2="2.06" />
-                      <line x1="9.69" y1="16" x2="3.95" y2="6.06" />
-                      <line x1="14.31" y1="16" x2="2.83" y2="16" />
-                      <line x1="16.62" y1="12" x2="10.88" y2="21.94" />
-                    </svg>
-                  ) : (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B0016" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 2v20M2 12h20M12 2c3.5 0 6 4.5 6 10s-2.5 10-6 10-6-4.5-6-10 2.5-10 6-10z" />
-                    </svg>
-                  )}
-                </div>
-                <span className="w-8 h-px bg-[#8B0016] shrink-0" />
-                <p className="text-[#8B0016] font-mono text-[10px] tracking-[0.3em] uppercase font-bold truncate">{leader.role}</p>
-              </div>
-              
-              <h3 className="text-black font-black text-3xl md:text-5xl tracking-tighter leading-tight mb-8">
-                {leader.name.split(" ").map((word: string, i: number) => (
-                  <span key={i} className={i === 0 ? "block" : "block text-black/20"}>{word}</span>
-                ))}
-              </h3>
-
-              <p className="text-black/50 text-sm md:text-base leading-relaxed font-light">
-                {leader.desc}
-              </p>
-            </div>
+          <div className="absolute -bottom-1 -right-1 px-3 py-1 bg-[#8B0016] rounded-full flex items-center justify-center font-mono text-[7px] md:text-[8px] text-white border-2 border-white shadow-lg z-20 whitespace-nowrap">
+            {leader.badge}
           </div>
+        </div>
+
+        {/* Leadership Copy */}
+        <div className="max-w-md px-4">
+          <div className="flex items-center justify-center gap-3 mb-3">
+             <span className="w-4 h-px bg-[#8B0016]/30" />
+             <p className="text-[#8B0016] font-mono text-[8px] tracking-[0.2em] uppercase font-bold">{leader.role}</p>
+             <span className="w-4 h-px bg-[#8B0016]/30" />
+          </div>
+          
+          <h3 className="text-black font-bold text-2xl md:text-4xl tracking-tighter leading-tight mb-4">
+            {leader.name.split(" ").map((word: string, i: number) => (
+              <span key={i} className={i === 0 ? "block text-black" : "block text-black/20"}>{word}</span>
+            ))}
+          </h3>
+
+          <p className="text-black/50 text-[13px] md:text-sm leading-relaxed font-light">
+            {leader.desc}
+          </p>
         </div>
       </div>
     </Reveal>
@@ -165,11 +203,22 @@ export default function TeamPage() {
       </section>
 
       {/* SECTION 2: LEADERSHIP (EDITORIAL) */}
-      <section data-theme="light" className="py-24 md:py-40 bg-white">
+      <section data-theme="light" className="py-12 md:py-24 bg-white">
         <div className="container">
-          <Reveal className="mb-24">
-            <h2 className="text-black/10 font-mono text-[11px] tracking-[0.5em] uppercase border-b border-black/5 pb-8 flex items-center justify-between">
-              Studio Leadership <span>01 — Founding Directors</span>
+          
+          {/* Featured Primary Leadership */}
+          <div className="mb-12 md:mb-16">
+            <FeaturedLeadershipCard leader={FEATURED_LEADERSHIP} />
+            
+            {/* Subtle Divider */}
+            <Reveal delay={0.2} className="mt-4 flex justify-center">
+              <div className="w-12 h-px bg-black/5" />
+            </Reveal>
+          </div>
+
+          <Reveal className="mb-12">
+            <h2 className="text-black/20 font-mono text-[11px] tracking-[0.5em] uppercase border-b border-black/5 pb-4 flex items-center justify-between">
+              Core Leadership <span>02 — Founding Directors</span>
             </h2>
           </Reveal>
 

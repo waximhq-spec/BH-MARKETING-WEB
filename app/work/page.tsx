@@ -105,7 +105,6 @@ function CarouselSlides() {
                   <SmartVideo
                     src={slide.vid}
                     autoPlayViewport={isActive} // Play only if it is the active slide AND in viewport
-                    mobileFallback={true}
                     className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover"
                   />
                   {/* Meta overlay */}
@@ -189,7 +188,6 @@ function CarouselSlides() {
                     <SmartVideo
                       src={slide.vid}
                       autoPlayViewport={isCenter}
-                      mobileFallback={true}
                       className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 object-cover"
                     />
                   </div>
@@ -335,7 +333,6 @@ export default function WorkPage() {
                     <SmartVideo 
                       src={reel.url}
                       hoverPlay={true}
-                      mobileFallback={true}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">

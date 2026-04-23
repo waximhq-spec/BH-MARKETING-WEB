@@ -15,7 +15,7 @@ export default function SmartVideo({
   poster,
   autoPlayViewport = false,
   hoverPlay = false,
-  mobileFallback = true,
+  mobileFallback = false,
   className,
   ...props
 }: SmartVideoProps) {

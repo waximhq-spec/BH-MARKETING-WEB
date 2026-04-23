@@ -282,7 +282,6 @@ export default function Home() {
           src="https://www.pexels.com/download/video/8396974/"
           poster="https://images.pexels.com/photos/8396974/pexels-photo-8396974.jpeg"
           autoPlayViewport={true}
-          mobileFallback={true}
           className="absolute inset-0 w-full h-full object-cover grayscale brightness-50"
         />
 
@@ -487,7 +486,6 @@ export default function Home() {
                   <SmartVideo 
                     src={reel.url}
                     hoverPlay={true}
-                    mobileFallback={true}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
@@ -511,7 +509,6 @@ export default function Home() {
                     <SmartVideo
                       src={video.vid}
                       hoverPlay={true}
-                      mobileFallback={true}
                       className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover"
                     />
                   </div>

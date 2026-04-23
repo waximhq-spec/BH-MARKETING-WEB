@@ -276,126 +276,144 @@ function Reveal({
    ─────────────────────────────────────────────────────────── */
 export default function WorkPage() {
   return (
-    <section 
-      data-theme="light" 
-      className="min-h-screen pt-[120px] pb-24" 
-      style={{ background: "#FAFAFA" }}
-    >
-      <div className="container">
-        
-        {/* Header */}
-        <Reveal className="mb-20">
-          <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-6">
-            Archive
-          </p>
-          <h1
-            className="text-black font-black leading-[0.95]"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", letterSpacing: "-0.04em" }}
-          >
-            OUR<br />PORTFOLIO.
-          </h1>
-          <p className="mt-8 text-black/60 max-w-md font-light leading-relaxed">
-            A curated selection of cinematic assets, from high-end hospitality films to luxury real estate visuals.
-          </p>
-        </Reveal>
-
-        {/* SECTION 1: CINEMATIC CAROUSEL (16:9) */}
-        <div className="mb-24 px-4 sm:px-0 overflow-hidden">
-          <Reveal className="mb-10">
-            <h2 className="text-black font-black text-sm tracking-[0.1em] uppercase border-b border-black/10 pb-4">
-              Cinematic Films
-            </h2>
-          </Reveal>
-
-          <div className="relative">
-            <CarouselSlides />
-          </div>
-        </div>
-
-        {/* SECTION 2: VERTICAL REELS (9:16) */}
-        <div className="py-[120px]" style={{ background: "#FFFFFF", marginLeft: "-50vw", marginRight: "-50vw", paddingLeft: "50vw", paddingRight: "50vw" }}>
-          <div className="container px-4 sm:px-0">
-            <Reveal className="mb-10">
-              <h2 className="text-black font-black text-sm tracking-[0.1em] uppercase border-b border-black/10 pb-4">
-                Vertical Reels
-              </h2>
-            </Reveal>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-              {[
-                { id: 1, title: "Modern Space", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
-                { id: 2, title: "Design Details", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
-                { id: 3, title: "Exterior Profile", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
-                { id: 4, title: "Lounge Area", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
-              ].map((reel, i) => (
-                <Reveal key={reel.id} delay={i * 0.1}>
-                  <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[16px] overflow-hidden cursor-pointer border border-black/5">
-                    <SmartVideo 
-                      src={reel.url}
-                      hoverPlay={true}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
-                      <p className="text-white/80 font-mono text-[9px] tracking-[0.4em] uppercase">Cinematic</p>
-                      <h4 className="text-white font-bold text-lg tracking-tight mt-1">{reel.title}</h4>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
+    <main className="bg-white min-h-screen">
+      {/* ══════════════════════════════════════════════════════
+          HERO SECTION — ELEVATED
+      ══════════════════════════════════════════════════════ */}
+      <section 
+        data-theme="light" 
+        className="pt-40 md:pt-56 pb-20 md:pb-32 bg-white" 
+      >
+        <div className="container">
+          <Reveal>
+            <div className="flex items-center gap-4 mb-10">
+              <span className="w-8 h-px bg-[#8B0016]" />
+              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
+                Archive
+              </p>
             </div>
-          </div>
+            <h1
+              className="text-black font-black leading-[0.85] tracking-tight"
+              style={{ fontSize: "clamp(3.5rem, 11vw, 10rem)", letterSpacing: "-0.05em" }}
+            >
+              SELECTED<br />
+              <span className="text-[#8B0016]">WORK.</span>
+            </h1>
+          </Reveal>
+          
+          <Reveal delay={0.1} className="mt-16 sm:mt-20 border-t border-black/10 pt-10">
+            <p className="text-black/60 max-w-2xl font-light leading-relaxed text-lg lg:text-xl">
+              A curated selection of cinematic assets. We partner with visionaries in luxury hospitality, real estate, and high-end consumer brands to shape global narratives.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          SECTION 1: CINEMATIC CAROUSEL (16:9)
+      ══════════════════════════════════════════════════════ */}
+      <section data-theme="light" className="py-20 md:py-28 bg-[#FAFAFA] border-t border-black/5 overflow-hidden">
+        <div className="container mb-12">
+          <Reveal>
+            <h2 className="text-black font-black text-xs md:text-sm tracking-[0.2em] uppercase border-b border-black/10 pb-4 inline-flex">
+              Cinematic Films <span className="ml-4 text-black/30">01</span>
+            </h2>
+          </Reveal>
         </div>
 
-        {/* SECTION 3: IMAGE SHOWCASE (SQUARE) */}
-        <div className="mt-24 px-4 sm:px-0">
-          <Reveal className="mb-10">
-            <h2 className="text-black font-black text-sm tracking-[0.1em] uppercase border-b border-black/10 pb-4">
-              Visual Narrative
+        <div className="relative">
+          <CarouselSlides />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          SECTION 2: VERTICAL REELS (9:16)
+      ══════════════════════════════════════════════════════ */}
+      <section data-theme="light" className="py-24 md:py-36 bg-white border-t border-black/5">
+        <div className="container">
+          <Reveal className="mb-14">
+            <h2 className="text-black font-black text-xs md:text-sm tracking-[0.2em] uppercase border-b border-black/10 pb-4 inline-flex">
+              Vertical Reels <span className="ml-4 text-black/30">02</span>
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {[
+              { id: 1, title: "Modern Space", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
+              { id: 2, title: "Design Details", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
+              { id: 3, title: "Exterior Profile", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=165" },
+              { id: 4, title: "Lounge Area", url: "https://player.vimeo.com/external/554522927.sd.mp4?s=33842cda0dbe2666cc63266986427d11f715ea08&profile_id=164" },
+            ].map((reel, i) => (
+              <Reveal key={reel.id} delay={i * 0.1}>
+                <div className="group relative aspect-[9/16] bg-neutral-100 overflow-hidden cursor-pointer">
+                  <SmartVideo 
+                    src={reel.url}
+                    hoverPlay={true}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0">
+                    <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase mb-2 drop-shadow-md">Cinematic</p>
+                    <h4 className="text-white font-black text-xl md:text-2xl tracking-tight leading-tight">{reel.title}</h4>
+                  </div>
+                  {/* Subtle Red Frame on Hover */}
+                  <div className="absolute inset-0 border-2 border-[#8B0016] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          SECTION 3: IMAGE SHOWCASE (SQUARE)
+      ══════════════════════════════════════════════════════ */}
+      <section data-theme="light" className="py-24 md:py-36 bg-[#FAFAFA] border-t border-black/5">
+        <div className="container">
+          <Reveal className="mb-14">
+            <h2 className="text-black font-black text-xs md:text-sm tracking-[0.2em] uppercase border-b border-black/10 pb-4 inline-flex">
+              Visual Narrative <span className="ml-4 text-black/30">03</span>
+            </h2>
+          </Reveal>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               { label: "03", title: "Harbour Row Dining",    cat: "Hospitality",   driveId: "1LGbCekMBgMNNIyabVbFiTkVO6-brJgAe", bg: "bg-neutral-200" },
               { label: "04", title: "Ebrahim Corp Identity", cat: "Brand Film",    driveId: "1TZB5T-PnWl2-cePCrcC4tdsJAz2PSI3w", bg: "bg-neutral-300" },
               { label: "05", title: "Corporate Assets",      cat: "Hospitality",   driveId: "1-b48lZJ5UFnpe6QG639kJAiB0O6yqGBI", bg: "bg-neutral-200" },
               { label: "06", title: "Brand Vision",          cat: "Hospitality",   driveId: "1Ex9QPsfx6VsIX8GhiDqmSNStOrg76OHp", bg: "bg-neutral-300" },
-            ].map((project) => (
-              <Reveal key={project.label} delay={0.1}>
+            ].map((project, idx) => (
+              <Reveal key={project.label} delay={idx * 0.1}>
                 <motion.div
                   className={`group relative aspect-square overflow-hidden ${project.bg} cursor-pointer`}
-                  whileHover={{ scale: 1.01 }}
+                  whileHover={{ y: -5 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <img
                     src={`https://drive.google.com/thumbnail?sz=w1000&id=${project.driveId}`}
                     alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.12]"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
-                    <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase mb-1">{project.cat}</p>
-                    <h4 className="text-white font-black text-sm md:text-lg tracking-tight leading-tight">{project.title}</h4>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="text-white/30 font-mono text-[9px] tracking-[0.2em]">{project.label}</span>
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                  
+                  <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+                    <p className="text-[#8B0016] font-mono text-[8px] tracking-[0.3em] uppercase mb-2">{project.cat}</p>
+                    <h4 className="text-white font-black text-sm md:text-base tracking-tight leading-snug">{project.title}</h4>
                   </div>
                 </motion.div>
               </Reveal>
             ))}
           </div>
-        </div>
 
-        {/* Additional Tier for legacy projects if needed */}
-        <div className="mt-24 border-t border-black/5 pt-16">
-          <Reveal>
-            <p className="text-black/40 text-[10px] font-mono tracking-[0.2em] uppercase">
-              More Work Coming Soon
+          <Reveal className="mt-24 border-t border-black/10 pt-16 text-center">
+            <p className="text-black/30 text-[10px] font-mono tracking-[0.4em] uppercase">
+              End of Archive. More Work Loading...
             </p>
           </Reveal>
-        </div>
 
-      </div>
-    </section>
+        </div>
+      </section>
+    </main>
   );
 }

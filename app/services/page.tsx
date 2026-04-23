@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal utility
@@ -66,61 +65,40 @@ const SERVICES_DATA = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   Interactive Card Component
+   Brutalist Service Component
    ─────────────────────────────────────────────────────────── */
-function ServiceCard({ service }: { service: typeof SERVICES_DATA[0] }) {
+function ServiceCard({ service, index }: { service: typeof SERVICES_DATA[0]; index: number }) {
+  const isTopRow = index < 3;
   return (
-    <motion.div
-      layout
-      className="group relative bg-white border border-black/5 p-8 md:p-10 flex flex-col h-full transition-all duration-500 will-change-transform"
-      style={{
-        boxShadow: "0 16px 40px rgba(0,0,0,0.04)",
-        borderRadius: "16px",
-      }}
-      whileHover={{ y: -4 }}
-    >
-      {/* Top accent line on hover */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-full"
-        style={{ background: "linear-gradient(90deg, #8B0016, transparent)" }}
-      />
+    <div className={`group relative bg-transparent flex flex-col h-full border-t border-black/10 transition-colors duration-500 hover:bg-white pt-10 pb-12 px-6 lg:px-10`}>
+      {/* Red accent beam */}
+      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#8B0016] scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-500 ease-out" />
       
-      <span className="text-black/20 font-mono text-[10px] tracking-[0.3em] uppercase mb-6 block font-bold transition-colors group-hover:text-[#8B0016]">
-        {service.num}
+      <span className="text-black/30 font-mono text-[10px] tracking-[0.4em] uppercase mb-8 block transition-colors group-hover:text-[#8B0016]">
+        [{service.num}]
       </span>
       
-      <motion.h3
-        layout="position"
-        className="text-black font-black mb-4 leading-tight group-hover:text-[#8B0016] transition-colors duration-300"
-        style={{ fontSize: "clamp(1.3rem, 2vw, 1.6rem)", letterSpacing: "-0.02em" }}
+      <h3
+        className="text-black font-black mb-6 leading-[1.05] group-hover:translate-x-2 transition-transform duration-500"
+        style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)", letterSpacing: "-0.03em" }}
       >
         {service.title}
-      </motion.h3>
+      </h3>
       
-      <motion.p layout="position" className="text-black/60 text-sm leading-relaxed max-w-[280px]">
+      <p className="text-black/60 text-[15px] leading-relaxed mb-10 max-w-[90%] font-light group-hover:text-black transition-colors duration-500">
         {service.shortDesc}
-      </motion.p>
+      </p>
 
-      {/* Permanently Open Bullet Points */}
-      <motion.div
-        layout
-        className="overflow-hidden border-t border-black/5 pt-6 mt-6 flex flex-col gap-3"
-      >
+      {/* Structured bullet list */}
+      <div className="mt-auto flex flex-col gap-3 group-hover:opacity-100 transition-opacity duration-500">
         {service.bullets.map((bullet, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, x: -8 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.05 }}
-            className="flex items-center gap-4"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-[#8B0016]/80 shrink-0" />
-            <span className="text-black/80 text-[14px] font-medium tracking-wide">{bullet}</span>
-          </motion.div>
+          <div key={idx} className="flex items-center gap-4">
+            <span className="w-1.5 h-1.5 bg-[#8B0016] opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+            <span className="text-black/70 text-sm font-medium tracking-tight uppercase group-hover:text-black transition-colors duration-300">{bullet}</span>
+          </div>
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
@@ -132,66 +110,58 @@ export default function ServicesPage() {
     <main className="bg-white min-h-screen">
 
       {/* ══════════════════════════════════════════════════════
-          HERO SECTION
+          HERO SECTION — ELEVATED
       ══════════════════════════════════════════════════════ */}
       <section
         data-theme="light"
-        className="relative pt-40 md:pt-56 pb-24 md:pb-36 overflow-hidden"
-        style={{ background: "#FAFAFA" }}
+        className="relative pt-40 md:pt-56 pb-24 md:pb-36 bg-white overflow-hidden"
       >
-        {/* Subtle grid overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
-
         <div className="container relative z-10">
           <Reveal>
-            <p className="text-[#8B0016] font-mono tracking-[0.35em] uppercase text-[10px] mb-6 font-bold">
-              Our Services
-            </p>
+            <div className="flex items-center gap-4 mb-10">
+              <span className="w-8 h-px bg-[#8B0016]" />
+              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
+                Capabilities
+              </p>
+            </div>
           </Reveal>
 
           <Reveal delay={0.08}>
             <h1
-              className="font-black text-black mb-8"
+              className="font-black text-black mb-12"
               style={{
-                fontSize: "clamp(3rem, 9vw, 8rem)",
+                fontSize: "clamp(3.5rem, 10vw, 9rem)",
                 letterSpacing: "-0.05em",
-                lineHeight: 0.88,
+                lineHeight: 0.85,
               }}
             >
               CINEMATIC VISUALS<br />
-              <span className="text-[#8B0016]">BUILT TO MOVE</span><br />
+              <span className="text-black/20">BUILT TO MOVE</span><br />
               YOUR BRAND.
             </h1>
           </Reveal>
 
-          <Reveal delay={0.18} className="flex flex-col lg:flex-row items-start gap-12 lg:gap-24 mt-12">
+          <Reveal delay={0.18} className="flex flex-col lg:flex-row items-start gap-12 lg:gap-24 mt-16 max-w-5xl border-t border-black/10 pt-10">
             <p
-              className="text-black/55 max-w-xl leading-relaxed"
-              style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75 }}
+              className="text-black/80 font-light leading-[1.8] flex-1"
+              style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)" }}
             >
-              We go far beyond the shoot. Cinmach Productions offers a full creative suite — from concept and direction to production, post-production, and digital presence. One studio, one standard of excellence.
+              We go far beyond the shoot. Cinmach Productions offers a full creative suite — from concept and direction to production, post-production, and digital presence. Delivering one flawless standard of excellence.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-5 shrink-0 w-full sm:w-auto">
               <Link
                 href="/contact"
-                className="group flex items-center gap-4 px-10 py-5 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] transition-all duration-500"
+                className="group flex justify-center items-center gap-6 px-12 py-5 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] transition-all duration-500 shadow-2xl"
               >
-                Start a Project{" "}
-                <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                Initiate Project{" "}
+                <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
               </Link>
               <Link
                 href="/work"
-                className="px-10 py-5 border border-black/10 text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-black/40 transition-all duration-500"
+                className="flex justify-center px-12 py-5 border border-black/10 text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-[#8B0016] hover:text-[#8B0016] hover:bg-[#8B0016]/5 transition-all duration-500"
               >
-                View Work
+                Explore Archive
               </Link>
             </div>
           </Reveal>
@@ -199,59 +169,68 @@ export default function ServicesPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          WHAT WE DO — INTERACTIVE GRID
+          WHAT WE DO — RIGID ARCHITECTURAL GRID
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="light" className="py-24 md:py-36 bg-[#FAFAFA] border-t border-black/5">
+      <section data-theme="light" className="py-24 md:py-40 bg-[#FAFAFA] border-t border-black/5">
         <div className="container">
-          {/* Section Header */}
-          <Reveal className="mb-16 md:mb-24 flex items-center gap-6">
+          <Reveal className="mb-20">
             <h2 
-              className="font-black text-black shrink-0"
-              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+              className="font-black text-black shrink-0 relative"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
             >
-              WHAT WE DO.
+              THE <span className="text-[#8B0016] italic font-serif pr-2">SYSTEM.</span>
             </h2>
-            <div className="h-px flex-1 bg-black/10" />
           </Reveal>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          {/* Brutalist Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-b border-black/10">
             {SERVICES_DATA.map((service, idx) => (
-              <Reveal key={service.num} delay={idx * 0.1}>
-                <ServiceCard service={service} />
+              <Reveal key={service.num} delay={idx * 0.1} className="h-full">
+                <ServiceCard service={service} index={idx} />
               </Reveal>
             ))}
+            {/* Empty filler block to complete the 3x2 grid if needed */}
+            <Reveal delay={0.5} className="h-full hidden lg:block">
+              <div className="group relative bg-transparent flex flex-col justify-center items-center h-full border-t border-black/10 transition-colors duration-500 hover:bg-black group pt-10 pb-12 px-6 lg:px-10 cursor-pointer">
+                 <p className="font-mono text-[#8B0016] tracking-[0.3em] uppercase text-[10px] group-hover:text-white transition-colors">Bespoke Solutions</p>
+                 <span className="font-black text-3xl mt-4 text-black group-hover:text-white transition-colors">→</span>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          PROCESS CALLOUT — COMPACT
+          PROCESS CALLOUT — COMPACT & STRUCTURED
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="light" className="py-20 md:py-28 bg-white border-t border-black/5">
+      <section data-theme="light" className="py-24 md:py-32 bg-white">
         <div className="container">
-          <Reveal className="grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-12 items-center">
-            <div>
-              <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] mb-5">How it works</p>
+          <Reveal className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
+            <div className="sticky top-32">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="w-8 h-px bg-[#8B0016]" />
+                <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">How it works</p>
+              </div>
               <h2
-                className="font-black text-black"
-                style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+                className="font-black text-black leading-[0.9]"
+                style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
               >
-                BRIEF → STRATEGY →<br />PRODUCTION → DELIVERY.
+                BRIEF →<br />STRATEGY →<br />PRODUCTION →<br />DELIVERY.
               </h2>
             </div>
-            <div className="flex flex-col gap-5 max-w-xs">
+            
+            <div className="flex flex-col border-t border-black/10">
               {[
-                { step: "01", label: "Discovery Call", desc: "We understand your brand, goals, and audience." },
-                { step: "02", label: "Creative Proposal", desc: "Concept, moodboard, timeline, and budget." },
-                { step: "03", label: "Production", desc: "We execute with precision, on-site and in-studio." },
-                { step: "04", label: "Delivery", desc: "Final assets delivered in all required formats." },
+                { step: "01", label: "Discovery Call", desc: "We understand your brand, goals, and audience intimately." },
+                { step: "02", label: "Creative Proposal", desc: "Concept, moodboard, visual direction, timeline, and exact budget." },
+                { step: "03", label: "Production", desc: "We execute with precision, on-site and in-studio using cinema-grade pipelines." },
+                { step: "04", label: "Delivery", desc: "Final masterpieces delivered logically in all optimal platform formats." },
               ].map((s, i) => (
-                <div key={s.step} className="flex items-start gap-5">
-                  <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.25em] shrink-0 mt-0.5">{s.step}</span>
+                <div key={s.step} className="group flex items-start gap-8 border-b border-black/10 py-10 transition-colors duration-500 hover:bg-[#FAFAFA] px-4 -mx-4 cursor-default">
+                  <span className="text-[#8B0016] font-black text-2xl shrink-0 mt-1 transition-transform group-hover:scale-110">{s.step}</span>
                   <div>
-                    <p className="text-black font-black text-sm tracking-tight">{s.label}</p>
-                    <p className="text-black/40 text-xs leading-relaxed mt-0.5">{s.desc}</p>
+                    <p className="text-black font-black text-lg tracking-tight uppercase mb-3">{s.label}</p>
+                    <p className="text-black/60 text-[15px] font-light leading-relaxed max-w-md">{s.desc}</p>
                   </div>
                 </div>
               ))}
@@ -261,44 +240,48 @@ export default function ServicesPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          FINAL CTA
+          FINAL CTA — IMMERSIVE CINEMATIC (BLACK)
       ══════════════════════════════════════════════════════ */}
-      <section
-        data-theme="dark"
-        className="py-24 md:py-36"
-        style={{ background: "linear-gradient(135deg, #0A0A0A 0%, #1a0006 100%)" }}
-      >
-        <div className="container">
+      <section data-theme="dark" className="relative py-24 md:py-48 bg-black overflow-hidden border-t-[0.5px] border-white/10">
+        <div 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(139,0,22,0.1)_0%,transparent_60%)] pointer-events-none" />
+
+        <div className="container relative z-10 text-center flex flex-col items-center">
           <Reveal>
             <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-8 font-bold">
-              Ready to start?
+              Ready to execute?
             </p>
             <h2
-              className="text-white font-black mb-10"
+              className="text-white font-black mb-12"
               style={{
-                fontSize: "clamp(3rem, 8vw, 7rem)",
+                fontSize: "clamp(3.5rem, 10vw, 9rem)",
                 letterSpacing: "-0.05em",
-                lineHeight: 0.88,
+                lineHeight: 0.85,
               }}
             >
               LET&apos;S BUILD<br />YOUR VISION.
             </h2>
-            <p className="text-white/40 max-w-md mb-12 leading-relaxed">
-              Whether you need a single film or a complete brand presence — we bring the same level of craft to every project.
+            <p className="text-white/50 max-w-lg mx-auto mb-16 font-light leading-relaxed text-lg lg:text-xl">
+              From single brand films to defining entire visual identities. We bring the exact same obsessive craft to everything.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto">
               <Link
-                href="/contact"
-                className="group flex items-center gap-4 px-12 py-6 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500"
+                href="/estimate"
+                className="group flex justify-center items-center w-full sm:w-auto px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl"
               >
-                Start a Project{" "}
-                <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                Initiate Project{" "}
+                <span className="ml-4 transition-transform duration-500 group-hover:translate-x-2">→</span>
               </Link>
               <Link
                 href="/work"
-                className="px-12 py-6 border border-white/20 text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-white/50 transition-all duration-500"
+                className="flex justify-center items-center w-full sm:w-auto px-12 py-5 border border-white/20 text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-[#8B0016] hover:text-[#8B0016] hover:bg-[#8B0016]/5 transition-all duration-500"
               >
-                View Our Work
+                View Archive
               </Link>
             </div>
           </Reveal>

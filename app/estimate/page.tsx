@@ -12,95 +12,119 @@ export default function ContactPage() {
   }
 
   return (
-    <main data-theme="light" className="bg-white min-h-screen pt-32 pb-24 md:pb-36">
-      <div className="container">
+    <main data-theme="dark" className="relative bg-black min-h-[100svh] pt-32 pb-24 md:pb-36 overflow-hidden">
+      {/* Subtle noisy texture */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(139,0,22,0.1)_0%,transparent_60%)] pointer-events-none" />
+
+      <div className="container relative z-10">
         {/* Header */}
-        <div className="mb-20 max-w-2xl">
+        <div className="mb-20 max-w-2xl border-b border-white/10 pb-12">
           <Reveal>
-            <p className="label mb-8 text-[#8B0016]">Contact</p>
+            <div className="flex items-center gap-4 mb-10">
+              <span className="w-8 h-px bg-[#8B0016]" />
+              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
+                Project Initiation
+              </p>
+            </div>
             <h1
-              className="text-black font-black mb-6"
-              style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+              className="text-white font-black mb-6 leading-[0.85] tracking-tight"
+              style={{ fontSize: "clamp(3.5rem, 8vw, 6.5rem)", letterSpacing: "-0.05em" }}
             >
-              Let&apos;s make something.
+              LET&apos;S MAKE<br />SOMETHING.
             </h1>
-            <p className="text-black/50 font-light text-lg leading-relaxed">
-              Tell us what you&apos;re working on. We&apos;ll get back to you within 48 hours.
+            <p className="text-white/50 font-light text-lg leading-relaxed mt-10">
+              Tell us what you&apos;re working on. We only take on a select number of projects per year to guarantee absolute focus. We&apos;ll respond within 48 hours.
             </p>
           </Reveal>
         </div>
 
         {/* Form + Info */}
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row gap-20 lg:gap-32 md:pt-4">
           {/* Form */}
           <div className="flex-1">
             {submitted ? (
               <Reveal>
                 <div className="py-16">
-                  <p className="label-red mb-4 text-[#8B0016]">Message received</p>
-                  <p className="text-black text-xl font-light">
-                    Thank you. We&apos;ll be in touch soon.
+                  <p className="font-mono text-[#8B0016] text-[10px] uppercase tracking-[0.4em] mb-6">Transmission Received</p>
+                  <p className="text-white text-2xl font-light">
+                    Thank you. The studio will be in touch shortly.
                   </p>
                 </div>
               </Reveal>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                   <Reveal delay={0.1}>
-                    <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Name</label>
-                    <input 
-                      type="text" 
-                      name="name" 
-                      required 
-                      placeholder="Your full name" 
-                      className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black placeholder:text-black/20 focus:border-[#8B0016]/20 transition-all outline-none"
-                    />
+                    <div className="relative group">
+                      <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Name</label>
+                      <input 
+                        type="text" 
+                        name="name" 
+                        required 
+                        placeholder="John Doe" 
+                        className="w-full bg-transparent border-b border-white/10 pb-4 text-white placeholder:text-white/20 focus:border-[#8B0016] transition-all outline-none font-light"
+                      />
+                    </div>
                   </Reveal>
                   <Reveal delay={0.15}>
-                    <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Email</label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      required 
-                      placeholder="your@email.com" 
-                      className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black placeholder:text-black/20 focus:border-[#8B0016]/20 transition-all outline-none"
-                    />
+                    <div className="relative group">
+                      <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Email</label>
+                      <input 
+                        type="email" 
+                        name="email" 
+                        required 
+                        placeholder="john@example.com" 
+                        className="w-full bg-transparent border-b border-white/10 pb-4 text-white placeholder:text-white/20 focus:border-[#8B0016] transition-all outline-none font-light"
+                      />
+                    </div>
                   </Reveal>
                 </div>
 
                 <Reveal delay={0.2}>
-                  <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Project Type</label>
-                  <select 
-                    name="type"
-                    className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black transition-all outline-none appearance-none cursor-pointer"
-                  >
-                    <option value="" className="text-black">Select…</option>
-                    <option value="real-estate" className="text-black">Real Estate Cinematics</option>
-                    <option value="fb" className="text-black">Restaurant / F&amp;B</option>
-                    <option value="brand-film" className="text-black">Brand Film</option>
-                    <option value="photography" className="text-black">Photography</option>
-                    <option value="other" className="text-black">Other</option>
-                  </select>
+                  <div className="relative group">
+                    <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Project Scope</label>
+                    <select 
+                      name="type"
+                      className="w-full bg-transparent border-b border-white/10 pb-4 text-white transition-all outline-none appearance-none cursor-pointer font-light hover:border-[#8B0016]"
+                    >
+                      <option value="" className="text-black bg-white">Select Scope…</option>
+                      <option value="real-estate" className="text-black bg-white">Real Estate Cinematics</option>
+                      <option value="fb" className="text-black bg-white">Restaurant / F&amp;B</option>
+                      <option value="brand-film" className="text-black bg-white">Brand Film</option>
+                      <option value="photography" className="text-black bg-white">Photography</option>
+                      <option value="other" className="text-black bg-white">Other</option>
+                    </select>
+                    {/* Minimal custom arrow */}
+                    <div className="absolute right-0 bottom-5 pointer-events-none text-white/30 group-hover:text-[#8B0016] transition-colors">↓</div>
+                  </div>
                 </Reveal>
 
                 <Reveal delay={0.25}>
-                  <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 block mb-3">Message</label>
-                  <textarea
-                    name="message"
-                    rows={5}
-                    required
-                    placeholder="Tell us about your project…"
-                    className="w-full bg-[#FBFBFB] border border-black/5 p-4 text-black placeholder:text-black/20 focus:border-[#8B0016]/20 transition-all outline-none"
-                  />
+                  <div className="relative group">
+                    <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Transmission Brief</label>
+                    <textarea
+                      name="message"
+                      rows={4}
+                      required
+                      placeholder="Outline your vision, timeline, and rough budget…"
+                      className="w-full bg-transparent border-b border-white/10 pb-4 text-white placeholder:text-white/20 focus:border-[#8B0016] transition-all outline-none font-light resize-none"
+                    />
+                  </div>
                 </Reveal>
 
                 <Reveal delay={0.3}>
-                  <div className="flex items-center gap-6 pt-4">
+                  <div className="flex items-center gap-6 pt-8">
                     <button
                       type="submit"
-                      className="group inline-flex items-center gap-6 px-12 py-5 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] transition-all duration-500 shadow-xl"
+                      className="group inline-flex items-center gap-6 px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl"
                     >
-                      Send Message <span className="text-lg transition-transform group-hover:translate-x-3">→</span>
+                      Deploy <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
                     </button>
                   </div>
                 </Reveal>
@@ -109,32 +133,32 @@ export default function ContactPage() {
           </div>
 
           {/* Info sidebar */}
-          <div className="lg:w-80 shrink-0 flex flex-col gap-12">
-            <Reveal delay={0.4}>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#8B0016] mb-4">Studio</p>
-              <p className="text-black/60 text-sm md:text-base font-light leading-relaxed">
+          <div className="lg:w-80 shrink-0 flex flex-col gap-12 lg:border-l border-white/10 lg:pl-16">
+            <Reveal delay={0.35}>
+              <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#8B0016] mb-4">Command Center</p>
+              <p className="text-white font-black text-xl tracking-tight uppercase">
                 Cinmach Productions<br />
-                Manama, Kingdom of Bahrain
+                Manama, Bahrain
               </p>
             </Reveal>
-            <Reveal delay={0.45}>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#8B0016] mb-4">WhatsApp</p>
+            <Reveal delay={0.4}>
+              <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#8B0016] mb-4">Direct Line</p>
               <a
                 href="https://wa.me/97300000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black/80 text-sm md:text-base font-light hover:text-[#8B0016] transition-colors flex items-center gap-2"
+                className="text-white font-black text-lg tracking-tight uppercase hover:text-[#8B0016] transition-colors inline-block border-b border-transparent hover:border-[#8B0016]"
               >
-                +973 0000 0000 <span className="text-xs">→</span>
+                +973 0000 0000
               </a>
             </Reveal>
-            <Reveal delay={0.5}>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#8B0016] mb-4">Email</p>
+            <Reveal delay={0.45}>
+              <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#8B0016] mb-4">Transmission</p>
               <a
                 href="mailto:contact@cinmachproductions.com"
-                className="text-black/80 text-sm md:text-base font-light hover:text-[#8B0016] transition-colors flex items-center gap-2"
+                className="text-white font-black text-lg tracking-tight uppercase hover:text-[#8B0016] transition-colors break-all inline-block border-b border-transparent hover:border-[#8B0016]"
               >
-                contact@cinmachproductions.com <span className="text-xs">→</span>
+                CONTACT@CINMACH.COM
               </a>
             </Reveal>
           </div>

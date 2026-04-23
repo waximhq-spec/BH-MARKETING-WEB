@@ -136,7 +136,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Mobile toggle */}
+        {/* Mobile toggle */}
           <button
             className="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -147,7 +147,7 @@ export default function Navbar() {
                   key={i}
                   className="block w-5 h-px transition-all duration-300 origin-center"
                   style={{
-                    background: !isHome ? "#000000" : burgerColor,
+                    background: burgerColor,
                     opacity: i === 1 && menuOpen ? 0 : 1,
                     transform: i === 0 && menuOpen ? "translateY(6px) rotate(45deg)" : 
                                i === 2 && menuOpen ? "translateY(-6px) rotate(-45deg)" : "",

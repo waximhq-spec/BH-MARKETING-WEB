@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Comparison from "@/components/Comparison";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -156,6 +157,11 @@ export default function AboutContent() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════════
+          COMPARISON MATRIX
+      ══════════════════════════════════════════════════════ */}
+      <Comparison />
 
       {/* ══════════════════════════════════════════════════════
           FINAL CTA — IMMERSIVE CINEMATIC (BLACK)

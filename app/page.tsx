@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useInView } from "fra
 import { useModal } from "@/components/ModalContext";
 import ProcessSection from "@/components/ProcessSection";
 import SmartVideo from "@/components/SmartVideo";
+import Comparison from "@/components/Comparison";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -243,28 +244,7 @@ function ServicesTable() {
    Home Page
    ─────────────────────────────────────────────────────────── */
 export default function Home() {
-  const testimonialRef = useRef<HTMLDivElement>(null);
   const { openProjectModal } = useModal();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const container = testimonialRef.current;
-      if (container && window.innerWidth < 768) {
-        const { scrollLeft, scrollWidth, clientWidth } = container;
-        const maxScroll = scrollWidth - clientWidth;
-
-        if (scrollLeft >= maxScroll - 10) {
-          container.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          // Calculate next position by finding the width of the first child + gap
-          const cardWidth = container.firstElementChild?.clientWidth || clientWidth;
-          const gap = 20; // gap-5 is 20px
-          container.scrollTo({ left: scrollLeft + cardWidth + gap, behavior: "smooth" });
-        }
-      }
-    }, 4500);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <>
@@ -654,7 +634,12 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          §6a  TRUSTED BY (SOCIAL PROOF)
+          §6a  COMPARISON MATRIX
+      ══════════════════════════════════════════════════════ */}
+      <Comparison />
+
+      {/* ══════════════════════════════════════════════════════
+          §6b  TRUSTED BY (SOCIAL PROOF)
       ══════════════════════════════════════════════════════ */}
       <section data-theme="light" className="py-12 md:py-16 border-t border-b border-black/5 bg-white overflow-hidden flex flex-col items-center">
         <p className="text-black/30 font-mono text-[9px] tracking-[0.4em] uppercase mb-8 md:mb-12 text-center">Trusted by Industry Leaders</p>
@@ -682,38 +667,93 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          §6b  TESTIMONIALS — ELEVATED QUOTE MODULE
+          §6b  TESTIMONIALS — ELEVATED HIGH-DENSITY SYSTEM
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="light" className="py-24 md:py-40 bg-white">
-        <div className="container max-w-5xl">
-          <Reveal className="mb-16 text-center flex flex-col items-center">
-            <span className="w-8 h-px bg-[#8B0016] mb-6" />
-            <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">Client Feedback</p>
+      <section data-theme="light" className="py-24 md:py-32 bg-white overflow-hidden relative">
+        <div className="container max-w-7xl mb-12 flex justify-center">
+          <Reveal className="text-center">
+            <div className="flex items-center gap-3 justify-center">
+              <span className="w-4 h-px bg-[#B11226]" />
+              <p className="text-[#8A8A8A] font-mono tracking-[0.3em] uppercase text-[10px] font-bold">Client Feedback</p>
+              <span className="w-4 h-px bg-[#B11226]" />
+            </div>
           </Reveal>
+        </div>
 
-          {/* Massive Featured Quote */}
-          <Reveal delay={0.1} className="relative">
-             <span className="absolute -top-12 md:-top-20 -left-6 md:-left-12 text-[#8B0016]/5 font-serif leading-none select-none z-0" style={{ fontSize: "clamp(8rem, 20vw, 16rem)" }}>"</span>
-             
-             <div className="relative z-10 text-center px-4 md:px-12">
-               <h3 
-                 className="text-black font-black leading-[1.1] md:leading-[1.15] mb-12 tracking-tight"
-                 style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)" }}
-               >
-                 Cinmach didn't just deliver videos; they codified our <span className="text-[#8B0016] italic font-serif font-medium">brand's visual DNA</span>. The results completely reshaped how our market perceives us.
-               </h3>
-               
-               <div className="inline-flex flex-col items-center gap-2">
-                 <div className="flex gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <div key={i} className="w-1.5 h-1.5 bg-[#8B0016] rotate-45" />
-                    ))}
-                 </div>
-                 <p className="text-black font-black text-sm uppercase tracking-widest mt-2">Omar Hassan</p>
-                 <p className="text-black/40 font-mono text-[9px] tracking-[0.3em] uppercase">Director of Operations · Real Estate Group</p>
-               </div>
-             </div>
-          </Reveal>
+        <div className="relative w-full flex flex-col gap-6 select-none cursor-default">
+           {/* Fading Edges for Marquee */}
+           <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+           <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+           {/* Row 1 (Scrolls Left) */}
+           <motion.div 
+             className="flex gap-6 w-max"
+             animate={{ x: ["0%", "-50%"] }}
+             transition={{ ease: "linear", duration: 40, repeat: Infinity }}
+           >
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
+                  {[
+                    { quote: "Cinmach didn't just deliver videos; they codified our brand's visual DNA. The results completely reshaped how our market perceives us.", name: "Omar Rahman", role: "Director of Operations · Real Estate Firm" },
+                    { quote: "Their team operates with a level of precision we haven't seen from other agencies to date. Flawless execution from top to bottom.", name: "Sara Malik", role: "Marketing Director · Creative Agency" },
+                    { quote: "The visual standards are uncompromising. They turned a complex service offering into a gorgeous, highly converting asset ecosystem.", name: "Ahmed Khan", role: "Founder · Technology Brand" },
+                    { quote: "We engaged Cinmach for a brand film and ended up redefining our entire positioning. Their strategic input is invaluable.", name: "Elena R.", role: "Managing Partner · Investment Group" },
+                    { quote: "Fast, deliberate, and exceptionally high-end. Selecting them was the absolute best marketing decision we made this year.", name: "Fahad A.", role: "Head of Creative · Development Company" }
+                  ].map((t, idx) => (
+                    <div 
+                      key={idx} 
+                      className="w-[300px] md:w-[480px] bg-[#FAFAFA] border border-[#EAEAEA] rounded-[6px] p-6 md:p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
+                    >
+                      <p className="text-black font-medium leading-relaxed" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)" }}>
+                        "{t.quote}"
+                      </p>
+                      <div className="mt-auto flex items-center gap-3 pt-4">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#B11226] shrink-0" />
+                        <div className="flex flex-col">
+                          <span className="text-black font-bold text-[13px]">{t.name}</span>
+                          <span className="text-[#8A8A8A] text-[11px] uppercase tracking-wider mt-0.5">{t.role}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+           </motion.div>
+
+           {/* Row 2 (Scrolls Right) */}
+           <motion.div 
+             className="flex gap-6 w-max"
+             animate={{ x: ["-50%", "0%"] }}
+             transition={{ ease: "linear", duration: 45, repeat: Infinity }}
+           >
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
+                  {[
+                    { quote: "A boutique team that punches far above their weight. Every frame they produce feels like an intentional work of art.", name: "Daniel Carter", role: "VP of Growth · Digital Venture" },
+                    { quote: "Unmatched attention to detail. The resulting campaign outperformed our historical benchmarks by a staggering 300%.", name: "Aisha R.", role: "Marketing Manager · Hospitality Group" },
+                    { quote: "They don't just execute a brief—they challenge it, elevate it, and return with something exponentially more impactful.", name: "James C.", role: "CEO · Private Business" },
+                    { quote: "A seamless blend of aggressive strategy and minimalist design. They captured our exact vibe instantly.", name: "Layla Noor", role: "Owner · Lifestyle Brand" },
+                    { quote: "Top-tier reliability. When Cinmach takes on a project, we know the final product will immediately elevate our brand.", name: "Tariq Hassani", role: "General Manager · Logistics Firm" }
+                  ].map((t, idx) => (
+                    <div 
+                      key={idx} 
+                      className="w-[300px] md:w-[480px] bg-[#FAFAFA] border border-[#EAEAEA] rounded-[6px] p-6 md:p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
+                    >
+                      <p className="text-black font-medium leading-relaxed" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)" }}>
+                        "{t.quote}"
+                      </p>
+                      <div className="mt-auto flex items-center gap-3 pt-4">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#B11226] shrink-0" />
+                        <div className="flex flex-col">
+                          <span className="text-black font-bold text-[13px]">{t.name}</span>
+                          <span className="text-[#8A8A8A] text-[11px] uppercase tracking-wider mt-0.5">{t.role}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+           </motion.div>
         </div>
       </section>
 

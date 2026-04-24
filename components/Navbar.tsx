@@ -17,7 +17,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light" | "red">("red");
+  const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing">("red");
   const pathname = usePathname();
   const { openProjectModal } = useModal();
 
@@ -30,13 +30,13 @@ export default function Navbar() {
           setScrolled(window.scrollY > 40);
 
           const sections = document.querySelectorAll("[data-theme]");
-          let activeTheme: "dark" | "light" | "red" | null = null;
+          let activeTheme: "dark" | "light" | "red" | "pricing" | null = null;
           
           sections.forEach((section) => {
             const rect = section.getBoundingClientRect();
             // Check if section occupies the space just below the navbar (e.g., 100px from top)
             if (rect.top <= 100 && rect.bottom >= 100) {
-              activeTheme = section.getAttribute("data-theme") as "dark" | "light" | "red";
+              activeTheme = section.getAttribute("data-theme") as "dark" | "light" | "red" | "pricing";
             }
           });
 
@@ -73,10 +73,11 @@ export default function Navbar() {
   const isLight = theme === "light" || (!isHome && theme === "red");
   const isRed = theme === "red" && isHome;
   const isDark = theme === "dark";
+  const isPricing = theme === "pricing";
   
-  const textColor = isLight ? "#000000" : "#FAFAFA";
-  const mutedColor = isLight ? "rgba(0,0,0,0.4)" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
-  const activeColor = isRed ? "#FFFFFF" : isLight ? "#000000" : "#C50022";
+  const textColor = isPricing ? "#B11226" : isLight ? "#000000" : "#FAFAFA";
+  const mutedColor = isPricing ? "rgba(255,255,255,0.6)" : isLight ? "rgba(0,0,0,0.4)" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
+  const activeColor = isPricing ? "#B11226" : isRed ? "#FFFFFF" : isLight ? "#000000" : "#C50022";
   
   // Logic for Red theme (Hero): 
   // - Unscrolled: Transparent with a thin white line
@@ -85,12 +86,12 @@ export default function Navbar() {
   const redBlur = scrolled ? "blur(20px)" : "none";
   const redBorder = scrolled ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.15)";
 
-  const bgColor = isRed ? redBg : isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
-  const backdropBlur = isRed ? redBlur : scrolled ? "blur(12px)" : "none";
-  const borderColor = isRed ? redBorder : isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.08)";
-  const burgerColor = isLight ? "#000000" : "#FAFAFA";
+  const bgColor = isPricing ? "rgba(10,10,10,0.98)" : isRed ? redBg : isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
+  const backdropBlur = isPricing ? "blur(12px)" : isRed ? redBlur : scrolled ? "blur(12px)" : "none";
+  const borderColor = isPricing ? "rgba(177, 18, 38, 0.4)" : isRed ? redBorder : isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.08)";
+  const burgerColor = isPricing ? "#B11226" : isLight ? "#000000" : "#FAFAFA";
 
-  const shadow = "none";
+  const shadow = isPricing ? "0 20px 60px rgba(177, 18, 38, 0.15)" : "none";
 
   return (
     <>
@@ -115,7 +116,11 @@ export default function Navbar() {
               alt="Cinmach" 
               className="h-5 md:h-6 w-auto transition-all duration-500"
               style={{
-                filter: isLight ? "brightness(0)" : "brightness(0) invert(1)"
+                filter: isLight 
+                  ? "brightness(0)" 
+                  : isPricing 
+                    ? "brightness(0) saturate(100%) invert(18%) sepia(85%) saturate(3660%) hue-rotate(335deg) brightness(85%) contrast(105%)"
+                    : "brightness(0) invert(1)"
               }}
             />
           </Link>

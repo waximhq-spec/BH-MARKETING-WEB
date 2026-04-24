@@ -7,6 +7,7 @@ import { useModal } from "@/components/ModalContext";
 import ProcessSection from "@/components/ProcessSection";
 import SmartVideo from "@/components/SmartVideo";
 import Comparison from "@/components/Comparison";
+import PricingSection from "@/components/PricingSection";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -290,8 +291,8 @@ export default function Home() {
             {/* Left Column (60%) */}
             <div className="w-full lg:w-[60%] flex flex-col shrink-0">
               <h1
-                className="text-white font-black leading-[0.9] tracking-tight"
-                style={{ fontSize: "clamp(48px, 8vw, 120px)" }}
+                className="text-white font-black leading-[0.9] tracking-tighter"
+                style={{ fontSize: "clamp(40px, 10vw, 120px)" }}
               >
                 <span className="block anim-fade-up anim-delay-1">CREATE</span>
                 <span className="block anim-fade-up anim-delay-2">YOUR</span>
@@ -353,25 +354,19 @@ export default function Home() {
             <Reveal className="lg:w-1/2 shrink-0">
               <h2
                 className="font-black text-black"
-                style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+                style={{ fontSize: "clamp(2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
               >
-                WE DON&apos;T JUST<br />SHOOT. WE<br />INSPIRE ACTION.
+                WE DON&apos;T JUST<br />SHOOT. WE <br className="sm:hidden" />INSPIRE ACTION.
               </h2>
             </Reveal>
 
             {/* Right — Body + CTA */}
             <Reveal delay={0.2} className="lg:w-[460px] lg:border-l lg:border-black/10 lg:pl-12 shrink-0">
               <p
-                className="text-black/70 mb-4"
-                style={{ fontSize: "clamp(1rem, 1.3vw, 1.2rem)", lineHeight: 1.7, letterSpacing: "-0.01em" }}
+                className="text-black/80 font-medium mb-10"
+                style={{ fontSize: "clamp(1.1rem, 1.5vw, 1.35rem)", lineHeight: 1.6, letterSpacing: "-0.01em" }}
               >
-                Cinmach Productions is a specialized visual powerhouse based in Bahrain. We build cinematic assets that become the heartbeat of your brand strategy.
-              </p>
-              <p
-                className="text-black/50 mb-10"
-                style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)", lineHeight: 1.7 }}
-              >
-                No fluff. No filler. Just pure, intentional impact — crafted frame by frame.
+                We build cinematic assets that establish your authority. No filler, just pure, intentional impact.
               </p>
               <Link
                 href="/about"
@@ -436,7 +431,7 @@ export default function Home() {
                 </div>
                 <h2
                   className="text-black font-black leading-[0.9]"
-                  style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.04em" }}
+                  style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", letterSpacing: "-0.04em" }}
                 >
                   SELECTED<br />WORK.
                 </h2>
@@ -444,7 +439,7 @@ export default function Home() {
               <div className="mt-8 md:mt-0">
                 <Link
                   href="/work"
-                  className="group flex items-center justify-center w-32 h-32 rounded-full border border-black/10 relative overflow-hidden transition-all duration-700 hover:border-[#8B0016] shrink-0"
+                  className="group flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-black/10 relative overflow-hidden transition-all duration-700 hover:border-[#8B0016] shrink-0"
                 >
                   <div className="absolute inset-0 bg-[#8B0016] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[0.16,1,0.3,1] rounded-full" />
                   <span className="relative z-10 text-black group-hover:text-white font-mono text-[9px] tracking-[0.3em] uppercase transition-colors duration-500 text-center">
@@ -565,6 +560,8 @@ export default function Home() {
 
         </div>
       </section>
+
+      <PricingSection />
 
       {/* ══════════════════════════════════════════════════════
           §6  ABOUT / POSITIONING — WHITE
@@ -745,7 +742,6 @@ export default function Home() {
            </motion.div>
         </div>
       </section>
-
 
 
       </main>

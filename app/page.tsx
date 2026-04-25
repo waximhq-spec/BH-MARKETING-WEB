@@ -175,7 +175,7 @@ function ServicesTable() {
           const isDimmed = hoveredIndex !== null && hoveredIndex !== idx;
           return (
             <Reveal key={svc.num} delay={i * 0.06}>
-              <div 
+              <div
                 className={`group relative flex flex-col border-b border-black/8 transition-all duration-500
                   ${isDimmed ? "opacity-30" : "opacity-100"}`}
               >
@@ -245,7 +245,7 @@ function ServicesTable() {
                           ))}
                         </div>
                         <div className="shrink-0 pt-4 md:pt-0">
-                          <Link 
+                          <Link
                             href="/work"
                             className="inline-flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] font-bold text-black hover:text-[#8B0016] uppercase transition-colors"
                           >
@@ -415,385 +415,385 @@ export default function Home() {
                 </h1>
               </div>
 
-            {/* Right Column (40%) */}
-            <div className="w-full lg:w-[40%] flex flex-col items-start anim-fade-up anim-delay-3">
-               <p 
-                 className="text-white/70 font-medium tracking-wide mb-10"
-                 style={{ fontSize: "clamp(14px, 1.4vw, 18px)", lineHeight: 1.7 }}
-               >
-                 Cinematic visuals for restaurants &amp; caf&eacute;s that drive footfall, elevate perception, and turn attention into bookings.
-               </p>
+              {/* Right Column (40%) */}
+              <div className="w-full lg:w-[40%] flex flex-col items-start anim-fade-up anim-delay-3">
+                <p
+                  className="text-white/70 font-medium tracking-wide mb-10"
+                  style={{ fontSize: "clamp(14px, 1.4vw, 18px)", lineHeight: 1.7 }}
+                >
+                  Cinematic visuals for restaurants &amp; caf&eacute;s that drive footfall, elevate perception, and turn attention into bookings.
+                </p>
 
-               <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
                   <Link
                     href="/work"
                     className="w-full sm:w-[220px] py-[18px] bg-[#B11226] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-center border border-[#B11226] hover:border-white"
                   >
                     Get Restaurant Content
                   </Link>
-               </div>
+                </div>
+              </div>
+
             </div>
-
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ======================================================
+        {/* ======================================================
           S1.5 RESTAURANT DEDICATED SECTION - BLACK (IMPACT)
       ====================================================== */}
-      <section data-theme="dark" className="py-24 md:py-32 bg-black text-white relative">
-        <div className="container relative z-10">
-          <Reveal>
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-8 h-px bg-[#8B0016]" />
-              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
-                For Restaurants & Cafes
-              </p>
-            </div>
-            <h2
-              className="text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16"
-              style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
-            >
-              CONTENT THAT MAKES<br />
-              <span className="text-white/30">THEM CHOOSE YOU.</span>
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
-            <Reveal delay={0.1}>
-              <h3 className="font-bold text-xl md:text-2xl mb-4 leading-tight">Built for modern restaurants that want to stand out on Instagram and beyond.</h3>
-              <p className="text-white/60 leading-relaxed font-light mb-8">
-                We know the hospitality industry. It&apos;s not just about a pretty plate-it&apos;s about atmosphere, energy, and capturing cravings. We transform average social feeds into high-converting revenue drivers built to pack your dining room.
-              </p>
-              
-              <div className="flex gap-4 items-center border-l-2 border-[#8B0016] pl-6 py-2">
-                 <div className="text-white/40 uppercase tracking-widest text-[10px] font-mono">Before</div>
-                 <div className="h-px w-4 bg-white/10" />
-                 <div className="text-[#8B0016] uppercase tracking-widest text-[10px] font-mono font-bold">The Transformation</div>
-                 <div className="h-px flex-1 bg-white/10 hidden sm:block" />
-                 <div className="text-white uppercase tracking-widest text-[10px] font-mono font-bold ml-auto sm:ml-0">After</div>
+        <section data-theme="dark" className="py-24 md:py-32 bg-black text-white relative">
+          <div className="container relative z-10">
+            <Reveal>
+              <div className="flex items-center gap-4 mb-8">
+                <span className="w-8 h-px bg-[#8B0016]" />
+                <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
+                  For Restaurants & Cafes
+                </p>
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-sm md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
-                 <span>Generic Static Shots</span>
-                 <span className="text-white/20 hidden sm:block">→</span>
-                 <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-8 md:p-10">
-               <h4 className="font-mono text-[#8B0016] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
-               <ul className="flex flex-col gap-6">
-                 {[
-                   { step: "01", text: "Shoot", desc: "Cinematic, appetizing visuals" },
-                   { step: "02", text: "Edit", desc: "Fast-paced, retention-focused cuts" },
-                   { step: "03", text: "Deliver", desc: "Native social formats perfectly sized" },
-                   { step: "04", text: "Growth", desc: "Increased footfall and bookings" }
-                 ].map((s, i) => (
-                   <li key={i} className="flex items-center gap-6 group">
-                     <span className="font-mono text-[#8B0016] opacity-50 group-hover:opacity-100 transition-opacity text-xs">{s.step}</span>
-                     <div>
-                       <span className="block font-black text-white uppercase tracking-wide text-lg">{s.text}</span>
-                       <span className="block text-white/40 text-sm mt-0.5">{s.desc}</span>
-                     </div>
-                   </li>
-                 ))}
-               </ul>
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.3} className="border-t border-white/10 pt-10">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <p className="text-white/60 font-medium text-center md:text-left">Ready to pack your restaurant?</p>
-              <Link
-                href="/contact"
-                className="group flex justify-center items-center gap-4 px-10 py-4 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 w-full sm:w-auto"
+              <h2
+                className="text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16"
+                style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
               >
-                Let&apos;s Grow Your Restaurant <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+                CONTENT THAT MAKES<br />
+                <span className="text-white/30">THEM CHOOSE YOU.</span>
+              </h2>
+            </Reveal>
 
-      {/* ======================================================
-          S2+3  ABOUT + SERVICES - WHITE (unified)
-      ====================================================== */}
-      <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
-        <div className="container">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
+              <Reveal delay={0.1}>
+                <h3 className="font-bold text-xl md:text-2xl mb-4 leading-tight">Built for modern restaurants that want to stand out on Instagram and beyond.</h3>
+                <p className="text-white/60 leading-relaxed font-light mb-8">
+                  We know the hospitality industry. It&apos;s not just about a pretty plate-it&apos;s about atmosphere, energy, and capturing cravings. We transform average social feeds into high-converting revenue drivers built to pack your dining room.
+                </p>
 
-
-
-          {/* ── Divider + Services Label ── */}
-          <Reveal>
-            <div className="flex items-center gap-6 mb-10">
-              <div className="h-px flex-1 bg-black/10" />
-              <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] shrink-0">Services</p>
-            </div>
-          </Reveal>
-
-          {/* ── Interactive Service Table ── */}
-          <ServicesTable />
-
-          {/* CTA */}
-          <Reveal className="mt-10 flex justify-end">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-3 text-black/40 font-mono text-[10px] tracking-[0.3em] uppercase border-b border-black/20 pb-1 hover:text-[#8B0016] hover:border-[#8B0016] transition-all duration-300"
-            >
-              View All Services →
-            </Link>
-          </Reveal>
-
-        </div>
-      </section>
-
-
-
-      {/* ======================================================
-          S4  PROCESS - BLACK
-      ====================================================== */}
-      {/* ======================================================
-          S4  PROCESS - BLACK (PRCPTIV STYLE)
-      ====================================================== */}
-      <div data-theme="dark">
-        <ProcessSection />
-      </div>
-
-
-      {/* ======================================================
-          S5  FEATURED WORK - WHITE (EDITORIAL)
-      ====================================================== */}
-      <section data-theme="light" className="py-24 md:py-32 bg-white relative">
-        <div className="container relative z-10">
-
-          {/* Elevated Header */}
-          <Reveal className="mb-20">
-            <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-black/5 pb-10">
-              <div className="max-w-2xl">
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="w-10 h-px bg-[#8B0016]" />
-                  <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">
-                    Portfolio
-                  </p>
+                <div className="flex gap-4 items-center border-l-2 border-[#8B0016] pl-6 py-2">
+                  <div className="text-white/40 uppercase tracking-widest text-[10px] font-mono">Before</div>
+                  <div className="h-px w-4 bg-white/10" />
+                  <div className="text-[#8B0016] uppercase tracking-widest text-[10px] font-mono font-bold">The Transformation</div>
+                  <div className="h-px flex-1 bg-white/10 hidden sm:block" />
+                  <div className="text-white uppercase tracking-widest text-[10px] font-mono font-bold ml-auto sm:ml-0">After</div>
                 </div>
-                <h2
-                  className="text-black font-black leading-[0.9]"
-                  style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", letterSpacing: "-0.04em" }}
-                >
-                  SELECTED<br />WORK.
-                </h2>
-              </div>
-              <div className="mt-8 md:mt-0 hidden md:block">
+                <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-sm md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
+                  <span>Generic Static Shots</span>
+                  <span className="text-white/20 hidden sm:block">→</span>
+                  <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-8 md:p-10">
+                <h4 className="font-mono text-[#8B0016] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
+                <ul className="flex flex-col gap-6">
+                  {[
+                    { step: "01", text: "Shoot", desc: "Cinematic, appetizing visuals" },
+                    { step: "02", text: "Edit", desc: "Fast-paced, retention-focused cuts" },
+                    { step: "03", text: "Deliver", desc: "Native social formats perfectly sized" },
+                    { step: "04", text: "Growth", desc: "Increased footfall and bookings" }
+                  ].map((s, i) => (
+                    <li key={i} className="flex items-center gap-6 group">
+                      <span className="font-mono text-[#8B0016] opacity-50 group-hover:opacity-100 transition-opacity text-xs">{s.step}</span>
+                      <div>
+                        <span className="block font-black text-white uppercase tracking-wide text-lg">{s.text}</span>
+                        <span className="block text-white/40 text-sm mt-0.5">{s.desc}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.3} className="border-t border-white/10 pt-10">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                <p className="text-white/60 font-medium text-center md:text-left">Ready to pack your restaurant?</p>
                 <Link
-                  href="/work"
-                  className="group flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-black/10 relative overflow-hidden transition-all duration-700 hover:border-[#8B0016] shrink-0"
+                  href="/contact"
+                  className="group flex justify-center items-center gap-4 px-10 py-4 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 w-full sm:w-auto"
                 >
-                  <div className="absolute inset-0 bg-[#8B0016] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[0.16,1,0.3,1] rounded-full" />
-                  <span className="relative z-10 text-black group-hover:text-white font-mono text-[9px] tracking-[0.3em] uppercase transition-colors duration-500 text-center">
-                    Explore<br />Archive
-                  </span>
+                  Let&apos;s Grow Your Restaurant <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
                 </Link>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
+        </section>
 
-          {/* Master Grid containing Tier 1 and Tier 1.5 in a mixed layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 mb-16">
-            
-            {/* Left Column (Vertical Reel + Tall Content) */}
-            <div className="lg:col-span-5 flex flex-col gap-8 md:gap-10">
-              <Reveal delay={0.1}>
-                {/* Automotive Showcase Vertical Reel */}
-                <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[8px] overflow-hidden cursor-pointer border border-black/5 shadow-sm">
-                  <SmartVideo 
-                    src="https://www.pexels.com/download/video/31588827/"
-                    hoverPlay={true}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                  <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:translate-y-0 translate-y-4">
-                    <div className="flex justify-between items-start">
-                      <span className="text-white/50 font-mono text-[10px] tracking-[0.3em] border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm">01</span>
-                    </div>
-                    <div>
-                      <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase mb-3 drop-shadow-md">Automotive</p>
-                      <h4 className="text-white font-black text-2xl lg:text-3xl tracking-tight leading-tight">Speed &<br />Motion</h4>
-                    </div>
+        {/* ======================================================
+          S2+3  ABOUT + SERVICES - WHITE (unified)
+      ====================================================== */}
+        <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
+          <div className="container">
+
+
+
+            {/* ── Divider + Services Label ── */}
+            <Reveal>
+              <div className="flex items-center gap-6 mb-10">
+                <div className="h-px flex-1 bg-black/10" />
+                <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px] shrink-0">Services</p>
+              </div>
+            </Reveal>
+
+            {/* ── Interactive Service Table ── */}
+            <ServicesTable />
+
+            {/* CTA */}
+            <Reveal className="mt-10 flex justify-end">
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-3 text-black/40 font-mono text-[10px] tracking-[0.3em] uppercase border-b border-black/20 pb-1 hover:text-[#8B0016] hover:border-[#8B0016] transition-all duration-300"
+              >
+                View All Services →
+              </Link>
+            </Reveal>
+
+          </div>
+        </section>
+
+
+
+        {/* ======================================================
+          S4  PROCESS - BLACK
+      ====================================================== */}
+        {/* ======================================================
+          S4  PROCESS - BLACK (PRCPTIV STYLE)
+      ====================================================== */}
+        <div data-theme="dark">
+          <ProcessSection />
+        </div>
+
+
+        {/* ======================================================
+          S5  FEATURED WORK - WHITE (EDITORIAL)
+      ====================================================== */}
+        <section data-theme="light" className="py-24 md:py-32 bg-white relative">
+          <div className="container relative z-10">
+
+            {/* Elevated Header */}
+            <Reveal className="mb-20">
+              <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-black/5 pb-10">
+                <div className="max-w-2xl">
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="w-10 h-px bg-[#8B0016]" />
+                    <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">
+                      Portfolio
+                    </p>
                   </div>
-                  {/* Subtle Red Frame on Hover */}
-                  <div className="absolute inset-0 border-[3px] border-[#8B0016] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[8px] pointer-events-none" />
+                  <h2
+                    className="text-black font-black leading-[0.9]"
+                    style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", letterSpacing: "-0.04em" }}
+                  >
+                    SELECTED<br />WORK.
+                  </h2>
                 </div>
-              </Reveal>
-              
-              <Reveal delay={0.2} className="hidden lg:block">
-                <div className="p-8 border border-black/5 bg-neutral-50 rounded-[8px]">
-                  <p className="text-black/60 font-serif leading-relaxed text-lg italic">
-                    "A curated selection of our most visceral, high-impact projects. Built to define luxury and power."
-                  </p>
+                <div className="mt-8 md:mt-0 hidden md:block">
+                  <Link
+                    href="/work"
+                    className="group flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-black/10 relative overflow-hidden transition-all duration-700 hover:border-[#8B0016] shrink-0"
+                  >
+                    <div className="absolute inset-0 bg-[#8B0016] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[0.16,1,0.3,1] rounded-full" />
+                    <span className="relative z-10 text-black group-hover:text-white font-mono text-[9px] tracking-[0.3em] uppercase transition-colors duration-500 text-center">
+                      Explore<br />Archive
+                    </span>
+                  </Link>
                 </div>
-              </Reveal>
+              </div>
+            </Reveal>
+
+            {/* Master Grid containing Tier 1 and Tier 1.5 in a mixed layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 mb-16">
+
+              {/* Left Column (Vertical Reel + Tall Content) */}
+              <div className="lg:col-span-5 flex flex-col gap-8 md:gap-10">
+                <Reveal delay={0.1}>
+                  {/* Automotive Showcase Vertical Reel */}
+                  <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[8px] overflow-hidden cursor-pointer border border-black/5 shadow-sm">
+                    <SmartVideo
+                      src="https://www.pexels.com/download/video/31588827/"
+                      hoverPlay={true}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                    <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:translate-y-0 translate-y-4">
+                      <div className="flex justify-between items-start">
+                        <span className="text-white/50 font-mono text-[10px] tracking-[0.3em] border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm">01</span>
+                      </div>
+                      <div>
+                        <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase mb-3 drop-shadow-md">Automotive</p>
+                        <h4 className="text-white font-black text-2xl lg:text-3xl tracking-tight leading-tight">Speed &<br />Motion</h4>
+                      </div>
+                    </div>
+                    {/* Subtle Red Frame on Hover */}
+                    <div className="absolute inset-0 border-[3px] border-[#8B0016] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[8px] pointer-events-none" />
+                  </div>
+                </Reveal>
+
+                <Reveal delay={0.2} className="hidden lg:block">
+                  <div className="p-8 border border-black/5 bg-neutral-50 rounded-[8px]">
+                    <p className="text-black/60 font-serif leading-relaxed text-lg italic">
+                      "A curated selection of our most visceral, high-impact projects. Built to define luxury and power."
+                    </p>
+                  </div>
+                </Reveal>
+              </div>
+
+              {/* Right Column (Two 16:9s Stacked) */}
+              <div className="lg:col-span-7 flex flex-col gap-8 md:gap-10">
+                {[
+                  { label: "02", title: "Lee Heritage", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3121459/" },
+                  { label: "03", title: "Heaven View Villa", cat: "Real Estate", vid: "https://www.pexels.com/download/video/8422238/" },
+                ].map((video, idx) => (
+                  <Reveal key={video.label} delay={0.15 + (idx * 0.1)}>
+                    <div className="group relative aspect-video overflow-hidden bg-black cursor-pointer rounded-[8px] shadow-sm">
+                      <div className="absolute inset-0 pointer-events-none">
+                        <SmartVideo
+                          src={video.vid}
+                          hoverPlay={true}
+                          className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105"
+                        />
+                      </div>
+
+                      <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+                      <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-between">
+                        <div className="flex justify-between items-start opacity-0 group-hover:opacity-100 transition-all duration-700 -translate-y-4 group-hover:translate-y-0">
+                          <span className="text-white/40 font-mono text-[10px] tracking-[0.2em]">{video.label}</span>
+                          <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md">
+                            <span className="text-white font-light text-xl">+</span>
+                          </div>
+                        </div>
+
+                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                          <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase mb-3">{video.cat}</p>
+                          <h4 className="text-white font-black text-3xl md:text-5xl tracking-tighter leading-none">{video.title}</h4>
+                        </div>
+                      </div>
+                      {/* Red Accent Line growing from left */}
+                      <div className="absolute bottom-0 left-0 h-[4px] bg-[#8B0016] w-0 group-hover:w-full transition-all duration-[800ms] ease-[0.16,1,0.3,1] z-20 pointer-events-none" />
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+
             </div>
 
-            {/* Right Column (Two 16:9s Stacked) */}
-            <div className="lg:col-span-7 flex flex-col gap-8 md:gap-10">
+            {/* Tier 2: Image Showcase (Small Square Highlights) */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 border-t border-black/5 pt-12">
               {[
-                { label: "02", title: "Lee Heritage", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3121459/" },
-                { label: "03", title: "Heaven View Villa", cat: "Real Estate", vid: "https://www.pexels.com/download/video/8422238/" },
-              ].map((video, idx) => (
-                <Reveal key={video.label} delay={0.15 + (idx * 0.1)}>
-                  <div className="group relative aspect-video overflow-hidden bg-black cursor-pointer rounded-[8px] shadow-sm">
-                    <div className="absolute inset-0 pointer-events-none">
-                      <SmartVideo
-                        src={video.vid}
-                        hoverPlay={true}
-                        className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105"
-                      />
+                { label: "04", title: "Harbour Row", cat: "Hospitality", driveId: "1LGbCekMBgMNNIyabVbFiTkVO6-brJgAe", bg: "bg-neutral-100" },
+                { label: "05", title: "Ebrahim Identity", cat: "Brand", driveId: "1TZB5T-PnWl2-cePCrcC4tdsJAz2PSI3w", bg: "bg-neutral-200" },
+                { label: "06", title: "Corporate Assets", cat: "Corporate", driveId: "1-b48lZJ5UFnpe6QG639kJAiB0O6yqGBI", bg: "bg-neutral-100" },
+                { label: "07", title: "Brand Vision", cat: "Identity", driveId: "1Ex9QPsfx6VsIX8GhiDqmSNStOrg76OHp", bg: "bg-neutral-200" },
+              ].map((project, idx) => (
+                <Reveal key={project.label} delay={0.2 + (idx * 0.05)}>
+                  <motion.div
+                    className={`group relative aspect-square overflow-hidden rounded-[8px] ${project.bg} cursor-pointer shadow-sm`}
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <img
+                      src={`https://drive.google.com/thumbnail?sz=w1000&id=${project.driveId}`}
+                      alt={project.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.12]"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+
+                    <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+                      <p className="text-[#8B0016] font-mono text-[8px] tracking-[0.3em] uppercase mb-2">{project.cat}</p>
+                      <h4 className="text-white font-black text-xs md:text-sm tracking-tight leading-snug">{project.title}</h4>
                     </div>
-                    
-                    <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                    
-                    <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-between">
-                      <div className="flex justify-between items-start opacity-0 group-hover:opacity-100 transition-all duration-700 -translate-y-4 group-hover:translate-y-0">
-                         <span className="text-white/40 font-mono text-[10px] tracking-[0.2em]">{video.label}</span>
-                         <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md">
-                           <span className="text-white font-light text-xl">+</span>
-                         </div>
-                      </div>
-                      
-                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
-                        <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase mb-3">{video.cat}</p>
-                        <h4 className="text-white font-black text-3xl md:text-5xl tracking-tighter leading-none">{video.title}</h4>
-                      </div>
-                    </div>
-                    {/* Red Accent Line growing from left */}
-                    <div className="absolute bottom-0 left-0 h-[4px] bg-[#8B0016] w-0 group-hover:w-full transition-all duration-[800ms] ease-[0.16,1,0.3,1] z-20 pointer-events-none" />
-                  </div>
+                  </motion.div>
                 </Reveal>
               ))}
             </div>
 
+            {/* Mobile-focused CTA below grid */}
+            <Reveal delay={0.4} className="mt-12 flex justify-center">
+              <Link
+                href="/work"
+                className="w-full md:w-auto px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-xl flex items-center justify-center gap-4"
+              >
+                View All Projects <span>→</span>
+              </Link>
+            </Reveal>
           </div>
+        </section>
 
-          {/* Tier 2: Image Showcase (Small Square Highlights) */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 border-t border-black/5 pt-12">
-            {[
-              { label: "04", title: "Harbour Row",          cat: "Hospitality", driveId: "1LGbCekMBgMNNIyabVbFiTkVO6-brJgAe", bg: "bg-neutral-100" },
-              { label: "05", title: "Ebrahim Identity",     cat: "Brand",       driveId: "1TZB5T-PnWl2-cePCrcC4tdsJAz2PSI3w", bg: "bg-neutral-200" },
-              { label: "06", title: "Corporate Assets",     cat: "Corporate",   driveId: "1-b48lZJ5UFnpe6QG639kJAiB0O6yqGBI", bg: "bg-neutral-100" },
-              { label: "07", title: "Brand Vision",         cat: "Identity",    driveId: "1Ex9QPsfx6VsIX8GhiDqmSNStOrg76OHp", bg: "bg-neutral-200" },
-            ].map((project, idx) => (
-              <Reveal key={project.label} delay={0.2 + (idx * 0.05)}>
-                <motion.div
-                  className={`group relative aspect-square overflow-hidden rounded-[8px] ${project.bg} cursor-pointer shadow-sm`}
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <img
-                    src={`https://drive.google.com/thumbnail?sz=w1000&id=${project.driveId}`}
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.12]"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                  
-                  <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
-                    <p className="text-[#8B0016] font-mono text-[8px] tracking-[0.3em] uppercase mb-2">{project.cat}</p>
-                    <h4 className="text-white font-black text-xs md:text-sm tracking-tight leading-snug">{project.title}</h4>
-                  </div>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
+        <PricingSection />
 
-          {/* Mobile-focused CTA below grid */}
-          <Reveal delay={0.4} className="mt-12 flex justify-center">
-            <Link
-              href="/work"
-              className="w-full md:w-auto px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-xl flex items-center justify-center gap-4"
-            >
-              View All Projects <span>→</span>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <PricingSection />
-
-      {/* ======================================================
+        {/* ======================================================
           S6  ABOUT / POSITIONING - WHITE
       ====================================================== */}
-      <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
-        <div className="container">
-          <Reveal className="mb-12">
-            <div className="flex items-center gap-4">
-              <span className="w-8 h-px bg-[#8B0016]" />
-              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">About Us</p>
-            </div>
-          </Reveal>
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-16 lg:gap-24">
-            {/* Left Narrative */}
-            <Reveal className="lg:w-1/2 shrink-0">
-              <h2
-                className="font-black text-black mb-10"
-                style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
-              >
-                CRAFTED IN<br />BAHRAIN.<br />
-                <span className="text-black/30">BUILT FOR<br />THE WORLD.</span>
-              </h2>
-              <p className="text-black/70 max-w-md font-light" style={{ fontSize: "clamp(1rem, 1.3vw, 1.15rem)", lineHeight: 1.8 }}>
-                We are a boutique cinematic production studio rooted in Bahrain, creating high-end visual content for forward-thinking brands across the Gulf and beyond. We don't just fill space; we architect perception.
-              </p>
-            </Reveal>
-
-            {/* Right Architectural Stats Grid */}
-            <Reveal delay={0.2} className="w-full lg:w-[480px] shrink-0">
-              <div className="grid grid-cols-1 border-t border-black/10">
-                {[
-                  { stat: "5+",  label: "Years of craft",     desc: "Visual storytelling refined into a precise, repeatable signature system." },
-                  { stat: "40+", label: "Projects delivered", desc: "From intimate restaurants to large-scale real estate developments." },
-                  { stat: "BH",  label: "Based in Bahrain",   desc: "Serving the GCC region and international brands with local precision." },
-                ].map((item, idx) => (
-                  <div key={item.stat} className="group relative border-b border-black/10 py-8 flex items-start gap-8 overflow-hidden transition-colors duration-500 hover:bg-white hover:px-6">
-                    {/* Hover subtle red accent beam */}
-                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#8B0016] scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-500 ease-out" />
-                    
-                    <span 
-                      className="text-[#8B0016] font-black shrink-0 transition-transform duration-500 group-hover:scale-105" 
-                      style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.04em", lineHeight: 1 }}
-                    >
-                      {item.stat}
-                    </span>
-                    <div className="pt-1">
-                      <p className="text-black font-black text-sm tracking-tight uppercase mb-2 group-hover:text-[#8B0016] transition-colors">{item.label}</p>
-                      <p className="text-black/50 text-xs leading-relaxed font-light">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
+        <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
+          <div className="container">
+            <Reveal className="mb-12">
+              <div className="flex items-center gap-4">
+                <span className="w-8 h-px bg-[#8B0016]" />
+                <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">About Us</p>
               </div>
             </Reveal>
-          </div>
-        </div>
-      </section>
+            <div className="flex flex-col lg:flex-row items-start justify-between gap-16 lg:gap-24">
+              {/* Left Narrative */}
+              <Reveal className="lg:w-1/2 shrink-0">
+                <h2
+                  className="font-black text-black mb-10"
+                  style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+                >
+                  CRAFTED IN<br />BAHRAIN.<br />
+                  <span className="text-black/30">BUILT FOR<br />THE WORLD.</span>
+                </h2>
+                <p className="text-black/70 max-w-md font-light" style={{ fontSize: "clamp(1rem, 1.3vw, 1.15rem)", lineHeight: 1.8 }}>
+                  We are a boutique cinematic production studio rooted in Bahrain, creating high-end visual content for forward-thinking brands across the Gulf and beyond. We don't just fill space; we architect perception.
+                </p>
+              </Reveal>
 
-      {/* ======================================================
+              {/* Right Architectural Stats Grid */}
+              <Reveal delay={0.2} className="w-full lg:w-[480px] shrink-0">
+                <div className="grid grid-cols-1 border-t border-black/10">
+                  {[
+                    { stat: "5+", label: "Years of craft", desc: "Visual storytelling refined into a precise, repeatable signature system." },
+                    { stat: "40+", label: "Projects delivered", desc: "From intimate restaurants to large-scale real estate developments." },
+                    { stat: "BH", label: "Based in Bahrain", desc: "Serving the GCC region and international brands with local precision." },
+                  ].map((item, idx) => (
+                    <div key={item.stat} className="group relative border-b border-black/10 py-8 flex items-start gap-8 overflow-hidden transition-colors duration-500 hover:bg-white hover:px-6">
+                      {/* Hover subtle red accent beam */}
+                      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#8B0016] scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-500 ease-out" />
+
+                      <span
+                        className="text-[#8B0016] font-black shrink-0 transition-transform duration-500 group-hover:scale-105"
+                        style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.04em", lineHeight: 1 }}
+                      >
+                        {item.stat}
+                      </span>
+                      <div className="pt-1">
+                        <p className="text-black font-black text-sm tracking-tight uppercase mb-2 group-hover:text-[#8B0016] transition-colors">{item.label}</p>
+                        <p className="text-black/50 text-xs leading-relaxed font-light">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================
           S6a  COMPARISON MATRIX
       ====================================================== */}
-      <Comparison />
+        <Comparison />
 
-      {/* ======================================================
+        {/* ======================================================
           S6b  TRUSTED BY (SOCIAL PROOF)
       ====================================================== */}
-      <section data-theme="light" className="py-12 md:py-16 border-t border-b border-black/5 bg-white overflow-hidden flex flex-col items-center">
-        <p className="text-black/30 font-mono text-[9px] tracking-[0.4em] uppercase mb-8 md:mb-12 text-center">Trusted by Industry Leaders</p>
-        <div className="relative w-full flex overflow-hidden">
-           <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-           <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
-           
-           <motion.div 
-             className="flex gap-16 md:gap-32 items-center whitespace-nowrap px-8"
-             animate={{ x: ["0%", "-50%"] }}
-             transition={{ ease: "linear", duration: 30, repeat: Infinity }}
-           >
+        <section data-theme="light" className="py-12 md:py-16 border-t border-b border-black/5 bg-white overflow-hidden flex flex-col items-center">
+          <p className="text-black/30 font-mono text-[9px] tracking-[0.4em] uppercase mb-8 md:mb-12 text-center">Trusted by Industry Leaders</p>
+          <div className="relative w-full flex overflow-hidden">
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
+
+            <motion.div
+              className="flex gap-16 md:gap-32 items-center whitespace-nowrap px-8"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+            >
               {/* Duplicate the array to create identical infinite scroll */}
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex gap-16 md:gap-32 items-center">
@@ -804,35 +804,35 @@ export default function Home() {
                   <span className="text-black/20 font-mono text-xl md:text-2xl uppercase hover:text-black/80 transition-colors cursor-default">System</span>
                 </div>
               ))}
-           </motion.div>
-        </div>
-      </section>
+            </motion.div>
+          </div>
+        </section>
 
-      {/* ======================================================
+        {/* ======================================================
           S6b  TESTIMONIALS - ELEVATED HIGH-DENSITY SYSTEM
       ====================================================== */}
-      <section data-theme="light" className="py-24 md:py-32 bg-white overflow-hidden relative">
-        <div className="container max-w-7xl mb-12 flex justify-center">
-          <Reveal className="text-center">
-            <div className="flex items-center gap-3 justify-center">
-              <span className="w-4 h-px bg-[#B11226]" />
-              <p className="text-[#8A8A8A] font-mono tracking-[0.3em] uppercase text-[10px] font-bold">Client Feedback</p>
-              <span className="w-4 h-px bg-[#B11226]" />
-            </div>
-          </Reveal>
-        </div>
+        <section data-theme="light" className="py-24 md:py-32 bg-white overflow-hidden relative">
+          <div className="container max-w-7xl mb-12 flex justify-center">
+            <Reveal className="text-center">
+              <div className="flex items-center gap-3 justify-center">
+                <span className="w-4 h-px bg-[#B11226]" />
+                <p className="text-[#8A8A8A] font-mono tracking-[0.3em] uppercase text-[10px] font-bold">Client Feedback</p>
+                <span className="w-4 h-px bg-[#B11226]" />
+              </div>
+            </Reveal>
+          </div>
 
-        <div className="relative w-full flex flex-col gap-6 select-none cursor-default">
-           {/* Fading Edges for Marquee */}
-           <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-           <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          <div className="relative w-full flex flex-col gap-6 select-none cursor-default">
+            {/* Fading Edges for Marquee */}
+            <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-           {/* Row 1 (Scrolls Left) */}
-           <motion.div 
-             className="flex gap-6 w-max"
-             animate={{ x: ["0%", "-50%"] }}
-             transition={{ ease: "linear", duration: 40, repeat: Infinity }}
-           >
+            {/* Row 1 (Scrolls Left) */}
+            <motion.div
+              className="flex gap-6 w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ ease: "linear", duration: 40, repeat: Infinity }}
+            >
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
                   {[
@@ -842,8 +842,8 @@ export default function Home() {
                     { quote: "The visual framework Cinmach established has shifted how stakeholders engage with our firm. We finally look as formidable as we are.", name: "Elena R.", role: "Managing Partner . Investment Group" },
                     { quote: "Cinematically, they are unmatched. They didn't just capture our projects; they built a visual standard that has elevated our entire portfolio.", name: "Fahad A.", role: "Head of Creative . Development Company" }
                   ].map((t, idx) => (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className="w-[300px] md:w-[480px] bg-[#FAFAFA] border border-[#EAEAEA] rounded-[6px] p-6 md:p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
                     >
                       <p className="text-black font-medium leading-relaxed" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)" }}>
@@ -860,14 +860,14 @@ export default function Home() {
                   ))}
                 </div>
               ))}
-           </motion.div>
+            </motion.div>
 
-           {/* Row 2 (Scrolls Right) */}
-           <motion.div 
-             className="flex gap-6 w-max"
-             animate={{ x: ["-50%", "0%"] }}
-             transition={{ ease: "linear", duration: 45, repeat: Infinity }}
-           >
+            {/* Row 2 (Scrolls Right) */}
+            <motion.div
+              className="flex gap-6 w-max"
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{ ease: "linear", duration: 45, repeat: Infinity }}
+            >
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
                   {[
@@ -877,8 +877,8 @@ export default function Home() {
                     { quote: "They captured our exact essence and elevated it. Our brand identity now feels intentionally premium and globally competitive.", name: "Layla Noor", role: "Owner . Lifestyle Brand" },
                     { quote: "A complete overhaul of our visual perception. Cinmach turned our technical operations into a cinematic story of reliability and scale.", name: "Tariq Hassani", role: "General Manager . Logistics Firm" }
                   ].map((t, idx) => (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className="w-[300px] md:w-[480px] bg-[#FAFAFA] border border-[#EAEAEA] rounded-[6px] p-6 md:p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
                     >
                       <p className="text-black font-medium leading-relaxed" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)" }}>
@@ -895,9 +895,9 @@ export default function Home() {
                   ))}
                 </div>
               ))}
-           </motion.div>
-        </div>
-      </section>
+            </motion.div>
+          </div>
+        </section>
 
 
       </main>

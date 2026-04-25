@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent, MotionValue } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, MotionValue, useTransform } from "framer-motion";
 
 const STEPS = [
   {
@@ -43,97 +43,116 @@ export default function ProcessSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"],
+    offset: ["start end", "end start"],
   });
 
+  // Parallax effects
+  const leftParallaxY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
   return (
-    <section ref={containerRef} className="relative bg-[#000000]">
+    <section ref={containerRef} className="relative bg-gradient-to-b from-black to-[#0a0a0a]">
+      {/* Background Depth layer (Glow + Noise) */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(139,0,22,0.03)_0%,transparent_50%)]" />
+        {/* Subtle noise grain */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }}
+        />
+      </div>
+
       {/* DESKTOP (Split Sticky Scroll) */}
-      <div className="hidden lg:flex flex-col lg:flex-row w-full items-start">
+      <div className="hidden lg:flex flex-col lg:flex-row w-full items-start relative z-10">
         
         {/* Left Column: Sticky Editorial Header */}
-        <div 
-          className="lg:w-[41.666667%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 py-20 lg:pt-24 lg:pb-24 z-10 lg:border-r border-white/5 bg-[#000000]"
-        >
-          <div className="max-w-xl mt-6 lg:mt-12">
-
+        <div className="lg:w-[41.666667%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between px-6 md:px-12 lg:px-16 py-20 lg:pt-24 lg:pb-24 z-10 lg:border-r border-white-[0.02] bg-transparent">
+          
+          <motion.div style={{ y: leftParallaxY }} className="max-w-md mt-0 flex flex-col relative">
             <motion.p 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-[#8B0016] font-mono tracking-[0.25em] uppercase text-[9px] mb-8 lg:mb-12 font-bold"
+              transition={{ duration: 1 }}
+              className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[9px] mb-6 lg:mb-8 font-bold"
             >
               The Methodology
             </motion.p>
             
             <motion.h2
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-black leading-[0.92] tracking-tight text-white mb-6 lg:mb-8"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5.2rem)", letterSpacing: "-0.04em" }}
+              transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-white font-black leading-[0.9] tracking-tighter mb-8 lg:mb-10"
+              style={{ fontSize: "clamp(2rem, 4.5vw, 4.5rem)", letterSpacing: "-0.04em" }}
             >
               WE DESIGN<br />
               PERCEPTION.<br />
-              <span className="text-white/25">FRAME BY</span><br />
-              <span className="text-white/25">FRAME.</span>
+              <span className="text-white/20">FRAME BY</span><br />
+              <span className="text-white/20">FRAME.</span>
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-white/40 text-[12px] lg:text-[13px] font-medium tracking-wide max-w-[280px]"
+              transition={{ duration: 1, delay: 0.2 }}
+              className="text-white/40 text-[12px] lg:text-[14px] font-medium tracking-wide max-w-[280px]"
               style={{ lineHeight: 1.6 }}
             >
               We don&apos;t guess. We understand, plan, and execute with intent.
             </motion.p>
-          </div>
+          </motion.div>
 
           {/* Progress Indicator */}
-          <div className="hidden lg:flex items-center gap-6 mt-16 lg:mt-auto">
+          <div className="hidden lg:flex items-center gap-6 mt-16 lg:mt-auto relative z-20">
             <StepNumberDisplay progress={scrollYProgress} />
-            <div className="w-16 h-[1px] bg-white/10 relative overflow-hidden">
+            <div className="w-24 h-[1px] bg-white/5 relative overflow-hidden">
               <motion.div
-                className="absolute inset-0 bg-[#8B0016] origin-left"
+                className="absolute inset-0 bg-[#8B0016] origin-left shadow-[0_0_10px_rgba(139,0,22,0.8)]"
                 style={{ scaleX: scrollYProgress }}
               />
             </div>
-            <span className="text-white/30 font-mono text-[10px] tracking-[0.2em]">
+            <span className="text-white/20 font-mono text-[10px] tracking-[0.2em]">
               0{STEPS.length}
             </span>
           </div>
         </div>
 
         {/* Right Column: Scrollable Steps */}
-        <div className="lg:w-[58.333333%] relative bg-[#000000]">
-          <div className="py-[15vh] lg:py-[20vh] flex flex-col gap-12 md:gap-16">
+        <div className="lg:w-[58.333333%] relative bg-transparent">
+          <div className="py-[30vh] flex flex-col gap-32">
             {STEPS.map((step, index) => (
-              <div
+              <motion.div
                 key={step.num}
-                className="flex flex-col justify-center px-6 md:px-12 lg:px-20"
+                initial={{ opacity: 0.2, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ margin: "-20% 0px -20% 0px", once: false }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col justify-center px-6 md:px-12 lg:px-24 group relative"
               >
-                <div className="flex flex-col max-w-[500px]">
-                  <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.2em] font-bold mb-4">
+                {/* Active Glow Effect */}
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-32 h-32 bg-[#8B0016]/5 blur-[80px] rounded-full pointer-events-none mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                <div className="flex flex-col max-w-[550px] relative z-10">
+                  <span className="text-[#8B0016] font-mono text-[11px] tracking-[0.3em] font-bold mb-6 transition-transform duration-500 group-hover:-translate-y-1">
                     {step.num}
                   </span>
                   <h3
-                    className="text-[#8B0016] font-bold tracking-tight mb-4"
-                    style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+                    className="text-[#8B0016] font-black tracking-tighter mb-6 transition-all duration-500 group-hover:text-white"
+                    style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1 }}
                   >
                     {step.title.toUpperCase()}
                   </h3>
-                  <p className="text-white/50 text-[15px] md:text-[17px] font-light leading-[1.7] mb-12 md:mb-16">
+                  <p className="text-white/40 text-[16px] md:text-[18px] font-light leading-[1.8] mb-12 md:mb-16 transition-colors duration-500 group-hover:text-white/80">
                     {step.desc}
                   </p>
                 </div>
                 {index !== STEPS.length - 1 && (
-                  <div className="h-px w-full bg-white/5" />
+                  <div className="h-px w-full bg-white/5 transition-colors duration-500 group-hover:bg-[#8B0016]/20" />
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -34,33 +34,33 @@ function Reveal({
 const SERVICES_DATA = [
   {
     num: "01",
+    title: "Restaurant & Food Content",
+    shortDesc: "Cinematic, high-converting food visuals designed specifically to drive footfall and social growth.",
+    bullets: ["Social Media Reels", "Menu Cinematography", "Paid Ad Content", "Ambiance Highlights"],
+  },
+  {
+    num: "02",
     title: "Video Production",
     shortDesc: "High-end cinematic video production for brands and real estate.",
     bullets: ["Real Estate Shoots", "Commercial Ads", "Drone Cinematics", "Corporate Films"],
   },
   {
-    num: "02",
+    num: "03",
     title: "Post Production",
     shortDesc: "Precision editing, color grading, and sound to elevate your story.",
     bullets: ["Color Grading", "Sound Design", "Video Editing", "Motion Graphics"],
   },
   {
-    num: "03",
+    num: "04",
     title: "Creative & Branding",
     shortDesc: "Visual identity and creative direction built to last.",
     bullets: ["Storyboarding", "Creative Direction", "Brand Identity", "Visual Strategy"],
   },
   {
-    num: "04",
+    num: "05",
     title: "Digital Presence",
     shortDesc: "Clean, conversion-focused websites and landing pages.",
     bullets: ["Website Design", "Landing Pages", "UX/UI Design", "Performance Optimization"],
-  },
-  {
-    num: "05",
-    title: "Social Content",
-    shortDesc: "Native vertical content engineered for maximum retention.",
-    bullets: ["Meta & TikTok Ads", "Reels & Shorts", "Platform-Native Edits", "Trend Adaptation"],
   },
 ];
 

@@ -46,7 +46,7 @@ export default function Footer() {
              <div className="absolute inset-0 shadow-[0_0_40px_rgba(139,0,22,0.6)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
              
              <span className="relative z-10 group-hover:text-white transition-colors duration-500 flex items-center">
-               Start Your Project <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500">→</span>
+               Book a Shoot <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500">→</span>
              </span>
           </button>
         </div>

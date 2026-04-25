@@ -40,26 +40,26 @@ function Reveal({
 const SERVICES_DATA = [
   {
     num: "01",
-    title: "Real Estate Films",
+    title: "Food & Hospitality Content",
+    desc: "Appetizing, high-converting cinematic visuals that drive footfall and build authority.",
+    sub: ["Reels & Short-form Ads", "Menu & Food Cinematography", "Social Media Packages"],
+  },
+  {
+    num: "02",
+    title: "Real Estate & Spaces",
     desc: "Cinematic property visuals that sell the lifestyle, not just the space.",
     sub: ["Interior Shoots", "Exterior Cinematics", "Drone Coverage"],
   },
   {
-    num: "02",
+    num: "03",
     title: "Brand Commercials",
-    desc: "High-end brand stories that make your audience feel — not just watch.",
+    desc: "High-end brand stories that make your audience feel - not just watch.",
     sub: ["Creative Direction", "Storyboarding", "Production"],
   },
   {
-    num: "03",
-    title: "Social Media Ads",
-    desc: "Scroll-stopping vertical content engineered for maximum retention.",
-    sub: ["Short-form Content", "Reels / TikTok Ads", "Campaign Content"],
-  },
-  {
     num: "04",
-    title: "Video Editing",
-    desc: "Precision post-production — colour, sound, and cut to a premium standard.",
+    title: "Post-Production",
+    desc: "Precision editing - colour, sound, and cut to a premium standard.",
     sub: ["Color Grading", "Sound Design", "Motion Graphics"],
   },
 ];
@@ -99,236 +99,338 @@ function LocalTime() {
 }
 
 function ServicesTable() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
 
-  // Unified Grid to ensure exact column alignment for both headers and sub-services
-  const gridLayout = "grid-cols-1 md:grid-cols-[60px_1.5fr_2fr_40px] lg:grid-cols-[80px_1fr_2fr_40px]";
+  const featured = SERVICES_DATA[0];
+  const secondary = SERVICES_DATA.slice(1);
 
   return (
-    <div className="flex flex-col border-t border-black/10">
-      {SERVICES_DATA.map((svc, i) => {
-        const isOpen = openIndex === i;
-        const isDimmed = openIndex !== null && !isOpen;
+    <div className="flex flex-col gap-0">
 
-        return (
-          <Reveal key={svc.num} delay={i * 0.05}>
-            <div 
-              className={`relative border-b border-black/10 transition-all duration-700 ease-[0.16,1,0.3,1] 
-                ${isDimmed ? "opacity-50 saturate-0" : "opacity-100"}`}
-            >
-              {/* Active Left Accent Line */}
-              <div 
-                className={`absolute top-0 bottom-0 left-0 w-[3px] bg-[#8B0016] transition-transform duration-500 ease-out origin-top z-10
-                  ${isOpen ? "scale-y-100 shadow-[2px_0_15px_rgba(139,0,22,0.2)]" : "scale-y-0"}`} 
-              />
-              
-              <button
-                onClick={() => setOpenIndex(isOpen ? null : i)}
-                className={`w-full text-left group grid items-start md:items-center py-8 md:py-10 gap-5 md:gap-8 transition-colors duration-500 px-5 md:px-8 lg:px-10
-                  ${gridLayout} 
-                  ${isOpen ? "bg-black/[0.015]" : "hover:bg-black/[0.03]"}`}
-              >
-                {/* Desktop Number */}
-                <span className={`font-mono text-[11px] tracking-[0.3em] uppercase hidden md:block transition-colors duration-300 ${isOpen ? "text-[#8B0016]" : "text-black/40 group-hover:text-[#8B0016]"}`}>
-                  {svc.num}
-                </span>
+      {/* ── Featured Service: Food & Hospitality ── */}
+      <Reveal>
+        <div
+          className="group relative overflow-hidden rounded-[4px] mb-3"
+          onMouseEnter={() => setHoveredIndex(0)}
+          onMouseLeave={() => setHoveredIndex(null)}
+          style={{ minHeight: "320px" }}
+        >
+          {/* Cinematic food background video */}
+          <img
+            src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg"
+            alt="Food & Hospitality Content"
+            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out"
+          />
+          {/* Dark cinematic overlay */}
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700" />
+          {/* Subtle upward gradient for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                {/* Mobile Single Row (Hidden on Desktop) */}
-                <div className="flex items-center justify-between w-full md:hidden">
-                  <div className="flex items-center gap-5">
-                    <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.2em] uppercase shrink-0">
-                      {svc.num}
-                    </span>
-                    <h3
-                      className={`font-black flex-1 transition-all duration-300 ${isOpen ? "text-black" : "text-black/80 group-hover:text-black"}`}
-                      style={{ fontSize: "1.35rem", letterSpacing: "-0.03em" }}
-                    >
-                      {svc.title}
-                    </h3>
-                  </div>
-                  <div className={`w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-500 ${isOpen ? "bg-[#8B0016] border-[#8B0016] text-white" : "border-black/10 text-black/40 group-hover:bg-[#8B0016] group-hover:border-[#8B0016] group-hover:text-white"}`}>
-                    <motion.div animate={{ rotate: isOpen ? 135 : 0 }} transition={{ duration: 0.4 }}>+</motion.div>
-                  </div>
-                </div>
+          <div className="relative z-10 flex flex-col h-full justify-between p-8 md:p-12 lg:p-14" style={{ minHeight: "320px" }}>
+            {/* Top row */}
+            <div className="flex items-center justify-between">
+              <span className="text-white/40 font-mono text-[10px] tracking-[0.4em] uppercase">{featured.num}</span>
+              <span className="text-[#8B0016] font-mono text-[9px] tracking-[0.3em] uppercase border border-[#8B0016]/40 px-3 py-1">
+                Featured
+              </span>
+            </div>
 
-                {/* Desktop Title */}
+            {/* Bottom content */}
+            <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-10">
+              <div className="flex-1">
                 <h3
-                  className={`hidden md:block font-black transition-all duration-300 pr-4 lg:pr-8
-                    ${isOpen ? "text-black" : "text-black/90 group-hover:text-black"}`}
-                  style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.8rem)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+                  className="font-black text-white leading-[0.95] tracking-tighter mb-4 group-hover:translate-x-1 transition-transform duration-500"
+                  style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", letterSpacing: "-0.04em" }}
                 >
-                  {svc.title}
+                  {featured.title}
                 </h3>
-                
-                {/* Description */}
-                <p 
-                  className={`text-sm md:text-base leading-relaxed transition-colors duration-500 
-                    ${isOpen ? "text-black/90" : "text-black/60 group-hover:text-black/80"}`}
-                >
-                  {svc.desc}
+                <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-xl font-light">
+                  Cinematic content that makes people choose your restaurant before they even arrive.
                 </p>
-                
-                {/* Desktop Action Icon */}
-                <div className="hidden md:flex justify-end relative">
-                  <div className={`w-10 h-10 flex items-center justify-center rounded-full border transition-all duration-500 
-                    ${isOpen ? "bg-[#8B0016] border-[#8B0016] text-white" : "border-black/10 text-black/30 group-hover:bg-[#8B0016] group-hover:border-[#8B0016] group-hover:text-white group-hover:translate-x-1"}`}
+                {/* Trust line */}
+                <p className="text-white/35 text-[11px] font-mono tracking-widest uppercase mt-4">
+                  Trusted by restaurants & cafes to drive real customer engagement.
+                </p>
+              </div>
+
+              <Link
+                href="/work"
+                className="group/cta shrink-0 flex items-center gap-3 px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 self-start md:self-auto"
+              >
+                View Work
+                <span className="transition-transform duration-500 group-hover/cta:translate-x-1.5">→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* ── Secondary Services ── */}
+      <div className="flex flex-col border-t border-black/8">
+        {secondary.map((svc, i) => {
+          const idx = i + 1;
+          const isHovered = hoveredIndex === idx;
+          const isOpen = openAccordion === idx;
+          const isDimmed = hoveredIndex !== null && hoveredIndex !== idx;
+          return (
+            <Reveal key={svc.num} delay={i * 0.06}>
+              <div 
+                className={`group relative flex flex-col border-b border-black/8 transition-all duration-500
+                  ${isDimmed ? "opacity-30" : "opacity-100"}`}
+              >
+                {/* Left accent */}
+                <div
+                  className={`absolute left-0 top-0 bottom-0 w-[2px] bg-[#8B0016] origin-bottom transition-transform duration-500 ease-out z-10
+                    ${isHovered || isOpen ? "scale-y-100" : "scale-y-0"}`}
+                />
+
+                <div
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() => setOpenAccordion(isOpen ? null : idx)}
+                  className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 py-7 md:py-8 px-2 cursor-pointer"
+                >
+                  {/* Number */}
+                  <span className={`font-mono text-[10px] tracking-[0.4em] shrink-0 w-10 transition-colors duration-300 ${isOpen ? "text-[#8B0016]" : "text-black/25 group-hover:text-[#8B0016]"}`}>
+                    {svc.num}
+                  </span>
+
+                  {/* Title */}
+                  <h3
+                    className={`flex-1 font-black transition-all duration-300 group-hover:translate-x-1 leading-tight ${isOpen ? "text-black translate-x-1" : "text-black/80 group-hover:text-black"}`}
+                    style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.5rem)", letterSpacing: "-0.03em" }}
                   >
-                     <motion.div
-                       initial={false}
-                       animate={{ rotate: isOpen ? 135 : 0 }}
-                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                       className="pb-0.5 text-xl font-light"
-                     >
-                       +
-                     </motion.div>
+                    {svc.title}
+                  </h3>
+
+                  {/* Desc */}
+                  <p className="md:flex-1 text-sm text-black/45 leading-relaxed font-light group-hover:text-black/70 transition-colors duration-300 max-w-sm hidden md:block">
+                    {svc.desc}
+                  </p>
+
+                  {/* Toggle CTA */}
+                  <div className="shrink-0 flex items-center justify-end md:justify-center w-8">
+                    <motion.div
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className={`text-xl font-light transition-colors duration-300 ${isOpen || isHovered ? "text-[#8B0016]" : "text-black/40"}`}
+                    >
+                      +
+                    </motion.div>
                   </div>
                 </div>
-              </button>
 
-              {/* Sub-services Accordion Grid */}
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="overflow-hidden bg-black/[0.015]"
-                  >
-                    {/* Maps flawlessly to the same grid layout as the button above */}
-                    <div className={`grid items-start gap-4 md:gap-8 px-5 md:px-8 lg:px-10 pb-12 ${gridLayout}`}>
-                      
-                      {/* Empty Col 1 (Offset Number) */}
-                      <div className="hidden md:block" />
-
-                      {/* Col 2: Sub-services strictly indented under the Title */}
-                      <div className="flex flex-col gap-5 pt-6 md:border-t border-black/5 md:mt-[-1.5rem]">
-                        <p className="text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-[#8B0016] font-mono font-bold mb-1">
-                          Scope of Work
+                {/* Dropdown body */}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-2 md:pl-[84px] pb-8 flex flex-col md:flex-row gap-6 md:gap-12 w-full items-start">
+                        <p className="text-sm text-black/50 leading-relaxed font-light max-w-sm block md:hidden">
+                          {svc.desc}
                         </p>
-                        <div className="flex flex-col gap-3.5">
-                          {svc.sub.map((subItem, idx) => (
-                            <motion.div 
-                              key={idx}
-                              initial={{ opacity: 0, y: 15 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
-                              transition={{ delay: idx * 0.06 + 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                              className="flex items-center gap-4 text-black/80 text-[14px] md:text-[15px] tracking-wide font-medium"
-                            >
-                              <div className="w-6 h-[1px] bg-black/10" />
-                              {subItem}
-                            </motion.div>
+                        <div className="flex flex-col gap-3 flex-1">
+                          <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#8B0016] font-bold mb-1">Includes</p>
+                          {svc.sub.map((subItem, sIdx) => (
+                            <div key={sIdx} className="flex items-center gap-3">
+                              <span className="w-1 h-1 bg-[#8B0016] rounded-full shrink-0" />
+                              <span className="text-sm text-black/70">{subItem}</span>
+                            </div>
                           ))}
                         </div>
+                        <div className="shrink-0 pt-4 md:pt-0">
+                          <Link 
+                            href="/work"
+                            className="inline-flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] font-bold text-black hover:text-[#8B0016] uppercase transition-colors"
+                          >
+                            Explore Our Work <span>→</span>
+                          </Link>
+                        </div>
                       </div>
-
-                      {/* Invisible divs to fill remaining structural columns on desktop */}
-                      <div className="hidden md:block border-t border-black/5 mt-[-1.5rem]" /> 
-                      <div className="hidden md:block border-t border-black/5 mt-[-1.5rem]" />
-
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </Reveal>
-        );
-      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
-
-
-/* ─────────────────────────────────────────────────────────────
-   Home Page
-   ─────────────────────────────────────────────────────────── */
 export default function Home() {
   const { openProjectModal } = useModal();
 
   return (
     <>
-      {/* ══════════════════════════════════════════════════════
-          §1  HERO
-      ══════════════════════════════════════════════════════ */}
-      <main className="relative bg-black min-h-screen">
-
+      <main>
         <section
           data-theme="red"
-          className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden py-[100px] lg:py-[140px]"
+          className="relative min-h-[100svh] flex items-center overflow-hidden bg-black"
         >
-        {/* Background Video */}
-        <SmartVideo
-          src="https://www.pexels.com/download/video/8396974/"
-          poster="https://images.pexels.com/photos/8396974/pexels-photo-8396974.jpeg"
-          autoPlayViewport={true}
-          className="absolute inset-0 w-full h-full object-cover grayscale brightness-50"
-        />
+          {/* Grain texture */}
+          <div
+            className="absolute inset-0 opacity-[0.035] pointer-events-none z-10"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            }}
+          />
 
-        {/* Overlays */}
-        <div className="absolute inset-0 bg-black/5 mix-blend-overlay" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
+          {/* Split layout container */}
+          <div className="w-full min-h-[100svh] flex flex-col lg:flex-row">
 
-        {/* Content Wrapper */}
-        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 flex flex-col">
-          
-          <div className="w-full mb-6 md:mb-10 lg:mb-12">
-            <p className="text-white font-mono tracking-[0.2em] uppercase text-[10px] md:text-[11px] anim-fade-up opacity-40">
-              [ Cinmach Productions · Manama ]
-            </p>
-          </div>
+            {/* ── LEFT PANEL ── */}
+            <div className="relative z-20 w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-14 lg:px-20 xl:px-28 pt-28 pb-16 lg:py-0">
 
-          <div className="flex flex-col lg:flex-row w-full gap-12 lg:gap-[60px] xl:gap-[80px] items-start lg:items-center">
-            
-            {/* Left Column (60%) */}
-            <div className="w-full lg:w-[60%] flex flex-col shrink-0">
-              <h1
-                className="text-white font-black leading-[0.9] tracking-tighter"
-                style={{ fontSize: "clamp(40px, 10vw, 120px)" }}
+              {/* Top label */}
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1 }}
+                className="text-white/30 font-mono tracking-[0.28em] uppercase text-[9px] md:text-[10px] mb-10 lg:mb-14"
               >
-                <span className="block anim-fade-up anim-delay-1">CREATE</span>
-                <span className="block anim-fade-up anim-delay-2">YOUR</span>
-                <span className="block anim-fade-up anim-delay-3">PRESENCE.</span>
-              </h1>
+                Cinmach Productions - Manama
+              </motion.p>
+
+              {/* Headline */}
+              <div className="flex flex-col mb-8 lg:mb-10">
+                <motion.h1
+                  className="font-black text-white leading-[0.9] tracking-tighter"
+                  style={{ fontSize: "clamp(38px, 6.5vw, 96px)", letterSpacing: "-0.03em" }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Cinematic content<br />
+                  <span className="text-[#B11226]">that sells</span> your<br />
+                  space.
+                </motion.h1>
+              </div>
+
+              {/* Subheading */}
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.45 }}
+                className="text-white/55 font-light leading-relaxed mb-12 max-w-sm"
+                style={{ fontSize: "clamp(14px, 1.3vw, 17px)" }}
+              >
+                We create high-end visuals for restaurants &amp; caf&eacute;s that increase footfall, elevate perception, and turn views into bookings.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <button
+                  onClick={openProjectModal}
+                  type="button"
+                  className="group px-8 py-4 bg-[#B11226] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase transition-all duration-300 hover:bg-white hover:text-black flex items-center justify-center gap-3 hover:scale-[1.02]"
+                >
+                  Book a Shoot
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </button>
+                <Link
+                  href="/work"
+                  className="group px-8 py-4 border border-white/20 text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase transition-all duration-300 hover:border-white/60 hover:bg-white/5 flex items-center justify-center gap-3"
+                >
+                  View Our Work
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
+              </motion.div>
+
+              {/* Bottom stat strip */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.9 }}
+                className="flex items-center gap-8 mt-16 pt-8 border-t border-white/8"
+              >
+                {[
+                  { val: "3×", label: "More social engagement" },
+                  { val: "40+", label: "Restaurants served" },
+                  { val: "BH", label: "Based in Manama" },
+                ].map((s) => (
+                  <div key={s.val} className="flex flex-col">
+                    <span className="text-white font-black text-lg leading-none">{s.val}</span>
+                    <span className="text-white/30 text-[10px] font-mono mt-1 tracking-wide">{s.label}</span>
+                  </div>
+                ))}
+              </motion.div>
             </div>
+
+            {/* ── RIGHT PANEL (cinematic visual) ── */}
+            <div className="relative w-full lg:w-1/2 min-h-[50svh] lg:min-h-[100svh] overflow-hidden">
+              {/* Video */}
+              <motion.div
+                className="absolute inset-0"
+                initial={{ scale: 1.08 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <SmartVideo
+                  src="https://www.pexels.com/download/video/3195394/"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </motion.div>
+
+              {/* Overlays */}
+              <div className="absolute inset-0 bg-black/30" />
+              {/* Left-to-right fade so left panel reads on dark bg */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/10 to-transparent" />
+              {/* Bottom fade */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+              {/* Floating label on video */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 1 }}
+                className="absolute bottom-8 right-8 flex flex-col items-end gap-1"
+              >
+                <span className="text-white/30 text-[9px] font-mono tracking-[0.3em] uppercase">Now Playing</span>
+                <span className="text-white/60 text-[11px] font-mono tracking-wide">Restaurant Reel - Manama</span>
+              </motion.div>
+            </div>
+
+          </div>
+        </section>
+
+        <section className="relative py-24 md:py-32 bg-black overflow-hidden">
+          <div className="container relative z-10">
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+              <div className="w-full lg:w-[60%]">
+                <h1 className="font-black text-white leading-[0.9] tracking-tighter">
+                  <span className="anim-fade-up anim-delay-3 text-[#B11226]">RESTAURANT.</span>
+                </h1>
+              </div>
 
             {/* Right Column (40%) */}
             <div className="w-full lg:w-[40%] flex flex-col items-start anim-fade-up anim-delay-3">
                <p 
-                 className="text-white font-black leading-[1.1] tracking-tight mb-4 lg:mb-6"
-                 style={{ fontSize: "clamp(18px, 2vw, 24px)" }}
+                 className="text-white/70 font-medium tracking-wide mb-10"
+                 style={{ fontSize: "clamp(14px, 1.4vw, 18px)", lineHeight: 1.7 }}
                >
-                 We don’t shoot content.<br className="hidden lg:block lg:mb-1" /> We build perception.
-               </p>
-               <p
-                 className="text-white/60 font-medium tracking-wide mb-10"
-                 style={{ fontSize: "clamp(14px, 1.2vw, 16px)", lineHeight: 1.65 }}
-               >
-                 From strategy to final delivery, we create cinematic content that captures attention and positions you above the competition.
+                 Cinematic visuals for restaurants &amp; caf&eacute;s that drive footfall, elevate perception, and turn attention into bookings.
                </p>
 
                <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
                   <Link
                     href="/work"
-                    className="w-full sm:w-[180px] py-[18px] bg-[#B11226] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-center border border-[#B11226] hover:border-white"
+                    className="w-full sm:w-[220px] py-[18px] bg-[#B11226] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-center border border-[#B11226] hover:border-white"
                   >
-                    View Work
+                    Get Restaurant Content
                   </Link>
-                  <button
-                    onClick={openProjectModal}
-                    type="button"
-                    className="w-full sm:w-[180px] py-[18px] bg-transparent border border-white/20 text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-center"
-                  >
-                    Start Project
-                  </button>
                </div>
             </div>
 
@@ -336,9 +438,86 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          §2+3  ABOUT + SERVICES — WHITE (unified)
-      ══════════════════════════════════════════════════════ */}
+      {/* ======================================================
+          S1.5 RESTAURANT DEDICATED SECTION - BLACK (IMPACT)
+      ====================================================== */}
+      <section data-theme="dark" className="py-24 md:py-32 bg-black text-white relative">
+        <div className="container relative z-10">
+          <Reveal>
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-8 h-px bg-[#8B0016]" />
+              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
+                For Restaurants & Cafes
+              </p>
+            </div>
+            <h2
+              className="text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16"
+              style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
+            >
+              CONTENT THAT MAKES<br />
+              <span className="text-white/30">THEM CHOOSE YOU.</span>
+            </h2>
+          </Reveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
+            <Reveal delay={0.1}>
+              <h3 className="font-bold text-xl md:text-2xl mb-4 leading-tight">Built for modern restaurants that want to stand out on Instagram and beyond.</h3>
+              <p className="text-white/60 leading-relaxed font-light mb-8">
+                We know the hospitality industry. It&apos;s not just about a pretty plate-it&apos;s about atmosphere, energy, and capturing cravings. We transform average social feeds into high-converting revenue drivers built to pack your dining room.
+              </p>
+              
+              <div className="flex gap-4 items-center border-l-2 border-[#8B0016] pl-6 py-2">
+                 <div className="text-white/40 uppercase tracking-widest text-[10px] font-mono">Before</div>
+                 <div className="h-px w-4 bg-white/10" />
+                 <div className="text-[#8B0016] uppercase tracking-widest text-[10px] font-mono font-bold">The Transformation</div>
+                 <div className="h-px flex-1 bg-white/10 hidden sm:block" />
+                 <div className="text-white uppercase tracking-widest text-[10px] font-mono font-bold ml-auto sm:ml-0">After</div>
+              </div>
+              <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-sm md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
+                 <span>Generic Static Shots</span>
+                 <span className="text-white/20 hidden sm:block">→</span>
+                 <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-8 md:p-10">
+               <h4 className="font-mono text-[#8B0016] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
+               <ul className="flex flex-col gap-6">
+                 {[
+                   { step: "01", text: "Shoot", desc: "Cinematic, appetizing visuals" },
+                   { step: "02", text: "Edit", desc: "Fast-paced, retention-focused cuts" },
+                   { step: "03", text: "Deliver", desc: "Native social formats perfectly sized" },
+                   { step: "04", text: "Growth", desc: "Increased footfall and bookings" }
+                 ].map((s, i) => (
+                   <li key={i} className="flex items-center gap-6 group">
+                     <span className="font-mono text-[#8B0016] opacity-50 group-hover:opacity-100 transition-opacity text-xs">{s.step}</span>
+                     <div>
+                       <span className="block font-black text-white uppercase tracking-wide text-lg">{s.text}</span>
+                       <span className="block text-white/40 text-sm mt-0.5">{s.desc}</span>
+                     </div>
+                   </li>
+                 ))}
+               </ul>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.3} className="border-t border-white/10 pt-10">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              <p className="text-white/60 font-medium text-center md:text-left">Ready to pack your restaurant?</p>
+              <Link
+                href="/contact"
+                className="group flex justify-center items-center gap-4 px-10 py-4 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 w-full sm:w-auto"
+              >
+                Let&apos;s Grow Your Restaurant <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ======================================================
+          S2+3  ABOUT + SERVICES - WHITE (unified)
+      ====================================================== */}
       <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
         <div className="container">
 
@@ -369,20 +548,21 @@ export default function Home() {
       </section>
 
 
-      {/* ══════════════════════════════════════════════════════
-          §4  PROCESS — BLACK
-      ══════════════════════════════════════════════════════ */}
-      {/* ══════════════════════════════════════════════════════
-          §4  PROCESS — BLACK (PRCPTIV STYLE)
-      ══════════════════════════════════════════════════════ */}
+
+      {/* ======================================================
+          S4  PROCESS - BLACK
+      ====================================================== */}
+      {/* ======================================================
+          S4  PROCESS - BLACK (PRCPTIV STYLE)
+      ====================================================== */}
       <div data-theme="dark">
         <ProcessSection />
       </div>
 
 
-      {/* ══════════════════════════════════════════════════════
-          §5  FEATURED WORK — WHITE (EDITORIAL)
-      ══════════════════════════════════════════════════════ */}
+      {/* ======================================================
+          S5  FEATURED WORK - WHITE (EDITORIAL)
+      ====================================================== */}
       <section data-theme="light" className="py-24 md:py-32 bg-white relative">
         <div className="container relative z-10">
 
@@ -539,9 +719,9 @@ export default function Home() {
 
       <PricingSection />
 
-      {/* ══════════════════════════════════════════════════════
-          §6  ABOUT / POSITIONING — WHITE
-      ══════════════════════════════════════════════════════ */}
+      {/* ======================================================
+          S6  ABOUT / POSITIONING - WHITE
+      ====================================================== */}
       <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
         <div className="container">
           <Reveal className="mb-12">
@@ -595,14 +775,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          §6a  COMPARISON MATRIX
-      ══════════════════════════════════════════════════════ */}
+      {/* ======================================================
+          S6a  COMPARISON MATRIX
+      ====================================================== */}
       <Comparison />
 
-      {/* ══════════════════════════════════════════════════════
-          §6b  TRUSTED BY (SOCIAL PROOF)
-      ══════════════════════════════════════════════════════ */}
+      {/* ======================================================
+          S6b  TRUSTED BY (SOCIAL PROOF)
+      ====================================================== */}
       <section data-theme="light" className="py-12 md:py-16 border-t border-b border-black/5 bg-white overflow-hidden flex flex-col items-center">
         <p className="text-black/30 font-mono text-[9px] tracking-[0.4em] uppercase mb-8 md:mb-12 text-center">Trusted by Industry Leaders</p>
         <div className="relative w-full flex overflow-hidden">
@@ -628,9 +808,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          §6b  TESTIMONIALS — ELEVATED HIGH-DENSITY SYSTEM
-      ══════════════════════════════════════════════════════ */}
+      {/* ======================================================
+          S6b  TESTIMONIALS - ELEVATED HIGH-DENSITY SYSTEM
+      ====================================================== */}
       <section data-theme="light" className="py-24 md:py-32 bg-white overflow-hidden relative">
         <div className="container max-w-7xl mb-12 flex justify-center">
           <Reveal className="text-center">
@@ -656,11 +836,11 @@ export default function Home() {
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
                   {[
-                    { quote: "The shift in our market positioning was immediate. Cinmach codified a visual DNA that moved us from a local player to a premium entity.", name: "Omar Rahman", role: "Director of Operations · Real Estate Firm" },
-                    { quote: "They didn't just produce content; they engineered a perception of excellence that has redefined our entire brand authority.", name: "Sara Malik", role: "Marketing Director · Creative Agency" },
-                    { quote: "Our brand perception underwent a total transformation. The cinematic ecosystem they built has positioned us as the default choice in our tier.", name: "Ahmed Khan", role: "Founder · Technology Brand" },
-                    { quote: "The visual framework Cinmach established has shifted how stakeholders engage with our firm. We finally look as formidable as we are.", name: "Elena R.", role: "Managing Partner · Investment Group" },
-                    { quote: "Cinematically, they are unmatched. They didn't just capture our projects; they built a visual standard that has elevated our entire portfolio.", name: "Fahad A.", role: "Head of Creative · Development Company" }
+                    { quote: "The shift in our market positioning was immediate. Cinmach codified a visual DNA that moved us from a local player to a premium entity.", name: "Omar Rahman", role: "Director of Operations . Real Estate Firm" },
+                    { quote: "They didn't just produce content; they engineered a perception of excellence that has redefined our entire brand authority.", name: "Sara Malik", role: "Marketing Director . Creative Agency" },
+                    { quote: "Our brand perception underwent a total transformation. The cinematic ecosystem they built has positioned us as the default choice in our tier.", name: "Ahmed Khan", role: "Founder . Technology Brand" },
+                    { quote: "The visual framework Cinmach established has shifted how stakeholders engage with our firm. We finally look as formidable as we are.", name: "Elena R.", role: "Managing Partner . Investment Group" },
+                    { quote: "Cinematically, they are unmatched. They didn't just capture our projects; they built a visual standard that has elevated our entire portfolio.", name: "Fahad A.", role: "Head of Creative . Development Company" }
                   ].map((t, idx) => (
                     <div 
                       key={idx} 
@@ -691,11 +871,11 @@ export default function Home() {
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
                   {[
-                    { quote: "Every frame is an intentional move toward more premium positioning. Our audience response has shifted from interest to total trust.", name: "Daniel Carter", role: "VP of Growth · Digital Venture" },
-                    { quote: "The visual consistency across our assets has solidified a cohesive brand image that finally matches our high-end service standards.", name: "Aisha R.", role: "Marketing Manager · Hospitality Group" },
-                    { quote: "The perception shift was palpable. By prioritizing cinematic visual identity, our brand now commands a much higher authority in the market.", name: "James C.", role: "CEO · Private Business" },
-                    { quote: "They captured our exact essence and elevated it. Our brand identity now feels intentionally premium and globally competitive.", name: "Layla Noor", role: "Owner · Lifestyle Brand" },
-                    { quote: "A complete overhaul of our visual perception. Cinmach turned our technical operations into a cinematic story of reliability and scale.", name: "Tariq Hassani", role: "General Manager · Logistics Firm" }
+                    { quote: "Every frame is an intentional move toward more premium positioning. Our audience response has shifted from interest to total trust.", name: "Daniel Carter", role: "VP of Growth . Digital Venture" },
+                    { quote: "The visual consistency across our assets has solidified a cohesive brand image that finally matches our high-end service standards.", name: "Aisha R.", role: "Marketing Manager . Hospitality Group" },
+                    { quote: "The perception shift was palpable. By prioritizing cinematic visual identity, our brand now commands a much higher authority in the market.", name: "James C.", role: "CEO . Private Business" },
+                    { quote: "They captured our exact essence and elevated it. Our brand identity now feels intentionally premium and globally competitive.", name: "Layla Noor", role: "Owner . Lifestyle Brand" },
+                    { quote: "A complete overhaul of our visual perception. Cinmach turned our technical operations into a cinematic story of reliability and scale.", name: "Tariq Hassani", role: "General Manager . Logistics Firm" }
                   ].map((t, idx) => (
                     <div 
                       key={idx} 

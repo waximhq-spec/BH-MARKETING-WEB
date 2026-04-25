@@ -94,8 +94,8 @@ export default function ContactPage() {
                       className="w-full bg-transparent border-b border-white/10 pb-4 text-white transition-all outline-none appearance-none cursor-pointer font-light hover:border-[#8B0016]"
                     >
                       <option value="" className="text-black bg-white">Select Scope…</option>
+                      <option value="fb" className="text-black bg-white">Food &amp; Hospitality Content</option>
                       <option value="real-estate" className="text-black bg-white">Real Estate Cinematics</option>
-                      <option value="fb" className="text-black bg-white">Restaurant / F&amp;B</option>
                       <option value="brand-film" className="text-black bg-white">Brand Film</option>
                       <option value="photography" className="text-black bg-white">Photography</option>
                       <option value="other" className="text-black bg-white">Other</option>

@@ -342,40 +342,7 @@ export default function Home() {
       <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
         <div className="container">
 
-          {/* ── About Intro ── */}
-          <Reveal className="mb-8">
-            <p className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[10px]">
-              The Collective
-            </p>
-          </Reveal>
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-16 lg:gap-24 mb-20 md:mb-28">
 
-            {/* Left — Headline */}
-            <Reveal className="lg:w-1/2 shrink-0">
-              <h2
-                className="font-black text-black"
-                style={{ fontSize: "clamp(2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
-              >
-                WE DON&apos;T JUST<br />SHOOT. WE <br className="sm:hidden" />INSPIRE ACTION.
-              </h2>
-            </Reveal>
-
-            {/* Right — Body + CTA */}
-            <Reveal delay={0.2} className="lg:w-[460px] lg:border-l lg:border-black/10 lg:pl-12 shrink-0">
-              <p
-                className="text-black/80 font-medium mb-10"
-                style={{ fontSize: "clamp(1.1rem, 1.5vw, 1.35rem)", lineHeight: 1.6, letterSpacing: "-0.01em" }}
-              >
-                We build cinematic assets that establish your authority. No filler, just pure, intentional impact.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-3 text-[#8B0016] font-mono text-[10px] tracking-[0.3em] uppercase border-b border-[#8B0016] pb-1 hover:text-black hover:border-black transition-all duration-300"
-              >
-                Explore Our Approach <span>→</span>
-              </Link>
-            </Reveal>
-          </div>
 
           {/* ── Divider + Services Label ── */}
           <Reveal>
@@ -436,7 +403,7 @@ export default function Home() {
                   SELECTED<br />WORK.
                 </h2>
               </div>
-              <div className="mt-8 md:mt-0">
+              <div className="mt-8 md:mt-0 hidden md:block">
                 <Link
                   href="/work"
                   className="group flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-black/10 relative overflow-hidden transition-all duration-700 hover:border-[#8B0016] shrink-0"
@@ -558,6 +525,15 @@ export default function Home() {
             ))}
           </div>
 
+          {/* Mobile-focused CTA below grid */}
+          <Reveal delay={0.4} className="mt-12 flex justify-center">
+            <Link
+              href="/work"
+              className="w-full md:w-auto px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-xl flex items-center justify-center gap-4"
+            >
+              View All Projects <span>→</span>
+            </Link>
+          </Reveal>
         </div>
       </section>
 

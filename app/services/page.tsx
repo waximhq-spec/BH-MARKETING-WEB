@@ -130,7 +130,7 @@ export default function ServicesPage() {
             <h1
               className="font-black text-black mb-12"
               style={{
-                fontSize: "clamp(3.5rem, 10vw, 9rem)",
+                fontSize: "clamp(2.5rem, 10vw, 9rem)",
                 letterSpacing: "-0.05em",
                 lineHeight: 0.85,
               }}
@@ -168,52 +168,22 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          WHAT WE DO — RIGID ARCHITECTURAL GRID
-      ══════════════════════════════════════════════════════ */}
-      <section data-theme="light" className="py-24 md:py-40 bg-[#FAFAFA] border-t border-black/5">
-        <div className="container">
-          <Reveal className="mb-20">
-            <h2 
-              className="font-black text-black shrink-0 relative"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
-            >
-              THE <span className="text-[#8B0016] italic font-serif pr-2">SYSTEM.</span>
-            </h2>
-          </Reveal>
 
-          {/* Brutalist Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-b border-black/10">
-            {SERVICES_DATA.map((service, idx) => (
-              <Reveal key={service.num} delay={idx * 0.1} className="h-full">
-                <ServiceCard service={service} index={idx} />
-              </Reveal>
-            ))}
-            {/* Empty filler block to complete the 3x2 grid if needed */}
-            <Reveal delay={0.5} className="h-full hidden lg:block">
-              <div className="group relative bg-transparent flex flex-col justify-center items-center h-full border-t border-black/10 transition-colors duration-500 hover:bg-black group pt-10 pb-12 px-6 lg:px-10 cursor-pointer">
-                 <p className="font-mono text-[#8B0016] tracking-[0.3em] uppercase text-[10px] group-hover:text-white transition-colors">Bespoke Solutions</p>
-                 <span className="font-black text-3xl mt-4 text-black group-hover:text-white transition-colors">→</span>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════════════
           PROCESS CALLOUT — COMPACT & STRUCTURED
       ══════════════════════════════════════════════════════ */}
       <section data-theme="light" className="py-24 md:py-32 bg-white">
         <div className="container">
-          <Reveal className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
-            <div className="sticky top-32">
+          <Reveal className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start px-2 lg:px-0">
+            <div className="lg:sticky lg:top-32 lg:pb-20">
               <div className="flex items-center gap-4 mb-8">
                 <span className="w-8 h-px bg-[#8B0016]" />
                 <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">How it works</p>
               </div>
               <h2
                 className="font-black text-black leading-[0.9]"
-                style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
+                style={{ fontSize: "clamp(2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em" }}
               >
                 BRIEF →<br />STRATEGY →<br />PRODUCTION →<br />DELIVERY.
               </h2>

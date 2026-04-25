@@ -19,7 +19,7 @@ export default function Footer() {
       {/* Extremely subtle radial glow from the absolute bottom center - optimized without blur-3xl */}
       <div className="absolute -bottom-[200px] left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(139,0,22,0.15)_0%,transparent_70%)] pointer-events-none opacity-60" />
 
-      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center">
+      <div className="w-full max-w-[1400px] mx-auto px-8 md:px-14 lg:px-20 xl:px-24 relative z-10 flex flex-col items-center">
         
         {/* ══════════════════════════════════════════════════════
             TOP LAYER: THE FINAL CTA

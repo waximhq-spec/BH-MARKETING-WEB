@@ -119,7 +119,7 @@ export default function PricingSection() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white opacity-[0.015] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#B11226] opacity-[0.03] rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10 w-full overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-8 md:px-14 lg:px-20 xl:px-24 relative z-10 w-full overflow-hidden">
         {/* Header Text */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}

@@ -70,7 +70,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 export default function Comparison() {
   return (
     <section data-theme="light" className="py-24 md:py-40 bg-white">
-      <div className="container max-w-6xl">
+      <div className="container">
         <div className="flex flex-col mb-16 md:mb-24 text-center items-center">
           <Reveal>
             <p className="text-[#B11226] font-mono tracking-[0.3em] uppercase text-[10px] font-bold mb-6">

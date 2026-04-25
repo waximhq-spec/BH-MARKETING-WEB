@@ -105,7 +105,7 @@ export default function Navbar() {
           boxShadow: shadow,
         }}
       >
-        <div className="container h-16 flex items-center justify-between">
+        <div className="w-full h-16 flex items-center justify-between px-8 md:px-14 lg:px-20 xl:px-24">
           {/* Wordmark Logo */}
           <Link
             href="/"

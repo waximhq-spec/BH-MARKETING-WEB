@@ -66,7 +66,7 @@ export default function ProcessSection() {
       <div className="hidden lg:flex flex-col lg:flex-row w-full items-start relative z-10">
         
         {/* Left Column: Sticky Editorial Header */}
-        <div className="lg:w-[41.666667%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between px-6 md:px-12 lg:px-16 py-20 lg:pt-24 lg:pb-24 z-10 lg:border-r border-white-[0.02] bg-transparent">
+        <div className="lg:w-[41.666667%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between px-8 md:px-14 lg:px-20 xl:px-24 py-20 lg:pt-24 lg:pb-24 z-10 lg:border-r border-white-[0.02] bg-transparent">
           
           <motion.div style={{ y: leftParallaxY }} className="max-w-md mt-0 flex flex-col relative">
             <motion.p 
@@ -130,7 +130,7 @@ export default function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ margin: "-20% 0px -20% 0px", once: false }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col justify-center px-6 md:px-12 lg:px-24 group relative"
+                className="flex flex-col justify-center px-8 md:px-14 lg:px-20 xl:px-24 group relative"
               >
                 {/* Active Glow Effect */}
                 <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-32 h-32 bg-[#8B0016]/5 blur-[80px] rounded-full pointer-events-none mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -159,7 +159,7 @@ export default function ProcessSection() {
       </div>
 
       {/* MOBILE (Old Vertical Line Expansion) */}
-      <div className="lg:hidden flex flex-col px-6 py-24">
+      <div className="lg:hidden flex flex-col px-8 py-24">
         <motion.p 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

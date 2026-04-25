@@ -325,18 +325,18 @@ export default function Page() {
                 >
                   content for
                 </span>
-                {/* Line 3 — Cormorant serif italic, red */}
+                {/* Line 3 — Inter Black, uppercase, red */}
                 <span
                   className="block text-[#B11226]"
-                  style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(40px, 7vw, 104px)", fontWeight: 600, fontStyle: "italic", letterSpacing: "-0.02em", lineHeight: 1.0, marginTop: "0.04em" }}
+                  style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(36px, 6.5vw, 96px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.9, marginTop: "0.04em" }}
                 >
-                  restaurants
+                  RESTAURANTS
                 </span>
                 <span
                   className="block text-[#B11226]"
-                  style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(40px, 7vw, 104px)", fontWeight: 600, fontStyle: "italic", letterSpacing: "-0.02em", lineHeight: 0.95 }}
+                  style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(36px, 6.5vw, 96px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.9 }}
                 >
-                  &amp; caf&eacute;s.
+                  &amp; CAF&Eacute;S.
                 </span>
               </motion.h1>
             </div>

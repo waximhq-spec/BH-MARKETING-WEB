@@ -98,36 +98,22 @@ function ServicesTable() {
           <div className="relative z-10 flex flex-col h-full justify-between p-8 md:p-12 lg:p-14" style={{ minHeight: "320px" }}>
             {/* Top row */}
             <div className="flex items-center justify-between">
-              <span className="text-white/40 font-mono text-[10px] tracking-[0.4em] uppercase">{featured.num}</span>
-              <span className="text-[#B11226] font-mono text-[9px] tracking-[0.3em] uppercase border border-[#B11226]/40 px-3 py-1">
-                Featured
-              </span>
+              <span className="text-[#B11226] font-mono text-[10px] tracking-[0.4em] font-bold">Featured / 01</span>
+              <div className="px-3 py-1 bg-[#B11226] text-white text-[8px] font-mono font-bold tracking-widest uppercase rounded-[2px]">High Retention</div>
             </div>
 
-            {/* Bottom content */}
-            <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-10">
-              <div className="flex-1">
-                <h3
-                  className="font-black text-white leading-[0.95] tracking-tighter mb-4 group-hover:translate-x-1 transition-transform duration-500"
-                  style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", letterSpacing: "-0.04em" }}
-                >
-                  {featured.title}
+            {/* Bottom row */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div className="max-w-xl">
+                <h3 className="text-white font-black leading-[0.9] tracking-tighter mb-4" style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", letterSpacing: "-0.04em" }}>
+                  FOOD &<br />HOSPITALITY CONTENT
                 </h3>
-                <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-xl font-light">
+                <p className="text-white/70 text-base md:text-xl font-light leading-relaxed max-w-md">
                   Cinematic content that makes people choose your restaurant before they even arrive.
                 </p>
-                {/* Trust line */}
-                <p className="text-white/35 text-[11px] font-mono tracking-widest uppercase mt-4">
-                  Trusted by restaurants & cafes to drive real customer engagement.
-                </p>
               </div>
-
-              <button
-                onClick={() => {}}
-                className="group/cta shrink-0 flex items-center gap-3 px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#B11226] hover:text-white transition-all duration-500 self-start md:self-auto"
-              >
-                View Work
-                <span className="transition-transform duration-500 group-hover/cta:translate-x-1.5">→</span>
+              <button type="button" className="group/btn flex items-center gap-3 px-8 py-4 bg-white text-black font-mono text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#B11226] hover:text-white">
+                View Work <span className="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
               </button>
             </div>
           </div>
@@ -222,77 +208,113 @@ function ServicesTable() {
   );
 }
 
-export default function Page() {
+export default function LandingPage() {
   const { openProjectModal } = useModal();
 
   return (
-    <>
-      <main>
+    <div className="flex flex-col min-h-screen bg-black">
+      <main className="flex-1">
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 1: HERO (REVERTED)
+            SECTION 1: HERO
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="red" className="relative h-[100svh] flex flex-col overflow-hidden bg-black">
-          <motion.div className="absolute inset-0 z-0" initial={{ scale: 1.05 }} animate={{ scale: 1 }} transition={{ duration: 4, ease: [0.16, 1, 0.3, 1] }}>
-            <SmartVideo src="/bg-rest.mp4" autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover" />
-          </motion.div>
-          <div className="absolute inset-0 bg-black/60 z-[1]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-[2]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent z-[2]" />
+        <section data-theme="dark" className="relative h-screen min-h-[700px] w-full overflow-hidden flex flex-col">
+          <SmartVideo 
+            src="https://www.pexels.com/download/video/33033789/" 
+            autoPlayViewport={true}
+            className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2]"
+          />
+          <div className="absolute inset-0 bg-black/50 z-[1]" />
+          <motion.div 
+            className="absolute inset-0 bg-black z-[2]" 
+            initial={{ scaleY: 1 }} 
+            animate={{ scaleY: 0 }} 
+            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }} 
+          />
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80 z-[3]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1.5 }}
+          />
+          {/* Architectural Grid Overlay */}
+          <div className="absolute inset-0 z-[3] pointer-events-none">
+            <div className="container h-full relative">
+              {/* Vertical Lines */}
+              <div className="absolute inset-0 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-0 opacity-[0.06]">
+                {[...Array(13)].map((_, i) => (
+                  <div key={i} className="border-r border-white h-full" />
+                ))}
+              </div>
+              
+              {/* Horizontal Lines */}
+              <div className="absolute left-0 right-0 top-[15%] border-t border-white/10" />
+              <div className="absolute left-0 right-0 bottom-[25%] border-t border-white/10" />
+              <div className="absolute left-0 right-0 bottom-[10%] border-t border-white/10" />
+            </div>
+          </div>
 
-          {/* Vertical scan lines — architectural accents */}
-          <motion.div
-            className="absolute left-[32%] top-0 bottom-0 w-px bg-white/[0.04] z-[3] hidden lg:block"
-            initial={{ scaleY: 0, opacity: 0 }}
-            animate={{ scaleY: 1, opacity: 1 }}
-            transition={{ delay: 1, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          />
-          <motion.div
-            className="absolute right-[28%] top-0 bottom-0 w-px bg-white/[0.06] z-[3] hidden lg:block"
-            initial={{ scaleY: 0, opacity: 0 }}
-            animate={{ scaleY: 1, opacity: 1 }}
-            transition={{ delay: 1.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          />
-          <div className="container relative z-[4] flex flex-col h-full">
-            <div className="flex items-center justify-between pt-24 lg:pt-28 shrink-0">
+          <div className="relative z-[4] flex flex-col h-full px-8 md:px-14 lg:px-24">
+            <div className="flex items-center justify-between pt-12 md:pt-16 lg:pt-20 shrink-0">
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[9px]">[ Cinmach Productions · Manama ]</motion.p>
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.3 }} className="hidden md:flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#B11226] animate-pulse" />
-                <span className="text-white/25 font-mono text-[9px] tracking-[0.2em] uppercase">Est. 2020</span>
-              </motion.div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse" />
+                <span className="text-white/40 font-mono text-[9px] uppercase tracking-widest">EST. 2023</span>
+              </div>
             </div>
-            <div className="flex-1 min-h-0 flex items-center py-6">
-              <motion.h1 style={{ lineHeight: 0.9 }} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}>
-                <span className="block text-white" style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(36px, 6.5vw, 96px)", fontWeight: 900, letterSpacing: "-0.04em" }}>Cinematic</span>
-                <span className="block text-white" style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(36px, 6.5vw, 96px)", fontWeight: 900, letterSpacing: "-0.04em" }}>content for</span>
-                <span className="block text-[#B11226]" style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(36px, 6.5vw, 96px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.9, marginTop: "0.04em" }}>RESTAURANTS</span>
-                <span className="block text-[#B11226]" style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(36px, 6.5vw, 96px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.9 }}>&amp; CAF&Eacute;S.</span>
-              </motion.h1>
-            </div>
-            <div className="border-t border-white/[0.1] pt-5 pb-8 lg:pb-10 shrink-0">
-              <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-0">
-                <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.6 }} className="text-white/55 font-light leading-relaxed lg:w-[36%] lg:pr-16" style={{ fontSize: "clamp(13px, 1.1vw, 15px)", lineHeight: 1.85 }}>
+            
+            <div className="flex-1 flex flex-col justify-center py-4">
+              <Reveal delay={0.2}>
+                <h1 className="text-white font-black leading-[0.88] tracking-tighter mb-4 lg:mb-6" style={{ fontSize: "clamp(3rem, 9vw, 6.8rem)", letterSpacing: "-0.04em" }}>
+                  Cinematic<br />
+                  content for<br />
+                  <span className="text-[#B11226] uppercase">RESTAURANTS<br />&amp; CAFÉS.</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={0.4} className="max-w-xl">
+                <p className="text-white/60 text-[12px] md:text-[13px] leading-relaxed font-light">
                   We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings — built specifically for hospitality brands in the GCC.
-                </motion.p>
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.7 }} className="flex items-center gap-10 lg:gap-14 lg:w-[30%] lg:border-l lg:border-white/[0.1] lg:pl-14">
-                  {[
-                    { val: "40+", label: "Restaurants" },
-                    { val: "3×", label: "Engagement" },
-                    { val: "BH", label: "Bahrain" },
-                  ].map((s) => (
-                    <div key={s.val} className="flex flex-col">
-                      <span className="text-white font-black leading-none" style={{ fontSize: "clamp(22px, 2.5vw, 34px)", letterSpacing: "-0.03em" }}>{s.val}</span>
-                      <span className="text-white/30 font-mono text-[9px] uppercase tracking-[0.2em] mt-1">{s.label}</span>
+                </p>
+              </Reveal>
+            </div>
+
+            <div className="pb-8 md:pb-12 lg:pb-16 shrink-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-t border-white/5 pt-8">
+                <div className="lg:col-span-9 flex flex-wrap items-center gap-8 md:gap-16">
+                  <Reveal delay={0.5}>
+                    <div className="flex flex-col">
+                      <span className="text-white font-black text-3xl md:text-4xl tracking-tighter">40+</span>
+                      <span className="text-white/30 font-mono text-[8px] uppercase tracking-widest mt-1">Restaurants</span>
                     </div>
-                  ))}
-                </motion.div>
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.8 }} className="flex flex-row gap-3 lg:ml-auto">
-                  <Link href="/services" className="group btn-premium px-4 md:px-7 py-[14px] bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase flex items-center gap-2.5 whitespace-nowrap">
-                    View Our Work <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </Link>
-                  <button onClick={openProjectModal} type="button" className="group btn-premium px-4 md:px-7 py-[14px] border border-white/25 text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase hover:bg-white/5 flex items-center gap-2.5 whitespace-nowrap">
-                    Book a Shoot <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </Reveal>
+                  <Reveal delay={0.6}>
+                    <div className="flex flex-col">
+                      <span className="text-white font-black text-3xl md:text-4xl tracking-tighter">3x</span>
+                      <span className="text-white/30 font-mono text-[8px] uppercase tracking-widest mt-1">Engagement</span>
+                    </div>
+                  </Reveal>
+                  <Reveal delay={0.7}>
+                    <div className="flex flex-col">
+                      <span className="text-white font-black text-3xl md:text-4xl tracking-tighter">BH</span>
+                      <span className="text-white/30 font-mono text-[8px] uppercase tracking-widest mt-1">Bahrain</span>
+                    </div>
+                  </Reveal>
+                </div>
+
+                <div className="lg:col-span-3 flex justify-end">
+                  <button 
+                    onClick={openProjectModal}
+                    className="group relative flex items-center gap-6 px-10 py-5 bg-white text-black text-[10px] font-mono font-bold tracking-[0.3em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-2xl"
+                  >
+                     {/* Subtle Red Brand Accent Line (Static) */}
+                     <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#B11226] z-20" />
+
+                     <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
+                       BOOK YOUR SHOOT <span className="ml-5 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70 group-hover:opacity-100">→</span>
+                     </span>
+                     
+                     <div className="absolute inset-0 bg-[#B11226] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
                   </button>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -372,9 +394,16 @@ export default function Page() {
             <ServicesTable />
           </div>
         </section>
-        
-        {/* High-Impact Section Break */}
-        <section data-theme="light" className="bg-white pt-40 pb-20">
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            SECTION 4: COMPARISON
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <Comparison />
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            SECTION 4: PORTFOLIO / SELECTED WORK
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <div className="bg-white pt-40 pb-20">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-[2px] w-full bg-black mb-12" />
@@ -393,14 +422,10 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 4: PORTFOLIO
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <section data-theme="light" className="pb-24 md:pb-40 bg-white text-black overflow-hidden">
           <div className="container">
-
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
               <div className="lg:col-span-5">
                 <Reveal delay={0.1}>
@@ -446,62 +471,64 @@ export default function Page() {
         <PricingSection />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 7: TESTIMONIALS
+            SECTION 7: SOCIAL PROOF (REVERTED)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="py-24 md:py-40 bg-black text-white border-t border-white/5">
-          <div className="container max-w-6xl">
+        <section data-theme="dark" className="py-32 md:py-48 bg-black text-white overflow-hidden relative">
+          <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-              <Reveal>
-                <div className="flex items-center gap-4 mb-8">
-                  <span className="w-10 h-px bg-[#B11226]" />
-                  <p className="text-[#8A8A8A] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">Social Proof</p>
-                </div>
-                <h2 className="text-white font-black leading-[1.05] tracking-tight mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}>THE OBVIOUS<br /><span className="text-white/20 text-italic">CHOICE.</span></h2>
-                <div className="grid grid-cols-2 gap-10">
-                  <div>
-                    <span className="text-[#B11226] font-black text-4xl block">+40%</span>
-                    <span className="text-white/30 font-mono text-[9px] uppercase tracking-widest">Footfall Increase</span>
+              <div>
+                <Reveal>
+                  <div className="flex items-center gap-4 mb-8">
+                    <span className="w-8 h-px bg-[#B11226]" />
+                    <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">Social Proof</p>
                   </div>
-                  <div>
-                    <span className="text-[#B11226] font-black text-4xl block">100%</span>
-                    <span className="text-white/30 font-mono text-[9px] uppercase tracking-widest">Client Trust</span>
-                  </div>
-                </div>
-              </Reveal>
-              <div className="flex flex-col gap-12">
-                {[
-                  { quote: "Bookings doubled within weeks. The perception shift was immediate.", name: "Sara Malik", role: "Marketing Director" },
-                  { quote: "They engineered a level of excellence that redefined our brand authority.", name: "Ahmed Khan", role: "Founder . Hospitality Group" }
-                ].map((t, i) => (
-                  <Reveal key={i} delay={0.2}>
-                    <p className="text-white/60 text-xl font-light italic mb-6 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
-                    <div className="flex items-center gap-4">
-                      <div className="w-1 h-1 bg-[#B11226] rounded-full" />
-                      <div>
-                        <p className="text-white font-bold text-sm tracking-tight">{t.name}</p>
-                        <p className="text-white/30 text-[10px] uppercase font-mono">{t.role}</p>
-                      </div>
-                    </div>
+                  <h2 className="text-white font-black leading-[0.85] tracking-tighter mb-12" style={{ fontSize: "clamp(3rem, 8vw, 6rem)", letterSpacing: "-0.05em" }}>
+                    THE OBVIOUS<br /><span className="text-white/20">CHOICE.</span>
+                  </h2>
+                </Reveal>
+
+                <div className="grid grid-cols-2 gap-10 mt-4">
+                  <Reveal delay={0.1}>
+                    <p className="text-[#B11226] font-black text-4xl md:text-5xl tracking-tighter mb-2">+40%</p>
+                    <p className="text-white/30 font-mono uppercase text-[9px] tracking-[0.2em]">Footfall Increase</p>
                   </Reveal>
-                ))}
+                  <Reveal delay={0.2}>
+                    <p className="text-white font-black text-4xl md:text-5xl tracking-tighter mb-2">100%</p>
+                    <p className="text-white/30 font-mono uppercase text-[9px] tracking-[0.2em]">Client Trust</p>
+                  </Reveal>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-12">
+                <Reveal delay={0.2}>
+                  <p className="text-white/60 text-lg md:text-xl font-light italic leading-relaxed mb-6">
+                    "Bookings doubled within weeks. The perception shift was immediate."
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-1.5 h-1.5 bg-[#B11226]" />
+                    <div>
+                      <p className="text-white font-bold text-xs uppercase tracking-widest">Sara Malik</p>
+                      <p className="text-white/30 text-[9px] uppercase tracking-tighter font-mono">Marketing Director</p>
+                    </div>
+                  </div>
+                </Reveal>
+                <Reveal delay={0.3}>
+                  <p className="text-white/60 text-lg md:text-xl font-light italic leading-relaxed mb-6">
+                    "They engineered a level of excellence that redefined our brand authority."
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-1.5 h-1.5 bg-[#B11226]" />
+                    <div>
+                      <p className="text-white font-bold text-xs uppercase tracking-widest">Ahmed Khan</p>
+                      <p className="text-white/30 text-[9px] uppercase tracking-tighter font-mono">Founder - Hospitality Group</p>
+                    </div>
+                  </div>
+                </Reveal>
               </div>
             </div>
           </div>
         </section>
-
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 8: FINAL CTA
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="light" className="py-24 md:py-40 bg-white border-t border-black/5">
-          <div className="container text-center flex flex-col items-center">
-            <Reveal>
-              <h2 className="text-black font-black leading-none mb-10" style={{ fontSize: "clamp(2.5rem, 8vw, 6.5rem)", letterSpacing: "-0.04em" }}>READY TO BUILD<br /><span className="text-black/10">YOUR VISION?</span></h2>
-              <button onClick={openProjectModal} className="px-14 py-7 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#B11226] transition-all duration-500 shadow-2xl">Start a Project</button>
-            </Reveal>
-          </div>
-        </section>
-
       </main>
-    </>
+    </div>
   );
 }

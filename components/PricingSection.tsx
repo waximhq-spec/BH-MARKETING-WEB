@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 
@@ -160,34 +160,74 @@ export default function PricingSection() {
           ))}
         </div>
 
-        {/* Mobile View: Horizontal Scrollable Cards */}
-        <div className="lg:hidden -mx-8 px-8 overflow-hidden">
-          <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-12">
-            {packages.map((pkg, idx) => (
-              <motion.div
-                key={pkg.id}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 * idx }}
-                className={`min-w-[85vw] md:min-w-[320px] snap-center flex flex-col relative rounded-2xl overflow-hidden ${
-                  pkg.isPopular 
-                    ? "bg-[#0A0A0A] border border-[#B11226]/40" 
-                    : "bg-[#0A0A0A] border border-white/5"
-                }`}
-              >
-                <PricingCardContent pkg={pkg} openProjectModal={openProjectModal} />
-              </motion.div>
-            ))}
-          </div>
+        </motion.div>
+
+        {/* Auto-scroll logic for mobile */}
+        {(() => {
+          const scrollRef = useRef<HTMLDivElement>(null);
           
-          {/* Scroll Indicator */}
-          <div className="flex justify-center gap-1.5 mt-2">
-            {packages.map((_, i) => (
-              <div key={i} className="w-1 h-1 rounded-full bg-white/20 last:bg-[#B11226]/40" />
-            ))}
-          </div>
-        </div>
+          useEffect(() => {
+            const container = scrollRef.current;
+            if (!container) return;
+
+            let interval: NodeJS.Timeout;
+            const startScroll = () => {
+              interval = setInterval(() => {
+                const { scrollLeft, scrollWidth, clientWidth } = container;
+                // If we're at the end, scroll back to start
+                if (scrollLeft + clientWidth >= scrollWidth - 10) {
+                  container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                  // Scroll by one card width (roughly)
+                  container.scrollBy({ left: clientWidth * 0.85, behavior: 'smooth' });
+                }
+              }, 4000); // Scroll every 4 seconds
+            };
+
+            startScroll();
+
+            // Clear on interaction
+            const stopScroll = () => clearInterval(interval);
+            container.addEventListener('touchstart', stopScroll);
+            container.addEventListener('mousedown', stopScroll);
+
+            return () => {
+              stopScroll();
+              container.removeEventListener('touchstart', stopScroll);
+              container.removeEventListener('mousedown', stopScroll);
+            };
+          }, []);
+
+          return (
+            <div className="lg:hidden -mx-8 px-8 overflow-hidden">
+              <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-12">
+                {packages.map((pkg, idx) => (
+                  <motion.div
+                    key={pkg.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 * idx }}
+                    className={`min-w-[85vw] md:min-w-[320px] snap-center flex flex-col relative rounded-2xl overflow-hidden ${
+                      pkg.isPopular 
+                        ? "bg-[#0A0A0A] border border-[#B11226]/40" 
+                        : "bg-[#0A0A0A] border border-white/5"
+                    }`}
+                  >
+                    <PricingCardContent pkg={pkg} openProjectModal={openProjectModal} />
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Scroll Indicator */}
+              <div className="flex justify-center gap-1.5 mt-2">
+                {packages.map((_, i) => (
+                  <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </section>
   );

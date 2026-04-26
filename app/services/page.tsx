@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
+import { useModal } from "@/components/ModalContext";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal utility
@@ -29,219 +29,195 @@ function Reveal({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Data
+   Data: Organized Agency Services
    ─────────────────────────────────────────────────────────── */
-const SERVICES_DATA = [
+const SERVICE_CATEGORIES = [
   {
-    num: "01",
-    title: "Restaurant & Food Content",
-    shortDesc: "Cinematic, high-converting food visuals designed specifically to drive footfall and social growth.",
-    bullets: ["Social Media Reels", "Menu Cinematography", "Paid Ad Content", "Ambiance Highlights"],
+    title: "Content Production",
+    desc: "Cinematic visual assets engineered for impact and retention.",
+    services: [
+      "Restaurant & Café Shoots",
+      "Real Estate & Space Cinematics",
+      "Product & Lifestyle Content",
+      "Short-form Reels & Ad Creatives"
+    ]
   },
   {
-    num: "02",
-    title: "Video Production",
-    shortDesc: "High-end cinematic video production for brands and real estate.",
-    bullets: ["Real Estate Shoots", "Commercial Ads", "Drone Cinematics", "Corporate Films"],
+    title: "Branding & Identity",
+    desc: "Architecting the soul and visual language of your brand.",
+    services: [
+      "Brand Identity Systems",
+      "Creative & Visual Direction",
+      "Logo & Design Frameworks",
+      "Brand Voice & Strategy"
+    ]
   },
   {
-    num: "03",
-    title: "Post Production",
-    shortDesc: "Precision editing, color grading, and sound to elevate your story.",
-    bullets: ["Color Grading", "Sound Design", "Video Editing", "Motion Graphics"],
+    title: "Web Design & Development",
+    desc: "Digital experiences built to convert and scale.",
+    services: [
+      "High-Converting Websites",
+      "Strategic Landing Pages",
+      "Performance-Focused Builds",
+      "UX/UI Architectural Design"
+    ]
   },
   {
-    num: "04",
-    title: "Creative & Branding",
-    shortDesc: "Visual identity and creative direction built to last.",
-    bullets: ["Storyboarding", "Creative Direction", "Brand Identity", "Visual Strategy"],
-  },
-  {
-    num: "05",
-    title: "Digital Presence",
-    shortDesc: "Clean, conversion-focused websites and landing pages.",
-    bullets: ["Website Design", "Landing Pages", "UX/UI Design", "Performance Optimization"],
-  },
+    title: "Growth & Social Strategy",
+    desc: "Converting attention into measurable brand authority.",
+    services: [
+      "End-to-End Content Strategy",
+      "Social Media Ecosystem Management",
+      "High-Performance Paid Creatives",
+      "Audience Engagement Architecture"
+    ]
+  }
 ];
 
-/* ─────────────────────────────────────────────────────────────
-   Brutalist Service Component
-   ─────────────────────────────────────────────────────────── */
-function ServiceCard({ service, index }: { service: typeof SERVICES_DATA[0]; index: number }) {
-  const isTopRow = index < 3;
-  return (
-    <div className={`group relative bg-transparent flex flex-col h-full border-t border-black/10 transition-colors duration-500 hover:bg-white pt-10 pb-12 px-6 lg:px-10`}>
-      {/* Red accent beam */}
-      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#8B0016] scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-500 ease-out" />
-      
-      <span className="text-black/30 font-mono text-[10px] tracking-[0.4em] uppercase mb-8 block transition-colors group-hover:text-[#8B0016]">
-        [{service.num}]
-      </span>
-      
-      <h3
-        className="text-black font-black mb-6 leading-[1.05] group-hover:translate-x-2 transition-transform duration-500"
-        style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)", letterSpacing: "-0.03em" }}
-      >
-        {service.title}
-      </h3>
-      
-      <p className="text-black/60 text-[15px] leading-relaxed mb-10 max-w-[90%] font-light group-hover:text-black transition-colors duration-500">
-        {service.shortDesc}
-      </p>
-
-      {/* Structured bullet list */}
-      <div className="mt-auto flex flex-col gap-3 group-hover:opacity-100 transition-opacity duration-500">
-        {service.bullets.map((bullet, idx) => (
-          <div key={idx} className="flex items-center gap-4">
-            <span className="w-1.5 h-1.5 bg-[#8B0016] opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-            <span className="text-black/70 text-sm font-medium tracking-tight uppercase group-hover:text-black transition-colors duration-300">{bullet}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Page Component
-   ─────────────────────────────────────────────────────────── */
 export default function ServicesPage() {
-  return (
-    <main className="bg-white min-h-screen">
+  const { openProjectModal } = useModal();
 
+  return (
+    <main className="bg-white min-h-screen text-black">
+      
       {/* ══════════════════════════════════════════════════════
-          HERO SECTION — ELEVATED
+          SECTION 1: HERO (AGENCY POSITIONING)
       ══════════════════════════════════════════════════════ */}
-      <section
-        data-theme="light"
-        className="relative pt-40 md:pt-56 pb-24 md:pb-36 bg-white overflow-hidden"
-      >
+      <section data-theme="light" className="relative pt-40 md:pt-64 pb-24 md:pb-40 overflow-hidden bg-white">
+        {/* Subtle Architectural Grid */}
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+             style={{ backgroundImage: 'linear-gradient(black 1px, transparent 1px), linear-gradient(90deg, black 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
+        
         <div className="container relative z-10">
           <Reveal>
             <div className="flex items-center gap-4 mb-10">
-              <span className="w-8 h-px bg-[#8B0016]" />
-              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
-                Capabilities
-              </p>
+              <span className="w-10 h-px bg-[#8B0016]" />
+              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">The Creative Partner</p>
             </div>
           </Reveal>
 
-          <Reveal delay={0.08}>
-            <h1
-              className="font-black text-black mb-12"
-              style={{
-                fontSize: "clamp(2.5rem, 10vw, 9rem)",
-                letterSpacing: "-0.05em",
-                lineHeight: 0.85,
-              }}
-            >
-              CINEMATIC VISUALS<br />
-              <span className="text-black/20">BUILT TO MOVE</span><br />
-              YOUR BRAND.
+          <Reveal delay={0.1}>
+            <h1 className="font-black text-black leading-[0.85] mb-12" style={{ fontSize: "clamp(2.5rem, 10vw, 8.5rem)", letterSpacing: "-0.05em" }}>
+              EVERYTHING YOUR<br />
+              <span className="text-black/15">BRAND NEEDS TO</span><br />
+              STAND OUT.
             </h1>
           </Reveal>
 
-          <Reveal delay={0.18} className="flex flex-col lg:flex-row items-start gap-12 lg:gap-24 mt-16 max-w-5xl border-t border-black/10 pt-10">
-            <p
-              className="text-black/80 font-light leading-[1.8] flex-1"
-              style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)" }}
-            >
-              We go far beyond the shoot. Cinmach Productions offers a full creative suite — from concept and direction to production, post-production, and digital presence. Delivering one flawless standard of excellence.
+          <Reveal delay={0.2} className="max-w-2xl border-l border-black/10 pl-8 mt-16">
+            <p className="text-black/60 text-lg md:text-2xl font-light leading-relaxed">
+              From cinematic content to websites and brand identity — we build, shoot, and grow your presence.
             </p>
-
-            <div className="flex flex-col gap-5 shrink-0 w-full sm:w-auto">
-              <Link
-                href="/contact"
-                className="group flex justify-center items-center gap-6 px-12 py-5 bg-black text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] transition-all duration-500 shadow-2xl"
-              >
-                Initiate Project{" "}
-                <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
-              </Link>
-            </div>
           </Reveal>
         </div>
       </section>
 
-
-
       {/* ══════════════════════════════════════════════════════
-          PROCESS CALLOUT — COMPACT & STRUCTURED
+          SECTION 2: CORE SERVICES (VERTICAL FLOW)
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="light" className="py-24 md:py-32 bg-white">
+      <section data-theme="dark" className="py-24 md:py-40 border-t border-white/5 bg-black text-white">
         <div className="container">
-          <Reveal className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start px-2 lg:px-0">
-            <div className="lg:sticky lg:top-32 lg:pb-20">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="w-8 h-px bg-[#8B0016]" />
-                <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">How it works</p>
-              </div>
-              <h2
-                className="font-black text-black leading-[0.9]"
-                style={{ fontSize: "clamp(2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em" }}
-              >
-                BRIEF →<br />STRATEGY →<br />PRODUCTION →<br />DELIVERY.
-              </h2>
-            </div>
-            
-            <div className="flex flex-col border-t border-black/10">
-              {[
-                { step: "01", label: "Discovery Call", desc: "We understand your brand, goals, and audience intimately." },
-                { step: "02", label: "Creative Proposal", desc: "Concept, moodboard, visual direction, timeline, and exact budget." },
-                { step: "03", label: "Production", desc: "We execute with precision, on-site and in-studio using cinema-grade pipelines." },
-                { step: "04", label: "Delivery", desc: "Final masterpieces delivered logically in all optimal platform formats." },
-              ].map((s, i) => (
-                <div key={s.step} className="group flex items-start gap-8 border-b border-black/10 py-10 transition-colors duration-500 hover:bg-[#FAFAFA] px-4 -mx-4 cursor-default">
-                  <span className="text-[#8B0016] font-black text-2xl shrink-0 mt-1 transition-transform group-hover:scale-110">{s.step}</span>
-                  <div>
-                    <p className="text-black font-black text-lg tracking-tight uppercase mb-3">{s.label}</p>
-                    <p className="text-black/60 text-[15px] font-light leading-relaxed max-w-md">{s.desc}</p>
+          <div className="flex flex-col gap-32 md:gap-48">
+            {SERVICE_CATEGORIES.map((cat, idx) => (
+              <Reveal key={cat.title} delay={idx * 0.1}>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+                  {/* Category Title & Desc */}
+                  <div className="lg:col-span-5">
+                    <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.4em] uppercase font-bold mb-6 block">0{idx + 1} — Category</span>
+                    <h2 className="text-white font-black text-4xl md:text-6xl tracking-tighter leading-none mb-8">{cat.title}</h2>
+                    <p className="text-white/40 text-lg font-light leading-relaxed max-w-sm">{cat.desc}</p>
+                  </div>
+
+                  {/* Service List */}
+                  <div className="lg:col-span-7 pt-2 md:pt-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+                      {cat.services.map((svc, sIdx) => (
+                        <div key={svc} className="group border-b border-white/5 pb-6">
+                          <div className="flex items-center gap-4 mb-2">
+                            <span className="w-1.5 h-1.5 bg-[#8B0016] rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
+                            <p className="text-white font-bold text-lg md:text-xl tracking-tight group-hover:text-[#8B0016] transition-colors duration-300">{svc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          SECTION 3: POSITIONING LINE (THE IMPACT)
+      ══════════════════════════════════════════════════════ */}
+      <section data-theme="dark" className="py-24 md:py-40 bg-white text-black overflow-hidden relative">
+        {/* Subtle moving line */}
+        <div className="absolute top-1/2 left-0 w-full h-[0.5px] bg-black/5 -translate-y-1/2" />
+        
+        <div className="container relative z-10">
+          <Reveal>
+            <h2 className="text-center font-black leading-none tracking-[ -0.06em ]" style={{ fontSize: "clamp(2rem, 8vw, 7rem)" }}>
+              WE DON&apos;T JUST CREATE CONTENT —<br />
+              <span className="text-black/10 italic font-serif">WE BUILD BRANDS PEOPLE CHOOSE.</span>
+            </h2>
           </Reveal>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          FINAL CTA — IMMERSIVE CINEMATIC (BLACK)
+          SECTION 4: PROCESS (THE FRAMEWORK)
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="dark" className="relative py-24 md:py-48 bg-black overflow-hidden border-t-[0.5px] border-white/10">
-        <div 
-          className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(139,0,22,0.1)_0%,transparent_60%)] pointer-events-none" />
-
-        <div className="container relative z-10 text-center flex flex-col items-center">
-          <Reveal>
-            <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-8 font-bold">
-              Ready to execute?
-            </p>
-            <h2
-              className="text-white font-black mb-12"
-              style={{
-                fontSize: "clamp(3.5rem, 10vw, 9rem)",
-                letterSpacing: "-0.05em",
-                lineHeight: 0.85,
-              }}
-            >
-              LET&apos;S BUILD<br />YOUR VISION.
-            </h2>
-            <p className="text-white/50 max-w-lg mx-auto mb-16 font-light leading-relaxed text-lg lg:text-xl">
-              From single brand films to defining entire visual identities. We bring the exact same obsessive craft to everything.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto">
-              <Link
-                href="/estimate"
-                className="group flex justify-center items-center w-full sm:w-auto px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl"
-              >
-                Initiate Project{" "}
-                <span className="ml-4 transition-transform duration-500 group-hover:translate-x-2">→</span>
-              </Link>
+      <section data-theme="dark" className="py-24 md:py-48 border-t border-white/5 bg-black text-white">
+        <div className="container">
+          <Reveal className="mb-24 md:mb-32">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="w-8 h-px bg-[#8B0016]" />
+              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">The Framework</p>
             </div>
+            <h2 className="text-white font-black text-4xl md:text-7xl tracking-tighter">OUR PROCESS.</h2>
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+            {[
+              { step: "01", label: "Strategy", desc: "Defining the core narrative and competitive edge before we create a single pixel." },
+              { step: "02", label: "Shoot / Design", desc: "Executing high-end production and visual identity with cinematic precision." },
+              { step: "03", label: "Build", desc: "Translating visuals into high-performance digital architectures and web systems." },
+              { step: "04", label: "Deliver & Grow", desc: "Deploying and managing ecosystems that convert attention into business growth." }
+            ].map((item, idx) => (
+              <Reveal key={item.step} delay={idx * 0.1}>
+                <div className="relative group">
+                  <span className="text-[#8B0016] font-mono text-[10px] tracking-[0.3em] font-bold block mb-6">STEP {item.step}</span>
+                  <h3 className="text-white font-black text-2xl uppercase mb-4 tracking-tight group-hover:text-[#8B0016] transition-colors">{item.label}</h3>
+                  <div className="h-px w-12 bg-white/10 mb-6 group-hover:w-full group-hover:bg-[#8B0016] transition-all duration-700" />
+                  <p className="text-white/40 text-[15px] font-light leading-relaxed">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          SECTION 5: FINAL CTA
+      ══════════════════════════════════════════════════════ */}
+      <section data-theme="dark" className="py-32 md:py-60 bg-[#0A0A0A] border-t border-white/5">
+        <div className="container text-center flex flex-col items-center">
+          <Reveal>
+            <h2 className="text-white font-black leading-none mb-12" style={{ fontSize: "clamp(2.5rem, 8vw, 6.5rem)", letterSpacing: "-0.04em" }}>
+              READY TO BUILD<br />
+              <span className="text-white/20">SOMETHING THAT</span><br />
+              STANDS OUT?
+            </h2>
+          </Reveal>
+          
+          <Reveal delay={0.15}>
+            <button
+              onClick={openProjectModal}
+              className="px-14 py-7 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl"
+            >
+              Start a Project
+            </button>
           </Reveal>
         </div>
       </section>

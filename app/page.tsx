@@ -215,9 +215,9 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen bg-black">
       <main className="flex-1">
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 1: HERO
+            SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="relative h-screen min-h-[700px] w-full overflow-hidden flex flex-col">
+        <section data-theme="dark" className="relative h-[100svh] min-h-[600px] w-full overflow-hidden flex flex-col">
           <SmartVideo 
             src="/bg-rest.mp4" 
             autoPlay={true}
@@ -237,6 +237,7 @@ export default function LandingPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.5 }}
           />
+          
           {/* Architectural Grid Overlay */}
           <div className="absolute inset-0 z-[3] pointer-events-none">
             <div className="container h-full relative">
@@ -255,7 +256,8 @@ export default function LandingPage() {
           </div>
 
           <div className="relative z-[4] flex flex-col h-full px-5 md:px-14 lg:px-24">
-            <div className="flex flex-col md:flex-row md:items-center justify-between pt-10 md:pt-16 lg:pt-20 gap-4 shrink-0">
+            {/* Top Metadata - Pushed down to clear Navbar */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between pt-24 md:pt-32 lg:pt-20 gap-2 shrink-0">
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[7px] md:text-[9px]">[ Cinmach Productions · Manama ]</motion.p>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse" />
@@ -263,60 +265,57 @@ export default function LandingPage() {
               </div>
             </div>
             
-            <div className="flex-1 flex flex-col justify-center py-6">
+            <div className="flex-1 flex flex-col justify-center py-4">
               <Reveal delay={0.2}>
-                <h1 className="text-white font-black leading-[0.88] tracking-tighter mb-4 lg:mb-6" style={{ fontSize: "clamp(2rem, 10vw, 6.8rem)", letterSpacing: "-0.04em" }}>
+                <h1 className="text-white font-black leading-[0.88] tracking-tighter mb-4 lg:mb-6" style={{ fontSize: "clamp(1.8rem, 10vw, 6.8rem)", letterSpacing: "-0.04em" }}>
                   Cinematic<br />
                   content for<br />
                   <span className="text-[#B11226] uppercase">RESTAURANTS<br />&amp; CAFÉS.</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.4} className="max-w-xl">
-                <p className="text-white/60 text-[11px] md:text-[13px] leading-relaxed font-light pr-4 md:pr-0">
-                  We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings — built specifically for hospitality brands in the GCC.
+                <p className="text-white/60 text-[10px] md:text-[13px] leading-relaxed font-light pr-4 md:pr-0">
+                  We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings.
                 </p>
               </Reveal>
             </div>
 
-            <div className="pb-10 md:pb-16 lg:pb-20 shrink-0">
-              <div className="flex flex-col lg:flex-row lg:items-end gap-8 border-t border-white/5 pt-8">
-                <div className="flex flex-row justify-between lg:justify-start lg:flex-1 gap-4 md:gap-16">
+            <div className="pb-8 md:pb-16 lg:pb-20 shrink-0">
+              <div className="flex flex-col lg:flex-row lg:items-end gap-6 border-t border-white/5 pt-6 md:pt-8">
+                <div className="flex flex-row justify-between lg:justify-start lg:flex-1 gap-2 md:gap-16">
                   <Reveal delay={0.5}>
                     <div className="flex flex-col">
-                      <span className="text-white font-black text-2xl md:text-4xl tracking-tighter">
+                      <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
                         <CountUp end={40} suffix="+" />
                       </span>
-                      <span className="text-white/30 font-mono text-[7px] md:text-[8px] uppercase tracking-widest mt-1">Restaurants</span>
+                      <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Restaurants</span>
                     </div>
                   </Reveal>
                   <Reveal delay={0.6}>
                     <div className="flex flex-col">
-                      <span className="text-white font-black text-2xl md:text-4xl tracking-tighter">
+                      <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
                         <CountUp end={3} suffix="x" />
                       </span>
-                      <span className="text-white/30 font-mono text-[7px] md:text-[8px] uppercase tracking-widest mt-1">Engagement</span>
+                      <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Engagement</span>
                     </div>
                   </Reveal>
                   <Reveal delay={0.7}>
                     <div className="flex flex-col">
-                      <span className="text-white font-black text-2xl md:text-4xl tracking-tighter">BH</span>
-                      <span className="text-white/30 font-mono text-[7px] md:text-[8px] uppercase tracking-widest mt-1">Bahrain</span>
+                      <span className="text-white font-black text-xl md:text-4xl tracking-tighter">BH</span>
+                      <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Bahrain</span>
                     </div>
                   </Reveal>
                 </div>
 
-                <div className="flex justify-center md:justify-end w-full lg:w-auto">
+                <div className="flex justify-center md:justify-end w-full lg:w-auto pt-2 md:pt-0">
                   <button 
                     onClick={openProjectModal}
-                    className="group relative flex items-center justify-center gap-4 w-full md:w-auto px-8 py-5 md:px-10 md:py-5 bg-white text-black text-[9px] md:text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-2xl"
+                    className="group relative flex items-center justify-center gap-4 w-full md:w-auto px-8 py-4 md:px-10 md:py-5 bg-white text-black text-[9px] md:text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-2xl"
                   >
-                     {/* Subtle Red Brand Accent Line (Static) */}
                      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#B11226] z-20" />
-
                      <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
                        BOOK YOUR SHOOT <span className="ml-3 md:ml-5 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70 group-hover:opacity-100">→</span>
                      </span>
-                     
                      <div className="absolute inset-0 bg-[#B11226] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
                   </button>
                 </div>

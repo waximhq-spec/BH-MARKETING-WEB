@@ -238,6 +238,20 @@ export default function Page() {
           <div className="absolute inset-0 bg-black/60 z-[1]" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-[2]" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent z-[2]" />
+
+          {/* Vertical scan lines — architectural accents */}
+          <motion.div
+            className="absolute left-[32%] top-0 bottom-0 w-px bg-white/[0.04] z-[3] hidden lg:block"
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            transition={{ delay: 1, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          />
+          <motion.div
+            className="absolute right-[28%] top-0 bottom-0 w-px bg-white/[0.06] z-[3] hidden lg:block"
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            transition={{ delay: 1.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          />
           <div className="relative z-[4] flex flex-col h-full px-8 md:px-14 lg:px-24">
             <div className="flex items-center justify-between pt-24 lg:pt-28 shrink-0">
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[9px]">[ Cinmach Productions · Manama ]</motion.p>

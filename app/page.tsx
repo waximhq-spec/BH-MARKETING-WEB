@@ -259,7 +259,7 @@ export default function LandingPage() {
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[9px]">[ Cinmach Productions · Manama ]</motion.p>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse" />
-                <span className="text-white/40 font-mono text-[9px] uppercase tracking-widest">EST. 2023</span>
+                <span className="text-white/40 font-mono text-[9px] uppercase tracking-widest">Now Booking — Limited Slots</span>
               </div>
             </div>
             

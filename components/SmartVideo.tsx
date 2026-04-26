@@ -66,12 +66,15 @@ export default function SmartVideo({
     }
   }, [isInView, isHovered, isMobile, autoPlayViewport, hoverPlay, mobileFallback]);
 
-  // If mobile fallback is enabled and we're on mobile, we can just render an image or a paused video.
-  // We'll render the video tag for CSS sizing consistency, but without <source> tracking if possible, 
-  // or just strictly rely on JS pausing + preload=none.
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+    }
+  }, [src]);
 
   return (
     <video
+      key={src}
       ref={videoRef}
       poster={poster}
       preload="metadata"

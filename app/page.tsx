@@ -255,7 +255,8 @@ export default function Page() {
             transition={{ duration: 4, ease: [0.16, 1, 0.3, 1] }}
           >
             <SmartVideo
-              src="https://www.pexels.com/download/video/3195394/"
+              src="/bg-rest.mp4"
+              autoPlayViewport={true}
               className="absolute inset-0 w-full h-full object-cover"
             />
           </motion.div>

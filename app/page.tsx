@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import ProcessSection from "@/components/ProcessSection";
@@ -390,7 +390,10 @@ export default function LandingPage() {
               </div>
             </Reveal>
             <Reveal className="mb-10">
-              <h2 className="font-black text-white leading-[0.92] tracking-tighter" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.04em" }}>What we do.</h2>
+              <h2 className="font-black text-white leading-[0.92] tracking-tighter uppercase" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.04em" }}>How we help<br />your place grow.</h2>
+              <p className="text-white/40 mt-6 max-w-lg font-light text-base md:text-lg">
+                No complex marketing talk here. Just high-quality videos that make people in Bahrain crave your food. Simple as that.
+              </p>
             </Reveal>
             <ServicesTable />
           </div>
@@ -399,20 +402,20 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: PORTFOLIO / SELECTED WORK
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <div className="bg-white pt-40 pb-20">
+        <div className="bg-white pt-32 pb-20">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-[2px] w-full bg-black mb-12" />
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
                 <div>
-                  <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[12px] font-bold mb-6">Phase 04</p>
+                  <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[12px] font-bold mb-6">Our Work</p>
                   <h2 className="text-black font-black leading-[0.85] tracking-tighter" style={{ fontSize: "clamp(4rem, 12vw, 10rem)", letterSpacing: "-0.05em" }}>
-                    SELECTED<br />WORK.
+                    PROJECTS<br />WE LOVE.
                   </h2>
                 </div>
                 <div className="max-w-xs pb-4">
-                  <p className="text-black/40 text-sm font-light leading-relaxed">
-                    A curated collection of high-performance content engineered for brand authority and conversion.
+                  <p className="text-black/50 text-sm font-light leading-relaxed italic">
+                    Bringing those Manama vibes to the screen. Khalas, your search for a camera team ends here.
                   </p>
                 </div>
               </div>
@@ -469,62 +472,131 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 7: SOCIAL PROOF (REVERTED)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="py-32 md:py-48 bg-black text-white overflow-hidden relative">
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            SECTION 7: SOCIAL PROOF (REFINED)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <section data-theme="light" className="py-20 md:py-28 bg-white text-black overflow-hidden relative border-t border-black/5">
           <div className="container relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-              <div>
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-24">
+              
+              {/* Left: Authority Block */}
+              <div className="max-w-xl">
                 <Reveal>
-                  <div className="flex items-center gap-4 mb-8">
-                    <span className="w-8 h-px bg-[#B11226]" />
-                    <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">Social Proof</p>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="w-6 h-px bg-[#B11226]" />
+                    <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">Social Proof</p>
                   </div>
-                  <h2 className="text-white font-black leading-[0.85] tracking-tighter mb-12" style={{ fontSize: "clamp(3rem, 8vw, 6rem)", letterSpacing: "-0.05em" }}>
-                    THE OBVIOUS<br /><span className="text-white/20">CHOICE.</span>
+                  <h2 className="text-black font-black leading-[0.85] tracking-tighter mb-10 uppercase" style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}>
+                    WHAT OUR<br /><span className="text-black/10">CLIENTS SAY.</span>
                   </h2>
                 </Reveal>
 
-                <div className="grid grid-cols-2 gap-10 mt-4">
+                <div className="flex gap-12">
                   <Reveal delay={0.1}>
-                    <p className="text-[#B11226] font-black text-4xl md:text-5xl tracking-tighter mb-2">+40%</p>
-                    <p className="text-white/30 font-mono uppercase text-[9px] tracking-[0.2em]">Footfall Increase</p>
+                    <p className="text-[#B11226] font-black text-3xl md:text-4xl tracking-tighter mb-1">+40%</p>
+                    <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Footfall Increase</p>
                   </Reveal>
                   <Reveal delay={0.2}>
-                    <p className="text-white font-black text-4xl md:text-5xl tracking-tighter mb-2">100%</p>
-                    <p className="text-white/30 font-mono uppercase text-[9px] tracking-[0.2em]">Client Trust</p>
+                    <p className="text-black font-black text-3xl md:text-4xl tracking-tighter mb-1">100%</p>
+                    <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Client Trust</p>
                   </Reveal>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-12">
-                <Reveal delay={0.2}>
-                  <p className="text-white/60 text-lg md:text-xl font-light italic leading-relaxed mb-6">
-                    "Bookings doubled within weeks. The perception shift was immediate."
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-1.5 h-1.5 bg-[#B11226]" />
-                    <div>
-                      <p className="text-white font-bold text-xs uppercase tracking-widest">Sara Malik</p>
-                      <p className="text-white/30 text-[9px] uppercase tracking-tighter font-mono">Marketing Director</p>
-                    </div>
-                  </div>
-                </Reveal>
-                <Reveal delay={0.3}>
-                  <p className="text-white/60 text-lg md:text-xl font-light italic leading-relaxed mb-6">
-                    "They engineered a level of excellence that redefined our brand authority."
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-1.5 h-1.5 bg-[#B11226]" />
-                    <div>
-                      <p className="text-white font-bold text-xs uppercase tracking-widest">Ahmed Khan</p>
-                      <p className="text-white/30 text-[9px] uppercase tracking-tighter font-mono">Founder - Hospitality Group</p>
-                    </div>
-                  </div>
-                </Reveal>
+              {/* Vertical Divider (Desktop only) */}
+              <div className="hidden lg:block w-px h-32 bg-black/5 shrink-0" />
+
+              {/* Right: Testimonial Engine */}
+              <div className="relative flex-1 min-h-[140px] md:min-h-[160px] flex flex-col justify-center">
+                <TestimonialWheel />
               </div>
+              
             </div>
           </div>
         </section>
       </main>
+    </div>
+  );
+}
+
+const TESTIMONIALS = [
+  {
+    quote: "Our reels started bringing in real customers. People were coming in saying they saw us on Instagram.",
+    client: "Ayaan Khan — Restaurant Owner"
+  },
+  {
+    quote: "The quality of the video immediately changed how people perceived our brand. We look premium now.",
+    client: "Sara Malik — Café Founder"
+  },
+  {
+    quote: "We've seen a massive spike in weekend bookings since the campaign went live. It actually works.",
+    client: "Omar Hussain — Fine Dining Brand"
+  },
+  {
+    quote: "They understood our vision and translated it into visuals that actually represent who we are.",
+    client: "Zaid Ahmed — Burger Boutique"
+  },
+  {
+    quote: "The footage is stunning, but the results are better. Our engagement is at an all-time high.",
+    client: "Layla Yusuf — Dessert Bar"
+  },
+  {
+    quote: "Finally found a team that treats our food like art. The response from our followers was huge.",
+    client: "Faisal Aziz — Steakhouse Founder"
+  },
+  {
+    quote: "It's rare to find production quality this high in the region. They've set a new standard for us.",
+    client: "Noor Al-Bahrani — Specialty Coffee"
+  },
+  {
+    quote: "Our launch was a success because the teaser video built so much hype before we even opened.",
+    client: "Hamad Qasim — Fusion Concept"
+  },
+  {
+    quote: "The cinematic look they gave us helped us secure a major partnership. It was a game changer.",
+    client: "Mariam Shah — Bakery Chain"
+  },
+  {
+    quote: "The best investment we've made this year. The content paid for itself within the first month.",
+    client: "Rashid Mahmood — Rooftop Lounge"
+  }
+];
+
+function TestimonialWheel() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 4500); // Slightly slower for readability
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative w-full h-full">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ y: 50, opacity: 0, rotateX: -30 }}
+          animate={{ y: 0, opacity: 1, rotateX: 0 }}
+          exit={{ y: -50, opacity: 0, rotateX: 30 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 flex flex-col justify-center"
+        >
+          <p className="text-black font-medium text-xl md:text-2xl lg:text-3xl leading-[1.2] tracking-tight italic mb-8">
+            "{TESTIMONIALS[index].quote}"
+          </p>
+          <div className="flex flex-col gap-4">
+            <p className="text-black/60 font-mono text-[10px] uppercase tracking-widest font-bold">
+              {TESTIMONIALS[index].client}
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-[#B11226]" />
+              <p className="text-black/20 font-mono text-[8px] uppercase tracking-[0.2em] font-bold">Client Result</p>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

@@ -17,8 +17,16 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing" | "split">("red");
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
   const pathname = usePathname();
   const { openProjectModal } = useModal();
+
+  useEffect(() => {
+    const handleResize = () => setIsLargeScreen(window.innerWidth >= 1024);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -33,7 +41,6 @@ export default function Navbar() {
           
           sections.forEach((section) => {
             const rect = section.getBoundingClientRect();
-            // Trigger exactly when the section hits the top of the viewport
             if (rect.top <= 0 && rect.bottom >= 0) {
               activeTheme = section.getAttribute("data-theme") as any;
             }
@@ -68,9 +75,11 @@ export default function Navbar() {
   const isHome = pathname === "/";
   const isLight = theme === "light" || (!isHome && theme === "red");
   const isRed = theme === "red" && isHome;
-  const isDark = theme === "dark";
   const isPricing = theme === "pricing";
-  const isSplit = theme === "split";
+  const isSplit = theme === "split" && isLargeScreen;
+  
+  // On mobile, if theme is split, we treat it as dark (since the mobile header of that section is black)
+  const isDark = theme === "dark" || (theme === "split" && !isLargeScreen);
   
   const textColor = isPricing ? "#B11226" : isLight ? "#000000" : "#FAFAFA";
   const mutedColor = isPricing ? "rgba(255,255,255,0.6)" : (isLight || isSplit) ? "rgba(0,0,0,0.4)" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
@@ -93,7 +102,7 @@ export default function Navbar() {
           willChange: "transform, background",
         }}
       >
-        {/* SPLIT BACKGROUND FOR SPLIT THEME */}
+        {/* SPLIT BACKGROUND FOR SPLIT THEME (Desktop Only) */}
         {isSplit && (
           <div className="absolute inset-0 flex pointer-events-none overflow-hidden">
             <div className="w-[41.666667%] bg-black h-full border-r border-white/10 border-b border-white/10" />
@@ -102,11 +111,7 @@ export default function Navbar() {
         )}
 
         <div className="w-full h-16 flex items-center justify-between px-8 md:px-14 lg:px-20 xl:px-24 relative z-10">
-          {/* Wordmark Logo */}
-          <Link
-            href="/"
-            className="block transition-all duration-500 hover:opacity-70"
-          >
+          <Link href="/" className="block transition-all duration-500 hover:opacity-70">
             <img 
               src="/HERO-LOGO.svg" 
               alt="Cinmach" 
@@ -121,23 +126,19 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-10 lg:gap-12">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase transition-colors duration-500"
-                style={{
-                  color: pathname === link.href ? activeColor : (isSplit ? "#000000" : mutedColor),
-                }}
+                style={{ color: pathname === link.href ? activeColor : (isSplit ? "#000000" : mutedColor) }}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Mobile toggle */}
           <button
             className="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -159,7 +160,6 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -169,7 +169,6 @@ export default function Navbar() {
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-[100] flex flex-col bg-white"
           >
-            {/* Header Overlay */}
             <div className="w-full h-16 flex items-center justify-between px-8 shrink-0">
               <Link href="/" onClick={() => setMenuOpen(false)}>
                 <img 
@@ -189,12 +188,10 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Menu Label */}
             <div className="px-10 pt-20 pb-4">
               <p className="text-black/20 font-mono text-[9px] uppercase tracking-[0.5em] font-bold">Menu</p>
             </div>
 
-            {/* Navigation Body */}
             <nav className="flex-1 flex flex-col items-start px-10 gap-10">
               {NAV_LINKS.map((link, i) => (
                 <motion.div

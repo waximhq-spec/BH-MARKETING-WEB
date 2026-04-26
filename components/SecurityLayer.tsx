@@ -1,92 +1,108 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function SecurityLayer() {
-  const [isTriggered, setIsTriggered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const triggerOverlay = (e?: Event) => {
+    if (e) e.preventDefault();
+    setIsVisible(true);
+  };
 
   useEffect(() => {
-    // 1. Disable Right-Click Globally
+    if (isVisible) {
+      const timer = setTimeout(() => setIsVisible(false), 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible]);
+
+  useEffect(() => {
+    // 1. Context Menu (Right Click)
     const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-      setIsTriggered(true);
-      console.warn("Protected by Cinmach Productions");
+      triggerOverlay(e);
     };
 
-    // 2. Detect DevTools and View Source Shortcuts
+    // 2. Keyboard Shortcuts
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Keys to block
-      const isF12 = e.key === "F12";
-      const isDevTools = (e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "C" || e.key === "c" || e.key === "J" || e.key === "j");
-      const isViewSource = (e.ctrlKey || e.metaKey) && (e.key === "U" || e.key === "u");
-      const isSave = (e.ctrlKey || e.metaKey) && (e.key === "S" || e.key === "s");
-
-      if (isF12 || isDevTools || isViewSource || isSave) {
-        e.preventDefault();
-        setIsTriggered(true);
-        console.warn("Protected by Cinmach Productions");
+      const isCmdOrCtrl = e.metaKey || e.ctrlKey;
+      
+      // Ctrl+C (Copy), Ctrl+U (Source), Ctrl+Shift+I (DevTools), Ctrl+Shift+C (Inspect), F12 (DevTools)
+      if (
+        (isCmdOrCtrl && e.key === "c") || 
+        (isCmdOrCtrl && e.key === "u") || 
+        (isCmdOrCtrl && e.shiftKey && e.key === "I") ||
+        (isCmdOrCtrl && e.shiftKey && e.key === "C") ||
+        e.key === "F12"
+      ) {
+        triggerOverlay(e);
       }
     };
 
-    // 3. Add Listeners
-    window.addEventListener("contextmenu", handleContextMenu);
-    window.addEventListener("keydown", handleKeyDown);
+    // 3. Image/Video Drag
+    const handleDragStart = (e: DragEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === "IMG" || target.tagName === "VIDEO") {
+        triggerOverlay(e);
+      }
+    };
 
-    // 4. Handle Body Scroll when triggered
-    if (isTriggered) {
-      document.body.style.overflow = "hidden";
-    }
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("dragstart", handleDragStart);
 
     return () => {
-      window.removeEventListener("contextmenu", handleContextMenu);
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("dragstart", handleDragStart);
     };
-  }, [isTriggered]);
+  }, []);
 
   return (
     <AnimatePresence>
-      {isTriggered && (
+      {isVisible && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-[15px] select-none cursor-pointer"
-          onContextMenu={(e) => e.preventDefault()}
-          onClick={() => setIsTriggered(false)}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none"
         >
-          <div className="max-w-2xl px-8 text-center">
-            <motion.h2
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl md:text-3xl font-bold tracking-widest uppercase text-white mb-6"
-            >
-              Content Protected by Copyright
-            </motion.h2>
+          {/* Backdrop Blur Overlay */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
+          
+          {/* Content Card */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 10 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative bg-black border border-white/10 p-12 md:p-16 flex flex-col items-center text-center max-w-sm mx-4 shadow-2xl"
+          >
+            {/* Minimal Logo/Icon */}
+            <div className="w-12 h-px bg-[#B11226] mb-10" />
             
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-sm md:text-base text-white/70 font-light tracking-wide leading-relaxed mb-12"
-            >
-              Unauthorized downloading, reproduction, or recreation is strictly prohibited.
-            </motion.p>
+            <h2 className="text-white font-black text-2xl tracking-tighter uppercase mb-4">
+              This content is protected.
+            </h2>
             
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-semibold"
-            >
-              © Cinmach Productions 2026
-            </motion.div>
-          </div>
+            <p className="text-white/40 text-[10px] font-mono uppercase tracking-[0.4em] leading-relaxed">
+              Crafted, not copied.
+            </p>
+            
+            <div className="mt-12 flex flex-col items-center">
+              <p className="text-white/20 text-[11px] font-light italic mb-2">
+                If you like what you see...
+              </p>
+              <p className="text-white text-[11px] font-mono font-bold tracking-[0.2em] uppercase">
+                Let&apos;s build yours.
+              </p>
+            </div>
 
-          {/* Optional: Subtle pulse effect to indicate active protection */}
-          <div className="absolute inset-0 pointer-events-none border-[1px] border-white/5 animate-pulse"></div>
+            {/* Subtle glow effect */}
+            <div className="absolute -inset-px bg-gradient-to-tr from-[#B11226]/20 via-transparent to-transparent opacity-30 pointer-events-none" />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

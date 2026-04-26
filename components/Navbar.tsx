@@ -16,7 +16,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing">("red");
+  const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing" | "split">("red");
   const pathname = usePathname();
   const { openProjectModal } = useModal();
 
@@ -29,12 +29,13 @@ export default function Navbar() {
           setScrolled(window.scrollY > 40);
 
           const sections = document.querySelectorAll("[data-theme]");
-          let activeTheme: "dark" | "light" | "red" | "pricing" | null = null;
+          let activeTheme: "dark" | "light" | "red" | "pricing" | "split" | null = null;
           
           sections.forEach((section) => {
             const rect = section.getBoundingClientRect();
-            if (rect.top <= 100 && rect.bottom >= 100) {
-              activeTheme = section.getAttribute("data-theme") as "dark" | "light" | "red" | "pricing";
+            // Trigger exactly when the section hits the top of the viewport
+            if (rect.top <= 0 && rect.bottom >= 0) {
+              activeTheme = section.getAttribute("data-theme") as any;
             }
           });
 
@@ -67,31 +68,45 @@ export default function Navbar() {
   const isHome = pathname === "/";
   const isLight = theme === "light" || (!isHome && theme === "red");
   const isRed = theme === "red" && isHome;
+  const isDark = theme === "dark";
   const isPricing = theme === "pricing";
+  const isSplit = theme === "split";
   
   const textColor = isPricing ? "#B11226" : isLight ? "#000000" : "#FAFAFA";
-  const mutedColor = isPricing ? "rgba(255,255,255,0.6)" : isLight ? "rgba(0,0,0,0.4)" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
-  const activeColor = isPricing ? "#B11226" : isRed ? "#FFFFFF" : isLight ? "#000000" : "#C50022";
+  const mutedColor = isPricing ? "rgba(255,255,255,0.6)" : (isLight || isSplit) ? "rgba(0,0,0,0.4)" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
+  const activeColor = isPricing ? "#B11226" : isRed ? "#FFFFFF" : (isLight || isSplit) ? "#000000" : "#C50022";
   
   const redBg = scrolled ? "rgba(0, 0, 0, 0.6)" : "transparent";
   const redBorder = scrolled ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.15)";
 
   const bgColor = isPricing ? "rgba(10,10,10,0.98)" : isRed ? redBg : isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
-  const borderColor = isPricing ? "rgba(177, 18, 38, 0.4)" : isRed ? redBorder : isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.08)";
-  const burgerColor = isPricing ? "#B11226" : isLight ? "#000000" : "#FAFAFA";
+  const borderColor = isPricing ? "rgba(177, 18, 38, 0.4)" : isRed ? redBorder : (isLight || isSplit) ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.08)";
+  const burgerColor = isPricing ? "#B11226" : (isLight || isSplit) ? "#000000" : "#FAFAFA";
 
   return (
     <>
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
         style={{
-          borderBottom: isRed || scrolled ? `1px solid ${borderColor}` : "1px solid transparent",
-          background: isRed || scrolled ? bgColor : "transparent",
+          borderBottom: isRed || scrolled || isSplit ? `1px solid ${borderColor}` : "1px solid transparent",
+          background: isSplit ? "transparent" : (isRed || scrolled ? bgColor : "transparent"),
           willChange: "transform, background",
         }}
       >
-        <div className="w-full h-16 flex items-center justify-between px-8 md:px-14 lg:px-20 xl:px-24">
-          <Link href="/" className="block transition-all duration-500 hover:opacity-70">
+        {/* SPLIT BACKGROUND FOR SPLIT THEME */}
+        {isSplit && (
+          <div className="absolute inset-0 flex pointer-events-none overflow-hidden">
+            <div className="w-[41.666667%] bg-black h-full border-r border-white/10 border-b border-white/10" />
+            <div className="flex-1 bg-white h-full" />
+          </div>
+        )}
+
+        <div className="w-full h-16 flex items-center justify-between px-8 md:px-14 lg:px-20 xl:px-24 relative z-10">
+          {/* Wordmark Logo */}
+          <Link
+            href="/"
+            className="block transition-all duration-500 hover:opacity-70"
+          >
             <img 
               src="/HERO-LOGO.svg" 
               alt="Cinmach" 
@@ -106,19 +121,23 @@ export default function Navbar() {
             />
           </Link>
 
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-10 lg:gap-12">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase transition-colors duration-500"
-                style={{ color: pathname === link.href ? activeColor : mutedColor }}
+                style={{
+                  color: pathname === link.href ? activeColor : (isSplit ? "#000000" : mutedColor),
+                }}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
+          {/* Mobile toggle */}
           <button
             className="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -140,6 +159,7 @@ export default function Navbar() {
         </div>
       </header>
 
+      {/* Mobile overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -220,7 +240,6 @@ export default function Navbar() {
               </motion.div>
             </nav>
 
-            {/* Mobile Footer Area */}
             <div className="px-10 py-12 mt-auto">
                <p className="text-black/10 font-mono text-[9px] uppercase tracking-[0.3em]">© 2026 Cinmach Productions</p>
             </div>

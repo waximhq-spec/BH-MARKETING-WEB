@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { ModalProvider } from "@/components/ModalContext";
 import ProjectModal from "@/components/ProjectModal";
 import BackToTop from "@/components/BackToTop";
+import SecurityLayer from "@/components/SecurityLayer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -48,6 +49,7 @@ export default function RootLayout({
           </SmoothScroll>
           <ProjectModal />
           <BackToTop />
+          <SecurityLayer />
         </ModalProvider>
       </body>
     </html>

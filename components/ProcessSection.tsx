@@ -54,12 +54,12 @@ export default function ProcessSection() {
   const leftParallaxY = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
-    <section ref={containerRef} className="relative w-full bg-black">
+    <section ref={containerRef} data-theme="split" className="relative w-full bg-black">
       {/* DESKTOP (Split Sticky Scroll) */}
       <div className="hidden lg:flex flex-col lg:flex-row w-full items-start relative z-10">
         
         {/* Left Column: Sticky Dark Header */}
-        <div className="lg:w-[41.666667%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between px-8 md:px-14 lg:px-20 xl:px-24 py-20 lg:pt-32 lg:pb-24 z-10 bg-black">
+        <div className="lg:w-[41.666667%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between px-8 md:px-14 lg:px-20 xl:px-24 py-20 lg:pt-32 lg:pb-24 z-10 bg-black border-r border-white/10">
           <motion.div style={{ y: leftParallaxY }} className="max-w-md mt-0 flex flex-col relative">
             <motion.p 
               initial={{ opacity: 0 }}

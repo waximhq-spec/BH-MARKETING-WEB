@@ -135,7 +135,7 @@ function ServicesTable() {
       </Reveal>
 
       {/* ── Secondary Services ── */}
-      <div className="flex flex-col border-t border-black/8">
+      <div className="flex flex-col border-t border-white/10">
         {secondary.map((svc, i) => {
           const idx = i + 1;
           const isHovered = hoveredIndex === idx;
@@ -144,7 +144,7 @@ function ServicesTable() {
           return (
             <Reveal key={svc.num} delay={i * 0.06}>
               <div
-                className={`group relative flex flex-col border-b border-black/8 transition-all duration-500
+                className={`group relative flex flex-col border-b border-white/10 transition-all duration-500
                   ${isDimmed ? "opacity-30" : "opacity-100"}`}
               >
                 {/* Left accent */}
@@ -160,20 +160,20 @@ function ServicesTable() {
                   className="flex flex-row items-center justify-between gap-4 md:gap-8 py-7 md:py-8 px-2 cursor-pointer"
                 >
                   {/* Number */}
-                  <span className={`font-mono text-[10px] tracking-[0.4em] shrink-0 w-10 transition-colors duration-300 ${isOpen ? "text-[#B11226]" : "text-black/25 group-hover:text-[#B11226]"}`}>
+                  <span className={`font-mono text-[10px] tracking-[0.4em] shrink-0 w-10 transition-colors duration-300 ${isOpen ? "text-[#B11226]" : "text-white/25 group-hover:text-[#B11226]"}`}>
                     {svc.num}
                   </span>
 
                   {/* Title */}
                   <h3
-                    className={`flex-1 font-black transition-all duration-300 group-hover:translate-x-1 leading-tight ${isOpen ? "text-black translate-x-1" : "text-black/80 group-hover:text-black"}`}
+                    className={`flex-1 font-black transition-all duration-300 group-hover:translate-x-1 leading-tight ${isOpen ? "text-white translate-x-1" : "text-white/80 group-hover:text-white"}`}
                     style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.5rem)", letterSpacing: "-0.03em" }}
                   >
                     {svc.title}
                   </h3>
 
                   {/* Desc */}
-                  <p className="md:flex-1 text-sm text-black/45 leading-relaxed font-light group-hover:text-black/70 transition-colors duration-300 max-w-sm hidden md:block">
+                  <p className="md:flex-1 text-sm text-white/45 leading-relaxed font-light group-hover:text-white/70 transition-colors duration-300 max-w-sm hidden md:block">
                     {svc.desc}
                   </p>
 
@@ -182,7 +182,7 @@ function ServicesTable() {
                     <motion.div
                       animate={{ rotate: isOpen ? 45 : 0 }}
                       transition={{ duration: 0.3 }}
-                      className={`text-xl font-light transition-colors duration-300 ${isOpen || isHovered ? "text-[#B11226]" : "text-black/40"}`}
+                      className={`text-xl font-light transition-colors duration-300 ${isOpen || isHovered ? "text-[#B11226]" : "text-white/40"}`}
                     >
                       +
                     </motion.div>
@@ -205,7 +205,7 @@ function ServicesTable() {
                           {svc.sub.map((subItem, sIdx) => (
                             <div key={sIdx} className="flex items-center gap-3">
                               <span className="w-1 h-1 bg-[#B11226] rounded-full shrink-0" />
-                              <span className="text-sm text-black/70">{subItem}</span>
+                              <span className="text-sm text-white/70">{subItem}</span>
                             </div>
                           ))}
                         </div>
@@ -299,40 +299,40 @@ export default function Page() {
         </section>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 2: RESTAURANT IMPACT (REVERTED)
+            SECTION 2: RESTAURANT IMPACT (WHITE THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="py-32 md:py-32 bg-black text-white relative">
+        <section data-theme="light" className="py-32 md:py-32 bg-white text-black relative">
           <div className="container relative z-10">
             <Reveal>
               <div className="flex items-center gap-4 mb-8">
                 <span className="w-8 h-px bg-[#B11226]" />
                 <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">For Restaurants &amp; Cafes</p>
               </div>
-              <h2 className="text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16" style={{ fontSize: "clamp(2.2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em" }}>
-                CONTENT THAT MAKES<br /><span className="text-white/30">THEM CHOOSE YOU.</span>
+              <h2 className="text-black font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16" style={{ fontSize: "clamp(2.2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em" }}>
+                CONTENT THAT MAKES<br /><span className="text-black/20">THEM CHOOSE YOU.</span>
               </h2>
             </Reveal>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
               <Reveal delay={0.1}>
                 <h3 className="font-bold text-xl md:text-2xl mb-6 leading-tight">Built for restaurants that want to stand out.</h3>
-                <p className="text-white/60 text-base md:text-lg leading-relaxed font-light mb-10 max-w-lg">
+                <p className="text-black/60 text-base md:text-lg leading-relaxed font-light mb-10 max-w-lg">
                   We turn your food, space, and vibe into content that actually drives customers.<br className="hidden md:block" />
                   Not just visuals — content that makes people choose you.
                 </p>
                 <div className="flex gap-4 items-center border-l-2 border-[#B11226] pl-6 py-2">
-                  <div className="text-white/40 uppercase tracking-widest text-[9px] font-mono">Before</div>
-                  <div className="h-px w-4 bg-white/10" />
+                  <div className="text-black/30 uppercase tracking-widest text-[9px] font-mono">Before</div>
+                  <div className="h-px w-4 bg-black/10" />
                   <div className="text-[#B11226] uppercase tracking-widest text-[9px] font-mono font-bold">The Transformation</div>
-                  <div className="h-px flex-1 bg-white/10 hidden sm:block" />
-                  <div className="text-white uppercase tracking-widest text-[9px] font-mono font-bold ml-auto sm:ml-0">After</div>
+                  <div className="h-px flex-1 bg-black/10 hidden sm:block" />
+                  <div className="text-black uppercase tracking-widest text-[9px] font-mono font-bold ml-auto sm:ml-0">After</div>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-[12px] md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
                   <span>Generic Static Shots</span>
-                  <span className="text-white/20 hidden sm:block">→</span>
+                  <span className="text-black/20 hidden sm:block">→</span>
                   <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
                 </div>
               </Reveal>
-              <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-6 md:p-10 hover-lift">
+              <Reveal delay={0.2} className="bg-black/5 border border-black/5 p-6 md:p-10 hover-lift rounded-sm">
                 <h4 className="font-mono text-[#B11226] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
                 <ul className="flex flex-col gap-6">
                   {[
@@ -344,8 +344,8 @@ export default function Page() {
                     <li key={i} className="flex items-center gap-6 group">
                       <span className="font-mono text-[#B11226] opacity-50 group-hover:opacity-100 transition-opacity text-xs">{s.step}</span>
                       <div>
-                        <span className="block font-black text-white uppercase tracking-wide text-lg">{s.text}</span>
-                        <span className="text-white/40 text-sm mt-0.5">{s.desc}</span>
+                        <span className="block font-black text-black uppercase tracking-wide text-lg">{s.text}</span>
+                        <span className="text-black/40 text-sm mt-0.5">{s.desc}</span>
                       </div>
                     </li>
                   ))}
@@ -356,18 +356,18 @@ export default function Page() {
         </section>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 3: WHAT WE DO / SERVICES (REVERTED)
+            SECTION 3: WHAT WE DO / SERVICES (BLACK THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="light" className="py-24 md:py-32" style={{ background: "#FAFAFA" }}>
+        <section data-theme="dark" className="py-24 md:py-32 bg-black text-white relative">
           <div className="container">
             <Reveal>
               <div className="flex items-center gap-6 mb-3">
-                <div className="h-px flex-1 bg-black/10" />
-                <p className="text-[#B11226] font-mono tracking-[0.3em] uppercase text-[10px] shrink-0">Services</p>
+                <div className="h-px flex-1 bg-white/10" />
+                <p className="text-[#B11226] font-mono tracking-[0.3em] uppercase text-[10px] shrink-0 font-bold">Services</p>
               </div>
             </Reveal>
             <Reveal className="mb-10">
-              <h2 className="font-black text-black leading-[0.92] tracking-tighter" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.04em" }}>What we do.</h2>
+              <h2 className="font-black text-white leading-[0.92] tracking-tighter" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.04em" }}>What we do.</h2>
             </Reveal>
             <ServicesTable />
           </div>

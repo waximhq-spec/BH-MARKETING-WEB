@@ -563,13 +563,13 @@ export default function Page() {
             </Reveal>
 
             {/* Master Grid containing Tier 1 and Tier 1.5 in a mixed layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 mb-16 items-stretch">
 
               {/* Left Column (Vertical Reel + Tall Content) */}
-              <div className="lg:col-span-5 flex flex-col gap-8 md:gap-10">
-                <Reveal delay={0.1}>
+              <div className="lg:col-span-5 flex flex-col gap-8 md:gap-10 h-full">
+                <Reveal delay={0.1} className="flex-1 flex flex-col">
                   {/* Automotive Showcase Vertical Reel */}
-                  <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[8px] overflow-hidden cursor-pointer border border-black/5 shadow-sm">
+                  <div className="group relative flex-1 aspect-[9/16] lg:aspect-auto bg-neutral-100 rounded-[8px] overflow-hidden cursor-pointer border border-black/5 shadow-sm min-h-[400px]">
                     <SmartVideo
                       src="https://www.pexels.com/download/video/3298720/"
                       autoPlayViewport={true}

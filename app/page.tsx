@@ -792,7 +792,7 @@ export default function Page() {
         {/* ======================================================
           S6b  TESTIMONIALS - MINIMAL & AUTHORITATIVE
       ====================================================== */}
-        <section data-theme="dark" className="py-32 md:py-48 bg-black text-white relative overflow-hidden">
+        <section data-theme="dark" className="py-20 md:py-40 bg-black text-white relative overflow-hidden">
           {/* Subtle architectural background line */}
           <div className="absolute left-[20%] top-0 bottom-0 w-px bg-white/[0.03] pointer-events-none" />
 
@@ -825,7 +825,7 @@ export default function Page() {
                   className="text-white font-black leading-[1.05] tracking-tight mb-12 max-w-4xl"
                   style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)", letterSpacing: "-0.04em" }}
                 >
-                  &ldquo;We became the <span className="text-white/20">obvious choice</span> in our category.&rdquo;
+                  &ldquo;We became the <span className="text-white/20">obvious choice.</span>&rdquo;
                 </h2>
                 <div className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-[#B11226]" />
@@ -841,12 +841,12 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 border-t border-white/5 pt-20">
               {[
                 { 
-                  quote: "Our bookings doubled within weeks of the rollout. The perception shift was immediate.", 
+                  quote: "Bookings doubled within weeks. The perception shift was immediate.", 
                   name: "Sara Malik", 
                   role: "Marketing Director" 
                 },
                 { 
-                  quote: "They engineered a perception of excellence that redefined our entire brand authority.", 
+                  quote: "They engineered a level of excellence that redefined our brand authority.", 
                   name: "Ahmed Khan", 
                   role: "Founder . Tech Brand" 
                 }

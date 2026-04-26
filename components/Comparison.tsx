@@ -152,36 +152,70 @@ export default function Comparison() {
           </div>
         </div>
 
-        {/* Mobile View (Cards) */}
-        <div className="md:hidden flex flex-col gap-6">
-          {COMPARISON_DATA.map((row, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <div className="bg-white border border-[#EAEAEA] p-6 flex flex-col gap-6 relative shadow-sm">
-                <h3 className="font-medium text-black text-lg">{row.feature}</h3>
-                
-                <div className="flex flex-col gap-5">
-                  <div className="flex flex-col gap-1.5 p-4 bg-[#FAFAFA] border-l-2 border-[#B11226]">
-                    <span className="text-[10px] font-black tracking-[0.1em] uppercase text-black">Cinmach</span>
-                    <span className="font-semibold text-[14px]">
-                      <span className="text-[#B11226] mr-2">✓</span>
-                      <span className="text-[#B11226]">{row.cinmachRed}</span>
-                      <span className="text-black">{row.cinmachDark}</span>
-                    </span>
-                  </div>
-                  
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#8A8A8A]">In-House Hire</span>
-                    <span className="font-normal text-[#8A8A8A] text-[13px]">{row.inhouse}</span>
-                  </div>
-                  
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#8A8A8A]">Typical Agency</span>
-                    <span className="font-normal text-[#8A8A8A] text-[13px]">{row.agency}</span>
-                  </div>
+        {/* Mobile View (Compact Horizontal Matrix) */}
+        <div className="md:hidden -mx-4 px-4 overflow-hidden">
+          <div className="overflow-x-auto scrollbar-hide pb-4">
+            <div className="min-w-[640px] flex flex-col">
+              {/* Header Row */}
+              <div className="grid grid-cols-[1fr_1.4fr_1fr_1fr] border-b border-[#EAEAEA] pb-4 mb-2 px-2">
+                <div className="flex items-end">
+                  <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-black/40">Feature</span>
+                </div>
+                <div className="flex items-end px-4">
+                  <span className="font-black text-[11px] tracking-[0.1em] uppercase text-black">Cinmach</span>
+                </div>
+                <div className="flex items-end justify-center px-2">
+                  <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-black/40 text-center">In-House</span>
+                </div>
+                <div className="flex items-end justify-center px-2">
+                  <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-black/40 text-center">Agency</span>
                 </div>
               </div>
-            </Reveal>
-          ))}
+
+              {/* Data Rows */}
+              {COMPARISON_DATA.map((row, i) => (
+                <Reveal key={i} delay={i * 0.05}>
+                  <div className="grid grid-cols-[1fr_1.4fr_1fr_1fr] border-b border-[#EAEAEA] last:border-0 py-4 items-center px-2">
+                    <div className="pr-4">
+                      <span className="font-medium text-black text-[13px] leading-tight block">
+                        {row.feature}
+                      </span>
+                    </div>
+                    
+                    {/* Cinmach Column (Highlighted) */}
+                    <div className="bg-[#FAFAFA] border-x border-black/[0.05] px-4 py-3">
+                      <span className="font-bold text-[13px] leading-snug block">
+                        <span className="text-[#B11226] mr-1">✓</span>
+                        <span className="text-[#B11226]">{row.cinmachRed}</span>
+                        <span className="text-black">{row.cinmachDark}</span>
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-center px-2">
+                      <span className="font-normal text-[#8A8A8A] text-[12px] text-center leading-tight">
+                        {row.inhouse}
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-center px-2">
+                      <span className="font-normal text-[#8A8A8A] text-[12px] text-center leading-tight">
+                        {row.agency}
+                      </span>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          
+          {/* Hint for scrolling */}
+          <div className="flex justify-center mt-2">
+            <div className="flex items-center gap-2 px-3 py-1 bg-black/5 rounded-full">
+              <span className="w-1 h-1 bg-black/20 rounded-full animate-pulse" />
+              <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">Scroll to compare</span>
+              <span className="w-1 h-1 bg-black/20 rounded-full animate-pulse" />
+            </div>
+          </div>
         </div>
         
       </div>

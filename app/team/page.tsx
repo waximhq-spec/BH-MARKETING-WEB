@@ -36,7 +36,7 @@ const FEATURED_LEADERSHIP = {
   name: "Suhail Ahmad Goni",
   role: "Co-Founder & CEO",
   badge: "CO-FOUNDER & CEO",
-  image: "/team-img/suhail.png",
+  image: "/team-img/suhailb.jpg",
   desc: "The catalyst of Cinmach's architectural evolution. Suhail orchestrates the convergence of creative ambition and strategic scale, ensuring every production transcends traditional boundaries to establish a new standard of cinematic excellence.",
 };
 
@@ -69,9 +69,10 @@ function FeaturedLeadershipCard({ leader }: { leader: any }) {
               <Image 
                 src={leader.image} 
                 alt={leader.name} 
-                fill 
+                width={256}
+                height={256}
                 priority
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
             ) : (
               <div className="w-4 h-4 rounded-full bg-[#8B0016]/20 animate-pulse" />

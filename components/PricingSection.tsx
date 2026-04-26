@@ -139,8 +139,8 @@ export default function PricingSection() {
           </p>
         </motion.div>
 
-        {/* 4 Column Pricing Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 items-stretch">
+        {/* 4 Column Pricing Grid (Desktop) / Horizontal Scroll (Mobile) */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-6 items-stretch">
           {packages.map((pkg, idx) => (
             <motion.div
               key={pkg.id}
@@ -154,76 +154,116 @@ export default function PricingSection() {
                   : "bg-[#0A0A0A] border border-white/5 hover:border-white/20"
               }`}
             >
-              {/* Highlight / Glow Behind Card */}
-              {pkg.isPopular && (
-                <div className="absolute inset-0 bg-gradient-to-b from-[#B11226]/10 to-transparent pointer-events-none" />
-              )}
-              
-              {/* Image Area */}
-              <div className="relative h-20 w-full overflow-hidden bg-[#111]">
-                <div 
-                  className={`absolute inset-0 bg-gradient-to-br ${pkg.imageGradient} opacity-60 z-10 transition-opacity duration-300 group-hover:opacity-40`} 
-                />
-                
-                {pkg.isPopular && (
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#B11226]/20 border border-[#B11226]/50 text-[#B11226] text-[9px] font-bold tracking-widest uppercase">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                
-                <svg className="absolute inset-0 w-full h-full opacity-20 text-white mix-blend-overlay" width="100%" height="100%">
-                    <defs>
-                      <pattern id={`grid-${pkg.id}`} width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect width="20" height="20" fill="none"></rect>
-                        <circle cx="2" cy="2" r="1.5" fill="currentColor"></circle>
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill={`url(#grid-${pkg.id})`}></rect>
-                </svg>
-              </div>
-
-              {/* Content block */}
-              <div className="flex flex-col flex-grow p-5 md:p-6 pt-5 z-10">
-                <div className="mb-4">
-                  <h3 className="text-white text-[12px] font-bold tracking-[0.2em] uppercase mb-2">
-                    {pkg.name}
-                  </h3>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className={`text-4xl font-black tracking-tighter ${pkg.isPopular ? "text-[#B11226]" : "text-white"}`}>
-                      {pkg.price}
-                    </span>
-                  </div>
-                  <p className="text-white/40 text-[11px] leading-relaxed min-h-[32px]">
-                    {pkg.target}
-                  </p>
-                </div>
-
-                <div className="w-full h-px bg-white/5 mb-4" />
-
-                <div className="flex-grow flex flex-col mb-8">
-                  <p className="text-white/30 text-[9px] tracking-widest uppercase font-bold mb-2">Includes</p>
-                  {pkg.features.map((feature, i) => (
-                    <FeatureItem key={i} label={feature.label} details={feature.details} />
-                  ))}
-                </div>
-
-                <button 
-                  onClick={openProjectModal}
-                  className={`mt-auto w-full py-3.5 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
-                    pkg.isPopular
-                      ? "bg-gradient-to-r from-[#B11226] to-[#7a0b19] text-white hover:scale-[1.02]"
-                      : "bg-white/5 text-white hover:bg-white hover:text-black hover:scale-[1.02]"
-                  }`}
-                >
-                  {pkg.ctaText}
-                </button>
-              </div>
+              {/* Card Content (Shared Logic) */}
+              <PricingCardContent pkg={pkg} openProjectModal={openProjectModal} />
             </motion.div>
           ))}
+        </div>
+
+        {/* Mobile View: Horizontal Scrollable Cards */}
+        <div className="lg:hidden -mx-8 px-8 overflow-hidden">
+          <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-12">
+            {packages.map((pkg, idx) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 * idx }}
+                className={`min-w-[85vw] md:min-w-[320px] snap-center flex flex-col relative rounded-2xl overflow-hidden ${
+                  pkg.isPopular 
+                    ? "bg-[#0A0A0A] border border-[#B11226]/40" 
+                    : "bg-[#0A0A0A] border border-white/5"
+                }`}
+              >
+                <PricingCardContent pkg={pkg} openProjectModal={openProjectModal} />
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Scroll Indicator */}
+          <div className="flex justify-center gap-1.5 mt-2">
+            {packages.map((_, i) => (
+              <div key={i} className="w-1 h-1 rounded-full bg-white/20 last:bg-[#B11226]/40" />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+// Extracted card content to avoid duplication
+function PricingCardContent({ pkg, openProjectModal }: { pkg: any, openProjectModal: () => void }) {
+  return (
+    <>
+      {/* Highlight / Glow Behind Card */}
+      {pkg.isPopular && (
+        <div className="absolute inset-0 bg-gradient-to-b from-[#B11226]/10 to-transparent pointer-events-none" />
+      )}
+      
+      {/* Image Area */}
+      <div className="relative h-20 w-full overflow-hidden bg-[#111]">
+        <div 
+          className={`absolute inset-0 bg-gradient-to-br ${pkg.imageGradient} opacity-60 z-10 transition-opacity duration-300 group-hover:opacity-40`} 
+        />
+        
+        {pkg.isPopular && (
+          <div className="absolute top-4 right-4 z-20">
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#B11226]/20 border border-[#B11226]/50 text-[#B11226] text-[9px] font-bold tracking-widest uppercase">
+              Most Popular
+            </span>
+          </div>
+        )}
+        
+        <svg className="absolute inset-0 w-full h-full opacity-20 text-white mix-blend-overlay" width="100%" height="100%">
+            <defs>
+              <pattern id={`grid-${pkg.id}`} width="20" height="20" patternUnits="userSpaceOnUse">
+                <rect width="20" height="20" fill="none"></rect>
+                <circle cx="2" cy="2" r="1.5" fill="currentColor"></circle>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill={`url(#grid-${pkg.id})`}></rect>
+        </svg>
+      </div>
+
+      {/* Content block */}
+      <div className="flex flex-col flex-grow p-6 pt-5 z-10">
+        <div className="mb-4">
+          <h3 className="text-white text-[12px] font-bold tracking-[0.2em] uppercase mb-2">
+            {pkg.name}
+          </h3>
+          <div className="flex items-baseline gap-1 mb-1">
+            <span className={`text-4xl font-black tracking-tighter ${pkg.isPopular ? "text-[#B11226]" : "text-white"}`}>
+              {pkg.price}
+            </span>
+          </div>
+          <p className="text-white/40 text-[11px] leading-relaxed min-h-[32px]">
+            {pkg.target}
+          </p>
+        </div>
+
+        <div className="w-full h-px bg-white/5 mb-4" />
+
+        <div className="flex-grow flex flex-col mb-8">
+          <p className="text-white/30 text-[9px] tracking-widest uppercase font-bold mb-2">Includes</p>
+          {pkg.features.map((feature: any, i: number) => (
+            <FeatureItem key={i} label={feature.label} details={feature.details} />
+          ))}
+        </div>
+
+        <button 
+          onClick={openProjectModal}
+          className={`mt-auto w-full py-3.5 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
+            pkg.isPopular
+              ? "bg-gradient-to-r from-[#B11226] to-[#7a0b19] text-white hover:scale-[1.02]"
+              : "bg-white/5 text-white hover:bg-white hover:text-black hover:scale-[1.02]"
+          }`}
+        >
+          {pkg.ctaText}
+        </button>
+      </div>
+    </>
+  );
+}
+

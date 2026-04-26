@@ -228,7 +228,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => { setMenuOpen(false); openProjectModal(); }}
-                  className="group flex items-center justify-between w-full h-[64px] px-8 bg-black text-white text-[11px] font-mono font-bold tracking-[0.25em] uppercase hover:scale-[1.02] active:scale-[0.98] transition-all duration-500 shadow-xl overflow-hidden relative"
+                  className="group btn-premium flex items-center justify-between w-full h-[64px] px-8 bg-black text-white text-[11px] font-mono font-bold tracking-[0.25em] uppercase shadow-xl overflow-hidden relative"
                 >
                   <span className="relative z-10 group-hover:text-black transition-colors duration-500">Start a Project</span>
                   <span className="relative z-10 group-hover:text-black transition-colors duration-500">→</span>

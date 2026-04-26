@@ -23,10 +23,10 @@ function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.6, delay: delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: delay, ease: [0.22, 1, 0.36, 1] }}
       className={`will-change-[transform,opacity] ${className}`}
     >
       {children}
@@ -286,10 +286,10 @@ export default function Page() {
                   ))}
                 </motion.div>
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.8 }} className="flex flex-row gap-3 lg:ml-auto">
-                  <Link href="/services" className="group px-4 md:px-7 py-[14px] bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase transition-all duration-500 hover:bg-white hover:text-black flex items-center gap-2.5 whitespace-nowrap">
+                  <Link href="/services" className="group btn-premium px-4 md:px-7 py-[14px] bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase flex items-center gap-2.5 whitespace-nowrap">
                     View Our Work <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </Link>
-                  <button onClick={openProjectModal} type="button" className="group px-4 md:px-7 py-[14px] border border-white/25 text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase transition-all duration-300 hover:border-white/60 hover:bg-white/5 flex items-center gap-2.5 whitespace-nowrap">
+                  <button onClick={openProjectModal} type="button" className="group btn-premium px-4 md:px-7 py-[14px] border border-white/25 text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase hover:bg-white/5 flex items-center gap-2.5 whitespace-nowrap">
                     Book a Shoot <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </button>
                 </motion.div>
@@ -332,7 +332,7 @@ export default function Page() {
                   <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
                 </div>
               </Reveal>
-              <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-6 md:p-10">
+              <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-6 md:p-10 hover-lift">
                 <h4 className="font-mono text-[#B11226] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
                 <ul className="flex flex-col gap-6">
                   {[
@@ -404,7 +404,7 @@ export default function Page() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
               <div className="lg:col-span-5">
                 <Reveal delay={0.1}>
-                  <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer">
+                  <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer hover-lift">
                     <SmartVideo src="https://www.pexels.com/download/video/3298720/" autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                     <div className="absolute inset-0 p-10 flex flex-col justify-end">
@@ -420,7 +420,7 @@ export default function Page() {
                   { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/" },
                 ].map((video, idx) => (
                   <Reveal key={idx} delay={0.15 + (idx * 0.1)}>
-                    <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer">
+                    <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer hover-lift">
                       <SmartVideo src={video.vid} autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                       <div className="absolute inset-0 p-10 flex flex-col justify-end">

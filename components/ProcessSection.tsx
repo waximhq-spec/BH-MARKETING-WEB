@@ -6,18 +6,23 @@ import { motion, useScroll, useMotionValueEvent, MotionValue, useTransform } fro
 const STEPS = [
   {
     num: "01",
-    title: "Visual Direction",
-    desc: "Every project begins with defining how your brand should be perceived. We align visuals, messaging, and audience intent before anything is produced.",
+    title: "Understand Your Brand",
+    desc: "We learn before we create. We dive into your business, audience, and goals to understand what makes you different and how your brand should feel. No guessing — only clarity.",
   },
   {
     num: "02",
-    title: "Cinematic Production",
-    desc: "We produce cinematic content engineered to position your brand at a higher standard. Every frame is intentional, consistent, and built to elevate perception.",
+    title: "Plan the Vision",
+    desc: "We design how you should be seen. We define the visual direction, messaging, and content style so everything looks intentional, premium, and aligned.",
   },
   {
     num: "03",
-    title: "Brand Synergy",
-    desc: "We refine and systemize your visual identity across outputs, ensuring every piece of content reinforces a cohesive, premium brand presence.",
+    title: "Create Cinematic Content",
+    desc: "We bring the vision to life. We produce high-end visuals that elevate your brand. Every frame is crafted to be sharp, consistent, and scroll-stopping.",
+  },
+  {
+    num: "04",
+    title: "Refine & Scale",
+    desc: "We make your brand consistent everywhere. We align and optimize your content across platforms so your brand feels cohesive, professional, and trustworthy.",
   },
 ];
 
@@ -74,9 +79,9 @@ export default function ProcessSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="text-[#8B0016] font-mono tracking-[0.3em] uppercase text-[9px] mb-6 lg:mb-8 font-bold"
+              className="text-[#8B0016] font-black tracking-tighter uppercase text-xl md:text-2xl mb-6 lg:mb-8"
             >
-              The Methodology
+              Our Process
             </motion.p>
             
             <motion.h2
@@ -89,8 +94,8 @@ export default function ProcessSection() {
             >
               WE DESIGN<br />
               PERCEPTION.<br />
-              <span className="text-white/20">FRAME BY</span><br />
-              <span className="text-white/20">FRAME.</span>
+              <span className="text-white/20">STEP BY</span><br />
+              <span className="text-white/20">STEP.</span>
             </motion.h2>
 
             <motion.p
@@ -101,7 +106,7 @@ export default function ProcessSection() {
               className="text-white/40 text-[12px] lg:text-[14px] font-medium tracking-wide max-w-[280px]"
               style={{ lineHeight: 1.6 }}
             >
-              We don&apos;t guess. We understand, plan, and execute with intent.
+              A clear, structured approach to building how your brand is seen.
             </motion.p>
           </motion.div>
 
@@ -165,9 +170,9 @@ export default function ProcessSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-6 font-bold"
+          className="text-[#8B0016] font-black tracking-tighter uppercase text-xl mb-6"
         >
-          The Methodology
+          Our Process
         </motion.p>
         
         <motion.h2
@@ -179,7 +184,7 @@ export default function ProcessSection() {
           style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
         >
           WE DESIGN PERCEPTION.<br />
-          <span className="text-white/25">FRAME BY FRAME.</span>
+          <span className="text-white/25">STEP BY STEP.</span>
         </motion.h2>
 
         <div className="relative border-l border-white/10 ml-4 flex flex-col pt-4 pb-12">

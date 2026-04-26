@@ -104,18 +104,9 @@ export default function Footer() {
               Contact
             </h4>
             <div className="flex flex-col gap-4">
-              <a href="mailto:hello@cinmach.com" className="group flex flex-col w-fit">
-                <span className="text-white/70 text-[13px] font-medium group-hover:text-white transition-colors">hello@cinmach.com</span>
+              <a href="mailto:contact@cinmachproductions.com" className="group flex flex-col w-fit">
+                <span className="text-white/70 text-[13px] font-medium group-hover:text-white transition-colors">contact@cinmachproductions.com</span>
                 <span className="w-0 h-[1px] bg-[#8B0016] group-hover:w-full transition-all duration-500 ease-out mt-1" />
-              </a>
-              <a href="tel:+97300000000" className="group flex flex-col w-fit mt-2">
-                <span className="text-white/70 text-[13px] font-medium group-hover:text-white transition-colors">+973 0000 0000</span>
-                <span className="w-0 h-[1px] bg-[#8B0016] group-hover:w-full transition-all duration-500 ease-out mt-1" />
-              </a>
-              
-              <a href="https://wa.me/97300000000" target="_blank" rel="noopener noreferrer" className="mt-4 flex items-center gap-3 text-[#8B0016] text-[11px] font-mono font-bold tracking-[0.2em] uppercase hover:text-white transition-colors duration-300">
-                <span className="w-2 h-2 rounded-full bg-[#8B0016] animate-pulse" />
-                WhatsApp Direct
               </a>
             </div>
           </div>

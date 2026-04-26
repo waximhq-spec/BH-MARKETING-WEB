@@ -314,9 +314,10 @@ export default function Page() {
             </Reveal>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
               <Reveal delay={0.1}>
-                <h3 className="font-bold text-xl md:text-2xl mb-4 leading-tight">Built for modern restaurants that want to stand out on Instagram and beyond.</h3>
-                <p className="text-white/60 leading-relaxed font-light mb-10">
-                  We know the hospitality industry. It&apos;s not just about a pretty plate — it&apos;s about atmosphere, energy, and capturing cravings. We transform average social feeds into high-converting revenue drivers built to pack your dining room.
+                <h3 className="font-bold text-xl md:text-2xl mb-6 leading-tight">Built for restaurants that want to stand out.</h3>
+                <p className="text-white/60 text-base md:text-lg leading-relaxed font-light mb-10 max-w-lg">
+                  We turn your food, space, and vibe into content that actually drives customers.<br className="hidden md:block" />
+                  Not just visuals — content that makes people choose you.
                 </p>
                 <div className="flex gap-4 items-center border-l-2 border-[#B11226] pl-6 py-2">
                   <div className="text-white/40 uppercase tracking-widest text-[9px] font-mono">Before</div>
@@ -371,25 +372,39 @@ export default function Page() {
             <ServicesTable />
           </div>
         </section>
+        
+        {/* High-Impact Section Break */}
+        <div className="bg-white pt-40 pb-20">
+          <div className="container">
+            <div className="flex flex-col">
+              <div className="h-[2px] w-full bg-black mb-12" />
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div>
+                  <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[12px] font-bold mb-6">Phase 04</p>
+                  <h2 className="text-black font-black leading-[0.85] tracking-tighter" style={{ fontSize: "clamp(4rem, 12vw, 10rem)", letterSpacing: "-0.05em" }}>
+                    SELECTED<br />WORK.
+                  </h2>
+                </div>
+                <div className="max-w-xs pb-4">
+                  <p className="text-black/40 text-sm font-light leading-relaxed">
+                    A curated collection of high-performance content engineered for brand authority and conversion.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: PORTFOLIO
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="py-24 md:py-40 bg-black text-white overflow-hidden">
+        <section data-theme="light" className="pb-24 md:pb-40 bg-white text-black overflow-hidden">
           <div className="container">
-            <Reveal className="mb-20">
-              <div className="flex items-center justify-between border-b border-white/10 pb-10">
-                <div>
-                  <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold mb-4">Case Studies</p>
-                  <h2 className="text-white font-black leading-[0.9]" style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", letterSpacing: "-0.04em" }}>SELECTED WORK.</h2>
-                </div>
-              </div>
-            </Reveal>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
               <div className="lg:col-span-5">
                 <Reveal delay={0.1}>
-                  <div className="group relative aspect-[9/16] bg-white/5 rounded-2xl overflow-hidden cursor-pointer">
+                  <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer">
                     <SmartVideo src="https://www.pexels.com/download/video/3298720/" autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                     <div className="absolute inset-0 p-10 flex flex-col justify-end">

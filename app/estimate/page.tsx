@@ -141,24 +141,13 @@ export default function ContactPage() {
                 Manama, Bahrain
               </p>
             </Reveal>
-            <Reveal delay={0.4}>
-              <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#8B0016] mb-4">Direct Line</p>
-              <a
-                href="https://wa.me/97300000000"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white font-black text-lg tracking-tight uppercase hover:text-[#8B0016] transition-colors inline-block border-b border-transparent hover:border-[#8B0016]"
-              >
-                +973 0000 0000
-              </a>
-            </Reveal>
             <Reveal delay={0.45}>
               <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#8B0016] mb-4">Transmission</p>
               <a
                 href="mailto:contact@cinmachproductions.com"
                 className="text-white font-black text-lg tracking-tight uppercase hover:text-[#8B0016] transition-colors break-all inline-block border-b border-transparent hover:border-[#8B0016]"
               >
-                CONTACT@CINMACH.COM
+                contact@cinmachproductions.com
               </a>
             </Reveal>
           </div>

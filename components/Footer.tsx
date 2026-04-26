@@ -22,33 +22,43 @@ export default function Footer() {
       <div className="w-full max-w-[1400px] mx-auto px-8 md:px-14 lg:px-20 xl:px-24 relative z-10 flex flex-col items-center">
         
         {/* ══════════════════════════════════════════════════════
-            TOP LAYER: THE FINAL CTA
+            TOP LAYER: THE FINAL CTA — REFINED & COMPACT
         ══════════════════════════════════════════════════════ */}
-        <div className="flex flex-col items-center text-center mb-32 md:mb-48 w-full max-w-4xl">
-          <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] md:text-[11px] mb-8 font-bold">
-            The Next Step
-          </p>
-          <h2
-            className="font-black text-white leading-[0.95] mb-12 tracking-tighter"
-            style={{ fontSize: "clamp(3rem, 7vw, 6.5rem)", letterSpacing: "-0.04em" }}
-          >
-            LET&apos;S BUILD<br />
-            SOMETHING<br />
-            <span className="text-white/30">THAT LASTS.</span>
-          </h2>
+        <div className="w-full flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-24 md:mb-32">
           
-          <button 
-            onClick={openProjectModal}
-            className="group relative flex justify-center items-center px-12 py-5 bg-white text-black text-[12px] font-mono font-bold tracking-[0.3em] uppercase transition-all duration-500 overflow-hidden"
-          >
-             <div className="absolute inset-0 bg-[#8B0016] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
-             {/* Red Box Shadow Glow strictly tied to hover */}
-             <div className="absolute inset-0 shadow-[0_0_40px_rgba(139,0,22,0.6)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-             
-             <span className="relative z-10 group-hover:text-white transition-colors duration-500 flex items-center">
-               Book a Shoot <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500">→</span>
-             </span>
-          </button>
+          {/* Left: Content Block */}
+          <div className="flex flex-col items-start text-left max-w-2xl">
+            <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] mb-6 font-bold">
+              The Next Step
+            </p>
+            <h2
+              className="font-black text-white leading-[1.1] mb-6 tracking-tighter"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", letterSpacing: "-0.03em" }}
+            >
+              Let&apos;s build your <span className="text-white/30 italic font-serif">cinematic legacy.</span>
+            </h2>
+            <p className="text-white/50 text-sm md:text-base font-light max-w-lg leading-relaxed">
+              We transform average visual identities into high-end brand authorities. Built for brands that demand a higher standard.
+            </p>
+          </div>
+          
+          {/* Right: Action Block */}
+          <div className="shrink-0 pb-2">
+            <button 
+              onClick={openProjectModal}
+              className="group relative flex items-center gap-6 px-10 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.25em] uppercase transition-all duration-500 overflow-hidden"
+            >
+               <span className="relative z-10 transition-colors duration-500 flex items-center">
+                 Book a Shoot <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500">→</span>
+               </span>
+               {/* Minimal hover fill */}
+               <div className="absolute inset-0 bg-[#8B0016] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+               <span className="absolute inset-0 z-0 group-hover:bg-[#8B0016] transition-colors duration-500" />
+               <span className="relative z-10 group-hover:text-white transition-colors duration-500 flex items-center">
+                 Book a Shoot <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500">→</span>
+               </span>
+            </button>
+          </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════

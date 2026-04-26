@@ -790,93 +790,84 @@ export default function Page() {
         </section>
 
         {/* ======================================================
-          S6b  TESTIMONIALS - ELEVATED HIGH-DENSITY SYSTEM
+          S6b  TESTIMONIALS - MINIMAL & AUTHORITATIVE
       ====================================================== */}
-        <section data-theme="light" className="py-24 md:py-32 bg-white overflow-hidden relative">
-          <div className="container max-w-7xl mb-12 flex justify-center">
-            <Reveal className="text-center">
-              <div className="flex items-center gap-3 justify-center">
-                <span className="w-4 h-px bg-[#B11226]" />
-                <p className="text-[#8A8A8A] font-mono tracking-[0.3em] uppercase text-[10px] font-bold">Client Feedback</p>
-                <span className="w-4 h-px bg-[#B11226]" />
-              </div>
-            </Reveal>
-          </div>
+        <section data-theme="dark" className="py-32 md:py-48 bg-black text-white relative overflow-hidden">
+          {/* Subtle architectural background line */}
+          <div className="absolute left-[20%] top-0 bottom-0 w-px bg-white/[0.03] pointer-events-none" />
 
-          <div className="relative w-full flex flex-col gap-6 select-none cursor-default">
-            {/* Fading Edges for Marquee */}
-            <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          <div className="container max-w-6xl relative z-10">
+            
+            {/* Header / Metrics Row */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 mb-24 md:mb-32">
+              {[
+                { val: "+40%", label: "Footfall Increase" },
+                { val: "3x", label: "Digital Engagement" },
+                { val: "100%", label: "Weekend Bookings" },
+              ].map((m, i) => (
+                <Reveal key={i} delay={i * 0.1}>
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[#B11226] font-black text-4xl md:text-5xl tracking-tighter">{m.val}</span>
+                    <span className="text-white/30 font-mono text-[9px] uppercase tracking-[0.3em] font-bold">{m.label}</span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
 
-            {/* Row 1 (Scrolls Left) */}
-            <motion.div
-              className="flex gap-6 w-max"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ ease: "linear", duration: 40, repeat: Infinity }}
-            >
-              {[0, 1].map((copy) => (
-                <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
-                  {[
-                    { quote: "The shift in our market positioning was immediate. Cinmach codified a visual DNA that moved us from a local player to a premium entity.", name: "Omar Rahman", role: "Director of Operations . Real Estate Firm" },
-                    { quote: "They didn't just produce content; they engineered a perception of excellence that has redefined our entire brand authority.", name: "Sara Malik", role: "Marketing Director . Creative Agency" },
-                    { quote: "Our brand perception underwent a total transformation. The cinematic ecosystem they built has positioned us as the default choice in our tier.", name: "Ahmed Khan", role: "Founder . Technology Brand" },
-                    { quote: "The visual framework Cinmach established has shifted how stakeholders engage with our firm. We finally look as formidable as we are.", name: "Elena R.", role: "Managing Partner . Investment Group" },
-                    { quote: "Cinematically, they are unmatched. They didn't just capture our projects; they built a visual standard that has elevated our entire portfolio.", name: "Fahad A.", role: "Head of Creative . Development Company" }
-                  ].map((t, idx) => (
-                    <div
-                      key={idx}
-                      className="w-[300px] md:w-[480px] bg-[#FAFAFA] border border-[#EAEAEA] rounded-[6px] p-6 md:p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
-                    >
-                      <p className="text-black font-medium leading-relaxed" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)" }}>
-                        "{t.quote}"
-                      </p>
-                      <div className="mt-auto flex items-center gap-3 pt-4">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#B11226] shrink-0" />
-                        <div className="flex flex-col">
-                          <span className="text-black font-bold text-[13px]">{t.name}</span>
-                          <span className="text-[#8A8A8A] text-[11px] uppercase tracking-wider mt-0.5">{t.role}</span>
-                        </div>
+            {/* Featured Testimonial */}
+            <div className="mb-24 md:mb-32">
+              <Reveal>
+                <div className="flex items-center gap-4 mb-10">
+                  <span className="w-10 h-px bg-[#B11226]" />
+                  <p className="text-[#8A8A8A] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">The Impact</p>
+                </div>
+                <h2 
+                  className="text-white font-black leading-[1.05] tracking-tight mb-12 max-w-4xl"
+                  style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)", letterSpacing: "-0.04em" }}
+                >
+                  &ldquo;We became the <span className="text-white/20">obvious choice</span> in our category.&rdquo;
+                </h2>
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 rounded-full bg-[#B11226]" />
+                  <div>
+                    <p className="text-white font-bold text-sm tracking-tight">Omar Rahman</p>
+                    <p className="text-white/30 text-[10px] uppercase tracking-widest font-mono mt-1">Director of Operations . Hospitality Group</p>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Supporting Testimonials Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 border-t border-white/5 pt-20">
+              {[
+                { 
+                  quote: "Our bookings doubled within weeks of the rollout. The perception shift was immediate.", 
+                  name: "Sara Malik", 
+                  role: "Marketing Director" 
+                },
+                { 
+                  quote: "They engineered a perception of excellence that redefined our entire brand authority.", 
+                  name: "Ahmed Khan", 
+                  role: "Founder . Tech Brand" 
+                }
+              ].map((t, i) => (
+                <Reveal key={i} delay={0.2 + (i * 0.1)}>
+                  <div className="flex flex-col gap-8">
+                    <p className="text-white/60 text-xl md:text-2xl font-light leading-relaxed italic">
+                      &ldquo;{t.quote}&rdquo;
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-1 h-1 rounded-full bg-[#B11226]" />
+                      <div className="flex flex-col">
+                        <span className="text-white font-bold text-xs">{t.name}</span>
+                        <span className="text-white/20 text-[9px] uppercase tracking-widest font-mono mt-1">{t.role}</span>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                </Reveal>
               ))}
-            </motion.div>
+            </div>
 
-            {/* Row 2 (Scrolls Right) */}
-            <motion.div
-              className="flex gap-6 w-max"
-              animate={{ x: ["-50%", "0%"] }}
-              transition={{ ease: "linear", duration: 45, repeat: Infinity }}
-            >
-              {[0, 1].map((copy) => (
-                <div key={copy} className="flex gap-6 items-stretch shrink-0 pr-6">
-                  {[
-                    { quote: "Every frame is an intentional move toward more premium positioning. Our audience response has shifted from interest to total trust.", name: "Daniel Carter", role: "VP of Growth . Digital Venture" },
-                    { quote: "The visual consistency across our assets has solidified a cohesive brand image that finally matches our high-end service standards.", name: "Aisha R.", role: "Marketing Manager . Hospitality Group" },
-                    { quote: "The perception shift was palpable. By prioritizing cinematic visual identity, our brand now commands a much higher authority in the market.", name: "James C.", role: "CEO . Private Business" },
-                    { quote: "They captured our exact essence and elevated it. Our brand identity now feels intentionally premium and globally competitive.", name: "Layla Noor", role: "Owner . Lifestyle Brand" },
-                    { quote: "A complete overhaul of our visual perception. Cinmach turned our technical operations into a cinematic story of reliability and scale.", name: "Tariq Hassani", role: "General Manager . Logistics Firm" }
-                  ].map((t, idx) => (
-                    <div
-                      key={idx}
-                      className="w-[300px] md:w-[480px] bg-[#FAFAFA] border border-[#EAEAEA] rounded-[6px] p-6 md:p-8 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
-                    >
-                      <p className="text-black font-medium leading-relaxed" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)" }}>
-                        "{t.quote}"
-                      </p>
-                      <div className="mt-auto flex items-center gap-3 pt-4">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#B11226] shrink-0" />
-                        <div className="flex flex-col">
-                          <span className="text-black font-bold text-[13px]">{t.name}</span>
-                          <span className="text-[#8A8A8A] text-[11px] uppercase tracking-wider mt-0.5">{t.role}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </motion.div>
           </div>
         </section>
 

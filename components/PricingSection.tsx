@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 
@@ -49,185 +49,106 @@ export default function PricingSection() {
   const packages = [
     {
       id: "starter",
-      name: "STARTER",
+      name: "Starter",
       price: "$499",
       target: "Best for small brands or basic shoots",
+      imageGradient: "from-blue-500/20 to-purple-500/20",
       features: [
-        { label: "10 Edited Photos", details: "High-resolution, retouched images ready for web and social." },
-        { label: "1 Short Reel (15–30 sec)", details: "Dynamic, fast-paced video cut for TikTok or IG Reels." },
-        { label: "Basic Color Grading", details: "Standard color correction ensuring brand consistency." },
-        { label: "1 Location Shoot", details: "Up to 2 hours of coverage at a single approved location." },
+        { label: "10 Edited Photos", details: "High-resolution professionally color-graded photos." },
+        { label: "1 Short Reel (15-30 sec)", details: "Optimized for Instagram/TikTok with trending transitions." },
+        { label: "Basic Color Grading", details: "Standard cinematic color correction for a consistent look." },
+        { label: "1 Location Shoot", details: "Up to 2 hours of production at a single venue." }
       ],
-      ctaText: "Explore Package",
-      isPopular: false,
-      imageGradient: "from-black/80 to-[#1a1a1a]"
+      ctaText: "Get Started",
+      isPopular: false
     },
     {
-      id: "creator",
-      name: "CREATOR",
+      id: "pro",
+      name: "Standard",
       price: "$899",
-      target: "Most chosen package for growing brands",
+      target: "Comprehensive content for monthly growth",
+      imageGradient: "from-[#B11226]/20 to-orange-500/20",
       features: [
-        { label: "20 Edited Photos", details: "Extensive gallery of retouched, multi-format images." },
-        { label: "2 Reels (30–45 sec)", details: "Engaging vertical videos tailored for maximum retention." },
-        { label: "Advanced Color Grading", details: "Cinematic color manipulation mapping to your brand palette." },
-        { label: "Creative Direction", details: "We guide the visual narrative and on-set talent." },
-        { label: "1–2 Locations", details: "Up to 4 hours of shooting across two nearby locations." },
+        { label: "25 Edited Photos", details: "Full gallery covering food, ambiance, and team." },
+        { label: "3 Reels / Short Videos", details: "A mix of storytelling, fast-paced, and cinematic edits." },
+        { label: "Advanced Color Grading", details: "Premium 'film-look' grading tailored to your brand." },
+        { label: "Drone / 4K Footage", details: "Stunning aerials and crisp 4K production quality." }
       ],
-      ctaText: "Explore Package",
-      isPopular: false,
-      imageGradient: "from-black/80 to-[#222]"
+      ctaText: "Choose Standard",
+      isPopular: true
     },
     {
-      id: "cinematic",
-      name: "CINEMATIC",
-      price: "$1,499",
-      target: "Designed for brands that want premium storytelling",
+      id: "elite",
+      name: "Premium",
+      price: "$1499",
+      target: "The ultimate cinematic brand overhaul",
+      imageGradient: "from-amber-500/20 to-red-500/20",
       features: [
-        { label: "30+ Edited Photos", details: "A comprehensive library of editorial-grade brand imagery." },
-        { label: "3–4 Cinematic Reels", details: "High-retention, narrative-driven vertical content." },
-        { label: "Full Creative Direction", details: "Pre-production planning, moodboards, and full on-set control." },
-        { label: "Drone Shots", details: "Aerial establishing shots for massive scale and production value." },
-        { label: "Lighting Setup", details: "Professional studio lighting tailored to external environments." },
-        { label: "Story-Based Edit", details: "Complex sound design, pacing, and multi-cam editing." },
+        { label: "50+ Edited Photos", details: "Infinite content for ads, website, and socials." },
+        { label: "6 Reels + 1 Main Film", details: "Complete content ecosystem including a 60-sec brand story." },
+        { label: "Creative Direction", details: "We handle the concepts, script, and storyboarding." },
+        { label: "Full Day Production", details: "Comprehensive shoot covering every angle of your brand." }
       ],
-      ctaText: "Explore Package",
-      isPopular: true,
-      imageGradient: "from-black/80 to-[#B11226]/40"
+      ctaText: "Go Premium",
+      isPopular: false
     },
     {
       id: "custom",
-      name: "CUSTOM",
+      name: "Enterprise",
       price: "Custom",
-      target: "Build your own package based on your exact needs",
+      target: "Scalable solutions for groups & chains",
+      imageGradient: "from-emerald-500/20 to-teal-500/20",
       features: [
-        { label: "Product Shoot", details: "Studio or lifestyle product photography with precise lighting." },
-        { label: "Real Estate Shoot", details: "Interior, exterior, and drone coverage of premium properties." },
-        { label: "Drone Footage", details: "Dedicated aerial videography sessions." },
-        { label: "Ads / Commercials", details: "Full-scale TV or web commercials with crew and talent." },
-        { label: "Social Media Content", details: "Bulk retained content creation for monthly posting." },
+        { label: "Multi-Location Support", details: "Coordinated shoots across multiple venues/branches." },
+        { label: "Dedicated Producer", details: "Single point of contact for all your production needs." },
+        { label: "Full Rights / Raw Files", details: "Complete ownership of all captured raw assets." },
+        { label: "Priority Turnaround", details: "Express delivery for time-sensitive marketing campaigns." }
       ],
-      ctaText: "Build Your Package",
-      isPopular: false,
-      imageGradient: "from-black/80 to-[#111]"
+      ctaText: "Contact Us",
+      isPopular: false
     }
   ];
 
   return (
-    <section data-theme="pricing" className="relative py-20 md:py-28 bg-[#050505] overflow-hidden border-t border-white/5">
-      {/* Background Soft Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white opacity-[0.01] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#B11226] opacity-[0.02] rounded-full pointer-events-none" />
-
-      <div className="max-w-[1440px] mx-auto px-8 md:px-14 lg:px-20 xl:px-24 relative z-10 w-full overflow-hidden">
-        {/* Header Text */}
+    <section data-theme="pricing" className="py-24 md:py-32 bg-[#050505] relative overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#B11226]/50 to-transparent" />
+      
+      <div className="container relative z-10">
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          viewport={{ once: true }}
+          className="text-center mb-16 md:mb-20"
         >
-          <h2 
-            className="text-white font-black tracking-tighter leading-[1.1] mb-6 uppercase"
-            style={{ fontSize: "clamp(2rem, 6vw, 4rem)" }}
-          >
-            Packages Designed to <br className="hidden md:block" /> Elevate Your Brand
+          <p className="text-[#B11226] font-mono text-[10px] tracking-[0.4em] uppercase font-bold mb-4">Investment</p>
+          <h2 className="text-white font-black text-4xl md:text-6xl tracking-tighter leading-none mb-6">
+            CHOOSE YOUR<br />PACKAGE.
           </h2>
-          <p className="text-white/50 text-[13px] md:text-[15px] max-w-xl mx-auto leading-relaxed">
-            Choose a plan that matches your vision — from simple shoots to full cinematic production.
+          <p className="text-white/40 max-w-xl mx-auto text-sm md:text-base font-light">
+            Simple, transparent pricing built for high-end hospitality and modern brand growth.
           </p>
         </motion.div>
 
-        {/* 4 Column Pricing Grid (Desktop) / Horizontal Scroll (Mobile) */}
-        <div className="hidden lg:grid lg:grid-cols-4 gap-6 items-stretch">
+        {/* Pricing Grid - Responsive */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {packages.map((pkg, idx) => (
             <motion.div
               key={pkg.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: 0.1 * idx }}
-              className={`group flex flex-col h-full relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 ${
+              className={`group flex flex-col h-full relative rounded-2xl overflow-hidden transition-all duration-500 md:hover:-translate-y-2 ${
                 pkg.isPopular 
                   ? "bg-[#0A0A0A] border border-[#B11226]/40 hover:border-[#B11226]/80" 
                   : "bg-[#0A0A0A] border border-white/5 hover:border-white/20"
               }`}
             >
-              {/* Card Content (Shared Logic) */}
               <PricingCardContent pkg={pkg} openProjectModal={openProjectModal} />
             </motion.div>
           ))}
         </div>
-
-        </motion.div>
-
-        {/* Auto-scroll logic for mobile */}
-        {(() => {
-          const scrollRef = useRef<HTMLDivElement>(null);
-          
-          useEffect(() => {
-            const container = scrollRef.current;
-            if (!container) return;
-
-            let interval: NodeJS.Timeout;
-            const startScroll = () => {
-              interval = setInterval(() => {
-                const { scrollLeft, scrollWidth, clientWidth } = container;
-                // If we're at the end, scroll back to start
-                if (scrollLeft + clientWidth >= scrollWidth - 10) {
-                  container.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                  // Scroll by one card width (roughly)
-                  container.scrollBy({ left: clientWidth * 0.85, behavior: 'smooth' });
-                }
-              }, 4000); // Scroll every 4 seconds
-            };
-
-            startScroll();
-
-            // Clear on interaction
-            const stopScroll = () => clearInterval(interval);
-            container.addEventListener('touchstart', stopScroll);
-            container.addEventListener('mousedown', stopScroll);
-
-            return () => {
-              stopScroll();
-              container.removeEventListener('touchstart', stopScroll);
-              container.removeEventListener('mousedown', stopScroll);
-            };
-          }, []);
-
-          return (
-            <div className="lg:hidden -mx-8 px-8 overflow-hidden">
-              <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-12">
-                {packages.map((pkg, idx) => (
-                  <motion.div
-                    key={pkg.id}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 * idx }}
-                    className={`min-w-[85vw] md:min-w-[320px] snap-center flex flex-col relative rounded-2xl overflow-hidden ${
-                      pkg.isPopular 
-                        ? "bg-[#0A0A0A] border border-[#B11226]/40" 
-                        : "bg-[#0A0A0A] border border-white/5"
-                    }`}
-                  >
-                    <PricingCardContent pkg={pkg} openProjectModal={openProjectModal} />
-                  </motion.div>
-                ))}
-              </div>
-              
-              {/* Scroll Indicator */}
-              <div className="flex justify-center gap-1.5 mt-2">
-                {packages.map((_, i) => (
-                  <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                ))}
-              </div>
-            </div>
-          );
-        })()}
       </div>
     </section>
   );
@@ -306,4 +227,3 @@ function PricingCardContent({ pkg, openProjectModal }: { pkg: any, openProjectMo
     </>
   );
 }
-

@@ -418,48 +418,33 @@ export default function Page() {
                 </p>
               </div>
               
-              {/* Desktop Headline */}
               <h2
-                className="hidden md:block text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16"
-                style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
+                className="text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16"
+                style={{ fontSize: "clamp(2.2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em" }}
               >
                 CONTENT THAT MAKES<br />
                 <span className="text-white/30">THEM CHOOSE YOU.</span>
-              </h2>
-
-              {/* Mobile Headline — Simplified */}
-              <h2
-                className="block md:hidden text-white font-black leading-[1.1] tracking-tighter mb-10"
-                style={{ fontSize: "clamp(2.4rem, 8vw, 3rem)", letterSpacing: "-0.04em" }}
-              >
-                Content that makes them choose you.
               </h2>
             </Reveal>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
               <Reveal delay={0.1}>
-                {/* Subtext — Condensed for mobile */}
-                <h3 className="hidden md:block font-bold text-xl md:text-2xl mb-4 leading-tight">
+                <h3 className="font-bold text-xl md:text-2xl mb-4 leading-tight">
                   Built for modern restaurants that want to stand out on Instagram and beyond.
                 </h3>
-                <p className="hidden md:block text-white/60 leading-relaxed font-light mb-8">
+                <p className="text-white/60 leading-relaxed font-light mb-10">
                   We know the hospitality industry. It&apos;s not just about a pretty plate — it&apos;s about atmosphere, energy, and capturing cravings. We transform average social feeds into high-converting revenue drivers built to pack your dining room.
                 </p>
 
-                {/* Mobile Subtext */}
-                <p className="block md:hidden text-white/80 text-lg leading-relaxed font-medium mb-12">
-                  We create high-converting content for restaurants &amp; cafés — built to drive attention and bookings.
-                </p>
-
-                {/* Hide Before/After on mobile */}
-                <div className="hidden md:flex gap-4 items-center border-l-2 border-[#8B0016] pl-6 py-2">
-                  <div className="text-white/40 uppercase tracking-widest text-[10px] font-mono">Before</div>
+                {/* Before/After Transformation Line */}
+                <div className="flex gap-4 items-center border-l-2 border-[#8B0016] pl-6 py-2">
+                  <div className="text-white/40 uppercase tracking-widest text-[9px] font-mono">Before</div>
                   <div className="h-px w-4 bg-white/10" />
-                  <div className="text-[#8B0016] uppercase tracking-widest text-[10px] font-mono font-bold">The Transformation</div>
+                  <div className="text-[#8B0016] uppercase tracking-widest text-[9px] font-mono font-bold">The Transformation</div>
                   <div className="h-px flex-1 bg-white/10 hidden sm:block" />
-                  <div className="text-white uppercase tracking-widest text-[10px] font-mono font-bold ml-auto sm:ml-0">After</div>
+                  <div className="text-white uppercase tracking-widest text-[9px] font-mono font-bold ml-auto sm:ml-0">After</div>
                 </div>
-                <div className="hidden md:flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-sm md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
+                <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-[12px] md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
                   <span>Generic Static Shots</span>
                   <span className="text-white/20 hidden sm:block">→</span>
                   <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
@@ -617,8 +602,8 @@ export default function Page() {
               {/* Right Column (Two 16:9s Stacked) */}
               <div className="lg:col-span-7 flex flex-col gap-8 md:gap-10">
                 {[
-                  { label: "02", title: "Lee Heritage", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3121459/" },
-                  { label: "03", title: "Heaven View Villa", cat: "Real Estate", vid: "https://www.pexels.com/download/video/8422238/" },
+                  { label: "02", title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/12188718/" },
+                  { label: "03", title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/" },
                 ].map((video, idx) => (
                   <Reveal key={video.label} delay={0.15 + (idx * 0.1)}>
                     <div className="group relative aspect-video overflow-hidden bg-black cursor-pointer rounded-[8px] shadow-sm">

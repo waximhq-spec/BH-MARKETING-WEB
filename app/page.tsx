@@ -572,7 +572,7 @@ export default function Page() {
                   <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[8px] overflow-hidden cursor-pointer border border-black/5 shadow-sm">
                     <SmartVideo
                       src="https://www.pexels.com/download/video/31588827/"
-                      hoverPlay={true}
+                      autoPlayViewport={true}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
                     <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -610,7 +610,7 @@ export default function Page() {
                       <div className="absolute inset-0 pointer-events-none">
                         <SmartVideo
                           src={video.vid}
-                          hoverPlay={true}
+                          autoPlayViewport={true}
                           className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105"
                         />
                       </div>

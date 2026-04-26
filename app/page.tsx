@@ -160,7 +160,7 @@ function ServicesTable() {
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => setOpenAccordion(isOpen ? null : idx)}
-                  className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 py-7 md:py-8 px-2 cursor-pointer"
+                  className="flex flex-row items-center justify-between gap-4 md:gap-8 py-7 md:py-8 px-2 cursor-pointer"
                 >
                   {/* Number */}
                   <span className={`font-mono text-[10px] tracking-[0.4em] shrink-0 w-10 transition-colors duration-300 ${isOpen ? "text-[#8B0016]" : "text-black/25 group-hover:text-[#8B0016]"}`}>
@@ -181,7 +181,7 @@ function ServicesTable() {
                   </p>
 
                   {/* Toggle CTA */}
-                  <div className="shrink-0 flex items-center justify-end md:justify-center w-8">
+                  <div className="shrink-0 flex items-center justify-end w-8">
                     <motion.div
                       animate={{ rotate: isOpen ? 45 : 0 }}
                       transition={{ duration: 0.3 }}

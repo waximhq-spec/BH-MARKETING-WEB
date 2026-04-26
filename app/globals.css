@@ -76,7 +76,7 @@ html.lenis, html.lenis body { height: auto; }
   width: 100%;
   max-width: 1400px;
   margin-inline: auto;
-  padding-inline: 2rem; /* px-8 = 32px */
+  padding-inline: 1.5rem; /* px-6 = 24px for mobile */
 }
 @media (min-width: 768px)  { .container { padding-inline: 3.5rem; } } /* md:px-14 */
 @media (min-width: 1024px) { .container { padding-inline: 5rem;   } } /* lg:px-20 */

@@ -48,15 +48,11 @@ export default function Footer() {
               onClick={openProjectModal}
               className="group relative flex items-center gap-6 px-10 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.25em] uppercase transition-all duration-500 overflow-hidden"
             >
-               <span className="relative z-10 transition-colors duration-500 flex items-center">
+               <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
                  Book a Shoot <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500">→</span>
                </span>
                {/* Minimal hover fill */}
                <div className="absolute inset-0 bg-[#8B0016] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
-               <span className="absolute inset-0 z-0 group-hover:bg-[#8B0016] transition-colors duration-500" />
-               <span className="relative z-10 group-hover:text-white transition-colors duration-500 flex items-center">
-                 Book a Shoot <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500">→</span>
-               </span>
             </button>
           </div>
         </div>

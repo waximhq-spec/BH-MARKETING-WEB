@@ -9,6 +9,7 @@ import { ModalProvider } from "@/components/ModalContext";
 import ProjectModal from "@/components/ProjectModal";
 import BackToTop from "@/components/BackToTop";
 import SecurityLayer from "@/components/SecurityLayer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,6 +43,7 @@ export default function RootLayout({
           <ServiceWorkerUnregister />
           <Navbar />
           <SmoothScroll>
+            <ScrollToTop />
             <main className="flex-1">
               {children}
             </main>

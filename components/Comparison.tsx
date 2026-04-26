@@ -59,8 +59,9 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>
@@ -127,7 +128,7 @@ export default function Comparison() {
                 </div>
                 
                 {/* Cinmach Data Column */}
-                <div className="relative px-8 py-[26px] flex items-center bg-[#FAFAFA] border-x border-black/[0.08] transition-transform duration-300 ease-out group-hover:scale-[1.01] group-hover:bg-white group-hover:shadow-[0_0_15px_rgba(0,0,0,0.03)] z-10">
+                <div className="relative px-8 py-[26px] flex items-center bg-[#FAFAFA] border-x border-black/[0.08] transition-transform duration-300 ease-out group-hover:scale-[1.01] group-hover:bg-white z-10">
                   <span className="font-semibold text-[14px] tracking-tight">
                     <span className="text-[#B11226] mr-2">✓</span>
                     <span className="text-[#B11226]">{row.cinmachRed}</span>

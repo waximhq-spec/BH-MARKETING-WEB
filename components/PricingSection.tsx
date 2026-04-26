@@ -27,10 +27,10 @@ function FeatureItem({ label, details }: { label: string; details: string }) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
             <p className="pt-2 text-[10px] text-white/50 leading-relaxed max-w-[90%]">
@@ -116,8 +116,8 @@ export default function PricingSection() {
   return (
     <section data-theme="pricing" className="relative py-20 md:py-28 bg-[#050505] overflow-hidden border-t border-white/5">
       {/* Background Soft Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white opacity-[0.015] rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#B11226] opacity-[0.03] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white opacity-[0.01] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#B11226] opacity-[0.02] rounded-full pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-8 md:px-14 lg:px-20 xl:px-24 relative z-10 w-full overflow-hidden">
         {/* Header Text */}
@@ -148,10 +148,10 @@ export default function PricingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.1 * idx }}
-              className={`group flex flex-col h-full relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] ${
+              className={`group flex flex-col h-full relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 ${
                 pkg.isPopular 
-                  ? "bg-[#0A0A0A] border border-[#B11226]/40 hover:shadow-[0_20px_60px_rgba(177,18,38,0.15)] hover:border-[#B11226]/80" 
-                  : "bg-[#0A0A0A] border border-white/5 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(255,255,255,0.02)]"
+                  ? "bg-[#0A0A0A] border border-[#B11226]/40 hover:border-[#B11226]/80" 
+                  : "bg-[#0A0A0A] border border-white/5 hover:border-white/20"
               }`}
             >
               {/* Highlight / Glow Behind Card */}
@@ -167,7 +167,7 @@ export default function PricingSection() {
                 
                 {pkg.isPopular && (
                   <div className="absolute top-4 right-4 z-20">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#B11226]/20 border border-[#B11226]/50 text-[#B11226] text-[9px] font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(177,18,38,0.4)]">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#B11226]/20 border border-[#B11226]/50 text-[#B11226] text-[9px] font-bold tracking-widest uppercase">
                       Most Popular
                     </span>
                   </div>
@@ -213,7 +213,7 @@ export default function PricingSection() {
                   onClick={openProjectModal}
                   className={`mt-auto w-full py-3.5 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
                     pkg.isPopular
-                      ? "bg-gradient-to-r from-[#B11226] to-[#7a0b19] text-white hover:shadow-[0_0_20px_rgba(177,18,38,0.4)] hover:scale-[1.02]"
+                      ? "bg-gradient-to-r from-[#B11226] to-[#7a0b19] text-white hover:scale-[1.02]"
                       : "bg-white/5 text-white hover:bg-white hover:text-black hover:scale-[1.02]"
                   }`}
                 >

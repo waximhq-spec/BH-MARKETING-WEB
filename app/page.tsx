@@ -25,9 +25,9 @@ function Reveal({
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.85, delay: delay + 0.15, ease: [0.16, 1, 0.3, 1] }}
-      className={`will-change-transform ${className}`}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.6, delay: delay, ease: [0.16, 1, 0.3, 1] }}
+      className={`will-change-[transform,opacity] ${className}`}
     >
       {children}
     </motion.div>
@@ -90,6 +90,8 @@ function ServicesTable() {
             src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg"
             alt="Food & Hospitality Content"
             className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out"
+            loading="lazy"
+            decoding="async"
           />
           {/* Dark cinematic overlay */}
           <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700" />
@@ -194,10 +196,10 @@ function ServicesTable() {
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
                       <div className="px-2 md:pl-[84px] pb-8 flex flex-col md:flex-row gap-6 md:gap-12 w-full items-start">
@@ -381,11 +383,11 @@ export default function Page() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.9, delay: 0.8 }}
-                  className="flex flex-row sm:flex-row gap-3 lg:ml-auto"
+                  className="flex flex-row gap-3 lg:ml-auto"
                 >
                   <Link
                     href="/work"
-                    className="group px-7 py-[14px] bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.28em] uppercase transition-all duration-300 hover:bg-white hover:text-black flex items-center gap-2.5"
+                    className="group px-4 md:px-7 py-[14px] bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase transition-all duration-300 hover:bg-white hover:text-black flex items-center gap-2.5 whitespace-nowrap"
                   >
                     View Our Work
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -393,7 +395,7 @@ export default function Page() {
                   <button
                     onClick={openProjectModal}
                     type="button"
-                    className="group px-7 py-[14px] border border-white/25 text-white text-[9px] font-mono font-bold tracking-[0.28em] uppercase transition-all duration-300 hover:border-white/60 hover:bg-white/5 flex items-center gap-2.5"
+                    className="group px-4 md:px-7 py-[14px] border border-white/25 text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase transition-all duration-300 hover:border-white/60 hover:bg-white/5 flex items-center gap-2.5 whitespace-nowrap"
                   >
                     Book a Shoot
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -406,7 +408,7 @@ export default function Page() {
         </section>
 
         {/* ── RESTAURANT IMPACT SECTION ── */}
-        <section data-theme="dark" className="py-24 md:py-32 bg-black text-white relative">
+        <section data-theme="dark" className="py-32 md:py-32 bg-black text-white relative">
           <div className="container relative z-10">
             <Reveal>
               <div className="flex items-center gap-4 mb-8">
@@ -415,49 +417,72 @@ export default function Page() {
                   For Restaurants &amp; Cafes
                 </p>
               </div>
+              
+              {/* Desktop Headline */}
               <h2
-                className="text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16"
+                className="hidden md:block text-white font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16"
                 style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
               >
                 CONTENT THAT MAKES<br />
                 <span className="text-white/30">THEM CHOOSE YOU.</span>
               </h2>
+
+              {/* Mobile Headline — Simplified */}
+              <h2
+                className="block md:hidden text-white font-black leading-[1.1] tracking-tighter mb-10"
+                style={{ fontSize: "clamp(2.4rem, 8vw, 3rem)", letterSpacing: "-0.04em" }}
+              >
+                Content that makes them choose you.
+              </h2>
             </Reveal>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
               <Reveal delay={0.1}>
-                <h3 className="font-bold text-xl md:text-2xl mb-4 leading-tight">Built for modern restaurants that want to stand out on Instagram and beyond.</h3>
-                <p className="text-white/60 leading-relaxed font-light mb-8">
+                {/* Subtext — Condensed for mobile */}
+                <h3 className="hidden md:block font-bold text-xl md:text-2xl mb-4 leading-tight">
+                  Built for modern restaurants that want to stand out on Instagram and beyond.
+                </h3>
+                <p className="hidden md:block text-white/60 leading-relaxed font-light mb-8">
                   We know the hospitality industry. It&apos;s not just about a pretty plate — it&apos;s about atmosphere, energy, and capturing cravings. We transform average social feeds into high-converting revenue drivers built to pack your dining room.
                 </p>
-                <div className="flex gap-4 items-center border-l-2 border-[#8B0016] pl-6 py-2">
+
+                {/* Mobile Subtext */}
+                <p className="block md:hidden text-white/80 text-lg leading-relaxed font-medium mb-12">
+                  We create high-converting content for restaurants &amp; cafés — built to drive attention and bookings.
+                </p>
+
+                {/* Hide Before/After on mobile */}
+                <div className="hidden md:flex gap-4 items-center border-l-2 border-[#8B0016] pl-6 py-2">
                   <div className="text-white/40 uppercase tracking-widest text-[10px] font-mono">Before</div>
                   <div className="h-px w-4 bg-white/10" />
                   <div className="text-[#8B0016] uppercase tracking-widest text-[10px] font-mono font-bold">The Transformation</div>
                   <div className="h-px flex-1 bg-white/10 hidden sm:block" />
                   <div className="text-white uppercase tracking-widest text-[10px] font-mono font-bold ml-auto sm:ml-0">After</div>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-sm md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
+                <div className="hidden md:flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-sm md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
                   <span>Generic Static Shots</span>
                   <span className="text-white/20 hidden sm:block">→</span>
                   <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
                 </div>
               </Reveal>
 
-              <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-8 md:p-10">
+              <Reveal delay={0.2} className="bg-white/5 border border-white/10 p-6 md:p-10">
                 <h4 className="font-mono text-[#8B0016] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
                 <ul className="flex flex-col gap-6">
                   {[
-                    { step: "01", text: "Shoot", desc: "Cinematic, appetizing visuals" },
-                    { step: "02", text: "Edit", desc: "Fast-paced, retention-focused cuts" },
-                    { step: "03", text: "Deliver", desc: "Native social formats perfectly sized" },
-                    { step: "04", text: "Growth", desc: "Increased footfall and bookings" },
+                    { step: "01", text: "Shoot", desc: "Cinematic", fullDesc: "Cinematic, appetizing visuals" },
+                    { step: "02", text: "Edit", desc: "Retention", fullDesc: "Fast-paced, retention-focused cuts" },
+                    { step: "03", text: "Deliver", desc: "Social-ready", fullDesc: "Native social formats perfectly sized" },
+                    { step: "04", text: "Growth", desc: "More bookings", fullDesc: "Increased footfall and bookings" },
                   ].map((s, i) => (
                     <li key={i} className="flex items-center gap-6 group">
                       <span className="font-mono text-[#8B0016] opacity-50 group-hover:opacity-100 transition-opacity text-xs">{s.step}</span>
                       <div>
                         <span className="block font-black text-white uppercase tracking-wide text-lg">{s.text}</span>
-                        <span className="block text-white/40 text-sm mt-0.5">{s.desc}</span>
+                        {/* Desktop Description */}
+                        <span className="hidden md:block text-white/40 text-sm mt-0.5">{s.fullDesc}</span>
+                        {/* Mobile Description */}
+                        <span className="block md:hidden text-[#8B0016] text-[10px] font-mono uppercase tracking-widest mt-0.5 font-bold">{s.desc}</span>
                       </div>
                     </li>
                   ))}
@@ -466,11 +491,11 @@ export default function Page() {
             </div>
 
             <Reveal delay={0.3} className="border-t border-white/10 pt-10">
-              <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-8">
                 <p className="text-white/60 font-medium text-center md:text-left">Ready to pack your restaurant?</p>
                 <Link
                   href="/work"
-                  className="group flex justify-center items-center gap-4 px-10 py-4 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 w-full sm:w-auto"
+                  className="group flex justify-center items-center gap-4 px-10 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.15em] md:tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 w-full sm:w-auto"
                 >
                   Let&apos;s Grow Your Restaurant <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
                 </Link>
@@ -747,7 +772,8 @@ export default function Page() {
             <motion.div
               className="flex gap-16 md:gap-32 items-center whitespace-nowrap px-8"
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+              transition={{ ease: "linear", duration: 40, repeat: Infinity }}
+              style={{ willChange: "transform" }}
             >
               {/* Duplicate the array to create identical infinite scroll */}
               {[...Array(2)].map((_, i) => (

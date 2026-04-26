@@ -82,12 +82,10 @@ export default function Navbar() {
   // Logic for Red theme (Hero): 
   // - Unscrolled: Transparent with a thin white line
   // - Scrolled: Frosted glass (blur + slight bg)
-  const redBg = scrolled ? "rgba(0, 0, 0, 0.4)" : "transparent";
-  const redBlur = scrolled ? "blur(20px)" : "none";
+  const redBg = scrolled ? "rgba(0, 0, 0, 0.6)" : "transparent";
   const redBorder = scrolled ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.15)";
 
   const bgColor = isPricing ? "rgba(10,10,10,0.98)" : isRed ? redBg : isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
-  const backdropBlur = isPricing ? "blur(12px)" : isRed ? redBlur : scrolled ? "blur(12px)" : "none";
   const borderColor = isPricing ? "rgba(177, 18, 38, 0.4)" : isRed ? redBorder : isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.08)";
   const burgerColor = isPricing ? "#B11226" : isLight ? "#000000" : "#FAFAFA";
 
@@ -100,9 +98,7 @@ export default function Navbar() {
         style={{
           borderBottom: isRed || scrolled ? `1px solid ${borderColor}` : "1px solid transparent",
           background: isRed || scrolled ? bgColor : "transparent",
-          backdropFilter: backdropBlur,
-          WebkitBackdropFilter: backdropBlur,
-          boxShadow: shadow,
+          willChange: "transform, background",
         }}
       >
         <div className="w-full h-16 flex items-center justify-between px-8 md:px-14 lg:px-20 xl:px-24">

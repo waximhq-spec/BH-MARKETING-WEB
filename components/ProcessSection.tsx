@@ -110,8 +110,8 @@ export default function ProcessSection() {
             <StepNumberDisplay progress={scrollYProgress} />
             <div className="w-24 h-[1px] bg-white/5 relative overflow-hidden">
               <motion.div
-                className="absolute inset-0 bg-[#8B0016] origin-left shadow-[0_0_10px_rgba(139,0,22,0.8)]"
-                style={{ scaleX: scrollYProgress }}
+                className="absolute inset-0 bg-[#8B0016] origin-left"
+                style={{ scaleX: scrollYProgress, willChange: "transform" }}
               />
             </div>
             <span className="text-white/20 font-mono text-[10px] tracking-[0.2em]">
@@ -126,14 +126,14 @@ export default function ProcessSection() {
             {STEPS.map((step, index) => (
               <motion.div
                 key={step.num}
-                initial={{ opacity: 0.2, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ margin: "-20% 0px -20% 0px", once: false }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col justify-center px-8 md:px-14 lg:px-20 xl:px-24 group relative"
+                viewport={{ margin: "-10% 0px", once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col justify-center px-8 md:px-14 lg:px-20 xl:px-24 group relative will-change-[transform,opacity]"
               >
                 {/* Active Glow Effect */}
-                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-32 h-32 bg-[#8B0016]/5 blur-[80px] rounded-full pointer-events-none mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-32 h-32 bg-[#8B0016]/10 rounded-full pointer-events-none mix-blend-screen opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
                 <div className="flex flex-col max-w-[550px] relative z-10">
                   <span className="text-[#8B0016] font-mono text-[11px] tracking-[0.3em] font-bold mb-6 transition-transform duration-500 group-hover:-translate-y-1">
@@ -194,14 +194,14 @@ export default function ProcessSection() {
               <motion.div 
                 initial="initial"
                 whileInView="active"
-                viewport={{ once: false, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.3 }}
                 className="group relative pl-8 py-10 -ml-[1px] border-b border-white/[0.03] last:border-0 rounded-r-3xl"
               >
                 {/* Hover/Scroll Indicator Line */}
                 <motion.div 
                   variants={{
                     initial: { scaleY: 0 },
-                    active: { scaleY: 1, boxShadow: "0 0 20px #8B0016" }
+                    active: { scaleY: 1 }
                   }}
                   className="absolute top-0 bottom-0 left-0 w-[2px] bg-[#8B0016] origin-top transition-all duration-500 ease-out z-10" 
                 />

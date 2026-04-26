@@ -8,7 +8,6 @@ import { useModal } from "@/components/ModalContext";
 
 const NAV_LINKS = [
   { label: "Services", href: "/services" },
-  { label: "Our Work", href: "/work" },
   { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/estimate" },

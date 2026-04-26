@@ -126,10 +126,10 @@ function ServicesTable() {
               </div>
 
               <Link
-                href="/work"
+                href="/services"
                 className="group/cta shrink-0 flex items-center gap-3 px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.25em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 self-start md:self-auto"
               >
-                View Work
+                Our Services
                 <span className="transition-transform duration-500 group-hover/cta:translate-x-1.5">→</span>
               </Link>
             </div>
@@ -216,12 +216,6 @@ function ServicesTable() {
                           ))}
                         </div>
                         <div className="shrink-0 pt-4 md:pt-0">
-                          <Link
-                            href="/work"
-                            className="inline-flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] font-bold text-black hover:text-[#8B0016] uppercase transition-colors"
-                          >
-                            Explore Our Work <span>→</span>
-                          </Link>
                         </div>
                       </div>
                     </motion.div>
@@ -386,10 +380,10 @@ export default function Page() {
                   className="flex flex-row gap-3 lg:ml-auto"
                 >
                   <Link
-                    href="/work"
+                    href="/services"
                     className="group px-4 md:px-7 py-[14px] bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.28em] uppercase transition-all duration-300 hover:bg-white hover:text-black flex items-center gap-2.5 whitespace-nowrap"
                   >
-                    View Our Work
+                    View All Services
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </Link>
                   <button
@@ -478,12 +472,12 @@ export default function Page() {
             <Reveal delay={0.3} className="border-t border-white/10 pt-10">
               <div className="flex flex-col md:flex-row justify-between items-center gap-8">
                 <p className="text-white/60 font-medium text-center md:text-left">Ready to pack your restaurant?</p>
-                <Link
-                  href="/work"
+                <button
+                  onClick={openProjectModal}
                   className="group flex justify-center items-center gap-4 px-10 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.15em] md:tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 w-full sm:w-auto"
                 >
                   Let&apos;s Grow Your Restaurant <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
-                </Link>
+                </button>
               </div>
             </Reveal>
           </div>
@@ -549,15 +543,6 @@ export default function Page() {
                   </h2>
                 </div>
                 <div className="mt-8 md:mt-0 hidden md:block">
-                  <Link
-                    href="/work"
-                    className="group flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-black/10 relative overflow-hidden transition-all duration-700 hover:border-[#8B0016] shrink-0"
-                  >
-                    <div className="absolute inset-0 bg-[#8B0016] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[0.16,1,0.3,1] rounded-full" />
-                    <span className="relative z-10 text-black group-hover:text-white font-mono text-[9px] tracking-[0.3em] uppercase transition-colors duration-500 text-center">
-                      Explore<br />Archive
-                    </span>
-                  </Link>
                 </div>
               </div>
             </Reveal>
@@ -639,46 +624,6 @@ export default function Page() {
 
             </div>
 
-            {/* Tier 2: Image Showcase (Small Square Highlights) */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 border-t border-black/5 pt-12">
-              {[
-                { label: "04", title: "Harbour Row", cat: "Hospitality", driveId: "1LGbCekMBgMNNIyabVbFiTkVO6-brJgAe", bg: "bg-neutral-100" },
-                { label: "05", title: "Ebrahim Identity", cat: "Brand", driveId: "1TZB5T-PnWl2-cePCrcC4tdsJAz2PSI3w", bg: "bg-neutral-200" },
-                { label: "06", title: "Corporate Assets", cat: "Corporate", driveId: "1-b48lZJ5UFnpe6QG639kJAiB0O6yqGBI", bg: "bg-neutral-100" },
-                { label: "07", title: "Brand Vision", cat: "Identity", driveId: "1Ex9QPsfx6VsIX8GhiDqmSNStOrg76OHp", bg: "bg-neutral-200" },
-              ].map((project, idx) => (
-                <Reveal key={project.label} delay={0.2 + (idx * 0.05)}>
-                  <motion.div
-                    className={`group relative aspect-square overflow-hidden rounded-[8px] ${project.bg} cursor-pointer shadow-sm`}
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <img
-                      src={`https://drive.google.com/thumbnail?sz=w1000&id=${project.driveId}`}
-                      alt={project.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.12]"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-                    <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
-                      <p className="text-[#8B0016] font-mono text-[8px] tracking-[0.3em] uppercase mb-2">{project.cat}</p>
-                      <h4 className="text-white font-black text-xs md:text-sm tracking-tight leading-snug">{project.title}</h4>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-
-            {/* Mobile-focused CTA below grid */}
-            <Reveal delay={0.4} className="mt-12 flex justify-center">
-              <Link
-                href="/work"
-                className="w-full md:w-auto px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-xl flex items-center justify-center gap-4"
-              >
-                View All Projects <span>→</span>
-              </Link>
-            </Reveal>
           </div>
         </section>
 

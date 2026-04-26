@@ -157,12 +157,6 @@ export default function ServicesPage() {
                 Initiate Project{" "}
                 <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
               </Link>
-              <Link
-                href="/work"
-                className="flex justify-center px-12 py-5 border border-black/10 text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-[#8B0016] hover:text-[#8B0016] hover:bg-[#8B0016]/5 transition-all duration-500"
-              >
-                Explore Archive
-              </Link>
             </div>
           </Reveal>
         </div>
@@ -246,12 +240,6 @@ export default function ServicesPage() {
               >
                 Initiate Project{" "}
                 <span className="ml-4 transition-transform duration-500 group-hover:translate-x-2">→</span>
-              </Link>
-              <Link
-                href="/work"
-                className="flex justify-center items-center w-full sm:w-auto px-12 py-5 border border-white/20 text-white text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:border-[#8B0016] hover:text-[#8B0016] hover:bg-[#8B0016]/5 transition-all duration-500"
-              >
-                View Archive
               </Link>
             </div>
           </Reveal>

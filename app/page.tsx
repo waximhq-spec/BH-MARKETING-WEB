@@ -219,7 +219,8 @@ export default function LandingPage() {
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <section data-theme="dark" className="relative h-screen min-h-[700px] w-full overflow-hidden flex flex-col">
           <SmartVideo 
-            src="https://www.pexels.com/download/video/33033789/" 
+            src="/bg-rest.mp4" 
+            autoPlay={true}
             autoPlayViewport={true}
             className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2]"
           />

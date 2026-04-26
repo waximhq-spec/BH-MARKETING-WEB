@@ -110,7 +110,7 @@ export default function Navbar() {
           </div>
         )}
 
-        <div className="w-full h-16 flex items-center justify-between px-8 md:px-14 lg:px-20 xl:px-24 relative z-10">
+        <div className="container h-16 flex items-center justify-between relative z-10">
           <Link href="/" className="block transition-all duration-500 hover:opacity-70">
             <img 
               src="/HERO-LOGO.svg" 

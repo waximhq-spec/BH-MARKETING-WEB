@@ -252,7 +252,7 @@ export default function Page() {
             animate={{ scaleY: 1, opacity: 1 }}
             transition={{ delay: 1.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           />
-          <div className="relative z-[4] flex flex-col h-full px-8 md:px-14 lg:px-24">
+          <div className="container relative z-[4] flex flex-col h-full">
             <div className="flex items-center justify-between pt-24 lg:pt-28 shrink-0">
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[9px]">[ Cinmach Productions · Manama ]</motion.p>
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.3 }} className="hidden md:flex items-center gap-2">

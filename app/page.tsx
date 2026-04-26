@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import ProcessSection from "@/components/ProcessSection";
@@ -283,13 +283,17 @@ export default function LandingPage() {
                 <div className="flex flex-row justify-between lg:justify-start lg:flex-1 gap-4 md:gap-16">
                   <Reveal delay={0.5}>
                     <div className="flex flex-col">
-                      <span className="text-white font-black text-2xl md:text-4xl tracking-tighter">40+</span>
+                      <span className="text-white font-black text-2xl md:text-4xl tracking-tighter">
+                        <CountUp end={40} suffix="+" />
+                      </span>
                       <span className="text-white/30 font-mono text-[7px] md:text-[8px] uppercase tracking-widest mt-1">Restaurants</span>
                     </div>
                   </Reveal>
                   <Reveal delay={0.6}>
                     <div className="flex flex-col">
-                      <span className="text-white font-black text-2xl md:text-4xl tracking-tighter">3x</span>
+                      <span className="text-white font-black text-2xl md:text-4xl tracking-tighter">
+                        <CountUp end={3} suffix="x" />
+                      </span>
                       <span className="text-white/30 font-mono text-[7px] md:text-[8px] uppercase tracking-widest mt-1">Engagement</span>
                     </div>
                   </Reveal>
@@ -517,6 +521,43 @@ export default function LandingPage() {
       </main>
     </div>
   );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Count-up Animation
+   ─────────────────────────────────────────────────────────── */
+function CountUp({ end, duration = 1.5, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let startTime: number;
+          const animate = (currentTime: number) => {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
+            // Ease out cubic
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(easeProgress * end));
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (nodeRef.current) observer.observe(nodeRef.current);
+    return () => observer.disconnect();
+  }, [end, duration, hasAnimated]);
+
+  return <span ref={nodeRef}>{count}{suffix}</span>;
 }
 
 const TESTIMONIALS = [

@@ -144,22 +144,65 @@ export default function ProcessSection() {
         </div>
       </div>
 
-      {/* MOBILE (Hybrid List) */}
+      {/* MOBILE (Architectural Timeline) */}
       <div className="lg:hidden flex flex-col bg-black">
-        <div className="px-8 py-24 border-b border-white/5">
-          <motion.p className="text-[#B11226] font-black tracking-tighter uppercase text-xl mb-6">Our Process</motion.p>
-          <h2 className="text-white font-black" style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-            WE DESIGN PERCEPTION.<br /><span className="text-white/25">STEP BY STEP.</span>
+        <div className="px-8 py-24 border-b border-white/5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#B11226]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <motion.p 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-[#B11226] font-mono text-[10px] uppercase tracking-[0.4em] mb-6 font-bold"
+          >
+            Our Process
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-white font-black relative z-10" 
+            style={{ fontSize: "clamp(2.5rem, 10vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+          >
+            WE DESIGN<br />
+            PERCEPTION.<br />
+            <span className="text-white/20">STEP BY STEP.</span>
           </h2>
         </div>
-        <div className="bg-white px-8 py-24 flex flex-col gap-16">
-          {STEPS.map((step, i) => (
-            <motion.div key={i} className="flex flex-col gap-4">
-              <span className="text-[#B11226] font-mono text-xs font-bold tracking-widest">{step.num}</span>
-              <h3 className="text-black font-black text-3xl tracking-tighter leading-none">{step.title.toUpperCase()}</h3>
-              <p className="text-black/40 text-base font-light leading-relaxed">{step.desc}</p>
-            </motion.div>
-          ))}
+
+        <div className="bg-white px-6 py-24 relative">
+          {/* Vertical Architectural Line */}
+          <div className="absolute left-10 top-0 bottom-0 w-px bg-black/5" />
+          
+          <div className="flex flex-col gap-24 relative z-10">
+            {STEPS.map((step, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col gap-6 pl-12 relative"
+              >
+                {/* Node Point */}
+                <div className="absolute left-[-11px] top-2 w-[5px] h-[5px] rounded-full bg-[#B11226]" />
+                
+                <div className="flex flex-col gap-2">
+                  <span className="text-[#B11226] font-mono text-[10px] font-bold tracking-[0.3em]">
+                    PHASE {step.num}
+                  </span>
+                  <h3 className="text-black font-black text-3xl tracking-tighter leading-none uppercase">
+                    {step.title}
+                  </h3>
+                </div>
+                
+                <p className="text-black/50 text-[15px] font-light leading-relaxed max-w-sm">
+                  {step.desc}
+                </p>
+
+                <div className="w-12 h-px bg-black/10 mt-2" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

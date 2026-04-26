@@ -58,14 +58,13 @@ export default function ProcessSection() {
       {/* DESKTOP (Split Sticky Scroll) */}
       <div className="hidden lg:flex flex-col lg:flex-row w-full items-start relative z-10">
         
-        {/* Left Column: Sticky Dark Header (Top Aligned) */}
+        {/* Left Column: Sticky Dark Header */}
         <div className="lg:w-[41.666667%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between px-8 md:px-14 lg:px-20 xl:px-24 py-20 lg:pt-32 lg:pb-24 z-10 bg-black">
           <motion.div style={{ y: leftParallaxY }} className="max-w-md mt-0 flex flex-col relative">
             <motion.p 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1 }}
               className="text-[#B11226] font-black tracking-tighter uppercase text-xl md:text-2xl mb-6 lg:mb-10"
             >
               Our Process
@@ -75,7 +74,6 @@ export default function ProcessSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-white font-black leading-[0.9] tracking-tighter mb-8 lg:mb-12"
               style={{ fontSize: "clamp(2rem, 4.5vw, 4.5rem)", letterSpacing: "-0.04em" }}
             >
@@ -89,7 +87,6 @@ export default function ProcessSection() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 }}
               className="text-white/40 text-[12px] lg:text-[14px] font-medium tracking-wide max-w-[280px]"
               style={{ lineHeight: 1.6 }}
             >
@@ -97,7 +94,7 @@ export default function ProcessSection() {
             </motion.p>
           </motion.div>
 
-          {/* Progress Indicator (Bottom) */}
+          {/* Progress Indicator */}
           <div className="hidden lg:flex items-center gap-6 mt-16 lg:mt-auto relative z-20">
             <StepNumberDisplay progress={scrollYProgress} />
             <div className="w-24 h-[1px] bg-white/10 relative overflow-hidden">
@@ -112,7 +109,7 @@ export default function ProcessSection() {
           </div>
         </div>
 
-        {/* Right Column: White Background Steps (Top Aligned) */}
+        {/* Right Column: White Background Steps */}
         <div className="lg:w-[58.333333%] relative bg-white">
           <div className="flex flex-col">
             {STEPS.map((step, index) => (
@@ -121,7 +118,6 @@ export default function ProcessSection() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ margin: "-10% 0px", once: true }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="flex flex-col max-w-[550px] relative z-10"
                 >
                   <span className="text-[#B11226] font-mono text-[11px] tracking-[0.3em] font-bold mb-6">
@@ -144,65 +140,65 @@ export default function ProcessSection() {
         </div>
       </div>
 
-      {/* MOBILE (Architectural Timeline) */}
-      <div className="lg:hidden flex flex-col bg-black">
-        <div className="px-8 py-24 border-b border-white/5 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#B11226]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      {/* MOBILE (PRO UI/UX - Version 2.1) */}
+      <div className="lg:hidden flex flex-col bg-white">
+        <div className="bg-black px-6 py-24 flex flex-col items-center text-center relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(177,18,38,0.1)_0%,transparent_70%)] pointer-events-none" />
           <motion.p 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-[#B11226] font-mono text-[10px] uppercase tracking-[0.4em] mb-6 font-bold"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-[#B11226] font-mono text-[10px] uppercase tracking-[0.5em] mb-6 font-black"
           >
-            Our Process
+            Our Methodology
           </motion.p>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-white font-black relative z-10" 
-            style={{ fontSize: "clamp(2.5rem, 10vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+            className="text-white font-black leading-none tracking-tighter text-5xl mb-4"
           >
-            WE DESIGN<br />
-            PERCEPTION.<br />
-            <span className="text-white/20">STEP BY STEP.</span>
-          </h2>
+            WE DESIGN<br />PERCEPTION.
+          </motion.h2>
+          <p className="text-white/40 text-[10px] font-mono uppercase tracking-[0.3em]">
+            Step by Step.
+          </p>
         </div>
 
-        <div className="bg-white px-6 py-24 relative">
-          {/* Vertical Architectural Line */}
-          <div className="absolute left-10 top-0 bottom-0 w-px bg-black/5" />
-          
-          <div className="flex flex-col gap-24 relative z-10">
-            {STEPS.map((step, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col gap-6 pl-12 relative"
-              >
-                {/* Node Point */}
-                <div className="absolute left-[-11px] top-2 w-[5px] h-[5px] rounded-full bg-[#B11226]" />
-                
-                <div className="flex flex-col gap-2">
-                  <span className="text-[#B11226] font-mono text-[10px] font-bold tracking-[0.3em]">
-                    PHASE {step.num}
-                  </span>
-                  <h3 className="text-black font-black text-3xl tracking-tighter leading-none uppercase">
-                    {step.title}
-                  </h3>
-                </div>
-                
-                <p className="text-black/50 text-[15px] font-light leading-relaxed max-w-sm">
-                  {step.desc}
-                </p>
+        <div className="px-6 py-20 flex flex-col gap-8 bg-[#FAFAFA]">
+          {STEPS.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="bg-white border border-black/5 p-8 rounded-sm shadow-[0_10px_30px_rgba(0,0,0,0.02)] flex flex-col gap-6 relative group"
+            >
+              <div className="absolute top-[-20px] right-[-10px] text-[100px] font-black text-black/[0.03] leading-none select-none pointer-events-none group-hover:text-[#B11226]/[0.05] transition-colors duration-500">
+                {step.num}
+              </div>
 
-                <div className="w-12 h-px bg-black/10 mt-2" />
-              </motion.div>
-            ))}
-          </div>
+              <div className="flex flex-col gap-2 relative z-10">
+                <span className="text-[#B11226] font-mono text-[10px] font-bold tracking-[0.3em]">
+                  PHASE {step.num}
+                </span>
+                <h3 className="text-black font-black text-2xl tracking-tighter leading-tight uppercase">
+                  {step.title}
+                </h3>
+              </div>
+
+              <p className="text-black/50 text-[14px] font-light leading-relaxed relative z-10">
+                {step.desc}
+              </p>
+
+              <div className="w-full h-px bg-black/[0.05] mt-2" />
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="py-12 flex justify-center items-center gap-4 bg-white">
+          <div className="h-px w-8 bg-black/10" />
+          <p className="text-black/20 font-mono text-[9px] uppercase tracking-[0.4em]">Cinmach Productions</p>
+          <div className="h-px w-8 bg-black/10" />
         </div>
       </div>
     </section>

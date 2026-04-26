@@ -571,7 +571,7 @@ export default function Page() {
                   {/* Automotive Showcase Vertical Reel */}
                   <div className="group relative aspect-[9/16] bg-neutral-100 rounded-[8px] overflow-hidden cursor-pointer border border-black/5 shadow-sm">
                     <SmartVideo
-                      src="https://www.pexels.com/download/video/31588827/"
+                      src="https://www.pexels.com/download/video/3298720/"
                       autoPlayViewport={true}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
@@ -581,8 +581,8 @@ export default function Page() {
                         <span className="text-white/50 font-mono text-[10px] tracking-[0.3em] border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm">01</span>
                       </div>
                       <div>
-                        <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase mb-3 drop-shadow-md">Automotive</p>
-                        <h4 className="text-white font-black text-2xl lg:text-3xl tracking-tight leading-tight">Speed &<br />Motion</h4>
+                        <p className="text-[#8B0016] font-mono text-[9px] tracking-[0.4em] uppercase mb-3 drop-shadow-md font-bold">Hospitality</p>
+                        <h4 className="text-white font-black text-2xl lg:text-4xl tracking-tight leading-tight">Culinary<br />Art</h4>
                       </div>
                     </div>
                     {/* Subtle Red Frame on Hover */}
@@ -593,7 +593,7 @@ export default function Page() {
                 <Reveal delay={0.2} className="hidden lg:block">
                   <div className="p-8 border border-black/5 bg-neutral-50 rounded-[8px]">
                     <p className="text-black/60 font-serif leading-relaxed text-lg italic">
-                      "A curated selection of our most visceral, high-impact projects. Built to define luxury and power."
+                      "A curated selection of our most high-impact hospitality content. Built to drive desire and bookings."
                     </p>
                   </div>
                 </Reveal>

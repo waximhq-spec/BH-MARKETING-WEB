@@ -374,7 +374,7 @@ export default function Page() {
         </section>
         
         {/* High-Impact Section Break */}
-        <div className="bg-white pt-40 pb-20">
+        <section data-theme="light" className="bg-white pt-40 pb-20">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-[2px] w-full bg-black mb-12" />
@@ -393,7 +393,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: PORTFOLIO

@@ -336,10 +336,10 @@ export default function Page() {
                 <h4 className="font-mono text-[#B11226] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
                 <ul className="flex flex-col gap-6">
                   {[
-                    { step: "01", text: "Shoot", desc: "Cinematic, appetizing visuals" },
-                    { step: "02", text: "Edit", desc: "Fast-paced, retention-focused cuts" },
-                    { step: "03", text: "Deliver", desc: "Native social formats perfectly sized" },
-                    { step: "04", text: "Growth", desc: "Increased footfall and bookings" },
+                    { step: "01", text: "Shoot", desc: "High-quality filming of your food and space" },
+                    { step: "02", text: "Edit", desc: "We turn the clips into exciting short videos" },
+                    { step: "03", text: "Deliver", desc: "Final videos sent, ready for social media" },
+                    { step: "04", text: "Growth", desc: "Reach more people and get more customers" },
                   ].map((s, i) => (
                     <li key={i} className="flex items-center gap-6 group">
                       <span className="font-mono text-[#B11226] opacity-50 group-hover:opacity-100 transition-opacity text-xs">{s.step}</span>

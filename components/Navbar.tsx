@@ -39,9 +39,10 @@ export default function Navbar() {
           const sections = document.querySelectorAll("[data-theme]");
           let activeTheme: "dark" | "light" | "red" | "pricing" | "split" | null = null;
           
+          const offset = 64; // Navbar height (h-16)
           sections.forEach((section) => {
             const rect = section.getBoundingClientRect();
-            if (rect.top <= 0 && rect.bottom >= 0) {
+            if (rect.top <= offset && rect.bottom >= offset) {
               activeTheme = section.getAttribute("data-theme") as any;
             }
           });

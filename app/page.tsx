@@ -68,7 +68,6 @@ function ServicesTable() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
 
-  const featured = SERVICES_DATA[0];
   const secondary = SERVICES_DATA.slice(1);
 
   return (
@@ -77,23 +76,23 @@ function ServicesTable() {
       {/* ── Featured Service: Food & Hospitality ── */}
       <Reveal>
         <div
-          className="group relative overflow-hidden rounded-[4px] mb-3"
+          className="group relative overflow-hidden rounded-[4px] mb-3 transform-gpu will-change-transform"
           onMouseEnter={() => setHoveredIndex(0)}
           onMouseLeave={() => setHoveredIndex(null)}
           style={{ minHeight: "320px" }}
         >
-          {/* Cinematic food background video */}
+          {/* Cinematic food background image */}
           <img
             src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg"
             alt="Food & Hospitality Content"
-            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out"
+            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out will-change-transform transform-gpu"
             loading="lazy"
             decoding="async"
           />
           {/* Dark cinematic overlay */}
-          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700" />
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700 pointer-events-none" />
           {/* Subtle upward gradient for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
           <div className="relative z-10 flex flex-col h-full justify-between p-8 md:p-12 lg:p-14" style={{ minHeight: "320px" }}>
             {/* Top row */}
@@ -112,7 +111,7 @@ function ServicesTable() {
                   Cinematic content that makes people choose your restaurant before they even arrive.
                 </p>
               </div>
-              <button type="button" className="group/btn flex items-center gap-3 px-8 py-4 bg-white text-black font-mono text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#B11226] hover:text-white">
+              <button type="button" className="group/btn flex items-center gap-3 px-8 py-4 bg-white text-black font-mono text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#B11226] hover:text-white rounded-sm">
                 View Work <span className="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
               </button>
             </div>
@@ -130,12 +129,12 @@ function ServicesTable() {
           return (
             <Reveal key={svc.num} delay={i * 0.06}>
               <div
-                className={`group relative flex flex-col border-b border-white/10 transition-all duration-500
+                className={`group relative flex flex-col border-b border-white/10 transition-opacity duration-500 will-change-opacity
                   ${isDimmed ? "opacity-30" : "opacity-100"}`}
               >
                 {/* Left accent */}
                 <div
-                  className={`absolute left-0 top-0 bottom-0 w-[2px] bg-[#B11226] origin-bottom transition-transform duration-500 ease-out z-10
+                  className={`absolute left-0 top-0 bottom-0 w-[2px] bg-[#B11226] origin-bottom transition-transform duration-500 ease-out z-10 will-change-transform
                     ${isHovered || isOpen ? "scale-y-100" : "scale-y-0"}`}
                 />
 
@@ -179,11 +178,11 @@ function ServicesTable() {
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden will-change-[height,opacity]"
                     >
                       <div className="px-2 md:pl-[84px] pb-8 flex flex-col md:flex-row gap-6 md:gap-12 w-full items-start">
                         <div className="flex flex-col gap-3 flex-1">
@@ -507,9 +506,13 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
               <div className="lg:col-span-5">
                 <Reveal delay={0.1}>
-                  <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer hover-lift">
-                    <SmartVideo src="https://www.pexels.com/download/video/3298720/" autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                  <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer hover-lift transform-gpu will-change-transform">
+                    <SmartVideo 
+                      src="https://www.pexels.com/download/video/3298720/" 
+                      autoPlayViewport={true} 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 transform-gpu will-change-transform" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 pointer-events-none" />
                     <div className="absolute inset-0 p-10 flex flex-col justify-end">
                       <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">Hospitality</p>
                       <h4 className="text-white font-black text-4xl">Culinary Art</h4>
@@ -523,9 +526,13 @@ export default function LandingPage() {
                   { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/" },
                 ].map((video, idx) => (
                   <Reveal key={idx} delay={0.15 + (idx * 0.1)}>
-                    <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer hover-lift">
-                      <SmartVideo src={video.vid} autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer hover-lift transform-gpu will-change-transform">
+                      <SmartVideo 
+                        src={video.vid} 
+                        autoPlayViewport={true} 
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105 transform-gpu will-change-transform" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                       <div className="absolute inset-0 p-10 flex flex-col justify-end">
                         <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">{video.cat}</p>
                         <h4 className="text-white font-black text-4xl">{video.title}</h4>

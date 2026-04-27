@@ -255,28 +255,97 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="relative z-[4] flex flex-col h-full px-5 md:px-14 lg:px-24">
+          <div className="container relative z-[4] flex flex-col h-full">
             {/* Top Metadata */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between pt-20 md:pt-32 lg:pt-20 gap-2 shrink-0">
+            <div className="flex flex-col md:flex-row md:items-center justify-between pt-16 md:pt-24 lg:pt-16 gap-2 shrink-0">
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[7px] md:text-[9px]">[ Cinmach Productions · Manama ]</motion.p>
             </div>
             
-            <div className="flex-1 flex flex-col justify-center py-4">
-              <Reveal delay={0.2}>
-                <h1 className="text-white font-black leading-[0.88] tracking-tighter mb-4 lg:mb-6" style={{ fontSize: "clamp(1.8rem, 10vw, 6.8rem)", letterSpacing: "-0.04em" }}>
-                  Cinematic<br />
-                  content for<br />
-                  <span className="text-[#B11226] uppercase">RESTAURANTS<br />&amp; CAFÉS.</span>
-                </h1>
-              </Reveal>
-              <Reveal delay={0.4} className="max-w-xl">
-                <p className="text-white/60 text-[10px] md:text-[13px] leading-relaxed font-light pr-4 md:pr-0 mb-8 md:mb-10">
-                  We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings.
-                </p>
-              </Reveal>
+            <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center py-4">
+              {/* LEFT: CONTENT AREA */}
+              <div className="lg:col-span-7 flex flex-col justify-center">
+                <Reveal delay={0.2}>
+                  <h1 className="text-white font-black leading-[0.88] tracking-tighter mb-4 lg:mb-5" style={{ fontSize: "clamp(1.8rem, 8vw, 5.2rem)", letterSpacing: "-0.04em" }}>
+                    Cinematic<br />
+                    content for<br />
+                    <span className="text-[#B11226] uppercase">RESTAURANTS<br />&amp; CAFÉS.</span>
+                  </h1>
+                </Reveal>
+                <Reveal delay={0.4} className="max-w-xl">
+                  <p className="text-white/60 text-[10px] md:text-[13px] lg:text-base leading-relaxed font-light pr-4 md:pr-0 mb-6 md:mb-8 lg:max-w-md">
+                    We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings.
+                  </p>
+                </Reveal>
 
-              {/* Main Primary CTA Area (Repositioned for mobile hierarchy) */}
-              <div className="flex flex-col items-start gap-4">
+                {/* Secondary CTA (Desktop Only) */}
+                <div className="hidden lg:block">
+                  <Reveal delay={0.5}>
+                    <button 
+                      onClick={openProjectModal}
+                      className="group relative flex items-center justify-center gap-4 px-6 py-3 border border-white/20 text-white text-[9px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:bg-white hover:text-black"
+                    >
+                       <span>VIEW PROJECTS</span>
+                       <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </button>
+                  </Reveal>
+                </div>
+              </div>
+
+              {/* RIGHT: CONVERSION CARD (Desktop Only) */}
+              <div className="hidden lg:flex lg:col-span-5 flex-col items-center justify-center">
+                <motion.div 
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+                  className="w-full max-w-[380px]"
+                >
+                  <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                    className="relative w-full bg-black/40 backdrop-blur-[15px] border border-white/10 p-6 lg:p-8 shadow-[0_30px_100px_rgba(0,0,0,0.5)] group transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_40px_120px_rgba(0,0,0,0.7)] hover:border-white/20"
+                  >
+                    {/* Architectural Accent */}
+                    <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#B11226]/40 -translate-y-4 translate-x-4 transition-transform duration-700 group-hover:translate-x-0 group-hover:translate-y-0" />
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse shadow-[0_0_10px_#B11226]" />
+                        <span className="text-[#B11226] font-mono text-[8px] uppercase tracking-widest font-bold">Direct Booking</span>
+                      </div>
+                      
+                      <h3 className="text-white font-bold text-xl mb-1 tracking-tight uppercase">Start Your Shoot</h3>
+                      <p className="text-white/40 text-[9px] font-mono uppercase tracking-widest mb-6">Limited Slots Available</p>
+                      
+                      <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+                        <div className="relative group/input">
+                          <input type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-xs outline-none focus:border-[#B11226]/50 focus:bg-white/[0.08] transition-all duration-300 rounded-none placeholder:text-white/20" />
+                          <div className="absolute inset-0 bg-[#B11226]/5 opacity-0 group-focus-within/input:opacity-100 blur-xl transition-opacity pointer-events-none" />
+                        </div>
+                        
+                        <div className="relative group/input">
+                          <input type="text" placeholder="Business Name" className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-xs outline-none focus:border-[#B11226]/50 focus:bg-white/[0.08] transition-all duration-300 rounded-none placeholder:text-white/20" />
+                          <div className="absolute inset-0 bg-[#B11226]/5 opacity-0 group-focus-within/input:opacity-100 blur-xl transition-opacity pointer-events-none" />
+                        </div>
+                        
+                        <div className="relative group/input">
+                          <input type="text" placeholder="Phone / WhatsApp" className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-xs outline-none focus:border-[#B11226]/50 focus:bg-white/[0.08] transition-all duration-300 rounded-none placeholder:text-white/20" />
+                          <div className="absolute inset-0 bg-[#B11226]/5 opacity-0 group-focus-within/input:opacity-100 blur-xl transition-opacity pointer-events-none" />
+                        </div>
+                        
+                        <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#B11226] hover:text-white active:scale-95 active:bg-[#8B101F] transition-all duration-500 shadow-xl flex items-center justify-center gap-4 overflow-hidden relative">
+                          <span className="relative z-10">Get a Quote</span>
+                          <span className="relative z-10 transform group-hover/btn:translate-x-2 transition-transform duration-500 text-lg">→</span>
+                        </button>
+                      </form>
+                      
+                      <p className="text-white/20 text-[8px] text-center mt-4 font-mono tracking-widest uppercase">Response within 24 hours</p>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </div>
+
+              {/* Mobile CTA (Visible only on mobile) */}
+              <div className="lg:hidden flex flex-col items-start gap-4">
                 <Reveal delay={0.5}>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse" />
@@ -287,19 +356,21 @@ export default function LandingPage() {
                 <Reveal delay={0.6}>
                   <button 
                     onClick={openProjectModal}
-                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-transparent border border-white/20 text-white text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap hover:bg-white hover:text-black"
+                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-white text-black text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-[0_20px_50px_rgba(177,18,38,0.3)] hover:shadow-[0_20px_50px_rgba(177,18,38,0.5)]"
                   >
-                     <span className="relative z-10 flex items-center">
-                       BOOK YOUR SHOOT <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70">→</span>
+                     <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#B11226] z-20" />
+                     <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
+                       BOOK YOUR SHOOT <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70 group-hover:opacity-100">→</span>
                      </span>
+                     <div className="absolute inset-0 bg-[#B11226] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
                   </button>
                 </Reveal>
               </div>
             </div>
 
             {/* Bottom Metrics */}
-            <div className="pb-24 md:pb-16 lg:pb-20 shrink-0">
-              <div className="flex flex-row justify-between lg:justify-start lg:items-end gap-2 border-t border-white/5 pt-6">
+            <div className="pb-8 md:pb-12 lg:pb-10 shrink-0">
+              <div className="flex flex-row justify-between lg:justify-start lg:items-end gap-2 border-t border-white/5 pt-4">
                 <div className="flex flex-row justify-between w-full lg:w-auto lg:flex-1 gap-2 md:gap-16">
                   <Reveal delay={0.7}>
                     <div className="flex flex-col">
@@ -326,25 +397,6 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Sticky Mobile CTA Bar (Full-Width, Centered, Thumb-Friendly) */}
-          <div className="md:hidden fixed bottom-0 left-0 right-0 z-[60] pointer-events-none">
-            <motion.div
-              initial={{ y: 100 }}
-              animate={{ y: 0 }}
-              transition={{ delay: 2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="pointer-events-auto bg-[#B11226] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t border-white/10"
-              style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-            >
-              <button
-                onClick={openProjectModal}
-                className="w-full h-[70px] flex items-center justify-center gap-4 text-white font-mono font-black text-[11px] tracking-[0.35em] uppercase active:bg-[#8B101F] transition-colors"
-              >
-                <span>BOOK YOUR SHOOT NOW</span>
-                <span className="text-lg">→</span>
-              </button>
-            </motion.div>
           </div>
         </section>
 

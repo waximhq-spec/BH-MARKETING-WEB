@@ -76,7 +76,7 @@ function ServicesTable() {
       {/* ── Featured Service: Food & Hospitality ── */}
       <Reveal>
         <div
-          className="group relative overflow-hidden rounded-[4px] mb-3 transform-gpu will-change-transform"
+          className="group relative overflow-hidden rounded-[4px] mb-3"
           onMouseEnter={() => setHoveredIndex(0)}
           onMouseLeave={() => setHoveredIndex(null)}
           style={{ minHeight: "320px" }}
@@ -85,14 +85,14 @@ function ServicesTable() {
           <img
             src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg"
             alt="Food & Hospitality Content"
-            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out will-change-transform transform-gpu"
+            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out"
             loading="lazy"
             decoding="async"
           />
           {/* Dark cinematic overlay */}
-          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700" />
           {/* Subtle upward gradient for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
           <div className="relative z-10 flex flex-col h-full justify-between p-8 md:p-12 lg:p-14" style={{ minHeight: "320px" }}>
             {/* Top row */}
@@ -129,12 +129,12 @@ function ServicesTable() {
           return (
             <Reveal key={svc.num} delay={i * 0.06}>
               <div
-                className={`group relative flex flex-col border-b border-white/10 transition-opacity duration-500 will-change-opacity
+                className={`group relative flex flex-col border-b border-white/10 transition-all duration-500
                   ${isDimmed ? "opacity-30" : "opacity-100"}`}
               >
                 {/* Left accent */}
                 <div
-                  className={`absolute left-0 top-0 bottom-0 w-[2px] bg-[#B11226] origin-bottom transition-transform duration-500 ease-out z-10 will-change-transform
+                  className={`absolute left-0 top-0 bottom-0 w-[2px] bg-[#B11226] origin-bottom transition-transform duration-500 ease-out z-10
                     ${isHovered || isOpen ? "scale-y-100" : "scale-y-0"}`}
                 />
 
@@ -178,11 +178,11 @@ function ServicesTable() {
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden will-change-[height,opacity]"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
                     >
                       <div className="px-2 md:pl-[84px] pb-8 flex flex-col md:flex-row gap-6 md:gap-12 w-full items-start">
                         <div className="flex flex-col gap-3 flex-1">
@@ -503,47 +503,39 @@ export default function LandingPage() {
 
         <section data-theme="light" className="pb-24 md:pb-40 bg-white text-black overflow-hidden">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-              <div className="lg:col-span-5">
-                <Reveal delay={0.1}>
-                  <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer hover-lift transform-gpu will-change-transform">
-                    <SmartVideo 
-                      src="https://www.pexels.com/download/video/3298720/" 
-                      autoPlayViewport={true} 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 transform-gpu will-change-transform" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 pointer-events-none" />
-                    <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                      <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">Hospitality</p>
-                      <h4 className="text-white font-black text-4xl">Culinary Art</h4>
-                    </div>
-                  </div>
-                </Reveal>
-              </div>
-              <div className="lg:col-span-7 flex flex-col gap-8 md:gap-12">
-                {[
-                  { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/12188718/" },
-                  { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/" },
-                ].map((video, idx) => (
-                  <Reveal key={idx} delay={0.15 + (idx * 0.1)}>
-                    <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer hover-lift transform-gpu will-change-transform">
-                      <SmartVideo 
-                        src={video.vid} 
-                        autoPlayViewport={true} 
-                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105 transform-gpu will-change-transform" 
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                        <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">{video.cat}</p>
-                        <h4 className="text-white font-black text-4xl">{video.title}</h4>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+               <div className="lg:col-span-5">
+                 <Reveal delay={0.1}>
+                   <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer hover-lift">
+                     <SmartVideo src="https://www.pexels.com/download/video/3298720/" autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                     <div className="absolute inset-0 p-10 flex flex-col justify-end">
+                       <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">Hospitality</p>
+                       <h4 className="text-white font-black text-4xl">Culinary Art</h4>
+                     </div>
+                   </div>
+                 </Reveal>
+               </div>
+               <div className="lg:col-span-7 flex flex-col gap-8 md:gap-12">
+                 {[
+                   { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/12188718/" },
+                   { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/" },
+                 ].map((video, idx) => (
+                   <Reveal key={idx} delay={0.15 + (idx * 0.1)}>
+                     <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer hover-lift">
+                       <SmartVideo src={video.vid} autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105" />
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                       <div className="absolute inset-0 p-10 flex flex-col justify-end">
+                         <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">{video.cat}</p>
+                         <h4 className="text-white font-black text-4xl">{video.title}</h4>
+                       </div>
+                     </div>
+                   </Reveal>
+                 ))}
+               </div>
+             </div>
+           </div>
+         </section>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 5: PROCESS

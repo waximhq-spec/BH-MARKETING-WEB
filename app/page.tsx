@@ -333,7 +333,7 @@ export default function LandingPage() {
                         </div>
                         
                         <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#B11226] hover:text-white active:scale-95 active:bg-[#8B101F] transition-all duration-500 shadow-xl flex items-center justify-center gap-4 overflow-hidden relative">
-                          <span className="relative z-10">Get a Quote</span>
+                          <span className="relative z-10">Book Your Shoot</span>
                           <span className="relative z-10 transform group-hover/btn:translate-x-2 transition-transform duration-500 text-lg">→</span>
                         </button>
                       </form>

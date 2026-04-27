@@ -96,7 +96,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
+        className="fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ease-[0.16,1,0.3,1]"
         style={{
           borderBottom: isRed || scrolled || isSplit ? `1px solid ${borderColor}` : "1px solid transparent",
           background: isSplit ? "transparent" : (isRed || scrolled ? bgColor : "transparent"),
@@ -105,10 +105,15 @@ export default function Navbar() {
       >
         {/* SPLIT BACKGROUND FOR SPLIT THEME (Desktop Only) */}
         {isSplit && (
-          <div className="absolute inset-0 flex pointer-events-none overflow-hidden">
-            <div className="w-[41.666667%] bg-black h-full border-r border-white/10 border-b border-white/10" />
-            <div className="flex-1 bg-white h-full" />
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 flex pointer-events-none overflow-hidden transition-all duration-700 ease-[0.16,1,0.3,1]"
+          >
+            <div className="w-[41.666667%] bg-black h-full border-r border-white/10 border-b border-white/10 transition-all duration-700" />
+            <div className="flex-1 bg-white h-full transition-all duration-700" />
+          </motion.div>
         )}
 
         <div className="container h-16 flex items-center justify-between relative z-10">
@@ -127,24 +132,35 @@ export default function Navbar() {
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-10 lg:gap-12">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-14">
             <div className="flex items-center gap-8 lg:gap-10">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase transition-colors duration-500"
-                  style={{ color: pathname === link.href ? activeColor : (isSplit ? "#000000" : mutedColor) }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const [isHovered, setIsHovered] = useState(false);
+                const isActive = pathname === link.href;
+                
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    className="group relative py-2 text-[11px] font-black tracking-[0.15em] uppercase transition-all duration-300"
+                    style={{ 
+                      color: isHovered 
+                        ? "#B11226" 
+                        : (isSplit ? "#000000" : (scrolled ? (isLight ? "#000000" : "#FFFFFF") : mutedColor)) 
+                    }}
+                  >
+                    <span className="relative z-10">{link.label}</span>
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Desktop Navigation CTA */}
             <button
               onClick={openProjectModal}
-              className="group relative h-10 px-6 bg-[#B11226] text-white text-[9px] font-mono font-black tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 hover:shadow-[0_15px_35px_rgba(177,18,38,0.4)]"
+              className="group relative h-10 px-6 bg-[#B11226] text-white text-[9px] font-mono font-black tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 hover:shadow-[0_15px_35px_rgba(177,18,38,0.4)] rounded-sm"
             >
               <span className="relative z-10 group-hover:text-[#B11226] transition-colors duration-300 flex items-center gap-3">
                 GET A QUOTE <span className="text-xs">→</span>

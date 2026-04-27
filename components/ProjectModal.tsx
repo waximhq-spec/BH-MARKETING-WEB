@@ -252,7 +252,7 @@ export default function ProjectModal() {
               <div className="mt-6 flex flex-col gap-4">
                 <button 
                   type="submit" 
-                  className="w-full bg-[#B11226] text-white font-mono font-black text-[11px] tracking-[0.4em] uppercase h-[70px] hover:bg-[#8B101F] active:scale-[0.98] transition-all duration-300 shadow-[0_10px_30px_rgba(177,18,38,0.2)]"
+                  className="w-full bg-[#B11226] text-white font-mono font-black text-[11px] tracking-[0.4em] uppercase h-[70px] hover:bg-[#8B101F] active:scale-[0.98] transition-all duration-300 shadow-[0_10px_30px_rgba(177,18,38,0.2)] rounded-sm"
                 >
                   {isMobile ? "Send Request" : "Submit Brief"}
                 </button>

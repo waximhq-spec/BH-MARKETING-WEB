@@ -332,7 +332,7 @@ export default function LandingPage() {
                           <div className="absolute inset-0 bg-[#B11226]/5 opacity-0 group-focus-within/input:opacity-100 blur-xl transition-opacity pointer-events-none" />
                         </div>
                         
-                        <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#B11226] hover:text-white active:scale-95 active:bg-[#8B101F] transition-all duration-500 shadow-xl flex items-center justify-center gap-4 overflow-hidden relative">
+                        <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#B11226] hover:text-white active:scale-95 active:bg-[#8B101F] transition-all duration-500 shadow-xl flex items-center justify-center gap-4 overflow-hidden relative rounded-sm">
                           <span className="relative z-10">Book Your Shoot</span>
                           <span className="relative z-10 transform group-hover/btn:translate-x-2 transition-transform duration-500 text-lg">→</span>
                         </button>
@@ -356,7 +356,7 @@ export default function LandingPage() {
                 <Reveal delay={0.6}>
                   <button 
                     onClick={openProjectModal}
-                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-white text-black text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-[0_20px_50px_rgba(177,18,38,0.3)] hover:shadow-[0_20px_50px_rgba(177,18,38,0.5)]"
+                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-white text-black text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-[0_20px_50px_rgba(177,18,38,0.3)] hover:shadow-[0_20px_50px_rgba(177,18,38,0.5)] rounded-sm"
                   >
                      <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#B11226] z-20" />
                      <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">

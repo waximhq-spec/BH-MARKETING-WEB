@@ -256,13 +256,9 @@ export default function LandingPage() {
           </div>
 
           <div className="relative z-[4] flex flex-col h-full px-5 md:px-14 lg:px-24">
-            {/* Top Metadata - Pushed down to clear Navbar */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between pt-24 md:pt-32 lg:pt-20 gap-2 shrink-0">
+            {/* Top Metadata */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between pt-20 md:pt-32 lg:pt-20 gap-2 shrink-0">
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[7px] md:text-[9px]">[ Cinmach Productions · Manama ]</motion.p>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse" />
-                <span className="text-white/40 font-mono text-[7px] md:text-[9px] uppercase tracking-widest">Now Booking — Limited Slots</span>
-              </div>
             </div>
             
             <div className="flex-1 flex flex-col justify-center py-4">
@@ -274,16 +270,38 @@ export default function LandingPage() {
                 </h1>
               </Reveal>
               <Reveal delay={0.4} className="max-w-xl">
-                <p className="text-white/60 text-[10px] md:text-[13px] leading-relaxed font-light pr-4 md:pr-0">
+                <p className="text-white/60 text-[10px] md:text-[13px] leading-relaxed font-light pr-4 md:pr-0 mb-8 md:mb-10">
                   We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings.
                 </p>
               </Reveal>
+
+              {/* Main Primary CTA Area (Repositioned for mobile hierarchy) */}
+              <div className="flex flex-col items-start gap-4">
+                <Reveal delay={0.5}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse" />
+                    <span className="text-[#B11226] font-mono text-[8px] md:text-[9px] uppercase tracking-widest font-bold">Now Booking — Limited Slots</span>
+                  </div>
+                </Reveal>
+                
+                <Reveal delay={0.6}>
+                  <button 
+                    onClick={openProjectModal}
+                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-transparent border border-white/20 text-white text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap hover:bg-white hover:text-black"
+                  >
+                     <span className="relative z-10 flex items-center">
+                       BOOK YOUR SHOOT <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70">→</span>
+                     </span>
+                  </button>
+                </Reveal>
+              </div>
             </div>
 
-            <div className="pb-8 md:pb-16 lg:pb-20 shrink-0">
-              <div className="flex flex-col lg:flex-row lg:items-end gap-6 border-t border-white/5 pt-6 md:pt-8">
-                <div className="flex flex-row justify-between lg:justify-start lg:flex-1 gap-2 md:gap-16">
-                  <Reveal delay={0.5}>
+            {/* Bottom Metrics */}
+            <div className="pb-24 md:pb-16 lg:pb-20 shrink-0">
+              <div className="flex flex-row justify-between lg:justify-start lg:items-end gap-2 border-t border-white/5 pt-6">
+                <div className="flex flex-row justify-between w-full lg:w-auto lg:flex-1 gap-2 md:gap-16">
+                  <Reveal delay={0.7}>
                     <div className="flex flex-col">
                       <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
                         <CountUp end={40} suffix="+" />
@@ -291,7 +309,7 @@ export default function LandingPage() {
                       <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Restaurants</span>
                     </div>
                   </Reveal>
-                  <Reveal delay={0.6}>
+                  <Reveal delay={0.8}>
                     <div className="flex flex-col">
                       <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
                         <CountUp end={3} suffix="x" />
@@ -299,28 +317,34 @@ export default function LandingPage() {
                       <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Engagement</span>
                     </div>
                   </Reveal>
-                  <Reveal delay={0.7}>
+                  <Reveal delay={0.9}>
                     <div className="flex flex-col">
                       <span className="text-white font-black text-xl md:text-4xl tracking-tighter">BH</span>
                       <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Bahrain</span>
                     </div>
                   </Reveal>
                 </div>
-
-                <div className="flex justify-center md:justify-end w-full lg:w-auto pt-2 md:pt-0">
-                  <button 
-                    onClick={openProjectModal}
-                    className="group relative flex items-center justify-center gap-4 w-full md:w-auto px-8 py-4 md:px-10 md:py-5 bg-white text-black text-[9px] md:text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-2xl"
-                  >
-                     <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#B11226] z-20" />
-                     <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
-                       BOOK YOUR SHOOT <span className="ml-3 md:ml-5 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70 group-hover:opacity-100">→</span>
-                     </span>
-                     <div className="absolute inset-0 bg-[#B11226] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
-                  </button>
-                </div>
               </div>
             </div>
+          </div>
+
+          {/* Sticky Mobile CTA Bar (Full-Width, Centered, Thumb-Friendly) */}
+          <div className="md:hidden fixed bottom-0 left-0 right-0 z-[60] pointer-events-none">
+            <motion.div
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              transition={{ delay: 2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="pointer-events-auto bg-[#B11226] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t border-white/10"
+              style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+            >
+              <button
+                onClick={openProjectModal}
+                className="w-full h-[70px] flex items-center justify-center gap-4 text-white font-mono font-black text-[11px] tracking-[0.35em] uppercase active:bg-[#8B101F] transition-colors"
+              >
+                <span>BOOK YOUR SHOOT NOW</span>
+                <span className="text-lg">→</span>
+              </button>
+            </motion.div>
           </div>
         </section>
 

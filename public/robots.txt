@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://cinmachproductions.com
+
+# Sitemaps
+Sitemap: https://cinmachproductions.com/sitemap.xml

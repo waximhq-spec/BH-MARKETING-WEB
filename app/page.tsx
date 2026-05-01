@@ -8,6 +8,8 @@ import ProcessSection from "@/components/ProcessSection";
 import SmartVideo from "@/components/SmartVideo";
 import Comparison from "@/components/Comparison";
 import PricingSection from "@/components/PricingSection";
+import VisualHiddenSEO from "@/components/VisualHiddenSEO";
+
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -212,7 +214,37 @@ export default function LandingPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black">
+      {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
+      <VisualHiddenSEO>
+        <h1>Cinmach Productions: Cinematic Content for Restaurants & Cafés in Bahrain</h1>
+        <p>We are a high-end cinematic brand studio based in Manama, Bahrain. We specialize in creating high-retention video content, food cinematography, and brand commercials that drive footfall and elevate restaurant perception.</p>
+        
+        <h2>Our Services</h2>
+        <ul>
+          <li>Food & Hospitality Content: Reels, short-form ads, and menu cinematography.</li>
+          <li>Real Estate & Spaces: Interior and exterior cinematic coverage including drone footage.</li>
+          <li>Brand Commercials: Creative direction and high-end brand storytelling.</li>
+          <li>Post-Production: Professional color grading, sound design, and motion graphics.</li>
+        </ul>
+
+        <h2>Why Choose Cinmach Productions?</h2>
+        <p>Our cinematic visuals are engineered to turn views into bookings. With over 40+ restaurants served in Bahrain, we deliver 3x engagement through high-quality video production.</p>
+
+        <h2>Our Process</h2>
+        <ol>
+          <li>Understand Your Brand: Discovery and goal alignment.</li>
+          <li>Plan the Vision: Creative strategy and visual direction.</li>
+          <li>Create Cinematic Content: High-end production and filming.</li>
+          <li>Refine & Scale: Content optimization and delivery.</li>
+        </ol>
+
+        <h2>Client Testimonials</h2>
+        <blockquote>"Our reels started bringing in real customers. People were coming in saying they saw us on Instagram." — Ayaan Khan</blockquote>
+        <blockquote>"The quality of the video immediately changed how people perceived our brand." — Sara Malik</blockquote>
+      </VisualHiddenSEO>
+
       <main className="flex-1">
+
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}

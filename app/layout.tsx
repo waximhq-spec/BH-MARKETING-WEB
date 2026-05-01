@@ -31,6 +31,25 @@ export const metadata: Metadata = {
   description: "A cinematic creative studio based in Bahrain, crafting high-end visual stories for luxury brands.",
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Cinmach Productions",
+  "url": "https://cinmach.com",
+  "logo": "https://cinmach.com/logo.png",
+  "description": "Cinematic content production for restaurants, cafés, and luxury brands in Bahrain.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Manama",
+    "addressCountry": "BH"
+  },
+  "sameAs": [
+    "https://instagram.com/cinmach",
+    "https://linkedin.com/company/cinmach"
+  ]
+};
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,7 +57,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col overflow-x-hidden">
+
         <ModalProvider>
           <ServiceWorkerUnregister />
           <Navbar />

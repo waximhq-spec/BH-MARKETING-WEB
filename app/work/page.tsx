@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import SmartVideo from "@/components/SmartVideo";
+import VisualHiddenSEO from "@/components/VisualHiddenSEO";
+
 
 /* ─────────────────────────────────────────────────────────────
    Premium Cinematic Carousel
@@ -277,6 +279,35 @@ function Reveal({
 export default function WorkPage() {
   return (
     <main className="bg-white min-h-screen">
+      {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
+      <VisualHiddenSEO>
+        <h1>Our Portfolio: Selected Cinematic Work by Cinmach Productions</h1>
+        <p>Explore our archive of high-end cinematic films, vertical reels, and visual narratives. We partner with visionaries in luxury hospitality, real estate, and high-end consumer brands to shape global narratives.</p>
+
+        <h2>Featured Cinematic Films</h2>
+        <ul>
+          <li>Lee Heritage: Luxury hospitality cinematography.</li>
+          <li>Heaven View Villa: High-end property visual storytelling.</li>
+          <li>Drone Master: Professional aerial cinematography.</li>
+        </ul>
+
+        <h2>Vertical Reels for Social Media</h2>
+        <ul>
+          <li>Modern Space: High-retention short-form content.</li>
+          <li>Design Details: Close-up cinematic details.</li>
+          <li>Exterior Profile: Stunning building and landscape visuals.</li>
+          <li>Lounge Area: Capturing the vibe and atmosphere of spaces.</li>
+        </ul>
+
+        <h2>Visual Narratives & Commercials</h2>
+        <ul>
+          <li>Harbour Row Dining: Hospitality visual storytelling.</li>
+          <li>Ebrahim Corp Identity: Corporate brand film and identity.</li>
+          <li>Corporate Assets: Professional visual documentation.</li>
+          <li>Brand Vision: Shaping the future of brands through film.</li>
+        </ul>
+      </VisualHiddenSEO>
+
       {/* ══════════════════════════════════════════════════════
           HERO SECTION — ELEVATED
       ══════════════════════════════════════════════════════ */}

@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
+import VisualHiddenSEO from "@/components/VisualHiddenSEO";
+
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal utility
@@ -79,6 +81,56 @@ export default function ServicesPage() {
 
   return (
     <main className="bg-white min-h-screen text-black">
+      {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
+      <VisualHiddenSEO>
+        <h1>Our Services: Cinematic Content, Branding, and Digital Growth in Bahrain</h1>
+        <p>Cinmach Productions offers a comprehensive suite of creative services designed to elevate your brand and drive results. We focus on cinematic visual storytelling, strategic branding, and high-performance digital systems.</p>
+
+        <h2>Content Production</h2>
+        <p>Cinematic visual assets engineered for impact and retention. Our services include:</p>
+        <ul>
+          <li>Restaurant & Café Shoots: Specialized food cinematography.</li>
+          <li>Real Estate & Space Cinematics: Luxury property visuals.</li>
+          <li>Product & Lifestyle Content: Engaging brand visuals.</li>
+          <li>Short-form Reels & Ad Creatives: High-performance social content.</li>
+        </ul>
+
+        <h2>Branding & Identity</h2>
+        <p>Architecting the soul and visual language of your brand. We provide:</p>
+        <ul>
+          <li>Brand Identity Systems: Comprehensive visual frameworks.</li>
+          <li>Creative & Visual Direction: Strategic aesthetic guidance.</li>
+          <li>Logo & Design Frameworks: Distinctive brand symbols.</li>
+          <li>Brand Voice & Strategy: Defining your market position.</li>
+        </ul>
+
+        <h2>Web Design & Development</h2>
+        <p>Digital experiences built to convert and scale. Our expertise covers:</p>
+        <ul>
+          <li>High-Converting Websites: Results-driven digital platforms.</li>
+          <li>Strategic Landing Pages: Focused conversion tools.</li>
+          <li>Performance-Focused Builds: Fast, optimized web systems.</li>
+          <li>UX/UI Architectural Design: Intuitive user journeys.</li>
+        </ul>
+
+        <h2>Growth & Social Strategy</h2>
+        <p>Converting attention into measurable brand authority. We help with:</p>
+        <ul>
+          <li>End-to-End Content Strategy: Integrated content planning.</li>
+          <li>Social Media Ecosystem Management: Full platform oversight.</li>
+          <li>High-Performance Paid Creatives: Ads that drive ROI.</li>
+          <li>Audience Engagement Architecture: Building loyal communities.</li>
+        </ul>
+
+        <h2>Our Framework: The Process</h2>
+        <ul>
+          <li>Step 01 — Strategy: Defining narrative and competitive edge.</li>
+          <li>Step 02 — Shoot / Design: High-end production and visual identity.</li>
+          <li>Step 03 — Build: Digital architecture and web systems.</li>
+          <li>Step 04 — Deliver & Grow: Ecosystem management and growth.</li>
+        </ul>
+      </VisualHiddenSEO>
+
       
       {/* ══════════════════════════════════════════════════════
           SECTION 1: HERO (AGENCY POSITIONING)

@@ -323,14 +323,14 @@ export default function LandingPage() {
               {/* LEFT: CONTENT AREA */}
               <div className="lg:col-span-7 flex flex-col justify-center">
                 <Reveal delay={0.2}>
-                  <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 font-black leading-[0.88] tracking-tight mb-4 lg:mb-5" style={{ fontSize: "clamp(1.8rem, 8vw, 5.2rem)", letterSpacing: "-0.02em" }}>
+                  <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 font-black leading-[0.9] tracking-tight mb-4 lg:mb-5" style={{ fontSize: "clamp(2.5rem, 12vw, 5.5rem)", letterSpacing: "-0.02em" }}>
                     Cinematic<br />
                     content for<br />
                     <span className="text-[#B11226] uppercase">RESTAURANTS<br />&amp; CAFÉS.</span>
                   </h1>
                 </Reveal>
                 <Reveal delay={0.4} className="max-w-xl">
-                  <p className="text-white/60 text-[10px] md:text-[13px] lg:text-base leading-relaxed font-light pr-4 md:pr-0 mb-6 md:mb-8 lg:max-w-md">
+                  <p className="text-white/60 text-[14px] md:text-[15px] lg:text-base leading-relaxed font-light pr-4 md:pr-0 mb-6 md:mb-8 lg:max-w-md">
                     We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings.
                   </p>
                 </Reveal>
@@ -546,7 +546,7 @@ export default function LandingPage() {
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
                 <div>
                   <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[12px] font-bold mb-6">Our Work</p>
-                  <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight" style={{ fontSize: "clamp(4rem, 12vw, 10rem)", letterSpacing: "-0.02em" }}>
+                  <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight" style={{ fontSize: "clamp(2.8rem, 12vw, 10rem)", letterSpacing: "-0.02em" }}>
                     PROJECTS<br />WE LOVE.
                   </h2>
                 </div>

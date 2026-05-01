@@ -9,6 +9,8 @@ import SmartVideo from "@/components/SmartVideo";
 import Comparison from "@/components/Comparison";
 import PricingSection from "@/components/PricingSection";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
+import FAQSection from "@/components/FAQSection";
+
 
 
 /* ─────────────────────────────────────────────────────────────
@@ -216,32 +218,44 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen bg-black">
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
       <VisualHiddenSEO>
-        <h1>Cinmach Productions: Cinematic Content for Restaurants & Cafés in Bahrain</h1>
-        <p>We are a high-end cinematic brand studio based in Manama, Bahrain. We specialize in creating high-retention video content, food cinematography, and brand commercials that drive footfall and elevate restaurant perception.</p>
+        <h1>Restaurant Videography & Food Content Creation in Bahrain</h1>
+        <h2>Cinmach Productions: Premium Video Production Agency</h2>
+        <p>Cinmach Productions is a Bahrain-based video production agency specializing in restaurant videography, food photography, and cinematic content for cafés and hospitality brands. We help businesses in Manama and across Bahrain grow through high-quality video marketing, social media reels, and brand storytelling.</p>
         
-        <h2>Our Services</h2>
+        <h2>Our Specialized Services</h2>
         <ul>
-          <li>Food & Hospitality Content: Reels, short-form ads, and menu cinematography.</li>
-          <li>Real Estate & Spaces: Interior and exterior cinematic coverage including drone footage.</li>
-          <li>Brand Commercials: Creative direction and high-end brand storytelling.</li>
-          <li>Post-Production: Professional color grading, sound design, and motion graphics.</li>
+          <li><strong>Restaurant Videography Bahrain:</strong> High-end cinematic films for the hospitality industry.</li>
+          <li><strong>Food Videography:</strong> Appetizing, high-converting visuals for menus and ads.</li>
+          <li><strong>Social Media Video Production:</strong> High-retention reels and short-form content.</li>
+          <li>Real Estate & Space Cinematics: Interior and exterior cinematic coverage.</li>
+          <li>Brand Commercials: Creative direction and high-end storytelling.</li>
+          <li>Post-Production: Professional color grading and sound design.</li>
         </ul>
+
+        <h2>FAQ — Video Production for Restaurants</h2>
+        <div>
+          <h3>How does restaurant videography help my business?</h3>
+          <p>Cinematic video content increases engagement on social media, showcases your food in the best light, and drives more footfall to your restaurant or café in Bahrain.</p>
+          
+          <h3>What is included in a food videography shoot?</h3>
+          <p>We provide full production, including creative direction, high-end filming, and professional post-production (editing, color grading, and sound design).</p>
+          
+          <h3>Do you offer social media video production for cafés?</h3>
+          <p>Yes, we specialize in high-retention social media reels and short-form ads tailored for platforms like Instagram and TikTok.</p>
+          
+          <h3>Where are you based?</h3>
+          <p>We are a video production agency based in Manama, serving clients across all of Bahrain.</p>
+        </div>
+
+        <h2>Related Services</h2>
+        <p>
+          Learn more about our <a href="/restaurant-videography-bahrain">Restaurant Videography in Bahrain</a>.
+        </p>
 
         <h2>Why Choose Cinmach Productions?</h2>
         <p>Our cinematic visuals are engineered to turn views into bookings. With over 40+ restaurants served in Bahrain, we deliver 3x engagement through high-quality video production.</p>
-
-        <h2>Our Process</h2>
-        <ol>
-          <li>Understand Your Brand: Discovery and goal alignment.</li>
-          <li>Plan the Vision: Creative strategy and visual direction.</li>
-          <li>Create Cinematic Content: High-end production and filming.</li>
-          <li>Refine & Scale: Content optimization and delivery.</li>
-        </ol>
-
-        <h2>Client Testimonials</h2>
-        <blockquote>"Our reels started bringing in real customers. People were coming in saying they saw us on Instagram." — Ayaan Khan</blockquote>
-        <blockquote>"The quality of the video immediately changed how people perceived our brand." — Sara Malik</blockquote>
       </VisualHiddenSEO>
+
 
       <main className="flex-1">
 
@@ -624,8 +638,14 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            SECTION 8: FAQ
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <FAQSection />
       </main>
     </div>
+
   );
 }
 

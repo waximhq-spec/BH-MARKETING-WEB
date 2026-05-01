@@ -60,7 +60,7 @@ export default function Footer() {
         {/* ══════════════════════════════════════════════════════
             MIDDLE LAYER: NAVIGATION & INFO GRID
         ══════════════════════════════════════════════════════ */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 border-t border-white/10 pt-16 mb-16">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-16 border-t border-white/10 pt-16 mb-16">
           
           {/* Column 1: Brand */}
           <div className="flex flex-col">
@@ -82,7 +82,9 @@ export default function Footer() {
               {[
                 { label: "Services", href: "/services" },
                 { label: "Our Work", href: "/work" },
+                { label: "Blog", href: "/blog" },
                 { label: "Team", href: "/team" },
+
                 { label: "About", href: "/about" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
@@ -98,7 +100,31 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Column 3: Expertise */}
+          <div className="flex flex-col">
+            <h4 className="text-white/30 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mb-8">
+              Expertise
+            </h4>
+            <nav className="flex flex-col gap-4">
+              {[
+                { label: "Restaurant Videography", href: "/restaurant-videography-bahrain" },
+                { label: "Food Videography", href: "/food-videography-bahrain" },
+                { label: "Video Production", href: "/video-production-company-bahrain" },
+                { label: "Marketing Guide", href: "/restaurant-video-marketing-bahrain" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="group flex w-fit items-center text-white/70 text-[13px] font-medium transition-colors"
+                >
+                   <span className="w-0 overflow-hidden group-hover:w-4 group-hover:mr-2 text-[#8B0016] transition-all duration-300 ease-out font-black opacity-0 group-hover:opacity-100">-</span>
+                   <span className="group-hover:text-white transition-colors duration-300">{link.label}</span>
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Column 4: Contact */}
           <div className="flex flex-col">
             <h4 className="text-white/30 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mb-8">
               Contact
@@ -111,7 +137,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4: Social */}
+          {/* Column 5: Social */}
           <div className="flex flex-col">
             <h4 className="text-white/30 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mb-8">
               Social

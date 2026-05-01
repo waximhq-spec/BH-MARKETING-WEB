@@ -10,8 +10,10 @@ const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/estimate" },
 ];
+
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

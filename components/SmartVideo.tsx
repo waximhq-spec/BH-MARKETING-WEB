@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 interface SmartVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src: string;
   poster?: string;
-  autoPlayViewport?: boolean; // If true, plays when in viewport
-  hoverPlay?: boolean; // If true, only plays on hover
-  mobileFallback?: boolean; // If true, don't play video on mobile
+  autoPlayViewport?: boolean; // Deprecated by user request
+  hoverPlay?: boolean; // Deprecated
+  mobileFallback?: boolean; // Deprecated
 }
 
 export default function SmartVideo({
@@ -16,80 +16,79 @@ export default function SmartVideo({
   autoPlayViewport = false,
   hoverPlay = false,
   mobileFallback = false,
-  className,
+  className = "",
   ...props
 }: SmartVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isInView, setIsInView] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile, { passive: true });
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (!videoRef.current || hoverPlay || (mobileFallback && isMobile)) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { rootMargin: "0px", threshold: 0.1 }
-    );
-
-    observer.observe(videoRef.current);
-    return () => observer.disconnect();
-  }, [hoverPlay, mobileFallback, isMobile]);
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-
-    const shouldPlay = 
-      (!mobileFallback || !isMobile) && // Not restricted by mobile
-      ((autoPlayViewport && isInView) || (hoverPlay && isHovered));
-
-    if (shouldPlay) {
-      if (videoRef.current.paused) {
-        // Handle promise rejection gracefully (e.g. browser autoplay restrictions)
-        videoRef.current.play().catch(() => {});
-      }
-    } else {
-      if (!videoRef.current.paused) {
-        videoRef.current.pause();
-      }
-    }
-  }, [isInView, isHovered, isMobile, autoPlayViewport, hoverPlay, mobileFallback]);
-
+  // Enforce no autoplay as requested
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.load();
+      videoRef.current.pause();
     }
-  }, [src]);
+  }, []);
+
+  const togglePlay = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  };
 
   return (
-    <video
-      key={src}
-      ref={videoRef}
-      poster={poster}
-      preload="metadata"
-      muted
-      playsInline
-      loop // Default loop assuming most background videos are looping
-      className={className}
-      onMouseEnter={() => hoverPlay && setIsHovered(true)}
-      onMouseLeave={() => hoverPlay && setIsHovered(false)}
-      {...props}
+    <div 
+      className={`relative group/video overflow-hidden ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* On mobile, if we fallback strictly, we could theoretically not render the source, but for simplicity we rely on it being paused and preload="metadata" to save bandwidth. */}
-      {(!isMobile || !mobileFallback) && (
+      <video
+        key={src}
+        ref={videoRef}
+        poster={poster}
+        preload="metadata"
+        muted
+        playsInline
+        loop
+        className="w-full h-full object-cover"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        {...props}
+      >
         <source src={src} type="video/mp4" />
-      )}
-    </video>
+      </video>
+
+      {/* Frost Blur Overlay when not playing */}
+      <div 
+        className={`absolute inset-0 bg-white/5 backdrop-blur-[6px] transition-all duration-700 pointer-events-none ${
+          !isPlaying ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      {/* Play/Pause Button Area */}
+      <button
+        onClick={togglePlay}
+        className="absolute inset-0 w-full h-full flex items-center justify-center z-20 outline-none"
+        aria-label={isPlaying ? "Pause video" : "Play video"}
+      >
+        <div 
+          className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-2xl transition-all duration-500 ease-out hover:bg-[#B11226] hover:border-[#B11226] hover:scale-110 ${
+            !isPlaying ? "opacity-100 scale-100" : "opacity-0 scale-90 group-hover/video:opacity-100 group-hover/video:scale-100"
+          }`}
+        >
+          {!isPlaying ? (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" className="ml-1"><path d="M8 5v14l11-7z"/></svg>
+          ) : (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          )}
+        </div>
+      </button>
+    </div>
   );
 }

@@ -162,9 +162,9 @@ export default function Navbar() {
             {/* Desktop Navigation CTA */}
             <button
               onClick={openProjectModal}
-              className="group relative h-10 px-6 bg-[#B11226] text-white text-[9px] font-mono font-black tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 hover:shadow-[0_15px_35px_rgba(177,18,38,0.4)] rounded-sm"
+              className="group relative h-10 px-6 bg-[#B11226] text-white text-[9px] font-mono font-black tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 rounded-sm"
             >
-              <span className="relative z-10 group-hover:text-[#B11226] transition-colors duration-300 flex items-center gap-3">
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-3">
                 GET A QUOTE <span className="text-xs">→</span>
               </span>
               <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[0.16,1,0.3,1]" />
@@ -260,7 +260,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => { setMenuOpen(false); openProjectModal(); }}
-                  className="group btn-premium flex items-center justify-between w-full h-[64px] px-8 bg-black text-white text-[11px] font-mono font-bold tracking-[0.25em] uppercase shadow-xl overflow-hidden relative"
+                  className="group btn-premium flex items-center justify-between w-full h-[64px] px-8 bg-black text-white text-[11px] font-mono font-bold tracking-[0.25em] uppercase overflow-hidden relative"
                 >
                   <span className="relative z-10 group-hover:text-black transition-colors duration-500">Get a Quote</span>
                   <span className="relative z-10 group-hover:text-black transition-colors duration-500">→</span>

@@ -31,7 +31,7 @@ const FAQS = [
   }
 ];
 
-function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
+function FAQItem({ question, answer, index }: { question: string; answer: React.ReactNode; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

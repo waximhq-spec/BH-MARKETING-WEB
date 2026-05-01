@@ -1,17 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
-import ProcessSection from "@/components/ProcessSection";
 import SmartVideo from "@/components/SmartVideo";
-import Comparison from "@/components/Comparison";
-import PricingSection from "@/components/PricingSection";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
-import FAQSection from "@/components/FAQSection";
 
-
+// Lazy load below-the-fold sections for performance
+const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const Comparison = dynamic(() => import("@/components/Comparison"));
+const PricingSection = dynamic(() => import("@/components/PricingSection"));
+const FAQSection = dynamic(() => import("@/components/FAQSection"));
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -31,7 +33,8 @@ function Reveal({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay: delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`will-change-[transform,opacity] ${className}`}
+      className={`will-change-[transform,opacity] transform-gpu ${className}`}
+      style={{ transform: "translateZ(0)" }}
     >
       {children}
     </motion.div>
@@ -86,17 +89,19 @@ function ServicesTable() {
           style={{ minHeight: "320px" }}
         >
           {/* Cinematic food background image */}
-          <img
-            src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg"
+          <Image
+            src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt="Food & Hospitality Content"
-            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out"
-            loading="lazy"
-            decoding="async"
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out transform-gpu will-change-transform"
+            style={{ transform: "translateZ(0)" }}
           />
           {/* Dark cinematic overlay */}
-          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700" />
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700 transform-gpu" style={{ transform: "translateZ(0)" }} />
           {/* Subtle upward gradient for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transform-gpu" style={{ transform: "translateZ(0)" }} />
 
           <div className="relative z-10 flex flex-col h-full justify-between p-8 md:p-12 lg:p-14" style={{ minHeight: "320px" }}>
             {/* Top row */}
@@ -271,16 +276,18 @@ export default function LandingPage() {
           />
           <div className="absolute inset-0 bg-black/50 z-[1]" />
           <motion.div 
-            className="absolute inset-0 bg-black z-[2]" 
+            className="absolute inset-0 bg-black z-[2] transform-gpu" 
             initial={{ scaleY: 1 }} 
             animate={{ scaleY: 0 }} 
             transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }} 
+            style={{ transform: "translateZ(0)" }}
           />
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80 z-[3]"
+            className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80 z-[3] transform-gpu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.5 }}
+            style={{ transform: "translateZ(0)" }}
           />
           
           {/* Architectural Grid Overlay */}
@@ -553,7 +560,11 @@ export default function LandingPage() {
                <div className="lg:col-span-5">
                  <Reveal delay={0.1}>
                    <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer hover-lift">
-                     <SmartVideo src="https://www.pexels.com/download/video/3298720/" autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                     <SmartVideo 
+                        src="https://www.pexels.com/download/video/3298720/" 
+                        poster="https://images.pexels.com/videos/3298720/pictures/preview-0.jpg"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+                      />
                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                      <div className="absolute inset-0 p-10 flex flex-col justify-end">
                        <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">Hospitality</p>

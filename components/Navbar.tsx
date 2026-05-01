@@ -146,7 +146,7 @@ export default function Navbar() {
                     href={link.href}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    className="group relative py-2 text-[11px] font-black tracking-[0.15em] uppercase transition-all duration-300"
+                    className="group relative py-2 text-[11px] font-medium tracking-[0.2em] uppercase transition-all duration-300"
                     style={{ 
                       color: isHovered 
                         ? "#B11226" 
@@ -162,7 +162,7 @@ export default function Navbar() {
             {/* Desktop Navigation CTA */}
             <button
               onClick={openProjectModal}
-              className="group relative h-10 px-6 bg-[#B11226] text-white text-[9px] font-mono font-black tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 rounded-sm"
+              className="group relative h-10 px-6 bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 rounded-sm"
             >
               <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-3">
                 GET A QUOTE <span className="text-xs">→</span>
@@ -237,7 +237,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     className={`block text-black transition-all duration-300 hover:translate-x-1 hover:text-[#B11226] ${
-                      link.label === "Services" ? "font-black opacity-100" : "font-bold opacity-50"
+                      link.label === "Services" ? "font-semibold opacity-100" : "font-medium opacity-50"
                     }`}
                     style={{ 
                       fontSize: "clamp(32px, 10vw, 48px)", 
@@ -260,7 +260,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => { setMenuOpen(false); openProjectModal(); }}
-                  className="group btn-premium flex items-center justify-between w-full h-[64px] px-8 bg-black text-white text-[11px] font-mono font-bold tracking-[0.25em] uppercase overflow-hidden relative"
+                  className="group btn-premium flex items-center justify-between w-full h-[64px] px-8 bg-black text-white text-[11px] font-mono font-medium tracking-[0.25em] uppercase overflow-hidden relative"
                 >
                   <span className="relative z-10 group-hover:text-black transition-colors duration-500">Get a Quote</span>
                   <span className="relative z-10 group-hover:text-black transition-colors duration-500">→</span>

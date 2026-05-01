@@ -533,7 +533,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: PORTFOLIO / SELECTED WORK
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <div className="bg-white pt-32 pb-20">
+        <section data-theme="light" className="bg-white pt-32 pb-20">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-[2px] w-full bg-black mb-12" />
@@ -552,7 +552,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <section data-theme="light" className="pb-24 md:pb-40 bg-white text-black overflow-hidden">
           <div className="container">
@@ -575,12 +575,16 @@ export default function LandingPage() {
                </div>
                <div className="lg:col-span-7 flex flex-col gap-8 md:gap-12">
                  {[
-                   { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/12188718/" },
-                   { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/" },
+                   { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/12188718/", poster: "https://images.pexels.com/videos/12188718/pictures/preview-0.jpg" },
+                   { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/", poster: "https://images.pexels.com/videos/5657164/pictures/preview-0.jpg" },
                  ].map((video, idx) => (
                    <Reveal key={idx} delay={0.15 + (idx * 0.1)}>
                      <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer hover-lift">
-                       <SmartVideo src={video.vid} autoPlayViewport={true} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105" />
+                       <SmartVideo 
+                          src={video.vid} 
+                          poster={video.poster}
+                          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105" 
+                        />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                        <div className="absolute inset-0 p-10 flex flex-col justify-end">
                          <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">{video.cat}</p>

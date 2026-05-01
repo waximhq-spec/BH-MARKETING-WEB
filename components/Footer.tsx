@@ -7,7 +7,7 @@ export default function Footer() {
   const { openProjectModal } = useModal();
 
   return (
-    <footer className="bg-[#000000] text-white pt-24 md:pt-40 pb-6 md:pb-8 relative overflow-hidden">
+    <footer data-theme="dark" className="bg-[#000000] text-white pt-24 md:pt-40 pb-6 md:pb-8 relative overflow-hidden">
       {/* Subtle Noise Texture overlay - optimized without blend-modes */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none"

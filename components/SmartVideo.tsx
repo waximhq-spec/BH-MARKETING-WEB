@@ -47,10 +47,10 @@ export default function SmartVideo({
       setIsLoading(true);
     } else {
       if (videoRef.current) {
-        if (isPlaying) {
-          videoRef.current.pause();
-        } else {
+        if (videoRef.current.paused) {
           videoRef.current.play().catch(() => {});
+        } else {
+          videoRef.current.pause();
         }
       }
     }
@@ -58,29 +58,34 @@ export default function SmartVideo({
 
   useEffect(() => {
     if (isActivated && videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Auto-play was prevented, show UI to play manually
+          setIsPlaying(false);
+          setIsLoading(false);
+        });
+      }
     }
   }, [isActivated]);
 
   return (
     <div 
-      className={`relative group/video overflow-hidden ${className}`}
+      className={`relative group/video overflow-hidden cursor-pointer ${className}`}
+      onClick={handleInteraction}
     >
       {/* 1. THUMBNAIL LAYER (Static Image) - Hidden only when video is actually playing */}
-      {!isPlaying && (
-        <div className="absolute inset-0 z-[5]">
-            {poster ? (
-              <img
-                src={poster}
-                alt=""
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full bg-neutral-900" />
-            )}
-        </div>
-      )}
+      <div className={`absolute inset-0 z-[5] transition-opacity duration-700 ${isPlaying ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          {poster ? (
+            <img
+              src={poster}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-neutral-900" />
+          )}
+      </div>
 
       {/* 2. VIDEO LAYER (Only mounted when activated) */}
       {isActivated && (
@@ -110,11 +115,7 @@ export default function SmartVideo({
       />
 
       {/* 4. INTERACTION AREA / PLAY BUTTON */}
-      <button
-        onClick={handleInteraction}
-        className="absolute inset-0 w-full h-full flex items-center justify-center z-[20] outline-none"
-        aria-label={isPlaying ? "Pause video" : "Play video"}
-      >
+      <div className="absolute inset-0 w-full h-full flex items-center justify-center z-[20] pointer-events-none">
         {isLoading && isActivated ? (
           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center">
             <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
@@ -132,7 +133,7 @@ export default function SmartVideo({
             )}
           </div>
         )}
-      </button>
+      </div>
     </div>
   );
 }

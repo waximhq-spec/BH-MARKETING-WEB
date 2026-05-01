@@ -22,10 +22,12 @@ function Reveal({
   children,
   delay = 0,
   className = "",
+  style = {},
 }: {
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <motion.div
@@ -34,7 +36,7 @@ function Reveal({
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay: delay, ease: [0.16, 1, 0.3, 1] }}
       className={`will-change-[transform,opacity] transform-gpu ${className}`}
-      style={{ transform: "translateZ(0)" }}
+      style={{ transform: "translateZ(0)", ...style }}
     >
       {children}
     </motion.div>

@@ -10,8 +10,15 @@ const nextConfig: NextConfig = {
   // Disable compression as Hostinger's LiteSpeed server handles this more efficiently
   compress: false,
 
-  // Disable image optimization to avoid spawning heavy 'sharp' processes
-  images: { unoptimized: true },
+  // Enable aggressive image optimization with AVIF and WebP formats
+  images: { 
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' }
+    ],
+    minimumCacheTTL: 604800,
+  },
   
   // Disable memory-heavy features to prevent Hostinger thread limit crashes
   experimental: {

@@ -32,7 +32,7 @@ function Reveal({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, delay: delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: delay, ease: [0.16, 1, 0.3, 1] }}
       className={`will-change-[transform,opacity] transform-gpu ${className}`}
       style={{ transform: "translateZ(0)" }}
     >
@@ -93,7 +93,7 @@ function ServicesTable() {
             src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt="Food & Hospitality Content"
             fill
-            priority
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, 1200px"
             className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out transform-gpu will-change-transform"
             style={{ transform: "translateZ(0)" }}
@@ -271,10 +271,14 @@ export default function LandingPage() {
           <SmartVideo 
             src="/bg-rest.mp4" 
             autoPlay={true}
-            autoPlayViewport={true}
-            className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2]"
+            className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2] anim-slow-zoom"
           />
-          <div className="absolute inset-0 bg-black/50 z-[1]" />
+          {/* Base darkening */}
+          <div className="absolute inset-0 bg-black/60 z-[1]" />
+          {/* Subtle amber/red radial gradient for depth */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_80%)] z-[1]" />
+          {/* Cinematic vignette */}
+          <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none z-[1]" />
           <motion.div 
             className="absolute inset-0 bg-black z-[2] transform-gpu" 
             initial={{ scaleY: 1 }} 
@@ -317,7 +321,7 @@ export default function LandingPage() {
               {/* LEFT: CONTENT AREA */}
               <div className="lg:col-span-7 flex flex-col justify-center">
                 <Reveal delay={0.2}>
-                  <h1 className="text-white font-black leading-[0.88] tracking-tighter mb-4 lg:mb-5" style={{ fontSize: "clamp(1.8rem, 8vw, 5.2rem)", letterSpacing: "-0.04em" }}>
+                  <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 font-black leading-[0.88] tracking-tight mb-4 lg:mb-5" style={{ fontSize: "clamp(1.8rem, 8vw, 5.2rem)", letterSpacing: "-0.02em" }}>
                     Cinematic<br />
                     content for<br />
                     <span className="text-[#B11226] uppercase">RESTAURANTS<br />&amp; CAFÉS.</span>
@@ -354,7 +358,7 @@ export default function LandingPage() {
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    className="relative w-full bg-black/40 backdrop-blur-[15px] border border-white/10 p-6 lg:p-8 shadow-[0_30px_100px_rgba(0,0,0,0.5)] group transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_40px_120px_rgba(0,0,0,0.7)] hover:border-white/20"
+                    className="relative w-full bg-black/40 backdrop-blur-[4px] border border-white/10 p-6 lg:p-8 shadow-[0_30px_100px_rgba(0,0,0,0.5)] group transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_40px_120px_rgba(0,0,0,0.7)] hover:border-white/20 will-change-transform transform-gpu"
                   >
                     {/* Architectural Accent */}
                     <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#B11226]/40 -translate-y-4 translate-x-4 transition-transform duration-700 group-hover:translate-x-0 group-hover:translate-y-0" />
@@ -370,18 +374,18 @@ export default function LandingPage() {
                       
                       <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
                         <div className="relative group/input">
-                          <input type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-xs outline-none focus:border-[#B11226]/50 focus:bg-white/[0.08] transition-all duration-300 rounded-none placeholder:text-white/20" />
-                          <div className="absolute inset-0 bg-[#B11226]/5 opacity-0 group-focus-within/input:opacity-100 blur-xl transition-opacity pointer-events-none" />
+                          <input type="text" placeholder="Your Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#ff2a2a]/50 transition-all duration-300 rounded-none placeholder:text-white/30" />
+                          <div className="absolute inset-0 bg-[#B11226]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
                         </div>
                         
                         <div className="relative group/input">
-                          <input type="text" placeholder="Business Name" className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-xs outline-none focus:border-[#B11226]/50 focus:bg-white/[0.08] transition-all duration-300 rounded-none placeholder:text-white/20" />
-                          <div className="absolute inset-0 bg-[#B11226]/5 opacity-0 group-focus-within/input:opacity-100 blur-xl transition-opacity pointer-events-none" />
+                          <input type="text" placeholder="Business Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#ff2a2a]/50 transition-all duration-300 rounded-none placeholder:text-white/30" />
+                          <div className="absolute inset-0 bg-[#B11226]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
                         </div>
                         
                         <div className="relative group/input">
-                          <input type="text" placeholder="Phone / WhatsApp" className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-xs outline-none focus:border-[#B11226]/50 focus:bg-white/[0.08] transition-all duration-300 rounded-none placeholder:text-white/20" />
-                          <div className="absolute inset-0 bg-[#B11226]/5 opacity-0 group-focus-within/input:opacity-100 blur-xl transition-opacity pointer-events-none" />
+                          <input type="text" placeholder="Phone / WhatsApp" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#ff2a2a]/50 transition-all duration-300 rounded-none placeholder:text-white/30" />
+                          <div className="absolute inset-0 bg-[#B11226]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
                         </div>
                         
                         <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#B11226] hover:text-white active:scale-95 active:bg-[#8B101F] transition-all duration-500 shadow-xl flex items-center justify-center gap-4 overflow-hidden relative rounded-sm">
@@ -455,14 +459,14 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 2: RESTAURANT IMPACT (WHITE THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="light" className="py-32 md:py-32 bg-white text-black relative">
+        <section data-theme="light" className="defer-render py-32 md:py-40 bg-white text-black relative">
           <div className="container relative z-10">
             <Reveal>
               <div className="flex items-center gap-4 mb-8">
                 <span className="w-8 h-px bg-[#B11226]" />
                 <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">For Restaurants &amp; Cafes</p>
               </div>
-              <h2 className="text-black font-black leading-[0.9] tracking-tighter mb-12 lg:mb-16" style={{ fontSize: "clamp(2.2rem, 8vw, 4.5rem)", letterSpacing: "-0.04em" }}>
+              <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.9] tracking-tight mb-12 lg:mb-16" style={{ fontSize: "clamp(2.2rem, 8vw, 4.5rem)", letterSpacing: "-0.02em" }}>
                 CONTENT THAT MAKES<br /><span className="text-black/20">THEM CHOOSE YOU.</span>
               </h2>
             </Reveal>
@@ -486,7 +490,7 @@ export default function LandingPage() {
                   <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
                 </div>
               </Reveal>
-              <Reveal delay={0.2} className="bg-black/5 border border-black/5 p-6 md:p-10 hover-lift rounded-sm">
+              <Reveal delay={0.2} className="glass-panel border-black/10 p-6 md:p-10 hover-lift rounded-sm" style={{ background: "rgba(0,0,0,0.02)" }}>
                 <h4 className="font-mono text-[#B11226] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
                 <ul className="flex flex-col gap-6">
                   {[
@@ -512,7 +516,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 3: WHAT WE DO / SERVICES (BLACK THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="py-24 md:py-32 bg-black text-white relative">
+        <section data-theme="dark" className="defer-render py-32 md:py-40 bg-black text-white relative">
           <div className="container">
             <Reveal>
               <div className="flex items-center gap-6 mb-3">
@@ -521,7 +525,7 @@ export default function LandingPage() {
               </div>
             </Reveal>
             <Reveal className="mb-10">
-              <h2 className="font-black text-white leading-[0.92] tracking-tighter uppercase" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.04em" }}>How we help<br />your place grow.</h2>
+              <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 font-black leading-[0.92] tracking-tight uppercase" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}>How we help<br />your place grow.</h2>
               <p className="text-white/40 mt-6 max-w-lg font-light text-base md:text-lg">
                 No complex marketing talk here. Just high-quality videos that make people in Bahrain crave your food. Simple as that.
               </p>
@@ -533,14 +537,14 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: PORTFOLIO / SELECTED WORK
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="light" className="bg-white pt-32 pb-20">
+        <section data-theme="light" className="defer-render bg-white pt-40 pb-24">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-[2px] w-full bg-black mb-12" />
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
                 <div>
                   <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[12px] font-bold mb-6">Our Work</p>
-                  <h2 className="text-black font-black leading-[0.85] tracking-tighter" style={{ fontSize: "clamp(4rem, 12vw, 10rem)", letterSpacing: "-0.05em" }}>
+                  <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight" style={{ fontSize: "clamp(4rem, 12vw, 10rem)", letterSpacing: "-0.02em" }}>
                     PROJECTS<br />WE LOVE.
                   </h2>
                 </div>
@@ -554,21 +558,21 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section data-theme="light" className="pb-24 md:pb-40 bg-white text-black overflow-hidden">
+        <section data-theme="light" className="defer-render pb-32 md:pb-48 bg-white text-black overflow-hidden">
           <div className="container">
              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
                <div className="lg:col-span-5">
                  <Reveal delay={0.1}>
-                   <div className="group relative aspect-[9/16] bg-black/5 rounded-2xl overflow-hidden cursor-pointer hover-lift">
+                   <div className="group relative aspect-[9/16] glass-panel rounded-2xl overflow-hidden cursor-pointer hover-lift">
                      <SmartVideo 
                         src="https://www.pexels.com/download/video/3298720/" 
                         poster="https://images.pexels.com/videos/3298720/pictures/preview-0.jpg"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
                       />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                     <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                       <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">Hospitality</p>
-                       <h4 className="text-white font-black text-4xl">Culinary Art</h4>
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.5)] z-[6]" />
+                     <div className="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
+                       <p className="text-[#ff2a2a] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">Hospitality</p>
+                       <h4 className="text-white font-black text-4xl tracking-tight">Culinary Art</h4>
                      </div>
                    </div>
                  </Reveal>
@@ -579,16 +583,16 @@ export default function LandingPage() {
                    { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/", poster: "https://images.pexels.com/videos/5657164/pictures/preview-0.jpg" },
                  ].map((video, idx) => (
                    <Reveal key={idx} delay={0.15 + (idx * 0.1)}>
-                     <div className="group relative aspect-video overflow-hidden bg-white/5 rounded-2xl cursor-pointer hover-lift">
+                     <div className="group relative aspect-video overflow-hidden glass-panel rounded-2xl cursor-pointer hover-lift">
                        <SmartVideo 
                           src={video.vid} 
                           poster={video.poster}
                           className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105" 
                         />
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                       <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                         <p className="text-[#B11226] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">{video.cat}</p>
-                         <h4 className="text-white font-black text-4xl">{video.title}</h4>
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.5)] z-[6]" />
+                       <div className="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
+                         <p className="text-[#ff2a2a] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">{video.cat}</p>
+                         <h4 className="text-white font-black text-4xl tracking-tight">{video.title}</h4>
                        </div>
                      </div>
                    </Reveal>
@@ -614,7 +618,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 7: SOCIAL PROOF (REFINED)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="light" className="py-20 md:py-28 bg-white text-black overflow-hidden relative border-t border-black/5">
+        <section data-theme="light" className="defer-render py-28 md:py-36 bg-white text-black overflow-hidden relative border-t border-black/5">
           <div className="container relative z-10">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-24">
               
@@ -625,7 +629,7 @@ export default function LandingPage() {
                     <span className="w-6 h-px bg-[#B11226]" />
                     <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">Social Proof</p>
                   </div>
-                  <h2 className="text-black font-black leading-[0.85] tracking-tighter mb-10 uppercase" style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}>
+                  <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight mb-10 uppercase" style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.02em" }}>
                     WHAT OUR<br /><span className="text-black/10">CLIENTS SAY.</span>
                   </h2>
                 </Reveal>

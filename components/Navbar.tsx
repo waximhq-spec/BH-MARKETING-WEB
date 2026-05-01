@@ -146,7 +146,7 @@ export default function Navbar() {
                     href={link.href}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    className="group relative py-2 text-[11px] font-medium tracking-[0.2em] uppercase transition-all duration-300"
+                    className="group relative py-2 text-[11px] font-medium tracking-[0.2em] uppercase transition-all duration-300 link-animated-underline"
                     style={{ 
                       color: isHovered 
                         ? "#B11226" 

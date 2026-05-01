@@ -5,6 +5,9 @@ import React, { useRef, useState, useEffect } from "react";
 interface SmartVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src: string;
   poster?: string;
+  autoPlayViewport?: boolean;
+  hoverPlay?: boolean;
+  mobileFallback?: boolean;
 }
 
 export default function SmartVideo({

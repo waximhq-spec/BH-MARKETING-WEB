@@ -65,7 +65,6 @@ export default function FoodVideographyPage() {
         <SmartVideo 
           src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg" // Placeholder
           autoPlay={true}
-          autoPlayViewport={true}
           className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale-[0.3]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black" />

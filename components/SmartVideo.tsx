@@ -20,10 +20,29 @@ export default function SmartVideo({
   ...props
 }: SmartVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(props.autoPlay ? true : false);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Enforce no autoplay as requested
+  // For background videos (autoPlay), return the original simple tag
+  if (props.autoPlay) {
+    return (
+      <video
+        key={src}
+        ref={videoRef}
+        poster={poster}
+        preload="auto"
+        muted
+        playsInline
+        loop
+        className={className}
+        {...props}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    );
+  }
+
+  // Enforce no autoplay for portfolio/content videos
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.pause();
@@ -92,3 +111,4 @@ export default function SmartVideo({
     </div>
   );
 }
+

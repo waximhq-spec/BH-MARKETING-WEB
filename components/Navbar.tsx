@@ -7,10 +7,10 @@ import { usePathname } from "next/navigation";
 import { useModal } from "@/components/ModalContext";
 
 const NAV_LINKS = [
+  { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/estimate" },
 ];
 
@@ -85,24 +85,37 @@ export default function Navbar() {
   const isDark = theme === "dark" || (theme === "split" && !isLargeScreen);
   
   const textColor = isPricing ? "#B11226" : isLight ? "#000000" : "#FAFAFA";
-  const mutedColor = isPricing ? "rgba(255,255,255,0.6)" : (isLight || isSplit) ? "rgba(0,0,0,0.4)" : isRed ? "rgba(255,255,255,0.7)" : "rgba(250,250,250,0.6)";
+  const mutedColor = isPricing ? "rgba(255,255,255,0.5)" : (isLight || isSplit) ? "rgba(0,0,0,0.35)" : isRed ? "rgba(255,255,255,0.6)" : "rgba(250,250,250,0.5)";
   const activeColor = isPricing ? "#B11226" : isRed ? "#FFFFFF" : (isLight || isSplit) ? "#000000" : "#C50022";
   
-  const redBg = scrolled ? "rgba(0, 0, 0, 0.6)" : "transparent";
-  const redBorder = scrolled ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.15)";
+  const redBg = scrolled ? "rgba(0, 0, 0, 0.45)" : "transparent";
+  const redBorder = scrolled ? "rgba(255,255,255,0.06)" : "transparent";
 
-  const bgColor = isPricing ? "rgba(10,10,10,0.98)" : isRed ? redBg : isLight ? "rgba(250,250,250,0.95)" : "rgba(0,0,0,0.95)";
-  const borderColor = isPricing ? "rgba(177, 18, 38, 0.4)" : isRed ? redBorder : (isLight || isSplit) ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.08)";
+  const bgColor = isPricing 
+    ? (scrolled ? "rgba(10,10,10,0.75)" : "rgba(10,10,10,0.98)") 
+    : isRed 
+    ? redBg 
+    : isLight 
+    ? (scrolled ? "rgba(255,255,255,0.65)" : "rgba(250,250,250,0.95)") 
+    : (scrolled ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.95)");
+  const borderColor = isPricing 
+    ? (scrolled ? "rgba(177,18,38,0.15)" : "rgba(177, 18, 38, 0.4)") 
+    : isRed 
+    ? redBorder 
+    : (isLight || isSplit) 
+    ? (scrolled ? "rgba(0,0,0,0.04)" : "rgba(0,0,0,0.06)") 
+    : (scrolled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.06)");
   const burgerColor = isPricing ? "#B11226" : (isLight || isSplit) ? "#000000" : "#FAFAFA";
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ease-[0.16,1,0.3,1]"
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ease-[0.16,1,0.3,1]
+          ${scrolled ? "backdrop-blur-xl backdrop-saturate-150" : ""}`}
         style={{
-          borderBottom: isRed || scrolled || isSplit ? `1px solid ${borderColor}` : "1px solid transparent",
+          borderBottom: `1px solid ${borderColor}`,
           background: isSplit ? "transparent" : (isRed || scrolled ? bgColor : "transparent"),
-          willChange: "transform, background",
+          WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.5)" : "none",
         }}
       >
         {/* SPLIT BACKGROUND FOR SPLIT THEME (Desktop Only) */}
@@ -111,19 +124,19 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 flex pointer-events-none overflow-hidden transition-all duration-700 ease-[0.16,1,0.3,1]"
+            className="absolute inset-0 flex pointer-events-none overflow-hidden transition-all duration-500 ease-[0.16,1,0.3,1]"
           >
             <div className="w-[41.666667%] bg-black h-full border-r border-white/10 border-b border-white/10 transition-all duration-700" />
             <div className="flex-1 bg-white h-full transition-all duration-700" />
           </motion.div>
         )}
 
-        <div className="container h-16 flex items-center justify-between relative z-10">
-          <Link href="/" className="block transition-all duration-500 hover:opacity-70">
+        <div className="container h-14 md:h-16 flex items-center justify-between relative z-10">
+          <Link href="/" className="block transition-all duration-400 hover:opacity-60">
             <img 
               src="/HERO-LOGO.svg" 
               alt="Cinmach" 
-              className="h-5 md:h-6 w-auto transition-all duration-500"
+              className="h-[18px] md:h-5 w-auto transition-all duration-400"
               style={{
                 filter: isLight 
                   ? "brightness(0)" 
@@ -134,8 +147,8 @@ export default function Navbar() {
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-10 lg:gap-14">
-            <div className="flex items-center gap-8 lg:gap-10">
+          <nav className="hidden md:flex items-center gap-8 lg:gap-12">
+            <div className="flex items-center gap-7 lg:gap-9">
               {NAV_LINKS.map((link) => {
                 const [isHovered, setIsHovered] = useState(false);
                 const isActive = pathname === link.href;
@@ -146,28 +159,34 @@ export default function Navbar() {
                     href={link.href}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    className="group relative py-2 text-[11px] font-medium tracking-[0.2em] uppercase transition-all duration-300 link-animated-underline"
+                    className="group relative py-2 text-[10px] font-medium tracking-[0.18em] uppercase transition-all duration-400"
                     style={{ 
                       color: isHovered 
-                        ? "#B11226" 
+                        ? (isLight || isSplit ? "#9A0E1F" : "#FFFFFF")
+                        : isActive
+                        ? activeColor
                         : (isSplit ? "#000000" : (scrolled ? (isLight ? "#000000" : "#FFFFFF") : mutedColor)) 
                     }}
                   >
                     <span className="relative z-10">{link.label}</span>
+                    {/* Active dot indicator */}
+                    {isActive && (
+                      <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-[#9A0E1F]" />
+                    )}
                   </Link>
                 );
               })}
             </div>
 
-            {/* Desktop Navigation CTA */}
+            {/* Desktop CTA — Premium pill */}
             <button
               onClick={openProjectModal}
-              className="group relative h-10 px-6 bg-[#B11226] text-white text-[9px] font-mono font-bold tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 rounded-sm"
+              className="group relative h-9 px-5 bg-[#9A0E1F] text-white text-[9px] font-mono font-bold tracking-[0.25em] uppercase overflow-hidden transition-all duration-400 rounded-full hover:shadow-[0_4px_20px_rgba(154,14,31,0.4)]"
             >
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-3">
-                GET A QUOTE <span className="text-xs">→</span>
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-2.5">
+                GET A QUOTE <span className="text-[10px] transition-transform duration-300 group-hover:translate-x-0.5">→</span>
               </span>
-              <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[0.16,1,0.3,1]" />
+              <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[0.16,1,0.3,1] origin-left" />
             </button>
           </nav>
 

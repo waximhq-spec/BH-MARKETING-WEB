@@ -82,10 +82,12 @@ export default function FAQSection() {
           {/* Left Column: Heading */}
           <div className="lg:col-span-5">
             <div className="flex items-center gap-4 mb-8">
-              <span className="w-8 h-px bg-[#B11226]" />
-              <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">Common Questions</p>
+              <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
+                <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Common Questions</span>
+              </div>
             </div>
-            <h2 className="text-black font-black leading-[0.9] tracking-tighter mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}>
+            <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-black leading-[0.9] tracking-tighter mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}>
               FREQUENTLY<br /><span className="text-black/10">ASKED.</span>
             </h2>
             <p className="text-black/40 text-lg font-light leading-relaxed max-w-xs">

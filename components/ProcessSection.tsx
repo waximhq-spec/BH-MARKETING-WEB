@@ -6,25 +6,41 @@ import { motion, useScroll, useMotionValueEvent, MotionValue, useTransform } fro
 const STEPS = [
   {
     num: "01",
-    title: "Understand Your Brand",
-    desc: "We learn before we create. We dive into your business, audience, and goals to understand what makes you different and how your brand should feel. No guessing — only clarity.",
+    title: "Understand Your Customers",
+    desc: "We learn what makes people choose you and what brings real demand.",
   },
   {
     num: "02",
-    title: "Plan the Vision",
-    desc: "We design how you should be seen. We define the visual direction, messaging, and content style so everything looks intentional, premium, and aligned.",
+    title: "Plan What To Shoot",
+    desc: "We plan exactly what to shoot so your content looks clear and effective.",
   },
   {
     num: "03",
-    title: "Create Cinematic Content",
-    desc: "We bring the vision to life. We produce high-end visuals that elevate your brand. Every frame is crafted to be sharp, consistent, and scroll-stopping.",
+    title: "Create Content That Sells",
+    desc: "We create content that grabs attention and drives people to visit or buy.",
   },
   {
     num: "04",
-    title: "Refine & Scale",
-    desc: "We make your brand consistent everywhere. We align and optimize your content across platforms so your brand feels cohesive, professional, and trustworthy.",
+    title: "Improve & Grow",
+    desc: "We refine your content so it stays consistent and keeps bringing customers.",
   },
 ];
+
+// Highlight the word "customers" with the brand accent color
+function HighlightDesc({ text }: { text: string }) {
+  const parts = text.split(/(customers)/gi);
+  return (
+    <>
+      {parts.map((part, i) =>
+        /customers/i.test(part) ? (
+          <span key={i} className="text-[#9A0E1F] font-medium">{part}</span>
+        ) : (
+          part
+        )
+      )}
+    </>
+  );
+}
 
 function StepNumberDisplay({ progress }: { progress: MotionValue<number> }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -38,7 +54,7 @@ function StepNumberDisplay({ progress }: { progress: MotionValue<number> }) {
   });
 
   return (
-    <span className="text-[#B11226] font-mono text-[10px] font-bold tracking-[0.2em] w-4">
+    <span className="text-[#9A0E1F] font-mono text-[10px] font-bold tracking-[0.2em] w-4">
       0{activeStep + 1}
     </span>
   );
@@ -64,27 +80,35 @@ export default function ProcessSection() {
             {/* INNER CONTENT WRAPPER - TO ALIGN WITH CONTAINER */}
             <div className="container !max-w-none w-full flex flex-col justify-between h-full">
                <div>
-                  <motion.p 
+                  <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    className="text-[#B11226] font-black tracking-tighter uppercase text-xl md:text-2xl mb-6 lg:mb-10"
+                    className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-6 lg:mb-10"
                   >
-                    Our Process
-                  </motion.p>
+                    <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
+                    <span className="text-white font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Our Process</span>
+                  </motion.div>
                   
                   <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-white font-black leading-[0.9] tracking-tighter mb-8 lg:mb-12"
-                    style={{ fontSize: "clamp(2rem, 4.5vw, 4.5rem)", letterSpacing: "-0.04em" }}
+                    className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black tracking-tighter mb-4 lg:mb-6 uppercase pr-8"
+                    style={{ fontSize: "clamp(2.2rem, 3.8vw, 3.8rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
                   >
-                    WE DESIGN<br />
-                    PERCEPTION.<br />
-                    <span className="text-white/20">STEP BY</span><br />
-                    <span className="text-white/20">STEP.</span>
+                    WE GET YOU<br />
+                    MORE CUSTOMERS.
                   </motion.h2>
+
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.7 }}
+                    viewport={{ once: true }}
+                    className="text-white/70 font-mono tracking-[0.4em] uppercase text-[10px] md:text-[12px] font-medium mb-12"
+                  >
+                    Step by step.
+                  </motion.div>
 
                   <motion.p
                     initial={{ opacity: 0 }}
@@ -102,7 +126,7 @@ export default function ProcessSection() {
                 <StepNumberDisplay progress={scrollYProgress} />
                 <div className="w-24 h-[1px] bg-white/10 relative overflow-hidden">
                   <motion.div
-                    className="absolute inset-0 bg-[#B11226] origin-left"
+                    className="absolute inset-0 bg-[#9A0E1F] origin-left"
                     style={{ scaleX: scrollYProgress }}
                   />
                 </div>
@@ -116,30 +140,50 @@ export default function ProcessSection() {
 
         {/* Right Column: White Background Steps */}
         <div className="lg:w-[58.333333%] relative bg-white">
-          <div className="flex flex-col">
+          {/* Continuous Journey Line */}
+          <div className="absolute left-[calc(1.5rem+6px)] md:left-[calc(3.5rem+6px)] lg:left-[calc(5rem+6px)] xl:left-[calc(6rem+6px)] top-[150px] bottom-[200px] w-px border-l border-dashed border-[#9A0E1F]/20 hidden lg:block z-0" />
+          
+          <div className="flex flex-col relative z-10">
             {STEPS.map((step, index) => (
               <div key={step.num} className="min-h-[70vh] flex flex-col items-start justify-start pt-32 lg:pt-[140px] pb-32">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ margin: "-10% 0px", once: true }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                   className="w-full flex flex-col relative z-10"
                 >
-                  {/* INNER CONTENT WRAPPER - TO ALIGN WITH CONTAINER */}
+                  {/* INNER CONTENT WRAPPER */}
                   <div className="container !max-w-none w-full flex flex-col">
-                    <span className="text-[#B11226] font-mono text-[11px] tracking-[0.3em] font-bold mb-6">
-                      {step.num}
-                    </span>
+                    {/* Step number */}
+                    <div className="relative inline-flex mb-8">
+                      <span className="text-[#9A0E1F] font-mono text-[11px] tracking-[0.3em] font-bold relative z-10 bg-white py-2 pr-4">
+                        {step.num}
+                      </span>
+                    </div>
+
+                    {/* Heading */}
                     <h3
-                      className="text-black font-black tracking-tighter mb-8 transition-all duration-500"
-                      style={{ fontSize: "clamp(2rem, 3.5vw, 3.8rem)", lineHeight: 1 }}
+                      className="text-black font-black tracking-tighter mb-10"
+                      style={{ fontSize: "clamp(1.8rem, 3.2vw, 3.4rem)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
                     >
                       {step.title.toUpperCase()}
                     </h3>
-                    <p className="text-black/40 text-[16px] md:text-[20px] font-light leading-[1.8] mb-12 transition-colors duration-500 max-w-xl">
-                      {step.desc}
+
+                    {/* Description with keyword highlight */}
+                    <p className="text-black/80 text-[17px] md:text-[19px] font-light leading-[1.75] mb-14 max-w-lg">
+                      <HighlightDesc text={step.desc} />
                     </p>
-                    <div className="h-px w-24 bg-black/5" />
+
+                    {/* Animated divider */}
+                    <motion.div
+                      className="h-px bg-[#9A0E1F]/20 origin-left"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ margin: "-15% 0px", once: true }}
+                      transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                      style={{ width: "80px" }}
+                    />
                   </div>
                 </motion.div>
               </div>
@@ -155,18 +199,18 @@ export default function ProcessSection() {
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-[#B11226] font-mono text-[10px] uppercase tracking-[0.5em] mb-6 font-black"
+            className="text-[#9A0E1F] font-mono text-[10px] uppercase tracking-[0.5em] mb-6 font-black"
           >
             Our Methodology
           </motion.p>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-white font-black leading-none tracking-tighter text-5xl mb-4"
+            className="text-white font-black leading-[1.1] tracking-tighter text-4xl md:text-5xl mb-4 uppercase"
           >
-            WE DESIGN<br />PERCEPTION.
+            WE GET YOU<br />MORE CUSTOMERS.
           </motion.h2>
-          <p className="text-white/40 text-[10px] font-mono uppercase tracking-[0.3em]">
+          <p className="text-white/70 text-[9px] font-mono uppercase tracking-[0.4em]">
             Step by Step.
           </p>
         </div>
@@ -181,12 +225,12 @@ export default function ProcessSection() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="bg-white border border-black/5 p-8 rounded-sm shadow-[0_10px_30_rgba(0,0,0,0.02)] flex flex-col gap-6 relative group"
             >
-              <div className="absolute top-[-20px] right-[-10px] text-[100px] font-black text-black/[0.03] leading-none select-none pointer-events-none group-hover:text-[#B11226]/[0.05] transition-colors duration-500">
+              <div className="absolute top-[-20px] right-[-10px] text-[100px] font-black text-black/[0.03] leading-none select-none pointer-events-none group-hover:text-[#9A0E1F]/[0.05] transition-colors duration-500">
                 {step.num}
               </div>
 
               <div className="flex flex-col gap-2 relative z-10">
-                <span className="text-[#B11226] font-mono text-[10px] font-bold tracking-[0.3em]">
+                <span className="text-[#9A0E1F] font-mono text-[10px] font-bold tracking-[0.3em]">
                   PHASE {step.num}
                 </span>
                 <h3 className="text-black font-black text-2xl tracking-tighter leading-tight uppercase">
@@ -194,8 +238,8 @@ export default function ProcessSection() {
                 </h3>
               </div>
 
-              <p className="text-black/50 text-[14px] font-light leading-relaxed relative z-10">
-                {step.desc}
+              <p className="text-black/80 text-[14px] font-light leading-relaxed relative z-10">
+                <HighlightDesc text={step.desc} />
               </p>
 
               <div className="w-full h-px bg-black/[0.05] mt-2" />

@@ -4,42 +4,44 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 
-// Accordion feature item
+// Expandable feature item — checkmark, no dividers
 function FeatureItem({ label, details }: { label: string; details: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-white/5 py-2">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center text-left focus:outline-none group"
-      >
-        <span className="text-[12px] text-white/80 font-medium group-hover:text-white transition-colors duration-200">
+    <button
+      onClick={() => setIsOpen(!isOpen)}
+      className="w-full flex flex-col items-start text-left focus:outline-none group py-2.5"
+    >
+      <div className="flex items-center gap-3 w-full">
+        {/* Checkmark dot */}
+        <span className="w-[5px] h-[5px] rounded-full bg-white/30 shrink-0 group-hover:bg-white/60 transition-colors duration-200" />
+        <span className="text-[12px] text-white/70 font-medium group-hover:text-white transition-colors duration-200 flex-1 text-left leading-snug">
           {label}
         </span>
         <motion.span
           animate={{ rotate: isOpen ? 45 : 0 }}
-          className="text-white/40 group-hover:text-white/80 transition-colors text-[14px]"
+          className="text-white/20 group-hover:text-white/50 transition-colors text-[12px] leading-none shrink-0"
         >
           +
         </motion.span>
-      </button>
+      </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden w-full pl-[17px]"
           >
-            <p className="pt-2 text-[10px] text-white/50 leading-relaxed max-w-[90%]">
+            <p className="pt-2 pb-1 text-[10px] text-white/40 leading-relaxed">
               {details}
             </p>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </button>
   );
 }
 
@@ -50,24 +52,25 @@ export default function PricingSection() {
     {
       id: "starter",
       name: "Starter",
-      price: "$499",
+      price: "499",
+      currency: "$",
       target: "Best for small brands or basic shoots",
-      imageGradient: "from-blue-500/20 to-purple-500/20",
       features: [
         { label: "10 Edited Photos", details: "High-resolution professionally color-graded photos." },
-        { label: "1 Short Reel (15-30 sec)", details: "Optimized for Instagram/TikTok with trending transitions." },
+        { label: "1 Short Reel (15–30 sec)", details: "Optimized for Instagram/TikTok with trending transitions." },
         { label: "Basic Color Grading", details: "Standard cinematic color correction for a consistent look." },
         { label: "1 Location Shoot", details: "Up to 2 hours of production at a single venue." }
       ],
       ctaText: "Get Started",
-      isPopular: false
+      isPopular: false,
+      isEnterprise: false,
     },
     {
       id: "pro",
       name: "Standard",
-      price: "$899",
+      price: "899",
+      currency: "$",
       target: "Comprehensive content for monthly growth",
-      imageGradient: "from-[#B11226]/20 to-orange-500/20",
       features: [
         { label: "25 Edited Photos", details: "Full gallery covering food, ambiance, and team." },
         { label: "3 Reels / Short Videos", details: "A mix of storytelling, fast-paced, and cinematic edits." },
@@ -75,14 +78,15 @@ export default function PricingSection() {
         { label: "Drone / 4K Footage", details: "Stunning aerials and crisp 4K production quality." }
       ],
       ctaText: "Choose Standard",
-      isPopular: true
+      isPopular: true,
+      isEnterprise: false,
     },
     {
       id: "elite",
       name: "Premium",
-      price: "$1499",
+      price: "1,499",
+      currency: "$",
       target: "The ultimate cinematic brand overhaul",
-      imageGradient: "from-amber-500/20 to-red-500/20",
       features: [
         { label: "50+ Edited Photos", details: "Infinite content for ads, website, and socials." },
         { label: "6 Reels + 1 Main Film", details: "Complete content ecosystem including a 60-sec brand story." },
@@ -90,14 +94,15 @@ export default function PricingSection() {
         { label: "Full Day Production", details: "Comprehensive shoot covering every angle of your brand." }
       ],
       ctaText: "Go Premium",
-      isPopular: false
+      isPopular: false,
+      isEnterprise: false,
     },
     {
       id: "custom",
       name: "Enterprise",
       price: "Custom",
+      currency: "",
       target: "Scalable solutions for groups & chains",
-      imageGradient: "from-emerald-500/20 to-teal-500/20",
       features: [
         { label: "Multi-Location Support", details: "Coordinated shoots across multiple venues/branches." },
         { label: "Dedicated Producer", details: "Single point of contact for all your production needs." },
@@ -105,24 +110,30 @@ export default function PricingSection() {
         { label: "Priority Turnaround", details: "Express delivery for time-sensitive marketing campaigns." }
       ],
       ctaText: "Contact Us",
-      isPopular: false
+      isPopular: false,
+      isEnterprise: true,
     }
   ];
 
   return (
-    <section data-theme="pricing" className="py-24 md:py-32 bg-[#050505] relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#B11226]/50 to-transparent" />
-      
+    <section data-theme="pricing" className="py-24 md:py-36 bg-[#050505] relative overflow-hidden">
+      {/* Top divider glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/40 to-transparent" />
+      {/* Background radial for depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(154,14,31,0.05)_0%,transparent_70%)] pointer-events-none" />
+
       <div className="container relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-16 md:mb-24"
         >
-          <p className="text-[#B11226] font-mono text-[10px] tracking-[0.4em] uppercase font-bold mb-4">Investment</p>
-          <h2 className="text-white font-black text-4xl md:text-6xl tracking-tighter leading-none mb-6">
+          <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
+            <span className="text-white font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Investment</span>
+          </div>
+          <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black text-4xl md:text-6xl tracking-tighter leading-none mb-6">
             CHOOSE YOUR<br />PACKAGE.
           </h2>
           <p className="text-white/40 max-w-xl mx-auto text-sm md:text-base font-light">
@@ -130,100 +141,151 @@ export default function PricingSection() {
           </p>
         </motion.div>
 
-        {/* Pricing Grid - Responsive */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        {/* Grid — align tops, Standard lifts */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-end">
           {packages.map((pkg, idx) => (
             <motion.div
               key={pkg.id}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.1 * idx }}
-              className={`group flex flex-col h-full relative rounded-2xl overflow-hidden transition-all duration-500 md:hover:-translate-y-2 ${
-                pkg.isPopular 
-                  ? "bg-[#0A0A0A] border border-[#B11226]/40 hover:border-[#B11226]/80" 
-                  : "bg-[#0A0A0A] border border-white/5 hover:border-white/20"
-              }`}
+              transition={{ duration: 0.55, delay: 0.08 * idx, ease: [0.22, 1, 0.36, 1] }}
+              className={`group flex flex-col relative rounded-2xl overflow-hidden cursor-default
+                transition-all duration-400 ease-out
+                hover:-translate-y-2 hover:scale-[1.02]
+                ${pkg.isPopular
+                  ? "-translate-y-3 scale-[1.05] shadow-[0_20px_60px_rgba(154,14,31,0.25),0_0_0_1px_rgba(154,14,31,0.2)] hover:shadow-[0_28px_70px_rgba(154,14,31,0.35),0_0_0_1px_rgba(154,14,31,0.4)]"
+                  : pkg.isEnterprise
+                  ? "shadow-[0_8px_30px_rgba(255,255,255,0.03),0_0_0_1px_rgba(255,255,255,0.07)] hover:shadow-[0_16px_50px_rgba(255,255,255,0.06),0_0_0_1px_rgba(255,255,255,0.12)]"
+                  : "shadow-[0_8px_30px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.07)] hover:shadow-[0_16px_50px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.12)]"
+                }`}
+              style={{
+                background: pkg.isPopular
+                  ? "linear-gradient(160deg, #111 0%, #0d0d0d 60%, #0a0a0a 100%)"
+                  : pkg.isEnterprise
+                  ? "linear-gradient(160deg, #0f0f0d 0%, #0a0a09 100%)"
+                  : "#0a0a0a",
+              }}
             >
-              <PricingCardContent pkg={pkg} openProjectModal={openProjectModal} />
+              {/* Featured glow overlay */}
+              {pkg.isPopular && (
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute top-0 left-0 right-0 h-[120px] bg-gradient-to-b from-[#9A0E1F]/12 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 h-[80px] bg-gradient-to-t from-[#9A0E1F]/6 to-transparent" />
+                </div>
+              )}
+
+              {/* Enterprise gold tint */}
+              {pkg.isEnterprise && (
+                <div className="absolute inset-0 bg-gradient-to-b from-[#c9a84c]/5 to-transparent pointer-events-none" />
+              )}
+
+              {/* Top accent bar */}
+              <div className={`h-[2px] w-full ${
+                pkg.isPopular
+                  ? "bg-gradient-to-r from-transparent via-[#9A0E1F] to-transparent"
+                  : pkg.isEnterprise
+                  ? "bg-gradient-to-r from-transparent via-[#c9a84c]/40 to-transparent"
+                  : "bg-gradient-to-r from-transparent via-white/10 to-transparent"
+              }`} />
+
+              {/* Dot grid pattern */}
+              <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" width="100%" height="100%">
+                <defs>
+                  <pattern id={`dots-${pkg.id}`} width="18" height="18" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="1" fill="white" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill={`url(#dots-${pkg.id})`} />
+              </svg>
+
+              {/* Content */}
+              <div className="flex flex-col flex-grow p-6 z-10 relative">
+                {/* Popular badge */}
+                {pkg.isPopular && (
+                  <div className="mb-5 self-start">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9A0E1F]/20 border border-[#9A0E1F]/40 text-[#9A0E1F] text-[9px] font-bold tracking-widest uppercase">
+                      <span className="w-1 h-1 rounded-full bg-[#9A0E1F] animate-pulse" />
+                      Most Popular
+                    </span>
+                  </div>
+                )}
+
+                {/* Enterprise badge */}
+                {pkg.isEnterprise && (
+                  <div className="mb-5 self-start">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c9a84c]/10 border border-[#c9a84c]/25 text-[#c9a84c] text-[9px] font-bold tracking-widest uppercase">
+                      <span className="w-1 h-1 rounded-full bg-[#c9a84c]" />
+                      Enterprise
+                    </span>
+                  </div>
+                )}
+
+                {/* Plan name */}
+                <h3 className={`text-[11px] font-bold tracking-[0.25em] uppercase mb-5 ${
+                  pkg.isPopular ? "text-[#9A0E1F]"
+                  : pkg.isEnterprise ? "text-[#c9a84c]/70"
+                  : "text-white/40"
+                }`}>
+                  {pkg.name}
+                </h3>
+
+                {/* Price */}
+                <div className="flex items-baseline gap-1 mb-2">
+                  {pkg.currency && (
+                    <span className={`font-bold leading-none ${
+                      pkg.isPopular ? "text-[#9A0E1F]/80" : "text-white/40"
+                    }`} style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)" }}>
+                      {pkg.currency}
+                    </span>
+                  )}
+                  <span className={`font-black tracking-tighter leading-none ${
+                    pkg.isPopular
+                      ? "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70"
+                      : pkg.isEnterprise
+                      ? "bg-clip-text text-transparent bg-gradient-to-b from-[#e8c87a] to-[#c9a84c]/70"
+                      : "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60"
+                  }`} style={{ fontSize: "clamp(2.4rem, 4vw, 3.2rem)" }}>
+                    {pkg.price}
+                  </span>
+                </div>
+                <p className="text-white/35 text-[11px] leading-relaxed mb-6 min-h-[32px] font-light">
+                  {pkg.target}
+                </p>
+
+                {/* Divider */}
+                <div className={`w-full h-px mb-4 ${
+                  pkg.isPopular ? "bg-[#9A0E1F]/15" : "bg-white/[0.05]"
+                }`} />
+
+                {/* Features */}
+                <div className="flex-grow flex flex-col mb-8">
+                  <p className="text-white/20 text-[9px] tracking-widest uppercase font-bold mb-1">Includes</p>
+                  {pkg.features.map((feature: any, i: number) => (
+                    <FeatureItem key={i} label={feature.label} details={feature.details} />
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <button
+                  onClick={openProjectModal}
+                  className={`mt-auto w-full py-3.5 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase
+                    transition-all duration-300 ease-out
+                    hover:-translate-y-[2px] hover:brightness-110 active:scale-[0.98]
+                    ${pkg.isPopular
+                      ? "bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white shadow-[0_6px_24px_rgba(154,14,31,0.35)] hover:shadow-[0_8px_32px_rgba(154,14,31,0.55)]"
+                      : pkg.isEnterprise
+                      ? "bg-gradient-to-r from-[#c9a84c]/20 to-[#c9a84c]/10 text-[#c9a84c] border border-[#c9a84c]/25 hover:bg-[#c9a84c]/20 hover:border-[#c9a84c]/50"
+                      : "bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black hover:border-white"
+                    }`}
+                >
+                  {pkg.ctaText}
+                </button>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-// Extracted card content to avoid duplication
-function PricingCardContent({ pkg, openProjectModal }: { pkg: any, openProjectModal: () => void }) {
-  return (
-    <>
-      {/* Highlight / Glow Behind Card */}
-      {pkg.isPopular && (
-        <div className="absolute inset-0 bg-gradient-to-b from-[#B11226]/10 to-transparent pointer-events-none" />
-      )}
-      
-      {/* Image Area */}
-      <div className="relative h-20 w-full overflow-hidden bg-[#111]">
-        <div 
-          className={`absolute inset-0 bg-gradient-to-br ${pkg.imageGradient} opacity-60 z-10 transition-opacity duration-300 group-hover:opacity-40`} 
-        />
-        
-        {pkg.isPopular && (
-          <div className="absolute top-4 right-4 z-20">
-            <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#B11226]/20 border border-[#B11226]/50 text-[#B11226] text-[9px] font-bold tracking-widest uppercase">
-              Most Popular
-            </span>
-          </div>
-        )}
-        
-        <svg className="absolute inset-0 w-full h-full opacity-20 text-white mix-blend-overlay" width="100%" height="100%">
-            <defs>
-              <pattern id={`grid-${pkg.id}`} width="20" height="20" patternUnits="userSpaceOnUse">
-                <rect width="20" height="20" fill="none"></rect>
-                <circle cx="2" cy="2" r="1.5" fill="currentColor"></circle>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill={`url(#grid-${pkg.id})`}></rect>
-        </svg>
-      </div>
-
-      {/* Content block */}
-      <div className="flex flex-col flex-grow p-6 pt-5 z-10">
-        <div className="mb-4">
-          <h3 className="text-white text-[12px] font-bold tracking-[0.2em] uppercase mb-2">
-            {pkg.name}
-          </h3>
-          <div className="flex items-baseline gap-1 mb-1">
-            <span className={`text-4xl font-black tracking-tighter ${pkg.isPopular ? "text-[#B11226]" : "text-white"}`}>
-              {pkg.price}
-            </span>
-          </div>
-          <p className="text-white/40 text-[11px] leading-relaxed min-h-[32px]">
-            {pkg.target}
-          </p>
-        </div>
-
-        <div className="w-full h-px bg-white/5 mb-4" />
-
-        <div className="flex-grow flex flex-col mb-8">
-          <p className="text-white/30 text-[9px] tracking-widest uppercase font-bold mb-2">Includes</p>
-          {pkg.features.map((feature: any, i: number) => (
-            <FeatureItem key={i} label={feature.label} details={feature.details} />
-          ))}
-        </div>
-
-        <button 
-          onClick={openProjectModal}
-          className={`mt-auto w-full py-3.5 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
-            pkg.isPopular
-              ? "bg-gradient-to-r from-[#B11226] to-[#7a0b19] text-white hover:scale-[1.02]"
-              : "bg-white/5 text-white hover:bg-white hover:text-black hover:scale-[1.02]"
-          }`}
-        >
-          {pkg.ctaText}
-        </button>
-      </div>
-    </>
   );
 }

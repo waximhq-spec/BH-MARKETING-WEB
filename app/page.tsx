@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import SmartVideo from "@/components/SmartVideo";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
@@ -34,7 +34,7 @@ function Reveal({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, delay: delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, delay: delay, ease: "easeOut" }}
       className={`will-change-[transform,opacity] transform-gpu ${className}`}
       style={{ transform: "translateZ(0)", ...style }}
     >
@@ -49,170 +49,250 @@ function Reveal({
 const SERVICES_DATA = [
   {
     num: "01",
-    title: "Food & Hospitality Content",
-    desc: "Appetizing, high-converting cinematic visuals that drive footfall and build authority.",
+    title: "Food & Hospitality",
+    desc: "We create cinematic food content that drives footfall and builds authority.",
     sub: ["Reels & Short-form Ads", "Menu & Food Cinematography", "Social Media Packages"],
   },
   {
     num: "02",
     title: "Real Estate & Spaces",
-    desc: "Cinematic property visuals that sell the lifestyle, not just the space.",
+    desc: "We shoot properties that attract buyers and increase inquiries.",
     sub: ["Interior Shoots", "Exterior Cinematics", "Drone Coverage"],
   },
   {
     num: "03",
-    title: "Brand Commercials",
-    desc: "High-end brand stories that make your audience feel - not just watch.",
-    sub: ["Creative Direction", "Storyboarding", "Production"],
+    title: "Gyms & Fitness",
+    desc: "Content that brings more people into your gym.",
+    sub: ["Training Promos", "Facility Tours", "Client Transformations"],
   },
   {
     num: "04",
-    title: "Post-Production",
-    desc: "Precision editing - colour, sound, and cut to a premium standard.",
-    sub: ["Color Grading", "Sound Design", "Motion Graphics"],
+    title: "Hotels & Resorts",
+    desc: "Visuals that increase bookings and guest interest.",
+    sub: ["Room Showcases", "Lifestyle Shoots", "Amenity Coverage"],
+  },
+  {
+    num: "05",
+    title: "Ads & E-commerce",
+    desc: "Content that drives clicks, sales, and conversions.",
+    sub: ["Product Cinematics", "Direct Response Ads", "Explainer Videos"],
+  },
+  {
+    num: "06",
+    title: "Luxury Lifestyle & Automotive",
+    desc: "Content that attracts high-end clients for cars, yachts, and premium brands.",
+    sub: ["Exotic Automotive Shoots", "Luxury Yacht Coverage", "Personal & Corporate Events"],
   },
 ];
 
-function ServicesTable() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+/* ─────────────────────────────────────────────────────────────
+   Cinematic Hero Blur — scroll-linked depth-of-field effect
+   ─────────────────────────────────────────────────────────── */
+function HeroBlurWrapper({ children }: { children: React.ReactNode }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement | null>(null);
 
-  const secondary = SERVICES_DATA.slice(1);
+  const { scrollY } = useScroll();
+
+  // Map scroll position to blur + opacity
+  // Start blurring after 100px of scroll, fully blurred by 600px
+  const blurAmount = useTransform(scrollY, [100, 600], [0, 14]);
+  const opacityAmount = useTransform(scrollY, [100, 500], [1, 0.2]);
+
+  useMotionValueEvent(blurAmount, "change", (blur) => {
+    if (wrapperRef.current) {
+      const opacity = opacityAmount.get();
+      wrapperRef.current.style.filter = blur > 0.1 ? `blur(${blur}px)` : "none";
+      wrapperRef.current.style.opacity = String(opacity);
+    }
+  });
 
   return (
-    <div className="flex flex-col gap-0">
+    <div
+      ref={wrapperRef}
+      className="absolute inset-0 w-full h-full will-change-[filter,opacity] transform-gpu"
+      style={{ transition: "filter 0.1s linear, opacity 0.1s linear" }}
+    >
+      {children}
+    </div>
+  );
+}
 
-      {/* ── Featured Service: Food & Hospitality ── */}
-      <Reveal>
+/* ─────────────────────────────────────────────────────────────
+   Section Blur — blurs a section as user scrolls past it
+   ─────────────────────────────────────────────────────────── */
+function SectionBlurWrapper({ children }: { children: React.ReactNode }) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Blur kicks in during the last 30% of section visibility
+  const blurAmount = useTransform(scrollYProgress, [0.65, 1], [0, 10]);
+  const opacityAmount = useTransform(scrollYProgress, [0.65, 1], [1, 0.3]);
+
+  useMotionValueEvent(blurAmount, "change", (blur) => {
+    if (contentRef.current) {
+      const opacity = opacityAmount.get();
+      contentRef.current.style.filter = blur > 0.1 ? `blur(${blur}px)` : "none";
+      contentRef.current.style.opacity = String(opacity);
+    }
+  });
+
+  return (
+    <div ref={sectionRef} className="relative">
+      <div
+        ref={contentRef}
+        className="will-change-[filter,opacity] transform-gpu"
+        style={{ transition: "filter 0.08s linear, opacity 0.08s linear" }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ServicesTable() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const secondary = SERVICES_DATA.slice(1);
+
+  // Shared row renderer for cleanliness
+  const renderRow = (
+    svc: typeof SERVICES_DATA[0],
+    idx: number,
+    isFeatured: boolean,
+    delay: number,
+    bgImage?: string
+  ) => {
+    const isHovered = hoveredIndex === idx;
+    const isDimmed = hoveredIndex !== null && hoveredIndex !== idx;
+
+    return (
+      <Reveal key={svc.num} delay={delay}>
         <div
-          className="group relative overflow-hidden rounded-[4px] mb-3"
-          onMouseEnter={() => setHoveredIndex(0)}
+          className={`group relative flex flex-col border-b transition-all duration-500 ease-out overflow-hidden
+            ${ isDimmed ? "opacity-30" : "opacity-100" }
+            ${ isFeatured
+              ? "border-[#9A0E1F]/20"
+              : isHovered
+              ? "border-white/15 bg-white/[0.025]"
+              : "border-white/8"
+            }`}
+          onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
-          style={{ minHeight: "320px" }}
         >
-          {/* Cinematic food background image */}
-          <Image
-            src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"
-            alt="Food & Hospitality Content"
-            fill
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 1200px"
-            className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[1400ms] ease-out transform-gpu will-change-transform"
-            style={{ transform: "translateZ(0)" }}
-          />
-          {/* Dark cinematic overlay */}
-          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-700 transform-gpu" style={{ transform: "translateZ(0)" }} />
-          {/* Subtle upward gradient for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transform-gpu" style={{ transform: "translateZ(0)" }} />
+          {/* ── Background: image for featured, glow for rest ── */}
+          {isFeatured ? (
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt="Food & Hospitality Content"
+                fill
+                loading="lazy"
+                sizes="100vw"
+                className="object-cover scale-100 group-hover:scale-[1.03] transition-transform duration-[1400ms] ease-out opacity-50"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-black/85" />
+              {/* Featured red glow tint */}
+              <div className="absolute inset-0 bg-[#9A0E1F]/5" />
+            </div>
+          ) : (
+            <div
+              className={`absolute inset-0 z-0 transition-opacity duration-500 ${
+                isHovered ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/5 via-transparent to-transparent" />
+            </div>
+          )}
 
-          <div className="relative z-10 flex flex-col h-full justify-between p-8 md:p-12 lg:p-14" style={{ minHeight: "320px" }}>
-            {/* Top row */}
-            <div className="flex items-center justify-between">
-              <span className="text-[#B11226] font-mono text-[10px] tracking-[0.4em] font-bold">Featured / 01</span>
-              <div className="px-3 py-1 bg-[#B11226] text-white text-[8px] font-mono font-bold tracking-widest uppercase rounded-[2px]">High Retention</div>
+          {/* ── Always-on left accent bar ── */}
+          <div
+            className={`absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-500 ease-out z-10
+              ${ isFeatured
+                ? "bg-gradient-to-b from-[#9A0E1F] to-[#9A0E1F]/30 scale-y-100"
+                : isHovered
+                ? "bg-[#9A0E1F] scale-y-100"
+                : "bg-white/10 scale-y-100"
+              } origin-top`}
+          />
+
+          {/* ── Row content ── */}
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-14 py-10 md:py-14 px-4">
+
+            {/* Left: Number + Title [25%] */}
+            <div className="flex items-start gap-5 md:w-[25%]">
+              <span className={`font-mono text-[9px] tracking-[0.3em] pt-1 transition-colors duration-300 shrink-0 ${
+                isFeatured ? "text-[#9A0E1F]" : isHovered ? "text-[#9A0E1F]" : "text-white/25"
+              }`}>
+                {svc.num}
+              </span>
+              <div className="flex flex-col gap-1.5">
+                {isFeatured && (
+                  <span className="text-[#9A0E1F] font-mono text-[8px] tracking-[0.35em] font-bold uppercase leading-none">Featured</span>
+                )}
+                <h3
+                  className="font-black antialiased leading-[1.05] text-white"
+                  style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.55rem)", letterSpacing: "-0.025em" }}
+                >
+                  {svc.title}
+                </h3>
+              </div>
             </div>
 
-            {/* Bottom row */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <div className="max-w-xl">
-                <h3 className="text-white font-black leading-[0.9] tracking-tighter mb-4" style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", letterSpacing: "-0.04em" }}>
-                  FOOD &<br />HOSPITALITY CONTENT
-                </h3>
-                <p className="text-white/70 text-base md:text-xl font-light leading-relaxed max-w-md">
-                  Cinematic content that makes people choose your restaurant before they even arrive.
-                </p>
-              </div>
-              <button type="button" className="group/btn flex items-center gap-3 px-8 py-4 bg-white text-black font-mono text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#B11226] hover:text-white rounded-sm">
-                View Work <span className="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
-              </button>
+            {/* Center: Description [35%] */}
+            <div className="md:w-[35%]">
+              <p className={`text-[14px] leading-[1.7] antialiased font-light ${
+                isFeatured ? "text-white/88" : "text-white/70"
+              }`}>
+                {svc.desc}
+              </p>
+            </div>
+
+            {/* Right-center: Includes [20%] */}
+            <div className="md:w-[20%] flex flex-col gap-2">
+              <p className="text-[8px] font-mono tracking-[0.25em] uppercase text-white/30 font-bold mb-1.5">Includes</p>
+              {svc.sub.map((subItem, sIdx) => (
+                <div key={sIdx} className="flex items-center gap-2.5">
+                  <span className={`text-[8px] leading-none shrink-0 ${
+                    isFeatured ? "text-[#9A0E1F]/60" : "text-white/25"
+                  }`}>—</span>
+                  <span className="text-[10px] text-white/45 antialiased leading-snug">{subItem}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Far-right: CTA [15%] */}
+            <div className="md:w-[15%] flex justify-end">
+              <Link
+                href="/services"
+                className={`inline-flex items-center gap-2.5 px-6 py-3.5 border font-mono text-[8px] tracking-[0.2em] uppercase rounded-[2px] transition-all duration-300 ease-out group/btn
+                  ${ isFeatured
+                    ? "border-[#9A0E1F]/50 text-white/80 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F] hover:text-white shadow-[0_0_16px_rgba(154,14,31,0.15)]"
+                    : "border-white/10 text-white/50 bg-transparent hover:border-white/30 hover:text-white"
+                  }`}
+              >
+                Explore
+                <span className="text-[11px] leading-none transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
+              </Link>
             </div>
           </div>
         </div>
       </Reveal>
+    );
+  };
 
-      {/* ── Secondary Services ── */}
-      <div className="flex flex-col border-t border-white/10">
-        {secondary.map((svc, i) => {
-          const idx = i + 1;
-          const isHovered = hoveredIndex === idx;
-          const isOpen = openAccordion === idx;
-          const isDimmed = hoveredIndex !== null && hoveredIndex !== idx;
-          return (
-            <Reveal key={svc.num} delay={i * 0.06}>
-              <div
-                className={`group relative flex flex-col border-b border-white/10 transition-all duration-500
-                  ${isDimmed ? "opacity-30" : "opacity-100"}`}
-              >
-                {/* Left accent */}
-                <div
-                  className={`absolute left-0 top-0 bottom-0 w-[2px] bg-[#B11226] origin-bottom transition-transform duration-500 ease-out z-10
-                    ${isHovered || isOpen ? "scale-y-100" : "scale-y-0"}`}
-                />
+  return (
+    <div className="flex flex-col gap-0">
+      {/* Featured */}
+      {renderRow(SERVICES_DATA[0], 1, true, 0)}
 
-                <div
-                  onMouseEnter={() => setHoveredIndex(idx)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={() => setOpenAccordion(isOpen ? null : idx)}
-                  className="flex flex-row items-center justify-between gap-4 md:gap-8 py-7 md:py-8 px-2 cursor-pointer"
-                >
-                  {/* Number */}
-                  <span className={`font-mono text-[10px] tracking-[0.4em] shrink-0 w-10 transition-colors duration-300 ${isOpen ? "text-[#B11226]" : "text-white/25 group-hover:text-[#B11226]"}`}>
-                    {svc.num}
-                  </span>
-
-                  {/* Title */}
-                  <h3
-                    className={`flex-1 font-black transition-all duration-300 group-hover:translate-x-1 leading-tight ${isOpen ? "text-white translate-x-1" : "text-white/80 group-hover:text-white"}`}
-                    style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.5rem)", letterSpacing: "-0.03em" }}
-                  >
-                    {svc.title}
-                  </h3>
-
-                  {/* Desc */}
-                  <p className="md:flex-1 text-sm text-white/45 leading-relaxed font-light group-hover:text-white/70 transition-colors duration-300 max-w-sm hidden md:block">
-                    {svc.desc}
-                  </p>
-
-                  {/* Toggle CTA */}
-                  <div className="shrink-0 flex items-center justify-end w-8">
-                    <motion.div
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.3 }}
-                      className={`text-xl font-light transition-colors duration-300 ${isOpen || isHovered ? "text-[#B11226]" : "text-white/40"}`}
-                    >
-                      +
-                    </motion.div>
-                  </div>
-                </div>
-
-                {/* Dropdown body */}
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-2 md:pl-[84px] pb-8 flex flex-col md:flex-row gap-6 md:gap-12 w-full items-start">
-                        <div className="flex flex-col gap-3 flex-1">
-                          <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#B11226] font-bold mb-1">Includes</p>
-                          {svc.sub.map((subItem, sIdx) => (
-                            <div key={sIdx} className="flex items-center gap-3">
-                              <span className="w-1 h-1 bg-[#B11226] rounded-full shrink-0" />
-                              <span className="text-sm text-white/70">{subItem}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </Reveal>
-          );
-        })}
+      {/* Secondary */}
+      <div className="flex flex-col">
+        {secondary.map((svc, i) => renderRow(svc, i + 2, false, i * 0.06))}
       </div>
     </div>
   );
@@ -269,14 +349,16 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="relative h-[100svh] min-h-[600px] w-full overflow-hidden flex flex-col">
+        <section data-theme="dark" className="relative h-[100svh] min-h-[600px] w-full overflow-hidden flex flex-col" id="hero-section">
+          {/* Cinematic scroll blur wrapper */}
+          <HeroBlurWrapper>
           <SmartVideo 
             src="/bg-rest.mp4" 
             autoPlay={true}
             className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2] anim-slow-zoom"
           />
           {/* Base darkening */}
-          <div className="absolute inset-0 bg-black/60 z-[1]" />
+          <div className="absolute inset-0 bg-black/75 z-[1]" />
           {/* Subtle amber/red radial gradient for depth */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_80%)] z-[1]" />
           {/* Cinematic vignette */}
@@ -289,7 +371,7 @@ export default function LandingPage() {
             style={{ transform: "translateZ(0)" }}
           />
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80 z-[3] transform-gpu"
+            className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 z-[3] transform-gpu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.5 }}
@@ -300,38 +382,36 @@ export default function LandingPage() {
           <div className="absolute inset-0 z-[3] pointer-events-none">
             <div className="container h-full relative">
               {/* Vertical Lines */}
-              <div className="absolute inset-0 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-0 opacity-[0.06]">
+              <div className="absolute inset-0 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-0 opacity-[0.03]">
                 {[...Array(13)].map((_, i) => (
                   <div key={i} className="border-r border-white h-full" />
                 ))}
               </div>
               
               {/* Horizontal Lines */}
-              <div className="absolute left-0 right-0 top-[15%] border-t border-white/10" />
-              <div className="absolute left-0 right-0 bottom-[25%] border-t border-white/10" />
-              <div className="absolute left-0 right-0 bottom-[10%] border-t border-white/10" />
+              <div className="absolute left-0 right-0 top-[15%] border-t border-white/5" />
+              <div className="absolute left-0 right-0 bottom-[25%] border-t border-white/5" />
+              <div className="absolute left-0 right-0 bottom-[10%] border-t border-white/5" />
             </div>
           </div>
 
-          <div className="container relative z-[4] flex flex-col h-full">
-            {/* Top Metadata */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between pt-16 md:pt-24 lg:pt-16 gap-2 shrink-0">
-              <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-white/35 font-mono tracking-[0.3em] uppercase text-[7px] md:text-[9px]">[ Cinmach Productions · Manama ]</motion.p>
-            </div>
+          <div className="container relative z-[4] flex flex-col h-full justify-center">
+            {/* Top Metadata Removed */}
             
-            <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center py-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 items-start py-4">
               {/* LEFT: CONTENT AREA */}
-              <div className="lg:col-span-7 flex flex-col justify-center">
+              <div className="lg:col-span-7 flex flex-col mt-12">
                 <Reveal delay={0.2}>
-                  <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 font-black leading-[0.9] tracking-tight mb-4 lg:mb-5" style={{ fontSize: "clamp(2.5rem, 12vw, 5.5rem)", letterSpacing: "-0.02em" }}>
-                    Cinematic<br />
-                    content for<br />
-                    <span className="text-[#B11226] uppercase">RESTAURANTS<br />&amp; CAFÉS.</span>
+                  <h1 className="text-white font-black leading-[0.9] tracking-tighter mb-6 lg:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ fontSize: "clamp(2.5rem, 12vw, 5.5rem)", letterSpacing: "-0.04em" }}>
+                    <span className="block whitespace-nowrap text-[0.8em] font-semibold tracking-tight mb-2">
+                      Content that <span className="italic">fills</span>
+                    </span>
+                    <span className="text-[#9A0E1F] uppercase drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">RESTAURANTS<br />&amp; CAFÉS.</span>
                   </h1>
                 </Reveal>
                 <Reveal delay={0.4} className="max-w-xl">
-                  <p className="text-white/60 text-[14px] md:text-[15px] lg:text-base leading-relaxed font-light pr-4 md:pr-0 mb-6 md:mb-8 lg:max-w-md">
-                    We create high-end cinematic visuals that drive footfall, elevate perception, and turn views into real bookings.
+                  <p className="text-white/85 text-[14px] md:text-[15px] lg:text-base leading-relaxed font-light pr-4 md:pr-0 mb-8 md:mb-10 lg:max-w-md">
+                    We create scroll-stopping content that grabs attention and turns it into real customers at your tables.
                   </p>
                 </Reveal>
 
@@ -350,25 +430,25 @@ export default function LandingPage() {
               </div>
 
               {/* RIGHT: CONVERSION CARD (Desktop Only) */}
-              <div className="hidden lg:flex lg:col-span-5 flex-col items-center justify-center">
+              <div className="hidden lg:flex lg:col-span-5 flex-col items-end">
                 <motion.div 
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
-                  className="w-full max-w-[380px]"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+                  className="w-full max-w-[400px]"
                 >
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    className="relative w-full bg-black/40 backdrop-blur-[4px] border border-white/10 p-6 lg:p-8 shadow-[0_30px_100px_rgba(0,0,0,0.5)] group transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_40px_120px_rgba(0,0,0,0.7)] hover:border-white/20 will-change-transform transform-gpu"
+                    className="relative w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-6 lg:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)] group transition-all duration-500 hover:scale-[1.02] hover:border-white/20 will-change-transform transform-gpu"
                   >
                     {/* Architectural Accent */}
-                    <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#B11226]/40 -translate-y-4 translate-x-4 transition-transform duration-700 group-hover:translate-x-0 group-hover:translate-y-0" />
+                    <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#9A0E1F]/40 -translate-y-4 translate-x-4 transition-transform duration-700 group-hover:translate-x-0 group-hover:translate-y-0" />
                     
                     <div className="relative z-10">
                       <div className="flex items-center gap-2 mb-4">
-                        <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse shadow-[0_0_10px_#B11226]" />
-                        <span className="text-[#B11226] font-mono text-[8px] uppercase tracking-widest font-bold">Direct Booking</span>
+                        <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse shadow-[0_0_10px_#9A0E1F]" />
+                        <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-widest font-bold">Direct Booking</span>
                       </div>
                       
                       <h3 className="text-white font-bold text-xl mb-1 tracking-tight uppercase">Start Your Shoot</h3>
@@ -376,28 +456,48 @@ export default function LandingPage() {
                       
                       <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
                         <div className="relative group/input">
-                          <input type="text" placeholder="Your Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#ff2a2a]/50 transition-all duration-300 rounded-none placeholder:text-white/30" />
-                          <div className="absolute inset-0 bg-[#B11226]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
+                          <input type="text" placeholder="Your Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#9A0E1F]/50 transition-all duration-300 rounded-none placeholder:text-white/30 bg-white/[0.02]" />
+                          <div className="absolute inset-0 bg-[#9A0E1F]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
                         </div>
                         
                         <div className="relative group/input">
-                          <input type="text" placeholder="Business Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#ff2a2a]/50 transition-all duration-300 rounded-none placeholder:text-white/30" />
-                          <div className="absolute inset-0 bg-[#B11226]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
+                          <input type="text" placeholder="Business Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#9A0E1F]/50 transition-all duration-300 rounded-none placeholder:text-white/30 bg-white/[0.02]" />
+                          <div className="absolute inset-0 bg-[#9A0E1F]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
                         </div>
                         
                         <div className="relative group/input">
-                          <input type="text" placeholder="Phone / WhatsApp" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#ff2a2a]/50 transition-all duration-300 rounded-none placeholder:text-white/30" />
-                          <div className="absolute inset-0 bg-[#B11226]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
+                          <input type="text" placeholder="Phone / WhatsApp" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#9A0E1F]/50 transition-all duration-300 rounded-none placeholder:text-white/30 bg-white/[0.02]" />
+                          <div className="absolute inset-0 bg-[#9A0E1F]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
                         </div>
                         
-                        <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#B11226] hover:text-white active:scale-95 active:bg-[#8B101F] transition-all duration-500 shadow-xl flex items-center justify-center gap-4 overflow-hidden relative rounded-sm">
-                          <span className="relative z-10">Book Your Shoot</span>
-                          <span className="relative z-10 transform group-hover/btn:translate-x-2 transition-transform duration-500 text-lg">→</span>
+                        <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#9A0E1F] hover:text-white hover:scale-[1.02] hover:brightness-110 active:scale-95 transition-all duration-200 ease-out shadow-xl flex items-center justify-center gap-4 overflow-hidden relative rounded-sm">
+                          <span className="relative z-10 transition-transform duration-200 group-hover/btn:scale-[1.02]">Book Your Shoot</span>
+                          <span className="relative z-10 transform group-hover/btn:translate-x-2 transition-transform duration-200 text-lg">→</span>
                         </button>
                       </form>
                       
                       <p className="text-white/20 text-[8px] text-center mt-4 font-mono tracking-widest uppercase">Response within 24 hours</p>
                     </div>
+                  </motion.div>
+
+                  {/* Trust Signal Testimonial Slider */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-4 w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)]"
+                  >
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-[1px] w-4 bg-[#9A0E1F]/40" />
+                        <span className="text-white/60 font-mono text-[7px] uppercase tracking-[0.4em] font-bold">Client Results</span>
+                      </div>
+                      <div className="relative h-12 flex items-center">
+                        <TestimonialRotation />
+                      </div>
+                    </div>
+                    {/* Subtle accent line */}
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/30 to-transparent" />
                   </motion.div>
                 </motion.div>
               </div>
@@ -406,153 +506,104 @@ export default function LandingPage() {
               <div className="lg:hidden flex flex-col items-start gap-4">
                 <Reveal delay={0.5}>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="w-1.5 h-1.5 bg-[#B11226] rounded-full animate-pulse" />
-                    <span className="text-[#B11226] font-mono text-[8px] md:text-[9px] uppercase tracking-widest font-bold">Now Booking — Limited Slots</span>
+                    <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
+                    <span className="text-[#9A0E1F] font-mono text-[8px] md:text-[9px] uppercase tracking-widest font-bold">Now Booking — Limited Slots</span>
                   </div>
                 </Reveal>
                 
                 <Reveal delay={0.6}>
                   <button 
                     onClick={openProjectModal}
-                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-white text-black text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-[0_20px_50px_rgba(177,18,38,0.3)] hover:shadow-[0_20px_50px_rgba(177,18,38,0.5)] rounded-sm"
+                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-white text-black text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-[0_20px_50px_rgba(154,14,31,0.3)] hover:shadow-[0_20px_50px_rgba(154,14,31,0.5)] rounded-sm"
                   >
-                     <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#B11226] z-20" />
+                     <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#9A0E1F] z-20" />
                      <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
                        BOOK YOUR SHOOT <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70 group-hover:opacity-100">→</span>
                      </span>
-                     <div className="absolute inset-0 bg-[#B11226] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                     <div className="absolute inset-0 bg-[#9A0E1F] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
                   </button>
                 </Reveal>
+
+                {/* Mobile Testimonial Slider */}
+                <div className="w-full mt-2">
+                  <Reveal delay={0.7}>
+                    <div className="w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)]">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="h-[1px] w-3 bg-[#9A0E1F]/40" />
+                        <span className="text-white/60 font-mono text-[7px] uppercase tracking-[0.3em] font-bold block">Client Results</span>
+                      </div>
+                      <div className="relative h-10 flex items-center">
+                        <TestimonialRotation isMobile={true} />
+                      </div>
+                    </div>
+                  </Reveal>
+                </div>
               </div>
             </div>
 
             {/* Bottom Metrics */}
-            <div className="pb-8 md:pb-12 lg:pb-10 shrink-0">
-              <div className="flex flex-row justify-between lg:justify-start lg:items-end gap-2 border-t border-white/5 pt-4">
-                <div className="flex flex-row justify-between w-full lg:w-auto lg:flex-1 gap-2 md:gap-16">
-                  <Reveal delay={0.7}>
-                    <div className="flex flex-col">
-                      <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
-                        <CountUp end={40} suffix="+" />
-                      </span>
-                      <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Restaurants</span>
-                    </div>
-                  </Reveal>
-                  <Reveal delay={0.8}>
-                    <div className="flex flex-col">
-                      <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
-                        <CountUp end={3} suffix="x" />
-                      </span>
-                      <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Engagement</span>
-                    </div>
-                  </Reveal>
-                  <Reveal delay={0.9}>
-                    <div className="flex flex-col">
-                      <span className="text-white font-black text-xl md:text-4xl tracking-tighter">BH</span>
-                      <span className="text-white/30 font-mono text-[6px] md:text-[8px] uppercase tracking-widest mt-1">Bahrain</span>
-                    </div>
-                  </Reveal>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 2: RESTAURANT IMPACT (WHITE THEME)
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="light" className="defer-render py-32 md:py-40 bg-white text-black relative">
-          <div className="container relative z-10">
-            <Reveal>
-              <div className="flex items-center gap-4 mb-8">
-                <span className="w-8 h-px bg-[#B11226]" />
-                <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">For Restaurants &amp; Cafes</p>
-              </div>
-              <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.9] tracking-tight mb-12 lg:mb-16" style={{ fontSize: "clamp(2.2rem, 8vw, 4.5rem)", letterSpacing: "-0.02em" }}>
-                CONTENT THAT MAKES<br /><span className="text-black/20">THEM CHOOSE YOU.</span>
-              </h2>
-            </Reveal>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
-              <Reveal delay={0.1}>
-                <h3 className="font-bold text-xl md:text-2xl mb-6 leading-tight">Built for restaurants that want to stand out.</h3>
-                <p className="text-black/60 text-base md:text-lg leading-relaxed font-light mb-10 max-w-lg">
-                  We turn your food, space, and vibe into content that actually drives customers.<br className="hidden md:block" />
-                  Not just visuals — content that makes people choose you.
-                </p>
-                <div className="flex gap-4 items-center border-l-2 border-[#B11226] pl-6 py-2">
-                  <div className="text-black/30 uppercase tracking-widest text-[9px] font-mono">Before</div>
-                  <div className="h-px w-4 bg-black/10" />
-                  <div className="text-[#B11226] uppercase tracking-widest text-[9px] font-mono font-bold">The Transformation</div>
-                  <div className="h-px flex-1 bg-black/10 hidden sm:block" />
-                  <div className="text-black uppercase tracking-widest text-[9px] font-mono font-bold ml-auto sm:ml-0">After</div>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-[12px] md:text-base font-medium mt-4 pl-6 opacity-80 gap-2 sm:gap-0">
-                  <span>Generic Static Shots</span>
-                  <span className="text-black/20 hidden sm:block">→</span>
-                  <span className="text-left sm:text-right">Cinematic, High-Retention Reels</span>
-                </div>
-              </Reveal>
-              <Reveal delay={0.2} className="glass-panel border-black/10 p-6 md:p-10 hover-lift rounded-sm" style={{ background: "rgba(0,0,0,0.02)" }}>
-                <h4 className="font-mono text-[#B11226] text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Our Workflow</h4>
-                <ul className="flex flex-col gap-6">
-                  {[
-                    { step: "01", text: "Shoot", desc: "High-quality filming of your food and space" },
-                    { step: "02", text: "Edit", desc: "We turn the clips into exciting short videos" },
-                    { step: "03", text: "Deliver", desc: "Final videos sent, ready for social media" },
-                    { step: "04", text: "Growth", desc: "Reach more people and get more customers" },
-                  ].map((s, i) => (
-                    <li key={i} className="flex items-center gap-6 group">
-                      <span className="font-mono text-[#B11226] opacity-50 group-hover:opacity-100 transition-opacity text-xs">{s.step}</span>
-                      <div>
-                        <span className="block font-black text-black uppercase tracking-wide text-lg">{s.text}</span>
-                        <span className="text-black/40 text-sm mt-0.5">{s.desc}</span>
+            <div className="absolute bottom-0 left-0 right-0 z-10 pb-16 md:pb-24 lg:pb-20 w-full">
+              <div className="container mx-auto border-t border-white/5 pt-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* LEFT COLUMN: All 3 Metrics */}
+                  <div className="lg:col-span-7 flex flex-row items-end gap-12 md:gap-16 lg:gap-20">
+                    <Reveal delay={0.7}>
+                      <div className="flex flex-col">
+                        <span className="text-white font-black text-xl md:text-4xl tracking-tighter">GULF</span>
+                        <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">Clients</span>
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+                    </Reveal>
+                    <Reveal delay={0.8}>
+                      <div className="flex flex-col">
+                        <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
+                          <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
+                        </span>
+                        <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">Restaurants</span>
+                      </div>
+                    </Reveal>
+                    <Reveal delay={0.9}>
+                      <div className="flex flex-col">
+                        <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
+                          <CountUp start={0} end={300} duration={5} redraw={true} suffix="%" />
+                        </span>
+                        <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">More Engagement</span>
+                      </div>
+                    </Reveal>
+                  </div>
+
+                  {/* RIGHT COLUMN: Empty for now */}
+                  <div className="lg:col-span-5 hidden lg:block" />
+                </div>
+              </div>
             </div>
           </div>
+          </HeroBlurWrapper>
         </section>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 3: WHAT WE DO / SERVICES (BLACK THEME)
+            SECTION 2: PORTFOLIO / SELECTED WORK
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="defer-render py-32 md:py-40 bg-black text-white relative">
-          <div className="container">
-            <Reveal>
-              <div className="flex items-center gap-6 mb-3">
-                <div className="h-px flex-1 bg-white/10" />
-                <p className="text-[#B11226] font-mono tracking-[0.3em] uppercase text-[10px] shrink-0 font-bold">Services</p>
-              </div>
-            </Reveal>
-            <Reveal className="mb-10">
-              <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 font-black leading-[0.92] tracking-tight uppercase" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}>How we help<br />your place grow.</h2>
-              <p className="text-white/40 mt-6 max-w-lg font-light text-base md:text-lg">
-                No complex marketing talk here. Just high-quality videos that make people in Bahrain crave your food. Simple as that.
-              </p>
-            </Reveal>
-            <ServicesTable />
-          </div>
-        </section>
-
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 4: PORTFOLIO / SELECTED WORK
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <SectionBlurWrapper>
         <section data-theme="light" className="defer-render bg-white pt-40 pb-24">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-[2px] w-full bg-black mb-12" />
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
                 <div>
-                  <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[12px] font-bold mb-6">Our Work</p>
-                  <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight" style={{ fontSize: "clamp(2.8rem, 12vw, 10rem)", letterSpacing: "-0.02em" }}>
-                    PROJECTS<br />WE LOVE.
+                  <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full mb-10 opacity-80 transition-opacity hover:opacity-100">
+                    <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
+                    <span className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">Our Work</span>
+                  </div>
+                  <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
+                    CLIENT<br />WORK.
                   </h2>
                 </div>
-                <div className="max-w-xs pb-4">
-                  <p className="text-black/50 text-sm font-light leading-relaxed italic">
-                    Bringing those Manama vibes to the screen. Khalas, your search for a camera team ends here.
+                <div className="max-w-[340px] mt-28">
+                  <h4 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
+                    Built to turn views into real customers.
+                  </h4>
+                  <p className="text-black/85 text-[15px] md:text-base leading-relaxed font-light antialiased">
+                    A selection of client work crafted to drive attention, engagement, and real customer growth.
                   </p>
                 </div>
               </div>
@@ -562,47 +613,131 @@ export default function LandingPage() {
 
         <section data-theme="light" className="defer-render pb-32 md:pb-48 bg-white text-black overflow-hidden">
           <div className="container">
-             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-               <div className="lg:col-span-5">
-                 <Reveal delay={0.1}>
-                   <div className="group relative aspect-[9/16] glass-panel rounded-2xl overflow-hidden cursor-pointer hover-lift">
-                     <SmartVideo 
-                        src="https://www.pexels.com/download/video/3298720/" 
-                        poster="https://images.pexels.com/videos/3298720/pictures/preview-0.jpg"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
-                      />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.5)] z-[6]" />
-                     <div className="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
-                       <p className="text-[#ff2a2a] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">Hospitality</p>
-                       <h4 className="text-white font-black text-4xl tracking-tight">Culinary Art</h4>
-                     </div>
-                   </div>
-                 </Reveal>
-               </div>
-               <div className="lg:col-span-7 flex flex-col gap-8 md:gap-12">
-                 {[
+             <div className="flex flex-col gap-4 md:gap-6">
+               {(() => {
+                 const PORTFOLIO_VIDEOS = [
+                   { title: "Culinary Art", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3298720/", poster: "https://images.pexels.com/videos/3298720/pictures/preview-0.jpg" },
                    { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/12188718/", poster: "https://images.pexels.com/videos/12188718/pictures/preview-0.jpg" },
                    { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/", poster: "https://images.pexels.com/videos/5657164/pictures/preview-0.jpg" },
-                 ].map((video, idx) => (
-                   <Reveal key={idx} delay={0.15 + (idx * 0.1)}>
-                     <div className="group relative aspect-video overflow-hidden glass-panel rounded-2xl cursor-pointer hover-lift">
-                       <SmartVideo 
-                          src={video.vid} 
-                          poster={video.poster}
-                          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105" 
-                        />
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.5)] z-[6]" />
-                       <div className="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
-                         <p className="text-[#ff2a2a] font-mono text-[9px] tracking-[0.4em] uppercase mb-2">{video.cat}</p>
-                         <h4 className="text-white font-black text-4xl tracking-tight">{video.title}</h4>
+                 ];
+                 
+                 const chunks = [];
+                 for (let i = 0; i < PORTFOLIO_VIDEOS.length; i += 3) {
+                   chunks.push(PORTFOLIO_VIDEOS.slice(i, i + 3));
+                 }
+
+                 return chunks.map((chunk, chunkIdx) => {
+                   const isAlternate = chunkIdx % 2 !== 0;
+                   const largeVideo = chunk[0];
+                   const smallVideos = chunk.slice(1);
+                   
+                   return (
+                     <div key={chunkIdx} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6">
+                       
+                       {/* LARGE CARD (~60%) */}
+                       <div className={`lg:col-span-7 h-full ${isAlternate ? 'md:order-2 lg:order-2' : 'md:order-1 lg:order-1'}`}>
+                         {largeVideo && (
+                           <Reveal delay={0.1} className="h-full">
+                             <div className="group relative w-full h-full min-h-[400px] lg:min-h-[550px] aspect-[4/5] lg:aspect-auto bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                               <SmartVideo 
+                                  src={largeVideo.vid} 
+                                  poster={largeVideo.poster}
+                                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
+                                />
+                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 z-[5]" />
+                               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
+                               
+                               {/* Play Icon */}
+                               <div className="absolute inset-0 flex items-center justify-center z-[7] opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-95 group-hover:scale-100">
+                                 <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-2xl">
+                                   <div className="w-0 h-0 border-t-8 border-t-transparent border-l-[14px] border-l-white border-b-8 border-b-transparent ml-1" />
+                                 </div>
+                               </div>
+
+                               <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end z-10 pointer-events-none">
+                                 <p className="text-white/80 font-mono text-[9px] md:text-[10px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{largeVideo.cat}</p>
+                                 <h4 className="text-white font-bold text-3xl md:text-4xl tracking-tight drop-shadow-lg">{largeVideo.title}</h4>
+                               </div>
+                             </div>
+                           </Reveal>
+                         )}
+                       </div>
+
+                       {/* SMALL CARDS (~40%) */}
+                       <div className={`lg:col-span-5 flex flex-col gap-4 md:gap-6 ${isAlternate ? 'md:order-1 lg:order-1' : 'md:order-2 lg:order-2'}`}>
+                         {smallVideos.map((video, idx) => (
+                           <Reveal key={idx} delay={0.15 + (idx * 0.1)} className="flex-1 h-full">
+                             <div className="group relative w-full h-full min-h-[220px] aspect-video lg:aspect-auto bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-500">
+                               <SmartVideo 
+                                  src={video.vid} 
+                                  poster={video.poster}
+                                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
+                                />
+                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 z-[5]" />
+                               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
+                               
+                               {/* Play Icon */}
+                               <div className="absolute inset-0 flex items-center justify-center z-[7] opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-95 group-hover:scale-100">
+                                 <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-2xl">
+                                   <div className="w-0 h-0 border-t-6 border-t-transparent border-l-[10px] border-l-white border-b-6 border-b-transparent ml-1" />
+                                 </div>
+                               </div>
+
+                               <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-10 pointer-events-none">
+                                 <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-1 md:mb-2 font-bold drop-shadow-md">{video.cat}</p>
+                                 <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight drop-shadow-lg">{video.title}</h4>
+                               </div>
+                             </div>
+                           </Reveal>
+                         ))}
                        </div>
                      </div>
-                   </Reveal>
-                 ))}
-               </div>
+                   );
+                 });
+               })()}
              </div>
            </div>
          </section>
+        </SectionBlurWrapper>
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            SECTION 3: WHAT WE DO / SERVICES (BLACK THEME)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <SectionBlurWrapper>
+        <section data-theme="dark" className="defer-render py-32 md:py-40 bg-black text-white relative">
+          <div className="container">
+            <div className="flex flex-col">
+              <div className="h-px w-full bg-white/10 mb-12" />
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-16 md:mb-20">
+                <div>
+                  <Reveal>
+                    <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-10 opacity-80">
+                      <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
+                      <span className="text-white font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">Services</span>
+                    </div>
+                  </Reveal>
+                  <Reveal>
+                    <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
+                      SERVICES.
+                    </h2>
+                  </Reveal>
+                </div>
+                <Reveal>
+                  <div className="max-w-[340px] mt-28">
+                    <h4 className="text-white font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
+                      Built to turn views into real customers.
+                    </h4>
+                    <p className="text-white/85 text-[15px] md:text-base leading-relaxed font-light antialiased">
+                      We create content that drives attention, demand, and real customer growth.
+                    </p>
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+            <ServicesTable />
+          </div>
+        </section>
+        </SectionBlurWrapper>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 5: PROCESS
@@ -612,14 +747,14 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 6: PRICING
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <SectionBlurWrapper>
         <PricingSection />
+        </SectionBlurWrapper>
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 7: SOCIAL PROOF (REVERTED)
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 7: SOCIAL PROOF (REFINED)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <SectionBlurWrapper>
         <section data-theme="light" className="defer-render py-28 md:py-36 bg-white text-black overflow-hidden relative border-t border-black/5">
           <div className="container relative z-10">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-24">
@@ -627,9 +762,11 @@ export default function LandingPage() {
               {/* Left: Authority Block */}
               <div className="max-w-xl">
                 <Reveal>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="w-6 h-px bg-[#B11226]" />
-                    <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[9px] font-bold">Social Proof</p>
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full">
+                      <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
+                      <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Social Proof</span>
+                    </div>
                   </div>
                   <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight mb-10 uppercase" style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.02em" }}>
                     WHAT OUR<br /><span className="text-black/10">CLIENTS SAY.</span>
@@ -659,11 +796,14 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+        </SectionBlurWrapper>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 8: FAQ
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <SectionBlurWrapper>
         <FAQSection />
+        </SectionBlurWrapper>
       </main>
     </div>
 
@@ -671,30 +811,86 @@ export default function LandingPage() {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Testimonial Rotation Component
+   ─────────────────────────────────────────────────────────── */
+const HERO_TESTIMONIALS = [
+  "We started getting real customers within weeks.",
+  "Our bookings increased almost instantly.",
+  "Content actually brought people into our restaurant.",
+  "We saw a clear jump in customers after working with them.",
+  "Finally content that converts into real business.",
+];
+
+function TestimonialRotation({ isMobile = false }: { isMobile?: boolean }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % HERO_TESTIMONIALS.length);
+    }, 4800);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="w-full relative h-full">
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={index}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className={`text-white font-semibold italic ${isMobile ? "text-[12px]" : "text-[14px]"} leading-relaxed tracking-wide`}
+        >
+          &ldquo;{HERO_TESTIMONIALS[index]}&rdquo;
+        </motion.p>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
    Count-up Animation
    ─────────────────────────────────────────────────────────── */
-function CountUp({ end, duration = 1.5, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
+function CountUp({ 
+  end, 
+  start = 0, 
+  duration = 1.5, 
+  suffix = "", 
+  redraw = false 
+}: { 
+  end: number; 
+  start?: number; 
+  duration?: number; 
+  suffix?: string;
+  redraw?: boolean;
+}) {
+  const [count, setCount] = useState(start);
   const nodeRef = useRef<HTMLSpanElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let startTime: number;
-          const animate = (currentTime: number) => {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
-            // Ease out cubic
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(easeProgress * end));
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            }
-          };
-          requestAnimationFrame(animate);
+        if (entry.isIntersecting) {
+          if (!hasAnimated || redraw) {
+            setHasAnimated(true);
+            let startTime: number;
+            const animate = (currentTime: number) => {
+              if (!startTime) startTime = currentTime;
+              const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
+              // Ease out cubic
+              const easeProgress = 1 - Math.pow(1 - progress, 3);
+              setCount(Math.floor(start + (easeProgress * (end - start))));
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              }
+            };
+            requestAnimationFrame(animate);
+          }
+        } else if (redraw) {
+          setHasAnimated(false);
+          setCount(start);
         }
       },
       { threshold: 0.1 }
@@ -702,7 +898,7 @@ function CountUp({ end, duration = 1.5, suffix = "" }: { end: number; duration?:
 
     if (nodeRef.current) observer.observe(nodeRef.current);
     return () => observer.disconnect();
-  }, [end, duration, hasAnimated]);
+  }, [end, start, duration, redraw, hasAnimated]);
 
   return <span ref={nodeRef}>{count}{suffix}</span>;
 }

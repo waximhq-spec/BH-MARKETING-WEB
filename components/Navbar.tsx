@@ -136,7 +136,7 @@ export default function Navbar() {
             <img 
               src="/HERO-LOGO.svg" 
               alt="Cinmach" 
-              className="h-[18px] md:h-5 w-auto transition-all duration-400"
+              className="h-[26px] md:h-[32px] w-auto transition-all duration-400"
               style={{
                 filter: isLight 
                   ? "brightness(0)" 
@@ -225,7 +225,7 @@ export default function Navbar() {
                 <img 
                   src="/HERO-LOGO.svg" 
                   alt="Cinmach" 
-                  className="h-5 w-auto" 
+                  className="h-7 md:h-8 w-auto" 
                   style={{ filter: "brightness(0)" }} 
                 />
               </Link>

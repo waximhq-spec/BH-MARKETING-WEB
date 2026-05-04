@@ -184,19 +184,21 @@ function ServicesTable() {
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
-          {/* ── Background: image for featured, glow for rest ── */}
-          {isFeatured ? (
+          {/* ── Background: image for featured/specific, glow for rest ── */}
+          {(isFeatured || bgImage) ? (
             <div className="absolute inset-0 z-0">
               <Image
-                src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="Food & Hospitality Content"
+                src={bgImage || "https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"}
+                alt={svc.title}
                 fill
                 loading="lazy"
                 sizes="100vw"
-                className="object-cover scale-100 group-hover:scale-[1.03] transition-transform duration-[1400ms] ease-out opacity-50"
+                className={`object-cover scale-100 group-hover:scale-[1.03] transition-transform duration-[1400ms] ease-out ${
+                  isFeatured ? "opacity-60" : idx === 2 ? "opacity-35" : "opacity-20"
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-black/85" />
-              {/* Featured red glow tint */}
+              {/* Red glow tint */}
               <div className="absolute inset-0 bg-[#9A0E1F]/5" />
             </div>
           ) : (
@@ -253,30 +255,44 @@ function ServicesTable() {
             </div>
 
             {/* Right-center: Includes [20%] */}
-            <div className="md:w-[20%] flex flex-col gap-2">
-              <p className="text-[8px] font-mono tracking-[0.25em] uppercase text-white/30 font-bold mb-1.5">Includes</p>
+            <div className="md:w-[20%] flex flex-col gap-2.5">
+              <p className={`text-[8px] font-mono tracking-[0.3em] uppercase font-black mb-1.5 transition-colors duration-300 ${
+                isFeatured ? "text-[#9A0E1F]" : "text-white/50"
+              }`}>
+                Includes
+              </p>
               {svc.sub.map((subItem, sIdx) => (
-                <div key={sIdx} className="flex items-center gap-2.5">
-                  <span className={`text-[8px] leading-none shrink-0 ${
-                    isFeatured ? "text-[#9A0E1F]/60" : "text-white/25"
+                <div key={sIdx} className="flex items-center gap-3">
+                  <span className={`text-[10px] leading-none shrink-0 transition-colors duration-300 ${
+                    isFeatured ? "text-[#9A0E1F]" : "text-white/40"
                   }`}>—</span>
-                  <span className="text-[10px] text-white/45 antialiased leading-snug">{subItem}</span>
+                  <span className={`text-[11px] antialiased leading-snug font-medium transition-colors duration-300 ${
+                    isFeatured ? "text-white" : "text-white/80"
+                  }`}>
+                    {subItem}
+                  </span>
                 </div>
               ))}
             </div>
 
             {/* Far-right: CTA [15%] */}
-            <div className="md:w-[15%] flex justify-end">
+            <div className="md:w-[15%] flex justify-end mt-6 md:mt-0">
               <Link
                 href="/services"
-                className={`inline-flex items-center gap-2.5 px-6 py-3.5 border font-mono text-[8px] tracking-[0.2em] uppercase rounded-[2px] transition-all duration-300 ease-out group/btn
+                className={`group inline-flex items-center gap-4 rounded-full pl-6 pr-1.5 py-1.5 transition-all duration-300 border
                   ${ isFeatured
-                    ? "border-[#9A0E1F]/50 text-white/80 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F] hover:text-white shadow-[0_0_16px_rgba(154,14,31,0.15)]"
-                    : "border-white/10 text-white/50 bg-transparent hover:border-white/30 hover:text-white"
+                    ? "border-[#9A0E1F]/30 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F]/50"
+                    : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20"
                   }`}
               >
-                Explore
-                <span className="text-[11px] leading-none transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
+                <span className={`font-mono tracking-[0.25em] uppercase text-[9px] font-bold mt-[1px] ${isFeatured ? "text-[#9A0E1F]" : "text-white/70"}`}>
+                  Explore
+                </span>
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${isFeatured ? "bg-[#9A0E1F] group-hover:bg-white" : "bg-white/10 group-hover:bg-white"}`}>
+                  <svg className={`w-3 h-3 transition-colors duration-300 ${isFeatured ? "text-white group-hover:text-[#9A0E1F]" : "text-white/70 group-hover:text-black"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
               </Link>
             </div>
           </div>
@@ -292,7 +308,35 @@ function ServicesTable() {
 
       {/* Secondary */}
       <div className="flex flex-col">
-        {secondary.map((svc, i) => renderRow(svc, i + 2, false, i * 0.06))}
+        {secondary.map((svc, i) => {
+          const actualIdx = i + 2;
+          let bg;
+          if (svc.title === "Gyms & Fitness") {
+            bg = "https://images.pexels.com/photos/29639963/pexels-photo-29639963.jpeg";
+          } else if (svc.title === "Real Estate & Spaces") {
+            bg = "https://images.pexels.com/photos/9771524/pexels-photo-9771524.jpeg";
+          }
+          return renderRow(svc, actualIdx, false, i * 0.06, bg);
+        })}
+      </div>
+
+      {/* View All Services CTA */}
+      <div className="flex justify-center md:justify-end mt-12 md:mt-16 pr-4">
+        <Reveal delay={0.3}>
+          <Link 
+            href="/services" 
+            className="group inline-flex items-center gap-6 bg-white rounded-full pl-8 pr-2 py-2 transition-all duration-300 hover:bg-neutral-200 hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
+          >
+            <span className="font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-black pt-[2px]">
+              View All Services
+            </span>
+            <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center transition-all duration-300 group-hover:bg-[#9A0E1F]">
+              <svg className="w-4 h-4 text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </Link>
+        </Reveal>
       </div>
     </div>
   );
@@ -524,7 +568,7 @@ export default function LandingPage() {
                   </button>
                 </Reveal>
                 <Reveal delay={0.65}>
-                  <p className="w-full text-[#9A0E1F] text-[8px] text-center mt-2 font-mono tracking-[0.2em] uppercase font-black">Response within 24 hours</p>
+                  <p className="w-full text-white/40 text-[8px] text-center mt-2 font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
                 </Reveal>
 
                 {/* Mobile Testimonial Slider */}
@@ -587,7 +631,7 @@ export default function LandingPage() {
             SECTION 2: PORTFOLIO / SELECTED WORK
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
-        <section data-theme="light" className="defer-render bg-white pt-40 pb-24">
+        <section id="work" data-theme="light" className="defer-render bg-white pt-40 pb-24">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-[2px] w-full bg-black mb-12" />
@@ -618,33 +662,34 @@ export default function LandingPage() {
           <div className="container">
              <div className="flex flex-col gap-4 md:gap-6">
                {(() => {
-                 const PORTFOLIO_VIDEOS = [
-                   { title: "Culinary Art", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3298720/", poster: "https://images.pexels.com/videos/3298720/pictures/preview-0.jpg" },
-                   { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/12188718/", poster: "https://images.pexels.com/videos/12188718/pictures/preview-0.jpg" },
-                   { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/5657164/", poster: "https://images.pexels.com/videos/5657164/pictures/preview-0.jpg" },
-                 ];
+                   const PORTFOLIO_VIDEOS = [
+                     { title: "Culinary Art", cat: "Hospitality", vid: "https://www.pexels.com/download/video/29586732", poster: "https://images.pexels.com/videos/29586732/pictures/preview-0.jpg" },
+                     { title: "Chef's Special", cat: "Hospitality", vid: "https://www.pexels.com/download/video/34867881", poster: "https://images.pexels.com/videos/34867881/pictures/preview-0.jpg" },
+                     { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3769033", poster: "https://images.pexels.com/videos/3769033/pictures/preview-0.jpg" },
+                     { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/4253140", poster: "https://images.pexels.com/videos/4253140/pictures/preview-0.jpg" },
+                   ];
                  
-                 const chunks = [];
-                 for (let i = 0; i < PORTFOLIO_VIDEOS.length; i += 3) {
-                   chunks.push(PORTFOLIO_VIDEOS.slice(i, i + 3));
+                 const chunks: (typeof PORTFOLIO_VIDEOS)[] = [];
+                 for (let i = 0; i < PORTFOLIO_VIDEOS.length; i += 4) {
+                   chunks.push(PORTFOLIO_VIDEOS.slice(i, i + 4));
                  }
 
                  return chunks.map((chunk, chunkIdx) => {
                    const isAlternate = chunkIdx % 2 !== 0;
-                   const largeVideo = chunk[0];
-                   const smallVideos = chunk.slice(1);
+                   const mainVideos = chunk.slice(0, 2);
+                   const sideVideos = chunk.slice(2, 4);
                    
                    return (
                      <div key={chunkIdx} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6">
                        
-                       {/* LARGE CARD (~60%) */}
-                       <div className={`lg:col-span-7 h-full ${isAlternate ? 'md:order-2 lg:order-2' : 'md:order-1 lg:order-1'}`}>
-                         {largeVideo && (
-                           <Reveal delay={0.1} className="h-full">
-                             <div className="group relative w-full h-full min-h-[400px] lg:min-h-[550px] aspect-[4/5] lg:aspect-auto bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                       {/* PRIMARY VERTICAL REELS AREA (9:16) */}
+                       <div className={`lg:col-span-7 grid grid-cols-2 gap-4 md:gap-6 ${isAlternate ? 'md:order-2 lg:order-2' : 'md:order-1 lg:order-1'}`}>
+                         {mainVideos.map((video, idx) => (
+                           <Reveal key={idx} delay={0.1 + (idx * 0.1)} className="h-full">
+                             <div className="group relative w-full h-full aspect-[9/16] bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500">
                                <SmartVideo 
-                                  src={largeVideo.vid} 
-                                  poster={largeVideo.poster}
+                                  src={video.vid} 
+                                  poster={video.poster}
                                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
                                 />
                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 z-[5]" />
@@ -652,23 +697,23 @@ export default function LandingPage() {
                                
                                {/* Play Icon */}
                                <div className="absolute inset-0 flex items-center justify-center z-[7] opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-95 group-hover:scale-100">
-                                 <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-2xl">
-                                   <div className="w-0 h-0 border-t-8 border-t-transparent border-l-[14px] border-l-white border-b-8 border-b-transparent ml-1" />
+                                 <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-2xl">
+                                   <div className="w-0 h-0 border-t-6 border-t-transparent border-l-[10px] border-l-white border-b-6 border-b-transparent ml-1" />
                                  </div>
                                </div>
 
-                               <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end z-10 pointer-events-none">
-                                 <p className="text-white/80 font-mono text-[9px] md:text-[10px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{largeVideo.cat}</p>
-                                 <h4 className="text-white font-bold text-3xl md:text-4xl tracking-tight drop-shadow-lg">{largeVideo.title}</h4>
+                               <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end z-10 pointer-events-none">
+                                 <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-1 font-bold drop-shadow-md">{video.cat}</p>
+                                 <h4 className="text-white font-bold text-lg md:text-xl tracking-tight drop-shadow-lg leading-tight">{video.title}</h4>
                                </div>
                              </div>
                            </Reveal>
-                         )}
+                         ))}
                        </div>
 
-                       {/* SMALL CARDS (~40%) */}
+                       {/* SECONDARY SIDE CARDS */}
                        <div className={`lg:col-span-5 flex flex-col gap-4 md:gap-6 ${isAlternate ? 'md:order-1 lg:order-1' : 'md:order-2 lg:order-2'}`}>
-                         {smallVideos.map((video, idx) => (
+                         {sideVideos.map((video, idx) => (
                            <Reveal key={idx} delay={0.15 + (idx * 0.1)} className="flex-1 h-full">
                              <div className="group relative w-full h-full min-h-[220px] aspect-video lg:aspect-auto bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-500">
                                <SmartVideo 
@@ -698,7 +743,26 @@ export default function LandingPage() {
                    );
                  });
                })()}
-             </div>
+              </div>
+
+              {/* Dedicated Work Page CTA */}
+              <div className="flex justify-center md:justify-end mt-16 md:mt-20 w-full pr-2">
+                <Reveal delay={0.2}>
+                  <Link 
+                    href="/work" 
+                    className="group inline-flex items-center gap-6 bg-black rounded-full pl-8 pr-2 py-2 transition-all duration-300 hover:bg-[#111] hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+                  >
+                    <span className="font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white pt-[2px]">
+                      View All Projects
+                    </span>
+                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#9A0E1F]">
+                      <svg className="w-4 h-4 text-black group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </Link>
+                </Reveal>
+              </div>
            </div>
          </section>
         </SectionBlurWrapper>
@@ -706,7 +770,6 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 3: WHAT WE DO / SERVICES (BLACK THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <SectionBlurWrapper>
         <section data-theme="dark" className="defer-render py-32 md:py-40 bg-black text-white relative">
           <div className="container">
             <div className="flex flex-col">
@@ -740,7 +803,6 @@ export default function LandingPage() {
             <ServicesTable />
           </div>
         </section>
-        </SectionBlurWrapper>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 5: PROCESS
@@ -758,7 +820,7 @@ export default function LandingPage() {
             SECTION 7: SOCIAL PROOF (REFINED)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
-        <section data-theme="light" className="defer-render py-28 md:py-36 bg-white text-black overflow-hidden relative border-t border-black/5">
+        <section data-theme="light" className="defer-render py-32 md:py-40 bg-white text-black overflow-hidden relative border-t border-black/5">
           <div className="container relative z-10">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-24">
               

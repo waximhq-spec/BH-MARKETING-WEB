@@ -120,7 +120,7 @@ export default function PortfolioSplit() {
   return (
     <section className="relative w-full min-h-screen flex flex-col bg-[#0d0303]">
       {/* ── Top label ── */}
-      <div className="w-full flex justify-center pt-20 pb-12 px-6">
+      <div className="w-full flex justify-center pt-32 md:pt-40 pb-12 md:pb-20 px-6">
         <div className="text-center">
           <p className="type-label text-[#D91616] mb-4" style={{ textShadow: "0 0 18px rgba(217,22,22,0.4)" }}>
             Selected Work
@@ -310,7 +310,7 @@ export default function PortfolioSplit() {
       </div>
 
       {/* ── Project Grids (below split) ── */}
-      <div className="w-full px-5 sm:px-8 md:px-14 lg:px-20 py-20">
+      <div className="w-full px-5 sm:px-8 md:px-14 lg:px-20 py-32 md:py-40">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
           {/* Spaces Grid */}
           <div>

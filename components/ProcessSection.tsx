@@ -70,7 +70,7 @@ export default function ProcessSection() {
   const leftParallaxY = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
-    <section ref={containerRef} data-theme="split" className="relative w-full bg-black">
+    <section id="process" ref={containerRef} data-theme="split" className="relative w-full bg-black">
       {/* DESKTOP (Split Sticky Scroll) */}
       <div className="hidden lg:flex flex-col lg:flex-row w-full items-start relative z-10">
         
@@ -100,7 +100,6 @@ export default function ProcessSection() {
                     WE GET YOU<br />
                     MORE CUSTOMERS.
                   </motion.h2>
-
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 0.7 }}
@@ -109,7 +108,6 @@ export default function ProcessSection() {
                   >
                     Step by step.
                   </motion.div>
-
                   <motion.p
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -120,7 +118,6 @@ export default function ProcessSection() {
                     A clear, structured approach to building how your brand is seen.
                   </motion.p>
                </div>
-
               {/* Progress Indicator */}
               <div className="hidden lg:flex items-center gap-6 mt-16 relative z-20">
                 <StepNumberDisplay progress={scrollYProgress} />
@@ -137,7 +134,6 @@ export default function ProcessSection() {
             </div>
           </motion.div>
         </div>
-
         {/* Right Column: White Background Steps */}
         <div className="lg:w-[58.333333%] relative bg-white">
           {/* Continuous Journey Line */}
@@ -145,7 +141,12 @@ export default function ProcessSection() {
           
           <div className="flex flex-col relative z-10">
             {STEPS.map((step, index) => (
-              <div key={step.num} className="min-h-[70vh] flex flex-col items-start justify-start pt-32 lg:pt-[140px] pb-32">
+              <div 
+                key={step.num} 
+                className={`flex flex-col items-start 
+                  ${index === 0 ? "pt-[60vh] lg:pt-[50vh]" : "pt-40 lg:pt-48"}
+                  ${index === STEPS.length - 1 ? "pb-[80vh]" : "pb-40 lg:pb-48"}`}
+              >
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -161,7 +162,6 @@ export default function ProcessSection() {
                         {step.num}
                       </span>
                     </div>
-
                     {/* Heading */}
                     <h3
                       className="text-black font-black tracking-tighter mb-10"
@@ -169,12 +169,10 @@ export default function ProcessSection() {
                     >
                       {step.title.toUpperCase()}
                     </h3>
-
                     {/* Description with keyword highlight */}
                     <p className="text-black/80 text-[17px] md:text-[19px] font-light leading-[1.75] mb-14 max-w-lg">
                       <HighlightDesc text={step.desc} />
                     </p>
-
                     {/* Animated divider */}
                     <motion.div
                       className="h-px bg-[#9A0E1F]/20 origin-left"
@@ -186,12 +184,18 @@ export default function ProcessSection() {
                     />
                   </div>
                 </motion.div>
+
+                {/* Subtle Divider between steps */}
+                {index !== STEPS.length - 1 && (
+                  <div className="container !max-w-none w-full mt-auto">
+                    <div className="h-px w-full bg-black/[0.06]" />
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       </div>
-
       {/* MOBILE (PRO UI/UX - Version 2.1) */}
       <div className="lg:hidden flex flex-col bg-white">
         <div className="bg-black px-6 py-24 flex flex-col items-center text-center relative overflow-hidden">
@@ -214,7 +218,6 @@ export default function ProcessSection() {
             Step by Step.
           </p>
         </div>
-
         <div className="px-6 py-20 flex flex-col gap-8 bg-[#FAFAFA]">
           {STEPS.map((step, i) => (
             <motion.div
@@ -228,7 +231,6 @@ export default function ProcessSection() {
               <div className="absolute top-[-20px] right-[-10px] text-[100px] font-black text-black/[0.03] leading-none select-none pointer-events-none group-hover:text-[#9A0E1F]/[0.05] transition-colors duration-500">
                 {step.num}
               </div>
-
               <div className="flex flex-col gap-2 relative z-10">
                 <span className="text-[#9A0E1F] font-mono text-[10px] font-bold tracking-[0.3em]">
                   PHASE {step.num}
@@ -237,16 +239,13 @@ export default function ProcessSection() {
                   {step.title}
                 </h3>
               </div>
-
               <p className="text-black/80 text-[14px] font-light leading-relaxed relative z-10">
                 <HighlightDesc text={step.desc} />
               </p>
-
               <div className="w-full h-px bg-black/[0.05] mt-2" />
             </motion.div>
           ))}
         </div>
-
         <div className="py-12 flex justify-center items-center gap-4 bg-white">
           <div className="h-px w-8 bg-black/10" />
           <p className="text-black/20 font-mono text-[9px] uppercase tracking-[0.4em]">Cinmach Productions</p>

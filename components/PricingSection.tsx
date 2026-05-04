@@ -47,6 +47,17 @@ function FeatureItem({ label, details }: { label: string; details: string }) {
 
 export default function PricingSection() {
   const { openProjectModal } = useModal();
+  const [activeCategory, setActiveCategory] = useState("Restaurants & Cafes");
+
+  const CATEGORIES = [
+    "Restaurants & Cafes",
+    "Real Estate",
+    "Gyms & Fitness",
+    "Hotels & Resorts",
+    "E-commerce",
+    "Luxury"
+  ];
+
 
   const packages = [
     {
@@ -133,7 +144,7 @@ export default function PricingSection() {
   ];
 
   return (
-    <section data-theme="pricing" className="py-12 md:py-20 bg-[#050505] relative overflow-hidden">
+    <section id="pricing" data-theme="pricing" className="py-32 md:py-40 bg-[#050505] relative overflow-hidden">
       {/* Top divider glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/40 to-transparent" />
       {/* Background radial for depth */}
@@ -158,8 +169,34 @@ export default function PricingSection() {
           </p>
         </motion.div>
 
+        {/* Category Toggle */}
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex flex-wrap items-center justify-center p-1.5 bg-white/5 border border-white/10 rounded-full gap-1 lg:gap-2">
+            {CATEGORIES.map(category => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`relative px-5 py-2.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-widest uppercase transition-all duration-300 ${
+                  activeCategory === category 
+                    ? "text-white" 
+                    : "text-white/40 hover:text-white/80"
+                }`}
+              >
+                {activeCategory === category && (
+                  <motion.div
+                    layoutId="pricingCategoryIndicator"
+                    className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] shadow-[0_0_20px_rgba(154,14,31,0.4)] rounded-full z-0"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{category}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Grid — align tops, Standard lifts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-end">
+        <div key={activeCategory} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-end">
           {packages.map((pkg, idx) => (
             <motion.div
               key={pkg.id}

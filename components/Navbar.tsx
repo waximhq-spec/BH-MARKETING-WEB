@@ -132,7 +132,16 @@ export default function Navbar() {
         )}
 
         <div className="container h-14 md:h-16 flex items-center justify-between relative z-10">
-          <Link href="/" className="block transition-all duration-400 hover:opacity-60">
+          <Link 
+            href="/" 
+            className="block transition-all duration-400 hover:opacity-60"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
             <img 
               src="/HERO-LOGO.svg" 
               alt="Cinmach" 

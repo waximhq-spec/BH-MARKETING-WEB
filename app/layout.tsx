@@ -27,8 +27,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Cinmach Productions | Cinematic Brand Studio — Bahrain",
-  description: "A cinematic creative studio based in Bahrain, crafting high-end visual stories for luxury brands.",
+  title: "Cinmach Productions | Cinematic Brand Production — Bahrain",
+  description: "A cinematic creative production based in Bahrain, crafting high-end visual stories for luxury brands.",
 };
 
 const jsonLd = {

@@ -36,7 +36,7 @@ export default function AboutContent() {
             <Reveal delay={0.2}>
               <div className="max-w-[360px] md:mt-28">
                 <h2 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
-                  A production studio built on results.
+                  A production company built on results.
                 </h2>
                 <p className="text-black/70 text-[15px] md:text-base leading-relaxed font-light antialiased">
                   We are a cinematic content agency based in Bahrain, focused on creating visuals that bring real customers to your business.

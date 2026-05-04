@@ -42,7 +42,7 @@ export default function VideoProductionPage() {
         <p>Looking for a top-tier video production company in Bahrain? Cinmach Productions delivers world-class cinematic video content, brand films, and high-performance social media reels for luxury brands, restaurants, and corporate clients in Manama and across the GCC.</p>
         
         <h2>Comprehensive Video Production Services</h2>
-        <p>As a full-service creative studio, we handle everything from pre-production strategy to final delivery.</p>
+        <p>As a full-service creative production, we handle everything from pre-production strategy to final delivery.</p>
         <ul>
           <li>Brand Commercials: Epic, story-driven films that establish market authority.</li>
           <li>Corporate Video Production: Professional content that communicates your brand values effectively.</li>

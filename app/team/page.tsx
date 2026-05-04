@@ -11,9 +11,9 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 }
 
 const TEAM = [
-  { name: "Suhail Ahmad Goni", role: "CO-FOUNDER & CEO", desc: "As the principal architect of Cinmach, Suhail leads the company's strategic vision and all executive decision-making. He directs regional expansion and oversees business operations, steering the studio's growth while delegating production execution to our elite creative team." },
+  { name: "Suhail Ahmad Goni", role: "CO-FOUNDER & CEO", desc: "As the principal architect of Cinmach, Suhail leads the company's strategic vision and all executive decision-making. He directs regional expansion and oversees business operations, steering the production's growth while delegating production execution to our elite creative team." },
   { name: "Shayan", role: "Lead Cinematographer", desc: "As our lead creative force on location, Shayan specializes in the technical and artistic execution of high-end brand visuals. He is responsible for the cinematic lighting and movement that defines the premium aesthetic of every Cinmach production." },
-  { name: "Wasim", role: "Post-Production Specialist", desc: "As our lead creative force in the studio, Wasim handles the entire post-production workflow, transforming raw footage into cinematic masterpieces. He is responsible for the technical execution of color grading and sound design to our signature standard." },
+  { name: "Wasim", role: "Post-Production Specialist", desc: "As our lead creative force in the production, Wasim handles the entire post-production workflow, transforming raw footage into cinematic masterpieces. He is responsible for the technical execution of color grading and sound design to our signature standard." },
 ];
 
 export default function TeamPage() {

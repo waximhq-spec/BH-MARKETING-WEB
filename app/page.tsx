@@ -639,7 +639,7 @@ export default function LandingPage() {
                     CLIENT<br />WORK.
                   </h2>
                 </div>
-                <div className="max-w-[340px] mt-28">
+                <div className="max-w-[340px] mt-12 md:mt-28">
                   <h4 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
                     Built to turn views into real customers.
                   </h4>

@@ -74,7 +74,7 @@ export default function BackToTop() {
             animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
             exit={{ opacity: 0, y: 50, x: "-50%", scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="fixed bottom-6 md:bottom-8 left-1/2 z-[100] flex items-center gap-3 md:gap-4"
+            className="fixed bottom-6 md:bottom-8 left-1/2 z-[100] hidden md:flex items-center gap-3 md:gap-4"
           >
             {/* ── THE NAVIGATION PILL ── */}
             <div className="flex items-center bg-white rounded-full p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-black/5">

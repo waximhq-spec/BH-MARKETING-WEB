@@ -37,7 +37,7 @@ export default function WorkPage() {
       {/* ══════════════════════════════════════════════════════
           HERO SECTION
       ══════════════════════════════════════════════════════ */}
-      <section className="pt-40 md:pt-56 pb-20 md:pb-32">
+      <section data-theme="light" className="pt-40 md:pt-56 pb-20 md:pb-32">
         <div className="container px-4 md:px-8 mx-auto max-w-7xl">
           <Reveal>
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full mb-8 md:mb-10 opacity-80">
@@ -45,10 +45,10 @@ export default function WorkPage() {
               <span className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">Archive</span>
             </div>
             <h1
-              className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased"
-              style={{ fontSize: "clamp(3.5rem, 11vw, 10rem)", letterSpacing: "-0.03em" }}
+              className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased uppercase"
+              style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}
             >
-              SELECTED<br />WORK.
+              OUR<br />WORK.
             </h1>
           </Reveal>
           
@@ -63,7 +63,7 @@ export default function WorkPage() {
       {/* ══════════════════════════════════════════════════════
           SECTION 1: CINEMATIC FILMS (16:9 Placeholders)
       ══════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-32 bg-white border-t border-black/5">
+      <section data-theme="light" className="py-20 md:py-32 bg-white border-t border-black/5">
         <div className="container px-4 md:px-8 mx-auto max-w-7xl">
           <Reveal>
             <h2 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-[0.2em] uppercase mb-12 flex items-center gap-4">
@@ -94,7 +94,7 @@ export default function WorkPage() {
       {/* ══════════════════════════════════════════════════════
           SECTION 2: VERTICAL REELS (9:16 Placeholders)
       ══════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-32 bg-[#fafafa] border-t border-black/5">
+      <section data-theme="light" className="py-20 md:py-32 bg-[#fafafa] border-t border-black/5">
         <div className="container px-4 md:px-8 mx-auto max-w-7xl">
           <Reveal>
             <h2 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-[0.2em] uppercase mb-12 flex items-center gap-4">

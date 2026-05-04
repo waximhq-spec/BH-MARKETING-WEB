@@ -11,10 +11,9 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 }
 
 const TEAM = [
-  { name: "Hussain Al-Bahrani", role: "Founder & Creative Director", desc: "Leads the creative vision across all productions. 8+ years in cinematic storytelling and brand strategy across the Gulf." },
-  { name: "Ahmed Malik", role: "Director of Photography", desc: "Specializes in food, hospitality, and luxury cinematography. Trained in commercial film production." },
-  { name: "Sara Yusuf", role: "Post-Production Lead", desc: "Manages editing, color grading, and final delivery. Ensures every frame meets our cinematic standard." },
-  { name: "Omar Qasim", role: "Producer & Operations", desc: "Oversees logistics, scheduling, and client coordination. Keeps every shoot running on time and on brief." },
+  { name: "Suhail Ahmad Goni", role: "CO-FOUNDER & CEO", desc: "As the principal architect of Cinmach, Suhail leads the company's strategic vision and all executive decision-making. He directs regional expansion and oversees business operations, steering the studio's growth while delegating production execution to our elite creative team." },
+  { name: "Shayan", role: "Lead Cinematographer", desc: "As our lead creative force on location, Shayan specializes in the technical and artistic execution of high-end brand visuals. He is responsible for the cinematic lighting and movement that defines the premium aesthetic of every Cinmach production." },
+  { name: "Wasim", role: "Post-Production Specialist", desc: "As our lead creative force in the studio, Wasim handles the entire post-production workflow, transforming raw footage into cinematic masterpieces. He is responsible for the technical execution of color grading and sound design to our signature standard." },
 ];
 
 export default function TeamPage() {
@@ -53,34 +52,67 @@ export default function TeamPage() {
       </section>
 
       {/* Team Grid */}
-      <section data-theme="dark" className="py-24 md:py-36 bg-[#0a0a0a] text-white">
+      <section data-theme="light" className="py-24 md:py-36 bg-[#fafafa] text-black border-t border-black/5">
         <div className="container">
+          
+          {/* Main / CEO Row */}
+          <Reveal delay={0}>
+            <div className="group relative p-8 md:p-12 lg:p-16 border border-black/5 rounded-3xl bg-white hover:border-black/10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.03)] transition-all duration-500 mb-6 md:mb-10 flex flex-col md:flex-row items-center md:items-center gap-8 md:gap-16">
+              
+              {/* Image Placeholder */}
+              <div className="w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full bg-[#f0f0f0] flex items-center justify-center overflow-hidden border border-black/5 group-hover:border-[#9A0E1F]/20 transition-colors duration-500">
+                <span className="text-black/20 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold">Image</span>
+              </div>
+
+              <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start">
+                <span className="text-[#9A0E1F] font-mono text-[9px] tracking-[0.3em] font-bold mb-4 block">
+                  01
+                </span>
+                <h3 className="text-black font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-2 md:mb-3">
+                  {TEAM[0].name}
+                </h3>
+                <p className="text-[#9A0E1F] font-mono text-[10px] md:text-[12px] tracking-[0.2em] uppercase font-bold mb-6">
+                  {TEAM[0].role}
+                </p>
+                <div className="h-px w-8 bg-black/10 mb-6 group-hover:w-16 group-hover:bg-[#9A0E1F]/40 transition-all duration-500" />
+                <p className="text-black/60 text-[15px] md:text-[17px] leading-[1.8] font-light max-w-2xl">
+                  {TEAM[0].desc}
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Working Team Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {TEAM.map((member, idx) => (
-              <Reveal key={member.name} delay={idx * 0.08}>
-                <div className="group relative p-8 md:p-10 border border-white/6 rounded-2xl bg-white/[0.015] hover:border-white/12 transition-all duration-400">
-                  {/* Number */}
-                  <span className="text-[#9A0E1F] font-mono text-[9px] tracking-[0.3em] font-bold mb-6 block">
-                    0{idx + 1}
-                  </span>
-                  {/* Name */}
-                  <h3 className="text-white font-black text-2xl md:text-3xl tracking-tighter leading-tight mb-2">
-                    {member.name}
-                  </h3>
-                  {/* Role */}
-                  <p className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.2em] uppercase font-bold mb-6">
-                    {member.role}
-                  </p>
-                  {/* Divider */}
-                  <div className="h-px w-8 bg-white/10 mb-6 group-hover:w-16 group-hover:bg-[#9A0E1F]/40 transition-all duration-500" />
-                  {/* Desc */}
-                  <p className="text-white/45 text-[14px] leading-[1.7] font-light max-w-sm">
-                    {member.desc}
-                  </p>
+            {TEAM.slice(1).map((member, idx) => (
+              <Reveal key={member.name} delay={(idx + 1) * 0.08}>
+                <div className="group relative p-8 md:p-10 border border-black/5 rounded-3xl bg-white hover:border-black/10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.03)] transition-all duration-500 h-full flex flex-col xl:flex-row items-center xl:items-center text-center xl:text-left gap-8">
+                  
+                  {/* Image Placeholder */}
+                  <div className="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-full bg-[#f0f0f0] flex items-center justify-center overflow-hidden border border-black/5 group-hover:border-[#9A0E1F]/20 transition-colors duration-500">
+                    <span className="text-black/20 font-mono text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold">Image</span>
+                  </div>
+
+                  <div className="flex-1 flex flex-col items-center xl:items-start">
+                    <span className="text-[#9A0E1F] font-mono text-[9px] tracking-[0.3em] font-bold mb-3 block">
+                      0{idx + 2}
+                    </span>
+                    <h3 className="text-black font-black text-2xl md:text-3xl tracking-tighter leading-tight mb-2">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#9A0E1F] font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase font-bold mb-5">
+                      {member.role}
+                    </p>
+                    <div className="h-px w-8 bg-black/10 mb-5 group-hover:w-16 group-hover:bg-[#9A0E1F]/40 transition-all duration-500" />
+                    <p className="text-black/60 text-[14px] md:text-[15px] leading-[1.7] font-light">
+                      {member.desc}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 

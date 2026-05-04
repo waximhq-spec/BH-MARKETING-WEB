@@ -407,13 +407,7 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_80%)] z-[1]" />
           {/* Cinematic vignette */}
           <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none z-[1]" />
-          <motion.div 
-            className="absolute inset-0 bg-black z-[2] transform-gpu" 
-            initial={{ scaleY: 1 }} 
-            animate={{ scaleY: 0 }} 
-            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }} 
-            style={{ transform: "translateZ(0)" }}
-          />
+
           <motion.div 
             className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 z-[3] transform-gpu"
             initial={{ opacity: 0 }}
@@ -692,15 +686,8 @@ export default function LandingPage() {
                                   poster={video.poster}
                                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
                                 />
-                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 z-[5]" />
+                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 z-[5] pointer-events-none" />
                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
-                               
-                               {/* Play Icon */}
-                               <div className="absolute inset-0 flex items-center justify-center z-[7] opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-95 group-hover:scale-100">
-                                 <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-2xl">
-                                   <div className="w-0 h-0 border-t-6 border-t-transparent border-l-[10px] border-l-white border-b-6 border-b-transparent ml-1" />
-                                 </div>
-                               </div>
 
                                <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end z-10 pointer-events-none">
                                  <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-1 font-bold drop-shadow-md">{video.cat}</p>
@@ -721,15 +708,8 @@ export default function LandingPage() {
                                   poster={video.poster}
                                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
                                 />
-                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 z-[5]" />
+                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 z-[5] pointer-events-none" />
                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
-                               
-                               {/* Play Icon */}
-                               <div className="absolute inset-0 flex items-center justify-center z-[7] opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-95 group-hover:scale-100">
-                                 <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-2xl">
-                                   <div className="w-0 h-0 border-t-6 border-t-transparent border-l-[10px] border-l-white border-b-6 border-b-transparent ml-1" />
-                                 </div>
-                               </div>
 
                                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-10 pointer-events-none">
                                  <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-1 md:mb-2 font-bold drop-shadow-md">{video.cat}</p>

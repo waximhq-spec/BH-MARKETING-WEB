@@ -395,22 +395,22 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="container relative z-[4] flex flex-col h-full justify-center">
+          <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0">
             {/* Top Metadata Removed */}
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 items-start py-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-24 items-start py-4">
               {/* LEFT: CONTENT AREA */}
-              <div className="lg:col-span-7 flex flex-col mt-12">
+              <div className="lg:col-span-7 flex flex-col mt-4 lg:mt-12">
                 <Reveal delay={0.2}>
-                  <h1 className="text-white font-black leading-[0.9] tracking-tighter mb-6 lg:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ fontSize: "clamp(2.5rem, 12vw, 5.5rem)", letterSpacing: "-0.04em" }}>
+                  <h1 className="text-white font-black leading-[0.9] tracking-tighter mb-5 lg:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ fontSize: "clamp(2rem, 10vw, 5.5rem)", letterSpacing: "-0.04em" }}>
                     <span className="block whitespace-nowrap text-[0.8em] font-semibold tracking-tight mb-2">
                       Content that <span className="italic">fills</span>
                     </span>
-                    <span className="text-[#9A0E1F] uppercase drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">RESTAURANTS<br />&amp; CAFÉS.</span>
+                    <span className="text-[#9A0E1F] uppercase drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">RESTAURANTS<br />&amp; CAF&Eacute;S.</span>
                   </h1>
                 </Reveal>
                 <Reveal delay={0.4} className="max-w-xl">
-                  <p className="text-white/85 text-[14px] md:text-[15px] lg:text-base leading-relaxed font-light pr-4 md:pr-0 mb-8 md:mb-10 lg:max-w-md">
+                  <p className="text-white/85 text-[13px] md:text-[15px] lg:text-base leading-relaxed font-light pr-2 md:pr-0 mb-6 md:mb-10 lg:max-w-md">
                     We create scroll-stopping content that grabs attention and turns it into real customers at your tables.
                   </p>
                 </Reveal>
@@ -503,18 +503,18 @@ export default function LandingPage() {
               </div>
 
               {/* Mobile CTA (Visible only on mobile) */}
-              <div className="lg:hidden flex flex-col items-start gap-4">
+              <div className="lg:hidden flex flex-col items-start gap-3">
                 <Reveal delay={0.5}>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
-                    <span className="text-[#9A0E1F] font-mono text-[8px] md:text-[9px] uppercase tracking-widest font-bold">Now Booking — Limited Slots</span>
+                    <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-widest font-bold">Now Booking</span>
                   </div>
                 </Reveal>
                 
                 <Reveal delay={0.6}>
                   <button 
                     onClick={openProjectModal}
-                    className="group relative flex items-center justify-center gap-6 w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-white text-black text-[10px] md:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden whitespace-nowrap shadow-[0_20px_50px_rgba(154,14,31,0.3)] hover:shadow-[0_20px_50px_rgba(154,14,31,0.5)] rounded-sm"
+                    className="group relative flex items-center justify-center gap-4 w-full px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden shadow-[0_10px_30px_rgba(154,14,31,0.2)] rounded-full"
                   >
                      <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#9A0E1F] z-20" />
                      <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
@@ -542,11 +542,11 @@ export default function LandingPage() {
             </div>
 
             {/* Bottom Metrics */}
-            <div className="absolute bottom-0 left-0 right-0 z-10 pb-16 md:pb-24 lg:pb-20 w-full">
-              <div className="container mx-auto border-t border-white/5 pt-8">
+            <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
+              <div className="container mx-auto border-t border-white/5 pt-6 md:pt-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                   {/* LEFT COLUMN: All 3 Metrics */}
-                  <div className="lg:col-span-7 flex flex-row items-end gap-12 md:gap-16 lg:gap-20">
+                  <div className="lg:col-span-7 flex flex-row items-end gap-8 md:gap-16 lg:gap-20">
                     <Reveal delay={0.7}>
                       <div className="flex flex-col">
                         <span className="text-white font-black text-xl md:text-4xl tracking-tighter">GULF</span>

@@ -11,7 +11,7 @@ function FeatureItem({ label, details }: { label: string; details: string }) {
   return (
     <button
       onClick={() => setIsOpen(!isOpen)}
-      className="w-full flex flex-col items-start text-left focus:outline-none group py-2.5"
+      className="w-full flex flex-col items-start text-left focus:outline-none group py-1.5"
     >
       <div className="flex items-center gap-3 w-full">
         {/* Checkmark dot */}
@@ -52,48 +52,65 @@ export default function PricingSection() {
     {
       id: "starter",
       name: "Starter",
-      price: "499",
-      currency: "$",
-      target: "Best for small brands or basic shoots",
+      price: "350",
+      currency: "BHD",
+      target: "Start your presence",
       features: [
-        { label: "10 Edited Photos", details: "High-resolution professionally color-graded photos." },
-        { label: "1 Short Reel (15–30 sec)", details: "Optimized for Instagram/TikTok with trending transitions." },
+        { label: "8 Reels", details: "Cinematic short-form videos optimized for engagement." },
+        { label: "16 Photos", details: "Professional high-resolution shots covering your brand." },
+        { label: "1 Location Shoot", details: "Production session at a single venue of your choice." },
         { label: "Basic Color Grading", details: "Standard cinematic color correction for a consistent look." },
-        { label: "1 Location Shoot", details: "Up to 2 hours of production at a single venue." }
+        { label: "1 Round Revision", details: "One set of refinements to ensure content meets your vision." },
+        { label: "Standard Scheduling", details: "Standard queue for production and editing timeline." },
+        { label: "Standard Delivery", details: "Regular turnaround for final assets." }
       ],
       ctaText: "Get Started",
       isPopular: false,
       isEnterprise: false,
     },
     {
-      id: "pro",
-      name: "Standard",
-      price: "899",
-      currency: "$",
-      target: "Comprehensive content for monthly growth",
+      id: "premium",
+      name: "Premium",
+      price: "599",
+      currency: "BHD",
+      target: "Everything you need to bring in customers",
       features: [
-        { label: "25 Edited Photos", details: "Full gallery covering food, ambiance, and team." },
-        { label: "3 Reels / Short Videos", details: "A mix of storytelling, fast-paced, and cinematic edits." },
-        { label: "Advanced Color Grading", details: "Premium 'film-look' grading tailored to your brand." },
-        { label: "Drone / 4K Footage", details: "Stunning aerials and crisp 4K production quality." }
+        { label: "20 Reels", details: "High-volume short-form content for consistent social presence." },
+        { label: "20 Photos", details: "Premium photography for menus, ads, and social media." },
+        { label: "10 Carousel Graphics", details: "Custom designed graphics for educational or promotional posts." },
+        { label: "Multi-location", details: "Flexibility to shoot across multiple venues or branches." },
+        { label: "Advanced Editing + Premium Grade", details: "High-end post-production with cinematic color science." },
+        { label: "Content Strategy Guidance", details: "Expert advice on hook-writing and content performance." },
+        { label: "2 Rounds Revisions", details: "Extended refinement process for perfect deliverables." },
+        { label: "Fast-Track Scheduling", details: "Priority booking for your production sessions." },
+        { label: "Fast-Track Delivery", details: "Accelerated editing turnaround for timely campaigns." },
+        { label: "Included Ad-Ready Content", details: "Content optimized specifically for paid social campaigns." },
+        { label: "Priority Access", details: "Direct communication and faster support response." }
       ],
-      ctaText: "Choose Standard",
+      ctaText: "Choose Premium",
       isPopular: true,
       isEnterprise: false,
     },
     {
-      id: "elite",
-      name: "Premium",
-      price: "1,499",
-      currency: "$",
-      target: "The ultimate cinematic brand overhaul",
+      id: "diamond",
+      name: "Diamond",
+      price: "1,000",
+      currency: "BHD",
+      target: "Built to scale faster",
       features: [
-        { label: "50+ Edited Photos", details: "Infinite content for ads, website, and socials." },
-        { label: "6 Reels + 1 Main Film", details: "Complete content ecosystem including a 60-sec brand story." },
-        { label: "Creative Direction", details: "We handle the concepts, script, and storyboarding." },
-        { label: "Full Day Production", details: "Comprehensive shoot covering every angle of your brand." }
+        { label: "30 Reels", details: "Daily content coverage for maximum brand visibility." },
+        { label: "30 Photos", details: "Complete visual library updated monthly." },
+        { label: "15 Carousel Graphics", details: "Extensive graphic support for all digital channels." },
+        { label: "Multi-location", details: "Comprehensive coverage across your entire business network." },
+        { label: "Advanced Editing + Premium Grade", details: "Master-level post-production and color finishing." },
+        { label: "Content Strategy Guidance", details: "Full strategic roadmap for your digital growth." },
+        { label: "3 Rounds Revisions", details: "Unlimited focus on detail for the highest quality output." },
+        { label: "Fast-Track Scheduling", details: "Priority booking for your production sessions." },
+        { label: "Fast-Track Delivery", details: "Accelerated editing turnaround for timely campaigns." },
+        { label: "Included Ad-Ready Content", details: "Content optimized specifically for paid social campaigns." },
+        { label: "Priority Access", details: "24/7 direct communication and immediate support." }
       ],
-      ctaText: "Go Premium",
+      ctaText: "Go Diamond",
       isPopular: false,
       isEnterprise: false,
     },
@@ -116,7 +133,7 @@ export default function PricingSection() {
   ];
 
   return (
-    <section data-theme="pricing" className="py-24 md:py-36 bg-[#050505] relative overflow-hidden">
+    <section data-theme="pricing" className="py-16 md:py-24 bg-[#050505] relative overflow-hidden">
       {/* Top divider glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/40 to-transparent" />
       {/* Background radial for depth */}
@@ -127,14 +144,14 @@ export default function PricingSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16 md:mb-24"
+          className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-6">
             <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
             <span className="text-white font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Investment</span>
           </div>
           <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black text-4xl md:text-6xl tracking-tighter leading-none mb-6">
-            CHOOSE YOUR<br />PACKAGE.
+            CINMACH PRODUCTIONS<br />PACKAGES.
           </h2>
           <p className="text-white/40 max-w-xl mx-auto text-sm md:text-base font-light">
             Simple, transparent pricing built for high-end hospitality and modern brand growth.
@@ -200,10 +217,10 @@ export default function PricingSection() {
               </svg>
 
               {/* Content */}
-              <div className="flex flex-col flex-grow p-6 z-10 relative">
+              <div className="flex flex-col flex-grow p-5 z-10 relative">
                 {/* Popular badge */}
                 {pkg.isPopular && (
-                  <div className="mb-5 self-start">
+                  <div className="mb-3 self-start">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9A0E1F]/20 border border-[#9A0E1F]/40 text-[#9A0E1F] text-[9px] font-bold tracking-widest uppercase">
                       <span className="w-1 h-1 rounded-full bg-[#9A0E1F] animate-pulse" />
                       Most Popular
@@ -213,7 +230,7 @@ export default function PricingSection() {
 
                 {/* Enterprise badge */}
                 {pkg.isEnterprise && (
-                  <div className="mb-5 self-start">
+                  <div className="mb-2 self-start">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c9a84c]/10 border border-[#c9a84c]/25 text-[#c9a84c] text-[9px] font-bold tracking-widest uppercase">
                       <span className="w-1 h-1 rounded-full bg-[#c9a84c]" />
                       Enterprise
@@ -222,7 +239,7 @@ export default function PricingSection() {
                 )}
 
                 {/* Plan name */}
-                <h3 className={`text-[11px] font-bold tracking-[0.25em] uppercase mb-5 ${
+                <h3 className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-2 ${
                   pkg.isPopular ? "text-[#9A0E1F]"
                   : pkg.isEnterprise ? "text-[#c9a84c]/70"
                   : "text-white/40"
@@ -231,7 +248,7 @@ export default function PricingSection() {
                 </h3>
 
                 {/* Price */}
-                <div className="flex items-baseline gap-1 mb-2">
+                <div className="flex items-baseline gap-1 mb-1">
                   {pkg.currency && (
                     <span className={`font-bold leading-none ${
                       pkg.isPopular ? "text-[#9A0E1F]/80" : "text-white/40"
@@ -249,17 +266,17 @@ export default function PricingSection() {
                     {pkg.price}
                   </span>
                 </div>
-                <p className="text-white/35 text-[11px] leading-relaxed mb-6 min-h-[32px] font-light">
+                <p className="text-white/35 text-[10px] leading-tight mb-4 min-h-[24px] font-light">
                   {pkg.target}
                 </p>
 
                 {/* Divider */}
-                <div className={`w-full h-px mb-4 ${
+                <div className={`w-full h-px mb-3 ${
                   pkg.isPopular ? "bg-[#9A0E1F]/15" : "bg-white/[0.05]"
                 }`} />
 
                 {/* Features */}
-                <div className="flex-grow flex flex-col mb-8">
+                <div className="flex-grow flex flex-col mb-6">
                   <p className="text-white/20 text-[9px] tracking-widest uppercase font-bold mb-1">Includes</p>
                   {pkg.features.map((feature: any, i: number) => (
                     <FeatureItem key={i} label={feature.label} details={feature.details} />

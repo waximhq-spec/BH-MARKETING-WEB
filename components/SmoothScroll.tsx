@@ -19,9 +19,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     if (prefersReduced) return;
 
     const lenis = new Lenis({
-      lerp: 0.05, // Lower lerp creates a smoother, slightly delayed friction scroll
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.2,
+      lerp: 0.12,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.5,
       infinite: false,
     });
 

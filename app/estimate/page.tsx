@@ -1,172 +1,178 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
-export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
+function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   return (
-    <main data-theme="dark" className="relative bg-black min-h-[100svh] pt-32 pb-24 md:pb-36 overflow-hidden">
-      {/* Subtle noisy texture */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(139,0,22,0.1)_0%,transparent_60%)] pointer-events-none" />
-
-      <div className="container relative z-10">
-        {/* Header */}
-        <div className="mb-20 max-w-2xl border-b border-white/10 pb-12">
-          <Reveal>
-            <div className="flex items-center gap-4 mb-10">
-              <span className="w-8 h-px bg-[#8B0016]" />
-              <p className="text-[#8B0016] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">
-                Project Initiation
-              </p>
-            </div>
-            <h1
-              className="text-white font-black mb-6 leading-[0.85] tracking-tight"
-              style={{ fontSize: "clamp(3.5rem, 8vw, 6.5rem)", letterSpacing: "-0.05em" }}
-            >
-              LET&apos;S MAKE<br />SOMETHING.
-            </h1>
-            <p className="text-white/50 font-light text-lg leading-relaxed mt-10">
-              Tell us what you&apos;re working on. We only take on a select number of projects per year to guarantee absolute focus. We&apos;ll respond within 48 hours.
-            </p>
-          </Reveal>
-        </div>
-
-        {/* Form + Info */}
-        <div className="flex flex-col lg:flex-row gap-20 lg:gap-32 md:pt-4">
-          {/* Form */}
-          <div className="flex-1">
-            {submitted ? (
-              <Reveal>
-                <div className="py-16">
-                  <p className="font-mono text-[#8B0016] text-[10px] uppercase tracking-[0.4em] mb-6">Transmission Received</p>
-                  <p className="text-white text-2xl font-light">
-                    Thank you. The studio will be in touch shortly.
-                  </p>
-                </div>
-              </Reveal>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                  <Reveal delay={0.1}>
-                    <div className="relative group">
-                      <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Name</label>
-                      <input 
-                        type="text" 
-                        name="name" 
-                        required 
-                        placeholder="John Doe" 
-                        className="w-full bg-transparent border-b border-white/10 pb-4 text-white placeholder:text-white/20 focus:border-[#8B0016] transition-all outline-none font-light"
-                      />
-                    </div>
-                  </Reveal>
-                  <Reveal delay={0.15}>
-                    <div className="relative group">
-                      <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Email</label>
-                      <input 
-                        type="email" 
-                        name="email" 
-                        required 
-                        placeholder="john@example.com" 
-                        className="w-full bg-transparent border-b border-white/10 pb-4 text-white placeholder:text-white/20 focus:border-[#8B0016] transition-all outline-none font-light"
-                      />
-                    </div>
-                  </Reveal>
-                </div>
-
-                <Reveal delay={0.2}>
-                  <div className="relative group">
-                    <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Project Scope</label>
-                    <select 
-                      name="type"
-                      className="w-full bg-transparent border-b border-white/10 pb-4 text-white transition-all outline-none appearance-none cursor-pointer font-light hover:border-[#8B0016]"
-                    >
-                      <option value="" className="text-black bg-white">Select Scope…</option>
-                      <option value="fb" className="text-black bg-white">Food &amp; Hospitality Content</option>
-                      <option value="real-estate" className="text-black bg-white">Real Estate Cinematics</option>
-                      <option value="brand-film" className="text-black bg-white">Brand Film</option>
-                      <option value="photography" className="text-black bg-white">Photography</option>
-                      <option value="other" className="text-black bg-white">Other</option>
-                    </select>
-                    {/* Minimal custom arrow */}
-                    <div className="absolute right-0 bottom-5 pointer-events-none text-white/30 group-hover:text-[#8B0016] transition-colors">↓</div>
-                  </div>
-                </Reveal>
-
-                <Reveal delay={0.25}>
-                  <div className="relative group">
-                    <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 block mb-4 transition-colors group-hover:text-[#8B0016]">Transmission Brief</label>
-                    <textarea
-                      name="message"
-                      rows={4}
-                      required
-                      placeholder="Outline your vision, timeline, and rough budget…"
-                      className="w-full bg-transparent border-b border-white/10 pb-4 text-white placeholder:text-white/20 focus:border-[#8B0016] transition-all outline-none font-light resize-none"
-                    />
-                  </div>
-                </Reveal>
-
-                <Reveal delay={0.3}>
-                  <div className="flex items-center gap-6 pt-8">
-                    <button
-                      type="submit"
-                      className="group inline-flex items-center gap-6 px-12 py-5 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#8B0016] hover:text-white transition-all duration-500 shadow-2xl"
-                    >
-                      Deploy <span className="transition-transform duration-500 group-hover:translate-x-2">→</span>
-                    </button>
-                  </div>
-                </Reveal>
-              </form>
-            )}
-          </div>
-
-          {/* Info sidebar */}
-          <div className="lg:w-80 shrink-0 flex flex-col gap-12 lg:border-l border-white/10 lg:pl-16">
-            <Reveal delay={0.35}>
-              <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#8B0016] mb-4">Command Center</p>
-              <p className="text-white font-black text-xl tracking-tight uppercase">
-                Cinmach Productions<br />
-                Manama, Bahrain
-              </p>
-            </Reveal>
-            <Reveal delay={0.45}>
-              <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#8B0016] mb-4">Transmission</p>
-              <a
-                href="mailto:contact@cinmachproductions.com"
-                className="text-white font-black text-lg tracking-tight uppercase hover:text-[#8B0016] transition-colors break-all inline-block border-b border-transparent hover:border-[#8B0016]"
-              >
-                contact@cinmachproductions.com
-              </a>
-            </Reveal>
-          </div>
-        </div>
-      </div>
-    </main>
+    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }} className={className}>
+      {children}
+    </motion.div>
   );
 }
 
-function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
+const CONTACT_INFO = [
+  {
+    label: "Email",
+    value: "contact@cinmachproductions.com",
+    href: "mailto:contact@cinmachproductions.com",
+    desc: "For project inquiries and general questions.",
+  },
+  {
+    label: "WhatsApp",
+    value: "+973 3XXX XXXX",
+    href: "https://wa.me/97330000000",
+    desc: "Quick responses. Usually within an hour.",
+  },
+  {
+    label: "Phone",
+    value: "+973 3XXX XXXX",
+    href: "tel:+97330000000",
+    desc: "Available Sunday to Thursday, 9am - 6pm.",
+  },
+];
+
+const SOCIALS = [
+  { label: "Instagram", handle: "@cinmach", href: "https://instagram.com/cinmach" },
+  { label: "LinkedIn", handle: "Cinmach Productions", href: "https://linkedin.com/company/cinmach" },
+  { label: "TikTok", handle: "@cinmach", href: "https://tiktok.com/@cinmach" },
+];
+
+export default function ContactPage() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
+    <main className="bg-white min-h-screen text-black">
+      {/* Hero */}
+      <section data-theme="light" className="relative pt-36 md:pt-52 pb-20 md:pb-32 bg-white overflow-hidden">
+        <div className="container relative z-10">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+            <div>
+              <Reveal>
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full mb-10 opacity-80">
+                  <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
+                  <span className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">Get in Touch</span>
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
+                  CONTACT<br />US.
+                </h1>
+              </Reveal>
+            </div>
+            <Reveal delay={0.2}>
+              <div className="max-w-[360px] md:mt-28">
+                <h2 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
+                  Ready to start a project?
+                </h2>
+                <p className="text-black/70 text-[15px] md:text-base leading-relaxed font-light antialiased">
+                  Reach out through any channel below. We respond within 24 hours — usually much faster.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+          <div className="h-[2px] w-full bg-black/10 mt-16" />
+        </div>
+      </section>
+
+      {/* Contact Details */}
+      <section data-theme="dark" className="py-24 md:py-36 bg-[#0a0a0a] text-white">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
+
+            {/* Left: Main Contact */}
+            <div className="lg:col-span-7">
+              <Reveal>
+                <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold mb-8 block">REACH US DIRECTLY</span>
+              </Reveal>
+
+              <div className="flex flex-col">
+                {CONTACT_INFO.map((item, idx) => (
+                  <Reveal key={item.label} delay={idx * 0.06}>
+                    <a
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-8 py-8 border-b border-white/6 hover:bg-white/[0.015] transition-all duration-300 px-2 -mx-2"
+                    >
+                      <div className="flex items-start gap-5 flex-1">
+                        <span className="text-white/20 font-mono text-[9px] tracking-[0.3em] pt-1 shrink-0">{item.label.toUpperCase()}</span>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-white font-bold text-lg md:text-xl tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300">
+                            {item.value}
+                          </span>
+                          <span className="text-white/35 text-[12px] font-light">{item.desc}</span>
+                        </div>
+                      </div>
+                      <span className="text-white/20 text-[14px] group-hover:text-[#9A0E1F] group-hover:translate-x-1 transition-all duration-300 shrink-0">→</span>
+                    </a>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Social & Location */}
+            <div className="lg:col-span-5 flex flex-col gap-16">
+              {/* Social */}
+              <div>
+                <Reveal>
+                  <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold mb-8 block">FOLLOW US</span>
+                </Reveal>
+                <div className="flex flex-col gap-4">
+                  {SOCIALS.map((s, idx) => (
+                    <Reveal key={s.label} delay={idx * 0.05}>
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-between py-4 border-b border-white/6 hover:bg-white/[0.015] transition-all duration-300 px-2 -mx-2"
+                      >
+                        <div className="flex items-center gap-4">
+                          <span className="text-white font-bold text-[15px] tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300">{s.label}</span>
+                          <span className="text-white/30 text-[12px] font-light">{s.handle}</span>
+                        </div>
+                        <span className="text-white/20 text-[12px] group-hover:text-[#9A0E1F] group-hover:translate-x-1 transition-all duration-300">→</span>
+                      </a>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+
+              {/* Location */}
+              <div>
+                <Reveal>
+                  <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold mb-6 block">LOCATION</span>
+                </Reveal>
+                <Reveal delay={0.05}>
+                  <div className="p-6 border border-white/6 rounded-xl bg-white/[0.015]">
+                    <p className="text-white font-bold text-[15px] tracking-tight mb-1">Manama, Bahrain</p>
+                    <p className="text-white/40 text-[13px] font-light leading-relaxed">
+                      We serve clients across all of Bahrain and the wider Gulf region. On-location shoots available anywhere.
+                    </p>
+                  </div>
+                </Reveal>
+              </div>
+
+              {/* Hours */}
+              <div>
+                <Reveal>
+                  <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold mb-6 block">WORKING HOURS</span>
+                </Reveal>
+                <Reveal delay={0.05}>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex justify-between">
+                      <span className="text-white/50 text-[13px] font-light">Sunday - Thursday</span>
+                      <span className="text-white text-[13px] font-medium">9:00 AM - 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/50 text-[13px] font-light">Friday - Saturday</span>
+                      <span className="text-white/40 text-[13px] font-medium">By appointment</span>
+                    </div>
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

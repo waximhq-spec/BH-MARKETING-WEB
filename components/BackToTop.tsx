@@ -69,15 +69,15 @@ export default function BackToTop() {
     <>
       <AnimatePresence>
         {isVisible && !isPricingVisible && (
-          <>
-            {/* ── THE NAVIGATION PILL (Center Bottom) ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 50, x: "-50%", scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
-              exit={{ opacity: 0, y: 50, x: "-50%", scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="fixed bottom-6 md:bottom-8 left-1/2 z-[100] flex items-center bg-white rounded-full p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-black/5"
-            >
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: "-50%", scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
+            exit={{ opacity: 0, y: 50, x: "-50%", scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            className="fixed bottom-6 md:bottom-8 left-1/2 z-[100] flex items-center gap-3 md:gap-4"
+          >
+            {/* ── THE NAVIGATION PILL ── */}
+            <div className="flex items-center bg-white rounded-full p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-black/5">
               <div className="flex items-center px-4 md:px-6 gap-5 md:gap-8">
                 {pathname === "/" ? (
                   <>
@@ -113,16 +113,12 @@ export default function BackToTop() {
               >
                 FREE CONSULTATION <span className="opacity-70">→</span>
               </button>
-            </motion.div>
+            </div>
 
-            {/* ── THE BACK TO TOP BUTTON (Right Corner) ── */}
-            <motion.button
-              initial={{ opacity: 0, y: 20, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
+            {/* ── THE BACK TO TOP BUTTON ── */}
+            <button
               onClick={scrollToTop}
-              className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] w-[46px] h-[46px] rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-[0_4px_24px_rgba(0,0,0,0.2)] transition-all duration-300 md:hover:bg-[#B11226] md:hover:border-[#B11226] md:hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-[46px] h-[46px] rounded-full bg-white border border-black/5 text-black flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.15)] transition-all duration-300 hover:bg-[#B11226] hover:text-white hover:border-[#B11226] md:hover:scale-105 active:scale-95 cursor-pointer flex-shrink-0"
               aria-label="Scroll to top"
             >
               <svg 
@@ -138,8 +134,8 @@ export default function BackToTop() {
               >
                 <path d="M12 21V3M5 10l7-7 7 7" />
               </svg>
-            </motion.button>
-          </>
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

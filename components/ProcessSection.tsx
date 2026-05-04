@@ -196,60 +196,88 @@ export default function ProcessSection() {
           </div>
         </div>
       </div>
-      {/* MOBILE (PRO UI/UX - Version 2.1) */}
-      <div className="lg:hidden flex flex-col bg-white">
-        <div className="bg-black px-6 py-24 flex flex-col items-center text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(177,18,38,0.1)_0%,transparent_70%)] pointer-events-none" />
-          <motion.p 
+      {/* MOBILE (PRO UI/UX - Light Premium Timeline) */}
+      <div className="lg:hidden flex flex-col">
+        
+        {/* Header - Light */}
+        <div className="bg-white px-6 py-24 flex flex-col items-start relative border-b border-black/5">
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-[#9A0E1F] font-mono text-[10px] uppercase tracking-[0.5em] mb-6 font-black"
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/5 border border-[#9A0E1F]/20 rounded-full mb-8"
           >
-            Our Methodology
-          </motion.p>
-          <motion.h2 
+            <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
+            <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[10px] md:text-[12px] font-bold">Our Process</span>
+          </motion.div>
+          
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-white font-black leading-[1.1] tracking-tighter text-4xl md:text-5xl mb-4 uppercase"
+            viewport={{ once: true }}
+            className="text-black font-black tracking-tighter mb-4 uppercase"
+            style={{ fontSize: "clamp(2.2rem, 9vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
           >
-            WE GET YOU<br />MORE CUSTOMERS.
+            WE GET YOU<br />
+            MORE CUSTOMERS.
           </motion.h2>
-          <p className="text-white/70 text-[9px] font-mono uppercase tracking-[0.4em]">
-            Step by Step.
-          </p>
+          
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.7 }}
+            viewport={{ once: true }}
+            className="text-black/40 font-mono tracking-[0.4em] uppercase text-[10px] md:text-[11px] font-bold mb-8"
+          >
+            Step by step.
+          </motion.div>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-black/60 text-[14px] md:text-[15px] font-medium tracking-wide max-w-[280px]"
+            style={{ lineHeight: 1.6 }}
+          >
+            A clear, structured approach to building how your brand is seen.
+          </motion.p>
         </div>
-        <div className="px-6 py-20 flex flex-col gap-8 bg-[#FAFAFA]">
-          {STEPS.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-white border border-black/5 p-8 rounded-sm shadow-[0_10px_30_rgba(0,0,0,0.02)] flex flex-col gap-6 relative group"
-            >
-              <div className="absolute top-[-20px] right-[-10px] text-[100px] font-black text-black/[0.03] leading-none select-none pointer-events-none group-hover:text-[#9A0E1F]/[0.05] transition-colors duration-500">
-                {step.num}
-              </div>
-              <div className="flex flex-col gap-2 relative z-10">
-                <span className="text-[#9A0E1F] font-mono text-[10px] font-bold tracking-[0.3em]">
-                  PHASE {step.num}
-                </span>
-                <h3 className="text-black font-black text-2xl tracking-tighter leading-tight uppercase">
-                  {step.title}
-                </h3>
-              </div>
-              <p className="text-black/80 text-[14px] font-light leading-relaxed relative z-10">
-                <HighlightDesc text={step.desc} />
-              </p>
-              <div className="w-full h-px bg-black/[0.05] mt-2" />
-            </motion.div>
+
+        {/* Steps - Light Timeline */}
+        <div className="bg-[#fafafa] relative flex flex-col py-16 md:py-24 overflow-hidden">
+          {/* Vertical dashed line for timeline */}
+          <div className="absolute left-[44px] md:left-[48px] top-24 bottom-24 w-px border-l border-dashed border-black/10 z-0" />
+          
+          {STEPS.map((step, index) => (
+            <div key={step.num} className="flex flex-col relative z-10 px-6 py-6 md:px-8 group">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ margin: "-10% 0px", once: true }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full flex gap-6 md:gap-8 items-start relative"
+              >
+                {/* Step Number Badge */}
+                <div className="relative z-10 shrink-0 bg-[#fafafa] py-1">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-black/5 shadow-sm flex items-center justify-center transition-all duration-300 group-hover:border-[#9A0E1F]/30 group-hover:shadow-md">
+                    <span className="text-[#9A0E1F] font-mono text-[10px] md:text-[11px] font-bold">
+                      {step.num}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="flex flex-col pt-1 pb-8 md:pb-10 w-full relative">
+                  <h3 className="text-black font-black tracking-tighter mb-3 text-2xl md:text-3xl uppercase leading-[1.05]">
+                    {step.title}
+                  </h3>
+                  
+                  <p className="text-black/60 text-[14px] md:text-[16px] leading-[1.7] md:leading-[1.75] font-light max-w-sm">
+                    <HighlightDesc text={step.desc} />
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           ))}
-        </div>
-        <div className="py-12 flex justify-center items-center gap-4 bg-white">
-          <div className="h-px w-8 bg-black/10" />
-          <p className="text-black/20 font-mono text-[9px] uppercase tracking-[0.4em]">Cinmach Productions</p>
-          <div className="h-px w-8 bg-black/10" />
         </div>
       </div>
     </section>

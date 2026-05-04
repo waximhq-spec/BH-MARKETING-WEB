@@ -170,13 +170,13 @@ export default function PricingSection() {
         </motion.div>
 
         {/* Category Toggle */}
-        <div className="flex justify-center mb-16">
-          <div className="inline-flex flex-wrap items-center justify-center p-1.5 bg-white/5 border border-white/10 rounded-full gap-1 lg:gap-2">
+        <div className="flex justify-center mb-12 md:mb-16 px-2">
+          <div className="flex flex-wrap items-center justify-center p-1.5 md:p-2 bg-white/5 border border-white/10 rounded-2xl md:rounded-full gap-x-1 gap-y-2 lg:gap-2">
             {CATEGORIES.map(category => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`relative px-5 py-2.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-widest uppercase transition-all duration-300 ${
+                className={`relative px-4 py-2 md:px-5 md:py-2.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-widest uppercase transition-all duration-300 ${
                   activeCategory === category 
                     ? "text-white" 
                     : "text-white/40 hover:text-white/80"
@@ -196,7 +196,7 @@ export default function PricingSection() {
         </div>
 
         {/* Grid — align tops, Standard lifts */}
-        <div key={activeCategory} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-end">
+        <div key={activeCategory} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5 items-end px-2 md:px-0 mt-4 md:mt-0">
           {packages.map((pkg, idx) => (
             <motion.div
               key={pkg.id}
@@ -208,7 +208,7 @@ export default function PricingSection() {
                 transition-all duration-400 ease-out
                 hover:-translate-y-2 hover:scale-[1.02]
                 ${pkg.isPopular
-                  ? "-translate-y-3 scale-[1.05] shadow-[0_20px_60px_rgba(154,14,31,0.25),0_0_0_1px_rgba(154,14,31,0.2)] hover:shadow-[0_28px_70px_rgba(154,14,31,0.35),0_0_0_1px_rgba(154,14,31,0.4)]"
+                  ? "-translate-y-2 md:-translate-y-3 md:scale-[1.05] shadow-[0_20px_60px_rgba(154,14,31,0.25),0_0_0_1px_rgba(154,14,31,0.2)] hover:shadow-[0_28px_70px_rgba(154,14,31,0.35),0_0_0_1px_rgba(154,14,31,0.4)]"
                   : pkg.isEnterprise
                   ? "shadow-[0_8px_30px_rgba(255,255,255,0.03),0_0_0_1px_rgba(255,255,255,0.07)] hover:shadow-[0_16px_50px_rgba(255,255,255,0.06),0_0_0_1px_rgba(255,255,255,0.12)]"
                   : "shadow-[0_8px_30px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.07)] hover:shadow-[0_16px_50px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.12)]"

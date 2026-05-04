@@ -438,7 +438,7 @@ export default function LandingPage() {
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-24 items-start py-4">
               {/* LEFT: CONTENT AREA */}
-              <div className="lg:col-span-7 flex flex-col mt-4 lg:mt-12">
+              <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left mt-4 lg:mt-12 w-full">
                 <Reveal delay={0.2}>
                   <h1 className="text-white font-black leading-[0.9] tracking-tighter mb-5 lg:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ fontSize: "clamp(2rem, 10vw, 5.5rem)", letterSpacing: "-0.04em" }}>
                     <span className="block whitespace-nowrap text-[0.8em] font-semibold tracking-tight mb-2">
@@ -448,7 +448,7 @@ export default function LandingPage() {
                   </h1>
                 </Reveal>
                 <Reveal delay={0.4} className="max-w-xl">
-                  <p className="text-white/85 text-[13px] md:text-[15px] lg:text-base leading-relaxed font-light pr-2 md:pr-0 mb-6 md:mb-10 lg:max-w-md">
+                  <p className="text-white/85 text-[13px] md:text-[15px] lg:text-base leading-relaxed font-light px-4 lg:px-0 mb-6 md:mb-10 lg:max-w-md mx-auto lg:mx-0">
                     We create scroll-stopping content that grabs attention and turns it into real customers at your tables.
                   </p>
                 </Reveal>
@@ -541,18 +541,18 @@ export default function LandingPage() {
               </div>
 
               {/* Mobile CTA (Visible only on mobile) */}
-              <div className="lg:hidden flex flex-col items-start gap-3">
+              <div className="lg:hidden flex flex-col items-center gap-3 w-full">
                 <Reveal delay={0.5}>
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center justify-center gap-2 mb-1">
                     <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
                     <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-widest font-bold">Now Booking</span>
                   </div>
                 </Reveal>
                 
-                <Reveal delay={0.6}>
+                <Reveal delay={0.6} className="w-full flex justify-center">
                   <button 
                     onClick={openProjectModal}
-                    className="group relative flex items-center justify-center gap-4 w-full px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden shadow-[0_10px_30px_rgba(154,14,31,0.2)] rounded-full"
+                    className="group relative flex items-center justify-center gap-4 w-[280px] md:w-[320px] px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden shadow-[0_10px_30px_rgba(154,14,31,0.2)] rounded-full"
                   >
                      <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#9A0E1F] z-20" />
                      <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
@@ -561,19 +561,20 @@ export default function LandingPage() {
                      <div className="absolute inset-0 bg-[#9A0E1F] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
                   </button>
                 </Reveal>
-                <Reveal delay={0.65}>
+                <Reveal delay={0.65} className="w-full">
                   <p className="w-full text-white/40 text-[8px] text-center mt-2 font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
                 </Reveal>
 
                 {/* Mobile Testimonial Slider */}
-                <div className="w-full mt-2">
-                  <Reveal delay={0.7}>
-                    <div className="w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)]">
-                      <div className="flex items-center gap-2 mb-2">
+                <div className="w-full mt-2 flex justify-center">
+                  <Reveal delay={0.7} className="w-full">
+                    <div className="w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)] flex flex-col items-center text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
                         <div className="h-[1px] w-5 bg-[#9A0E1F]" />
                         <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-[0.2em] font-black block">What Our Clients Say</span>
+                        <div className="h-[1px] w-5 bg-[#9A0E1F]" />
                       </div>
-                      <div className="relative h-10 flex items-center">
+                      <div className="relative h-10 w-full flex items-center justify-center">
                         <TestimonialRotation isMobile={true} />
                       </div>
                     </div>
@@ -587,15 +588,15 @@ export default function LandingPage() {
               <div className="container mx-auto border-t border-white/5 pt-6 md:pt-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                   {/* LEFT COLUMN: All 3 Metrics */}
-                  <div className="lg:col-span-7 flex flex-row items-end gap-8 md:gap-16 lg:gap-20">
+                  <div className="lg:col-span-7 flex flex-row items-end justify-center lg:justify-start gap-8 md:gap-16 lg:gap-20">
                     <Reveal delay={0.7}>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                         <span className="text-white font-black text-xl md:text-4xl tracking-tighter">GULF</span>
                         <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">Clients</span>
                       </div>
                     </Reveal>
                     <Reveal delay={0.8}>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                         <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
                           <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
                         </span>
@@ -603,7 +604,7 @@ export default function LandingPage() {
                       </div>
                     </Reveal>
                     <Reveal delay={0.9}>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                         <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
                           <CountUp start={0} end={300} duration={5} redraw={true} suffix="%" />
                         </span>

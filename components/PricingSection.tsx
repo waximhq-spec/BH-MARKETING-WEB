@@ -11,9 +11,9 @@ function FeatureItem({ label, details }: { label: string; details: string }) {
   return (
     <button
       onClick={() => setIsOpen(!isOpen)}
-      className="w-full flex flex-col items-start text-left focus:outline-none group py-1.5"
+      className="w-full flex flex-col items-start text-left focus:outline-none group py-1"
     >
-      <div className="flex items-center gap-3 w-full">
+      <div className="flex items-center gap-2.5 w-full">
         {/* Checkmark dot */}
         <span className="w-[5px] h-[5px] rounded-full bg-white/30 shrink-0 group-hover:bg-white/60 transition-colors duration-200" />
         <span className="text-[12px] text-white/70 font-medium group-hover:text-white transition-colors duration-200 flex-1 text-left leading-snug">
@@ -133,7 +133,7 @@ export default function PricingSection() {
   ];
 
   return (
-    <section data-theme="pricing" className="py-16 md:py-24 bg-[#050505] relative overflow-hidden">
+    <section data-theme="pricing" className="py-12 md:py-20 bg-[#050505] relative overflow-hidden">
       {/* Top divider glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/40 to-transparent" />
       {/* Background radial for depth */}
@@ -144,7 +144,7 @@ export default function PricingSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-12"
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-6">
             <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
@@ -153,7 +153,7 @@ export default function PricingSection() {
           <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black text-4xl md:text-6xl tracking-tighter leading-none mb-6">
             CINMACH PRODUCTIONS<br />PACKAGES.
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto text-sm md:text-base font-light">
+          <p className="text-white/40 max-w-xl mx-auto text-xs md:text-sm font-light">
             Simple, transparent pricing built for high-end hospitality and modern brand growth.
           </p>
         </motion.div>
@@ -217,7 +217,7 @@ export default function PricingSection() {
               </svg>
 
               {/* Content */}
-              <div className="flex flex-col flex-grow p-5 z-10 relative">
+              <div className="flex flex-col flex-grow p-4 z-10 relative">
                 {/* Popular badge */}
                 {pkg.isPopular && (
                   <div className="mb-3 self-start">
@@ -262,22 +262,21 @@ export default function PricingSection() {
                       : pkg.isEnterprise
                       ? "bg-clip-text text-transparent bg-gradient-to-b from-[#e8c87a] to-[#c9a84c]/70"
                       : "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60"
-                  }`} style={{ fontSize: "clamp(2.4rem, 4vw, 3.2rem)" }}>
+                  }`} style={{ fontSize: "clamp(2.2rem, 3.5vw, 2.8rem)" }}>
                     {pkg.price}
                   </span>
                 </div>
-                <p className="text-white/35 text-[10px] leading-tight mb-4 min-h-[24px] font-light">
+                <p className="text-white/35 text-[10px] leading-tight mb-3 min-h-[20px] font-light">
                   {pkg.target}
                 </p>
 
-                {/* Divider */}
-                <div className={`w-full h-px mb-3 ${
-                  pkg.isPopular ? "bg-[#9A0E1F]/15" : "bg-white/[0.05]"
+                <div className={`w-full h-px mb-2.5 ${
+                   pkg.isPopular ? "bg-[#9A0E1F]/15" : "bg-white/[0.04]"
                 }`} />
 
                 {/* Features */}
-                <div className="flex-grow flex flex-col mb-6">
-                  <p className="text-white/20 text-[9px] tracking-widest uppercase font-bold mb-1">Includes</p>
+                <div className="flex-grow flex flex-col mb-3">
+                  <p className="text-white/20 text-[8px] tracking-[0.2em] uppercase font-bold mb-0.5">Includes</p>
                   {pkg.features.map((feature: any, i: number) => (
                     <FeatureItem key={i} label={feature.label} details={feature.details} />
                   ))}
@@ -286,7 +285,7 @@ export default function PricingSection() {
                 {/* CTA */}
                 <button
                   onClick={openProjectModal}
-                  className={`mt-auto w-full py-3.5 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase
+                  className={`mt-auto w-full py-3 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase
                     transition-all duration-300 ease-out
                     hover:-translate-y-[2px] hover:brightness-110 active:scale-[0.98]
                     ${pkg.isPopular

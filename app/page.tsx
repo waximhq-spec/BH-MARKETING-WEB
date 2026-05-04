@@ -476,7 +476,7 @@ export default function LandingPage() {
                         </button>
                       </form>
                       
-                      <p className="text-white/20 text-[8px] text-center mt-4 font-mono tracking-widest uppercase">Response within 24 hours</p>
+                      <p className="text-white/40 text-[9px] text-center mt-5 font-mono tracking-[0.25em] uppercase font-medium">Response within <span className="font-black text-white/90 text-[10px]">24 hours</span></p>
                     </div>
                   </motion.div>
 
@@ -489,8 +489,8 @@ export default function LandingPage() {
                   >
                     <div className="flex flex-col gap-3">
                       <div className="flex items-center gap-3">
-                        <div className="h-[1px] w-4 bg-[#9A0E1F]/40" />
-                        <span className="text-white/60 font-mono text-[7px] uppercase tracking-[0.4em] font-bold">Client Results</span>
+                        <div className="h-[1px] w-6 bg-[#9A0E1F]" />
+                        <span className="text-white/60 font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</span>
                       </div>
                       <div className="relative h-12 flex items-center">
                         <TestimonialRotation />
@@ -523,14 +523,17 @@ export default function LandingPage() {
                      <div className="absolute inset-0 bg-[#9A0E1F] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
                   </button>
                 </Reveal>
+                <Reveal delay={0.65}>
+                  <p className="w-full text-[#9A0E1F] text-[8px] text-center mt-2 font-mono tracking-[0.2em] uppercase font-black">Response within 24 hours</p>
+                </Reveal>
 
                 {/* Mobile Testimonial Slider */}
                 <div className="w-full mt-2">
                   <Reveal delay={0.7}>
                     <div className="w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)]">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="h-[1px] w-3 bg-[#9A0E1F]/40" />
-                        <span className="text-white/60 font-mono text-[7px] uppercase tracking-[0.3em] font-bold block">Client Results</span>
+                        <div className="h-[1px] w-5 bg-[#9A0E1F]" />
+                        <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-[0.2em] font-black block">What Our Clients Say</span>
                       </div>
                       <div className="relative h-10 flex items-center">
                         <TestimonialRotation isMobile={true} />
@@ -840,7 +843,7 @@ function TestimonialRotation({ isMobile = false }: { isMobile?: boolean }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className={`text-white font-semibold italic ${isMobile ? "text-[12px]" : "text-[14px]"} leading-relaxed tracking-wide`}
+          className={`text-white font-bold italic ${isMobile ? "text-[13px]" : "text-[15px]"} leading-relaxed tracking-wide opacity-90`}
         >
           &ldquo;{HERO_TESTIMONIALS[index]}&rdquo;
         </motion.p>
@@ -976,7 +979,7 @@ function TestimonialWheel() {
             </p>
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-[#B11226]" />
-              <p className="text-black/20 font-mono text-[8px] uppercase tracking-[0.2em] font-bold">Client Result</p>
+              <p className="text-[#B11226] font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</p>
             </div>
           </div>
         </motion.div>

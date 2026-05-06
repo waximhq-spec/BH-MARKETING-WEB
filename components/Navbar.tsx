@@ -109,8 +109,9 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ease-[0.16,1,0.3,1]
+      <motion.header
+        layout
+        className={`relative z-[100] transition-all duration-500 ease-[0.16,1,0.3,1]
           ${scrolled ? "backdrop-blur-xl backdrop-saturate-150" : ""}`}
         style={{
           borderBottom: `1px solid ${borderColor}`,
@@ -190,12 +191,12 @@ export default function Navbar() {
             {/* Desktop CTA — Premium pill */}
             <button
               onClick={openProjectModal}
-              className="group relative h-9 px-5 bg-[#9A0E1F] text-white text-[9px] font-mono font-bold tracking-[0.25em] uppercase overflow-hidden transition-all duration-400 rounded-full hover:shadow-[0_4px_20px_rgba(154,14,31,0.4)]"
+              className="group relative h-9 px-5 bg-white text-black text-[9px] font-mono font-bold tracking-[0.25em] uppercase overflow-hidden transition-all duration-400 rounded-full hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)] border border-black"
             >
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-2.5">
-                GET A QUOTE <span className="text-[10px] transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-2.5">
+                START A PROJECT <span className="text-[10px] transition-transform duration-300 group-hover:translate-x-0.5">→</span>
               </span>
-              <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[0.16,1,0.3,1] origin-left" />
+              <div className="absolute inset-0 bg-[#9A0E1F] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[0.16,1,0.3,1] origin-left" />
             </button>
           </nav>
 
@@ -218,7 +219,7 @@ export default function Navbar() {
             ))}
           </button>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {menuOpen && (
@@ -290,7 +291,7 @@ export default function Navbar() {
                   onClick={() => { setMenuOpen(false); openProjectModal(); }}
                   className="group btn-premium flex items-center justify-between w-full h-[64px] px-8 bg-black text-white text-[11px] font-mono font-medium tracking-[0.25em] uppercase overflow-hidden relative"
                 >
-                  <span className="relative z-10 group-hover:text-black transition-colors duration-500">Get a Quote</span>
+                  <span className="relative z-10 group-hover:text-black transition-colors duration-500">Start a Project</span>
                   <span className="relative z-10 group-hover:text-black transition-colors duration-500">→</span>
                   <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
                 </button>

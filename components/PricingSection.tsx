@@ -4,38 +4,57 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 
-// Expandable feature item — checkmark, no dividers
-function FeatureItem({ label, details }: { label: string; details: string }) {
+// Expandable feature item — pro checkmark
+function FeatureItem({ label, details, isParentPopular }: { label: string; details: string; isParentPopular?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
+  const isHighlighted = label.toLowerCase().includes("multi") && label.toLowerCase().includes("location");
 
   return (
     <button
       onClick={() => setIsOpen(!isOpen)}
-      className="w-full flex flex-col items-start text-left focus:outline-none group py-1"
+      className="w-full flex flex-col items-start text-left focus:outline-none group py-1.5 relative overflow-hidden rounded-md transition-all duration-300"
     >
-      <div className="flex items-center gap-2.5 w-full">
-        {/* Checkmark dot */}
-        <span className="w-[5px] h-[5px] rounded-full bg-white/30 shrink-0 group-hover:bg-white/60 transition-colors duration-200" />
-        <span className="text-[12px] text-white/70 font-medium group-hover:text-white transition-colors duration-200 flex-1 text-left leading-snug">
+      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.03] transition-colors duration-300 pointer-events-none" />
+      <div className="flex items-start gap-3 w-full px-2 relative z-10">
+        <div className={`mt-[4px] shrink-0 transition-all duration-300 ${
+          isHighlighted ? "text-[#9A0E1F] drop-shadow-[0_0_8px_rgba(154,14,31,0.8)]" : 
+          isParentPopular ? "text-[#9A0E1F]/80 group-hover:text-[#9A0E1F]" :
+          "text-white/30 group-hover:text-white/70"
+        }`}>
+          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <span className={`text-[12.5px] transition-colors duration-300 flex-1 text-left leading-snug tracking-wide ${
+          isHighlighted 
+            ? "text-white font-bold drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" 
+            : isParentPopular 
+              ? "text-white/95 font-semibold group-hover:text-white" 
+              : "text-white/75 font-medium group-hover:text-white"
+        }`}>
           {label}
         </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          className="text-white/20 group-hover:text-white/50 transition-colors text-[12px] leading-none shrink-0"
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          className={`shrink-0 transition-colors mt-[3px] ${
+            isHighlighted ? "text-[#9A0E1F]" : "text-white/20 group-hover:text-white/50"
+          }`}
         >
-          +
-        </motion.span>
+          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </motion.div>
       </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden w-full pl-[17px]"
+            initial={{ opacity: 0, height: 0, y: -5 }}
+            animate={{ opacity: 1, height: "auto", y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -5 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden w-full pl-[32px] pr-2 relative z-10"
           >
-            <p className="pt-2 pb-1 text-[10px] text-white/40 leading-relaxed">
+            <p className="pt-2 pb-1 text-[11px] text-white/50 leading-relaxed font-light">
               {details}
             </p>
           </motion.div>
@@ -45,6 +64,7 @@ function FeatureItem({ label, details }: { label: string; details: string }) {
   );
 }
 
+
 export default function PricingSection() {
   const { openProjectModal } = useModal();
   const [activeCategory, setActiveCategory] = useState("Restaurants & Cafes");
@@ -53,95 +73,259 @@ export default function PricingSection() {
     "Restaurants & Cafes",
     "Real Estate",
     "Gyms & Fitness",
-    "Hotels & Resorts",
-    "E-commerce",
-    "Luxury"
+    "Hotels & Resorts"
   ];
 
+  const PRICING_DATA: Record<string, any[]> = {
+    "Restaurants & Cafes": [
+      {
+        id: "rest-starter",
+        name: "Starter",
+        price: "350",
+        currency: "BHD",
+        target: "For businesses getting started",
+        features: [
+          { label: "8 Reels (9:16)", details: "High-impact short-form content for social presence." },
+          { label: "16 Photos", details: "Professional high-res shots of your food and venue." },
+          { label: "1 Location Shoot", details: "Single session production at your primary venue." },
+          { label: "Cinematic Editing", details: "Professional cuts with color correction." },
+          { label: "1 Revision Round", details: "One set of refinements to ensure perfection." },
+          { label: "Fast-Track Delivery", details: "Regular turnaround for final assets." }
+        ],
+        ctaText: "Get Started",
+        isPopular: false,
+        isRetainer: false,
+      },
+      {
+        id: "rest-premium",
+        name: "Premium",
+        price: "599",
+        currency: "BHD",
+        target: "For brands focused on growth",
+        features: [
+          { label: "20 Reels (9:16)", details: "High-volume content for daily social engagement." },
+          { label: "20 Photos", details: "Premium photography for ads and social media." },
+          { label: "10 Carousel Graphics", details: "Custom designed social graphics for education." },
+          { label: "Multi-location Shoot", details: "Shoot across multiple venues or branches." },
+          { label: "Advanced Editing", details: "Premium sound design and color grading." },
+          { label: "2 Revision Rounds", details: "Extended refinement for total satisfaction." },
+          { label: "Fast-Track Delivery", details: "Accelerated delivery for timely campaigns." }
+        ],
+        ctaText: "Choose Premium",
+        isPopular: true,
+        isRetainer: false,
+      },
+      {
+        id: "rest-retainer",
+        name: "Retainer",
+        price: "1,000",
+        currency: "BHD",
+        target: "For businesses scaling monthly",
+        features: [
+          { label: "30 Reels (9:16)", details: "Maximum visibility with daily content coverage." },
+          { label: "30 Photos", details: "Complete monthly visual library for all channels." },
+          { label: "15 Carousel Graphics", details: "Extensive graphic support for digital marketing." },
+          { label: "Multi-location Shoot", details: "Comprehensive coverage across your entire network." },
+          { label: "Master-Level Editing", details: "Highest tier post-production and color science." },
+          { label: "3 Revision Rounds", details: "Unlimited focus on detail and quality." },
+          { label: "Fast-Track Delivery", details: "24/7 priority support and express delivery." }
+        ],
+        ctaText: "Start Retainer",
+        isPopular: false,
+        isRetainer: true,
+      },
+      {
+        id: "rest-custom",
+        name: "Enterprise",
+        price: "Custom",
+        currency: "",
+        target: "Tailored solutions for restaurant groups & franchises",
+        features: [
+          { label: "Multi-location Strategy", details: "Coordinated content across your entire chain." },
+          { label: "Full Creative Direction", details: "Dedicated producer and high-end art direction." },
+          { label: "Advanced Menu Engineering", details: "Visuals optimized for highest conversion rates." },
+          { label: "Full Rights & Master Files", details: "Complete ownership of all raw and final assets." },
+          { label: "Priority Asset Delivery", details: "Guaranteed express turnaround for campaign launches." }
+        ],
+        ctaText: "Contact Us",
+        isPopular: false,
+        isRetainer: false,
+        isEnterprise: true,
+      }
+    ],
+    "Real Estate": [
+      {
+        id: "re-starter",
+        name: "Starter",
+        price: "120",
+        currency: "BHD",
+        target: "For businesses getting started",
+        features: [
+          { label: "1 Cinematic Walkthrough (16:9)", details: "Interior and exterior property filming." },
+          { label: "1 Vertical Reel (9:16)", details: "Optimized for Instagram and TikTok listings." },
+          { label: "15 Edited Photos", details: "Color corrected and perspective-fixed shots." },
+          { label: "Professional Grading", details: "Clean, natural cinematic look for listings." },
+          { label: "1 Revision Round", details: "One set of refinements to ensure perfection." },
+          { label: "Fast-Track Delivery", details: "Standard turnaround for property assets." }
+        ],
+        ctaText: "Get Started",
+        isPopular: false,
+        isRetainer: false,
+      },
+      {
+        id: "re-premium",
+        name: "Premium",
+        price: "200",
+        currency: "BHD",
+        target: "For brands focused on growth",
+        features: [
+          { label: "1 Cinematic Walkthrough (16:9)", details: "Premium cinematography with gimbal work." },
+          { label: "1 High-Retention Speed Ramp (16:9)", details: "Dynamic edit for viral social media potential." },
+          { label: "1 Vertical Reel (9:16)", details: "High-impact vertical video content." },
+          { label: "30 Edited Photos", details: "Full coverage for all rooms and angles." },
+          { label: "Advanced Sound Design", details: "Immersive audio to match cinematic visuals." },
+          { label: "2 Revision Rounds", details: "Extended refinement for total satisfaction." },
+          { label: "Fast-Track Delivery", details: "Priority delivery for faster listing launches." }
+        ],
+        ctaText: "Choose Premium",
+        isPopular: true,
+        isRetainer: false,
+      },
+      {
+        id: "re-retainer",
+        name: "Retainer",
+        price: "Custom",
+        currency: "",
+        target: "For businesses scaling monthly",
+        features: [
+          { label: "Multi-location Coverage", details: "Volume shoots for development portfolios." },
+          { label: "Drone & Cinematic Shoots (16:9)", details: "Breathtaking aerial coverage for high-end listings." },
+          { label: "Monthly Content Strategy", details: "Bespoke planning for agencies and developers." },
+          { label: "VFX & Advanced Grading", details: "Top-tier post-production for luxury properties." },
+          { label: "Full Rights / Raw Files", details: "Complete ownership of all original assets." },
+          { label: "Fast-Track Delivery", details: "Guaranteed express delivery for all listings." }
+        ],
+        ctaText: "Contact Us",
+        isPopular: false,
+        isRetainer: true,
+      }
+    ],
+    "Gyms & Fitness": [
+      {
+        id: "gym-starter",
+        name: "Starter",
+        price: "120",
+        currency: "BHD",
+        target: "For businesses getting started",
+        features: [
+          { label: "1 Cinematic Fitness Video (16:9)", details: "High-energy footage of workouts or facilities." },
+          { label: "1 Vertical Reel (9:16)", details: "Optimized short-form video for social engagement." },
+          { label: "10 Edited Photos", details: "Action shots and high-quality facility photos." },
+          { label: "1 Location Shoot", details: "Single production session at your gym." },
+          { label: "Cinematic Editing", details: "Energy-matched cuts with professional flow." },
+          { label: "Fast-Track Delivery", details: "Regular turnaround for final content assets." }
+        ],
+        ctaText: "Get Started",
+        isPopular: false,
+        isRetainer: false,
+      },
+      {
+        id: "gym-premium",
+        name: "Premium",
+        price: "200",
+        currency: "BHD",
+        target: "For brands focused on growth",
+        features: [
+          { label: "1 Cinematic Fitness Video (16:9)", details: "Advanced cinematography focused on brand story." },
+          { label: "1 Speed Ramp Video (16:9)", details: "High-impact edit with professional transitions." },
+          { label: "1 Talking Head Reel (9:16)", details: "Motivational or educational presenter content." },
+          { label: "20 Edited Photos", details: "Extensive photo set covering all gym areas." },
+          { label: "Premium Sound Design", details: "Aggressive, high-energy audio post-production." },
+          { label: "Fast-Track Delivery", details: "Express turnaround for social media trends." }
+        ],
+        ctaText: "Choose Premium",
+        isPopular: true,
+        isRetainer: false,
+      },
+      {
+        id: "gym-retainer",
+        name: "Retainer",
+        price: "499",
+        currency: "BHD",
+        target: "For businesses scaling monthly",
+        features: [
+          { label: "15 Reels Per Month (9:16)", details: "Consistent daily or bi-daily content flow." },
+          { label: "30 Edited Photos", details: "Monthly library of fresh visual assets." },
+          { label: "Multi-location Shoots", details: "Production across multiple facility branches." },
+          { label: "Strategic Brand Direction", details: "Ongoing creative partnership for growth." },
+          { label: "Optimized for Growth", details: "Content specifically crafted to maximize reach." },
+          { label: "Fast-Track Delivery", details: "Ongoing express delivery for consistent posting." }
+        ],
+        ctaText: "Start Retainer",
+        isPopular: false,
+        isRetainer: true,
+      }
+    ],
+    "Hotels & Resorts": [
+      {
+        id: "hotel-starter",
+        name: "Starter",
+        price: "120",
+        currency: "BHD",
+        target: "For businesses getting started",
+        features: [
+          { label: "1 Cinematic Walkthrough (16:9)", details: "Interior and exterior filming of guest spaces." },
+          { label: "1 Vertical Reel (9:16)", details: "Engaging short-form content for social visibility." },
+          { label: "20 Website-Ready Photos", details: "Optimized shots for booking platforms and web." },
+          { label: "Lifestyle Cinematography", details: "Focus on guest experiences and atmosphere." },
+          { label: "Natural Color Grading", details: "Inviting aesthetic to attract future guests." },
+          { label: "Fast-Track Delivery", details: "Regular turnaround for hospitality assets." }
+        ],
+        ctaText: "Get Started",
+        isPopular: false,
+        isRetainer: false,
+      },
+      {
+        id: "hotel-premium",
+        name: "Premium",
+        price: "200",
+        currency: "BHD",
+        target: "For brands focused on growth",
+        features: [
+          { label: "1 Cinematic Walkthrough (16:9)", details: "Highest-tier luxury cinematography." },
+          { label: "1 High-Retention Speed Ramp (16:9)", details: "Dynamic showcase of resort amenities." },
+          { label: "1 Vertical Reel (9:16)", details: "Viral-ready vertical content for growth." },
+          { label: "60 Website-Ready Photos", details: "Complete library for every room type and facility." },
+          { label: "Immersive Sound Design", details: "Audio that captures the resort experience." },
+          { label: "Fast-Track Delivery", details: "Accelerated delivery for seasonal marketing." }
+        ],
+        ctaText: "Choose Premium",
+        isPopular: true,
+        isRetainer: false,
+      },
+      {
+        id: "hotel-retainer",
+        name: "Retainer",
+        price: "Custom",
+        currency: "",
+        target: "For businesses scaling monthly",
+        features: [
+          { label: "Multi-location Coverage", details: "Coordinated content across hotel groups or chains." },
+          { label: "Drone & Lifestyle Shoots (16:9)", details: "Breathtaking aerial views and lifestyle coverage." },
+          { label: "Seasonal Content Strategy", details: "Monthly planning for year-round marketing cycles." },
+          { label: "Specialized Color Science", details: "Top-tier grading for luxury brand positioning." },
+          { label: "Full Rights / Raw Files", details: "Complete ownership of all high-res master files." },
+          { label: "Fast-Track Delivery", details: "Guaranteed express delivery for campaign launches." }
+        ],
+        ctaText: "Contact Us",
+        isPopular: false,
+        isRetainer: true,
+      }
+    ]
+  };
 
-  const packages = [
-    {
-      id: "starter",
-      name: "Starter",
-      price: "350",
-      currency: "BHD",
-      target: "Start your presence",
-      features: [
-        { label: "8 Reels", details: "Cinematic short-form videos optimized for engagement." },
-        { label: "16 Photos", details: "Professional high-resolution shots covering your brand." },
-        { label: "1 Location Shoot", details: "Production session at a single venue of your choice." },
-        { label: "Basic Color Grading", details: "Standard cinematic color correction for a consistent look." },
-        { label: "1 Round Revision", details: "One set of refinements to ensure content meets your vision." },
-        { label: "Standard Scheduling", details: "Standard queue for production and editing timeline." },
-        { label: "Standard Delivery", details: "Regular turnaround for final assets." }
-      ],
-      ctaText: "Get Started",
-      isPopular: false,
-      isEnterprise: false,
-    },
-    {
-      id: "premium",
-      name: "Premium",
-      price: "599",
-      currency: "BHD",
-      target: "Everything you need to bring in customers",
-      features: [
-        { label: "20 Reels", details: "High-volume short-form content for consistent social presence." },
-        { label: "20 Photos", details: "Premium photography for menus, ads, and social media." },
-        { label: "10 Carousel Graphics", details: "Custom designed graphics for educational or promotional posts." },
-        { label: "Multi-location", details: "Flexibility to shoot across multiple venues or branches." },
-        { label: "Advanced Editing + Premium Grade", details: "High-end post-production with cinematic color science." },
-        { label: "Content Strategy Guidance", details: "Expert advice on hook-writing and content performance." },
-        { label: "2 Rounds Revisions", details: "Extended refinement process for perfect deliverables." },
-        { label: "Fast-Track Scheduling", details: "Priority booking for your production sessions." },
-        { label: "Fast-Track Delivery", details: "Accelerated editing turnaround for timely campaigns." },
-        { label: "Included Ad-Ready Content", details: "Content optimized specifically for paid social campaigns." },
-        { label: "Priority Access", details: "Direct communication and faster support response." }
-      ],
-      ctaText: "Choose Premium",
-      isPopular: true,
-      isEnterprise: false,
-    },
-    {
-      id: "diamond",
-      name: "Diamond",
-      price: "1,000",
-      currency: "BHD",
-      target: "Built to scale faster",
-      features: [
-        { label: "30 Reels", details: "Daily content coverage for maximum brand visibility." },
-        { label: "30 Photos", details: "Complete visual library updated monthly." },
-        { label: "15 Carousel Graphics", details: "Extensive graphic support for all digital channels." },
-        { label: "Multi-location", details: "Comprehensive coverage across your entire business network." },
-        { label: "Advanced Editing + Premium Grade", details: "Master-level post-production and color finishing." },
-        { label: "Content Strategy Guidance", details: "Full strategic roadmap for your digital growth." },
-        { label: "3 Rounds Revisions", details: "Unlimited focus on detail for the highest quality output." },
-        { label: "Fast-Track Scheduling", details: "Priority booking for your production sessions." },
-        { label: "Fast-Track Delivery", details: "Accelerated editing turnaround for timely campaigns." },
-        { label: "Included Ad-Ready Content", details: "Content optimized specifically for paid social campaigns." },
-        { label: "Priority Access", details: "24/7 direct communication and immediate support." }
-      ],
-      ctaText: "Go Diamond",
-      isPopular: false,
-      isEnterprise: false,
-    },
-    {
-      id: "custom",
-      name: "Enterprise",
-      price: "Custom",
-      currency: "",
-      target: "Scalable solutions for groups & chains",
-      features: [
-        { label: "Multi-Location Support", details: "Coordinated shoots across multiple venues/branches." },
-        { label: "Dedicated Producer", details: "Single point of contact for all your production needs." },
-        { label: "Full Rights / Raw Files", details: "Complete ownership of all captured raw assets." },
-        { label: "Priority Turnaround", details: "Express delivery for time-sensitive marketing campaigns." }
-      ],
-      ctaText: "Contact Us",
-      isPopular: false,
-      isEnterprise: true,
-    }
-  ];
+  // Default to restaurant data if category not found in map
+  const packages = PRICING_DATA[activeCategory] || PRICING_DATA["Restaurants & Cafes"];
 
   return (
     <section id="pricing" data-theme="pricing" className="py-32 md:py-40 bg-[#050505] relative overflow-hidden">
@@ -196,51 +380,53 @@ export default function PricingSection() {
         </div>
 
         {/* Grid — align tops, Standard lifts */}
-        <div key={activeCategory} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5 items-end px-2 md:px-0 mt-4 md:mt-0">
-          {packages.map((pkg, idx) => (
+        <div className="relative min-h-[600px]">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={pkg.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.55, delay: 0.08 * idx, ease: [0.22, 1, 0.36, 1] }}
-              className={`group flex flex-col relative rounded-2xl overflow-hidden cursor-default
-                transition-all duration-400 ease-out
+              key={activeCategory}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className={`grid grid-cols-1 md:grid-cols-2 ${
+                packages.length === 3 ? "lg:grid-cols-3 max-w-6xl mx-auto" : "lg:grid-cols-4 lg:max-w-[1400px] w-full mx-auto"
+              } gap-6 md:gap-5 items-end px-2 md:px-0 mt-4 md:mt-0`}
+            >
+              {packages.map((pkg, idx) => (
+                <motion.div
+                  key={pkg.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.05 }}
+                  className={`group flex flex-col relative rounded-[24px] overflow-hidden cursor-default
+                transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
                 hover:-translate-y-2 hover:scale-[1.02]
                 ${pkg.isPopular
-                  ? "-translate-y-2 md:-translate-y-3 md:scale-[1.05] shadow-[0_20px_60px_rgba(154,14,31,0.25),0_0_0_1px_rgba(154,14,31,0.2)] hover:shadow-[0_28px_70px_rgba(154,14,31,0.35),0_0_0_1px_rgba(154,14,31,0.4)]"
-                  : pkg.isEnterprise
-                  ? "shadow-[0_8px_30px_rgba(255,255,255,0.03),0_0_0_1px_rgba(255,255,255,0.07)] hover:shadow-[0_16px_50px_rgba(255,255,255,0.06),0_0_0_1px_rgba(255,255,255,0.12)]"
-                  : "shadow-[0_8px_30px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.07)] hover:shadow-[0_16px_50px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.12)]"
+                  ? "-translate-y-2 md:-translate-y-3 md:scale-[1.03] shadow-[0_20px_60px_rgba(154,14,31,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] border border-[#9A0E1F]/50 hover:shadow-[0_30px_80px_rgba(154,14,31,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] hover:border-[#9A0E1F]/80 z-10"
+                  : "shadow-[0_8px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.02)] border border-white/5 hover:border-white/10 hover:shadow-[0_16px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.05)]"
                 }`}
               style={{
-                background: pkg.isPopular
-                  ? "linear-gradient(160deg, #111 0%, #0d0d0d 60%, #0a0a0a 100%)"
-                  : pkg.isEnterprise
-                  ? "linear-gradient(160deg, #0f0f0d 0%, #0a0a09 100%)"
-                  : "#0a0a0a",
+                background: "rgba(10, 10, 10, 0.45)",
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
               }}
             >
               {/* Featured glow overlay */}
               {pkg.isPopular && (
                 <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute top-0 left-0 right-0 h-[120px] bg-gradient-to-b from-[#9A0E1F]/12 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 h-[80px] bg-gradient-to-t from-[#9A0E1F]/6 to-transparent" />
+                  <div className="absolute top-0 left-0 right-0 h-[150px] bg-gradient-to-b from-[#9A0E1F]/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#9A0E1F]/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#9A0E1F]/5 via-transparent to-[#9A0E1F]/5" />
                 </div>
               )}
 
-              {/* Enterprise gold tint */}
-              {pkg.isEnterprise && (
-                <div className="absolute inset-0 bg-gradient-to-b from-[#c9a84c]/5 to-transparent pointer-events-none" />
-              )}
-
               {/* Top accent bar */}
-              <div className={`h-[2px] w-full ${
+              <div className={`h-[3px] w-full ${
                 pkg.isPopular
-                  ? "bg-gradient-to-r from-transparent via-[#9A0E1F] to-transparent"
-                  : pkg.isEnterprise
-                  ? "bg-gradient-to-r from-transparent via-[#c9a84c]/40 to-transparent"
-                  : "bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                  ? "bg-gradient-to-r from-transparent via-[#9A0E1F] to-transparent shadow-[0_0_15px_#9A0E1F]"
+                  : pkg.isRetainer || pkg.isEnterprise
+                  ? "bg-gradient-to-r from-transparent via-[#c9a84c]/60 to-transparent"
+                  : "bg-gradient-to-r from-transparent via-white/20 to-transparent"
               }`} />
 
               {/* Dot grid pattern */}
@@ -254,90 +440,103 @@ export default function PricingSection() {
               </svg>
 
               {/* Content */}
-              <div className="flex flex-col flex-grow p-4 z-10 relative">
+              <div className="flex flex-col flex-grow p-6 z-10 relative">
                 {/* Popular badge */}
                 {pkg.isPopular && (
-                  <div className="mb-3 self-start">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9A0E1F]/20 border border-[#9A0E1F]/40 text-[#9A0E1F] text-[9px] font-bold tracking-widest uppercase">
-                      <span className="w-1 h-1 rounded-full bg-[#9A0E1F] animate-pulse" />
+                  <div className="absolute top-5 right-5 z-20">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9A0E1F]/20 border border-[#9A0E1F]/50 text-[#9A0E1F] text-[9px] font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(154,14,31,0.4)] backdrop-blur-md">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_5px_#9A0E1F]" />
                       Most Popular
                     </span>
                   </div>
                 )}
 
-                {/* Enterprise badge */}
-                {pkg.isEnterprise && (
-                  <div className="mb-2 self-start">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c9a84c]/10 border border-[#c9a84c]/25 text-[#c9a84c] text-[9px] font-bold tracking-widest uppercase">
-                      <span className="w-1 h-1 rounded-full bg-[#c9a84c]" />
-                      Enterprise
+                {/* Enterprise / Retainer badge */}
+                {(pkg.isRetainer || pkg.isEnterprise) && (
+                  <div className="absolute top-5 right-5 z-20">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c9a84c]/5 border border-[#c9a84c]/20 text-[#c9a84c]/90 text-[9px] font-bold tracking-widest uppercase">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c]" />
+                      {pkg.isRetainer ? "Retainer" : "Enterprise"}
                     </span>
                   </div>
                 )}
 
                 {/* Plan name */}
-                <h3 className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-2 ${
+                <h3 className={`text-[11px] font-bold tracking-[0.25em] uppercase mb-3 mt-1 ${
                   pkg.isPopular ? "text-[#9A0E1F]"
-                  : pkg.isEnterprise ? "text-[#c9a84c]/70"
-                  : "text-white/40"
+                  : pkg.isRetainer || pkg.isEnterprise ? "text-[#c9a84c]/80"
+                  : "text-white/50"
                 }`}>
                   {pkg.name}
                 </h3>
 
                 {/* Price */}
-                <div className="flex items-baseline gap-1 mb-1">
+                <div className="flex items-baseline gap-1.5 mb-1.5">
                   {pkg.currency && (
                     <span className={`font-bold leading-none ${
                       pkg.isPopular ? "text-[#9A0E1F]/80" : "text-white/40"
-                    }`} style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)" }}>
+                    }`} style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)" }}>
                       {pkg.currency}
                     </span>
                   )}
-                  <span className={`font-black tracking-tighter leading-none ${
+                  <span className={`font-black tracking-tighter leading-none drop-shadow-2xl ${
                     pkg.isPopular
                       ? "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70"
-                      : pkg.isEnterprise
-                      ? "bg-clip-text text-transparent bg-gradient-to-b from-[#e8c87a] to-[#c9a84c]/70"
-                      : "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60"
-                  }`} style={{ fontSize: "clamp(2.2rem, 3.5vw, 2.8rem)" }}>
+                      : pkg.isRetainer || pkg.isEnterprise
+                      ? "bg-clip-text text-transparent bg-gradient-to-b from-[#fcebb6] to-[#c9a84c]/80"
+                      : "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50"
+                  }`} style={{ fontSize: "clamp(2.5rem, 4vw, 3.2rem)" }}>
                     {pkg.price}
                   </span>
                 </div>
-                <p className="text-white/35 text-[10px] leading-tight mb-3 min-h-[20px] font-light">
+                <p className="text-white/40 text-[11px] leading-tight mb-5 min-h-[22px] font-light italic tracking-wide">
                   {pkg.target}
                 </p>
 
-                <div className={`w-full h-px mb-2.5 ${
-                   pkg.isPopular ? "bg-[#9A0E1F]/15" : "bg-white/[0.04]"
+                <div className={`w-full h-px mb-5 ${
+                   pkg.isPopular ? "bg-gradient-to-r from-[#9A0E1F]/40 to-transparent" : "bg-gradient-to-r from-white/10 to-transparent"
                 }`} />
 
                 {/* Features */}
-                <div className="flex-grow flex flex-col mb-3">
-                  <p className="text-white/20 text-[8px] tracking-[0.2em] uppercase font-bold mb-0.5">Includes</p>
-                  {pkg.features.map((feature: any, i: number) => (
-                    <FeatureItem key={i} label={feature.label} details={feature.details} />
-                  ))}
+                <div className="flex-grow flex flex-col mb-6">
+                  <p className="text-white/30 text-[9px] tracking-[0.2em] uppercase font-bold mb-3 ml-1">Includes</p>
+                  <div className="space-y-0.5">
+                    {pkg.features.map((feature: any, i: number) => (
+                      <FeatureItem key={i} label={feature.label} details={feature.details} isParentPopular={pkg.isPopular} />
+                    ))}
+                  </div>
                 </div>
 
                 {/* CTA */}
                 <button
-                  onClick={openProjectModal}
-                  className={`mt-auto w-full py-3 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase
-                    transition-all duration-300 ease-out
-                    hover:-translate-y-[2px] hover:brightness-110 active:scale-[0.98]
+                  onClick={() => openProjectModal(activeCategory)}
+                  className={`mt-auto w-full py-3.5 rounded-xl text-[12px] font-bold tracking-[0.2em] uppercase
+                    transition-all duration-300 ease-out relative overflow-hidden group/cta
+                    hover:-translate-y-[2px] active:scale-[0.98]
                     ${pkg.isPopular
-                      ? "bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white shadow-[0_6px_24px_rgba(154,14,31,0.35)] hover:shadow-[0_8px_32px_rgba(154,14,31,0.55)]"
-                      : pkg.isEnterprise
-                      ? "bg-gradient-to-r from-[#c9a84c]/20 to-[#c9a84c]/10 text-[#c9a84c] border border-[#c9a84c]/25 hover:bg-[#c9a84c]/20 hover:border-[#c9a84c]/50"
-                      : "bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black hover:border-white"
+                      ? "bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white shadow-[0_8px_30px_rgba(154,14,31,0.4)] hover:shadow-[0_12px_40px_rgba(154,14,31,0.6)]"
+                      : pkg.isRetainer || pkg.isEnterprise
+                      ? "bg-white/[0.02] border border-[#c9a84c]/30 text-[#c9a84c] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c]/50"
+                      : "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:text-white hover:border-white/30"
                     }`}
                 >
-                  {pkg.ctaText}
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {pkg.ctaText}
+                    <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                  {pkg.isPopular && (
+                     <div className="absolute inset-0 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full ease-out" style={{ transitionDuration: '0.7s' }} />
+                  )}
                 </button>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
       </div>
     </section>
   );

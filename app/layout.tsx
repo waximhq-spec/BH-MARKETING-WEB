@@ -7,9 +7,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ModalProvider } from "@/components/ModalContext";
 import ProjectModal from "@/components/ProjectModal";
-import BackToTop from "@/components/BackToTop";
 import SecurityLayer from "@/components/SecurityLayer";
 import ScrollToTop from "@/components/ScrollToTop";
+import AnnouncementBanner from "@/components/AnnouncementBanner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -75,7 +75,10 @@ export default function RootLayout({
 
         <ModalProvider>
           <ServiceWorkerUnregister />
-          <Navbar />
+          <div className="fixed top-0 left-0 right-0 z-[100]">
+            <AnnouncementBanner />
+            <Navbar />
+          </div>
           <SmoothScroll>
             <ScrollToTop />
             <main className="flex-1">
@@ -84,7 +87,6 @@ export default function RootLayout({
             <Footer />
           </SmoothScroll>
           <ProjectModal />
-          <BackToTop />
           <SecurityLayer />
         </ModalProvider>
       </body>

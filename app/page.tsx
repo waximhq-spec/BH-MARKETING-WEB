@@ -71,18 +71,6 @@ const SERVICES_DATA = [
     desc: "Visuals that increase bookings and guest interest.",
     sub: ["Room Showcases", "Lifestyle Shoots", "Amenity Coverage"],
   },
-  {
-    num: "05",
-    title: "Ads & E-commerce",
-    desc: "Content that drives clicks, sales, and conversions.",
-    sub: ["Product Cinematics", "Direct Response Ads", "Explainer Videos"],
-  },
-  {
-    num: "06",
-    title: "Luxury Lifestyle & Automotive",
-    desc: "Content that attracts high-end clients for cars, yachts, and premium brands.",
-    sub: ["Exotic Automotive Shoots", "Luxury Yacht Coverage", "Personal & Corporate Events"],
-  },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -256,6 +244,8 @@ function ServicesTable() {
             bg = "https://images.pexels.com/photos/29639963/pexels-photo-29639963.jpeg";
           } else if (svc.title === "Real Estate & Spaces") {
             bg = "https://images.pexels.com/photos/9771524/pexels-photo-9771524.jpeg";
+          } else if (svc.title === "Hotels & Resorts") {
+            bg = "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg";
           }
           return renderRow(svc, actualIdx, false, i * 0.06, bg);
         })}
@@ -266,16 +256,18 @@ function ServicesTable() {
         <Reveal delay={0.3}>
           <Link
             href="/services"
-            className="group inline-flex items-center gap-6 bg-white rounded-full pl-8 pr-2 py-2 transition-all duration-300 hover:bg-neutral-200 hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-[#9A0E1F]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(154,14,31,0.15)] active:scale-[0.98] overflow-hidden"
           >
-            <span className="font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-black pt-[2px]">
-              View All Services
+            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_bottom,rgba(154,14,31,0.4)_0%,transparent_80%)] transition-opacity duration-700 pointer-events-none" />
+            
+            <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
+              OUR WORK
             </span>
-            <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center transition-all duration-300 group-hover:bg-[#9A0E1F]">
-              <svg className="w-4 h-4 text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </div>
+            
+            <span className="relative z-10 text-white/60 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
+              →
+            </span>
           </Link>
         </Reveal>
       </div>
@@ -399,72 +391,36 @@ export default function LandingPage() {
                     <Reveal delay={0.5}>
                       <button
                         onClick={openProjectModal}
-                        className="group relative flex items-center justify-center gap-4 px-6 py-3 border border-white/20 text-white text-[9px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:bg-white hover:text-black"
+                        className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-white/20 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(255,255,255,0.05)] hover:bg-white/[0.08] active:scale-[0.98] overflow-hidden"
                       >
-                        <span>VIEW PROJECTS</span>
-                        <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
+                        
+                        <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
+                          OUR WORK
+                        </span>
+                        
+                        <span className="relative z-10 text-white/60 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
+                          →
+                        </span>
                       </button>
                     </Reveal>
                   </div>
                 </div>
 
                 {/* RIGHT: CONVERSION CARD (Desktop Only) */}
-                <div className="hidden lg:flex lg:col-span-5 flex-col items-end">
+                <div className="hidden lg:flex lg:col-span-5 flex-col items-end lg:mt-12">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
                     className="w-full max-w-[400px]"
                   >
-                    <motion.div
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                      className="relative w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-6 lg:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)] group transition-all duration-500 hover:scale-[1.02] hover:border-white/20 will-change-transform transform-gpu"
-                    >
-                      {/* Architectural Accent */}
-                      <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#9A0E1F]/40 -translate-y-4 translate-x-4 transition-transform duration-700 group-hover:translate-x-0 group-hover:translate-y-0" />
-
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-2 mb-4">
-                          <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse shadow-[0_0_10px_#9A0E1F]" />
-                          <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-widest font-bold">Direct Booking</span>
-                        </div>
-
-                        <h3 className="text-white font-bold text-xl mb-1 tracking-tight uppercase">Start Your Shoot</h3>
-                        <p className="text-white/40 text-[9px] font-mono uppercase tracking-widest mb-6">Limited Slots Available</p>
-
-                        <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-                          <div className="relative group/input">
-                            <input type="text" placeholder="Your Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#9A0E1F]/50 transition-all duration-300 rounded-none placeholder:text-white/30 bg-white/[0.02]" />
-                            <div className="absolute inset-0 bg-[#9A0E1F]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
-                          </div>
-
-                          <div className="relative group/input">
-                            <input type="text" placeholder="Business Name" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#9A0E1F]/50 transition-all duration-300 rounded-none placeholder:text-white/30 bg-white/[0.02]" />
-                            <div className="absolute inset-0 bg-[#9A0E1F]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
-                          </div>
-
-                          <div className="relative group/input">
-                            <input type="text" placeholder="Phone / WhatsApp" className="w-full px-4 py-3 text-white text-xs outline-none focus:border-[#9A0E1F]/50 transition-all duration-300 rounded-none placeholder:text-white/30 bg-white/[0.02]" />
-                            <div className="absolute inset-0 bg-[#9A0E1F]/10 opacity-0 group-focus-within/input:opacity-100 blur-md transition-opacity pointer-events-none transform-gpu" />
-                          </div>
-
-                          <button className="group/btn w-full bg-white text-black h-[50px] font-mono font-bold text-[10px] tracking-[0.3em] uppercase mt-2 hover:bg-[#9A0E1F] hover:text-white hover:scale-[1.02] hover:brightness-110 active:scale-95 transition-all duration-200 ease-out shadow-xl flex items-center justify-center gap-4 overflow-hidden relative rounded-sm">
-                            <span className="relative z-10 transition-transform duration-200 group-hover/btn:scale-[1.02]">Book Your Shoot</span>
-                            <span className="relative z-10 transform group-hover/btn:translate-x-2 transition-transform duration-200 text-lg">→</span>
-                          </button>
-                        </form>
-
-                        <p className="text-white/40 text-[9px] text-center mt-5 font-mono tracking-[0.25em] uppercase font-medium">Response within <span className="font-black text-white/90 text-[10px]">24 hours</span></p>
-                      </div>
-                    </motion.div>
-
                     {/* Trust Signal Testimonial Slider */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className="mt-4 w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)]"
+                      className="w-full bg-[#050505]/60 backdrop-blur-3xl border border-white/[0.08] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)] rounded-[24px]"
                     >
                       <div className="flex flex-col gap-3">
                         <div className="flex items-center gap-3">
@@ -477,6 +433,51 @@ export default function LandingPage() {
                       </div>
                       {/* Subtle accent line */}
                       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/30 to-transparent" />
+                    </motion.div>
+
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                      className="mt-4 relative w-full bg-[#050505]/60 backdrop-blur-3xl border border-white/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_40px_80px_rgba(154,14,31,0.15)] will-change-transform transform-gpu overflow-hidden"
+                    >
+                      {/* Soft ambient red glow */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#9A0E1F]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none" />
+                      
+                      <div className="relative z-10 flex flex-col items-center text-center">
+                        {/* Status Label */}
+                        <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                          <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full shadow-[0_0_8px_#9A0E1F] animate-pulse" />
+                          <span className="text-white/60 font-medium text-[9px] uppercase tracking-[0.2em]">Direct Booking</span>
+                        </div>
+
+                        {/* Headings */}
+                        <h3 className="text-white font-bold text-xl lg:text-2xl mb-2 tracking-tight uppercase">Start Your Project</h3>
+                        <p className="text-white/50 text-[11px] md:text-[12px] leading-relaxed max-w-[280px] mx-auto mb-6 font-light">
+                          Cinematic content tailored for modern Bahrain brands.
+                        </p>
+
+                        {/* CTA Button */}
+                        <button 
+                          onClick={openProjectModal}
+                          className="relative w-full overflow-hidden group/btn bg-gradient-to-r from-[#9A0E1F] to-[#c01529] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
+                        >
+                          <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500 ease-out" />
+                          <span className="relative z-10 text-white font-medium text-[11px] tracking-[0.15em] uppercase">
+                            Book a Strategy Call
+                          </span>
+                          <span className="relative z-10 text-white/80 group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
+                        </button>
+
+                        {/* Footer text */}
+                        <div className="mt-4 flex flex-col items-center gap-2">
+                          <p className="text-white/40 text-[9px] font-medium tracking-[0.1em] uppercase">
+                            Response within <span className="text-white/80 font-bold">24 hours</span>
+                          </p>
+                          <p className="text-[#9A0E1F]/70 text-[8px] font-medium tracking-[0.15em] uppercase">
+                            Limited client slots available for May
+                          </p>
+                        </div>
+                      </div>
                     </motion.div>
                   </motion.div>
                 </div>
@@ -672,16 +673,18 @@ export default function LandingPage() {
                 <Reveal delay={0.2}>
                   <Link
                     href="/work"
-                    className="group inline-flex items-center gap-6 bg-black rounded-full pl-8 pr-2 py-2 transition-all duration-300 hover:bg-[#111] hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+                    className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505] border border-black/10 shadow-[0_15px_40px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-[#9A0E1F]/50 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(154,14,31,0.2)] active:scale-[0.98] overflow-hidden"
                   >
-                    <span className="font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white pt-[2px]">
-                      View All Projects
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_bottom,rgba(154,14,31,0.5)_0%,transparent_80%)] transition-opacity duration-700 pointer-events-none" />
+                    
+                    <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
+                      OUR WORK
                     </span>
-                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#9A0E1F]">
-                      <svg className="w-4 h-4 text-black group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
+                    
+                    <span className="relative z-10 text-white/70 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
+                      →
+                    </span>
                   </Link>
                 </Reveal>
               </div>

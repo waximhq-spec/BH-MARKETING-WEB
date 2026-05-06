@@ -145,7 +145,7 @@ export default function ProcessSection() {
                 key={step.num} 
                 className={`flex flex-col items-start 
                   ${index === 0 ? "pt-[60vh] lg:pt-[50vh]" : "pt-40 lg:pt-48"}
-                  ${index === STEPS.length - 1 ? "pb-[80vh]" : "pb-40 lg:pb-48"}`}
+                  ${index === STEPS.length - 1 ? "pb-[calc(100vh-24rem)] lg:pb-[calc(100vh-28rem)]" : "pb-40 lg:pb-48"}`}
               >
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}

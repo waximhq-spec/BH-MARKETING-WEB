@@ -30,30 +30,48 @@ const slideVariants = {
   exit: { opacity: 0, x: -40 },
 };
 
+function getNextWorkingDays(numDays: number) {
+  const days = [];
+  const current = new Date();
+  while (days.length < numDays) {
+    current.setDate(current.getDate() + 1);
+    const day = current.getDay();
+    // In Bahrain, weekend is typically Friday (5) and Saturday (6)
+    if (day !== 5 && day !== 6) {
+      days.push(new Date(current));
+    }
+  }
+  return days;
+}
+
 export default function ProjectModal() {
-  const { isProjectModalOpen, closeProjectModal } = useModal();
+  const { isProjectModalOpen, modalMode, closeProjectModal } = useModal();
   const [step, setStep] = useState(0);
   const [industry, setIndustry] = useState("");
   const [projectType, setProjectType] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: "", brand: "", whatsapp: "", location: "", branches: "", message: "",
+    name: "", brand: "", whatsapp: "", location: "", branches: "", message: "", preferredDate: "", preferredTime: ""
   });
+
+  const workingDays = getNextWorkingDays(5);
+  const timeSlots = ["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"];
 
   useEffect(() => {
     if (isProjectModalOpen) {
       document.body.style.overflow = "hidden";
-      setStep(0);
+      setStep(modalMode === "booking" ? 5 : 0);
       setIndustry("");
       setProjectType("");
-      setFormData({ name: "", brand: "", whatsapp: "", location: "", branches: "", message: "" });
+      setFormData({ name: "", brand: "", whatsapp: "", location: "", branches: "", message: "", preferredDate: "", preferredTime: "" });
     } else {
       document.body.style.overflow = "";
     }
-  }, [isProjectModalOpen]);
+  }, [isProjectModalOpen, modalMode]);
 
-  const totalSteps = 5;
-  const progress = (step / (totalSteps - 1)) * 100;
+  const currentFlowSteps = modalMode === "booking" ? 2 : 5;
+  const normalizedStep = modalMode === "booking" ? step - 5 : step;
+  const progress = (normalizedStep / (currentFlowSteps - 1)) * 100;
 
   function handleIndustrySelect(id: string) {
     setIndustry(id);
@@ -204,49 +222,44 @@ export default function ProjectModal() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           disabled={!formData.name || !formData.brand || !formData.whatsapp || isSubmitting}
-          onClick={() => {
+          onClick={async () => {
             setIsSubmitting(true);
-            
-            // FormSubmit requires a standard HTML form submission for the first activation email.
-            // We dynamically create a form and submit it.
-            const form = document.createElement("form");
-            form.method = "POST";
-            form.action = "https://formsubmit.co/contact@cinmachproductions.com";
-            
-            const data = {
-              _subject: "QUOTE REQUEST CINMACH PRODUCTIONS",
-              _next: window.location.href, // Redirect back to the site
-              _captcha: "false",
-              _template: "table",
-              Industry: industry,
-              ProjectType: projectType,
-              Name: formData.name,
-              Brand: formData.brand,
-              WhatsApp: formData.whatsapp,
-              Location: formData.location || "Not provided",
-              Branches: formData.branches || "Not provided",
-              Message: formData.message || "No additional message"
-            };
-
-            Object.entries(data).forEach(([key, value]) => {
-              const input = document.createElement("input");
-              input.type = "hidden";
-              input.name = key;
-              input.value = value;
-              form.appendChild(input);
-            });
-
-            document.body.appendChild(form);
-            form.submit();
+            try {
+              await fetch("https://formsubmit.co/ajax/contact@cinmachproductions.com", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                  _subject: "QUOTE REQUEST CINMACH PRODUCTIONS",
+                  Industry: industry,
+                  ProjectType: projectType,
+                  Name: formData.name,
+                  Brand: formData.brand,
+                  WhatsApp: formData.whatsapp,
+                  Location: formData.location || "Not provided",
+                  Branches: formData.branches || "Not provided",
+                  Message: formData.message || "No additional message",
+                  _template: "table"
+                })
+              });
+              setStep(4);
+            } catch (error) {
+              console.error("Form submission error:", error);
+              setStep(4); // Proceed anyway to avoid blocking the user if it's a minor network issue
+            } finally {
+              setIsSubmitting(false);
+            }
           }}
           className="w-full h-[56px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[11px] tracking-[0.3em] uppercase rounded-xl shadow-[0_10px_40px_rgba(154,14,31,0.3)] hover:shadow-[0_16px_50px_rgba(154,14,31,0.5)] transition-all duration-500 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
-          {isSubmitting ? "REDIRECTING..." : "SUBMIT REQUEST"} <span>→</span>
+          {isSubmitting ? "SENDING..." : "SUBMIT REQUEST"} <span>→</span>
         </motion.button>
       </div>
     </motion.div>,
 
-    // STEP 4 — SUCCESS
+    // STEP 4 — SUCCESS (PROJECT MODE)
     <motion.div key="step4" variants={slideVariants} initial="enter" animate="center" exit="exit"
       transition={{ duration: 0.55, ease: EASE }}
       className="flex flex-col items-center justify-center text-center min-h-[420px] px-4"
@@ -266,19 +279,144 @@ export default function ProjectModal() {
         Our team will review your inquiry and get back to you within 24 hours.
       </p>
       <div className="flex flex-col items-center gap-4 w-full max-w-sm">
-        <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-          href="https://wa.me/97330000000"
-          target="_blank" rel="noopener noreferrer"
-          className="w-full h-[52px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[10px] tracking-[0.3em] uppercase rounded-full flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(154,14,31,0.3)]"
-        >
-          BOOK A STRATEGY CALL →
-        </motion.a>
-        <button onClick={closeProjectModal} className="text-white/30 hover:text-white/60 font-mono text-[9px] tracking-[0.25em] uppercase transition-colors duration-300">
+        <button onClick={closeProjectModal} className="w-full h-[52px] border border-white/20 hover:bg-white/5 text-white font-mono font-bold text-[10px] tracking-[0.25em] uppercase rounded-full transition-colors duration-300">
           Return to Website
         </button>
       </div>
-      <p className="mt-8 text-white/15 text-[9px] uppercase tracking-[0.2em]">Limited client slots available this month.</p>
     </motion.div>,
+
+    // STEP 5 — BOOK A CALL (BOOKING MODE INTRO)
+    <motion.div key="step5" variants={slideVariants} initial="enter" animate="center" exit="exit"
+      transition={{ duration: 0.55, ease: EASE }}
+      className="flex flex-col min-h-[420px] px-2"
+    >
+      <p className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] uppercase font-bold mb-3">Strategy Call</p>
+      <h3 className="text-white font-black text-2xl md:text-3xl tracking-tight uppercase mb-6">Schedule Your Session</h3>
+      
+      <div className="flex-1 flex flex-col gap-6">
+        {/* Personal Details */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <input type="text" placeholder="Full Name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="bg-white/[0.03] border border-white/8 hover:border-white/15 focus:border-[#9A0E1F]/60 text-white py-3 px-4 rounded-xl text-sm outline-none transition-all duration-300" />
+          <input type="text" placeholder="Brand / Company" required value={formData.brand} onChange={(e) => setFormData({ ...formData, brand: e.target.value })} className="bg-white/[0.03] border border-white/8 hover:border-white/15 focus:border-[#9A0E1F]/60 text-white py-3 px-4 rounded-xl text-sm outline-none transition-all duration-300" />
+          <input type="tel" placeholder="WhatsApp Number" required value={formData.whatsapp} onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })} className="md:col-span-2 bg-white/[0.03] border border-white/8 hover:border-white/15 focus:border-[#9A0E1F]/60 text-white py-3 px-4 rounded-xl text-sm outline-none transition-all duration-300" />
+        </div>
+
+        {/* Visual Calendar */}
+        <div>
+          <label className="text-white/40 text-[10px] uppercase tracking-widest mb-3 block">Select Date</label>
+          <div className="grid grid-cols-5 gap-2">
+            {workingDays.map((date, i) => {
+              const dateString = date.toISOString().split('T')[0];
+              const isSelected = formData.preferredDate === dateString;
+              const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+              return (
+                <button
+                  key={i}
+                  onClick={() => setFormData({ ...formData, preferredDate: dateString })}
+                  className={`flex flex-col items-center justify-center py-3 rounded-xl border transition-all duration-300 ${
+                    isSelected 
+                      ? "bg-[#9A0E1F]/20 border-[#9A0E1F] shadow-[0_0_15px_rgba(154,14,31,0.2)]" 
+                      : "bg-white/[0.02] border-white/10 hover:bg-white/[0.06] hover:border-white/20"
+                  }`}
+                >
+                  <span className={`text-[9px] uppercase font-mono tracking-wider ${isSelected ? "text-white" : "text-white/40"}`}>{dayName}</span>
+                  <span className={`text-lg font-black mt-1 ${isSelected ? "text-white" : "text-white/70"}`}>{date.getDate()}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Visual Time Slots */}
+        <AnimatePresence>
+          {formData.preferredDate && (
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
+              <label className="text-white/40 text-[10px] uppercase tracking-widest mb-3 block">Select Time</label>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                {timeSlots.map((time) => {
+                  const isSelected = formData.preferredTime === time;
+                  return (
+                    <button
+                      key={time}
+                      onClick={() => setFormData({ ...formData, preferredTime: time })}
+                      className={`py-2.5 rounded-xl border text-[10px] font-mono tracking-wider transition-all duration-300 ${
+                        isSelected 
+                          ? "bg-[#9A0E1F] border-[#9A0E1F] text-white shadow-[0_5px_15px_rgba(154,14,31,0.3)]" 
+                          : "bg-white/[0.02] border-white/10 text-white/50 hover:bg-white/[0.06] hover:text-white"
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <div className="mt-6 pt-6 border-t border-white/5">
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          disabled={!formData.name || !formData.brand || !formData.whatsapp || !formData.preferredDate || !formData.preferredTime || isSubmitting}
+          onClick={async () => {
+            setIsSubmitting(true);
+            try {
+              await fetch("https://formsubmit.co/ajax/contact@cinmachproductions.com", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                  _subject: "STRATEGY CALL: " + formData.brand,
+                  Name: formData.name,
+                  Brand: formData.brand,
+                  WhatsApp: formData.whatsapp,
+                  PreferredDate: formData.preferredDate,
+                  PreferredTime: formData.preferredTime,
+                  _template: "table"
+                })
+              });
+              setStep(6);
+            } catch (error) {
+              console.error("Booking submission error:", error);
+              setStep(6); // graceful degradation
+            } finally {
+              setIsSubmitting(false);
+            }
+          }}
+          className="w-full h-[52px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[10px] tracking-[0.3em] uppercase rounded-xl shadow-[0_10px_30px_rgba(154,14,31,0.3)] hover:shadow-[0_16px_40px_rgba(154,14,31,0.5)] transition-all duration-500 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+        >
+          {isSubmitting ? "CONFIRMING..." : "CONFIRM BOOKING"} <span>→</span>
+        </motion.button>
+      </div>
+    </motion.div>,
+
+    // STEP 6 — FINAL CONFIRMATION (BOOKING MODE)
+    <motion.div key="step6" variants={slideVariants} initial="enter" animate="center" exit="exit"
+      transition={{ duration: 0.55, ease: EASE }}
+      className="flex flex-col items-center justify-center text-center min-h-[420px] px-4"
+    >
+      <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, duration: 0.6, ease: EASE }}
+        className="w-16 h-16 rounded-full border border-green-500/40 bg-green-500/10 flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(34,197,94,0.2)]"
+      >
+        <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+          <path d="M2 11L10 19L26 2" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </motion.div>
+      <p className="text-green-500 font-mono text-[9px] tracking-[0.4em] uppercase font-bold mb-4">Meeting Confirmed</p>
+      <h2 className="text-white font-black text-3xl md:text-5xl tracking-tighter uppercase leading-none mb-5">
+        You're All<br />Set.
+      </h2>
+      <p className="text-white/40 text-sm font-light leading-relaxed max-w-xs mb-12">
+        We have received your request for {formData.preferredDate}. We will confirm the schedule via WhatsApp shortly.
+      </p>
+      <button onClick={closeProjectModal} className="w-full max-w-[240px] h-[52px] border border-white/20 hover:bg-white/5 text-white font-mono font-bold text-[10px] tracking-[0.25em] uppercase rounded-full transition-colors duration-300">
+        Return to Website
+      </button>
+    </motion.div>
   ];
 
   return (
@@ -325,22 +463,26 @@ export default function ProjectModal() {
             <div className="flex items-center justify-between px-8 pt-8 pb-0">
               {/* Step dots */}
               <div className="flex items-center gap-2">
-                {Array.from({ length: totalSteps }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{
-                      width: i === step ? 20 : 6,
-                      backgroundColor: i <= step ? "#9A0E1F" : "rgba(255,255,255,0.12)",
-                    }}
-                    transition={{ duration: 0.35, ease: EASE }}
-                    className="h-1.5 rounded-full"
-                  />
-                ))}
+                {Array.from({ length: currentFlowSteps }).map((_, i) => {
+                  const isActive = i === normalizedStep;
+                  const isPast = i < normalizedStep;
+                  return (
+                    <motion.div
+                      key={i}
+                      animate={{
+                        width: isActive ? 20 : 6,
+                        backgroundColor: isActive || isPast ? (modalMode === "booking" && normalizedStep === 1 ? "#22c55e" : "#9A0E1F") : "rgba(255,255,255,0.12)",
+                      }}
+                      transition={{ duration: 0.35, ease: EASE }}
+                      className="h-1.5 rounded-full"
+                    />
+                  );
+                })}
               </div>
 
               {/* Back + Close */}
               <div className="flex items-center gap-3">
-                {step > 0 && step < 4 && (
+                {((modalMode === "project" && step > 0 && step < 4) || (modalMode === "booking" && step > 5 && step < 6)) && (
                   <button
                     onClick={() => setStep(step - 1)}
                     className="text-white/25 hover:text-white/60 transition-colors text-[10px] font-mono tracking-[0.2em] uppercase flex items-center gap-1"

@@ -276,7 +276,7 @@ function ServicesTable() {
 }
 
 export default function LandingPage() {
-  const { openProjectModal } = useModal();
+  const { openProjectModal, openBookingModal } = useModal();
 
   return (
     <div className="flex flex-col min-h-screen bg-black">
@@ -458,7 +458,7 @@ export default function LandingPage() {
 
                         {/* CTA Button */}
                         <button 
-                          onClick={() => openProjectModal()}
+                          onClick={() => openBookingModal()}
                           className="relative w-full overflow-hidden group/btn bg-gradient-to-r from-[#9A0E1F] to-[#c01529] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
                         >
                           <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500 ease-out" />

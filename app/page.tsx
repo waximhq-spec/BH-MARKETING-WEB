@@ -390,7 +390,7 @@ export default function LandingPage() {
                   <div className="hidden lg:block">
                     <Reveal delay={0.5}>
                       <button
-                        onClick={openProjectModal}
+                        onClick={() => openProjectModal()}
                         className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-white/20 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(255,255,255,0.05)] hover:bg-white/[0.08] active:scale-[0.98] overflow-hidden"
                       >
                         <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
@@ -458,7 +458,7 @@ export default function LandingPage() {
 
                         {/* CTA Button */}
                         <button 
-                          onClick={openProjectModal}
+                          onClick={() => openProjectModal()}
                           className="relative w-full overflow-hidden group/btn bg-gradient-to-r from-[#9A0E1F] to-[#c01529] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
                         >
                           <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500 ease-out" />

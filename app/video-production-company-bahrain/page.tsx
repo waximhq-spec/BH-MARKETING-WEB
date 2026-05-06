@@ -196,7 +196,7 @@ export default function VideoProductionPage() {
           
           <Reveal delay={0.15}>
             <button
-              onClick={openProjectModal}
+              onClick={() => openProjectModal()}
               className="px-14 py-7 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#B11226] hover:text-white transition-all duration-500 shadow-2xl"
             >
               Start Your Project

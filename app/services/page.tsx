@@ -278,7 +278,7 @@ export default function ServicesPage() {
                     <Reveal delay={0.3}>
                       <div className="mt-10">
                         <button
-                          onClick={openProjectModal}
+                          onClick={() => openProjectModal()}
                           className={`inline-flex items-center gap-3 px-7 py-3.5 border font-mono text-[9px] tracking-[0.2em] uppercase rounded-full transition-all duration-300 ${
                             isEven
                               ? "border-black/15 text-black/60 hover:border-[#9A0E1F] hover:text-[#9A0E1F] hover:shadow-[0_0_20px_rgba(154,14,31,0.1)]"
@@ -325,7 +325,7 @@ export default function ServicesPage() {
           </Reveal>
           <Reveal delay={0.2}>
             <button
-              onClick={openProjectModal}
+              onClick={() => openProjectModal()}
               className="group relative px-10 py-5 bg-[#9A0E1F] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase rounded-full overflow-hidden transition-all duration-400 hover:shadow-[0_8px_30px_rgba(154,14,31,0.45)]"
             >
               <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-3">

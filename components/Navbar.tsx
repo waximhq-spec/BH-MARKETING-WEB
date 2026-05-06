@@ -190,7 +190,7 @@ export default function Navbar() {
 
             {/* Desktop CTA — Premium pill */}
             <button
-              onClick={openProjectModal}
+              onClick={() => openProjectModal()}
               className="group relative h-9 px-5 bg-white text-black text-[9px] font-mono font-bold tracking-[0.25em] uppercase overflow-hidden transition-all duration-400 rounded-full hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)] border border-black"
             >
               <span className="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-2.5">

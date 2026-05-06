@@ -89,7 +89,7 @@ export default function BackToTop() {
 
             {/* ── ELEMENT 2: PRIMARY CTA PILL ── */}
             <button
-              onClick={openProjectModal}
+              onClick={() => openProjectModal()}
               className="group relative flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-b from-[#151515] to-[#050505] backdrop-blur-2xl border border-white/[0.15] shadow-[0_20px_50px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:scale-[1.03] hover:border-white/40 hover:shadow-[0_25px_60px_rgba(255,255,255,0.1)] active:scale-[0.97]"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08)_0%,transparent_60%)] rounded-full pointer-events-none" />

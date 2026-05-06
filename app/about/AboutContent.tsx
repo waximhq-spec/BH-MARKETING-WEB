@@ -117,7 +117,7 @@ export default function AboutContent() {
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <button onClick={openProjectModal} className="group relative px-10 py-5 bg-[#9A0E1F] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase rounded-full overflow-hidden transition-all duration-400 hover:shadow-[0_8px_30px_rgba(154,14,31,0.45)]">
+            <button onClick={() => openProjectModal()} className="group relative px-10 py-5 bg-[#9A0E1F] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase rounded-full overflow-hidden transition-all duration-400 hover:shadow-[0_8px_30px_rgba(154,14,31,0.45)]">
               <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-3">
                 Get a Quote <span className="text-[12px]">→</span>
               </span>

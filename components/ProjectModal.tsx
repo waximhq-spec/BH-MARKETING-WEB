@@ -22,7 +22,7 @@ const PROJECT_TYPES = [
   { id: "custom", label: "Custom Project" },
 ];
 
-const EASE = [0.16, 1, 0.3, 1];
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const slideVariants = {
   enter: { opacity: 0, x: 40 },

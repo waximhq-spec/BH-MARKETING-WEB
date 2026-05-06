@@ -493,7 +493,7 @@ export default function LandingPage() {
 
                   <Reveal delay={0.6} className="w-full flex justify-center">
                     <button
-                      onClick={openProjectModal}
+                      onClick={() => openProjectModal()}
                       className="group relative flex items-center justify-center gap-4 w-[280px] md:w-[320px] px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden shadow-[0_10px_30px_rgba(154,14,31,0.2)] rounded-full"
                     >
                       <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#9A0E1F] z-20" />

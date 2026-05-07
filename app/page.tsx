@@ -543,7 +543,7 @@ export default function LandingPage() {
                             Response within <span className="text-white/80 font-bold">24 hours</span>
                           </p>
                           <p className="text-[#9A0E1F]/70 text-[8px] font-medium tracking-[0.15em] uppercase">
-                            Limited client slots available for May
+                            Limited client slots available for June
                           </p>
                         </div>
                       </div>

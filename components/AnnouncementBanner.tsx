@@ -37,7 +37,7 @@ export default function AnnouncementBanner() {
             </div>
             
             <p className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-black/60 text-center leading-relaxed">
-              Limited Client Slots Available for May
+              Limited Client Slots Available for June
             </p>
             
             {/* Subtle Accent Line */}

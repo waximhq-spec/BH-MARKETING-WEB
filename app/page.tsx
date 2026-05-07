@@ -562,11 +562,11 @@ export default function LandingPage() {
 
                   <Reveal delay={0.6} className="w-full flex justify-center">
                     <button
-                      onClick={() => openProjectModal()}
-                      className="relative flex items-center justify-center gap-3 w-[260px] px-6 py-4 bg-white text-black text-[10px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.97] transition-transform duration-200"
+                      onClick={() => openBookingModal()}
+                      className="relative flex items-center justify-center gap-3 w-[280px] px-6 py-4 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[10px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
                     >
-                      BOOK YOUR SHOOT
-                      <span className="opacity-60">→</span>
+                      BOOK A STRATEGY CALL
+                      <span className="opacity-80">→</span>
                     </button>
                   </Reveal>
                   <Reveal delay={0.65} className="w-full">

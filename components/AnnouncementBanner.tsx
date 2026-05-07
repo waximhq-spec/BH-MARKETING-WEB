@@ -9,7 +9,7 @@ export default function AnnouncementBanner() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(true);
-    }, 8000);
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
 

@@ -79,24 +79,28 @@ const SERVICES_DATA = [
     title: "Food & Hospitality",
     desc: "We create cinematic food content that drives footfall and builds authority.",
     sub: ["Reels & Short-form Ads", "Menu & Food Cinematography", "Social Media Packages"],
+    alt: "Cinematic food and hospitality video shoot by marketing agency in Bahrain",
   },
   {
     num: "02",
     title: "Real Estate & Spaces",
     desc: "We shoot properties that attract buyers and increase inquiries.",
     sub: ["Interior Shoots", "Exterior Cinematics", "Drone Coverage"],
+    alt: "Luxury real estate videography and space cinematics in Bahrain",
   },
   {
     num: "03",
     title: "Gyms & Fitness",
     desc: "Content that brings more people into your gym.",
     sub: ["Training Promos", "Facility Tours", "Client Transformations"],
+    alt: "High-energy gym promo videos and fitness cinematography in Bahrain",
   },
   {
     num: "04",
     title: "Hotels & Resorts",
     desc: "Visuals that increase bookings and guest interest.",
     sub: ["Room Showcases", "Lifestyle Shoots", "Amenity Coverage"],
+    alt: "Premium hotel and resort visual production by creative agency in Bahrain",
   },
 ];
 
@@ -152,7 +156,7 @@ function ServicesTable() {
             <div className="absolute inset-0 z-0">
               <Image
                 src={bgImage || "https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"}
-                alt={svc.title}
+                alt={svc.alt || svc.title}
                 fill
                 loading="lazy"
                 sizes="100vw"
@@ -235,6 +239,7 @@ function ServicesTable() {
             <div className="md:w-[15%] flex justify-end mt-6 md:mt-0">
               <Link
                 href="/services"
+                aria-label={`Explore ${svc.title} video production services in Bahrain`}
                 className={`group inline-flex items-center gap-4 rounded-full pl-6 pr-1.5 py-1.5 transition-all duration-300 border
                   ${isFeatured
                     ? "border-[#9A0E1F]/30 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F]/50"
@@ -283,6 +288,7 @@ function ServicesTable() {
         <Reveal delay={0.3}>
           <Link
             href="/services"
+            aria-label="View all creative marketing and video production services in Bahrain"
             className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-[#9A0E1F]/50 shadow-[0_15px_40px_rgba(154,14,31,0.2),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:bg-black hover:border-white/20 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
           >
             {/* Continuous Breathing Glow */}
@@ -528,6 +534,7 @@ export default function LandingPage() {
                         {/* CTA Button */}
                         <button 
                           onClick={() => openBookingModal()}
+                          aria-label="Book a creative strategy call for your shoot in Bahrain"
                           className="relative w-full overflow-hidden group/btn bg-gradient-to-r from-[#9A0E1F] to-[#c01529] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
                         >
                           <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500 ease-out" />
@@ -563,6 +570,7 @@ export default function LandingPage() {
                   <Reveal delay={0.6} className="w-full flex justify-center">
                     <button
                       onClick={() => openBookingModal()}
+                      aria-label="Book a strategy call for your marketing campaign in Bahrain"
                       className="relative flex items-center justify-center gap-3 w-[280px] px-6 py-4 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[10px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
                     >
                       BOOK A STRATEGY CALL

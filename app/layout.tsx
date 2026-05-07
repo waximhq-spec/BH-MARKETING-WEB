@@ -28,21 +28,85 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Cinmach Productions | Cinematic Brand Production — Bahrain",
-  description: "A cinematic creative production based in Bahrain, crafting high-end visual stories for luxury brands.",
+  title: "Cinmach Productions | Premium Creative & Marketing Agency in Bahrain",
+  description: "Cinmach Productions is Bahrain's premier creative marketing agency specializing in cinematic food & hospitality content, real estate shoots, gym promos, and hotel visuals. Book your shoot in Bahrain today.",
+  openGraph: {
+    title: "Cinmach Productions | Premium Creative & Marketing Agency in Bahrain",
+    description: "Cinmach Productions is Bahrain's premier creative marketing agency specializing in cinematic food & hospitality content, real estate shoots, gym promos, and hotel visuals.",
+    url: "https://cinmachproductions.com",
+    siteName: "Cinmach Productions",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cinmach Productions | Premium Creative & Marketing Agency in Bahrain",
+    description: "Cinmach Productions is Bahrain's premier creative marketing agency specializing in cinematic food & hospitality content, real estate shoots, gym promos, and hotel visuals.",
+  },
+  keywords: [
+    "Cinmach Productions",
+    "Cinmach",
+    "Marketing agency in Bahrain",
+    "Creative agency in Bahrain",
+    "Video production Bahrain",
+    "Shoot in Bahrain",
+    "Food cinematography Bahrain",
+    "Real estate videography Bahrain",
+    "Gym promo videos Bahrain",
+    "Cinematic brand production",
+    "Manama creative studio"
+  ],
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["VideoProductionCompany", "MarketingAgency"],
   "name": "Cinmach Productions",
-  "url": "https://cinmach.com",
-  "logo": "https://cinmach.com/logo.png",
-  "description": "Cinematic content production for restaurants, cafés, and luxury brands in Bahrain.",
+  "url": "https://cinmachproductions.com",
+  "logo": "https://cinmachproductions.com/logo.png",
+  "description": "Cinmach Productions is Bahrain's premier creative marketing agency specializing in cinematic food & hospitality content, real estate shoots, gym promos, and hotel visuals.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Manama",
     "addressCountry": "BH"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Bahrain"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Creative Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Food & Hospitality Cinematography"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Real Estate & Spaces Video Coverage"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gyms & Fitness Promos"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hotels & Resorts Visuals"
+        }
+      }
+    ]
   },
   "sameAs": [
     "https://instagram.com/cinmach",

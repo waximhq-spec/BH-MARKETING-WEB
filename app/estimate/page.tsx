@@ -19,6 +19,12 @@ const CONTACT_INFO = [
     desc: "For project inquiries and general questions.",
   },
   {
+    label: "Support",
+    value: "team@cinmachproductions.com",
+    href: "mailto:team@cinmachproductions.com",
+    desc: "For technical support and production team.",
+  },
+  {
     label: "WhatsApp",
     value: "+973 3XXX XXXX",
     href: "https://wa.me/97330000000",

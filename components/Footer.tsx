@@ -95,6 +95,9 @@ export default function Footer() {
               <a href="mailto:contact@cinmachproductions.com" className="text-white/50 text-[13px] font-light hover:text-white transition-colors duration-300 w-fit break-all">
                 contact@cinmachproductions.com
               </a>
+              <a href="mailto:team@cinmachproductions.com" className="text-white/50 text-[13px] font-light hover:text-white transition-colors duration-300 w-fit break-all">
+                team@cinmachproductions.com
+              </a>
               <a href="https://wa.me/97330000000" target="_blank" rel="noopener noreferrer" className="text-white/50 text-[13px] font-light hover:text-white transition-colors duration-300 w-fit">
                 WhatsApp
               </a>

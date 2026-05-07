@@ -13,6 +13,7 @@ const NAV_LINKS = [
 const EXPERTISE_LINKS = [
   { label: "Restaurant Videography", href: "/restaurant-videography-bahrain" },
   { label: "Food Videography", href: "/food-videography-bahrain" },
+  { label: "Marketing Agency", href: "/marketing-agency-bahrain" },
   { label: "Video Production", href: "/video-production-company-bahrain" },
   { label: "Marketing Guide", href: "/restaurant-video-marketing-bahrain" },
 ];

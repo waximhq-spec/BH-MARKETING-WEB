@@ -9,6 +9,7 @@ import { ModalProvider } from "@/components/ModalContext";
 import ProjectModal from "@/components/ProjectModal";
 import SecurityLayer from "@/components/SecurityLayer";
 import ScrollToTop from "@/components/ScrollToTop";
+import BackToTop from "@/components/BackToTop";
 import AnnouncementBanner from "@/components/AnnouncementBanner";
 
 const inter = Inter({
@@ -88,6 +89,7 @@ export default function RootLayout({
           </SmoothScroll>
           <ProjectModal />
           <SecurityLayer />
+          <BackToTop />
         </ModalProvider>
       </body>
     </html>

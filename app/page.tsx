@@ -16,6 +16,33 @@ const PricingSection = dynamic(() => import("@/components/PricingSection"));
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
 
 /* ─────────────────────────────────────────────────────────────
+   Internal Components
+   ─────────────────────────────────────────────────────────── */
+function HeroClock() {
+  const [time, setTime] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setTime(new Date());
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  if (!time) return <div className="w-20" />; // Placeholder to avoid layout shift
+
+  return (
+    <div className="flex flex-col items-start gap-1 font-mono">
+      <div className="flex items-center gap-2">
+        <span className="w-1 h-1 bg-[#9A0E1F] rounded-full animate-pulse" />
+        <span className="text-white/40 text-[8px] tracking-[0.3em] uppercase font-bold">Local Time</span>
+      </div>
+      <span className="text-white text-[13px] font-black tracking-[0.15em] tabular-nums">
+        {time.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+      </span>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
    ─────────────────────────────────────────────────────────── */
 function Reveal({
@@ -256,16 +283,30 @@ function ServicesTable() {
         <Reveal delay={0.3}>
           <Link
             href="/services"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-[#9A0E1F]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(154,14,31,0.15)] active:scale-[0.98] overflow-hidden"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-[#9A0E1F]/50 shadow-[0_15px_40px_rgba(154,14,31,0.2),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:bg-black hover:border-white/20 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
           >
+            {/* Continuous Breathing Glow */}
+            <motion.div 
+              animate={{ opacity: [0.4, 0.7, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(154,14,31,0.4)_0%,transparent_80%)] pointer-events-none" 
+            />
+            
+            {/* Shimmer Effect */}
+            <motion.div 
+              animate={{ x: ["-100%", "200%"] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none"
+            />
+
             <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_bottom,rgba(154,14,31,0.4)_0%,transparent_80%)] transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none" />
             
             <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
-              OUR WORK
+              ALL SERVICES
             </span>
             
-            <span className="relative z-10 text-white/60 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
+            <span className="relative z-10 text-[#9A0E1F] group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
               →
             </span>
           </Link>
@@ -332,7 +373,8 @@ export default function LandingPage() {
             <SmartVideo
               src="/bg-rest.mp4"
               autoPlay={true}
-              className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2] anim-slow-zoom"
+              className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2] anim-slow-zoom transform-gpu"
+              style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" } as React.CSSProperties}
             />
             {/* Base darkening */}
             <div className="absolute inset-0 bg-black/75 z-[1]" />
@@ -373,7 +415,7 @@ export default function LandingPage() {
                 {/* LEFT: CONTENT AREA */}
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left mt-4 lg:mt-12 w-full">
                   <Reveal delay={0.2}>
-                    <h1 className="text-white font-black leading-[0.9] tracking-tighter mb-5 lg:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ fontSize: "clamp(2rem, 10vw, 5.5rem)", letterSpacing: "-0.04em" }}>
+                    <h1 className="text-white font-black leading-[0.9] tracking-tighter mb-4 lg:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ fontSize: "clamp(2rem, 10vw, 5.5rem)", letterSpacing: "-0.04em" }}>
                       <span className="block whitespace-nowrap text-[0.8em] font-semibold tracking-tight mb-2">
                         Content that <span className="italic">fills</span>
                       </span>
@@ -381,28 +423,55 @@ export default function LandingPage() {
                     </h1>
                   </Reveal>
                   <Reveal delay={0.4} className="max-w-xl">
-                    <p className="text-white/85 text-[13px] md:text-[15px] lg:text-base leading-relaxed font-light px-4 lg:px-0 mb-6 md:mb-10 lg:max-w-md mx-auto lg:mx-0">
+                    <p className="text-white/85 text-[13px] md:text-[15px] lg:text-base leading-relaxed font-light px-2 lg:px-0 mb-5 md:mb-10 lg:max-w-md mx-auto lg:mx-0">
                       We create scroll-stopping content that grabs attention and turns it into real customers at your tables.
                     </p>
                   </Reveal>
 
-                  {/* Secondary CTA (Desktop Only) */}
-                  <div className="hidden lg:block">
+                  {/* Secondary CTA & Clock (Desktop Only) */}
+                  <div className="hidden lg:flex items-center gap-10">
                     <Reveal delay={0.5}>
-                      <button
-                        onClick={() => openProjectModal()}
-                        className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-white/20 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(255,255,255,0.05)] hover:bg-white/[0.08] active:scale-[0.98] overflow-hidden"
+                      <Link
+                        href="#work"
+                        className="group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white/[0.08] backdrop-blur-md transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
                       >
-                        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
+                        {/* Corner Accents - Persistent with Pulse */}
+                        {[
+                          "top-0 left-0 border-t-2 border-l-2",
+                          "top-0 right-0 border-t-2 border-r-2",
+                          "bottom-0 left-0 border-b-2 border-l-2",
+                          "bottom-0 right-0 border-b-2 border-r-2"
+                        ].map((pos, i) => (
+                          <motion.div
+                            key={i}
+                            animate={{ opacity: [0.5, 1, 0.5] }}
+                            transition={{ duration: 2, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
+                            className={`absolute w-4 h-4 border-white ${pos} transition-all duration-500`}
+                          />
+                        ))}
                         
-                        <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
+                        {/* Continuous Ambient Glow */}
+                        <motion.div 
+                          animate={{ opacity: [0, 0.2, 0] }}
+                          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute inset-0 bg-white pointer-events-none"
+                        />
+                        
+                        {/* Hover Fill Effect */}
+                        <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        <span className="relative z-10 text-[11px] font-mono font-black tracking-[0.3em] uppercase text-white">
                           OUR WORK
                         </span>
                         
-                        <span className="relative z-10 text-white/60 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
+                        <span className="relative z-10 text-white transition-transform duration-500 group-hover:translate-x-1.5 text-[14px] leading-none">
                           →
                         </span>
-                      </button>
+                      </Link>
+                    </Reveal>
+
+                    <Reveal delay={0.6}>
+                      <HeroClock />
                     </Reveal>
                   </div>
                 </div>
@@ -483,9 +552,9 @@ export default function LandingPage() {
                 </div>
 
                 {/* Mobile CTA (Visible only on mobile) */}
-                <div className="lg:hidden flex flex-col items-center gap-3 w-full">
+                <div className="lg:hidden flex flex-col items-center gap-4 w-full">
                   <Reveal delay={0.5}>
-                    <div className="flex items-center justify-center gap-2 mb-1">
+                    <div className="flex items-center justify-center gap-2">
                       <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
                       <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-widest font-bold">Now Booking</span>
                     </div>
@@ -494,23 +563,20 @@ export default function LandingPage() {
                   <Reveal delay={0.6} className="w-full flex justify-center">
                     <button
                       onClick={() => openProjectModal()}
-                      className="group relative flex items-center justify-center gap-4 w-[280px] md:w-[320px] px-8 py-4 bg-white text-black text-[10px] font-mono font-bold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden shadow-[0_10px_30px_rgba(154,14,31,0.2)] rounded-full"
+                      className="relative flex items-center justify-center gap-3 w-[260px] px-6 py-4 bg-white text-black text-[10px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.97] transition-transform duration-200"
                     >
-                      <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#9A0E1F] z-20" />
-                      <span className="relative z-10 transition-colors duration-500 flex items-center group-hover:text-white">
-                        BOOK YOUR SHOOT <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-500 opacity-70 group-hover:opacity-100">→</span>
-                      </span>
-                      <div className="absolute inset-0 bg-[#9A0E1F] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                      BOOK YOUR SHOOT
+                      <span className="opacity-60">→</span>
                     </button>
                   </Reveal>
                   <Reveal delay={0.65} className="w-full">
-                    <p className="w-full text-white/40 text-[8px] text-center mt-2 font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
+                    <p className="w-full text-white/40 text-[8px] text-center font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
                   </Reveal>
 
-                  {/* Mobile Testimonial Slider */}
-                  <div className="w-full mt-2 flex justify-center">
+                  {/* Mobile Testimonial */}
+                  <div className="w-full mt-1 flex justify-center">
                     <Reveal delay={0.7} className="w-full">
-                      <div className="w-full bg-[#0a0a0a]/55 backdrop-blur-[16px] border border-white/[0.06] p-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)] flex flex-col items-center text-center">
+                      <div className="w-full bg-[#0a0a0a]/70 border border-white/[0.06] p-4 flex flex-col items-center text-center transform-gpu" style={{ WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
                         <div className="flex items-center justify-center gap-2 mb-2">
                           <div className="h-[1px] w-5 bg-[#9A0E1F]" />
                           <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-[0.2em] font-black block">What Our Clients Say</span>
@@ -526,11 +592,11 @@ export default function LandingPage() {
               </div>
 
               {/* Bottom Metrics */}
-              <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
-                <div className="container mx-auto border-t border-white/5 pt-6 md:pt-8">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <div className="absolute bottom-0 left-0 right-0 z-10 pb-6 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
+                <div className="container mx-auto border-t border-white/5 pt-5 md:pt-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* LEFT COLUMN: All 3 Metrics */}
-                    <div className="lg:col-span-7 flex flex-row items-end justify-center lg:justify-start gap-8 md:gap-16 lg:gap-20">
+                    <div className="lg:col-span-7 flex flex-row items-end justify-center lg:justify-start gap-6 md:gap-16 lg:gap-20">
                       <Reveal delay={0.7}>
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                           <span className="text-white font-black text-xl md:text-4xl tracking-tighter">GULF</span>
@@ -673,16 +739,16 @@ export default function LandingPage() {
                 <Reveal delay={0.2}>
                   <Link
                     href="/work"
-                    className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505] border border-black/10 shadow-[0_15px_40px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-[#9A0E1F]/50 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(154,14,31,0.2)] active:scale-[0.98] overflow-hidden"
+                    className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505] border border-[#9A0E1F]/50 shadow-[0_15px_40px_rgba(154,14,31,0.3),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:bg-black hover:border-white/20 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_bottom,rgba(154,14,31,0.5)_0%,transparent_80%)] transition-opacity duration-700 pointer-events-none" />
+                    <div className="absolute inset-0 opacity-100 group-hover:opacity-0 bg-[radial-gradient(ellipse_at_bottom,rgba(154,14,31,0.5)_0%,transparent_80%)] transition-opacity duration-700 pointer-events-none" />
                     
                     <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
                       OUR WORK
                     </span>
                     
-                    <span className="relative z-10 text-white/70 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
+                    <span className="relative z-10 text-[#9A0E1F] group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
                       →
                     </span>
                   </Link>
@@ -951,10 +1017,10 @@ function TestimonialWheel() {
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ y: 50, opacity: 0, rotateX: -30 }}
-          animate={{ y: 0, opacity: 1, rotateX: 0 }}
-          exit={{ y: -50, opacity: 0, rotateX: 30 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -30, opacity: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 flex flex-col justify-center"
         >
           <p className="text-black font-medium text-xl md:text-2xl lg:text-3xl leading-[1.2] tracking-tight italic mb-8">

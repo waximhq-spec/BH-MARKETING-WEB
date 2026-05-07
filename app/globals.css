@@ -40,6 +40,8 @@ body {
   line-height: 1.6;
 
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Lenis smooth scroll */
@@ -139,6 +141,8 @@ html.lenis, html.lenis body { height: auto; }
   border-radius: 4px;
   contain: layout paint;
   transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .hover-scale {
@@ -193,6 +197,26 @@ html.lenis, html.lenis body { height: auto; }
   }
 }
 
+/* ── iOS Flicker Prevention ────────────────────────────── */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  video {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  /* Reduce heavy backdrop-blur on mobile iOS to prevent flicker */
+  @media (max-width: 768px) {
+    .backdrop-blur-3xl,
+    .backdrop-blur-2xl,
+    .backdrop-blur-xl {
+      -webkit-backdrop-filter: blur(8px) !important;
+      backdrop-filter: blur(8px) !important;
+    }
+  }
+}
+
 /* ── Dev Indicator Hide ─────────────────────────────────── */
 nextjs-portal,
 #__next-prerender-indicator,
@@ -225,4 +249,13 @@ input:focus, textarea:focus {
 
 input::placeholder, textarea::placeholder {
   color: var(--muted);
+}
+
+/* ── Scrollbar Utilities ─────────────────────────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

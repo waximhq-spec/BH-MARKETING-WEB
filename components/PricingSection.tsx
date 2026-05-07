@@ -354,13 +354,33 @@ export default function PricingSection() {
         </motion.div>
 
         {/* Category Toggle */}
-        <div className="flex justify-center mb-12 md:mb-16 px-2">
-          <div className="flex flex-wrap items-center justify-center p-1.5 md:p-2 bg-white/5 border border-white/10 rounded-2xl md:rounded-full gap-x-1 gap-y-2 lg:gap-2">
+        <div className="flex justify-center mb-10 md:mb-16 px-0 md:px-2">
+          {/* Mobile: Horizontal scroll strip */}
+          <div className="md:hidden w-full overflow-x-auto scrollbar-hide -mx-1">
+            <div className="flex items-center gap-2 px-5 pb-2 min-w-max">
+              {CATEGORIES.map(category => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`relative px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 ${
+                    activeCategory === category 
+                      ? "text-white bg-[#9A0E1F] shadow-[0_4px_16px_rgba(154,14,31,0.4)]" 
+                      : "text-white/40 bg-white/5 border border-white/10 active:bg-white/10"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Centered pill group */}
+          <div className="hidden md:flex flex-wrap items-center justify-center p-2 bg-white/5 border border-white/10 rounded-full gap-2">
             {CATEGORIES.map(category => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`relative px-4 py-2 md:px-5 md:py-2.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-widest uppercase transition-all duration-300 ${
+                className={`relative px-5 py-2.5 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all duration-300 ${
                   activeCategory === category 
                     ? "text-white" 
                     : "text-white/40 hover:text-white/80"
@@ -384,31 +404,31 @@ export default function PricingSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className={`grid grid-cols-1 md:grid-cols-2 ${
                 packages.length === 3 ? "lg:grid-cols-3 max-w-6xl mx-auto" : "lg:grid-cols-4 lg:max-w-[1400px] w-full mx-auto"
-              } gap-6 md:gap-5 items-end px-2 md:px-0 mt-4 md:mt-0`}
+              } gap-5 md:gap-5 items-end px-0 md:px-0 mt-0`}
             >
               {packages.map((pkg, idx) => (
                 <motion.div
                   key={pkg.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.05 }}
-                  className={`group flex flex-col relative rounded-[24px] overflow-hidden cursor-default
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  className={`group flex flex-col relative rounded-[20px] md:rounded-[24px] overflow-hidden cursor-default
                 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
-                hover:-translate-y-2 hover:scale-[1.02]
+                md:hover:-translate-y-2 md:hover:scale-[1.02]
                 ${pkg.isPopular
-                  ? "-translate-y-2 md:-translate-y-3 md:scale-[1.03] shadow-[0_20px_60px_rgba(154,14,31,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] border border-[#9A0E1F]/50 hover:shadow-[0_30px_80px_rgba(154,14,31,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] hover:border-[#9A0E1F]/80 z-10"
-                  : "shadow-[0_8px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.02)] border border-white/5 hover:border-white/10 hover:shadow-[0_16px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.05)]"
+                  ? "md:-translate-y-3 md:scale-[1.03] shadow-[0_20px_60px_rgba(154,14,31,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] border border-[#9A0E1F]/50 md:hover:shadow-[0_30px_80px_rgba(154,14,31,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] md:hover:border-[#9A0E1F]/80 z-10"
+                  : "shadow-[0_8px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.02)] border border-white/5 md:hover:border-white/10 md:hover:shadow-[0_16px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.05)]"
                 }`}
               style={{
-                background: "rgba(10, 10, 10, 0.45)",
-                backdropFilter: "blur(24px)",
-                WebkitBackdropFilter: "blur(24px)",
+                background: "rgba(10, 10, 10, 0.6)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
               }}
             >
               {/* Featured glow overlay */}
@@ -510,14 +530,14 @@ export default function PricingSection() {
                 {/* CTA */}
                 <button
                   onClick={() => openProjectModal(activeCategory)}
-                  className={`mt-auto w-full py-3.5 rounded-xl text-[12px] font-bold tracking-[0.2em] uppercase
+                  className={`mt-auto w-full py-4 md:py-3.5 rounded-xl text-[12px] font-bold tracking-[0.2em] uppercase
                     transition-all duration-300 ease-out relative overflow-hidden group/cta
-                    hover:-translate-y-[2px] active:scale-[0.98]
+                    active:scale-[0.97] md:hover:-translate-y-[2px]
                     ${pkg.isPopular
-                      ? "bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white shadow-[0_8px_30px_rgba(154,14,31,0.4)] hover:shadow-[0_12px_40px_rgba(154,14,31,0.6)]"
+                      ? "bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white shadow-[0_8px_30px_rgba(154,14,31,0.4)] md:hover:shadow-[0_12px_40px_rgba(154,14,31,0.6)]"
                       : pkg.isRetainer || pkg.isEnterprise
-                      ? "bg-white/[0.02] border border-[#c9a84c]/30 text-[#c9a84c] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c]/50"
-                      : "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:text-white hover:border-white/30"
+                      ? "bg-white/[0.02] border border-[#c9a84c]/30 text-[#c9a84c] md:hover:bg-[#c9a84c]/10 md:hover:border-[#c9a84c]/50"
+                      : "bg-white/5 border border-white/10 text-white md:hover:bg-white/10 md:hover:text-white md:hover:border-white/30"
                     }`}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">

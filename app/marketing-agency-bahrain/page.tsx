@@ -39,9 +39,9 @@ export default function MarketingAgencyGatewayPage() {
         <h1>Elevating Bahrain's Luxury Brands</h1>
         <p>
           When searching for a marketing agency in Bahrain, high-end brands require 
-          more than just standard digital services—they need striking visual narratives. 
+          more than just standard marketing—they need striking visual narratives. 
           Cinmach Productions is a specialized creative studio built on a foundation 
-          of cinematic excellence and elite digital design. We partner with Bahrain's 
+          of cinematic excellence and elite storytelling. We partner with Bahrain's 
           luxury real estate, hospitality, and commercial sectors to create media 
           that commands attention.
         </p>
@@ -55,12 +55,11 @@ export default function MarketingAgencyGatewayPage() {
           your brand's image is crafted by specialists.
         </p>
 
-        <h3>Core Capabilities:</h3>
         <ul>
           <li>Commercial Cinematography: Dynamic lighting and perfect framing for real estate and brand films.</li>
           <li>Elite Post-Production: Advanced editing, VFX, and color grading for a premium finish.</li>
           <li>Immersive Projection Mapping: Transforming Bahrain's luxury spaces with unforgettable visual media.</li>
-          <li>Premium Digital Design: High-converting, minimalist UI/UX web development.</li>
+          <li>Social Media Video Marketing: High-retention reels and short-form brand storytelling.</li>
         </ul>
 
         <h2>See the Difference</h2>
@@ -146,7 +145,7 @@ export default function MarketingAgencyGatewayPage() {
                   { label: "Commercial Cinematography", detail: "Dynamic lighting & perfect framing." },
                   { label: "Elite Post-Production", detail: "Advanced editing, VFX & color grading." },
                   { label: "Immersive Projection Mapping", detail: "Transforming luxury spaces." },
-                  { label: "Premium Digital Design", detail: "High-converting UI/UX development." }
+                  { label: "Social Media Video Marketing", detail: "High-retention reels & storytelling." }
                 ].map((item, i) => (
                   <li key={i} className="group border-b border-white/5 pb-8 last:border-0">
                     <h3 className="text-xl font-bold uppercase tracking-tight mb-2 group-hover:text-[#9A0E1F] transition-colors duration-300">{item.label}</h3>

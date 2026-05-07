@@ -78,11 +78,8 @@ export default function SecurityLayer() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 10 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative bg-black border border-white/10 p-12 md:p-16 flex flex-col items-center text-center max-w-sm mx-4 shadow-2xl"
+            className="relative flex flex-col items-center text-center max-w-sm mx-4 z-10"
           >
-            {/* Minimal Logo/Icon */}
-            <div className="w-12 h-px bg-[#B11226] mb-10" />
-            
             <h2 className="text-white font-black text-2xl tracking-tighter uppercase mb-4">
               This content is protected.
             </h2>
@@ -99,9 +96,6 @@ export default function SecurityLayer() {
                 Let&apos;s build yours.
               </p>
             </div>
-
-            {/* Subtle glow effect */}
-            <div className="absolute -inset-px bg-gradient-to-tr from-[#B11226]/20 via-transparent to-transparent opacity-30 pointer-events-none" />
           </motion.div>
         </motion.div>
       )}

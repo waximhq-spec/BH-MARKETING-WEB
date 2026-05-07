@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "./ModalContext";
 
@@ -99,14 +99,12 @@ export default function ProjectModal() {
       <p className="text-white/40 text-sm md:text-base font-light leading-relaxed max-w-sm mb-12">
         Tell us about your brand and we'll craft a cinematic content strategy tailored to your goals.
       </p>
-      <motion.button
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
+      <button
         onClick={() => setStep(1)}
-        className="group relative h-[56px] px-12 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[11px] tracking-[0.35em] uppercase rounded-full overflow-hidden shadow-[0_10px_40px_rgba(154,14,31,0.35)] hover:shadow-[0_16px_50px_rgba(154,14,31,0.5)] transition-shadow duration-500"
+        className="group relative h-[56px] px-12 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[11px] tracking-[0.35em] uppercase rounded-full overflow-hidden shadow-[0_8px_30px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200"
       >
-        <span className="flex items-center gap-3">CONTINUE <span className="group-hover:translate-x-1 transition-transform duration-300 inline-block">→</span></span>
-      </motion.button>
+        <span className="flex items-center gap-3">CONTINUE <span className="inline-block">→</span></span>
+      </button>
       <p className="mt-5 text-white/20 text-[9px] tracking-[0.2em] uppercase font-medium">Response within 24 hours</p>
     </motion.div>,
 
@@ -119,28 +117,25 @@ export default function ProjectModal() {
       <h3 className="text-white font-black text-2xl md:text-3xl tracking-tight uppercase mb-8">What type of brand are you?</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 flex-1">
         {INDUSTRIES.map((ind) => (
-          <motion.button
+          <button
             key={ind.id}
-            whileHover={{ scale: 1.03, borderColor: "rgba(154,14,31,0.6)" }}
-            whileTap={{ scale: 0.97 }}
             onClick={() => handleIndustrySelect(ind.id)}
-            className={`relative flex flex-col items-start justify-between p-5 rounded-2xl border transition-all duration-300 text-left overflow-hidden group ${
+            className={`relative flex flex-col items-start justify-between p-5 rounded-2xl border transition-all duration-200 text-left overflow-hidden active:scale-[0.97] ${
               industry === ind.id
-                ? "border-[#9A0E1F] bg-[#9A0E1F]/10 shadow-[0_0_25px_rgba(154,14,31,0.25)]"
-                : "border-white/8 bg-white/[0.02] hover:bg-white/[0.05]"
+                ? "border-[#9A0E1F] bg-[#9A0E1F]/10"
+                : "border-white/8 bg-white/[0.02]"
             }`}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#9A0E1F]/0 to-[#9A0E1F]/0 group-hover:from-[#9A0E1F]/5 transition-all duration-500 pointer-events-none" />
             <span className="text-2xl mb-4">{ind.icon}</span>
             <span className={`text-[11px] font-bold tracking-wide uppercase leading-snug ${industry === ind.id ? "text-white" : "text-white/60"}`}>
               {ind.label}
             </span>
             {industry === ind.id && (
-              <motion.div layoutId="industryCheck" className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[#9A0E1F] flex items-center justify-center">
+              <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[#9A0E1F] flex items-center justify-center">
                 <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              </motion.div>
+              </div>
             )}
-          </motion.button>
+          </button>
         ))}
       </div>
     </motion.div>,
@@ -154,20 +149,18 @@ export default function ProjectModal() {
       <h3 className="text-white font-black text-2xl md:text-3xl tracking-tight uppercase mb-8">What are you looking for?</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 flex-1">
         {PROJECT_TYPES.map((pt) => (
-          <motion.button
+          <button
             key={pt.id}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
             onClick={() => handleProjectTypeSelect(pt.id)}
-            className={`flex items-center justify-between px-6 py-4 rounded-xl border transition-all duration-300 text-left group ${
+            className={`flex items-center justify-between px-6 py-4 rounded-xl border transition-all duration-200 text-left active:scale-[0.98] ${
               projectType === pt.id
-                ? "border-[#9A0E1F] bg-[#9A0E1F]/10 shadow-[0_0_20px_rgba(154,14,31,0.2)]"
-                : "border-white/8 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/15"
+                ? "border-[#9A0E1F] bg-[#9A0E1F]/10"
+                : "border-white/8 bg-white/[0.02]"
             }`}
           >
             <span className={`text-[12px] font-bold tracking-widest uppercase ${projectType === pt.id ? "text-white" : "text-white/55"}`}>{pt.label}</span>
-            <motion.span animate={{ x: projectType === pt.id ? 4 : 0 }} className={`text-sm ${projectType === pt.id ? "text-[#9A0E1F]" : "text-white/20"}`}>→</motion.span>
-          </motion.button>
+            <span className={`text-sm ${projectType === pt.id ? "text-[#9A0E1F]" : "text-white/20"}`}>→</span>
+          </button>
         ))}
       </div>
     </motion.div>,
@@ -218,9 +211,7 @@ export default function ProjectModal() {
         </div>
       </div>
       <div className="mt-6">
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <button
           disabled={!formData.name || !formData.brand || !formData.whatsapp || isSubmitting}
           onClick={async () => {
             setIsSubmitting(true);
@@ -247,15 +238,15 @@ export default function ProjectModal() {
               setStep(4);
             } catch (error) {
               console.error("Form submission error:", error);
-              setStep(4); // Proceed anyway to avoid blocking the user if it's a minor network issue
+              setStep(4);
             } finally {
               setIsSubmitting(false);
             }
           }}
-          className="w-full h-[56px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[11px] tracking-[0.3em] uppercase rounded-xl shadow-[0_10px_40px_rgba(154,14,31,0.3)] hover:shadow-[0_16px_50px_rgba(154,14,31,0.5)] transition-all duration-500 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          className="w-full h-[56px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[11px] tracking-[0.3em] uppercase rounded-xl shadow-[0_8px_30px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
           {isSubmitting ? "SENDING..." : "SUBMIT REQUEST"} <span>→</span>
-        </motion.button>
+        </button>
       </div>
     </motion.div>,
 
@@ -356,9 +347,7 @@ export default function ProjectModal() {
       </div>
 
       <div className="mt-6 pt-6 border-t border-white/5">
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <button
           disabled={!formData.name || !formData.brand || !formData.whatsapp || !formData.preferredDate || !formData.preferredTime || isSubmitting}
           onClick={async () => {
             setIsSubmitting(true);
@@ -382,15 +371,15 @@ export default function ProjectModal() {
               setStep(6);
             } catch (error) {
               console.error("Booking submission error:", error);
-              setStep(6); // graceful degradation
+              setStep(6);
             } finally {
               setIsSubmitting(false);
             }
           }}
-          className="w-full h-[52px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[10px] tracking-[0.3em] uppercase rounded-xl shadow-[0_10px_30px_rgba(154,14,31,0.3)] hover:shadow-[0_16px_40px_rgba(154,14,31,0.5)] transition-all duration-500 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          className="w-full h-[52px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[10px] tracking-[0.3em] uppercase rounded-xl shadow-[0_8px_24px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
           {isSubmitting ? "CONFIRMING..." : "CONFIRM BOOKING"} <span>→</span>
-        </motion.button>
+        </button>
       </div>
     </motion.div>,
 
@@ -432,7 +421,7 @@ export default function ProjectModal() {
           onClick={closeProjectModal}
         >
           {/* Cinematic backdrop */}
-          <div className="absolute inset-0 bg-black/92 backdrop-blur-xl" />
+          <div className="absolute inset-0 bg-black/95" />
           {/* Ambient red glow */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(154,14,31,0.08)_0%,transparent_70%)] pointer-events-none" />
           {/* Subtle noise grain */}
@@ -444,7 +433,8 @@ export default function ProjectModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="relative w-full max-w-[680px] bg-[#080808]/90 border border-white/[0.06] rounded-[28px] shadow-[0_40px_120px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.04)] overflow-hidden"
+            className="relative w-full max-w-[680px] max-h-[90vh] overflow-y-auto bg-[#080808] border border-white/[0.06] rounded-[28px] shadow-[0_20px_60px_rgba(0,0,0,0.8)] transform-gpu"
+            style={{ WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top accent line */}

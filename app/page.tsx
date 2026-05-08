@@ -533,7 +533,9 @@ export default function LandingPage() {
 
                         {/* CTA Button */}
                         <button 
-                          onClick={() => openBookingModal()}
+                          data-cal-link="wasim-ebxvk8/schedule-call"
+                          data-cal-namespace="schedule-call"
+                          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                           aria-label="Book a creative strategy call for your shoot in Bahrain"
                           className="relative w-full overflow-hidden group/btn bg-gradient-to-r from-[#9A0E1F] to-[#c01529] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
                         >
@@ -569,7 +571,9 @@ export default function LandingPage() {
 
                   <Reveal delay={0.6} className="w-full flex justify-center">
                     <button
-                      onClick={() => openBookingModal()}
+                      data-cal-link="wasim-ebxvk8/schedule-call"
+                      data-cal-namespace="schedule-call"
+                      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                       aria-label="Book a strategy call for your marketing campaign in Bahrain"
                       className="relative flex items-center justify-center gap-3 w-[280px] px-6 py-4 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[10px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
                     >

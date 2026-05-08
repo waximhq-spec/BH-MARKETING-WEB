@@ -11,6 +11,7 @@ import SecurityLayer from "@/components/SecurityLayer";
 import ScrollToTop from "@/components/ScrollToTop";
 import BackToTop from "@/components/BackToTop";
 import AnnouncementBanner from "@/components/AnnouncementBanner";
+import CalEmbed from "@/components/CalEmbed";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -154,6 +155,7 @@ export default function RootLayout({
           <ProjectModal />
           <SecurityLayer />
           <BackToTop />
+          <CalEmbed />
         </ModalProvider>
       </body>
     </html>

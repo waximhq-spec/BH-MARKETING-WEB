@@ -20,11 +20,26 @@ export default function VideoHero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-60 blur-[3px]"
+        // @ts-ignore — webkit attribute for older iOS
+        webkit-playsinline="true"
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover opacity-60"
+        style={{
+          WebkitBackfaceVisibility: "hidden",
+          backfaceVisibility: "hidden",
+          transform: "translate3d(0, 0, 0)",
+        }}
       >
         <source src="/bg-vid.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      
+      {/* Soft blur overlay replaces direct blur on video element
+          — direct CSS blur on <video> triggers constant GPU recompositing on iOS */}
+      <div className="absolute inset-0 w-full h-full backdrop-blur-[3px] z-[1]" style={{
+        WebkitBackfaceVisibility: "hidden",
+        backfaceVisibility: "hidden",
+      }} />
 
       {/* Cinematic Overlays to maintain legibility and premium feel */}
       <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">

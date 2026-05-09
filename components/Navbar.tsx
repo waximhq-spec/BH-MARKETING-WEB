@@ -32,11 +32,13 @@ export default function Navbar() {
 
   useEffect(() => {
     let ticking = false;
+    const lastThemeRef = { current: theme };
 
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 40);
+          const newScrolled = window.scrollY > 40;
+          setScrolled(prev => prev !== newScrolled ? newScrolled : prev);
 
           const sections = document.querySelectorAll("[data-theme]");
           let activeTheme: "dark" | "light" | "red" | "pricing" | "split" | null = null;
@@ -49,7 +51,8 @@ export default function Navbar() {
             }
           });
 
-          if (activeTheme) {
+          if (activeTheme && activeTheme !== lastThemeRef.current) {
+            lastThemeRef.current = activeTheme;
             setTheme(activeTheme);
           }
           ticking = false;
@@ -109,9 +112,8 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        layout
-        className={`relative z-[100] transition-all duration-500 ease-[0.16,1,0.3,1] transform-gpu
+      <header
+        className={`relative z-[100] transition-[background-color,border-color] duration-500 ease-[0.16,1,0.3,1] transform-gpu
           ${scrolled ? "backdrop-blur-xl backdrop-saturate-150" : ""}`}
         style={{
           borderBottom: `1px solid ${borderColor}`,
@@ -119,6 +121,7 @@ export default function Navbar() {
           WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.5)" : "none",
           WebkitBackfaceVisibility: "hidden" as const,
           backfaceVisibility: "hidden" as const,
+          transform: "translate3d(0, 0, 0)",
         }}
       >
         {/* SPLIT BACKGROUND FOR SPLIT THEME (Desktop Only) */}
@@ -193,12 +196,18 @@ export default function Navbar() {
             {/* Desktop CTA — Premium pill */}
             <button
               onClick={() => openProjectModal()}
-              className="group relative h-9 px-5 bg-white text-black text-[9px] font-mono font-black tracking-[0.25em] uppercase overflow-hidden transition-all duration-400 rounded-full hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)] border border-black"
+              className={`group relative h-9 px-5 text-[9px] font-mono font-black tracking-[0.25em] uppercase overflow-hidden transition-all duration-400 rounded-full border
+                ${isHome 
+                  ? "bg-white text-black border-black hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]" 
+                  : "bg-[#9A0E1F] text-white border-transparent shadow-[0_4px_20px_rgba(154,14,31,0.15)]"
+                }`}
             >
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-2.5">
+              <span className={`relative z-10 transition-colors duration-300 flex items-center gap-2.5 ${isHome ? "group-hover:text-white" : ""}`}>
                 GET A QUOTE <span className="text-[10px] transition-transform duration-300 group-hover:translate-x-0.5">→</span>
               </span>
-              <div className="absolute inset-0 bg-[#9A0E1F] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[0.16,1,0.3,1] origin-left" />
+              {isHome && (
+                <div className="absolute inset-0 bg-[#9A0E1F] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[0.16,1,0.3,1] origin-left" />
+              )}
             </button>
           </nav>
 
@@ -215,13 +224,13 @@ export default function Navbar() {
                     background: burgerColor,
                     opacity: i === 1 && menuOpen ? 0 : 1,
                     transform: i === 0 && menuOpen ? "translateY(6px) rotate(45deg)" : 
-                               i === 2 && menuOpen ? "translateY(-6px) rotate(-45deg)" : "",
+                                i === 2 && menuOpen ? "translateY(-6px) rotate(-45deg)" : "",
                   }}
                 />
             ))}
           </button>
         </div>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {menuOpen && (

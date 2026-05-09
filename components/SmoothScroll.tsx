@@ -18,6 +18,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
+    // Disable Lenis on iOS — it conflicts with WebKit's native momentum scrolling,
+    // causing scroll jitter, white flashes, and rendering instability.
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (isIOS) return;
+
     const lenis = new Lenis({
       lerp: 0.1,
       wheelMultiplier: 1.1,

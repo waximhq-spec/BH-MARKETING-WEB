@@ -29,8 +29,16 @@ export default function SmartVideo({
         preload="auto"
         muted
         playsInline
+        // @ts-ignore — webkit attribute for older iOS
+        webkit-playsinline="true"
         loop
         className={className}
+        style={{
+          WebkitBackfaceVisibility: "hidden",
+          backfaceVisibility: "hidden",
+          transform: "translate3d(0, 0, 0)",
+          ...(props.style || {}),
+        }}
         {...props}
       >
         <source src={src} type="video/mp4" />
@@ -107,11 +115,12 @@ export default function SmartVideo({
         </video>
       )}
 
-      {/* 3. FROST BLUR OVERLAY (Maintains cinematic aesthetic) */}
+      {/* 3. TINT OVERLAY (Replaces backdrop-blur frost which causes iOS rendering issues) */}
       <div 
-        className={`absolute inset-0 bg-white/5 backdrop-blur-[4px] transition-opacity duration-700 pointer-events-none z-[10] transform-gpu ${
+        className={`absolute inset-0 bg-black/10 transition-opacity duration-700 pointer-events-none z-[10] transform-gpu ${
           !isPlaying ? "opacity-100" : "opacity-0"
         }`}
+        style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}
       />
 
       {/* 4. INTERACTION AREA / PLAY BUTTON */}
@@ -122,7 +131,7 @@ export default function SmartVideo({
           </div>
         ) : (
           <div 
-            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-2xl transition-all duration-500 ease-out hover:bg-[#ff2a2a] hover:border-[#ff2a2a] hover:scale-110 transform-gpu will-change-transform ${
+            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-2xl transition-all duration-500 ease-out hover:bg-[#ff2a2a] hover:border-[#ff2a2a] hover:scale-110 transform-gpu ${
               !isPlaying ? "opacity-100 scale-100" : "opacity-0 scale-90 group-hover/video:opacity-100 group-hover/video:scale-100"
             }`}
           >

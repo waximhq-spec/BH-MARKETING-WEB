@@ -65,7 +65,7 @@ export default function HeroTypographyLayer() {
           WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 80%)",
         }}
       >
-        <div className="relative flex flex-row rotate-90 md:rotate-0 items-center justify-center w-full h-full font-sans tracking-tighter font-bold will-change-transform">
+        <div className="relative flex flex-row rotate-90 md:rotate-0 items-center justify-center w-full h-full font-sans tracking-tighter font-bold">
           
           {/* Layer 1: Sharpest/Primary - High performance glow using text-shadow */}
           <div className="absolute text-[80vh] md:text-[35vw] text-white/[0.08]" 

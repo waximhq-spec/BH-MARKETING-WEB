@@ -62,8 +62,8 @@ function Reveal({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.6, delay: delay, ease: "easeOut" }}
-      className={`will-change-[transform,opacity] transform-gpu ${className}`}
-      style={{ transform: "translateZ(0)", ...style }}
+      className={`transform-gpu ${className}`}
+      style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden", transform: "translateZ(0)", ...style }}
     >
       {children}
     </motion.div>
@@ -513,7 +513,7 @@ export default function LandingPage() {
                     <motion.div
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                      className="mt-4 relative w-full bg-[#050505]/60 backdrop-blur-3xl border border-white/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_40px_80px_rgba(154,14,31,0.15)] will-change-transform transform-gpu overflow-hidden"
+                      className="mt-4 relative w-full bg-[#050505]/60 backdrop-blur-3xl border border-white/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_40px_80px_rgba(154,14,31,0.15)] transform-gpu overflow-hidden"
                     >
                       {/* Soft ambient red glow */}
                       <div className="absolute inset-0 bg-gradient-to-br from-[#9A0E1F]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none" />

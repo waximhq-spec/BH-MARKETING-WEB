@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import dynamic from "next/dynamic";
-import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import SmartVideo from "@/components/SmartVideo";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
+import Image from "next/image";
 
 // Lazy load below-the-fold sections for performance
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
@@ -58,12 +58,12 @@ function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.6, delay: delay, ease: "easeOut" }}
-      className={`transform-gpu ${className}`}
-      style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden", transform: "translateZ(0)", ...style }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      className={className}
+      style={style}
     >
       {children}
     </motion.div>
@@ -77,28 +77,28 @@ const SERVICES_DATA = [
   {
     num: "01",
     title: "Food & Hospitality",
-    desc: "We create cinematic food content that drives footfall and builds authority.",
+    desc: "We make food videos that bring more customers to your door.",
     sub: ["Reels & Short-form Ads", "Menu & Food Cinematography", "Social Media Packages"],
     alt: "Cinematic food and hospitality video shoot by marketing agency in Bahrain",
   },
   {
     num: "02",
     title: "Real Estate & Spaces",
-    desc: "We shoot properties that attract buyers and increase inquiries.",
+    desc: "We shoot property videos that help you sell or rent faster.",
     sub: ["Interior Shoots", "Exterior Cinematics", "Drone Coverage"],
     alt: "Luxury real estate videography and space cinematics in Bahrain",
   },
   {
     num: "03",
     title: "Gyms & Fitness",
-    desc: "Content that brings more people into your gym.",
+    desc: "Videos that get more people to join your gym.",
     sub: ["Training Promos", "Facility Tours", "Client Transformations"],
     alt: "High-energy gym promo videos and fitness cinematography in Bahrain",
   },
   {
     num: "04",
     title: "Hotels & Resorts",
-    desc: "Visuals that increase bookings and guest interest.",
+    desc: "Videos that get more guests to book a stay.",
     sub: ["Room Showcases", "Lifestyle Shoots", "Amenity Coverage"],
     alt: "Premium hotel and resort visual production by creative agency in Bahrain",
   },
@@ -108,16 +108,9 @@ const SERVICES_DATA = [
    Cinematic Hero Blur — scroll-linked depth-of-field effect
    ─────────────────────────────────────────────────────────── */
 function HeroBlurWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="absolute inset-0 w-full h-full">
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Section Blur — blurs a section as user scrolls past it
-   ─────────────────────────────────────────────────────────── */
 function SectionBlurWrapper({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
@@ -289,29 +282,11 @@ function ServicesTable() {
           <Link
             href="/services"
             aria-label="View all creative marketing and video production services in Bahrain"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-[#9A0E1F]/50 shadow-[0_15px_40px_rgba(154,14,31,0.2),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 ease-[0.16,1,0.3,1] hover:bg-black hover:border-white/20 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 border border-[#9A0E1F]/50 shadow-[0_15px_40px_rgba(154,14,31,0.2),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 hover:bg-black hover:border-white/20 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
           >
-            {/* Continuous Breathing Glow */}
-            <motion.div 
-              animate={{ opacity: [0.4, 0.7, 0.4] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(154,14,31,0.4)_0%,transparent_80%)] pointer-events-none" 
-            />
-            
-            {/* Shimmer Effect */}
-            <motion.div 
-              animate={{ x: ["-100%", "200%"] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
-            <div className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none" />
-            
             <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
               ALL SERVICES
             </span>
-            
             <span className="relative z-10 text-[#9A0E1F] group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
               →
             </span>
@@ -323,48 +298,41 @@ function ServicesTable() {
 }
 
 export default function LandingPage() {
-  const { openProjectModal, openBookingModal } = useModal();
+  const { openProjectModal } = useModal();
 
   return (
     <div className="flex flex-col min-h-screen bg-black">
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
       <VisualHiddenSEO>
-        <h1>Restaurant Videography & Food Content Creation in Bahrain</h1>
-        <h2>Cinmach Productions: Premium Video Production Agency</h2>
-        <p>Cinmach Productions is a Bahrain-based video production agency specializing in restaurant videography, food photography, and cinematic content for cafés and hospitality brands. We help businesses in Manama and across Bahrain grow through high-quality video marketing, social media reels, and brand storytelling.</p>
+        <h1>Creative Marketing Agency & Cinematic Video Production in Bahrain</h1>
+        <h2>Cinmach Productions: Premium Brand Building Agency</h2>
+        <p>Cinmach Productions is a premium creative marketing agency in Bahrain. We combine strategy, storytelling, and cinematic production to build modern brands. We specialize in brand strategy, social media campaigns, commercial video production, and digital presence across industries.</p>
 
         <h2>Our Specialized Services</h2>
         <ul>
-          <li><strong>Restaurant Videography Bahrain:</strong> High-end cinematic films for the hospitality industry.</li>
-          <li><strong>Food Videography:</strong> Appetizing, high-converting visuals for menus and ads.</li>
-          <li><strong>Social Media Video Production:</strong> High-retention reels and short-form content.</li>
-          <li>Real Estate & Space Cinematics: Interior and exterior cinematic coverage.</li>
-          <li>Brand Commercials: Creative direction and high-end storytelling.</li>
-          <li>Post-Production: Professional color grading and sound design.</li>
+          <li><strong>Brand Strategy:</strong> Positioning and visual identity to drive business growth.</li>
+          <li><strong>Content Production:</strong> Cinematic brand films, commercials, and high-end storytelling.</li>
+          <li><strong>Social Media Marketing:</strong> Conversion-focused campaigns and audience engagement.</li>
+          <li>Websites & Digital: Premium UI/UX and digital brand experiences.</li>
         </ul>
 
-        <h2>FAQ — Video Production for Restaurants</h2>
+        <h2>FAQ — Creative Agency Services</h2>
         <div>
-          <h3>How does restaurant videography help my business?</h3>
-          <p>Cinematic video content increases engagement on social media, showcases your food in the best light, and drives more footfall to your restaurant or café in Bahrain.</p>
+          <h3>How does cinematic content help my brand?</h3>
+          <p>Cinematic video content increases engagement, elevates your brand's perceived value, and turns digital views into real business growth.</p>
 
-          <h3>What is included in a food videography shoot?</h3>
-          <p>We provide full production, including creative direction, high-end filming, and professional post-production (editing, color grading, and sound design).</p>
+          <h3>What is included in a campaign production?</h3>
+          <p>We handle everything from creative direction and strategy to high-end filming, lighting, editing, color grading, and deployment.</p>
 
-          <h3>Do you offer social media video production for cafés?</h3>
-          <p>Yes, we specialize in high-retention social media reels and short-form ads tailored for platforms like Instagram and TikTok.</p>
+          <h3>Do you work with industries outside of hospitality?</h3>
+          <p>Yes, we build brands across fashion, real estate, fitness, lifestyle, corporate, and tech sectors in Bahrain.</p>
 
           <h3>Where are you based?</h3>
-          <p>We are a video production agency based in Manama, serving clients across all of Bahrain.</p>
+          <p>We are a creative marketing agency based in Manama, serving clients across all of Bahrain and the GCC.</p>
         </div>
 
-        <h2>Related Services</h2>
-        <p>
-          Learn more about our <a href="/restaurant-videography-bahrain">Restaurant Videography in Bahrain</a>.
-        </p>
-
         <h2>Why Choose Cinmach Productions?</h2>
-        <p>Our cinematic visuals are engineered to turn views into bookings. With over 40+ restaurants served in Bahrain, we deliver 3x engagement through high-quality video production.</p>
+        <p>Our strategic approach ensures that every visual serves a purpose. We engineer outcomes, turning businesses into recognizable brands through premium execution.</p>
       </VisualHiddenSEO>
 
 
@@ -389,30 +357,8 @@ export default function LandingPage() {
             {/* Cinematic vignette */}
             <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none z-[1]" />
 
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 z-[3] transform-gpu"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 1.5 }}
-              style={{ transform: "translateZ(0)" }}
-            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 z-[3] transform-gpu" />
 
-            {/* Architectural Grid Overlay */}
-            <div className="absolute inset-0 z-[3] pointer-events-none">
-              <div className="container h-full relative">
-                {/* Vertical Lines */}
-                <div className="absolute inset-0 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-0 opacity-[0.03]">
-                  {[...Array(13)].map((_, i) => (
-                    <div key={i} className="border-r border-white h-full" />
-                  ))}
-                </div>
-
-                {/* Horizontal Lines */}
-                <div className="absolute left-0 right-0 top-[15%] border-t border-white/5" />
-                <div className="absolute left-0 right-0 bottom-[25%] border-t border-white/5" />
-                <div className="absolute left-0 right-0 bottom-[10%] border-t border-white/5" />
-              </div>
-            </div>
 
             <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0">
               {/* Top Metadata Removed */}
@@ -421,16 +367,16 @@ export default function LandingPage() {
                 {/* LEFT: CONTENT AREA */}
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left mt-4 lg:mt-12 w-full">
                   <Reveal delay={0.2}>
-                    <h1 className="text-white font-black leading-[0.9] tracking-tighter mb-4 lg:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ fontSize: "clamp(2rem, 10vw, 5.5rem)", letterSpacing: "-0.04em" }}>
-                      <span className="block whitespace-nowrap text-[0.8em] font-semibold tracking-tight mb-2">
-                        Content that <span className="italic">fills</span>
+                    <h1 className="text-white font-black leading-[0.82] tracking-tighter mb-4 lg:mb-8" style={{ fontSize: "clamp(2.5rem, 9vw, 7.2rem)", letterSpacing: "-0.05em" }}>
+                      <span className="block whitespace-nowrap text-[0.34em] font-medium tracking-[0.02em] opacity-90 mb-1 lg:mb-2 uppercase">
+                        We build brands people
                       </span>
-                      <span className="text-[#9A0E1F] uppercase drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">RESTAURANTS<br />&amp; CAF&Eacute;S.</span>
+                      <span className="text-[#9A0E1F] uppercase block">REMEMBER.</span>
                     </h1>
                   </Reveal>
                   <Reveal delay={0.4} className="max-w-xl">
                     <p className="text-white/85 text-[13px] md:text-[15px] lg:text-base leading-relaxed font-light px-2 lg:px-0 mb-5 md:mb-10 lg:max-w-md mx-auto lg:mx-0">
-                      We create scroll-stopping content that grabs attention and turns it into real customers at your tables.
+                      We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
                     </p>
                   </Reveal>
 
@@ -439,29 +385,13 @@ export default function LandingPage() {
                     <Reveal delay={0.5}>
                       <Link
                         href="#work"
-                        className="group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white/[0.08] backdrop-blur-md transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
+                        className="group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white/[0.08] transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
                       >
-                        {/* Corner Accents - Persistent with Pulse */}
-                        {[
-                          "top-0 left-0 border-t-2 border-l-2",
-                          "top-0 right-0 border-t-2 border-r-2",
-                          "bottom-0 left-0 border-b-2 border-l-2",
-                          "bottom-0 right-0 border-b-2 border-r-2"
-                        ].map((pos, i) => (
-                          <motion.div
-                            key={i}
-                            animate={{ opacity: [0.5, 1, 0.5] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
-                            className={`absolute w-4 h-4 border-white ${pos} transition-all duration-500`}
-                          />
-                        ))}
-                        
-                        {/* Continuous Ambient Glow */}
-                        <motion.div 
-                          animate={{ opacity: [0, 0.2, 0] }}
-                          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute inset-0 bg-white pointer-events-none"
-                        />
+                        {/* Corner Accents - Static CSS */}
+                        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/70" />
+                        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/70" />
+                        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/70" />
+                        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/70" />
                         
                         {/* Hover Fill Effect */}
                         <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -510,10 +440,9 @@ export default function LandingPage() {
                       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/30 to-transparent" />
                     </motion.div>
 
-                    <motion.div
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                      className="mt-4 relative w-full bg-[#050505]/60 backdrop-blur-3xl border border-white/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_40px_80px_rgba(154,14,31,0.15)] transform-gpu overflow-hidden"
+                    <div
+                      style={{ willChange: "transform" }}
+                      className="mt-4 relative w-full bg-[#050505]/60 backdrop-blur-md border border-white/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_40px_80px_rgba(154,14,31,0.15)] transform-gpu overflow-hidden"
                     >
                       {/* Soft ambient red glow */}
                       <div className="absolute inset-0 bg-gradient-to-br from-[#9A0E1F]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none" />
@@ -528,7 +457,7 @@ export default function LandingPage() {
                         {/* Headings */}
                         <h3 className="text-white font-bold text-xl lg:text-2xl mb-2 tracking-tight uppercase">Start Your Project</h3>
                         <p className="text-white/50 text-[11px] md:text-[12px] leading-relaxed max-w-[280px] mx-auto mb-6 font-light">
-                          Cinematic content tailored for modern Bahrain brands.
+                          Creative marketing tailored for modern brands.
                         </p>
 
                         {/* CTA Button */}
@@ -556,7 +485,7 @@ export default function LandingPage() {
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   </motion.div>
                 </div>
 
@@ -620,7 +549,7 @@ export default function LandingPage() {
                           <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
                             <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
                           </span>
-                          <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">Restaurants</span>
+                          <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">Brands Built</span>
                         </div>
                       </Reveal>
                       <Reveal delay={0.9}>
@@ -642,8 +571,9 @@ export default function LandingPage() {
           </HeroBlurWrapper>
         </section>
 
+
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 2: PORTFOLIO / SELECTED WORK
+            SECTION 3: PORTFOLIO / SELECTED WORK
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
           <section id="work" data-theme="light" className="defer-render bg-white pt-40 pb-24">
@@ -662,10 +592,10 @@ export default function LandingPage() {
                   </div>
                   <div className="max-w-[340px] mt-12 md:mt-28">
                     <h4 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
-                      Built to turn views into real customers.
+                      Campaigns that drive real growth.
                     </h4>
                     <p className="text-black/85 text-[15px] md:text-base leading-relaxed font-light antialiased">
-                      A selection of client work crafted to drive attention, engagement, and real customer growth.
+                      A selection of our cinematic campaigns, commercials, and brand films.
                     </p>
                   </div>
                 </div>
@@ -678,10 +608,10 @@ export default function LandingPage() {
               <div className="flex flex-col gap-4 md:gap-6">
                 {(() => {
                   const PORTFOLIO_VIDEOS = [
-                    { title: "Culinary Art", cat: "Hospitality", vid: "https://www.pexels.com/download/video/29586732", poster: "https://images.pexels.com/videos/29586732/pictures/preview-0.jpg" },
-                    { title: "Chef's Special", cat: "Hospitality", vid: "https://www.pexels.com/download/video/34867881", poster: "https://images.pexels.com/videos/34867881/pictures/preview-0.jpg" },
-                    { title: "Elegant Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3769033", poster: "https://images.pexels.com/videos/3769033/pictures/preview-0.jpg" },
-                    { title: "Atmosphere", cat: "Hospitality", vid: "https://www.pexels.com/download/video/4253140", poster: "https://images.pexels.com/videos/4253140/pictures/preview-0.jpg" },
+                    { title: "Modern Aesthetics", cat: "Brand Film", vid: "https://www.pexels.com/download/video/29586732", poster: "https://images.pexels.com/videos/29586732/pictures/preview-0.jpg" },
+                    { title: "Urban Motion", cat: "Campaign", vid: "https://www.pexels.com/download/video/34867881", poster: "https://images.pexels.com/videos/34867881/pictures/preview-0.jpg" },
+                    { title: "Elevated Dining", cat: "Hospitality", vid: "https://www.pexels.com/download/video/3769033", poster: "https://images.pexels.com/videos/3769033/pictures/preview-0.jpg" },
+                    { title: "Architectural Space", cat: "Commercial", vid: "https://www.pexels.com/download/video/4253140", poster: "https://images.pexels.com/videos/4253140/pictures/preview-0.jpg" },
                   ];
 
                   const chunks: (typeof PORTFOLIO_VIDEOS)[] = [];
@@ -771,9 +701,9 @@ export default function LandingPage() {
         </SectionBlurWrapper>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 3: WHAT WE DO / SERVICES (BLACK THEME)
+            SECTION 4: WHAT WE DO / SERVICES (BLACK THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="defer-render py-32 md:py-40 bg-black text-white relative">
+        <section id="services" data-theme="dark" className="defer-render py-32 md:py-40 bg-black text-white relative">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-px w-full bg-white/10 mb-12" />
@@ -794,10 +724,10 @@ export default function LandingPage() {
                 <Reveal>
                   <div className="max-w-[340px] mt-28">
                     <h4 className="text-white font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
-                      Built to turn views into real customers.
+                      Videos that actually get you customers.
                     </h4>
                     <p className="text-white/85 text-[15px] md:text-base leading-relaxed font-light antialiased">
-                      We create content that drives attention, demand, and real customer growth.
+                      We make videos that get people interested and help your business grow.
                     </p>
                   </div>
                 </Reveal>
@@ -844,7 +774,7 @@ export default function LandingPage() {
                   <div className="flex gap-12">
                     <Reveal delay={0.1}>
                       <p className="text-[#B11226] font-black text-3xl md:text-4xl tracking-tighter mb-1">+40%</p>
-                      <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Footfall Increase</p>
+                      <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Brand Growth</p>
                     </Reveal>
                     <Reveal delay={0.2}>
                       <p className="text-black font-black text-3xl md:text-4xl tracking-tighter mb-1">100%</p>
@@ -882,11 +812,11 @@ export default function LandingPage() {
    Testimonial Rotation Component
    ─────────────────────────────────────────────────────────── */
 const HERO_TESTIMONIALS = [
-  "We started getting real customers within weeks.",
-  "Our bookings increased almost instantly.",
-  "Content actually brought people into our restaurant.",
-  "We saw a clear jump in customers after working with them.",
-  "Finally content that converts into real business.",
+  "We started getting real clients within weeks.",
+  "Our conversions increased almost instantly.",
+  "The campaign actually brought people to our business.",
+  "We saw a clear jump in engagement after working with them.",
+  "Finally, creative marketing that converts into real business.",
 ];
 
 function TestimonialRotation({ isMobile = false }: { isMobile?: boolean }) {
@@ -973,44 +903,44 @@ function CountUp({
 
 const TESTIMONIALS = [
   {
-    quote: "Our reels started bringing in real customers. People were coming in saying they saw us on Instagram.",
-    client: "Ayaan Khan — Restaurant Owner"
+    quote: "Our engagement started bringing in real clients. People were reaching out saying they saw our campaign.",
+    client: "Ayaan Khan — Real Estate Director"
   },
   {
     quote: "The quality of the video immediately changed how people perceived our brand. We look premium now.",
-    client: "Sara Malik — Café Founder"
+    client: "Sara Malik — Fashion Founder"
   },
   {
-    quote: "We've seen a massive spike in weekend bookings since the campaign went live. It actually works.",
-    client: "Omar Hussain — Fine Dining Brand"
+    quote: "We've seen a massive spike in conversions since the campaign went live. It actually works.",
+    client: "Omar Hussain — Tech Startup"
   },
   {
     quote: "They understood our vision and translated it into visuals that actually represent who we are.",
-    client: "Zaid Ahmed — Burger Boutique"
+    client: "Zaid Ahmed — Hospitality Group"
   },
   {
-    quote: "The footage is stunning, but the results are better. Our engagement is at an all-time high.",
-    client: "Layla Yusuf — Dessert Bar"
+    quote: "The footage is stunning, but the results are better. Our digital presence is at an all-time high.",
+    client: "Layla Yusuf — Lifestyle Brand"
   },
   {
-    quote: "Finally found a team that treats our food like art. The response from our followers was huge.",
-    client: "Faisal Aziz — Steakhouse Founder"
+    quote: "Finally found an agency that treats our brand like art. The response from our audience was huge.",
+    client: "Faisal Aziz — Fitness Franchise"
   },
   {
-    quote: "It's rare to find production quality this high in the region. They've set a new standard for us.",
-    client: "Noor Al-Bahrani — Specialty Coffee"
+    quote: "It's rare to find creative direction this high in the region. They've set a new standard for us.",
+    client: "Noor Al-Bahrani — Corporate Leader"
   },
   {
-    quote: "Our launch was a success because the teaser video built so much hype before we even opened.",
-    client: "Hamad Qasim — Fusion Concept"
+    quote: "Our product launch was a success because the brand film built so much hype before we even went live.",
+    client: "Hamad Qasim — Product Designer"
   },
   {
     quote: "The cinematic look they gave us helped us secure a major partnership. It was a game changer.",
-    client: "Mariam Shah — Bakery Chain"
+    client: "Mariam Shah — Retail Brand"
   },
   {
-    quote: "The best investment we've made this year. The content paid for itself within the first month.",
-    client: "Rashid Mahmood — Rooftop Lounge"
+    quote: "The best investment we've made this year. The campaign paid for itself within the first month.",
+    client: "Rashid Mahmood — Hospitality Director"
   }
 ];
 

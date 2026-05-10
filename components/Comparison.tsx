@@ -4,53 +4,53 @@ import { motion } from "framer-motion";
 
 const COMPARISON_DATA = [
   {
-    feature: "Senior-Level Execution",
-    cinmachRed: "Every time,",
-    cinmachDark: " no exceptions",
+    feature: "Work Quality",
+    cinmachRed: "Always great,",
+    cinmachDark: " every time",
     inhouse: "Sometimes",
-    agency: "Rarely",
+    agency: "Hit or miss",
   },
   {
-    feature: "Strategic Thinking",
-    cinmachRed: "Built-in,",
+    feature: "Planning for Growth",
+    cinmachRed: "Included,",
     cinmachDark: " from day one",
-    inhouse: "Depends on hire",
-    agency: "Add-on cost",
+    inhouse: "Depends on staff",
+    agency: "Costs extra",
   },
   {
-    feature: "Timeline Transparency",
-    cinmachRed: "Transparent,",
-    cinmachDark: " strictly scoped",
-    inhouse: "Varies",
-    agency: "Often vague",
+    feature: "Clear Deadlines",
+    cinmachRed: "Always,",
+    cinmachDark: " on time",
+    inhouse: "Changes often",
+    agency: "Often late",
   },
   {
-    feature: "Scalable Brand Systems",
-    cinmachRed: "Standard,",
-    cinmachDark: " baseline offering",
-    inhouse: "Uncommon",
-    agency: "Project-by-project",
+    feature: "Consistent Style",
+    cinmachRed: "Included,",
+    cinmachDark: " every time",
+    inhouse: "Rare",
+    agency: "Different every time",
   },
   {
-    feature: "Flexible Engagement",
-    cinmachRed: "Fluid,",
-    cinmachDark: " scales instantly",
-    inhouse: "Salary-locked",
-    agency: "Contract-locked",
+    feature: "Easy to Scale Up",
+    cinmachRed: "Very easy,",
+    cinmachDark: " anytime",
+    inhouse: "Hard to do",
+    agency: "Needs new contract",
   },
   {
     feature: "Start Date",
-    cinmachRed: "Immediate,",
-    cinmachDark: " within 48 hours",
-    inhouse: "Weeks to hire",
-    agency: "Days to onboard",
+    cinmachRed: "Right away,",
+    cinmachDark: " in 48 hours",
+    inhouse: "Takes weeks",
+    agency: "Takes days",
   },
   {
-    feature: "Cost Structure",
-    cinmachRed: "Clear,",
-    cinmachDark: " fully scoped",
-    inhouse: "Salary + benefits",
-    agency: "Retainer + overages",
+    feature: "Clear Pricing",
+    cinmachRed: "Very clear,",
+    cinmachDark: " no surprises",
+    inhouse: "Salary + extras",
+    agency: "Extra hidden costs",
   },
 ];
 
@@ -83,7 +83,7 @@ export default function Comparison() {
               className="text-black font-black leading-[0.95] tracking-tight uppercase"
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.04em" }}
             >
-              Most Agencies Execute.<br />We Engineer Outcomes.
+              Most Agencies Just Film.<br />We Build Brands.
             </h2>
           </Reveal>
         </div>

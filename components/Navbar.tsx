@@ -33,6 +33,8 @@ export default function Navbar() {
   useEffect(() => {
     let ticking = false;
     const lastThemeRef = { current: theme };
+    // Cache the NodeList once — avoids querying DOM on every scroll tick
+    let sections: NodeListOf<Element> | null = null;
 
     const onScroll = () => {
       if (!ticking) {
@@ -40,10 +42,12 @@ export default function Navbar() {
           const newScrolled = window.scrollY > 40;
           setScrolled(prev => prev !== newScrolled ? newScrolled : prev);
 
-          const sections = document.querySelectorAll("[data-theme]");
+          if (!sections) {
+            sections = document.querySelectorAll("[data-theme]");
+          }
+
           let activeTheme: "dark" | "light" | "red" | "pricing" | "split" | null = null;
-          
-          const offset = 64; // Navbar height (h-16)
+          const offset = 64;
           sections.forEach((section) => {
             const rect = section.getBoundingClientRect();
             if (rect.top <= offset && rect.bottom >= offset) {
@@ -64,7 +68,10 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      sections = null;
+    };
   }, [pathname]);
 
   useEffect(() => {

@@ -6,28 +6,28 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
   {
-    question: "How does restaurant videography help my business?",
+    question: "How does cinematic content help my brand?",
     answer: (
       <>
-        Cinematic video content increases engagement on social media, showcases your food in the best light, and drives more footfall to your restaurant or café in Bahrain. It turns digital views into physical bookings by building desire and trust. Learn more about our specialized{" "}
-        <Link href="/restaurant-videography-bahrain" className="text-[#B11226] hover:underline">
-          Restaurant Videography in Bahrain
+        High-end visual content elevates your brand's perceived value, increases engagement, and drives targeted conversions. It turns digital views into real business growth. Learn more about our{" "}
+        <Link href="/services" className="text-[#B11226] hover:underline">
+          Creative Services
         </Link>.
       </>
     )
   },
 
   {
-    question: "What is included in a food videography shoot?",
-    answer: "We provide full-scale production including creative direction, high-end filming, lighting, and professional post-production (precision editing, cinematic color grading, and sound design)."
+    question: "What is included in a campaign production?",
+    answer: "We handle everything from end to end: creative strategy, concept development, high-end filming, and professional post-production including color grading and sound design."
   },
   {
-    question: "Do you offer social media video production for cafés?",
-    answer: "Yes, we specialize in high-retention social media reels and short-form ads tailored for platforms like Instagram and TikTok, specifically optimized for the Bahraini market."
+    question: "Do you create social media campaigns?",
+    answer: "Yes, we produce conversion-focused short-form content and campaigns designed specifically for modern digital platforms like Instagram and TikTok."
   },
   {
     question: "Where are you based?",
-    answer: "We are a creative video production agency based in the heart of Manama, serving clients across the entire Kingdom of Bahrain."
+    answer: "We are a creative marketing agency located in Manama, and we partner with brands across Bahrain and the GCC."
   }
 ];
 
@@ -91,7 +91,7 @@ export default function FAQSection() {
               FREQUENTLY<br /><span className="text-black/10">ASKED.</span>
             </h2>
             <p className="text-black/40 text-lg font-light leading-relaxed max-w-xs">
-              Everything you need to know about starting your cinematic shoot in Bahrain.
+              Everything you need to know about working with us in Bahrain.
             </p>
           </div>
 

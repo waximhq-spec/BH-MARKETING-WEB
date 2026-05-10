@@ -41,6 +41,9 @@ body {
 
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
+  /* Improve paint performance */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
 }
 
 /* Lenis smooth scroll */
@@ -124,6 +127,21 @@ html.lenis, html.lenis body { height: auto; }
 
 .anim-slow-zoom {
   animation: slowZoom 20s alternate infinite ease-in-out;
+  will-change: transform;
+}
+
+/* Promote composited elements to their own GPU layer */
+.transform-gpu {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Prevent scroll jank on touch devices */
+* {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ── Interactive Utilities ───────────────────────────────── */
@@ -205,55 +223,70 @@ html.lenis, html.lenis body { height: auto; }
   }
 }
 
-/* ── iOS Flicker Prevention ────────────────────────────── */
+/* ── iOS / WebKit Performance Fixes ───────────────────── */
 @supports (-webkit-touch-callout: none) {
-  /* iOS Safari / WebKit specific fixes */
-  
-  /* Force GPU compositing on video elements to prevent flickering */
+  /* Force GPU compositing on video to prevent flicker */
   video {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
+    will-change: transform;
   }
-  
-  /* Stabilize fixed elements on iOS to prevent repaint storms */
-  .fixed, [style*="position: fixed"], [style*="position:fixed"] {
+
+  /* Stabilize ALL fixed/sticky elements — prevents repaint storms */
+  .fixed, [style*="position: fixed"], [style*="position:fixed"],
+  .sticky, [style*="position: sticky"], [style*="position:sticky"] {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 
-  /* Disable heavy infinite CSS animations on iOS to save GPU */
+  /* Kill the hero slow-zoom animation entirely on iOS — huge GPU saver */
   .anim-slow-zoom {
     animation: none !important;
     transform: scale(1) translateZ(0) !important;
+    will-change: auto !important;
   }
 
-  /* Reduce heavy backdrop-blur on mobile iOS to prevent flicker */
-  @media (max-width: 768px) {
-    .backdrop-blur-3xl,
-    .backdrop-blur-2xl,
-    .backdrop-blur-xl,
-    .backdrop-blur-md {
-      -webkit-backdrop-filter: blur(6px) !important;
-      backdrop-filter: blur(6px) !important;
-    }
-  }
-  
-  /* Reduce all backdrop-blur on iOS even on larger screens */
-  .backdrop-blur-3xl {
-    -webkit-backdrop-filter: blur(12px) !important;
-    backdrop-filter: blur(12px) !important;
+  /* Kill the HeroTypographyLayer floating animations on iOS */
+  .hero-typography-float {
+    animation: none !important;
   }
 
-  /* Hide the SVG noise overlay on iOS mobile — the fractalNoise filter
-     triggers continuous compositing that destroys scroll performance */
-  @media (max-width: 1024px) {
-    .ios-noise-overlay {
-      display: none !important;
-    }
+  /* Cap ALL backdrop-blur to safe values on iOS */
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  /* Kill the SVG noise overlay on iOS — fractalNoise is a compositing bomb */
+  .ios-noise-overlay {
+    display: none !important;
+  }
+
+  /* Prevent Framer Motion will-change from persisting after animation */
+  [style*="will-change"] {
+    will-change: auto !important;
+  }
+
+  /* Optimize scroll container */
+  html {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Reduce motion on framer-motion driven elements while keeping feel */
+  .defer-render {
+    content-visibility: visible !important;
+    contain-intrinsic-size: auto !important;
+  }
+
+  /* Kill parallax/floating animations in hero typography layer */
+  .hero-float-anim {
+    animation: none !important;
+    transform: none !important;
   }
 }
 

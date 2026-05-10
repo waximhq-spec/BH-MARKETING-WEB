@@ -134,7 +134,7 @@ export default function PortfolioSplit() {
               lineHeight: 1.05,
             }}
           >
-            Two Worlds. <span className="font-light text-white/50">One Vision.</span>
+            Two Types of Visuals. <span className="font-light text-white/50">One Goal.</span>
           </h2>
         </div>
       </div>
@@ -178,10 +178,10 @@ export default function PortfolioSplit() {
                   lineHeight: 0.95,
                 }}
               >
-                THE<br />SPACES
+                BRAND<br />COMMERCIALS
               </h3>
               <p className="text-white/40 text-sm max-w-[280px] leading-relaxed">
-                Crafted with cinematic lighting and spatial storytelling.
+                Premium storytelling for modern businesses.
               </p>
               <div
                 className={`mt-6 transition-all duration-400 ${hovered === "spaces" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
@@ -190,7 +190,7 @@ export default function PortfolioSplit() {
                   href="/work"
                   className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-[#D91616] hover:text-[#D91616] transition-colors duration-300"
                 >
-                  Explore Real Estate →
+                  Explore Commercials →
                 </Link>
               </div>
             </div>
@@ -236,10 +236,10 @@ export default function PortfolioSplit() {
                   lineHeight: 0.95,
                 }}
               >
-                THE<br />TASTES
+                DIGITAL<br />CAMPAIGNS
               </h3>
               <p className="text-white/40 text-sm max-w-[280px] leading-relaxed">
-                Designed for appetite, engagement, and brand identity.
+                Conversion-driven content that builds brand awareness.
               </p>
               <div
                 className={`mt-6 transition-all duration-400 ${hovered === "tastes" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
@@ -248,7 +248,7 @@ export default function PortfolioSplit() {
                   href="/work"
                   className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-[#D91616] hover:text-[#D91616] transition-colors duration-300"
                 >
-                  Explore F&amp;B →
+                  Explore Campaigns →
                 </Link>
               </div>
             </div>
@@ -272,10 +272,10 @@ export default function PortfolioSplit() {
           <div className="relative z-10 p-8">
             <p className="type-label text-[#D91616]/70 mb-2">Category 01</p>
             <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.04em" }}>
-              THE SPACES
+              COMMERCIALS
             </h3>
             <p className="text-white/40 text-sm leading-relaxed mb-4">
-              Crafted with cinematic lighting and spatial storytelling.
+              Premium storytelling for modern businesses.
             </p>
             <Link href="/work" className="text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1">
               Explore →
@@ -297,10 +297,10 @@ export default function PortfolioSplit() {
           <div className="relative z-10 p-8">
             <p className="type-label text-[#D91616]/70 mb-2">Category 02</p>
             <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.04em" }}>
-              THE TASTES
+              CAMPAIGNS
             </h3>
             <p className="text-white/40 text-sm leading-relaxed mb-4">
-              Designed for appetite, engagement, and brand identity.
+              Conversion-driven content that builds brand awareness.
             </p>
             <Link href="/work" className="text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1">
               Explore →
@@ -316,8 +316,8 @@ export default function PortfolioSplit() {
           <div>
             <div className="flex items-center justify-between mb-8">
               <div>
-                <p className="type-label text-white/25 mb-2">Real Estate</p>
-                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.02em" }}>The Spaces</h4>
+                <p className="type-label text-white/25 mb-2">Commercial Production</p>
+                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.02em" }}>Brand Commercials</h4>
               </div>
               <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#D91616]/70 hover:text-[#D91616] transition-colors">
                 View All →
@@ -334,8 +334,8 @@ export default function PortfolioSplit() {
           <div>
             <div className="flex items-center justify-between mb-8">
               <div>
-                <p className="type-label text-white/25 mb-2">Restaurants & F&B</p>
-                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.02em" }}>The Tastes</h4>
+                <p className="type-label text-white/25 mb-2">Digital Campaigns</p>
+                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.02em" }}>Campaigns</h4>
               </div>
               <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#D91616]/70 hover:text-[#D91616] transition-colors">
                 View All →

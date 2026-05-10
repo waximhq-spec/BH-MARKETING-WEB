@@ -67,17 +67,17 @@ function FeatureItem({ label, details, isParentPopular }: { label: string; detai
 
 export default function PricingSection() {
   const { openProjectModal } = useModal();
-  const [activeCategory, setActiveCategory] = useState("Restaurants & Cafes");
+  const [activeCategory, setActiveCategory] = useState("Content Campaigns");
 
   const CATEGORIES = [
-    "Restaurants & Cafes",
-    "Real Estate",
-    "Gyms & Fitness",
-    "Hotels & Resorts"
+    "Content Campaigns",
+    "Commercials",
+    "Social Media",
+    "Brand Films"
   ];
 
   const PRICING_DATA: Record<string, any[]> = {
-    "Restaurants & Cafes": [
+    "Content Campaigns": [
       {
         id: "rest-starter",
         name: "Starter",
@@ -139,7 +139,7 @@ export default function PricingSection() {
         name: "Enterprise",
         price: "Custom",
         currency: "",
-        target: "Tailored solutions for restaurant groups & franchises",
+        target: "Tailored solutions for enterprise brands & franchises",
         features: [
           { label: "Multi-location Strategy", details: "Coordinated content across your entire chain." },
           { label: "Full Creative Direction", details: "Dedicated producer and high-end art direction." },
@@ -153,7 +153,7 @@ export default function PricingSection() {
         isEnterprise: true,
       }
     ],
-    "Real Estate": [
+    "Commercials": [
       {
         id: "re-starter",
         name: "Starter",
@@ -210,7 +210,7 @@ export default function PricingSection() {
         isRetainer: true,
       }
     ],
-    "Gyms & Fitness": [
+    "Social Media": [
       {
         id: "gym-starter",
         name: "Starter",
@@ -266,7 +266,7 @@ export default function PricingSection() {
         isRetainer: true,
       }
     ],
-    "Hotels & Resorts": [
+    "Brand Films": [
       {
         id: "hotel-starter",
         name: "Starter",
@@ -325,7 +325,7 @@ export default function PricingSection() {
   };
 
   // Default to restaurant data if category not found in map
-  const packages = PRICING_DATA[activeCategory] || PRICING_DATA["Restaurants & Cafes"];
+  const packages = PRICING_DATA[activeCategory] || PRICING_DATA["Content Campaigns"];
 
   return (
     <section id="pricing" data-theme="pricing" className="py-32 md:py-40 bg-[#050505] relative overflow-hidden">
@@ -349,7 +349,7 @@ export default function PricingSection() {
             CINMACH PRODUCTIONS<br />PACKAGES.
           </h2>
           <p className="text-white/40 max-w-xl mx-auto text-xs md:text-sm font-light">
-            Simple, transparent pricing built for high-end hospitality and modern brand growth.
+            Simple, clear prices to help your business get more customers.
           </p>
         </motion.div>
 
@@ -449,15 +449,7 @@ export default function PricingSection() {
                   : "bg-gradient-to-r from-transparent via-white/20 to-transparent"
               }`} />
 
-              {/* Dot grid pattern */}
-              <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" width="100%" height="100%">
-                <defs>
-                  <pattern id={`dots-${pkg.id}`} width="18" height="18" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1" fill="white" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill={`url(#dots-${pkg.id})`} />
-              </svg>
+              {/* Dot grid pattern removed */}
 
               {/* Content */}
               <div className="flex flex-col flex-grow p-6 z-10 relative">

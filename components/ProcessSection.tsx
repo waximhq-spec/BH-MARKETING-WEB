@@ -6,33 +6,33 @@ import { motion, useScroll, useMotionValueEvent, MotionValue, useTransform } fro
 const STEPS = [
   {
     num: "01",
-    title: "Understand Your Customers",
-    desc: "We learn what makes people choose you and what brings real demand.",
+    title: "Understand Your Brand",
+    desc: "We learn what makes your audience connect with you.",
   },
   {
     num: "02",
-    title: "Plan What To Shoot",
-    desc: "We plan exactly what to shoot so your content looks clear and effective.",
+    title: "Plan The Strategy",
+    desc: "We build a creative roadmap to elevate your digital presence.",
   },
   {
     num: "03",
-    title: "Create Content That Sells",
-    desc: "We create content that grabs attention and drives people to visit or buy.",
+    title: "Execute The Creative",
+    desc: "We produce premium visual content designed to convert.",
   },
   {
     num: "04",
-    title: "Improve & Grow",
-    desc: "We refine your content so it stays consistent and keeps bringing customers.",
+    title: "Scale Your Growth",
+    desc: "We manage campaigns to ensure your brand reaches new heights.",
   },
 ];
 
 // Highlight the word "customers" with the brand accent color
 function HighlightDesc({ text }: { text: string }) {
-  const parts = text.split(/(customers)/gi);
+  const parts = text.split(/(brand|growth|convert)/gi);
   return (
     <>
       {parts.map((part, i) =>
-        /customers/i.test(part) ? (
+        /(brand|growth|convert)/i.test(part) ? (
           <span key={i} className="text-[#9A0E1F] font-medium">{part}</span>
         ) : (
           part
@@ -97,8 +97,8 @@ export default function ProcessSection() {
                     className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black tracking-tighter mb-4 lg:mb-6 uppercase pr-8"
                     style={{ fontSize: "clamp(2.2rem, 3.8vw, 3.8rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
                   >
-                    WE GET YOU<br />
-                    MORE CUSTOMERS.
+                    WE SCALE YOUR<br />
+                    BRAND.
                   </motion.h2>
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -115,7 +115,7 @@ export default function ProcessSection() {
                     className="text-white/40 text-[12px] lg:text-[14px] font-medium tracking-wide max-w-[280px]"
                     style={{ lineHeight: 1.6 }}
                   >
-                    A clear, structured approach to building how your brand is seen.
+                    A strategic four-step process to elevate your brand presence and drive real engagement.
                   </motion.p>
                </div>
               {/* Progress Indicator */}
@@ -218,8 +218,8 @@ export default function ProcessSection() {
             className="text-black font-black tracking-tighter mb-4 uppercase"
             style={{ fontSize: "clamp(2.2rem, 9vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
           >
-            WE GET YOU<br />
-            MORE CUSTOMERS.
+            WE SCALE YOUR<br />
+            BRAND.
           </motion.h2>
           
           <motion.div
@@ -238,7 +238,7 @@ export default function ProcessSection() {
             className="text-black/60 text-[14px] md:text-[15px] font-medium tracking-wide max-w-[280px]"
             style={{ lineHeight: 1.6 }}
           >
-            A clear, structured approach to building how your brand is seen.
+            A strategic four-step process to elevate your brand presence and drive real engagement.
           </motion.p>
         </div>
 

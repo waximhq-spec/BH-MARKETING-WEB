@@ -36,88 +36,46 @@ function Reveal({
 const SERVICES = [
   {
     num: "01",
-    title: "Food & Hospitality",
-    tagline: "Content that fills restaurants.",
-    desc: "We create cinematic food and ambiance content designed to make people hungry, curious, and ready to visit. From menu shoots to full venue films, every frame is built to drive footfall and online engagement.",
+    title: "Brand Identity",
+    tagline: "We build memorable brands that stand out.",
+    desc: "A brand is more than just a logo. We craft comprehensive visual identities, strategic positioning, and brand guidelines that resonate with your audience and set you apart in a crowded market.",
     deliverables: [
-      "Cinematic food photography & styling",
-      "Venue & ambiance video production",
-      "Social media reels & short-form ads",
-      "Menu content & seasonal campaigns",
-      "Google & delivery platform visuals",
+      "Logo Design & Visual Identity",
+      "Brand Strategy & Positioning",
+      "Brand Guidelines & Tone of Voice",
+      "Marketing Collateral Design",
+      "Packaging & Print Design",
     ],
-    results: "40+ restaurants served across Bahrain with an average 300% engagement increase.",
+    results: "Brands we build see higher recognition, trust, and long-term customer loyalty.",
   },
   {
     num: "02",
-    title: "Real Estate & Spaces",
-    tagline: "Properties that attract serious buyers.",
-    desc: "We shoot interiors, exteriors, and aerial coverage that makes properties feel aspirational. Our visuals help developers, agents, and landlords attract more inquiries and close deals faster.",
+    title: "Content Production",
+    tagline: "Cinematic content designed to capture attention.",
+    desc: "From restaurants and hotels to luxury real estate and fitness brands, we produce high-end video and photo content. Every frame is meticulously crafted to tell your story and drive engagement across all digital platforms.",
     deliverables: [
-      "Interior & exterior photography",
-      "Drone & aerial cinematics",
-      "Virtual tour video walkthroughs",
-      "Architectural detail coverage",
-      "Agent & developer marketing content",
+      "Food & Hospitality Cinematics",
+      "Real Estate & Space Walkthroughs",
+      "Gym & Fitness Promo Videos",
+      "Hotel & Resort Lifestyle Shoots",
+      "Commercials & Drone Coverage",
     ],
-    results: "Properties showcased with our visuals see significantly higher inquiry rates.",
+    results: "Our cinematic content consistently outperforms standard media in engagement and conversion.",
   },
   {
     num: "03",
-    title: "Gyms & Fitness",
-    tagline: "Content that brings people through your doors.",
-    desc: "We produce high-energy fitness content that showcases your facility, your trainers, and the experience of working out with you. Built for social media performance and membership growth.",
+    title: "Paid Advertising",
+    tagline: "Performance-driven campaigns built for sales.",
+    desc: "We don't just make things look good; we make them work. Our performance marketing team runs highly targeted Meta and Google ad campaigns, utilizing our custom creatives to generate high-quality leads and drive direct sales.",
     deliverables: [
-      "Facility & equipment showcases",
-      "Trainer profile videos",
-      "Client transformation stories",
-      "Class & session highlight reels",
-      "Membership campaign creatives",
+      "Meta Ads (Facebook & Instagram)",
+      "Ad Creative Strategy & Testing",
+      "Retargeting & Audience Scaling",
+      "High-Converting Landing Pages",
+      "Campaign Analytics & Reporting",
     ],
-    results: "Fitness brands using our content report stronger social engagement and new sign-ups.",
-  },
-  {
-    num: "04",
-    title: "Hotels & Resorts",
-    tagline: "Visuals that increase bookings.",
-    desc: "We capture the full guest experience — rooms, dining, pools, spas, and atmosphere. Our content is designed for booking platforms, social channels, and direct marketing campaigns.",
-    deliverables: [
-      "Room & suite photography",
-      "Lifestyle & guest experience films",
-      "Amenity & spa coverage",
-      "Drone & property aerials",
-      "Booking platform optimized visuals",
-    ],
-    results: "Hotels using cinematic content see measurably higher booking conversion rates.",
-  },
-  {
-    num: "05",
-    title: "Ads & E-Commerce",
-    tagline: "Content that drives clicks and sales.",
-    desc: "We produce product cinematics, direct response ads, and e-commerce visuals that are built to convert. Every asset is optimized for performance across paid and organic channels.",
-    deliverables: [
-      "Product photography & cinematics",
-      "Performance ad creatives",
-      "E-commerce catalog visuals",
-      "Explainer & demo videos",
-      "A/B test creative variants",
-    ],
-    results: "Ad creatives we produce consistently outperform client benchmarks on ROAS.",
-  },
-  {
-    num: "06",
-    title: "Luxury Lifestyle & Automotive",
-    tagline: "Premium content for premium brands.",
-    desc: "We create visuals for exotic cars, yachts, high-end events, and luxury lifestyle brands. Every detail is captured with the precision and cinematic quality these brands demand.",
-    deliverables: [
-      "Exotic automotive shoots",
-      "Yacht & marine coverage",
-      "Luxury event documentation",
-      "Personal branding content",
-      "Corporate & VIP event films",
-    ],
-    results: "Our luxury content attracts the high-net-worth audience these brands need.",
-  },
+    results: "Clients utilizing our paid ad strategies see significant improvements in ROAS and cost-per-lead.",
+  }
 ];
 
 export default function ServicesPage() {
@@ -127,8 +85,8 @@ export default function ServicesPage() {
     <main className="bg-white min-h-screen text-black">
       {/* ── SEO Layer ── */}
       <VisualHiddenSEO>
-        <h1>Professional Video Production & Content Services in Bahrain</h1>
-        <p>Cinmach Productions offers cinematic content production for restaurants, real estate, fitness, hotels, e-commerce, and luxury brands across Bahrain and the Gulf region.</p>
+        <h1>Creative Marketing Agency Services in Bahrain</h1>
+        <p>Cinmach Productions is a premium creative marketing agency offering Brand Identity, Cinematic Content Production, and Paid Advertising campaigns for modern brands.</p>
         {SERVICES.map((svc) => (
           <div key={svc.num}>
             <h2>{svc.title}</h2>

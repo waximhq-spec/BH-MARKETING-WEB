@@ -98,7 +98,7 @@ export default function Navbar() {
   const mutedColor = isPricing ? "rgba(255,255,255,0.5)" : (isLight || isSplit) ? "rgba(0,0,0,0.35)" : isRed ? "rgba(255,255,255,0.6)" : "rgba(250,250,250,0.5)";
   const activeColor = isPricing ? "#B11226" : isRed ? "#FFFFFF" : (isLight || isSplit) ? "#000000" : "#C50022";
   
-  const redBg = scrolled ? "rgba(0, 0, 0, 0.92)" : "transparent";
+  const redBg = scrolled ? "rgba(0, 0, 0, 0.92)" : "rgba(0, 0, 0, 0.55)";
   const redBorder = scrolled ? "rgba(255,255,255,0.06)" : "transparent";
 
   /* Solid/near-opaque backgrounds — no backdrop-blur needed.
@@ -126,7 +126,7 @@ export default function Navbar() {
         className="relative z-[100] transition-[background-color,border-color] duration-500 ease-[0.16,1,0.3,1] transform-gpu"
         style={{
           borderBottom: `1px solid ${borderColor}`,
-          background: isSplit ? "transparent" : (isRed || scrolled ? bgColor : "transparent"),
+          background: isSplit ? "transparent" : bgColor,
           /* No backdrop-filter — solid bg instead. iOS WebKit can't composite
              backdrop-blur on fixed elements without triggering white repaint flashes */
           WebkitBackfaceVisibility: "hidden" as const,

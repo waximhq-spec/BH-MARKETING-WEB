@@ -492,32 +492,9 @@ export default function LandingPage() {
 
                 {/* Mobile CTA (Visible only on mobile) */}
                 <div className="lg:hidden flex flex-col items-center gap-5 w-full mt-2">
-                  <Reveal delay={0.5}>
-                    <div className="flex items-center justify-center gap-2 mb-1">
-                      <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
-                      <span className="text-[#9A0E1F] font-mono text-[9px] uppercase tracking-[0.25em] font-bold">Now Booking</span>
-                    </div>
-                  </Reveal>
-
-                  <Reveal delay={0.6} className="w-full flex justify-center px-6">
-                    <button
-                      data-cal-link="wasim-ebxvk8/schedule-call"
-                      data-cal-namespace="schedule-call"
-                      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                      aria-label="Book a strategy call for your marketing campaign in Bahrain"
-                      className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
-                    >
-                      BOOK A STRATEGY CALL
-                      <span className="opacity-80">→</span>
-                    </button>
-                  </Reveal>
-                  <Reveal delay={0.65} className="w-full">
-                    <p className="w-full text-white/40 text-[9px] text-center font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
-                  </Reveal>
-
-                  {/* Mobile Testimonial */}
-                  <div className="w-full mt-6 flex justify-center px-4">
-                    <Reveal delay={0.7} className="w-full max-w-[340px]">
+                  {/* Mobile Testimonial (Shifted Higher) */}
+                  <div className="w-full mt-2 mb-2 flex justify-center px-4">
+                    <Reveal delay={0.5} className="w-full max-w-[340px]">
                       <div className="w-full bg-[#0a0a0a]/70 border border-white/[0.06] p-5 rounded-2xl flex flex-col items-center text-center transform-gpu shadow-xl" style={{ WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
                         <div className="flex items-center justify-center gap-2 mb-3">
                           <div className="h-[1px] w-4 bg-[#9A0E1F]" />
@@ -530,6 +507,29 @@ export default function LandingPage() {
                       </div>
                     </Reveal>
                   </div>
+
+                  <Reveal delay={0.6}>
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
+                      <span className="text-[#9A0E1F] font-mono text-[9px] uppercase tracking-[0.25em] font-bold">Now Booking</span>
+                    </div>
+                  </Reveal>
+
+                  <Reveal delay={0.65} className="w-full flex justify-center px-6">
+                    <button
+                      data-cal-link="wasim-ebxvk8/schedule-call"
+                      data-cal-namespace="schedule-call"
+                      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                      aria-label="Book a strategy call for your marketing campaign in Bahrain"
+                      className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
+                    >
+                      BOOK A STRATEGY CALL
+                      <span className="opacity-80">→</span>
+                    </button>
+                  </Reveal>
+                  <Reveal delay={0.7} className="w-full">
+                    <p className="w-full text-white/40 text-[9px] text-center font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
+                  </Reveal>
                 </div>
               </div>
 

@@ -303,8 +303,8 @@ export default function LandingPage() {
             {/* Cinematic vignette - Hidden on mobile */}
             <div className="hidden md:block absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none z-[1]" />
 
-            {/* Solidified gradient on mobile to prevent alpha blending hell */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/50 to-[#050505] md:via-transparent md:to-black/90 z-[3]" />
+            {/* Desktop Gradient ONLY - Mobile is pure black for test mode */}
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 z-[3]" />
 
 
             <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0">
@@ -322,11 +322,13 @@ export default function LandingPage() {
                       </span>
                       <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
                     </h1>
-                    <Reveal delay={0.2} className="w-full">
-                      <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-left lg:text-left">
-                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
-                      </p>
-                    </Reveal>
+                    <div className="hidden md:block w-full">
+                      <Reveal delay={0.2} className="w-full">
+                        <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-left lg:text-left">
+                          We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
+                        </p>
+                      </Reveal>
+                    </div>
                   </div>
 
                   {/* Secondary CTA & Clock (Desktop Only) */}
@@ -437,51 +439,23 @@ export default function LandingPage() {
                   </motion.div>
                 </div>
 
-                {/* Mobile CTA (Visible only on mobile) */}
-                <div className="lg:hidden flex flex-col items-center gap-5 w-full mt-2">
-                  {/* Mobile Testimonial (Shifted Higher) */}
-                  <div className="w-full mt-2 mb-2 flex justify-center px-4">
-                    <Reveal delay={0.5} className="w-full max-w-[340px]">
-                      <div className="w-full bg-[#0a0a0a]/70 border border-white/[0.06] p-5 rounded-2xl flex flex-col items-center text-center transform-gpu shadow-xl" style={{ WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
-                        <div className="flex items-center justify-center gap-2 mb-3">
-                          <div className="h-[1px] w-4 bg-[#9A0E1F]" />
-                          <span className="text-white/50 font-mono text-[8px] uppercase tracking-[0.25em] font-bold block">What Our Clients Say</span>
-                          <div className="h-[1px] w-4 bg-[#9A0E1F]" />
-                        </div>
-                        <div className="relative h-12 w-full flex items-center justify-center">
-                          <TestimonialRotation isMobile={true} />
-                        </div>
-                      </div>
-                    </Reveal>
-                  </div>
-
-                  <Reveal delay={0.6}>
-                    <div className="flex items-center justify-center gap-2 mb-1">
-                      <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
-                      <span className="text-[#9A0E1F] font-mono text-[9px] uppercase tracking-[0.25em] font-bold">Now Booking</span>
-                    </div>
-                  </Reveal>
-
-                  <Reveal delay={0.65} className="w-full flex justify-center px-6">
-                    <button
-                      data-cal-link="wasim-ebxvk8/schedule-call"
-                      data-cal-namespace="schedule-call"
-                      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                      aria-label="Book a strategy call for your marketing campaign in Bahrain"
-                      className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
-                    >
-                      BOOK A STRATEGY CALL
-                      <span className="opacity-80">→</span>
-                    </button>
-                  </Reveal>
-                  <Reveal delay={0.7} className="w-full">
-                    <p className="w-full text-white/40 text-[9px] text-center font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
-                  </Reveal>
+                {/* Mobile CTA - Ultra Simple Test Mode */}
+                <div className="lg:hidden w-full mt-12 flex justify-center px-6">
+                  <button
+                    data-cal-link="wasim-ebxvk8/schedule-call"
+                    data-cal-namespace="schedule-call"
+                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                    aria-label="Book a strategy call for your marketing campaign in Bahrain"
+                    className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full border border-red-500/50"
+                  >
+                    BOOK A STRATEGY CALL
+                    <span className="opacity-80">→</span>
+                  </button>
                 </div>
               </div>
 
-              {/* Bottom Metrics */}
-              <div className="absolute bottom-0 left-0 right-0 z-10 pb-6 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
+              {/* Bottom Metrics - Hidden on Mobile Test Mode */}
+              <div className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pb-6 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
                 <div className="container mx-auto border-t border-white/5 pt-5 md:pt-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* LEFT COLUMN: All 3 Metrics */}

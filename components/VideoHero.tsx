@@ -12,18 +12,18 @@ export default function VideoHero() {
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#050101]">
-      {/* Video Background */}
+    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black">
+      {/* Desktop Video Background - Hidden entirely on Mobile to test compositing */}
       <video
         ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        // @ts-ignore — webkit attribute for older iOS
+        // @ts-ignore
         webkit-playsinline="true"
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover opacity-60"
+        className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-60"
         style={{
           WebkitBackfaceVisibility: "hidden",
           backfaceVisibility: "hidden",
@@ -34,20 +34,11 @@ export default function VideoHero() {
         Your browser does not support the video tag.
       </video>
       
-      {/* Replaced backdrop-blur overlay with a semi-transparent tint.
-          Direct backdrop-blur on top of <video> triggers constant GPU
-          recompositing on iOS, causing white flash on every scroll frame. */}
-      <div className="absolute inset-0 w-full h-full bg-black/40 md:bg-black/20 z-[1]" style={{
-        WebkitBackfaceVisibility: "hidden",
-        backfaceVisibility: "hidden",
-      }} />
-
-      {/* Cinematic Overlays to maintain legibility and premium feel */}
-      <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-        {/* Subtle background glow layers — replaced blur-[150px] with solid gradients.
-            Massive blur() values trigger software rasterization on iOS.
-            HIDDEN ON MOBILE to save GPU. */}
-        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-30">
+      {/* Desktop Cinematic Overlays - Hidden entirely on Mobile */}
+      <div className="hidden md:block absolute inset-0 w-full h-full z-10 pointer-events-none">
+        <div className="absolute inset-0 w-full h-full bg-black/20 z-[1]" style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }} />
+        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-30">
           <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-red-900/10 rounded-full" style={{
             background: "radial-gradient(circle, rgba(127,29,29,0.1) 0%, transparent 70%)"
           }} />
@@ -56,11 +47,8 @@ export default function VideoHero() {
           }} />
         </div>
 
-        {/* Strong Vignette for cinematic focus - Hidden on mobile */}
-        <div className="hidden md:block absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_transparent_0%,_#000000_100%)] opacity-80" />
-        
-        {/* Vertical gradient to anchor content - Unified solid gradient for mobile */}
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-black/80 via-black/30 to-black/90 md:from-black/60 md:via-transparent md:to-black/90" />
+        <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_transparent_0%,_#000000_100%)] opacity-80" />
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-black/60 via-transparent to-black/90" />
       </div>
     </div>
   );

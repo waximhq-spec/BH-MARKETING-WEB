@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function SecurityLayer() {
+  // TEMPORARILY DISABLED PER USER REQUEST TO ENABLE DEVTOOLS
+  return null;
+
   const [isVisible, setIsVisible] = useState(false);
 
   const triggerOverlay = (e?: Event) => {

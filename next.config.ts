@@ -29,30 +29,37 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
+    const isDev = process.env.NODE_ENV === "development";
+
+    const headersList = [
+      {
+        key: "Cache-Control",
+        value: "public, max-age=0, must-revalidate",
+      },
+    ];
+
+    if (!isDev) {
+      headersList.push({
+        key: "Content-Security-Policy",
+        value: [
+          "default-src 'self';",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://app.cal.com;",
+          "style-src 'self' 'unsafe-inline';",
+          "img-src 'self' data: https:;",
+          "font-src 'self' data:;",
+          "frame-src 'self' https://challenges.cloudflare.com https://app.cal.com;",
+          "connect-src 'self' https://challenges.cloudflare.com https://app.cal.com;",
+          "worker-src 'self' blob:;",
+          "object-src 'none';",
+          "upgrade-insecure-requests;",
+        ].join(" "),
+      });
+    }
+
     return [
       {
         source: "/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=0, must-revalidate",
-          },
-          {
-            key: "Content-Security-Policy",
-            value: [
-              "default-src 'self';",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://app.cal.com;",
-              "style-src 'self' 'unsafe-inline';",
-              "img-src 'self' data: https:;",
-              "font-src 'self' data:;",
-              "frame-src 'self' https://challenges.cloudflare.com https://app.cal.com;",
-              "connect-src 'self' https://challenges.cloudflare.com https://app.cal.com;",
-              "worker-src 'self' blob:;",
-              "object-src 'none';",
-              "upgrade-insecure-requests;",
-            ].join(" "),
-          },
-        ],
+        headers: headersList,
       },
     ];
   },

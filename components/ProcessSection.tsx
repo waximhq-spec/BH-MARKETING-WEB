@@ -70,7 +70,7 @@ export default function ProcessSection() {
   const leftParallaxY = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
-    <section id="process" ref={containerRef} data-theme="split" className="relative w-full bg-black">
+    <section id="process" ref={containerRef} data-theme="split" className="relative w-full bg-black" style={{ position: "relative" }}>
       {/* DESKTOP (Split Sticky Scroll) */}
       <div className="hidden lg:flex flex-col lg:flex-row w-full items-start relative z-10">
         

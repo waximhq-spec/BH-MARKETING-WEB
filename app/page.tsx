@@ -137,12 +137,12 @@ function ServicesTable() {
                   fill
                   loading="lazy"
                   sizes="100vw"
-                  className={`object-cover transition-transform duration-[1400ms] ease-out opacity-[0.25] 
+                  className={`object-cover transition-transform duration-[1400ms] ease-out opacity-[0.45] 
                     ${isHovered ? "scale-[1.03]" : "scale-100"}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/80" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/70" />
                 {/* Always-on red glow tint over image */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/[0.25] via-[#9A0E1F]/[0.05] to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/[0.35] via-[#9A0E1F]/[0.1] to-transparent" />
               </div>
 
               {/* Left accent bar */}

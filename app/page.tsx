@@ -202,23 +202,13 @@ function ServicesTable() {
                   <Link
                     href="/services"
                     aria-label={`Explore ${svc.title} creative agency services in Bahrain`}
-                    className={`group/cta inline-flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 border ${
-                      isHovered
-                        ? "border-[#9A0E1F]/30 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F]/50"
-                        : "border-white/8 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15"
-                    }`}
+                    className="group/cta inline-flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 border border-[#9A0E1F]/35 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F]/60"
                   >
-                    <span className={`font-mono tracking-[0.2em] uppercase text-[9px] font-bold mt-[1px] transition-colors duration-300 ${
-                      isHovered ? "text-[#9A0E1F]" : "text-white/50"
-                    }`}>
+                    <span className="font-mono tracking-[0.2em] uppercase text-[9px] font-bold mt-[1px] transition-colors duration-300 text-[#9A0E1F]">
                       Explore
                     </span>
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
-                      isHovered ? "bg-[#9A0E1F] group-hover/cta:bg-white" : "bg-white/[0.06] group-hover/cta:bg-white/10"
-                    }`}>
-                      <svg className={`w-3 h-3 transition-all duration-300 ${
-                        isHovered ? "text-white group-hover/cta:text-[#9A0E1F]" : "text-white/50 group-hover/cta:text-white"
-                      }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <div className="w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 bg-[#9A0E1F] group-hover/cta:bg-white">
+                      <svg className="w-3 h-3 transition-all duration-300 text-white group-hover/cta:text-[#9A0E1F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>

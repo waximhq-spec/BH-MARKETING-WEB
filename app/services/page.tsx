@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
+import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
@@ -36,20 +37,6 @@ function Reveal({
 const SERVICES = [
   {
     num: "01",
-    title: "Brand Identity",
-    tagline: "We build memorable brands that stand out.",
-    desc: "A brand is more than just a logo. We craft comprehensive visual identities, strategic positioning, and brand guidelines that resonate with your audience and set you apart in a crowded market.",
-    deliverables: [
-      "Logo Design & Visual Identity",
-      "Brand Strategy & Positioning",
-      "Brand Guidelines & Tone of Voice",
-      "Marketing Collateral Design",
-      "Packaging & Print Design",
-    ],
-    results: "Brands we build see higher recognition, trust, and long-term customer loyalty.",
-  },
-  {
-    num: "02",
     title: "Content Production",
     tagline: "Cinematic content designed to capture attention.",
     desc: "From restaurants and hotels to luxury real estate and fitness brands, we produce high-end video and photo content. Every frame is meticulously crafted to tell your story and drive engagement across all digital platforms.",
@@ -61,6 +48,24 @@ const SERVICES = [
       "Commercial Video Production",
     ],
     results: "Our cinematic content consistently outperforms standard media in engagement and conversion.",
+    image: "https://i.pinimg.com/736x/a9/b9/88/a9b988ce1e463875821ab469a204221d.jpg",
+    href: "/content-production"
+  },
+  {
+    num: "02",
+    title: "Brand Identity",
+    tagline: "We build memorable brands that stand out.",
+    desc: "A brand is more than just a logo. We craft comprehensive visual identities, strategic positioning, and brand guidelines that resonate with your audience and set you apart in a crowded market.",
+    deliverables: [
+      "Logo Design & Visual Identity",
+      "Brand Strategy & Positioning",
+      "Brand Guidelines & Tone of Voice",
+      "Marketing Collateral Design",
+      "Packaging & Print Design",
+    ],
+    results: "Brands we build see higher recognition, trust, and long-term customer loyalty.",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop",
+    href: "/brand-identity"
   },
   {
     num: "03",
@@ -75,6 +80,9 @@ const SERVICES = [
       "Campaign Analytics & Reporting",
     ],
     results: "Clients utilizing our paid ad strategies see significant improvements in ROAS and cost-per-lead.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop",
+    href: "/paid-advertising",
+    disabled: true
   }
 ];
 
@@ -198,8 +206,21 @@ export default function ServicesPage() {
                     </div>
                   </div>
 
-                  {/* Right Column — Deliverables */}
+                  {/* Right Column — Image & Deliverables */}
                   <div className="lg:col-span-7 lg:pt-4">
+                    <Reveal>
+                      <div className="relative w-full h-[280px] md:h-[400px] rounded-3xl overflow-hidden mb-12 shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+                        <Image 
+                          src={svc.image} 
+                          alt={svc.title} 
+                          fill 
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover transition-transform duration-[2s] hover:scale-105 transform-gpu will-change-transform" 
+                        />
+                        <div className={`absolute inset-0 ${isEven ? "bg-black/5" : "bg-black/20"}`} />
+                      </div>
+                    </Reveal>
+
                     <p className={`font-mono text-[8px] tracking-[0.3em] uppercase font-bold mb-6 ${
                       isEven ? "text-black/30" : "text-white/25"
                     }`}>
@@ -234,10 +255,21 @@ export default function ServicesPage() {
 
                     {/* CTA */}
                     <Reveal delay={0.3}>
-                      <div className="mt-10">
+                      <div className="mt-10 flex flex-wrap gap-4">
+                        <Link
+                          href={svc.disabled ? "#" : svc.href}
+                          onClick={(e) => svc.disabled && e.preventDefault()}
+                          className={`inline-flex items-center justify-center gap-3 px-7 py-3.5 font-mono text-[9px] tracking-[0.2em] uppercase rounded-full transition-all duration-300 ${
+                            svc.disabled 
+                              ? isEven ? "bg-black/10 text-black/40 cursor-not-allowed" : "bg-white/10 text-white/40 cursor-not-allowed"
+                              : isEven ? "bg-black text-white hover:bg-black/80" : "bg-white text-black hover:bg-white/80"
+                          }`}
+                        >
+                          {svc.disabled ? "Coming Soon" : "More Details"}
+                        </Link>
                         <button
                           onClick={() => openProjectModal()}
-                          className={`inline-flex items-center gap-3 px-7 py-3.5 border font-mono text-[9px] tracking-[0.2em] uppercase rounded-full transition-all duration-300 ${
+                          className={`inline-flex items-center justify-center gap-3 px-7 py-3.5 border font-mono text-[9px] tracking-[0.2em] uppercase rounded-full transition-all duration-300 group ${
                             isEven
                               ? "border-black/15 text-black/60 hover:border-[#9A0E1F] hover:text-[#9A0E1F] hover:shadow-[0_0_20px_rgba(154,14,31,0.1)]"
                               : "border-white/15 text-white/50 hover:border-[#9A0E1F] hover:text-[#9A0E1F] hover:shadow-[0_0_20px_rgba(154,14,31,0.15)]"

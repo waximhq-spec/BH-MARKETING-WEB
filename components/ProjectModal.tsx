@@ -13,13 +13,10 @@ const INDUSTRIES = [
   { id: "other", label: "Other", icon: "◆" },
 ];
 
-const PROJECT_TYPES = [
-  { id: "monthly", label: "Monthly Content" },
-  { id: "onetime", label: "One-Time Shoot" },
-  { id: "launch", label: "Brand Launch Campaign" },
-  { id: "social", label: "Social Media Growth" },
-  { id: "full", label: "Full Production" },
-  { id: "custom", label: "Custom Project" },
+const SERVICES = [
+  { id: "content", label: "Content Production", icon: "🎥" },
+  { id: "brand", label: "Brand Identity", icon: "✨" },
+  { id: "ads", label: "Paid Advertising", icon: "📈", disabled: true },
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -48,7 +45,7 @@ export default function ProjectModal() {
   const { isProjectModalOpen, modalMode, closeProjectModal } = useModal();
   const [step, setStep] = useState(0);
   const [industry, setIndustry] = useState("");
-  const [projectType, setProjectType] = useState("");
+  const [service, setService] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "", brand: "", whatsapp: "", location: "", branches: "", message: "", preferredDate: "", preferredTime: ""
@@ -62,7 +59,7 @@ export default function ProjectModal() {
       document.body.style.overflow = "hidden";
       setStep(modalMode === "booking" ? 5 : 0);
       setIndustry("");
-      setProjectType("");
+      setService("");
       setFormData({ name: "", brand: "", whatsapp: "", location: "", branches: "", message: "", preferredDate: "", preferredTime: "" });
     } else {
       document.body.style.overflow = "";
@@ -73,13 +70,13 @@ export default function ProjectModal() {
   const normalizedStep = modalMode === "booking" ? step - 5 : step;
   const progress = (normalizedStep / (currentFlowSteps - 1)) * 100;
 
-  function handleIndustrySelect(id: string) {
-    setIndustry(id);
+  function handleServiceSelect(id: string) {
+    setService(id);
     setTimeout(() => setStep(2), 350);
   }
 
-  function handleProjectTypeSelect(id: string) {
-    setProjectType(id);
+  function handleIndustrySelect(id: string) {
+    setIndustry(id);
     setTimeout(() => setStep(3), 350);
   }
 
@@ -108,12 +105,43 @@ export default function ProjectModal() {
       <p className="mt-5 text-white/20 text-[9px] tracking-[0.2em] uppercase font-medium">Response within 24 hours</p>
     </motion.div>,
 
-    // STEP 1 — INDUSTRY
+    // STEP 1 — SERVICE
     <motion.div key="step1" variants={slideVariants} initial="enter" animate="center" exit="exit"
       transition={{ duration: 0.55, ease: EASE }}
       className="flex flex-col min-h-[420px] px-2"
     >
       <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-bold mb-3">Step 01</p>
+      <h3 className="text-white font-black text-2xl md:text-3xl tracking-tight uppercase mb-8">What service do you need?</h3>
+      <div className="grid grid-cols-1 gap-3 flex-1">
+        {SERVICES.map((svc) => (
+          <button
+            key={svc.id}
+            disabled={svc.disabled}
+            onClick={() => handleServiceSelect(svc.id)}
+            className={`flex items-center gap-4 px-6 py-5 rounded-2xl border transition-all duration-200 text-left ${
+              svc.disabled 
+                ? "opacity-50 cursor-not-allowed border-white/5 bg-white/[0.01]"
+                : service === svc.id
+                  ? "border-[#9A0E1F] bg-[#9A0E1F]/10 active:scale-[0.98]"
+                  : "border-white/8 bg-white/[0.02] active:scale-[0.98]"
+            }`}
+          >
+            <span className="text-2xl">{svc.icon}</span>
+            <div className="flex flex-col">
+              <span className={`text-[12px] md:text-[13px] font-bold tracking-widest uppercase ${service === svc.id ? "text-white" : "text-white/60"}`}>{svc.label}</span>
+              {svc.disabled && <span className="text-[9px] font-mono tracking-widest text-[#9A0E1F] uppercase mt-1">Coming Soon</span>}
+            </div>
+          </button>
+        ))}
+      </div>
+    </motion.div>,
+
+    // STEP 2 — INDUSTRY
+    <motion.div key="step2" variants={slideVariants} initial="enter" animate="center" exit="exit"
+      transition={{ duration: 0.55, ease: EASE }}
+      className="flex flex-col min-h-[420px] px-2"
+    >
+      <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-bold mb-3">Step 02</p>
       <h3 className="text-white font-black text-2xl md:text-3xl tracking-tight uppercase mb-8">What type of brand are you?</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 flex-1">
         {INDUSTRIES.map((ind) => (
@@ -135,31 +163,6 @@ export default function ProjectModal() {
                 <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </div>
             )}
-          </button>
-        ))}
-      </div>
-    </motion.div>,
-
-    // STEP 2 — PROJECT TYPE
-    <motion.div key="step2" variants={slideVariants} initial="enter" animate="center" exit="exit"
-      transition={{ duration: 0.55, ease: EASE }}
-      className="flex flex-col min-h-[420px] px-2"
-    >
-      <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-bold mb-3">Step 02</p>
-      <h3 className="text-white font-black text-2xl md:text-3xl tracking-tight uppercase mb-8">What are you looking for?</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 flex-1">
-        {PROJECT_TYPES.map((pt) => (
-          <button
-            key={pt.id}
-            onClick={() => handleProjectTypeSelect(pt.id)}
-            className={`flex items-center justify-between px-6 py-4 rounded-xl border transition-all duration-200 text-left active:scale-[0.98] ${
-              projectType === pt.id
-                ? "border-[#9A0E1F] bg-[#9A0E1F]/10"
-                : "border-white/8 bg-white/[0.02]"
-            }`}
-          >
-            <span className={`text-[12px] font-bold tracking-widest uppercase ${projectType === pt.id ? "text-white" : "text-white/55"}`}>{pt.label}</span>
-            <span className={`text-sm ${projectType === pt.id ? "text-[#9A0E1F]" : "text-white/20"}`}>→</span>
           </button>
         ))}
       </div>
@@ -225,7 +228,7 @@ export default function ProjectModal() {
                 body: JSON.stringify({
                   _subject: "QUOTE REQUEST CINMACH PRODUCTIONS",
                   Industry: industry,
-                  ProjectType: projectType,
+                  Service: service,
                   Name: formData.name,
                   Brand: formData.brand,
                   WhatsApp: formData.whatsapp,

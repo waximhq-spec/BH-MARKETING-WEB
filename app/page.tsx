@@ -12,8 +12,9 @@ import Image from "next/image";
 // Lazy load below-the-fold sections for performance
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const Comparison = dynamic(() => import("@/components/Comparison"));
-const PricingSection = dynamic(() => import("@/components/PricingSection"));
+
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
+const CTASection = dynamic(() => import("@/components/CTASection"));
 
 /* ─────────────────────────────────────────────────────────────
    Internal Components
@@ -80,7 +81,8 @@ const SERVICES_DATA = [
     desc: "Cinematic content designed to capture attention and drive engagement.",
     sub: ["Reels & Short-Form Content", "Commercial Videos", "Photography"],
     alt: "Cinematic content production and commercial video services in Bahrain",
-    bg: "https://i.pinimg.com/736x/a9/b9/88/a9b988ce1e463875821ab469a204221d.jpg"
+    bg: "https://i.pinimg.com/736x/a9/b9/88/a9b988ce1e463875821ab469a204221d.jpg",
+    href: "/content-production"
   },
   {
     num: "02",
@@ -88,7 +90,8 @@ const SERVICES_DATA = [
     desc: "We build memorable brands that stand out online and in real life.",
     sub: ["Logo Design", "Visual Identity", "Brand Strategy", "Brand Guidelines"],
     alt: "Premium brand identity and logo design services by creative agency in Bahrain",
-    bg: "https://i.pinimg.com/736x/b8/47/0f/b8470faac5cb1dcb84a476632d02efa8.jpg"
+    bg: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop",
+    href: "/brand-identity"
   },
   {
     num: "03",
@@ -96,7 +99,9 @@ const SERVICES_DATA = [
     desc: "Performance-driven campaigns built to generate leads and sales.",
     sub: ["Meta Ads", "Ad Creatives", "Retargeting", "Landing Pages"],
     alt: "Paid advertising and performance marketing campaigns in Bahrain",
-    bg: "https://i.pinimg.com/736x/a2/a8/aa/a2a8aa83bc1aec34374287377c1b03e2.jpg"
+    bg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop",
+    href: "/paid-advertising",
+    disabled: true
   }
 ];
 
@@ -192,8 +197,9 @@ function ServicesTable() {
             >
               <div className="w-full" style={{ paddingRight: 'var(--container-margin)', paddingLeft: '4rem' }}>
                 <Link
-                  href="/services"
-                  className="block relative w-full h-[65vh] max-h-[600px] overflow-hidden rounded-2xl group cursor-pointer"
+                  href={svc.disabled ? "#" : svc.href}
+                  onClick={(e) => svc.disabled && e.preventDefault()}
+                  className={`block relative w-full h-[65vh] max-h-[600px] overflow-hidden rounded-2xl group ${svc.disabled ? "cursor-not-allowed opacity-90" : "cursor-pointer"}`}
                 >
                   <Image
                     src={svc.bg}
@@ -201,7 +207,7 @@ function ServicesTable() {
                     fill
                     loading="lazy"
                     sizes="55vw"
-                    className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                    className={`object-cover transition-transform duration-[1200ms] ease-out ${!svc.disabled ? "group-hover:scale-[1.04]" : ""}`}
                   />
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
@@ -217,14 +223,18 @@ function ServicesTable() {
                       </p>
                     </div>
                     
-                    {/* Hover-revealed / Active Explore Button */}
-                    <div className="flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 border border-white/20 bg-white/5 group-hover:border-[#9A0E1F]/50 group-hover:bg-[#9A0E1F]/20 transition-all duration-300">
-                      <span className="font-mono tracking-[0.2em] uppercase text-[9px] font-bold text-white/80 group-hover:text-[#9A0E1F]">Explore</span>
-                      <div className="w-7 h-7 rounded-full bg-white/10 group-hover:bg-[#9A0E1F] flex items-center justify-center transition-colors duration-300">
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </div>
+                    {/* Premium Glassmorphism CTA Button */}
+                    <div className="flex items-center gap-4 rounded-full pl-6 pr-2 py-2 bg-black/40 backdrop-blur-md border border-white/10 transition-all duration-300">
+                      <span className="font-mono tracking-[0.2em] uppercase text-[10px] font-bold text-white pr-4">
+                        {svc.disabled ? "Coming Soon" : "View Details"}
+                      </span>
+                      {!svc.disabled && (
+                        <div className="w-8 h-8 rounded-full bg-[#9A0E1F] flex items-center justify-center shadow-[0_0_15px_rgba(154,14,31,0.5)] transition-transform duration-300 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(154,14,31,0.7)]">
+                          <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Link>
@@ -272,15 +282,20 @@ function ServicesTable() {
                 </div>
                 <div className="pl-8 mt-2">
                   <Link
-                    href="/services"
-                    className="inline-flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 border border-[#9A0E1F]/35 bg-[#9A0E1F]/10"
+                    href={svc.disabled ? "#" : svc.href}
+                    onClick={(e) => svc.disabled && e.preventDefault()}
+                    className={`inline-flex items-center gap-4 rounded-full pl-6 pr-2 py-2 bg-black/40 backdrop-blur-md border border-white/10 transition-all duration-300 ${!svc.disabled ? "hover:border-[#9A0E1F]/50 hover:bg-black/60 group/mobilebtn" : "opacity-90 cursor-not-allowed"}`}
                   >
-                    <span className="font-mono tracking-[0.2em] uppercase text-[9px] font-bold text-[#9A0E1F]">Explore</span>
-                    <div className="w-7 h-7 rounded-full bg-[#9A0E1F] flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
+                    <span className="font-mono tracking-[0.2em] uppercase text-[9px] font-bold text-white pr-4">
+                      {svc.disabled ? "Coming Soon" : "View Details"}
+                    </span>
+                    {!svc.disabled && (
+                      <div className="w-7 h-7 rounded-full bg-[#9A0E1F] flex items-center justify-center shadow-[0_0_15px_rgba(154,14,31,0.5)] transition-transform duration-300 group-hover/mobilebtn:scale-105">
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    )}
                   </Link>
                 </div>
               </div>
@@ -293,10 +308,14 @@ function ServicesTable() {
           <Reveal delay={0.3}>
             <Link
               href="/services"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 border border-[#9A0E1F]/50 transition-all duration-500 hover:bg-black hover:border-white/20"
+              className="group inline-flex items-center justify-center gap-4 pl-8 pr-2 py-2 rounded-full bg-white text-black transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] transform-gpu will-change-transform"
             >
-              <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white">ALL SERVICES</span>
-              <span className="text-[#9A0E1F] text-[14px]">→</span>
+              <span className="text-[11px] font-mono font-black tracking-[0.2em] uppercase mt-0.5">ALL SERVICES</span>
+              <div className="w-10 h-10 rounded-full bg-[#9A0E1F] flex items-center justify-center transition-transform duration-500 group-hover:translate-x-1 shadow-[0_0_15px_rgba(154,14,31,0.5)]">
+                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
             </Link>
           </Reveal>
         </div>
@@ -725,9 +744,13 @@ export default function LandingPage() {
             <ServicesTable />
             {/* All Services CTA below sticky section */}
             <div className="container pb-24 flex justify-end">
-              <Link href="/services" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 border border-[#9A0E1F]/50 hover:bg-black hover:border-white/20 transition-all duration-500">
-                <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white">ALL SERVICES</span>
-                <span className="text-[#9A0E1F] text-[14px]">→</span>
+              <Link href="/services" className="group inline-flex items-center justify-center gap-4 pl-10 pr-2 py-2 rounded-full bg-white text-black transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] transform-gpu will-change-transform">
+                <span className="text-[11px] font-mono font-black tracking-[0.2em] uppercase mt-0.5">ALL SERVICES</span>
+                <div className="w-12 h-12 rounded-full bg-[#9A0E1F] flex items-center justify-center transition-transform duration-500 group-hover:translate-x-1 shadow-[0_0_15px_rgba(154,14,31,0.5)]">
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
               </Link>
             </div>
           </div>
@@ -758,11 +781,13 @@ export default function LandingPage() {
         <ProcessSection />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            SECTION 6: PRICING
+            SECTION 6: CALL TO ACTION
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
-          <PricingSection />
+          <CTASection />
         </SectionBlurWrapper>
+
+
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 7: SOCIAL PROOF (REFINED)

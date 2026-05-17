@@ -6,9 +6,24 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useModal } from "@/components/ModalContext";
 
-const NAV_LINKS = [
+type NavLink = {
+  label: string;
+  href: string;
+  dropdown?: { label: string; href: string; disabled?: boolean }[];
+};
+
+const NAV_LINKS: NavLink[] = [
   { label: "Work", href: "/work" },
-  { label: "Services", href: "/services" },
+  { 
+    label: "Services", 
+    href: "/services",
+    dropdown: [
+      { label: "Content Production", href: "/content-production" },
+      { label: "Brand Identity", href: "/brand-identity" },
+      { label: "Paid Advertising", href: "#", disabled: true },
+      { label: "All Services →", href: "/services" },
+    ]
+  },
   { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/estimate" },
@@ -119,21 +134,61 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center gap-8 lg:gap-12">
             <div className="flex items-center gap-7 lg:gap-9">
               {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = pathname === link.href || (link.dropdown && link.dropdown.some(d => pathname === d.href));
                 return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="relative py-2 text-[10px] font-medium tracking-[0.18em] uppercase"
-                    style={{
-                      color: isActive ? accentColor : textColor,
-                    }}
-                  >
-                    {link.label}
-                    {isActive && (
-                      <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-[#9A0E1F]" />
+                  <div key={link.href} className="relative group flex items-center h-full">
+                    <Link
+                      href={link.href}
+                      className="relative py-2 text-[10px] font-medium tracking-[0.18em] uppercase transition-colors flex items-center gap-1.5"
+                      style={{
+                        color: isActive ? accentColor : textColor,
+                      }}
+                    >
+                      {link.label}
+                      {link.dropdown && (
+                        <svg className="w-2.5 h-2.5 opacity-50 transition-transform duration-300 group-hover:-rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      )}
+                      {isActive && (
+                        <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-[#9A0E1F]" />
+                      )}
+                    </Link>
+
+                    {link.dropdown && (
+                      <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[200]">
+                        <div className="flex flex-col min-w-[240px] rounded-2xl overflow-hidden border border-black/5 bg-white shadow-[0_20px_40px_rgba(0,0,0,0.15)]">
+                          {link.dropdown.map((item, idx) => {
+                            if (item.disabled) {
+                              return (
+                                <div key={item.label} className="px-6 py-4 border-b border-black/5 last:border-0 opacity-50 cursor-not-allowed flex items-center justify-between">
+                                  <span className="text-[13px] font-medium tracking-tight text-black/80">
+                                    {item.label}
+                                  </span>
+                                  <span className="text-[9px] font-mono tracking-widest text-[#9A0E1F] uppercase">Coming Soon</span>
+                                </div>
+                              );
+                            }
+                            return (
+                              <Link 
+                                key={item.href} 
+                                href={item.href}
+                                className="px-6 py-4 transition-colors hover:bg-black/5 border-b border-black/5 last:border-0"
+                              >
+                                <span className={`block ${
+                                  idx === link.dropdown!.length - 1 
+                                    ? "text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#9A0E1F]" 
+                                    : "text-[13px] font-medium tracking-tight text-black/80"
+                                }`}>
+                                  {item.label}
+                                </span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
                     )}
-                  </Link>
+                  </div>
                 );
               })}
             </div>

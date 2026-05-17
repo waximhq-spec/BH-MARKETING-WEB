@@ -356,21 +356,29 @@ export default function PricingSection() {
         {/* Category Toggle */}
         <div className="flex justify-center mb-10 md:mb-16 px-0 md:px-2">
           {/* Mobile: Horizontal scroll strip */}
-          <div className="md:hidden w-full overflow-x-auto scrollbar-hide -mx-1">
-            <div className="flex items-center gap-2 px-5 pb-2 min-w-max">
-              {CATEGORIES.map(category => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`relative px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 ${
-                    activeCategory === category 
-                      ? "text-white bg-[#9A0E1F] shadow-[0_4px_16px_rgba(154,14,31,0.4)]" 
-                      : "text-white/40 bg-white/5 border border-white/10 active:bg-white/10"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
+          <div className="md:hidden w-full relative">
+            <div className="w-full overflow-x-auto scrollbar-hide -mx-1">
+              <div className="flex items-center gap-2 px-5 pb-2 min-w-max pr-14">
+                {CATEGORIES.map(category => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`relative px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 ${
+                      activeCategory === category 
+                        ? "text-white bg-[#9A0E1F] shadow-[0_4px_16px_rgba(154,14,31,0.4)]" 
+                        : "text-white/40 bg-white/5 border border-white/10 active:bg-white/10"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {/* Scroll Indicator Arrow & Fade */}
+            <div className="absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-[#050505] via-[#050505]/80 to-transparent pointer-events-none flex items-center justify-end pr-2">
+              <svg className="w-4 h-4 text-white/40 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </div>
 

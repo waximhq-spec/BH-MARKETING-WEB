@@ -426,9 +426,9 @@ export default function PricingSection() {
                   : "shadow-[0_8px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.02)] border border-white/5 md:hover:border-white/10 md:hover:shadow-[0_16px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.05)]"
                 }`}
               style={{
-                background: "rgba(10, 10, 10, 0.6)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
+                background: "rgba(10, 10, 10, 0.95)",
+                /* No backdrop-filter — solid bg instead. Each card with backdrop-filter
+                   creates a new compositing layer, causing iOS repaint storms. */
               }}
             >
               {/* Featured glow overlay */}
@@ -456,7 +456,7 @@ export default function PricingSection() {
                 {/* Popular badge */}
                 {pkg.isPopular && (
                   <div className="absolute top-5 right-5 z-20">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9A0E1F]/20 border border-[#9A0E1F]/50 text-[#9A0E1F] text-[9px] font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(154,14,31,0.4)] backdrop-blur-md">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9A0E1F]/20 border border-[#9A0E1F]/50 text-[#9A0E1F] text-[9px] font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(154,14,31,0.4)]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_5px_#9A0E1F]" />
                       Most Popular
                     </span>

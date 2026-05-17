@@ -70,7 +70,7 @@ export default function SecurityLayer() {
           className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none"
         >
           {/* Backdrop Blur Overlay */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
+          <div className="absolute inset-0 bg-black/85" />
           
           {/* Content Card */}
           <motion.div

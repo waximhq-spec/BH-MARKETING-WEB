@@ -166,8 +166,12 @@ export default function ParticleHero() {
     <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#050101]">
       {/* Permanent background glow layers (Low performance impact) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-40">
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-red-900/10 blur-[180px] rounded-full" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-red-950/10 blur-[150px] rounded-full" />
+        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full" style={{
+          background: "radial-gradient(circle, rgba(127,29,29,0.1) 0%, transparent 70%)"
+        }} />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full" style={{
+          background: "radial-gradient(circle, rgba(69,10,10,0.1) 0%, transparent 70%)"
+        }} />
       </div>
 
       <canvas 

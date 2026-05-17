@@ -29,6 +29,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Solid background on html to prevent any white flash on iOS */
+  background-color: #000000;
 }
 
 body {
@@ -44,6 +46,9 @@ body {
   /* Improve paint performance */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
+  /* GPU layer promotion for body — prevents full-page repaint storms on iOS */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Lenis smooth scroll */
@@ -127,7 +132,7 @@ html.lenis, html.lenis body { height: auto; }
 
 .anim-slow-zoom {
   animation: slowZoom 20s alternate infinite ease-in-out;
-  will-change: transform;
+  /* Removed will-change: transform — persisted will-change creates GPU memory pressure on iOS */
 }
 
 /* Promote composited elements to their own GPU layer */
@@ -136,7 +141,7 @@ html.lenis, html.lenis body { height: auto; }
   -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  will-change: transform;
+  /* Removed will-change: transform — persisted will-change causes repaint storms on iOS */
 }
 
 /* Prevent scroll jank on touch devices */
@@ -159,8 +164,7 @@ html.lenis, html.lenis body { height: auto; }
 
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  /* Removed backdrop-filter — causes iOS repaint storms on scroll */
   border: 1px solid var(--border);
   border-radius: 4px;
   contain: layout paint;
@@ -225,13 +229,28 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ── iOS / WebKit Performance Fixes ───────────────────── */
 @supports (-webkit-touch-callout: none) {
+  /* Ensure html + body always have solid backgrounds — prevents white flash on overscroll */
+  html {
+    background-color: #000000 !important;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    background-color: #000000 !important;
+    /* Promote body to its own compositing layer */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
   /* Force GPU compositing on video to prevent flicker */
   video {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
-    will-change: transform;
   }
 
   /* Stabilize ALL fixed/sticky elements — prevents repaint storms */
@@ -247,7 +266,6 @@ html.lenis, html.lenis body { height: auto; }
   .anim-slow-zoom {
     animation: none !important;
     transform: scale(1) translateZ(0) !important;
-    will-change: auto !important;
   }
 
   /* Kill the HeroTypographyLayer floating animations on iOS */
@@ -255,10 +273,12 @@ html.lenis, html.lenis body { height: auto; }
     animation: none !important;
   }
 
-  /* Cap ALL backdrop-blur to safe values on iOS */
-  [class*="backdrop-blur"] {
-    -webkit-backdrop-filter: blur(8px) !important;
-    backdrop-filter: blur(8px) !important;
+  /* NUKE ALL backdrop-filter on iOS — this is the #1 cause of white flashes */
+  [class*="backdrop-blur"],
+  [style*="backdrop-filter"],
+  [style*="-webkit-backdrop-filter"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 
   /* Kill the SVG noise overlay on iOS — fractalNoise is a compositing bomb */
@@ -266,15 +286,10 @@ html.lenis, html.lenis body { height: auto; }
     display: none !important;
   }
 
-  /* Prevent Framer Motion will-change from persisting after animation */
+  /* Kill ALL persisted will-change — each one forces a new GPU compositing layer
+     and iOS WebKit cannot handle more than ~15-20 composited layers without flickering */
   [style*="will-change"] {
     will-change: auto !important;
-  }
-
-  /* Optimize scroll container */
-  html {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
   }
 
   /* Reduce motion on framer-motion driven elements while keeping feel */
@@ -287,6 +302,26 @@ html.lenis, html.lenis body { height: auto; }
   .hero-float-anim {
     animation: none !important;
     transform: none !important;
+  }
+
+  /* Reduce large blur() glow divs on iOS — they trigger software rasterization */
+  [class*="blur-["] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    opacity: 0.3;
+  }
+
+  /* Ensure main content wrapper doesn't trigger unnecessary repaints */
+  main {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Stabilize image transforms on iOS */
+  img {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 }
 
@@ -311,8 +346,7 @@ input, textarea, select {
   transition: border-color 0.3s;
   width: 100%;
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Removed backdrop-filter from form inputs — causes iOS compositing issues */
 }
 
 input:focus, textarea:focus {

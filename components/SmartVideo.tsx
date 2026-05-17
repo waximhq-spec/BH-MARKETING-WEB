@@ -126,12 +126,12 @@ export default function SmartVideo({
       {/* 4. INTERACTION AREA / PLAY BUTTON */}
       <div className="absolute inset-0 w-full h-full flex items-center justify-center z-[20] pointer-events-none">
         {isLoading && isActivated ? (
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/60 flex items-center justify-center">
             <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
           </div>
         ) : (
           <div 
-            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-2xl transition-all duration-500 ease-out hover:bg-[#ff2a2a] hover:border-[#ff2a2a] hover:scale-110 transform-gpu ${
+            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-white shadow-2xl transition-all duration-500 ease-out hover:bg-[#ff2a2a] hover:border-[#ff2a2a] hover:scale-110 transform-gpu ${
               !isPlaying ? "opacity-100 scale-100" : "opacity-0 scale-90 group-hover/video:opacity-100 group-hover/video:scale-100"
             }`}
           >

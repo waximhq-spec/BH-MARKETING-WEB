@@ -34,19 +34,25 @@ export default function VideoHero() {
         Your browser does not support the video tag.
       </video>
       
-      {/* Soft blur overlay replaces direct blur on video element
-          — direct CSS blur on <video> triggers constant GPU recompositing on iOS */}
-      <div className="absolute inset-0 w-full h-full backdrop-blur-[3px] z-[1]" style={{
+      {/* Replaced backdrop-blur overlay with a semi-transparent tint.
+          Direct backdrop-blur on top of <video> triggers constant GPU
+          recompositing on iOS, causing white flash on every scroll frame. */}
+      <div className="absolute inset-0 w-full h-full bg-black/20 z-[1]" style={{
         WebkitBackfaceVisibility: "hidden",
         backfaceVisibility: "hidden",
       }} />
 
       {/* Cinematic Overlays to maintain legibility and premium feel */}
       <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-        {/* Subtle background glow layers */}
+        {/* Subtle background glow layers — replaced blur-[150px] with solid gradients.
+            Massive blur() values trigger software rasterization on iOS. */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-30">
-          <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-red-900/10 blur-[150px] rounded-full" />
-          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-red-950/10 blur-[120px] rounded-full" />
+          <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-red-900/10 rounded-full" style={{
+            background: "radial-gradient(circle, rgba(127,29,29,0.1) 0%, transparent 70%)"
+          }} />
+          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-red-950/10 rounded-full" style={{
+            background: "radial-gradient(circle, rgba(69,10,10,0.1) 0%, transparent 70%)"
+          }} />
         </div>
 
         {/* Strong Vignette for cinematic focus */}

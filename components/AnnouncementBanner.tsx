@@ -24,7 +24,7 @@ export default function AnnouncementBanner() {
             duration: 1.2, 
             ease: [0.16, 1, 0.3, 1] 
           }}
-          className="relative w-full overflow-hidden bg-white/95 backdrop-blur-xl border-b border-black/[0.05] z-[101]"
+          className="relative w-full overflow-hidden bg-white border-b border-black/[0.05] z-[101]"
         >
           {/* Subtle red ambient glow - softened for white bg */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#9A0E1F]/5 to-transparent pointer-events-none" />

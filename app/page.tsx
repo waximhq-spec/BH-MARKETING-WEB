@@ -367,15 +367,15 @@ export default function LandingPage() {
                 {/* LEFT: CONTENT AREA */}
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left mt-4 lg:mt-12 w-full">
                   <Reveal delay={0.2}>
-                    <h1 className="text-white font-black leading-[0.82] tracking-tighter mb-4 lg:mb-8" style={{ fontSize: "clamp(2.5rem, 9vw, 7.2rem)", letterSpacing: "-0.05em" }}>
-                      <span className="block whitespace-nowrap text-[0.34em] font-medium tracking-[0.02em] opacity-90 mb-1 lg:mb-2 uppercase">
+                    <h1 className="text-white font-black leading-[0.85] tracking-tighter mb-5 lg:mb-8" style={{ fontSize: "clamp(3rem, 11.5vw, 7.2rem)", letterSpacing: "-0.05em" }}>
+                      <span className="block whitespace-nowrap text-[0.42em] font-medium tracking-normal opacity-90 mb-1.5 lg:mb-2 uppercase">
                         We build brands people
                       </span>
-                      <span className="text-[#9A0E1F] uppercase block">REMEMBER.</span>
+                      <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
                     </h1>
                   </Reveal>
-                  <Reveal delay={0.4} className="max-w-xl">
-                    <p className="text-white/85 text-[13px] md:text-[15px] lg:text-base leading-relaxed font-light px-2 lg:px-0 mb-5 md:mb-10 lg:max-w-md mx-auto lg:mx-0">
+                  <Reveal delay={0.4} className="w-full max-w-[290px] md:max-w-xl mx-auto lg:mx-0">
+                    <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-justify lg:text-left">
                       We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
                     </p>
                   </Reveal>
@@ -489,40 +489,40 @@ export default function LandingPage() {
                 </div>
 
                 {/* Mobile CTA (Visible only on mobile) */}
-                <div className="lg:hidden flex flex-col items-center gap-4 w-full">
+                <div className="lg:hidden flex flex-col items-center gap-5 w-full mt-2">
                   <Reveal delay={0.5}>
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-center gap-2 mb-1">
                       <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full animate-pulse" />
-                      <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-widest font-bold">Now Booking</span>
+                      <span className="text-[#9A0E1F] font-mono text-[9px] uppercase tracking-[0.25em] font-bold">Now Booking</span>
                     </div>
                   </Reveal>
 
-                  <Reveal delay={0.6} className="w-full flex justify-center">
+                  <Reveal delay={0.6} className="w-full flex justify-center px-6">
                     <button
                       data-cal-link="wasim-ebxvk8/schedule-call"
                       data-cal-namespace="schedule-call"
                       data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                       aria-label="Book a strategy call for your marketing campaign in Bahrain"
-                      className="relative flex items-center justify-center gap-3 w-[280px] px-6 py-4 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[10px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
+                      className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full shadow-[0_8px_24px_rgba(154,14,31,0.4)] border border-[#9A0E1F]/50 active:scale-[0.97] transition-transform duration-200"
                     >
                       BOOK A STRATEGY CALL
                       <span className="opacity-80">→</span>
                     </button>
                   </Reveal>
                   <Reveal delay={0.65} className="w-full">
-                    <p className="w-full text-white/40 text-[8px] text-center font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
+                    <p className="w-full text-white/40 text-[9px] text-center font-mono tracking-[0.2em] uppercase font-medium">Response within <span className="font-black text-white/90">24 hours</span></p>
                   </Reveal>
 
                   {/* Mobile Testimonial */}
-                  <div className="w-full mt-1 flex justify-center">
-                    <Reveal delay={0.7} className="w-full">
-                      <div className="w-full bg-[#0a0a0a]/70 border border-white/[0.06] p-4 flex flex-col items-center text-center transform-gpu" style={{ WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                          <div className="h-[1px] w-5 bg-[#9A0E1F]" />
-                          <span className="text-[#9A0E1F] font-mono text-[8px] uppercase tracking-[0.2em] font-black block">What Our Clients Say</span>
-                          <div className="h-[1px] w-5 bg-[#9A0E1F]" />
+                  <div className="w-full mt-6 flex justify-center px-4">
+                    <Reveal delay={0.7} className="w-full max-w-[340px]">
+                      <div className="w-full bg-[#0a0a0a]/70 border border-white/[0.06] p-5 rounded-2xl flex flex-col items-center text-center transform-gpu shadow-xl" style={{ WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
+                        <div className="flex items-center justify-center gap-2 mb-3">
+                          <div className="h-[1px] w-4 bg-[#9A0E1F]" />
+                          <span className="text-white/50 font-mono text-[8px] uppercase tracking-[0.25em] font-bold block">What Our Clients Say</span>
+                          <div className="h-[1px] w-4 bg-[#9A0E1F]" />
                         </div>
-                        <div className="relative h-10 w-full flex items-center justify-center">
+                        <div className="relative h-12 w-full flex items-center justify-center">
                           <TestimonialRotation isMobile={true} />
                         </div>
                       </div>

@@ -287,7 +287,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     className={`block text-black transition-all duration-300 hover:translate-x-1 hover:text-[#B11226] ${
-                      link.label === "Services" ? "font-semibold opacity-100" : "font-medium opacity-50"
+                      pathname === link.href ? "font-semibold opacity-100" : "font-medium opacity-50"
                     }`}
                     style={{ 
                       fontSize: "clamp(32px, 10vw, 48px)", 

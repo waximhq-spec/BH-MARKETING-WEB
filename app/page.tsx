@@ -76,31 +76,38 @@ function Reveal({
 const SERVICES_DATA = [
   {
     num: "01",
-    title: "Food & Hospitality",
-    desc: "We make food videos that bring more customers to your door.",
-    sub: ["Reels & Short-form Ads", "Menu & Food Cinematography", "Social Media Packages"],
-    alt: "Cinematic food and hospitality video shoot by marketing agency in Bahrain",
+    title: "Brand Identity",
+    desc: "We build memorable brands that stand out online and in real life.",
+    sub: ["Logo Design", "Visual Identity", "Brand Strategy", "Brand Guidelines"],
+    alt: "Premium brand identity and logo design services by creative agency in Bahrain",
   },
   {
     num: "02",
-    title: "Real Estate & Spaces",
-    desc: "We shoot property videos that help you sell or rent faster.",
-    sub: ["Interior Shoots", "Exterior Cinematics", "Drone Coverage"],
-    alt: "Luxury real estate videography and space cinematics in Bahrain",
+    title: "Content Production",
+    desc: "Cinematic content designed to capture attention and drive engagement.",
+    sub: ["Reels & Short-Form Content", "Commercial Videos", "Photography", "Drone Coverage"],
+    alt: "Cinematic content production and commercial video services in Bahrain",
   },
   {
     num: "03",
-    title: "Gyms & Fitness",
-    desc: "Videos that get more people to join your gym.",
-    sub: ["Training Promos", "Facility Tours", "Client Transformations"],
-    alt: "High-energy gym promo videos and fitness cinematography in Bahrain",
+    title: "Paid Advertising",
+    desc: "Performance-driven campaigns built to generate leads and sales.",
+    sub: ["Meta Ads", "Ad Creatives", "Retargeting", "Landing Pages"],
+    alt: "Paid advertising and performance marketing campaigns in Bahrain",
   },
   {
     num: "04",
-    title: "Hotels & Resorts",
-    desc: "Videos that get more guests to book a stay.",
-    sub: ["Room Showcases", "Lifestyle Shoots", "Amenity Coverage"],
-    alt: "Premium hotel and resort visual production by creative agency in Bahrain",
+    title: "Website Design",
+    desc: "Modern websites designed to elevate your brand and convert visitors.",
+    sub: ["Business Websites", "Landing Pages", "Mobile Optimization", "SEO Structure"],
+    alt: "Premium website design and development services in Bahrain",
+  },
+  {
+    num: "05",
+    title: "Creative Direction",
+    desc: "Creative concepts and campaign direction tailored for modern brands.",
+    sub: ["Campaign Planning", "Art Direction", "Moodboards", "Brand Storytelling"],
+    alt: "Creative direction and campaign strategy for brands in Bahrain",
   },
 ];
 
@@ -117,171 +124,120 @@ function SectionBlurWrapper({ children }: { children: React.ReactNode }) {
 
 function ServicesTable() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const secondary = SERVICES_DATA.slice(1);
-
-  // Shared row renderer for cleanliness
-  const renderRow = (
-    svc: typeof SERVICES_DATA[0],
-    idx: number,
-    isFeatured: boolean,
-    delay: number,
-    bgImage?: string
-  ) => {
-    const isHovered = hoveredIndex === idx;
-    const isDimmed = hoveredIndex !== null && hoveredIndex !== idx;
-
-    return (
-      <Reveal key={svc.num} delay={delay}>
-        <div
-          className={`group relative flex flex-col border-b transition-all duration-500 ease-out overflow-hidden
-            ${isDimmed ? "opacity-30" : "opacity-100"}
-            ${isFeatured
-              ? "border-[#9A0E1F]/20"
-              : isHovered
-                ? "border-white/15 bg-white/[0.025]"
-                : "border-white/8"
-            }`}
-          onMouseEnter={() => setHoveredIndex(idx)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          {/* ── Background: image for featured/specific, glow for rest ── */}
-          {(isFeatured || bgImage) ? (
-            <div className="absolute inset-0 z-0">
-              <Image
-                src={bgImage || "https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg?auto=compress&cs=tinysrgb&w=1600"}
-                alt={svc.alt || svc.title}
-                fill
-                loading="lazy"
-                sizes="100vw"
-                className={`object-cover scale-100 group-hover:scale-[1.03] transition-transform duration-[1400ms] ease-out ${isFeatured ? "opacity-60" : idx === 2 ? "opacity-35" : "opacity-20"
-                  }`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-black/85" />
-              {/* Red glow tint */}
-              <div className="absolute inset-0 bg-[#9A0E1F]/5" />
-            </div>
-          ) : (
-            <div
-              className={`absolute inset-0 z-0 transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"
-                }`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/5 via-transparent to-transparent" />
-            </div>
-          )}
-
-          {/* ── Always-on left accent bar ── */}
-          <div
-            className={`absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-500 ease-out z-10
-              ${isFeatured
-                ? "bg-gradient-to-b from-[#9A0E1F] to-[#9A0E1F]/30 scale-y-100"
-                : isHovered
-                  ? "bg-[#9A0E1F] scale-y-100"
-                  : "bg-white/10 scale-y-100"
-              } origin-top`}
-          />
-
-          {/* ── Row content ── */}
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-14 py-10 md:py-14 px-4">
-
-            {/* Left: Number + Title [25%] */}
-            <div className="flex items-start gap-5 md:w-[25%]">
-              <span className={`font-mono text-[9px] tracking-[0.3em] pt-1 transition-colors duration-300 shrink-0 ${isFeatured ? "text-[#9A0E1F]" : isHovered ? "text-[#9A0E1F]" : "text-white/25"
-                }`}>
-                {svc.num}
-              </span>
-              <div className="flex flex-col gap-1.5">
-                {isFeatured && (
-                  <span className="text-[#9A0E1F] font-mono text-[8px] tracking-[0.35em] font-bold uppercase leading-none">Featured</span>
-                )}
-                <h3
-                  className="font-black antialiased leading-[1.05] text-white"
-                  style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.55rem)", letterSpacing: "-0.025em" }}
-                >
-                  {svc.title}
-                </h3>
-              </div>
-            </div>
-
-            {/* Center: Description [35%] */}
-            <div className="md:w-[35%]">
-              <p className={`text-[14px] leading-[1.7] antialiased font-light ${isFeatured ? "text-white/88" : "text-white/70"
-                }`}>
-                {svc.desc}
-              </p>
-            </div>
-
-            {/* Right-center: Includes [20%] */}
-            <div className="md:w-[20%] flex flex-col gap-2.5">
-              <p className={`text-[8px] font-mono tracking-[0.3em] uppercase font-black mb-1.5 transition-colors duration-300 ${isFeatured ? "text-[#9A0E1F]" : "text-white/50"
-                }`}>
-                Includes
-              </p>
-              {svc.sub.map((subItem, sIdx) => (
-                <div key={sIdx} className="flex items-center gap-3">
-                  <span className={`text-[10px] leading-none shrink-0 transition-colors duration-300 ${isFeatured ? "text-[#9A0E1F]" : "text-white/40"
-                    }`}>—</span>
-                  <span className={`text-[11px] antialiased leading-snug font-medium transition-colors duration-300 ${isFeatured ? "text-white" : "text-white/80"
-                    }`}>
-                    {subItem}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Far-right: CTA [15%] */}
-            <div className="md:w-[15%] flex justify-end mt-6 md:mt-0">
-              <Link
-                href="/services"
-                aria-label={`Explore ${svc.title} video production services in Bahrain`}
-                className={`group inline-flex items-center gap-4 rounded-full pl-6 pr-1.5 py-1.5 transition-all duration-300 border
-                  ${isFeatured
-                    ? "border-[#9A0E1F]/30 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F]/50"
-                    : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20"
-                  }`}
-              >
-                <span className={`font-mono tracking-[0.25em] uppercase text-[9px] font-bold mt-[1px] ${isFeatured ? "text-[#9A0E1F]" : "text-white/70"}`}>
-                  Explore
-                </span>
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${isFeatured ? "bg-[#9A0E1F] group-hover:bg-white" : "bg-white/10 group-hover:bg-white"}`}>
-                  <svg className={`w-3 h-3 transition-colors duration-300 ${isFeatured ? "text-white group-hover:text-[#9A0E1F]" : "text-white/70 group-hover:text-black"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </Reveal>
-    );
-  };
 
   return (
-    <div className="flex flex-col gap-0">
-      {/* Featured */}
-      {renderRow(SERVICES_DATA[0], 1, true, 0)}
+    <div className="flex flex-col">
+      {SERVICES_DATA.map((svc, idx) => {
+        const isHovered = hoveredIndex === idx;
+        const isDimmed = hoveredIndex !== null && hoveredIndex !== idx;
 
-      {/* Secondary */}
-      <div className="flex flex-col">
-        {secondary.map((svc, i) => {
-          const actualIdx = i + 2;
-          let bg;
-          if (svc.title === "Gyms & Fitness") {
-            bg = "https://images.pexels.com/photos/29639963/pexels-photo-29639963.jpeg";
-          } else if (svc.title === "Real Estate & Spaces") {
-            bg = "https://images.pexels.com/photos/9771524/pexels-photo-9771524.jpeg";
-          } else if (svc.title === "Hotels & Resorts") {
-            bg = "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg";
-          }
-          return renderRow(svc, actualIdx, false, i * 0.06, bg);
-        })}
-      </div>
+        return (
+          <Reveal key={svc.num} delay={idx * 0.06}>
+            <div
+              className={`group relative border-b transition-all duration-500 ease-out overflow-hidden cursor-default
+                ${isDimmed ? "opacity-30" : "opacity-100"}
+                ${isHovered ? "border-white/15" : "border-white/[0.06]"}`}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              {/* Hover background glow */}
+              <div
+                className={`absolute inset-0 z-0 transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/[0.04] via-transparent to-transparent" />
+              </div>
+
+              {/* Left accent bar */}
+              <div
+                className={`absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-500 ease-out z-10 origin-top
+                  ${isHovered ? "bg-[#9A0E1F] scale-y-100" : "bg-white/[0.06] scale-y-100"}`}
+              />
+
+              {/* Row content */}
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-14 py-8 md:py-12 px-5 md:px-6">
+
+                {/* Left: Number + Title */}
+                <div className="flex items-start gap-4 md:gap-5 md:w-[28%]">
+                  <span className={`font-mono text-[9px] tracking-[0.3em] pt-1.5 transition-colors duration-300 shrink-0 ${
+                    isHovered ? "text-[#9A0E1F]" : "text-white/20"
+                  }`}>
+                    {svc.num}
+                  </span>
+                  <h3
+                    className={`font-black antialiased leading-[1.05] transition-colors duration-300 ${
+                      isHovered ? "text-white" : "text-white/90"
+                    }`}
+                    style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.5rem)", letterSpacing: "-0.025em" }}
+                  >
+                    {svc.title}
+                  </h3>
+                </div>
+
+                {/* Center: Description */}
+                <div className="md:w-[32%] pl-8 md:pl-0">
+                  <p className="text-[13px] md:text-[14px] leading-[1.7] antialiased font-light text-white/60">
+                    {svc.desc}
+                  </p>
+                </div>
+
+                {/* Includes */}
+                <div className="md:w-[24%] pl-8 md:pl-0 flex flex-col gap-2">
+                  <p className={`text-[8px] font-mono tracking-[0.3em] uppercase font-black mb-1 transition-colors duration-300 ${
+                    isHovered ? "text-[#9A0E1F]" : "text-white/30"
+                  }`}>
+                    Includes
+                  </p>
+                  {svc.sub.map((subItem, sIdx) => (
+                    <div key={sIdx} className="flex items-center gap-2.5">
+                      <span className={`text-[10px] leading-none shrink-0 transition-colors duration-300 ${
+                        isHovered ? "text-[#9A0E1F]" : "text-white/25"
+                      }`}>—</span>
+                      <span className="text-[11px] antialiased leading-snug font-medium text-white/70">
+                        {subItem}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Arrow */}
+                <div className="md:w-[12%] flex justify-start md:justify-end pl-8 md:pl-0 mt-2 md:mt-0">
+                  <Link
+                    href="/services"
+                    aria-label={`Explore ${svc.title} creative agency services in Bahrain`}
+                    className={`group/cta inline-flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 border ${
+                      isHovered
+                        ? "border-[#9A0E1F]/30 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F]/50"
+                        : "border-white/8 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15"
+                    }`}
+                  >
+                    <span className={`font-mono tracking-[0.2em] uppercase text-[9px] font-bold mt-[1px] transition-colors duration-300 ${
+                      isHovered ? "text-[#9A0E1F]" : "text-white/50"
+                    }`}>
+                      Explore
+                    </span>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isHovered ? "bg-[#9A0E1F] group-hover/cta:bg-white" : "bg-white/[0.06] group-hover/cta:bg-white/10"
+                    }`}>
+                      <svg className={`w-3 h-3 transition-all duration-300 ${
+                        isHovered ? "text-white group-hover/cta:text-[#9A0E1F]" : "text-white/50 group-hover/cta:text-white"
+                      }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        );
+      })}
 
       {/* View All Services CTA */}
       <div className="flex justify-center md:justify-end mt-12 md:mt-16 pr-4">
         <Reveal delay={0.3}>
           <Link
             href="/services"
-            aria-label="View all creative marketing and video production services in Bahrain"
+            aria-label="View all creative marketing and branding services in Bahrain"
             className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 border border-[#9A0E1F]/50 shadow-[0_15px_40px_rgba(154,14,31,0.2),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 hover:bg-black hover:border-white/20 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
           >
             <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
@@ -350,14 +306,17 @@ export default function LandingPage() {
               className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2] anim-slow-zoom transform-gpu"
               style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" } as React.CSSProperties}
             />
-            {/* Base darkening */}
-            <div className="absolute inset-0 bg-black/75 z-[1]" />
-            {/* Subtle amber/red radial gradient for depth */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_80%)] z-[1]" />
-            {/* Cinematic vignette */}
-            <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none z-[1]" />
+            {/* Base darkening - Simplified for mobile to avoid WebKit repaints */}
+            <div className="absolute inset-0 bg-black/80 md:bg-black/75 z-[1]" />
+            
+            {/* Cinematic depth - Hidden on mobile to save GPU */}
+            <div className="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_80%)] z-[1]" />
+            
+            {/* Cinematic vignette - Hidden on mobile */}
+            <div className="hidden md:block absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none z-[1]" />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 z-[3] transform-gpu" />
+            {/* Solidified gradient on mobile to prevent alpha blending hell */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/50 to-[#050505] md:via-transparent md:to-black/90 z-[3]" />
 
 
             <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0">
@@ -713,7 +672,7 @@ export default function LandingPage() {
                   <Reveal>
                     <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-10 opacity-80">
                       <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
-                      <span className="text-white font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">Services</span>
+                      <span className="text-white font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">What We Do</span>
                     </div>
                   </Reveal>
                   <Reveal>
@@ -723,12 +682,12 @@ export default function LandingPage() {
                   </Reveal>
                 </div>
                 <Reveal>
-                  <div className="max-w-[340px] mt-28">
-                    <h4 className="text-white font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
-                      Videos that actually get you customers.
+                  <div className="max-w-[380px] mt-14 md:mt-28">
+                    <h4 className="text-white/90 font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
+                      Creative solutions built for modern brands.
                     </h4>
-                    <p className="text-white/85 text-[15px] md:text-base leading-relaxed font-light antialiased">
-                      We make videos that get people interested and help your business grow.
+                    <p className="text-white/50 text-[14px] md:text-[15px] leading-relaxed font-light antialiased">
+                      We combine strategy, design, and cinematic storytelling to help businesses build recognizable brands and drive real growth.
                     </p>
                   </div>
                 </Reveal>

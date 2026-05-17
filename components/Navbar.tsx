@@ -98,19 +98,20 @@ export default function Navbar() {
   const mutedColor = isPricing ? "rgba(255,255,255,0.5)" : (isLight || isSplit) ? "rgba(0,0,0,0.35)" : isRed ? "rgba(255,255,255,0.6)" : "rgba(250,250,250,0.5)";
   const activeColor = isPricing ? "#B11226" : isRed ? "#FFFFFF" : (isLight || isSplit) ? "#000000" : "#C50022";
   
-  const redBg = scrolled ? "rgba(0, 0, 0, 0.92)" : "rgba(0, 0, 0, 0.55)";
+  const redBg = scrolled ? "#050505" : "#080102";
   const redBorder = scrolled ? "rgba(255,255,255,0.06)" : "transparent";
 
-  /* Solid/near-opaque backgrounds — no backdrop-blur needed.
-     This is the key iOS fix: backdrop-blur on fixed elements causes
-     full-viewport GPU recompositing on every scroll frame. */
+  /* FULLY SOLID BACKGROUNDS FOR iOS FIX:
+     Using rgba() transparency on a fixed header forces WebKit to composite the header
+     against the scrolling video behind it on every frame, causing white repaints.
+     Solid hex colors eliminate the alpha blending bottleneck completely. */
   const bgColor = isPricing 
-    ? (scrolled ? "rgba(10,10,10,0.97)" : "rgba(10,10,10,0.98)") 
+    ? (scrolled ? "#0a0a0a" : "#0d0d0d") 
     : isRed 
     ? redBg 
     : isLight 
-    ? (scrolled ? "rgba(255,255,255,0.97)" : "rgba(250,250,250,0.98)") 
-    : (scrolled ? "rgba(0,0,0,0.97)" : "rgba(0,0,0,0.98)");
+    ? (scrolled ? "#ffffff" : "#fafafa") 
+    : (scrolled ? "#000000" : "#050505");
   const borderColor = isPricing 
     ? (scrolled ? "rgba(177,18,38,0.15)" : "rgba(177, 18, 38, 0.4)") 
     : isRed 
@@ -123,15 +124,13 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="relative z-[100] transition-[background-color,border-color] duration-500 ease-[0.16,1,0.3,1] transform-gpu"
+        className="relative z-[100] transition-[background-color,border-color] duration-500 ease-[0.16,1,0.3,1]"
         style={{
           borderBottom: `1px solid ${borderColor}`,
           background: isSplit ? "transparent" : bgColor,
-          /* No backdrop-filter — solid bg instead. iOS WebKit can't composite
-             backdrop-blur on fixed elements without triggering white repaint flashes */
+          /* Simplified rendering - removed transform3d to prevent GPU layer creation conflicts on iOS */
           WebkitBackfaceVisibility: "hidden" as const,
           backfaceVisibility: "hidden" as const,
-          transform: "translate3d(0, 0, 0)",
         }}
       >
         {/* SPLIT BACKGROUND FOR SPLIT THEME (Desktop Only) */}

@@ -366,19 +366,21 @@ export default function LandingPage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-24 items-start py-4">
                 {/* LEFT: CONTENT AREA */}
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left mt-4 lg:mt-12 w-full">
-                  <Reveal delay={0.2}>
-                    <h1 className="text-white font-black leading-[0.85] tracking-tighter mb-5 lg:mb-8" style={{ fontSize: "clamp(3rem, 11.5vw, 7.2rem)", letterSpacing: "-0.05em" }}>
-                      <span className="block whitespace-nowrap text-[0.42em] font-medium tracking-normal opacity-90 mb-1.5 lg:mb-2 uppercase">
-                        We build brands people
-                      </span>
-                      <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
-                    </h1>
-                  </Reveal>
-                  <Reveal delay={0.4} className="w-full max-w-[290px] md:max-w-xl mx-auto lg:mx-0">
-                    <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-justify lg:text-left">
-                      We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
-                    </p>
-                  </Reveal>
+                  <div className="w-min lg:w-full flex flex-col mx-auto lg:mx-0">
+                    <Reveal delay={0.2}>
+                      <h1 className="text-white font-black leading-[0.85] tracking-tighter mb-5 lg:mb-8" style={{ fontSize: "clamp(3rem, 11.5vw, 7.2rem)", letterSpacing: "-0.05em" }}>
+                        <span className="block whitespace-nowrap text-[0.42em] font-medium tracking-normal opacity-90 mb-1.5 lg:mb-2 uppercase">
+                          We build brands people
+                        </span>
+                        <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
+                      </h1>
+                    </Reveal>
+                    <Reveal delay={0.4} className="w-full">
+                      <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-left lg:text-left">
+                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
+                      </p>
+                    </Reveal>
+                  </div>
 
                   {/* Secondary CTA & Clock (Desktop Only) */}
                   <div className="hidden lg:flex items-center gap-10">

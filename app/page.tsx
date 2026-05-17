@@ -80,6 +80,7 @@ const SERVICES_DATA = [
     desc: "We build memorable brands that stand out online and in real life.",
     sub: ["Logo Design", "Visual Identity", "Brand Strategy", "Brand Guidelines"],
     alt: "Premium brand identity and logo design services by creative agency in Bahrain",
+    bg: "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1600"
   },
   {
     num: "02",
@@ -87,6 +88,7 @@ const SERVICES_DATA = [
     desc: "Cinematic content designed to capture attention and drive engagement.",
     sub: ["Reels & Short-Form Content", "Commercial Videos", "Photography", "Drone Coverage"],
     alt: "Cinematic content production and commercial video services in Bahrain",
+    bg: "https://images.pexels.com/photos/3062534/pexels-photo-3062534.jpeg?auto=compress&cs=tinysrgb&w=1600"
   },
   {
     num: "03",
@@ -94,21 +96,8 @@ const SERVICES_DATA = [
     desc: "Performance-driven campaigns built to generate leads and sales.",
     sub: ["Meta Ads", "Ad Creatives", "Retargeting", "Landing Pages"],
     alt: "Paid advertising and performance marketing campaigns in Bahrain",
-  },
-  {
-    num: "04",
-    title: "Website Design",
-    desc: "Modern websites designed to elevate your brand and convert visitors.",
-    sub: ["Business Websites", "Landing Pages", "Mobile Optimization", "SEO Structure"],
-    alt: "Premium website design and development services in Bahrain",
-  },
-  {
-    num: "05",
-    title: "Creative Direction",
-    desc: "Creative concepts and campaign direction tailored for modern brands.",
-    sub: ["Campaign Planning", "Art Direction", "Moodboards", "Brand Storytelling"],
-    alt: "Creative direction and campaign strategy for brands in Bahrain",
-  },
+    bg: "https://images.pexels.com/photos/6476254/pexels-photo-6476254.jpeg?auto=compress&cs=tinysrgb&w=1600"
+  }
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -140,11 +129,20 @@ function ServicesTable() {
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Hover background glow */}
-              <div
-                className={`absolute inset-0 z-0 transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/[0.04] via-transparent to-transparent" />
+              {/* Background Image & Hover Glow */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src={svc.bg}
+                  alt={svc.alt || svc.title}
+                  fill
+                  loading="lazy"
+                  sizes="100vw"
+                  className={`object-cover transition-transform duration-[1400ms] ease-out opacity-[0.25] 
+                    ${isHovered ? "scale-[1.03]" : "scale-100"}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/80" />
+                {/* Always-on red glow tint over image */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/[0.25] via-[#9A0E1F]/[0.05] to-transparent" />
               </div>
 
               {/* Left accent bar */}

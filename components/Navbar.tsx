@@ -98,54 +98,18 @@ export default function Navbar() {
   const mutedColor = isPricing ? "rgba(255,255,255,0.5)" : (isLight || isSplit) ? "rgba(0,0,0,0.35)" : isRed ? "rgba(255,255,255,0.6)" : "rgba(250,250,250,0.5)";
   const activeColor = isPricing ? "#B11226" : isRed ? "#FFFFFF" : (isLight || isSplit) ? "#000000" : "#C50022";
   
-  const redBg = scrolled ? "#050505" : "#080102";
-  const redBorder = scrolled ? "rgba(255,255,255,0.06)" : "transparent";
-
-  /* FULLY SOLID BACKGROUNDS FOR iOS FIX:
-     Using rgba() transparency on a fixed header forces WebKit to composite the header
-     against the scrolling video behind it on every frame, causing white repaints.
-     Solid hex colors eliminate the alpha blending bottleneck completely. */
-  const bgColor = isPricing 
-    ? (scrolled ? "#0a0a0a" : "#0d0d0d") 
-    : isRed 
-    ? redBg 
-    : isLight 
-    ? (scrolled ? "#ffffff" : "#fafafa") 
-    : (scrolled ? "#000000" : "#050505");
-  const borderColor = isPricing 
-    ? (scrolled ? "rgba(177,18,38,0.15)" : "rgba(177, 18, 38, 0.4)") 
-    : isRed 
-    ? redBorder 
-    : (isLight || isSplit) 
-    ? (scrolled ? "rgba(0,0,0,0.04)" : "rgba(0,0,0,0.06)") 
-    : (scrolled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.06)");
-  const burgerColor = isPricing ? "#B11226" : (isLight || isSplit) ? "#000000" : "#FAFAFA";
+  // ULTRA-SIMPLE iOS TEST MODE
+  const bgColor = isLight ? "#ffffff" : "#000000";
+  const burgerColor = isLight ? "#000000" : "#FAFAFA";
 
   return (
     <>
       <header
-        className="relative z-[100] transition-[background-color,border-color] duration-500 ease-[0.16,1,0.3,1]"
+        className="relative z-[100]"
         style={{
-          borderBottom: `1px solid ${borderColor}`,
-          background: isSplit ? "transparent" : bgColor,
-          /* Simplified rendering - removed transform3d to prevent GPU layer creation conflicts on iOS */
-          WebkitBackfaceVisibility: "hidden" as const,
-          backfaceVisibility: "hidden" as const,
+          background: bgColor,
         }}
       >
-        {/* SPLIT BACKGROUND FOR SPLIT THEME (Desktop Only) */}
-        {isSplit && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 flex pointer-events-none overflow-hidden transition-all duration-500 ease-[0.16,1,0.3,1]"
-          >
-            <div className="w-[41.666667%] bg-black h-full border-r border-white/10 border-b border-white/10 transition-all duration-700" />
-            <div className="flex-1 bg-white h-full transition-all duration-700" />
-          </motion.div>
-        )}
-
         <div className="container h-14 md:h-16 flex items-center justify-between relative z-10">
           <Link 
             href="/" 

@@ -58,8 +58,8 @@ function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 16 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       className={className}
@@ -498,7 +498,7 @@ export default function LandingPage() {
             SECTION 3: PORTFOLIO / SELECTED WORK
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
-          <section id="work" data-theme="light" className="defer-render bg-white pt-40 pb-24">
+          <section id="work" data-theme="light" className="bg-white pt-40 pb-24">
             <div className="container">
               <div className="flex flex-col">
                 <div className="h-[2px] w-full bg-black mb-12" />
@@ -525,7 +525,7 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section data-theme="light" className="defer-render pb-32 md:pb-48 bg-white text-black overflow-hidden">
+          <section data-theme="light" className="pb-32 md:pb-48 bg-white text-black overflow-hidden">
             <div className="container">
               <div className="flex flex-col gap-4 md:gap-6">
                 {(() => {
@@ -625,7 +625,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: WHAT WE DO / SERVICES (BLACK THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section id="services" data-theme="dark" className="defer-render py-32 md:py-40 bg-black text-white relative">
+        <section id="services" data-theme="dark" className="py-32 md:py-40 bg-black text-white relative">
           <div className="container">
             <div className="flex flex-col">
               <div className="h-px w-full bg-white/10 mb-12" />
@@ -675,7 +675,7 @@ export default function LandingPage() {
             SECTION 7: SOCIAL PROOF (REFINED)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
-          <section data-theme="light" className="defer-render py-32 md:py-40 bg-white text-black overflow-hidden relative border-t border-black/5">
+          <section data-theme="light" className="py-32 md:py-40 bg-white text-black overflow-hidden relative border-t border-black/5">
             <div className="container relative z-10">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-24">
 

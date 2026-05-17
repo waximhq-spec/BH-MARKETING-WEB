@@ -81,7 +81,7 @@ export default function ProcessSection() {
             <div className="container !max-w-none w-full flex flex-col justify-between h-full">
                <div>
                   <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 1 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-6 lg:mb-10"
@@ -91,7 +91,7 @@ export default function ProcessSection() {
                   </motion.div>
                   
                   <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 1, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black tracking-tighter mb-4 lg:mb-6 uppercase pr-8"
@@ -101,15 +101,15 @@ export default function ProcessSection() {
                     BRAND.
                   </motion.h2>
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 0.7 }}
+                    initial={{ opacity: 1 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     className="text-white/70 font-mono tracking-[0.4em] uppercase text-[10px] md:text-[12px] font-medium mb-12"
                   >
                     Step by step.
                   </motion.div>
                   <motion.p
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 1 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     className="text-white/40 text-[12px] lg:text-[14px] font-medium tracking-wide max-w-[280px]"
@@ -148,7 +148,7 @@ export default function ProcessSection() {
                   ${index === STEPS.length - 1 ? "pb-[calc(100vh-24rem)] lg:pb-[calc(100vh-28rem)]" : "pb-40 lg:pb-48"}`}
               >
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 1, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ margin: "-10% 0px", once: true }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
@@ -202,7 +202,7 @@ export default function ProcessSection() {
         {/* Header - Light */}
         <div className="bg-white px-6 py-24 flex flex-col items-start relative border-b border-black/5">
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/5 border border-[#9A0E1F]/20 rounded-full mb-8"
@@ -212,7 +212,7 @@ export default function ProcessSection() {
           </motion.div>
           
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-black font-black tracking-tighter mb-4 uppercase"
@@ -223,8 +223,8 @@ export default function ProcessSection() {
           </motion.h2>
           
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.7 }}
+            initial={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-black/40 font-mono tracking-[0.4em] uppercase text-[10px] md:text-[11px] font-bold mb-8"
           >
@@ -232,7 +232,7 @@ export default function ProcessSection() {
           </motion.div>
           
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-black/60 text-[14px] md:text-[15px] font-medium tracking-wide max-w-[280px]"
@@ -250,7 +250,7 @@ export default function ProcessSection() {
           {STEPS.map((step, index) => (
             <div key={step.num} className="flex flex-col relative z-10 px-6 py-6 md:px-8 group">
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 1, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ margin: "-10% 0px", once: true }}
                 transition={{ duration: 0.5, ease: "easeOut" }}

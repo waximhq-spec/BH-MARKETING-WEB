@@ -249,7 +249,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[100] flex flex-col bg-white"
+            className="fixed inset-0 z-[200] flex flex-col bg-white"
           >
             <div className="w-full h-16 flex items-center justify-between px-8 shrink-0">
               <Link href="/" onClick={() => setMenuOpen(false)}>

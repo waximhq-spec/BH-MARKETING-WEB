@@ -135,7 +135,7 @@ export default function RootLayout({
 
         <ModalProvider>
           <ServiceWorkerUnregister />
-          <div className="fixed top-0 left-0 right-0 z-[100] transform-gpu" style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}>
+          <div className="fixed top-0 left-0 right-0 z-[100]">
             <AnnouncementBanner />
             <Navbar />
           </div>

@@ -13,7 +13,7 @@ export default function VideoHero() {
 
   return (
     <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black">
-      {/* Desktop Video Background - Hidden entirely on Mobile to test compositing */}
+      {/* Unified Background Video */}
       <video
         ref={videoRef}
         autoPlay
@@ -23,20 +23,22 @@ export default function VideoHero() {
         // @ts-ignore
         webkit-playsinline="true"
         preload="auto"
-        className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-60"
+        className="absolute inset-0 w-full h-full object-cover"
         style={{
           WebkitBackfaceVisibility: "hidden",
           backfaceVisibility: "hidden",
-          transform: "translate3d(0, 0, 0)",
         }}
       >
         <source src="/bg-vid.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       
+      {/* SINGLE STATIC OVERLAY FOR MOBILE - No gradients, no blur, no mix-blend-mode */}
+      <div className="md:hidden absolute inset-0 w-full h-full bg-black/60 z-[1]" />
+
       {/* Desktop Cinematic Overlays - Hidden entirely on Mobile */}
       <div className="hidden md:block absolute inset-0 w-full h-full z-10 pointer-events-none">
-        <div className="absolute inset-0 w-full h-full bg-black/20 z-[1]" style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }} />
+        <div className="absolute inset-0 w-full h-full bg-black/40 z-[1]" />
         
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-30">
           <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-red-900/10 rounded-full" style={{

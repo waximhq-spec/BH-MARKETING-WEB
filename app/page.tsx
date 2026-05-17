@@ -322,13 +322,11 @@ export default function LandingPage() {
                       </span>
                       <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
                     </h1>
-                    <div className="hidden md:block w-full">
-                      <Reveal delay={0.2} className="w-full">
-                        <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-left lg:text-left">
-                          We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
-                        </p>
-                      </Reveal>
-                    </div>
+                    <Reveal delay={0.2} className="w-full">
+                      <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-center lg:text-left">
+                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
+                      </p>
+                    </Reveal>
                   </div>
 
                   {/* Secondary CTA & Clock (Desktop Only) */}
@@ -439,23 +437,45 @@ export default function LandingPage() {
                   </motion.div>
                 </div>
 
-                {/* Mobile CTA - Ultra Simple Test Mode */}
-                <div className="lg:hidden w-full mt-12 flex justify-center px-6">
-                  <button
-                    data-cal-link="wasim-ebxvk8/schedule-call"
-                    data-cal-namespace="schedule-call"
-                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                    aria-label="Book a strategy call for your marketing campaign in Bahrain"
-                    className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full border border-red-500/50"
-                  >
-                    BOOK A STRATEGY CALL
-                    <span className="opacity-80">→</span>
-                  </button>
+                {/* Mobile Hero Content - Rendered with Static Solids */}
+                <div className="lg:hidden flex flex-col items-center gap-3 w-full mt-2">
+                  <div className="w-full flex justify-center px-6">
+                    <button
+                      data-cal-link="wasim-ebxvk8/schedule-call"
+                      data-cal-namespace="schedule-call"
+                      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                      aria-label="Book a strategy call for your marketing campaign in Bahrain"
+                      className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full border border-[#9A0E1F]"
+                    >
+                      BOOK A STRATEGY CALL
+                      <span className="opacity-80">→</span>
+                    </button>
+                  </div>
+                  
+                  <Reveal delay={0.3} className="w-full">
+                    <p className="w-full text-white/40 text-[9px] text-center font-mono tracking-[0.2em] uppercase font-medium mt-1">
+                      Response within <span className="font-black text-white/90">24 hours</span>
+                    </p>
+                  </Reveal>
+
+                  {/* Simple Static Testimonial Reference - No glows, no borders */}
+                  <Reveal delay={0.4} className="w-full mt-4 px-4">
+                    <div className="w-full bg-[#050505] p-5 rounded-xl flex flex-col items-center text-center">
+                      <div className="flex items-center justify-center gap-2 mb-3">
+                        <div className="h-[1px] w-4 bg-[#9A0E1F]" />
+                        <span className="text-white/50 font-mono text-[8px] uppercase tracking-[0.25em] font-bold block">What Our Clients Say</span>
+                        <div className="h-[1px] w-4 bg-[#9A0E1F]" />
+                      </div>
+                      <div className="relative h-10 w-full flex items-center justify-center">
+                        <TestimonialRotation isMobile={true} />
+                      </div>
+                    </div>
+                  </Reveal>
                 </div>
               </div>
 
-              {/* Bottom Metrics - Hidden on Mobile Test Mode */}
-              <div className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pb-6 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
+              {/* Bottom Metrics - Restored with Hardware Acceleration */}
+              <div className="absolute bottom-0 left-0 right-0 z-10 pb-6 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
                 <div className="container mx-auto border-t border-white/5 pt-5 md:pt-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* LEFT COLUMN: All 3 Metrics */}

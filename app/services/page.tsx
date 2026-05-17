@@ -58,7 +58,7 @@ const SERVICES = [
       "Real Estate & Space Walkthroughs",
       "Gym & Fitness Promo Videos",
       "Hotel & Resort Lifestyle Shoots",
-      "Commercials & Drone Coverage",
+      "Commercial Video Production",
     ],
     results: "Our cinematic content consistently outperforms standard media in engagement and conversion.",
   },

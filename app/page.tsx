@@ -76,19 +76,19 @@ function Reveal({
 const SERVICES_DATA = [
   {
     num: "01",
+    title: "Content Production",
+    desc: "Cinematic content designed to capture attention and drive engagement.",
+    sub: ["Reels & Short-Form Content", "Commercial Videos", "Photography"],
+    alt: "Cinematic content production and commercial video services in Bahrain",
+    bg: "https://i.pinimg.com/736x/a9/b9/88/a9b988ce1e463875821ab469a204221d.jpg"
+  },
+  {
+    num: "02",
     title: "Brand Identity",
     desc: "We build memorable brands that stand out online and in real life.",
     sub: ["Logo Design", "Visual Identity", "Brand Strategy", "Brand Guidelines"],
     alt: "Premium brand identity and logo design services by creative agency in Bahrain",
-    bg: "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1600"
-  },
-  {
-    num: "02",
-    title: "Content Production",
-    desc: "Cinematic content designed to capture attention and drive engagement.",
-    sub: ["Reels & Short-Form Content", "Commercial Videos", "Photography", "Drone Coverage"],
-    alt: "Cinematic content production and commercial video services in Bahrain",
-    bg: "https://images.pexels.com/photos/3062534/pexels-photo-3062534.jpeg?auto=compress&cs=tinysrgb&w=1600"
+    bg: "https://i.pinimg.com/736x/b8/47/0f/b8470faac5cb1dcb84a476632d02efa8.jpg"
   },
   {
     num: "03",
@@ -96,7 +96,7 @@ const SERVICES_DATA = [
     desc: "Performance-driven campaigns built to generate leads and sales.",
     sub: ["Meta Ads", "Ad Creatives", "Retargeting", "Landing Pages"],
     alt: "Paid advertising and performance marketing campaigns in Bahrain",
-    bg: "https://images.pexels.com/photos/6476254/pexels-photo-6476254.jpeg?auto=compress&cs=tinysrgb&w=1600"
+    bg: "https://i.pinimg.com/736x/a2/a8/aa/a2a8aa83bc1aec34374287377c1b03e2.jpg"
   }
 ];
 
@@ -112,24 +112,138 @@ function SectionBlurWrapper({ children }: { children: React.ReactNode }) {
 }
 
 function ServicesTable() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = panelRefs.current.findIndex((r) => r === entry.target);
+            if (idx !== -1) setActiveIndex(idx);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    panelRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="flex flex-col">
-      {SERVICES_DATA.map((svc, idx) => {
-        const isHovered = hoveredIndex === idx;
-        const isDimmed = hoveredIndex !== null && hoveredIndex !== idx;
+    <>
+      {/* ── DESKTOP: Sticky Left + Scrolling Right Panels ── */}
+      <div ref={sectionRef} className="hidden lg:flex w-full relative items-start">
+        {/* LEFT: Sticky Column */}
+        <div className="w-[42%] sticky top-[56px] lg:top-[64px] h-[calc(100vh-56px)] lg:h-[calc(100vh-64px)] flex flex-col justify-center py-12 border-r border-white/10">
+          <div className="w-full flex flex-col justify-center h-full" style={{ paddingLeft: 'var(--container-margin)', paddingRight: '3rem' }}>
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-6 lg:mb-10 w-fit">
+              <span className="w-2 h-2 rounded-full bg-[#9A0E1F]" />
+              <span className="text-white font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Our Services</span>
+            </div>
 
-        return (
-          <Reveal key={svc.num} delay={idx * 0.06}>
+            <div className="flex flex-col gap-2 mb-10">
+            {SERVICES_DATA.map((svc, idx) => (
+              <button
+                key={svc.num}
+                onClick={() => panelRefs.current[idx]?.scrollIntoView({ behavior: "smooth", block: "center" })}
+                className="flex items-center gap-4 text-left group w-full py-2"
+              >
+                <span className={`font-mono text-[10px] tracking-[0.3em] transition-colors duration-300 ${activeIndex === idx ? "text-[#9A0E1F]" : "text-white/20"}`}>
+                  {svc.num}
+                </span>
+                <span className={`font-black text-[13px] md:text-[15px] tracking-tight uppercase transition-colors duration-300 ${activeIndex === idx ? "text-white" : "text-white/30"}`}>
+                  {svc.title}
+                </span>
+                <span className={`ml-auto transition-all duration-300 ${activeIndex === idx ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}`}>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#9A0E1F]" />
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Active service info panel */}
+          <div className="border-t border-white/10 pt-8">
+            <p className="text-white/50 text-[13px] leading-relaxed font-light mb-6">
+              {SERVICES_DATA[activeIndex].desc}
+            </p>
+            <div className="flex flex-col gap-2">
+              {SERVICES_DATA[activeIndex].sub.map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-1 h-1 rounded-full bg-[#9A0E1F]" />
+                  <span className="text-[12px] text-white/60 font-medium">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+        {/* RIGHT: Scrolling Panels */}
+        <div className="w-[58%] flex flex-col">
+          {SERVICES_DATA.map((svc, idx) => (
             <div
-              className={`group relative border-b transition-all duration-500 ease-out overflow-hidden cursor-default
-                ${isDimmed ? "opacity-30" : "opacity-100"}
-                ${isHovered ? "border-white/15" : "border-white/[0.06]"}`}
-              onMouseEnter={() => setHoveredIndex(idx)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              key={svc.num}
+              ref={(el) => { panelRefs.current[idx] = el; }}
+              className="relative h-screen flex items-center"
             >
-              {/* Background Image & Hover Glow */}
+              <div className="w-full" style={{ paddingRight: 'var(--container-margin)', paddingLeft: '4rem' }}>
+                <Link
+                  href="/services"
+                  className="block relative w-full h-[65vh] max-h-[600px] overflow-hidden rounded-2xl group cursor-pointer"
+                >
+                  <Image
+                    src={svc.bg}
+                    alt={svc.alt || svc.title}
+                    fill
+                    loading="lazy"
+                    sizes="55vw"
+                    className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/20 to-transparent" />
+                  
+                  {/* Bottom details & Explore button */}
+                  <div className="absolute bottom-0 left-0 right-0 p-8 flex items-end justify-between">
+                    <div>
+                      <p className="text-[9px] font-mono tracking-[0.4em] uppercase text-[#9A0E1F] mb-2">{svc.num} / 0{SERVICES_DATA.length}</p>
+                      <h3 className="text-white font-black text-2xl uppercase tracking-tight mb-2">{svc.title}</h3>
+                      <p className="text-white/60 text-[11px] font-light max-w-[340px] leading-relaxed">
+                        {svc.desc}
+                      </p>
+                    </div>
+                    
+                    {/* Hover-revealed / Active Explore Button */}
+                    <div className="flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 border border-white/20 bg-white/5 group-hover:border-[#9A0E1F]/50 group-hover:bg-[#9A0E1F]/20 transition-all duration-300">
+                      <span className="font-mono tracking-[0.2em] uppercase text-[9px] font-bold text-white/80 group-hover:text-[#9A0E1F]">Explore</span>
+                      <div className="w-7 h-7 rounded-full bg-white/10 group-hover:bg-[#9A0E1F] flex items-center justify-center transition-colors duration-300">
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+      </div>
+
+      {/* ── MOBILE: Card Stack ── */}
+      <div className="flex flex-col gap-4 lg:hidden">
+        <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-4 w-fit">
+          <span className="w-2 h-2 rounded-full bg-[#9A0E1F]" />
+          <span className="text-white font-mono tracking-[0.3em] uppercase text-[11px] md:text-[12px] font-bold">Our Services</span>
+        </div>
+
+        {SERVICES_DATA.map((svc, idx) => (
+          <Reveal key={svc.num} delay={idx * 0.06}>
+            <div className="relative rounded-xl overflow-hidden border border-white/[0.06] group cursor-default">
               <div className="absolute inset-0 z-0">
                 <Image
                   src={svc.bg}
@@ -137,78 +251,33 @@ function ServicesTable() {
                   fill
                   loading="lazy"
                   sizes="100vw"
-                  className={`object-cover transition-transform duration-[1400ms] ease-out opacity-[0.45] 
-                    ${isHovered ? "scale-[1.03]" : "scale-100"}`}
+                  className="object-cover opacity-40"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/70" />
-                {/* Always-on red glow tint over image */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/[0.35] via-[#9A0E1F]/[0.1] to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#9A0E1F]/[0.3] via-[#9A0E1F]/[0.08] to-transparent" />
               </div>
-
-              {/* Left accent bar */}
-              <div
-                className={`absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-500 ease-out z-10 origin-top
-                  ${isHovered ? "bg-[#9A0E1F] scale-y-100" : "bg-white/[0.06] scale-y-100"}`}
-              />
-
-              {/* Row content */}
-              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-14 py-8 md:py-12 px-5 md:px-6">
-
-                {/* Left: Number + Title */}
-                <div className="flex items-start gap-4 md:gap-5 md:w-[28%]">
-                  <span className={`font-mono text-[9px] tracking-[0.3em] pt-1.5 transition-colors duration-300 shrink-0 ${
-                    isHovered ? "text-[#9A0E1F]" : "text-white/20"
-                  }`}>
-                    {svc.num}
-                  </span>
-                  <h3
-                    className={`font-black antialiased leading-[1.05] transition-colors duration-300 ${
-                      isHovered ? "text-white" : "text-white/90"
-                    }`}
-                    style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.5rem)", letterSpacing: "-0.025em" }}
-                  >
-                    {svc.title}
-                  </h3>
+              <div className="relative z-10 flex flex-col gap-4 py-8 px-5">
+                <div className="flex items-start gap-4">
+                  <span className="font-mono text-[9px] tracking-[0.3em] text-[#9A0E1F] pt-1.5">{svc.num}</span>
+                  <h3 className="font-black text-white/90 leading-[1.05] text-[1.15rem] tracking-tight">{svc.title}</h3>
                 </div>
-
-                {/* Center: Description */}
-                <div className="md:w-[32%] pl-8 md:pl-0">
-                  <p className="text-[13px] md:text-[14px] leading-[1.7] antialiased font-light text-white/60">
-                    {svc.desc}
-                  </p>
-                </div>
-
-                {/* Includes */}
-                <div className="md:w-[24%] pl-8 md:pl-0 flex flex-col gap-2">
-                  <p className={`text-[8px] font-mono tracking-[0.3em] uppercase font-black mb-1 transition-colors duration-300 ${
-                    isHovered ? "text-[#9A0E1F]" : "text-white/30"
-                  }`}>
-                    Includes
-                  </p>
-                  {svc.sub.map((subItem, sIdx) => (
-                    <div key={sIdx} className="flex items-center gap-2.5">
-                      <span className={`text-[10px] leading-none shrink-0 transition-colors duration-300 ${
-                        isHovered ? "text-[#9A0E1F]" : "text-white/25"
-                      }`}>—</span>
-                      <span className="text-[11px] antialiased leading-snug font-medium text-white/70">
-                        {subItem}
-                      </span>
+                <p className="text-[13px] leading-[1.7] font-light text-white/60 pl-8">{svc.desc}</p>
+                <div className="flex flex-col gap-2 pl-8">
+                  {svc.sub.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2.5">
+                      <span className="text-[#9A0E1F] text-[10px]">—</span>
+                      <span className="text-[11px] font-medium text-white/70">{item}</span>
                     </div>
                   ))}
                 </div>
-
-                {/* CTA Arrow */}
-                <div className="md:w-[12%] flex justify-start md:justify-end pl-8 md:pl-0 mt-2 md:mt-0">
+                <div className="pl-8 mt-2">
                   <Link
                     href="/services"
-                    aria-label={`Explore ${svc.title} creative agency services in Bahrain`}
-                    className="group/cta inline-flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 border border-[#9A0E1F]/35 bg-[#9A0E1F]/10 hover:bg-[#9A0E1F]/20 hover:border-[#9A0E1F]/60"
+                    className="inline-flex items-center gap-3 rounded-full pl-5 pr-1.5 py-1.5 border border-[#9A0E1F]/35 bg-[#9A0E1F]/10"
                   >
-                    <span className="font-mono tracking-[0.2em] uppercase text-[9px] font-bold mt-[1px] transition-colors duration-300 text-[#9A0E1F]">
-                      Explore
-                    </span>
-                    <div className="w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 bg-[#9A0E1F] group-hover/cta:bg-white">
-                      <svg className="w-3 h-3 transition-all duration-300 text-white group-hover/cta:text-[#9A0E1F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <span className="font-mono tracking-[0.2em] uppercase text-[9px] font-bold text-[#9A0E1F]">Explore</span>
+                    <div className="w-7 h-7 rounded-full bg-[#9A0E1F] flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>
@@ -217,29 +286,25 @@ function ServicesTable() {
               </div>
             </div>
           </Reveal>
-        );
-      })}
+        ))}
 
-      {/* View All Services CTA */}
-      <div className="flex justify-center md:justify-end mt-12 md:mt-16 pr-4">
-        <Reveal delay={0.3}>
-          <Link
-            href="/services"
-            aria-label="View all creative marketing and branding services in Bahrain"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 border border-[#9A0E1F]/50 shadow-[0_15px_40px_rgba(154,14,31,0.2),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-500 hover:bg-black hover:border-white/20 hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
-          >
-            <span className="relative z-10 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white transition-colors duration-300">
-              ALL SERVICES
-            </span>
-            <span className="relative z-10 text-[#9A0E1F] group-hover:text-white group-hover:translate-x-1.5 transition-all duration-500 ease-[0.16,1,0.3,1] text-[14px] leading-none ml-1">
-              →
-            </span>
-          </Link>
-        </Reveal>
+        {/* View All CTA */}
+        <div className="flex justify-center mt-8">
+          <Reveal delay={0.3}>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 border border-[#9A0E1F]/50 transition-all duration-500 hover:bg-black hover:border-white/20"
+            >
+              <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white">ALL SERVICES</span>
+              <span className="text-[#9A0E1F] text-[14px]">→</span>
+            </Link>
+          </Reveal>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
+
 
 export default function LandingPage() {
   const { openProjectModal } = useModal();
@@ -285,34 +350,28 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="relative h-[100svh] min-h-[600px] w-full overflow-hidden flex flex-col" id="hero-section">
-          {/* Cinematic scroll blur wrapper */}
+        <section data-theme="dark" className="relative h-[calc(100svh-40px)] md:h-[calc(100svh-48px)] lg:h-[calc(100svh-64px)] min-h-[580px] w-full overflow-hidden flex flex-col" id="hero-section">
           <HeroBlurWrapper>
+            {/* Background video — no filter, no scale animation, no will-change */}
             <SmartVideo
               src="/bg-rest.mp4"
               autoPlay={true}
-              className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2] anim-slow-zoom transform-gpu"
+              className="absolute inset-0 w-full h-full object-cover z-0"
               style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" } as React.CSSProperties}
             />
-            {/* Base darkening - Simplified for mobile to avoid WebKit repaints */}
-            <div className="absolute inset-0 bg-black/80 md:bg-black/75 z-[1]" />
-            
-            {/* Cinematic depth - Hidden on mobile to save GPU */}
-            <div className="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.15)_0%,transparent_80%)] z-[1]" />
-            
-            {/* Cinematic vignette - Hidden on mobile */}
-            <div className="hidden md:block absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none z-[1]" />
+            {/* Single unified dark overlay for legibility */}
+            <div className="absolute inset-0 bg-black/75 md:bg-black/60 z-[1]" />
 
-            {/* Desktop Gradient ONLY - Mobile is pure black for test mode */}
-            <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 z-[3]" />
+            {/* Desktop-only cinematic accents */}
+            <div className="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.12)_0%,transparent_70%)] z-[2]" />
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 z-[2]" />
 
 
-            <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0">
-              {/* Top Metadata Removed */}
+            <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-24 lg:pb-40">
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-24 items-start py-4">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-24 items-center">
                 {/* LEFT: CONTENT AREA */}
-                <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left mt-4 lg:mt-12 w-full">
+                <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left w-full">
                   <div className="w-min lg:w-full flex flex-col mx-auto lg:mx-0">
                     {/* STATIC LCP ELEMENT: Do not wrap the primary heading in JS animations.
                         This ensures it paints instantly from server HTML, fixing the 3.63s LCP. */}
@@ -645,35 +704,49 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: WHAT WE DO / SERVICES (BLACK THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section id="services" data-theme="dark" className="py-32 md:py-40 bg-black text-white relative">
-          <div className="container">
-            <div className="flex flex-col">
+        <section id="services" data-theme="dark" className="bg-black text-white relative">
+          {/* Desktop: full-bleed for sticky to work — container inside ServicesTable */}
+          <div className="hidden lg:block">
+            {/* Section header only on desktop — inside container, above the sticky panels */}
+            <div className="container pt-32 pb-16">
               <div className="h-px w-full bg-white/10 mb-12" />
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-16 md:mb-20">
-                <div>
-                  <Reveal>
-                    <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-10 opacity-80">
-                      <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
-                      <span className="text-white font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">What We Do</span>
-                    </div>
-                  </Reveal>
-                  <Reveal>
-                    <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
-                      SERVICES.
-                    </h2>
-                  </Reveal>
+              <Reveal>
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-10 opacity-80">
+                  <span className="w-2 h-2 rounded-full bg-[#9A0E1F]" />
+                  <span className="text-white font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">What We Do</span>
                 </div>
-                <Reveal>
-                  <div className="max-w-[380px] mt-14 md:mt-28">
-                    <h4 className="text-white/90 font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
-                      Creative solutions built for modern brands.
-                    </h4>
-                    <p className="text-white/50 text-[14px] md:text-[15px] leading-relaxed font-light antialiased">
-                      We combine strategy, design, and cinematic storytelling to help businesses build recognizable brands and drive real growth.
-                    </p>
-                  </div>
-                </Reveal>
-              </div>
+              </Reveal>
+              <Reveal>
+                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
+                  SERVICES.
+                </h2>
+              </Reveal>
+            </div>
+            <ServicesTable />
+            {/* All Services CTA below sticky section */}
+            <div className="container pb-24 flex justify-end">
+              <Link href="/services" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#050505]/80 border border-[#9A0E1F]/50 hover:bg-black hover:border-white/20 transition-all duration-500">
+                <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-white">ALL SERVICES</span>
+                <span className="text-[#9A0E1F] text-[14px]">→</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile: normal container layout */}
+          <div className="lg:hidden container py-20">
+            <div className="h-px w-full bg-white/10 mb-10" />
+            <div className="flex flex-col gap-6 mb-12">
+              <Reveal>
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full opacity-80">
+                  <span className="w-2 h-2 rounded-full bg-[#9A0E1F]" />
+                  <span className="text-white font-mono tracking-[0.4em] uppercase text-[11px] font-bold">What We Do</span>
+                </div>
+              </Reveal>
+              <Reveal>
+                <h2 className="text-white font-bold leading-[0.95] tracking-tight uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 4.5rem)", letterSpacing: "-0.03em" }}>
+                  SERVICES.
+                </h2>
+              </Reveal>
             </div>
             <ServicesTable />
           </div>

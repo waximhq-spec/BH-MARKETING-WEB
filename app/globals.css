@@ -31,6 +31,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   /* Solid background on html to prevent any white flash on iOS */
   background-color: #000000;
+  max-width: 100vw;
 }
 
 body {
@@ -41,20 +42,28 @@ body {
   font-weight: 300;
   line-height: 1.6;
 
-  overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
   /* Improve paint performance */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
-  /* GPU layer promotion for body — prevents full-page repaint storms on iOS */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  /* Do NOT put transform on body — it creates a stacking context that
+     breaks sticky positioning and forces recompositing every child layer */
 }
 
 /* Lenis smooth scroll */
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* iOS overscroll background — prevents white bounce flash */
+html {
+  background: #000000;
+  overscroll-behavior: none;
+}
+body {
+  overscroll-behavior-y: none;
+  touch-action: pan-y;
+}
 
 /* ── Typography ─────────────────────────────────────────── */
 .label {
@@ -83,16 +92,39 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 /* ── Layout Utilities ───────────────────────────────────── */
-/* Matches hero: px-8 md:px-14 lg:px-20 xl:px-24 */
+/* Custom Container (1400px max) ── */
 .container {
   width: 100%;
   max-width: 1400px;
-  margin-inline: auto;
-  padding-inline: 1.5rem; /* px-6 = 24px for mobile */
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: 1.5rem; /* px-6 */
 }
 @media (min-width: 768px)  { .container { padding-inline: 3.5rem; } } /* md:px-14 */
 @media (min-width: 1024px) { .container { padding-inline: 5rem;   } } /* lg:px-20 */
 @media (min-width: 1280px) { .container { padding-inline: 6rem;   } } /* xl:px-24 */
+
+/* 
+  Expose variables for full-bleed sections that need to align content 
+  with the container edge on large monitors.
+*/
+:root {
+  --container-px: 1.5rem;
+  /* margin = max(padding, (100vw - max-width) / 2 + padding) */
+  --container-margin: var(--container-px);
+}
+@media (min-width: 768px) {
+  :root { --container-px: 3.5rem; --container-margin: var(--container-px); }
+}
+@media (min-width: 1024px) {
+  :root { --container-px: 5rem; --container-margin: var(--container-px); }
+}
+@media (min-width: 1400px) {
+  :root { 
+    --container-px: 6rem; 
+    --container-margin: calc(max(6rem, (100vw - 1400px) / 2 + 6rem));
+  }
+}
 
 /* Off-screen render deferral — disabled on iOS to prevent white flash */
 .defer-render {
@@ -144,9 +176,9 @@ html.lenis, html.lenis body { height: auto; }
   /* Removed will-change: transform — persisted will-change causes repaint storms on iOS */
 }
 
-/* Prevent scroll jank on touch devices */
+/* Prevent scroll jank on touch devices — use contain instead of overflow-scrolling */
 * {
-  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ── Interactive Utilities ───────────────────────────────── */
@@ -232,17 +264,12 @@ html.lenis, html.lenis body { height: auto; }
   /* Ensure html + body always have solid backgrounds — prevents white flash on overscroll */
   html {
     background-color: #000000 !important;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    /* Keep overflow-x: clip but do NOT set overflow-y here — that breaks sticky */
   }
 
   body {
     background-color: #000000 !important;
-    /* Promote body to its own compositing layer */
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    /* NO transform on body — it breaks sticky and creates global stacking context */
   }
 
   /* Force GPU compositing on video to prevent flicker */
@@ -253,13 +280,18 @@ html.lenis, html.lenis body { height: auto; }
     -webkit-transform: translate3d(0, 0, 0);
   }
 
-  /* Stabilize ALL fixed/sticky elements — prevents repaint storms */
-  .fixed, [style*="position: fixed"], [style*="position:fixed"],
-  .sticky, [style*="position: sticky"], [style*="position:sticky"] {
+  /* The sticky header container — isolated compositing layer */
+  #header-root {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    contain: layout style;
+    /* DO NOT add transform here — it would break sticky */
+  }
+
+  /* touch-action: pan-y prevents iOS from cancelling scroll to interpret gestures */
+  body {
+    touch-action: pan-y;
+    overscroll-behavior-y: none;
   }
 
   /* Kill the hero slow-zoom animation entirely on iOS — huge GPU saver */
@@ -311,11 +343,9 @@ html.lenis, html.lenis body { height: auto; }
     opacity: 0.3;
   }
 
-  /* Ensure main content wrapper doesn't trigger unnecessary repaints */
+  /* Main content — no transform, no backface, keep it in normal flow */
   main {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translate3d(0, 0, 0);
+    isolation: isolate;
   }
 
   /* Stabilize image transforms on iOS */

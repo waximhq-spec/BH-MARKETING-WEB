@@ -120,23 +120,28 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col overflow-x-hidden text-black/80 dark:text-white/80 selection:bg-[#ff2a2a]/30 selection:text-white">
-        
-        {/* Noise overlay removed per user request */}
-
+      <body className="min-h-screen flex flex-col text-black/80 dark:text-white/80 selection:bg-[#ff2a2a]/30 selection:text-white">
         <ModalProvider>
           <ServiceWorkerUnregister />
-          <div className="sticky top-0 z-[100]">
+          {/* ── ISOLATED STICKY HEADER
+              Direct child of ModalProvider (for context access),
+              but NOT inside SmoothScroll or any overflow:hidden/transform wrapper.
+              This is the correct pattern for sticky + context access. */}
+          <div id="header-root" className="sticky top-0 z-[100]" style={{ contain: "layout style" }}>
             <AnnouncementBanner />
             <Navbar />
           </div>
-          <SmoothScroll>
-            <ScrollToTop />
-            <main className="flex-1">
+
+          {/* Main content wrapper — overflow-x is handled at html level in globals.css,
+              NOT here. overflow:hidden on any ancestor breaks position:sticky children. */}
+          <div className="flex-1">
+            <SmoothScroll>
+              <ScrollToTop />
               {children}
-            </main>
-            <Footer />
-          </SmoothScroll>
+              <Footer />
+            </SmoothScroll>
+          </div>
+
           <ProjectModal />
           <SecurityLayer />
           <BackToTop />

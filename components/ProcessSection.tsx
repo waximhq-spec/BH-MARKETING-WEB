@@ -83,13 +83,13 @@ export default function ProcessSection() {
       id="process"
       ref={containerRef}
       data-theme="split"
-      className="relative w-full bg-black"
+      className="relative w-full bg-[#050505]"
     >
       {/* ── DESKTOP: Split Sticky Scroll ── */}
       <div className="hidden lg:flex lg:flex-row w-full items-start relative z-10">
 
         {/* Left Column — sticky, fills viewport minus header */}
-        <div className="lg:w-[41.666667%] sticky top-[56px] lg:top-[64px] h-[calc(100vh-56px)] lg:h-[calc(100vh-64px)] flex flex-col justify-between py-20 lg:pt-32 lg:pb-24 z-10 bg-black border-r border-white/10">
+        <div className="lg:w-[41.666667%] sticky top-[56px] lg:top-[64px] h-[calc(100vh-56px)] lg:h-[calc(100vh-64px)] flex flex-col justify-between py-20 lg:pt-32 lg:pb-24 z-10 bg-[#050505] border-r border-white/10">
           {/* No motion.div transform wrapper here — transforms on sticky elements
               cause GPU compositing conflicts on iOS/WebKit */}
           <div className="w-full flex flex-col justify-between h-full" style={{ paddingLeft: 'var(--container-margin)', paddingRight: '3rem' }}>
@@ -100,8 +100,8 @@ export default function ProcessSection() {
               </div>
 
               <h2
-                className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black tracking-tighter mb-4 lg:mb-6 uppercase pr-8"
-                style={{ fontSize: "clamp(2.2rem, 3.8vw, 3.8rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
+                className="text-[#ffffff] font-bold tracking-tight antialiased uppercase mb-4 lg:mb-6 uppercase pr-8"
+                style={{ fontSize: "clamp(2.2rem, 3.8vw, 3.8rem)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
               >
                 WE SCALE YOUR<br />
                 BRAND.
@@ -164,7 +164,7 @@ export default function ProcessSection() {
                     </div>
 
                     <h3
-                      className="text-black font-black tracking-tighter mb-10"
+                      className="text-black font-bold tracking-tight antialiased uppercase mb-10"
                       style={{ fontSize: "clamp(1.8rem, 3.2vw, 3.4rem)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
                     >
                       {step.title.toUpperCase()}
@@ -204,8 +204,8 @@ export default function ProcessSection() {
           </div>
 
           <h2
-            className="text-black font-black tracking-tighter mb-4 uppercase"
-            style={{ fontSize: "clamp(2.2rem, 9vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
+            className="text-black font-bold tracking-tight antialiased uppercase mb-4 uppercase"
+            style={{ fontSize: "clamp(2.2rem, 9vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
           >
             WE SCALE YOUR<br />
             BRAND.
@@ -238,7 +238,7 @@ export default function ProcessSection() {
                 </div>
 
                 <div className="flex flex-col pt-1 pb-8 md:pb-10 w-full">
-                  <h3 className="text-black font-black tracking-tighter mb-3 text-2xl md:text-3xl uppercase leading-[1.05]">
+                  <h3 className="text-black font-bold tracking-tight antialiased uppercase mb-3 text-2xl md:text-3xl uppercase leading-[1.05]">
                     {step.title}
                   </h3>
                   <p className="text-black/60 text-[14px] md:text-[16px] leading-[1.7] font-light max-w-sm">

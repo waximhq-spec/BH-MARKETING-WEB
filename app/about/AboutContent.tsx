@@ -61,7 +61,7 @@ export default function AboutContent() {
             <div className="lg:col-span-5">
               <Reveal>
                 <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold mb-6 block">OUR STORY</span>
-                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black leading-[0.95] tracking-tighter mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "-0.03em" }}>
+                <h2 className="text-[#ffffff] font-black leading-[0.95] tracking-tighter mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "-0.03em" }}>
                   WE STARTED WITH<br />ONE CAMERA.
                 </h2>
               </Reveal>
@@ -115,10 +115,10 @@ export default function AboutContent() {
       </section>
 
       {/* CTA */}
-      <section data-theme="dark" className="py-24 md:py-36 bg-black">
+      <section data-theme="dark" className="py-24 md:py-36 bg-[#050505]">
         <div className="container text-center flex flex-col items-center">
           <Reveal>
-            <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black leading-[0.95] tracking-tighter mb-10" style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", letterSpacing: "-0.04em" }}>
+            <h2 className="text-[#ffffff] font-black leading-[0.95] tracking-tighter mb-10" style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", letterSpacing: "-0.03em" }}>
               WANT TO WORK<br />WITH US?
             </h2>
           </Reveal>

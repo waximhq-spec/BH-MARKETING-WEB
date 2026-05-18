@@ -65,7 +65,7 @@ export default function PaidAdvertisingPage() {
                 </p>
                 <button 
                   onClick={() => openProjectModal()}
-                  className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white hover:bg-black/90 transition-all duration-300 text-[11px] font-bold tracking-[0.2em] uppercase"
+                  className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#050505] text-[#ffffff] hover:bg-black/90 transition-all duration-300 text-[11px] font-bold tracking-[0.2em] uppercase"
                 >
                   Start Scaling Today →
                 </button>

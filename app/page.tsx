@@ -328,7 +328,7 @@ export default function LandingPage() {
   const { openProjectModal } = useModal();
 
   return (
-    <div className="flex flex-col min-h-screen bg-black">
+    <div className="flex flex-col min-h-screen bg-[#050505]">
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
       <VisualHiddenSEO>
         <h1>Creative Marketing Agency & Cinematic Video Production in Bahrain</h1>
@@ -378,14 +378,14 @@ export default function LandingPage() {
               style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" } as React.CSSProperties}
             />
             {/* Single unified dark overlay for legibility */}
-            <div className="absolute inset-0 bg-black/75 md:bg-black/60 z-[1]" />
+            <div className="absolute inset-0 bg-[#050505]/90 md:bg-black/60 z-[1]" />
 
             {/* Desktop-only cinematic accents */}
             <div className="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.12)_0%,transparent_70%)] z-[2]" />
             <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 z-[2]" />
 
 
-            <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-24 lg:pb-40">
+            <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-12 md:pb-24 lg:pb-40">
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-24 items-center">
                 {/* LEFT: CONTENT AREA */}
@@ -393,14 +393,29 @@ export default function LandingPage() {
                   <div className="w-min lg:w-full flex flex-col mx-auto lg:mx-0">
                     {/* STATIC LCP ELEMENT: Do not wrap the primary heading in JS animations.
                         This ensures it paints instantly from server HTML, fixing the 3.63s LCP. */}
-                    <h1 className="text-white font-black leading-[0.85] tracking-tighter mb-5 lg:mb-8" style={{ fontSize: "clamp(3rem, 11.5vw, 7.2rem)", letterSpacing: "-0.05em" }}>
-                      <span className="block whitespace-nowrap text-[0.42em] font-medium tracking-normal opacity-90 mb-1.5 lg:mb-2 uppercase">
-                        We build brands people
+                    {/* MOBILE HEADLINE */}
+                    <h1 className="md:hidden text-white font-bold leading-[0.9] tracking-tight antialiased uppercase mb-4 text-center mx-auto max-w-[320px]" style={{ fontSize: "12vw", letterSpacing: "-0.02em" }}>
+                      <span className="block text-[0.65em] font-light tracking-normal opacity-90 mb-1 uppercase">
+                        We <span className="font-black">build brands</span> people
                       </span>
                       <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
                     </h1>
-                    <Reveal delay={0.2} className="w-full">
-                      <p className="text-white/80 text-[14px] md:text-[15px] lg:text-base leading-[1.6] font-light mb-8 md:mb-10 text-center lg:text-left">
+                    {/* DESKTOP HEADLINE (Exactly Unchanged) */}
+                    <h1 className="hidden md:block text-white font-bold leading-[0.95] tracking-tight antialiased uppercase mb-5 lg:mb-8" style={{ fontSize: "clamp(3rem, 11.5vw, 7.2rem)", letterSpacing: "-0.03em" }}>
+                      <span className="block whitespace-nowrap text-[0.42em] font-light tracking-normal opacity-90 mb-1.5 lg:mb-2 uppercase">
+                        We <span className="font-black">build brands</span> people
+                      </span>
+                      <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
+                    </h1>
+                    {/* MOBILE PARAGRAPH */}
+                    <Reveal delay={0.2} className="w-full md:hidden">
+                      <p className="text-white/60 text-[13px] leading-[1.7] font-light mb-8 text-center max-w-[260px] mx-auto">
+                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
+                      </p>
+                    </Reveal>
+                    {/* DESKTOP PARAGRAPH */}
+                    <Reveal delay={0.2} className="w-full hidden md:block">
+                      <p className="text-white/80 text-[15px] lg:text-base leading-[1.6] font-light mb-10 text-left">
                         We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
                       </p>
                     </Reveal>
@@ -491,7 +506,7 @@ export default function LandingPage() {
                           data-cal-namespace="schedule-call"
                           data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                           aria-label="Book a creative strategy call for your shoot in Bahrain"
-                          className="relative w-full overflow-hidden group/btn bg-gradient-to-r from-[#9A0E1F] to-[#c01529] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
+                          className="relative w-full overflow-hidden group/btn bg-[#9A0E1F] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
                         >
                           <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500 ease-out" />
                           <span className="relative z-10 text-white font-medium text-[11px] tracking-[0.15em] uppercase">
@@ -515,68 +530,53 @@ export default function LandingPage() {
                 </div>
 
                 {/* Mobile Hero Content - Rendered with Static Solids */}
-                <div className="lg:hidden flex flex-col items-center gap-3 w-full mt-2">
-                  <div className="w-full flex justify-center px-6">
+                <div className="lg:hidden flex flex-col items-center gap-3 w-full mt-2 mb-8">
+                  <div className="w-full flex justify-center px-4">
                     <button
                       data-cal-link="wasim-ebxvk8/schedule-call"
                       data-cal-namespace="schedule-call"
                       data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                       aria-label="Book a strategy call for your marketing campaign in Bahrain"
-                      className="relative flex items-center justify-center gap-3 w-full max-w-[320px] h-[54px] bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full border border-[#9A0E1F]"
+                      className="relative flex items-center justify-center w-full max-w-[260px] h-[48px] bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.1em] uppercase rounded-full shadow-[0_8px_20px_rgba(154,14,31,0.2)] active:scale-[0.98] transition-transform"
                     >
                       BOOK A STRATEGY CALL
-                      <span className="opacity-80">→</span>
                     </button>
                   </div>
                   
                   <Reveal delay={0.3} className="w-full">
-                    <p className="w-full text-white/40 text-[9px] text-center font-mono tracking-[0.2em] uppercase font-medium mt-1">
-                      Response within <span className="font-black text-white/90">24 hours</span>
+                    <p className="w-full text-white/40 text-[9px] text-center font-mono tracking-[0.1em] uppercase font-medium mt-1">
+                      Response within <span className="font-black text-white/80">24 hours</span>
                     </p>
-                  </Reveal>
-
-                  {/* Simple Static Testimonial Reference - No glows, no borders */}
-                  <Reveal delay={0.4} className="w-full mt-4 px-4">
-                    <div className="w-full bg-[#050505] p-5 rounded-xl flex flex-col items-center text-center">
-                      <div className="flex items-center justify-center gap-2 mb-3">
-                        <div className="h-[1px] w-4 bg-[#9A0E1F]" />
-                        <span className="text-white/50 font-mono text-[8px] uppercase tracking-[0.25em] font-bold block">What Our Clients Say</span>
-                        <div className="h-[1px] w-4 bg-[#9A0E1F]" />
-                      </div>
-                      <div className="relative h-10 w-full flex items-center justify-center">
-                        <TestimonialRotation isMobile={true} />
-                      </div>
-                    </div>
                   </Reveal>
                 </div>
               </div>
 
               {/* Bottom Metrics - Restored with Hardware Acceleration */}
-              <div className="absolute bottom-0 left-0 right-0 z-10 pb-6 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
+              <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
                 <div className="container mx-auto border-t border-white/5 pt-5 md:pt-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* LEFT COLUMN: All 3 Metrics */}
-                    <div className="lg:col-span-7 flex flex-row items-end justify-center lg:justify-start gap-6 md:gap-16 lg:gap-20">
+                    <div className="lg:col-span-7 flex flex-row items-end justify-center lg:justify-start gap-8 md:gap-16 lg:gap-20">
                       <Reveal delay={0.7}>
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                          <span className="text-white font-black text-xl md:text-4xl tracking-tighter">GULF</span>
-                          <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">Clients</span>
+                          <span className="text-white/90 font-black text-[15px] md:text-4xl tracking-tighter">GULF</span>
+                          <span className="text-white/30 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Clients</span>
                         </div>
                       </Reveal>
                       <Reveal delay={0.8}>
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                          <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
+                          <span className="text-white/90 font-black text-[15px] md:text-4xl tracking-tighter">
                             <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
                           </span>
-                          <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">Brands Built</span>
+                          <span className="text-white/30 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Brands Built</span>
                         </div>
                       </Reveal>
                       <Reveal delay={0.9}>
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                          <span className="text-white font-black text-xl md:text-4xl tracking-tighter">
+                          <span className="text-white/90 font-black text-[15px] md:text-4xl tracking-tighter">
                             <CountUp start={0} end={300} duration={5} redraw={true} suffix="%" />
                           </span>
-                          <span className="text-white/50 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.2em] mt-1">More Engagement</span>
+                          <span className="text-white/30 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.1em] mt-1">More Engagement</span>
                         </div>
                       </Reveal>
                     </div>
@@ -606,7 +606,7 @@ export default function LandingPage() {
                       <span className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">Our Work</span>
                     </div>
                     <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
-                      CLIENT<br />WORK.
+                      OUR<br />WORK.
                     </h2>
                   </div>
                   <div className="max-w-[340px] mt-12 md:mt-28">
@@ -722,7 +722,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 4: WHAT WE DO / SERVICES (BLACK THEME)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section id="services" data-theme="dark" className="bg-black text-white relative">
+        <section id="services" data-theme="dark" className="bg-[#050505] text-white relative">
           {/* Desktop: full-bleed for sticky to work — container inside ServicesTable */}
           <div className="hidden lg:block">
             {/* Section header only on desktop — inside container, above the sticky panels */}
@@ -736,7 +736,7 @@ export default function LandingPage() {
               </Reveal>
               <Reveal>
                 <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
-                  SERVICES.
+                  OUR<br />SERVICES.
                 </h2>
               </Reveal>
             </div>
@@ -765,8 +765,8 @@ export default function LandingPage() {
                 </div>
               </Reveal>
               <Reveal>
-                <h2 className="text-white font-bold leading-[0.95] tracking-tight uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 4.5rem)", letterSpacing: "-0.03em" }}>
-                  SERVICES.
+                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 4.5rem)", letterSpacing: "-0.03em" }}>
+                  OUR<br />SERVICES.
                 </h2>
               </Reveal>
             </div>
@@ -805,18 +805,18 @@ export default function LandingPage() {
                         <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Social Proof</span>
                       </div>
                     </div>
-                    <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight mb-10 uppercase" style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.02em" }}>
+                    <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight mb-10 uppercase" style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.03em" }}>
                       WHAT OUR<br /><span className="text-black/10">CLIENTS SAY.</span>
                     </h2>
                   </Reveal>
 
                   <div className="flex gap-12">
                     <Reveal delay={0.1}>
-                      <p className="text-[#B11226] font-black text-3xl md:text-4xl tracking-tighter mb-1">+40%</p>
+                      <p className="text-[#9A0E1F] font-bold text-3xl md:text-4xl tracking-tight antialiased uppercase mb-1">+40%</p>
                       <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Brand Growth</p>
                     </Reveal>
                     <Reveal delay={0.2}>
-                      <p className="text-black font-black text-3xl md:text-4xl tracking-tighter mb-1">100%</p>
+                      <p className="text-black font-bold text-3xl md:text-4xl tracking-tight antialiased uppercase mb-1">100%</p>
                       <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Client Trust</p>
                     </Reveal>
                   </div>
@@ -1012,8 +1012,8 @@ function TestimonialWheel() {
               {TESTIMONIALS[index].client}
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-[#B11226]" />
-              <p className="text-[#B11226] font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</p>
+              <div className="w-2 h-2 bg-[#9A0E1F]" />
+              <p className="text-[#9A0E1F] font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</p>
             </div>
           </div>
         </motion.div>

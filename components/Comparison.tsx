@@ -74,14 +74,14 @@ export default function Comparison() {
       <div className="container">
         <div className="flex flex-col mb-16 md:mb-24 text-center items-center">
           <Reveal>
-            <p className="text-[#B11226] font-mono tracking-[0.3em] uppercase text-[10px] font-bold mb-6">
+            <p className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[10px] font-bold mb-6">
               Most options look similar — until you look closer.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2
               className="text-black font-black leading-[0.95] tracking-tight uppercase"
-              style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.04em" }}
+              style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
             >
               Most Agencies Just Film.<br />We Build Brands.
             </h2>
@@ -130,8 +130,8 @@ export default function Comparison() {
                 {/* Cinmach Data Column */}
                 <div className="relative px-8 py-[26px] flex items-center bg-[#FAFAFA] border-x border-black/[0.08] transition-transform duration-300 ease-out group-hover:scale-[1.01] group-hover:bg-white z-10">
                   <span className="font-semibold text-[14px] tracking-tight">
-                    <span className="text-[#B11226] mr-2">✓</span>
-                    <span className="text-[#B11226]">{row.cinmachRed}</span>
+                    <span className="text-[#9A0E1F] mr-2">✓</span>
+                    <span className="text-[#9A0E1F]">{row.cinmachRed}</span>
                     <span className="text-black">{row.cinmachDark}</span>
                   </span>
                 </div>
@@ -185,8 +185,8 @@ export default function Comparison() {
                     {/* Cinmach Column (Highlighted) */}
                     <div className="bg-[#FAFAFA] border-x border-black/[0.05] px-4 py-3">
                       <span className="font-bold text-[13px] leading-snug block">
-                        <span className="text-[#B11226] mr-1">✓</span>
-                        <span className="text-[#B11226]">{row.cinmachRed}</span>
+                        <span className="text-[#9A0E1F] mr-1">✓</span>
+                        <span className="text-[#9A0E1F]">{row.cinmachRed}</span>
                         <span className="text-black">{row.cinmachDark}</span>
                       </span>
                     </div>

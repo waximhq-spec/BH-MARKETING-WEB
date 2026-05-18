@@ -46,15 +46,15 @@ export default async function BlogPostPage({ params }: Props) {
         
         {/* HEADER */}
         <header className="mb-16 border-b border-black/10 pb-12">
-          <div className="flex items-center gap-4 text-[#B11226] font-mono tracking-widest text-[10px] uppercase font-bold mb-6">
+          <div className="flex items-center gap-4 text-[#9A0E1F] font-mono tracking-widest text-[10px] uppercase font-bold mb-6">
             <Link href="/blog" className="hover:underline">Blog</Link>
-            <span className="w-1 h-1 bg-[#B11226] rounded-full" />
+            <span className="w-1 h-1 bg-[#9A0E1F] rounded-full" />
             <time dateTime={post.publishDate}>{post.publishDate}</time>
-            <span className="w-1 h-1 bg-[#B11226] rounded-full" />
+            <span className="w-1 h-1 bg-[#9A0E1F] rounded-full" />
             <span>{post.readTime}</span>
           </div>
           
-          <h1 className="font-black text-4xl md:text-6xl tracking-tighter leading-[1.1] mb-8">
+          <h1 className="font-bold text-4xl md:text-6xl tracking-tight antialiased uppercase leading-[1.1] mb-8">
             {post.title}
           </h1>
           
@@ -64,7 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
         </header>
 
         {/* CONTENT */}
-        <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-[#B11226] prose-a:no-underline hover:prose-a:underline marker:text-[#B11226]">
+        <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-[#9A0E1F] prose-a:no-underline hover:prose-a:underline marker:text-[#9A0E1F]">
           {post.content.map((block, index) => {
             switch (block.type) {
               case "h2":
@@ -97,7 +97,7 @@ export default async function BlogPostPage({ params }: Props) {
             <p className="text-black/60 mb-6">Cinmach Productions is Bahrain's premier cinematic video agency. We help restaurants and brands turn views into physical footfall.</p>
             <Link 
               href="/restaurant-videography-bahrain"
-              className="inline-block px-8 py-4 bg-black text-white text-[11px] font-mono font-bold tracking-[0.2em] uppercase hover:bg-[#B11226] transition-colors"
+              className="inline-block px-8 py-4 bg-[#050505] text-[#ffffff] text-[11px] font-mono font-bold tracking-[0.2em] uppercase hover:bg-[#9A0E1F] transition-colors"
             >
               Explore Our Services
             </Link>

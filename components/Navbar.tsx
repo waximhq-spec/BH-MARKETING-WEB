@@ -33,6 +33,14 @@ export default function Navbar() {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing" | "split">("dark");
   const pathname = usePathname();
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const { openProjectModal } = useModal();
   const sectionsRef = useRef<Element[]>([]);
   const lastThemeRef = useRef(theme);
@@ -132,10 +140,13 @@ export default function Navbar() {
   }, [pathname]);
 
   const isHome = pathname === "/";
-  const isLight = theme === "light" || (!isHome && (theme === "red" || theme === "pricing"));
+  const isSplit = theme === "split" && isDesktop;
+  const isLight = theme === "light" || (!isHome && (theme === "red" || theme === "pricing")) || (theme === "split" && !isDesktop);
 
-  const bgColor = isLight ? "#ffffff" : "#000000";
-  const textColor = isLight ? "#000000" : "#FAFAFA";
+  const bgColor = isSplit
+    ? "linear-gradient(to right, #050505 0%, #050505 41.666667%, #ffffff 41.666667%, #ffffff 100%)"
+    : (isLight ? "#ffffff" : "#050505");
+  const textColor = (isLight || isSplit) ? "#000000" : "#FAFAFA";
   const accentColor = "#9A0E1F";
 
   return (
@@ -169,7 +180,7 @@ export default function Navbar() {
               alt="Cinmach"
               className="h-[26px] md:h-[32px] w-auto"
               style={{
-                filter: isLight ? "brightness(0)" : "brightness(0) invert(1)",
+                filter: (isLight && !isSplit) ? "brightness(0)" : "brightness(0) invert(1)",
               }}
             />
           </Link>
@@ -253,8 +264,8 @@ export default function Navbar() {
             <button
               onClick={() => openProjectModal()}
               className={`h-9 px-5 text-[9px] font-mono font-black tracking-[0.25em] uppercase rounded-full border transition-all duration-300 ${
-                isLight
-                  ? "bg-black text-white border-transparent hover:bg-black/90"
+                (isLight || isSplit)
+                  ? "bg-[#050505] text-[#ffffff] border-transparent hover:bg-black/90"
                   : "bg-white text-black border-transparent hover:bg-white/90"
               }`}
             >
@@ -383,7 +394,7 @@ export default function Navbar() {
                       fontSize: "36px",
                       lineHeight: 1,
                       fontWeight: 500,
-                      letterSpacing: "-0.02em",
+                      letterSpacing: "-0.03em",
                       color: isActive ? accentColor : "#000000",
                       display: "flex",
                       alignItems: "center",

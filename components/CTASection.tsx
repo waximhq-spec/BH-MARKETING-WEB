@@ -24,11 +24,11 @@ export default function CTASection() {
           </div>
 
           <h2 
-            className="text-white font-black tracking-tighter leading-[1.05] uppercase mb-8"
+            className="text-white font-bold tracking-tight antialiased uppercase leading-[1.05] uppercase mb-8"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
           >
             Ready to scale your <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white/80 to-[#9A0E1F]">brand's revenue?</span>
+            <span className="text-[#ffffff]">brand's revenue?</span>
           </h2>
 
           <p className="text-white/40 text-[15px] md:text-[17px] max-w-2xl mx-auto font-light leading-relaxed mb-12">

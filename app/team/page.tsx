@@ -76,7 +76,7 @@ export default function TeamPage() {
                 <span className="text-[#9A0E1F] font-mono text-[9px] tracking-[0.3em] font-bold mb-3 md:mb-4 block">
                   01
                 </span>
-                <h3 className="text-black font-black text-3xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-2 md:mb-3">
+                <h3 className="text-black font-bold text-3xl md:text-5xl lg:text-6xl tracking-tight antialiased uppercase leading-tight mb-2 md:mb-3">
                   {TEAM[0].name}
                 </h3>
                 <p className="text-[#9A0E1F] font-mono text-[9px] md:text-[12px] tracking-[0.2em] uppercase font-bold mb-5 md:mb-6">
@@ -105,7 +105,7 @@ export default function TeamPage() {
                     <span className="text-[#9A0E1F] font-mono text-[8px] md:text-[9px] tracking-[0.3em] font-bold mb-2 md:mb-3 block">
                       0{idx + 2}
                     </span>
-                    <h3 className="text-black font-black text-2xl md:text-3xl tracking-tighter leading-tight mb-1 md:mb-2">
+                    <h3 className="text-black font-bold text-2xl md:text-3xl tracking-tight antialiased uppercase leading-tight mb-1 md:mb-2">
                       {member.name}
                     </h3>
                     <p className="text-[#9A0E1F] font-mono text-[8px] md:text-[10px] tracking-[0.2em] uppercase font-bold mb-4 md:mb-5">
@@ -141,7 +141,7 @@ export default function TeamPage() {
             ].map((v, i) => (
               <Reveal key={v.title} delay={i * 0.08}>
                 <div>
-                  <h3 className="font-black text-xl tracking-tight mb-3">{v.title}</h3>
+                  <h3 className="font-bold text-xl tracking-tight antialiased uppercase mb-3">{v.title}</h3>
                   <p className="text-black/55 text-[14px] leading-[1.7] font-light">{v.desc}</p>
                 </div>
               </Reveal>

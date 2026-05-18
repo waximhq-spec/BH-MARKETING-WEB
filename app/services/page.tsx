@@ -175,7 +175,7 @@ export default function ServicesPage() {
                       className={`font-black leading-[0.95] tracking-tighter mb-5 ${
                         isEven
                           ? "bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#555]"
-                          : "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60"
+                          : "text-[#ffffff]"
                       }`}
                       style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", letterSpacing: "-0.03em" }}
                     >
@@ -265,7 +265,7 @@ export default function ServicesPage() {
                           className={`inline-flex items-center justify-center gap-3 px-7 py-3.5 font-mono text-[9px] tracking-[0.2em] uppercase rounded-full transition-all duration-300 ${
                             svc.disabled 
                               ? isEven ? "bg-black/10 text-black/40 cursor-not-allowed" : "bg-white/10 text-white/40 cursor-not-allowed"
-                              : isEven ? "bg-black text-white hover:bg-black/80" : "bg-white text-black hover:bg-white/80"
+                              : isEven ? "bg-[#050505] text-[#ffffff] hover:bg-black/80" : "bg-white text-black hover:bg-white/80"
                           }`}
                         >
                           {svc.disabled ? "Coming Soon" : "More Details"}
@@ -294,7 +294,7 @@ export default function ServicesPage() {
       {/* ══════════════════════════════════════════════════════
           FINAL CTA
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="dark" className="py-32 md:py-48 bg-black border-t border-white/5">
+      <section data-theme="dark" className="py-32 md:py-48 bg-[#050505] border-t border-white/5">
         <div className="container text-center flex flex-col items-center">
           <Reveal>
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-10">
@@ -304,8 +304,8 @@ export default function ServicesPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2
-              className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 font-black leading-[0.9] tracking-tighter mb-6"
-              style={{ fontSize: "clamp(2rem, 7vw, 5rem)", letterSpacing: "-0.04em" }}
+              className="text-[#ffffff] font-black leading-[0.9] tracking-tighter mb-6"
+              style={{ fontSize: "clamp(2rem, 7vw, 5rem)", letterSpacing: "-0.03em" }}
             >
               READY TO GET<br />
               MORE CUSTOMERS?

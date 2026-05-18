@@ -53,7 +53,7 @@ export default function BrandIdentityPage() {
               </Reveal>
               <Reveal delay={0.1}>
                 <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
-                  LEGACY<br />BRANDS.
+                  BRAND<br />IDENTITY.
                 </h1>
               </Reveal>
             </div>
@@ -63,11 +63,11 @@ export default function BrandIdentityPage() {
                   We build memorable brands.
                 </h2>
                 <p className="text-black/70 text-[15px] md:text-base leading-relaxed font-light antialiased">
-                  A brand is more than just a logo. We craft comprehensive visual identities, strategic positioning, and brand guidelines that resonate with your audience and set you apart in a crowded market.
+                  A brand is more than just a logo. We create everything you need—from professional logos and color schemes to complete brand guidelines—so your business stands out and connects with people.
                 </p>
                 <button 
                   onClick={() => openProjectModal()}
-                  className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white hover:bg-black/90 transition-all duration-300 text-[11px] font-bold tracking-[0.2em] uppercase"
+                  className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#050505] text-[#ffffff] hover:bg-black/90 transition-all duration-300 text-[11px] font-bold tracking-[0.2em] uppercase"
                 >
                   Start Your Branding Project →
                 </button>
@@ -77,7 +77,7 @@ export default function BrandIdentityPage() {
           <div className="h-[2px] w-full bg-black/10 mt-16" />
         </div>
       </section>
-
+ 
       {/* ── SERVICES GRID ── */}
       <section data-theme="light" className="py-24 md:py-36 bg-[#fafafa] text-black border-t border-black/5 relative overflow-hidden">
         <div className="container max-w-7xl mx-auto">
@@ -89,7 +89,7 @@ export default function BrandIdentityPage() {
               </div>
               <h2 className="text-[#1a1a1a] font-black text-3xl md:text-5xl uppercase tracking-tighter mb-4">Pillars of Branding</h2>
               <p className="text-black/60 text-[15px] md:text-base leading-relaxed font-light max-w-2xl">
-                We craft tailored visual strategies and identity systems optimized for brand authority and market positioning.
+                We build strong visual systems to make sure your brand looks professional and stands out in the market.
               </p>
             </div>
           </Reveal>
@@ -134,7 +134,7 @@ export default function BrandIdentityPage() {
               <div className="text-[#1a1a1a] font-black text-5xl tracking-tighter mb-8">BHD 500</div>
               <button 
                 onClick={() => openProjectModal()}
-                className="w-full text-center py-4 rounded-xl bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white text-[11px] font-bold tracking-[0.2em] uppercase transition-transform duration-300 hover:-translate-y-1"
+                className="w-full text-center py-4 rounded-xl bg-[#9A0E1F] text-white text-[11px] font-bold tracking-[0.2em] uppercase transition-transform duration-300 hover:-translate-y-1"
               >
                 Request a Custom Proposal
               </button>

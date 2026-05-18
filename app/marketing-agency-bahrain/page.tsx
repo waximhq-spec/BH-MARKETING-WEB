@@ -94,7 +94,7 @@ export default function MarketingAgencyGatewayPage() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <h1 className="font-black text-white leading-[0.85] mb-16 tracking-tighter uppercase" style={{ fontSize: "clamp(2.5rem, 10vw, 8.5rem)" }}>
+            <h1 className="font-bold text-white leading-[0.95] antialiased uppercase mb-16 tracking-tighter uppercase" style={{ fontSize: "clamp(2.5rem, 10vw, 8.5rem)" }}>
               ELEVATING<br />
               BAHRAIN&apos;S<br />
               <span className="text-white/20">LUXURY BRANDS.</span>

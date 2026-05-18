@@ -10,7 +10,7 @@ const FAQS = [
     answer: (
       <>
         High-end visual content elevates your brand's perceived value, increases engagement, and drives targeted conversions. It turns digital views into real business growth. Learn more about our{" "}
-        <Link href="/services" className="text-[#B11226] hover:underline">
+        <Link href="/services" className="text-[#9A0E1F] hover:underline">
           Creative Services
         </Link>.
       </>
@@ -41,14 +41,14 @@ function FAQItem({ question, answer, index }: { question: string; answer: React.
         className="w-full py-8 flex items-center justify-between text-left group"
       >
         <div className="flex items-start gap-6">
-          <span className="text-[#B11226] font-mono text-[10px] mt-1.5 font-bold">0{index + 1}</span>
-          <h3 className="text-black font-bold text-xl md:text-2xl tracking-tight group-hover:text-[#B11226] transition-colors duration-300">
+          <span className="text-[#9A0E1F] font-mono text-[10px] mt-1.5 font-bold">0{index + 1}</span>
+          <h3 className="text-black font-bold text-xl md:text-2xl tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300">
             {question}
           </h3>
         </div>
         <motion.span
           animate={{ rotate: isOpen ? 45 : 0 }}
-          className="text-2xl font-light text-black/20 group-hover:text-[#B11226] transition-colors"
+          className="text-2xl font-light text-black/20 group-hover:text-[#9A0E1F] transition-colors"
         >
           +
         </motion.span>
@@ -87,7 +87,7 @@ export default function FAQSection() {
                 <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Common Questions</span>
               </div>
             </div>
-            <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-black leading-[0.9] tracking-tighter mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}>
+            <h2 className="text-[#050505] font-black leading-[0.9] tracking-tighter mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.03em" }}>
               FREQUENTLY<br /><span className="text-black/10">ASKED.</span>
             </h2>
             <p className="text-black/40 text-lg font-light leading-relaxed max-w-xs">

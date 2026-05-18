@@ -141,7 +141,7 @@ export default async function ProjectPage({ params }: Props) {
           <div className="flex-1">
             <h1
               className="text-[#EDEDED] font-black"
-              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", letterSpacing: "-0.04em", lineHeight: 1 }}
+              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", letterSpacing: "-0.03em", lineHeight: 1 }}
             >
               {project.title}
             </h1>

@@ -26,7 +26,7 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer data-theme="dark" className="bg-black text-white relative overflow-hidden">
+    <footer data-theme="dark" className="bg-[#050505] text-white relative overflow-hidden">
       {/* Top divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 

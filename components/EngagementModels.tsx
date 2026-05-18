@@ -98,7 +98,7 @@ export default function EngagementModels() {
             <span className="text-white font-mono tracking-[0.3em] uppercase text-[10px] md:text-[11px] font-bold">Engagement Models</span>
           </div>
           <h2 
-            className="text-white font-black tracking-tighter leading-[1.05] uppercase mb-6"
+            className="text-white font-bold tracking-tight antialiased uppercase leading-[1.05] uppercase mb-6"
             style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
           >
             Growth Engagements
@@ -159,7 +159,7 @@ export default function EngagementModels() {
                   }`}>
                     {pkg.priceLabel}
                   </span>
-                  <span className={`font-black tracking-tighter leading-tight drop-shadow-2xl ${
+                  <span className={`font-bold tracking-tight antialiased uppercase leading-tight drop-shadow-2xl ${
                     pkg.isPopular
                       ? "bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70"
                       : pkg.isEnterprise
@@ -195,7 +195,7 @@ export default function EngagementModels() {
                     transition-all duration-300 ease-out relative overflow-hidden group/cta transform-gpu
                     hover:-translate-y-[2px] active:scale-[0.98]
                     ${pkg.isPopular
-                      ? "bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white shadow-[0_8px_30px_rgba(154,14,31,0.4)] hover:shadow-[0_12px_40px_rgba(154,14,31,0.6)]"
+                      ? "bg-[#9A0E1F] text-white shadow-[0_8px_30px_rgba(154,14,31,0.4)] hover:shadow-[0_12px_40px_rgba(154,14,31,0.6)]"
                       : pkg.isEnterprise
                       ? "bg-white/[0.02] border border-[#c9a84c]/30 text-[#c9a84c] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c]/50"
                       : "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:text-white hover:border-white/30"

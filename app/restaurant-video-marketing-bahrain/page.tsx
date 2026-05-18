@@ -32,10 +32,10 @@ export default function RestaurantVideoMarketingPage() {
       <article className="container max-w-3xl mx-auto px-6">
         <header className="mb-16">
           <div className="flex items-center gap-4 mb-6">
-            <span className="w-8 h-px bg-[#B11226]" />
-            <p className="text-[#B11226] font-mono tracking-[0.2em] uppercase text-[10px] font-bold">Marketing Guide</p>
+            <span className="w-8 h-px bg-[#9A0E1F]" />
+            <p className="text-[#9A0E1F] font-mono tracking-[0.2em] uppercase text-[10px] font-bold">Marketing Guide</p>
           </div>
-          <h1 className="font-black text-4xl md:text-6xl tracking-tighter leading-[1.1] mb-6">
+          <h1 className="font-bold text-4xl md:text-6xl tracking-tight antialiased uppercase leading-[1.1] mb-6">
             THE ULTIMATE GUIDE TO RESTAURANT VIDEO MARKETING IN BAHRAIN.
           </h1>
           <p className="text-black/50 text-lg md:text-xl font-light leading-relaxed">
@@ -43,7 +43,7 @@ export default function RestaurantVideoMarketingPage() {
           </p>
         </header>
 
-        <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-[#B11226] prose-a:no-underline hover:prose-a:underline">
+        <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-[#9A0E1F] prose-a:no-underline hover:prose-a:underline">
           <p>
             In the rapidly evolving culinary landscape of Bahrain, the competition for attention is fierce. From the bustling avenues of Adliya to the high-end dining districts of Seef and Bahrain Bay, restaurants are constantly vying for footfall. In 2026, the deciding factor for consumers choosing where to dine isn't just the menu—it's the visual narrative presented online. This is where <strong>restaurant video marketing</strong> becomes the most critical investment for your brand.
           </p>

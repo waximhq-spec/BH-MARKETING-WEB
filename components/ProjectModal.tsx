@@ -90,7 +90,7 @@ export default function ProjectModal() {
         <span className="w-1.5 h-1.5 rounded-full bg-[#9A0E1F] animate-pulse" />
         <span className="text-[#9A0E1F] font-mono text-[9px] tracking-[0.35em] uppercase font-bold">Cinmach Productions</span>
       </div>
-      <h2 className="text-white font-black text-4xl md:text-6xl tracking-tighter uppercase leading-none mb-5">
+      <h2 className="text-white font-bold text-4xl md:text-6xl tracking-tight antialiased uppercase uppercase leading-none mb-5">
         Start Your<br />Project
       </h2>
       <p className="text-white/40 text-sm md:text-base font-light leading-relaxed max-w-sm mb-12">
@@ -98,7 +98,7 @@ export default function ProjectModal() {
       </p>
       <button
         onClick={() => setStep(1)}
-        className="group relative h-[56px] px-12 bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[11px] tracking-[0.35em] uppercase rounded-full overflow-hidden shadow-[0_8px_30px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200"
+        className="group relative h-[56px] px-12 bg-[#9A0E1F] text-white font-mono font-black text-[11px] tracking-[0.35em] uppercase rounded-full overflow-hidden shadow-[0_8px_30px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200"
       >
         <span className="flex items-center gap-3">CONTINUE <span className="inline-block">→</span></span>
       </button>
@@ -246,7 +246,7 @@ export default function ProjectModal() {
               setIsSubmitting(false);
             }
           }}
-          className="w-full h-[56px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[11px] tracking-[0.3em] uppercase rounded-xl shadow-[0_8px_30px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          className="w-full h-[56px] bg-[#9A0E1F] text-white font-mono font-black text-[11px] tracking-[0.3em] uppercase rounded-xl shadow-[0_8px_30px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
           {isSubmitting ? "SENDING..." : "SUBMIT REQUEST"} <span>→</span>
         </button>
@@ -379,7 +379,7 @@ export default function ProjectModal() {
               setIsSubmitting(false);
             }
           }}
-          className="w-full h-[52px] bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white font-mono font-black text-[10px] tracking-[0.3em] uppercase rounded-xl shadow-[0_8px_24px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          className="w-full h-[52px] bg-[#9A0E1F] text-white font-mono font-black text-[10px] tracking-[0.3em] uppercase rounded-xl shadow-[0_8px_24px_rgba(154,14,31,0.3)] active:scale-[0.97] transition-transform duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
           {isSubmitting ? "CONFIRMING..." : "CONFIRM BOOKING"} <span>→</span>
         </button>
@@ -435,7 +435,7 @@ export default function ProjectModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="relative w-full max-w-[680px] max-h-[90vh] overflow-y-auto bg-[#080808] border border-white/[0.06] rounded-[28px] shadow-[0_20px_60px_rgba(0,0,0,0.8)] transform-gpu"
+            className="relative w-full max-w-[680px] max-h-[90vh] overflow-y-auto bg-[#050505] border border-white/[0.06] rounded-[28px] shadow-[0_20px_60px_rgba(0,0,0,0.8)] transform-gpu"
             style={{ WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}
             onClick={(e) => e.stopPropagation()}
           >
@@ -445,7 +445,7 @@ export default function ProjectModal() {
             {/* Progress bar */}
             <div className="absolute top-0 left-0 w-full h-[2px] bg-white/5">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#9A0E1F] to-[#c01529]"
+                className="h-full bg-[#9A0E1F]"
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: EASE }}
               />

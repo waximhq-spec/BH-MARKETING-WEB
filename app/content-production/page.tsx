@@ -67,7 +67,7 @@ export default function ContentProductionPage() {
               </Reveal>
               <Reveal delay={0.1}>
                 <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
-                  BUILT TO<br />CONVERT.
+                  CONTENT<br />PRODUCTION
                 </h1>
               </Reveal>
             </div>
@@ -92,12 +92,12 @@ export default function ContentProductionPage() {
           <Reveal>
             <div className="mb-16">
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold">PORTFOLIO & EXPERTISE</span>
+                <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold">OUR SPECIALTIES</span>
                 <div className="h-px flex-1 bg-black/8" />
               </div>
               <h2 className="text-[#1a1a1a] font-black text-3xl md:text-5xl uppercase tracking-tighter mb-4">Industries We Serve</h2>
               <p className="text-black/60 text-[15px] md:text-base leading-relaxed font-light max-w-2xl">
-                We craft tailored visual strategies and content systems optimized for specific high-growth sectors.
+                We create high-end videos and photos tailored to your specific business to help you stand out and attract more customers.
               </p>
             </div>
           </Reveal>

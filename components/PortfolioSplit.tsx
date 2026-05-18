@@ -94,7 +94,7 @@ function ProjectCard({
             </span>
           ))}
         </div>
-        <p className="text-white font-bold text-sm leading-tight" style={{ letterSpacing: "-0.02em" }}>
+        <p className="text-white font-bold text-sm leading-tight" style={{ letterSpacing: "-0.03em" }}>
           {title}
         </p>
       </div>
@@ -174,7 +174,7 @@ export default function PortfolioSplit() {
                 className="text-white font-black mb-3"
                 style={{
                   fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                  letterSpacing: "-0.04em",
+                  letterSpacing: "-0.03em",
                   lineHeight: 0.95,
                 }}
               >
@@ -232,7 +232,7 @@ export default function PortfolioSplit() {
                 className="text-white font-black mb-3"
                 style={{
                   fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                  letterSpacing: "-0.04em",
+                  letterSpacing: "-0.03em",
                   lineHeight: 0.95,
                 }}
               >
@@ -271,7 +271,7 @@ export default function PortfolioSplit() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           <div className="relative z-10 p-8">
             <p className="type-label text-[#D91616]/70 mb-2">Category 01</p>
-            <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.04em" }}>
+            <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.03em" }}>
               COMMERCIALS
             </h3>
             <p className="text-white/40 text-sm leading-relaxed mb-4">
@@ -296,7 +296,7 @@ export default function PortfolioSplit() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           <div className="relative z-10 p-8">
             <p className="type-label text-[#D91616]/70 mb-2">Category 02</p>
-            <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.04em" }}>
+            <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.03em" }}>
               CAMPAIGNS
             </h3>
             <p className="text-white/40 text-sm leading-relaxed mb-4">
@@ -317,7 +317,7 @@ export default function PortfolioSplit() {
             <div className="flex items-center justify-between mb-8">
               <div>
                 <p className="type-label text-white/25 mb-2">Commercial Production</p>
-                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.02em" }}>Brand Commercials</h4>
+                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.03em" }}>Brand Commercials</h4>
               </div>
               <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#D91616]/70 hover:text-[#D91616] transition-colors">
                 View All →
@@ -335,7 +335,7 @@ export default function PortfolioSplit() {
             <div className="flex items-center justify-between mb-8">
               <div>
                 <p className="type-label text-white/25 mb-2">Digital Campaigns</p>
-                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.02em" }}>Campaigns</h4>
+                <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.03em" }}>Campaigns</h4>
               </div>
               <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#D91616]/70 hover:text-[#D91616] transition-colors">
                 View All →

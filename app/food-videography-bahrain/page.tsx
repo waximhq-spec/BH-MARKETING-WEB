@@ -64,7 +64,7 @@ export default function FoodVideographyPage() {
       {/* ══════════════════════════════════════════════════════
           SECTION 1: HERO
       ══════════════════════════════════════════════════════ */}
-      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden bg-black flex items-center">
+      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden bg-[#050505] flex items-center">
         <SmartVideo 
           src="https://images.pexels.com/photos/33033789/pexels-photo-33033789.jpeg" // Placeholder
           autoPlay={true}
@@ -75,16 +75,16 @@ export default function FoodVideographyPage() {
         <div className="container relative z-10 pt-20">
           <Reveal>
             <div className="flex items-center gap-4 mb-8">
-              <span className="w-10 h-px bg-[#B11226]" />
-              <p className="text-[#B11226] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">Food Content &middot; Bahrain</p>
+              <span className="w-10 h-px bg-[#9A0E1F]" />
+              <p className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[10px] font-bold">Food Content &middot; Bahrain</p>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <h1 className="font-black text-white leading-[0.85] mb-12" style={{ fontSize: "clamp(2.5rem, 10vw, 8.5rem)", letterSpacing: "-0.05em" }}>
+            <h1 className="font-bold text-white leading-[0.95] antialiased uppercase mb-12" style={{ fontSize: "clamp(2.5rem, 10vw, 8.5rem)", letterSpacing: "-0.03em" }}>
               FOOD<br />
               VIDEOGRAPHY<br />
-              <span className="text-[#B11226]">SERVICES.</span>
+              <span className="text-[#9A0E1F]">SERVICES.</span>
             </h1>
           </Reveal>
 
@@ -104,7 +104,7 @@ export default function FoodVideographyPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
             <div className="lg:col-span-7">
               <Reveal>
-                <h2 className="text-black font-black text-4xl md:text-6xl tracking-tighter leading-none mb-10">
+                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-bold text-4xl md:text-6xl tracking-tight leading-[0.95] antialiased uppercase mb-10">
                   PEOPLE EAT<br />WITH THEIR EYES.
                 </h2>
                 <p className="text-black/60 text-lg md:text-xl font-light leading-relaxed mb-12 max-w-xl">
@@ -125,26 +125,26 @@ export default function FoodVideographyPage() {
             </div>
 
             <div className="lg:col-span-5">
-              <Reveal className="bg-black text-white p-10 md:p-14 rounded-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#B11226]/10 rounded-full blur-3xl -translate-y-12 translate-x-12" />
-                <h4 className="font-mono text-[#B11226] text-[10px] tracking-[0.3em] uppercase mb-8 font-bold">What We Offer</h4>
+              <Reveal className="bg-[#050505] text-white p-10 md:p-14 rounded-sm relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#9A0E1F]/10 rounded-full blur-3xl -translate-y-12 translate-x-12" />
+                <h4 className="font-mono text-[#9A0E1F] text-[10px] tracking-[0.3em] uppercase mb-8 font-bold">What We Offer</h4>
                 <div className="flex flex-col gap-6">
                    <div className="flex items-start gap-4">
-                     <span className="text-[#B11226] font-bold mt-1">01</span>
+                     <span className="text-[#9A0E1F] font-bold mt-1">01</span>
                      <div>
                        <h5 className="font-bold uppercase tracking-wide">Menu Showcases</h5>
                        <p className="text-white/40 text-xs mt-1">Cinematic reels of your top-selling items.</p>
                      </div>
                    </div>
                    <div className="flex items-start gap-4">
-                     <span className="text-[#B11226] font-bold mt-1">02</span>
+                     <span className="text-[#9A0E1F] font-bold mt-1">02</span>
                      <div>
                        <h5 className="font-bold uppercase tracking-wide">Action Shots</h5>
                        <p className="text-white/40 text-xs mt-1">Chefs at work, sizzling pans, and dynamic prep.</p>
                      </div>
                    </div>
                    <div className="flex items-start gap-4">
-                     <span className="text-[#B11226] font-bold mt-1">03</span>
+                     <span className="text-[#9A0E1F] font-bold mt-1">03</span>
                      <div>
                        <h5 className="font-bold uppercase tracking-wide">Social Media Packs</h5>
                        <p className="text-white/40 text-xs mt-1">Batched content ready for Instagram & TikTok.</p>
@@ -163,7 +163,7 @@ export default function FoodVideographyPage() {
       <section className="py-24 bg-[#FAFAFA] text-black">
         <div className="container max-w-4xl">
           <Reveal>
-            <h2 className="font-black text-3xl md:text-5xl mb-12 text-center uppercase tracking-tighter">Food Videography FAQs</h2>
+            <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center tracking-tight leading-[0.95] antialiased uppercase">Food Videography FAQs</h2>
           </Reveal>
           <div className="flex flex-col gap-8">
             <Reveal delay={0.1}>
@@ -189,10 +189,10 @@ export default function FoodVideographyPage() {
       {/* ══════════════════════════════════════════════════════
           SECTION 4: CALL TO ACTION
       ══════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-48 bg-[#0A0A0A] text-white border-t border-white/5">
+      <section className="py-24 md:py-48 bg-[#050505] text-white border-t border-white/5">
         <div className="container text-center flex flex-col items-center">
           <Reveal>
-            <h2 className="text-white font-black leading-none mb-12" style={{ fontSize: "clamp(2.5rem, 8vw, 6.5rem)", letterSpacing: "-0.04em" }}>
+            <h2 className="text-white font-black leading-none mb-12" style={{ fontSize: "clamp(2.5rem, 8vw, 6.5rem)", letterSpacing: "-0.03em" }}>
               MAKE THEM<br />
               <span className="text-white/20">HUNGRY.</span>
             </h2>
@@ -201,7 +201,7 @@ export default function FoodVideographyPage() {
           <Reveal delay={0.15}>
             <button
               onClick={() => openProjectModal()}
-              className="px-14 py-7 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#B11226] hover:text-white transition-all duration-500 shadow-2xl"
+              className="px-14 py-7 bg-white text-black text-[11px] font-mono font-bold tracking-[0.3em] uppercase hover:bg-[#9A0E1F] hover:text-white transition-all duration-500 shadow-2xl"
             >
               Start Your Project
             </button>

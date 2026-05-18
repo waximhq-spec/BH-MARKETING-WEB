@@ -15,8 +15,6 @@ export default function ServiceWorkerUnregister() {
           registration.unregister().then((success) => {
             if (success) {
               console.log('Successfully unregistered old Service Worker');
-              // Optional: reload the page to get the fresh content if a SW was actually removed
-              window.location.reload();
             }
           });
         }

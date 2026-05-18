@@ -442,15 +442,15 @@ export default function LandingPage() {
                 {/* RIGHT: CONVERSION CARD (Desktop Only) */}
                 <div className="hidden lg:flex lg:col-span-5 flex-col items-end lg:mt-12">
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ y: 20 }}
+                    animate={{ y: 0 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
                     className="w-full max-w-[400px]"
                   >
                     {/* Trust Signal Testimonial Slider */}
                     <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{ y: 20 }}
+                      animate={{ y: 0 }}
                       transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                       className="w-full bg-[#050505]/95 border border-white/[0.08] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)] rounded-[24px]"
                     >
@@ -871,12 +871,12 @@ function TestimonialRotation({ isMobile = false }: { isMobile?: boolean }) {
 
   return (
     <div className="w-full relative h-full">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         <motion.p
           key={index}
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0.001, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
+          exit={{ opacity: 0.001, y: -8 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className={`text-white font-bold italic ${isMobile ? "text-[13px]" : "text-[15px]"} leading-relaxed tracking-wide opacity-90`}
         >
@@ -996,12 +996,12 @@ function TestimonialWheel() {
 
   return (
     <div className="relative w-full h-full">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={index}
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 30, opacity: 0.001 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -30, opacity: 0 }}
+          exit={{ y: -30, opacity: 0.001 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 flex flex-col justify-center"
         >

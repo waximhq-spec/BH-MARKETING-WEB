@@ -39,7 +39,7 @@ export default function PaidAdvertisingPage() {
       </VisualHiddenSEO>
 
       {/* ── HERO SECTION ── */}
-      <section data-theme="light" className="relative pt-36 md:pt-52 pb-20 md:pb-32 bg-white overflow-hidden">
+      <section data-theme="light" className="relative pt-36 md:pt-44 pb-10 md:pb-12 bg-white overflow-hidden">
         <div className="container relative z-10">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
             <div>
@@ -72,12 +72,12 @@ export default function PaidAdvertisingPage() {
               </div>
             </Reveal>
           </div>
-          <div className="h-[2px] w-full bg-black/10 mt-16" />
+          <div className="h-[2px] w-full bg-black/10 mt-10" />
         </div>
       </section>
 
       {/* ── SERVICES GRID ── */}
-      <section data-theme="light" className="py-24 md:py-36 bg-[#fafafa] text-black border-t border-black/5 relative overflow-hidden">
+      <section data-theme="light" className="pt-16 md:pt-20 pb-24 md:pb-36 bg-[#fafafa] text-black border-t border-black/5 relative overflow-hidden">
         <div className="container max-w-7xl mx-auto">
           <Reveal>
             <div className="mb-16">

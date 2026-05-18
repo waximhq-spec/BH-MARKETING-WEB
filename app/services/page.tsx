@@ -114,7 +114,7 @@ export default function ServicesPage() {
       {/* ══════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════ */}
-      <section data-theme="light" className="relative pt-36 md:pt-52 pb-20 md:pb-32 bg-white overflow-hidden">
+      <section data-theme="light" className="relative pt-36 md:pt-44 pb-10 md:pb-12 bg-white overflow-hidden">
         <div className="container relative z-10">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
             <div>
@@ -144,7 +144,7 @@ export default function ServicesPage() {
               </div>
             </Reveal>
           </div>
-          <div className="h-[2px] w-full bg-black/10 mt-16" />
+          <div className="h-[2px] w-full bg-black/10 mt-10" />
         </div>
       </section>
 
@@ -157,7 +157,7 @@ export default function ServicesPage() {
           <section
             key={svc.num}
             data-theme={isEven ? "light" : "dark"}
-            className={`py-24 md:py-36 ${isEven ? "bg-white text-black" : "bg-[#0a0a0a] text-white"}`}
+            className={`pb-24 md:pb-36 ${idx === 0 ? "pt-16 md:pt-20" : "pt-24 md:pt-36"} ${isEven ? "bg-white text-black" : "bg-[#0a0a0a] text-white"}`}
           >
             <div className="container">
               <Reveal>

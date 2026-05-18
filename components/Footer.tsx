@@ -41,6 +41,8 @@ export default function Footer() {
               <img
                 src="/HERO-LOGO.svg"
                 alt="Cinmach"
+                width={150}
+                height={16}
                 className="h-4 w-auto"
                 style={{ filter: "brightness(0) invert(1)" }}
               />

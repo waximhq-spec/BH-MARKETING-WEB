@@ -11,7 +11,8 @@ import SecurityLayer from "@/components/SecurityLayer";
 import ScrollToTop from "@/components/ScrollToTop";
 import BackToTop from "@/components/BackToTop";
 import AnnouncementBanner from "@/components/AnnouncementBanner";
-import CalEmbed from "@/components/CalEmbed";
+import dynamic from "next/dynamic";
+const CalEmbed = dynamic(() => import("@/components/CalEmbed"), { ssr: false });
 
 const inter = Inter({
   variable: "--font-inter",

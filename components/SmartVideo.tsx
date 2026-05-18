@@ -88,6 +88,8 @@ export default function SmartVideo({
             <img
               src={poster}
               alt=""
+              width={1920}
+              height={1080}
               className="w-full h-full object-cover"
             />
           ) : (

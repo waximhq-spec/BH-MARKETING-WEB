@@ -30,6 +30,7 @@ const NAV_LINKS: NavLink[] = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing" | "split">("dark");
   const pathname = usePathname();
   const { openProjectModal } = useModal();
@@ -108,7 +109,10 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+    setServicesDropdownOpen(false);
+  }, [pathname]);
 
   const isHome = pathname === "/";
   const isLight = theme === "light" || (!isHome && (theme === "red" || theme === "pricing"));
@@ -351,8 +355,12 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={(e) => {
-                      if (link.dropdown) e.preventDefault();
-                      else setMenuOpen(false);
+                      if (link.dropdown) {
+                        e.preventDefault();
+                        setServicesDropdownOpen(!servicesDropdownOpen);
+                      } else {
+                        setMenuOpen(false);
+                      }
                     }}
                     style={{
                       fontSize: "36px",
@@ -368,7 +376,13 @@ export default function Navbar() {
                     {link.label}
                     {link.dropdown && (
                       <svg
-                        style={{ width: "24px", height: "24px", opacity: 0.3 }}
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          opacity: 0.3,
+                          transform: servicesDropdownOpen ? "rotate(-180deg)" : "none",
+                          transition: "transform 0.25s ease",
+                        }}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -385,9 +399,13 @@ export default function Navbar() {
                         display: "flex",
                         flexDirection: "column",
                         gap: "20px",
-                        marginTop: "24px",
                         paddingLeft: "16px",
                         borderLeft: "2px solid rgba(0,0,0,0.1)",
+                        overflow: "hidden",
+                        maxHeight: servicesDropdownOpen ? "300px" : "0px",
+                        opacity: servicesDropdownOpen ? 1 : 0,
+                        marginTop: servicesDropdownOpen ? "24px" : "0px",
+                        transition: "max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, margin-top 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                       }}
                     >
                       {link.dropdown.map((item, idx) => {

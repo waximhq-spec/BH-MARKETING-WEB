@@ -74,7 +74,16 @@ function Reveal({
 /* ─────────────────────────────────────────────────────────────
    Services Table Component (Interactive Accordion)
    ─────────────────────────────────────────────────────────── */
-const SERVICES_DATA = [
+const SERVICES_DATA: Array<{
+  num: string;
+  title: string;
+  desc: string;
+  sub: string[];
+  alt: string;
+  bg: string;
+  href: string;
+  disabled?: boolean;
+}> = [
   {
     num: "01",
     title: "Content Production",
@@ -92,16 +101,6 @@ const SERVICES_DATA = [
     alt: "Premium brand identity and logo design services by creative agency in Bahrain",
     bg: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop",
     href: "/brand-identity"
-  },
-  {
-    num: "03",
-    title: "Paid Advertising",
-    desc: "Performance-driven campaigns built to generate leads and sales.",
-    sub: ["Meta Ads", "Ad Creatives", "Retargeting", "Landing Pages"],
-    alt: "Paid advertising and performance marketing campaigns in Bahrain",
-    bg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop",
-    href: "/paid-advertising",
-    disabled: true
   }
 ];
 
@@ -369,7 +368,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="relative h-[calc(100svh-40px)] md:h-[calc(100svh-48px)] lg:h-[calc(100svh-64px)] min-h-[580px] w-full overflow-hidden flex flex-col" id="hero-section">
+        <section data-theme="dark" className="relative h-[calc(100svh-88px)] md:h-[calc(100svh-100px)] lg:h-[calc(100svh-100px)] min-h-[580px] w-full overflow-hidden flex flex-col" id="hero-section">
           <HeroBlurWrapper>
             {/* Background video — no filter, no scale animation, no will-change */}
             <SmartVideo

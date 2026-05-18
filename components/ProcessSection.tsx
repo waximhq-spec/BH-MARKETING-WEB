@@ -7,22 +7,22 @@ const STEPS = [
   {
     num: "01",
     title: "Understand Your Brand",
-    desc: "We learn what makes your audience connect with you.",
+    desc: "We learn what makes your audience connect with your brand.",
   },
   {
     num: "02",
-    title: "Plan The Strategy",
-    desc: "We build a creative roadmap to elevate your digital presence.",
+    title: "Plan The Creative",
+    desc: "We build a creative roadmap to elevate your visual identity.",
   },
   {
     num: "03",
-    title: "Execute The Creative",
-    desc: "We produce premium visual content designed to convert.",
+    title: "Execute The Production",
+    desc: "We produce premium cinematic content designed to convert.",
   },
   {
     num: "04",
-    title: "Scale Your Growth",
-    desc: "We manage campaigns to ensure your brand reaches new heights.",
+    title: "Deliver & Elevate",
+    desc: "We deliver polished visual assets designed to accelerate your growth.",
   },
 ];
 

@@ -228,63 +228,106 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile full-screen menu — use CSS visibility instead of opacity animation */}
+      {/* Mobile full-screen menu — 100dvh for iOS/Android perfection */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[200] flex flex-col bg-white"
-            style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-0 left-0 w-full h-[100dvh] z-[200] flex flex-col bg-white"
           >
-            <div className="w-full h-14 flex items-center justify-between px-6 shrink-0 border-b border-black/5">
+            {/* Header matching main navbar height */}
+            <div className="w-full h-14 shrink-0 flex items-center justify-between px-6 border-b border-black/5 bg-white">
               <Link href="/" onClick={() => setMenuOpen(false)}>
                 <img
                   src="/HERO-LOGO.svg"
                   alt="Cinmach"
-                  className="h-7 w-auto"
+                  className="h-[26px] w-auto"
                   style={{ filter: "brightness(0)" }}
                 />
               </Link>
               <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1.5">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1.5">
                   <path d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
 
-            <nav className="flex-1 flex flex-col items-start px-8 pt-12 gap-8">
-              {NAV_LINKS.map((link, i) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-black font-medium"
-                  style={{
-                    fontSize: "clamp(28px, 9vw, 42px)",
-                    letterSpacing: "-0.03em",
-                    lineHeight: 1,
-                    color: pathname === link.href ? accentColor : "#000000",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            {/* Scrollable Links Area */}
+            <div className="flex-1 overflow-y-auto overscroll-contain bg-white">
+              <nav className="flex flex-col px-8 py-10 gap-8">
+                {NAV_LINKS.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <div key={link.href} className="flex flex-col">
+                      <Link
+                        href={link.href}
+                        onClick={(e) => {
+                          if (link.dropdown) e.preventDefault();
+                          else setMenuOpen(false);
+                        }}
+                        className="text-black font-medium tracking-tight flex items-center justify-between"
+                        style={{
+                          fontSize: "36px",
+                          lineHeight: 1,
+                          color: isActive ? accentColor : "#000000",
+                        }}
+                      >
+                        {link.label}
+                        {link.dropdown && (
+                          <svg className="w-6 h-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        )}
+                      </Link>
 
+                      {/* Render mobile dropdown if exists */}
+                      {link.dropdown && (
+                        <div className="flex flex-col gap-6 mt-8 pl-4 border-l-2 border-black/10">
+                          {link.dropdown.map((item, idx) => {
+                            if (item.disabled) {
+                              return (
+                                <div key={item.label} className="flex flex-wrap items-center gap-3 opacity-50">
+                                  <span className="text-[16px] font-medium tracking-tight text-black/70">{item.label}</span>
+                                  <span className="text-[9px] font-mono font-bold tracking-widest text-[#9A0E1F] uppercase mt-0.5">Coming Soon</span>
+                                </div>
+                              );
+                            }
+                            return (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setMenuOpen(false)}
+                                className={`text-[16px] font-medium tracking-tight text-black/80 ${
+                                  idx === link.dropdown!.length - 1 ? "text-[11px] font-mono font-bold tracking-[0.2em] uppercase !text-[#9A0E1F] pt-2" : ""
+                                }`}
+                              >
+                                {item.label}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </nav>
+              <div className="px-8 pb-8 pt-4">
+                <p className="text-black/20 font-mono text-[9px] uppercase tracking-[0.3em]">© 2026 Cinmach Productions</p>
+              </div>
+            </div>
+
+            {/* Fixed Bottom CTA */}
+            <div className="shrink-0 p-6 pb-8 border-t border-black/5 bg-white">
               <button
                 type="button"
                 onClick={() => { setMenuOpen(false); openProjectModal(); }}
-                className="mt-8 flex items-center justify-between w-full h-[56px] px-6 bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.25em] uppercase"
+                className="w-full flex items-center justify-center h-14 rounded-full bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.25em] uppercase shadow-[0_10px_30px_rgba(154,14,31,0.25)] transition-transform active:scale-[0.98]"
               >
-                <span>GET A QUOTE</span>
-                <span>→</span>
+                GET A QUOTE
               </button>
-            </nav>
-
-            <div className="px-8 py-8">
-              <p className="text-black/20 font-mono text-[9px] uppercase tracking-[0.3em]">© 2026 Cinmach Productions</p>
             </div>
           </motion.div>
         )}

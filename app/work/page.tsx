@@ -1,4 +1,5 @@
 "use client";
+import CTASection from "@/components/CTASection";
 
 import { motion } from "framer-motion";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
@@ -122,6 +123,7 @@ export default function WorkPage() {
           </div>
         </div>
       </section>
+      <CTASection />
     </main>
   );
 }

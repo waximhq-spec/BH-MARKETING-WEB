@@ -24,15 +24,15 @@ export default function CTASection() {
           </div>
 
           <h2 
-            className="text-white font-bold tracking-tight antialiased uppercase leading-[1.05] uppercase mb-8"
+            className="text-white font-bold tracking-tight antialiased uppercase leading-[1.05] mb-8"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
           >
-            Ready to scale your <br />
-            <span className="text-[#ffffff]">brand's revenue?</span>
+            Ready to elevate <br />
+            <span className="text-[#ffffff]">your brand?</span>
           </h2>
 
           <p className="text-white/40 text-[15px] md:text-[17px] max-w-2xl mx-auto font-light leading-relaxed mb-12">
-            Let's build a tailored creative strategy and high-converting marketing engine designed specifically for your growth goals.
+            Let's build a tailored visual strategy and premium cinematic assets designed specifically to accelerate your growth.
           </p>
 
           <button

@@ -1,4 +1,5 @@
 "use client";
+import CTASection from "@/components/CTASection";
 
 import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
@@ -142,6 +143,7 @@ export default function BrandIdentityPage() {
           </Reveal>
         </div>
       </section>
+      <CTASection />
     </main>
   );
 }

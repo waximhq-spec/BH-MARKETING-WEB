@@ -16,18 +16,21 @@ const FAQS = [
       </>
     )
   },
-
   {
-    question: "What is included in a campaign production?",
-    answer: "We handle everything from end to end: creative strategy, concept development, high-end filming, and professional post-production including color grading and sound design."
+    question: "What is included in a content production project?",
+    answer: "We handle everything from start to finish: creative concept development, pre-production planning, high-end filming, and professional post-production including cinematic editing, color grading, and sound design."
   },
   {
-    question: "Do you create social media campaigns?",
-    answer: "Yes, we produce conversion-focused short-form content and campaigns designed specifically for modern digital platforms like Instagram and TikTok."
+    question: "Can you help with my company's branding and logo design?",
+    answer: "Absolutely. We offer complete Brand Identity design services, including custom logo design, visual positioning, curated color palettes, typography, and professional brand guidelines to make your business memorable."
+  },
+  {
+    question: "Do you produce content optimized for social media?",
+    answer: "Yes, we produce high-end, short-form cinematic video reels and photography specifically formatted and optimized to stand out and capture attention on modern digital platforms like Instagram and TikTok."
   },
   {
     question: "Where are you based?",
-    answer: "We are a creative marketing agency located in Manama, and we partner with brands across Bahrain and the GCC."
+    answer: "We are a creative marketing and production agency located in Manama, partnering with ambitious brands across Bahrain and the GCC."
   }
 ];
 

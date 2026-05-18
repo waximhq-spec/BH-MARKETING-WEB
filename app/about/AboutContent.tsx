@@ -1,4 +1,5 @@
 "use client";
+import CTASection from "@/components/CTASection";
 
 import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
@@ -114,24 +115,7 @@ export default function AboutContent() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section data-theme="dark" className="py-24 md:py-36 bg-[#050505]">
-        <div className="container text-center flex flex-col items-center">
-          <Reveal>
-            <h2 className="text-[#ffffff] font-black leading-[0.95] tracking-tighter mb-10" style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", letterSpacing: "-0.03em" }}>
-              WANT TO WORK<br />WITH US?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <button onClick={() => openProjectModal()} className="group relative px-10 py-5 bg-[#9A0E1F] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase rounded-full overflow-hidden transition-all duration-400 hover:shadow-[0_8px_30px_rgba(154,14,31,0.45)]">
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-3">
-                Get a Quote <span className="text-[12px]">→</span>
-              </span>
-              <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[0.16,1,0.3,1] origin-left" />
-            </button>
-          </Reveal>
-        </div>
-      </section>
+      <CTASection />
     </main>
   );
 }

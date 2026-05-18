@@ -1,4 +1,5 @@
 "use client";
+import CTASection from "@/components/CTASection";
 
 import { motion } from "framer-motion";
 import PageBgSync from "@/components/PageBgSync";
@@ -149,6 +150,7 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
+      <CTASection />
     </main>
   );
 }

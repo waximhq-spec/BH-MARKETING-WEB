@@ -1,4 +1,5 @@
 "use client";
+import CTASection from "@/components/CTASection";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -291,44 +292,7 @@ export default function ServicesPage() {
         );
       })}
 
-      {/* ══════════════════════════════════════════════════════
-          FINAL CTA
-      ══════════════════════════════════════════════════════ */}
-      <section data-theme="dark" className="py-32 md:py-48 bg-[#050505] border-t border-white/5">
-        <div className="container text-center flex flex-col items-center">
-          <Reveal>
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/15 border border-[#9A0E1F]/30 rounded-full mb-10">
-              <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse shadow-[0_0_10px_#9A0E1F]" />
-              <span className="text-white font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Start a Project</span>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2
-              className="text-[#ffffff] font-black leading-[0.9] tracking-tighter mb-6"
-              style={{ fontSize: "clamp(2rem, 7vw, 5rem)", letterSpacing: "-0.03em" }}
-            >
-              READY TO GET<br />
-              MORE CUSTOMERS?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p className="text-white/35 text-[14px] md:text-base font-light max-w-lg mx-auto mb-12 leading-relaxed">
-              Tell us about your brand and we will show you exactly how our content can drive real results.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <button
-              onClick={() => openProjectModal()}
-              className="group relative px-10 py-5 bg-[#9A0E1F] text-white text-[10px] font-mono font-bold tracking-[0.25em] uppercase rounded-full overflow-hidden transition-all duration-400 hover:shadow-[0_8px_30px_rgba(154,14,31,0.45)]"
-            >
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300 flex items-center gap-3">
-                Get a Quote <span className="text-[12px] transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </span>
-              <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[0.16,1,0.3,1] origin-left" />
-            </button>
-          </Reveal>
-        </div>
-      </section>
+      <CTASection />
     </main>
   );
 }

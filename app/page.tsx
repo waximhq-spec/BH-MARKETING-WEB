@@ -327,14 +327,13 @@ export default function LandingPage() {
       <VisualHiddenSEO>
         <h1>Creative Marketing Agency & Cinematic Video Production in Bahrain</h1>
         <h2>Cinmach Productions: Premium Brand Building Agency</h2>
-        <p>Cinmach Productions is a premium creative marketing agency in Bahrain. We combine strategy, storytelling, and cinematic production to build modern brands. We specialize in brand strategy, social media campaigns, commercial video production, and digital presence across industries.</p>
+        <p>Cinmach Productions is a premium creative marketing and production agency in Bahrain. We combine strategy, storytelling, and cinematic production to build modern brands. We specialize in custom brand identity, professional logo design, high-end commercial video production, and visual assets across diverse industries.</p>
 
         <h2>Our Specialized Services</h2>
         <ul>
-          <li><strong>Brand Strategy:</strong> Positioning and visual identity to drive business growth.</li>
-          <li><strong>Content Production:</strong> Cinematic brand films, commercials, and high-end storytelling.</li>
-          <li><strong>Social Media Marketing:</strong> Conversion-focused campaigns and audience engagement.</li>
-          <li>Websites & Digital: Premium UI/UX and digital brand experiences.</li>
+          <li><strong>Brand Identity:</strong> Custom logos, strategic positioning, and brand guidelines to drive growth.</li>
+          <li><strong>Content Production:</strong> Cinematic brand films, high-end photography, reels, and visual storytelling.</li>
+          <li><strong>Digital Marketing Assets:</strong> Conversion-focused digital visuals and creative social media presence.</li>
         </ul>
 
         <h2>FAQ — Creative Agency Services</h2>
@@ -342,14 +341,17 @@ export default function LandingPage() {
           <h3>How does cinematic content help my brand?</h3>
           <p>Cinematic video content increases engagement, elevates your brand's perceived value, and turns digital views into real business growth.</p>
 
-          <h3>What is included in a campaign production?</h3>
-          <p>We handle everything from creative direction and strategy to high-end filming, lighting, editing, color grading, and deployment.</p>
+          <h3>What is included in a content production project?</h3>
+          <p>We handle everything from start to finish: creative concept development, pre-production planning, high-end filming, and professional post-production including cinematic editing, color grading, and sound design.</p>
 
-          <h3>Do you work with industries outside of hospitality?</h3>
-          <p>Yes, we build brands across fashion, real estate, fitness, lifestyle, corporate, and tech sectors in Bahrain.</p>
+          <h3>Can you help with my company's branding and logo design?</h3>
+          <p>Absolutely. We offer complete Brand Identity design services, including custom logo design, visual positioning, curated color palettes, typography, and professional brand guidelines to make your business memorable.</p>
+
+          <h3>Do you produce content optimized for social media?</h3>
+          <p>Yes, we produce high-end, short-form cinematic video reels and photography specifically formatted and optimized to stand out and capture attention on modern digital platforms like Instagram and TikTok.</p>
 
           <h3>Where are you based?</h3>
-          <p>We are a creative marketing agency based in Manama, serving clients across all of Bahrain and the GCC.</p>
+          <p>We are a creative marketing and production agency based in Manama, serving clients across all of Bahrain and the GCC.</p>
         </div>
 
         <h2>Why Choose Cinmach Productions?</h2>

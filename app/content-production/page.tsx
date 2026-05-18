@@ -1,4 +1,5 @@
 "use client";
+import CTASection from "@/components/CTASection";
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
@@ -134,6 +135,7 @@ export default function ContentProductionPage() {
 
       {/* ── FAQ SECTION ── */}
       <FAQSection />
+      <CTASection />
     </main>
   );
 }

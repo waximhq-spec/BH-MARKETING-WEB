@@ -40,47 +40,64 @@ export default function Navbar() {
   // Track scroll position before locking so we can restore it
   const scrollYRef = useRef(0);
 
-  // Query sections once after mount/pathname change
+  // Calculate offsets once on mount and resize, read scrollY on scroll
   useEffect(() => {
-    sectionsRef.current = Array.from(document.querySelectorAll("[data-theme]"));
-    const offset = 64;
-    let active: string | null = null;
-    sectionsRef.current.forEach((s) => {
-      const rect = s.getBoundingClientRect();
-      if (rect.top <= offset && rect.bottom >= offset) {
-        active = s.getAttribute("data-theme");
-      }
-    });
-    if (!active) {
-      active = pathname === "/" ? "dark" : "light";
-    }
-    setTheme(active as any);
-    lastThemeRef.current = active as any;
-  }, [pathname]);
+    let sectionData: { top: number; bottom: number; theme: string }[] = [];
+    
+    const calculateOffsets = () => {
+      const sections = Array.from(document.querySelectorAll("[data-theme]"));
+      const scrollY = window.scrollY;
+      sectionData = sections.map((s) => {
+        const rect = s.getBoundingClientRect();
+        return {
+          top: rect.top + scrollY,
+          bottom: rect.bottom + scrollY,
+          theme: s.getAttribute("data-theme") || "dark"
+        };
+      });
+      
+      // Initial check
+      checkTheme();
+    };
 
-  useEffect(() => {
+    const checkTheme = () => {
+      const scrollPos = window.scrollY + 64;
+      let activeTheme: string | null = null;
+      for (let i = 0; i < sectionData.length; i++) {
+        if (scrollPos >= sectionData[i].top && scrollPos < sectionData[i].bottom) {
+          activeTheme = sectionData[i].theme;
+          break;
+        }
+      }
+      if (!activeTheme) {
+        activeTheme = pathname === "/" ? "dark" : "light";
+      }
+      if (activeTheme !== lastThemeRef.current) {
+        lastThemeRef.current = activeTheme as any;
+        setTheme(activeTheme as any);
+      }
+    };
+
+    // Delay calculation slightly to ensure layout is settled
+    setTimeout(calculateOffsets, 100);
+    window.addEventListener("resize", calculateOffsets, { passive: true });
+
     const onScroll = () => {
       if (tickingRef.current) return;
       tickingRef.current = true;
       requestAnimationFrame(() => {
-        const offset = 64;
-        let activeTheme: string | null = null;
-        sectionsRef.current.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= offset && rect.bottom >= offset) {
-            activeTheme = section.getAttribute("data-theme");
-          }
-        });
-        if (activeTheme && activeTheme !== lastThemeRef.current) {
-          lastThemeRef.current = activeTheme;
-          setTheme(activeTheme as any);
-        }
+        checkTheme();
         tickingRef.current = false;
       });
     };
+    
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", calculateOffsets);
+    };
+  }, [pathname]);
 
   // iOS-safe scroll lock: fix the body in place instead of overflow:hidden
   // which doesn't work on Mobile Safari

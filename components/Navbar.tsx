@@ -188,6 +188,22 @@ export default function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-12">
             <div className="flex items-center gap-7 lg:gap-9">
+              {!isHome && (
+                <div className="relative group flex items-center h-full">
+                  <Link
+                    href="/"
+                    className="relative py-2 opacity-60 hover:opacity-100 transition-opacity flex items-center"
+                    style={{ color: textColor }}
+                    aria-label="Home"
+                    title="Return to Home"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] transition-transform duration-300 group-hover:-translate-y-0.5">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  </Link>
+                </div>
+              )}
               {NAV_LINKS.map((link) => {
                 const isActive =
                   pathname === link.href ||
@@ -376,6 +392,26 @@ export default function Navbar() {
           }}
         >
           <nav style={{ display: "flex", flexDirection: "column", padding: "40px 32px", gap: "32px" }}>
+            {!isHome && (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Link
+                  href="/"
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    fontSize: "36px",
+                    lineHeight: 1,
+                    fontWeight: 500,
+                    letterSpacing: "-0.03em",
+                    color: "#000000",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  HOME
+                </Link>
+              </div>
+            )}
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (

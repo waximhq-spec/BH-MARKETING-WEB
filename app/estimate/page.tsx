@@ -127,18 +127,15 @@ export default function ContactPage() {
                 <div className="flex flex-col gap-4">
                   {SOCIALS.map((s, idx) => (
                     <Reveal key={s.label} delay={idx * 0.05}>
-                      <a
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center justify-between py-4 border-b border-white/6 hover:bg-white/[0.015] transition-all duration-300 px-2 -mx-2"
+                      <div
+                        className="flex items-center justify-between py-4 border-b border-white/6 px-2 -mx-2 cursor-default select-none"
                       >
                         <div className="flex items-center gap-4">
-                          <span className="text-white font-bold text-[15px] tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300">{s.label}</span>
-                          <span className="text-white/30 text-[12px] font-light">{s.handle}</span>
+                          <span className="text-white font-bold text-[15px] tracking-tight">{s.label}</span>
+                          <span className="text-white/20 text-[12px] font-light">{s.handle}</span>
                         </div>
-                        <span className="text-white/20 text-[12px] group-hover:text-[#9A0E1F] group-hover:translate-x-1 transition-all duration-300">→</span>
-                      </a>
+                        <span className="text-white/10 text-[9px] font-mono tracking-widest uppercase font-bold">Coming Soon</span>
+                      </div>
                     </Reveal>
                   ))}
                 </div>

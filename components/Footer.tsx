@@ -114,15 +114,12 @@ export default function Footer() {
             </h4>
             <div className="flex flex-col gap-3">
               {SOCIALS.map((link) => (
-                <a
+                <span
                   key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/50 text-[13px] font-light hover:text-white transition-colors duration-300 w-fit"
+                  className="text-white/30 text-[13px] font-light flex items-center gap-2 cursor-default select-none"
                 >
-                  {link.label}
-                </a>
+                  {link.label} <span className="text-[8px] font-mono tracking-[0.1em] text-white/15 uppercase font-bold">(Soon)</span>
+                </span>
               ))}
             </div>
           </div>
@@ -130,12 +127,22 @@ export default function Footer() {
 
         {/* ─── Bottom Bar ─── */}
         <div className="border-t border-white/6 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/20 text-[10px] font-mono tracking-[0.15em] uppercase">
-            &copy; 2026 Cinmach Productions. All rights reserved.
+          <p className="text-white/20 text-[10px] font-mono tracking-[0.15em] uppercase text-center md:text-left">
+            &copy; {new Date().getFullYear()} Cinmach Productions. All rights reserved.
           </p>
-          <p className="text-white/15 text-[10px] font-mono tracking-[0.15em] uppercase">
-            Bahrain
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <div className="flex items-center gap-6">
+              <Link href="/privacy-policy" className="text-white/20 hover:text-white transition-colors text-[10px] font-mono tracking-[0.15em] uppercase">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-white/20 hover:text-white transition-colors text-[10px] font-mono tracking-[0.15em] uppercase">
+                Terms & Conditions
+              </Link>
+            </div>
+            <p className="text-white/15 text-[10px] font-mono tracking-[0.15em] uppercase hidden md:block">
+              Bahrain
+            </p>
+          </div>
         </div>
       </div>
     </footer>

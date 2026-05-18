@@ -120,7 +120,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col text-black/80 dark:text-white/80 selection:bg-[#ff2a2a]/30 selection:text-white">
+      <body className="min-h-screen flex flex-col text-black/80 dark:text-white/80 selection:bg-[#ff2a2a]/30 selection:text-white bg-[#050505]">
         <ModalProvider>
           <ServiceWorkerUnregister />
           {/* ── ISOLATED STICKY HEADER

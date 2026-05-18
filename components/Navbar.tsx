@@ -279,11 +279,7 @@ export default function Navbar() {
 
             <button
               onClick={() => openProjectModal()}
-              className={`h-9 px-5 text-[9px] font-mono font-black tracking-[0.25em] uppercase rounded-full border transition-all duration-300 ${
-                (isLight || isSplit)
-                  ? "bg-[#050505] text-[#ffffff] border-transparent hover:bg-black/90"
-                  : "bg-white text-black border-transparent hover:bg-white/90"
-              }`}
+              className="h-9 px-5 text-[9px] font-mono font-black tracking-[0.25em] uppercase rounded-full border border-transparent bg-[#9A0E1F] text-white transition-all duration-300 hover:bg-[#9A0E1F]/90 hover:shadow-[0_0_20px_rgba(154,14,31,0.4)]"
             >
               GET A QUOTE →
             </button>

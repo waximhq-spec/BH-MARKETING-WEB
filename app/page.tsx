@@ -33,7 +33,7 @@ function HeroClock() {
   return (
     <div className="flex flex-col items-start gap-1 font-mono">
       <div className="flex items-center gap-2">
-        <span className="w-1 h-1 bg-[#9A0E1F] rounded-full animate-pulse" />
+        <span className="w-1 h-1 bg-[#9A0E1F] rounded-full animate-pulse transform-gpu will-change-[opacity]" />
         <span className="text-white/40 text-[8px] tracking-[0.3em] uppercase font-bold">Local Time</span>
       </div>
       <span className="text-white text-[13px] font-black tracking-[0.15em] tabular-nums">
@@ -63,8 +63,8 @@ function Reveal({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={className}
-      style={style}
+      className={`transform-gpu ${className}`}
+      style={{ ...style, willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>
@@ -381,9 +381,9 @@ export default function LandingPage() {
             <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 z-[2]" />
 
 
-            <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-12 md:pb-24 lg:pb-40">
+            <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-8 md:pb-16 lg:pb-28">
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-24 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-24 items-start">
                 {/* LEFT: CONTENT AREA */}
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left w-full">
                   <div className="w-min lg:w-full flex flex-col mx-auto lg:mx-0">
@@ -450,49 +450,47 @@ export default function LandingPage() {
                 </div>
 
                 {/* RIGHT: CONVERSION CARD (Desktop Only) */}
-                <div className="hidden lg:flex lg:col-span-5 flex-col items-end lg:mt-12">
+                <div className="hidden lg:flex lg:col-span-5 flex-col items-end lg:mt-2">
                   <motion.div
                     initial={{ opacity: 0.85, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-                    className="w-full max-w-[400px]"
+                    className="w-full max-w-[400px] flex flex-col gap-4 transform-gpu will-change-[transform,opacity]"
                   >
                     {/* Trust Signal Testimonial Slider */}
                     <motion.div
-                      initial={{ opacity: 0.85, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className="w-full bg-[#050505]/95 border border-white/[0.08] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)] rounded-[24px]"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.8, duration: 0.6 }}
+                      className="w-full bg-white border border-black/[0.08] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.06)] rounded-[24px]"
                     >
                       <div className="flex flex-col gap-3">
                         <div className="flex items-center gap-3">
                           <div className="h-[1px] w-6 bg-[#9A0E1F]" />
-                          <span className="text-white/60 font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</span>
+                          <span className="text-black/60 font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</span>
                         </div>
                         <div className="relative h-12 flex items-center">
-                          <TestimonialRotation />
+                          <TestimonialRotation textColor="text-black" />
                         </div>
                       </div>
-                      {/* Subtle accent line */}
-                      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#9A0E1F]/30 to-transparent" />
                     </motion.div>
 
                     <div
-                      className="mt-4 relative w-full bg-[#050505]/95 border border-white/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_40px_80px_rgba(154,14,31,0.15)] transform-gpu overflow-hidden"
+                      className="relative w-full bg-white border border-black/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.06)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-black/20 hover:shadow-[0_40px_80px_rgba(0,0,0,0.1)] transform-gpu overflow-hidden"
                     >
                       {/* Soft ambient red glow */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#9A0E1F]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#9A0E1F]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none" />
                       
                       <div className="relative z-10 flex flex-col items-center text-center">
                         {/* Status Label */}
-                        <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                        <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-black/[0.03] border border-black/[0.05] shadow-[0_0_15px_rgba(0,0,0,0.02)]">
                           <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full shadow-[0_0_8px_#9A0E1F] animate-pulse" />
-                          <span className="text-white/60 font-medium text-[9px] uppercase tracking-[0.2em]">Direct Booking</span>
+                          <span className="text-black/60 font-medium text-[9px] uppercase tracking-[0.2em]">Direct Booking</span>
                         </div>
 
                         {/* Headings */}
-                        <h3 className="text-white font-bold text-xl lg:text-2xl mb-2 tracking-tight uppercase">Start Your Project</h3>
-                        <p className="text-white/50 text-[11px] md:text-[12px] leading-relaxed max-w-[280px] mx-auto mb-6 font-light">
+                        <h3 className="text-black font-bold text-xl lg:text-2xl mb-2 tracking-tight uppercase">Start Your Project</h3>
+                        <p className="text-black/60 text-[11px] md:text-[12px] leading-relaxed max-w-[280px] mx-auto mb-6 font-light">
                           Creative marketing tailored for modern brands.
                         </p>
 
@@ -502,7 +500,7 @@ export default function LandingPage() {
                           data-cal-namespace="schedule-call"
                           data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                           aria-label="Book a creative strategy call for your shoot in Bahrain"
-                          className="relative w-full overflow-hidden group/btn bg-[#9A0E1F] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.5)] active:scale-[0.98] border border-[#9A0E1F]/50"
+                          className="relative w-full overflow-hidden group/btn bg-[#9A0E1F] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.35)] active:scale-[0.98] border border-[#9A0E1F]/50"
                         >
                           <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500 ease-out" />
                           <span className="relative z-10 text-white font-medium text-[11px] tracking-[0.15em] uppercase">
@@ -513,10 +511,10 @@ export default function LandingPage() {
 
                         {/* Footer text */}
                         <div className="mt-4 flex flex-col items-center gap-2">
-                          <p className="text-white/40 text-[9px] font-medium tracking-[0.1em] uppercase">
-                            Response within <span className="text-white/80 font-bold">24 hours</span>
+                          <p className="text-black/40 text-[9px] font-medium tracking-[0.1em] uppercase">
+                            Response within <span className="text-black/80 font-bold">24 hours</span>
                           </p>
-                          <p className="text-[#9A0E1F]/70 text-[8px] font-medium tracking-[0.15em] uppercase">
+                          <p className="text-[#9A0E1F] text-[8px] font-bold tracking-[0.15em] uppercase">
                             Limited client slots available for June
                           </p>
                         </div>
@@ -626,12 +624,12 @@ export default function LandingPage() {
               <div className="flex flex-col gap-4 md:gap-6">
                 {(() => {
                   const PORTFOLIO_VIDEOS = [
-                    { title: "Restaurants & Cafes", cat: "Hospitality", poster: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1934&auto=format&fit=crop" },
-                    { title: "Real Estate", cat: "Property", poster: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop" },
-                    { title: "Gyms & Fitness", cat: "Health", poster: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop" },
-                    { title: "Hotels & Resorts", cat: "Lifestyle", poster: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" },
-                    { title: "E-commerce", cat: "Commercial", poster: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" },
-                    { title: "Luxury Brands", cat: "Editorial", poster: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" },
+                    { title: "Restaurants & Cafes", cat: "Hospitality", poster: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=800&auto=format&fit=crop" },
+                    { title: "Real Estate", cat: "Property", poster: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" },
+                    { title: "Gyms & Fitness", cat: "Health", poster: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" },
+                    { title: "Hotels & Resorts", cat: "Lifestyle", poster: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop" },
+                    { title: "E-commerce", cat: "Commercial", poster: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop" },
+                    { title: "Luxury Brands", cat: "Editorial", poster: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop" },
                   ];
 
                   const chunks: (typeof PORTFOLIO_VIDEOS)[] = [];
@@ -651,27 +649,28 @@ export default function LandingPage() {
                         <div className={`lg:col-span-7 grid grid-cols-2 gap-4 md:gap-6 ${isAlternate ? 'md:order-2 lg:order-2' : 'md:order-1 lg:order-1'}`}>
                           {mainVideos.map((video, idx) => (
                             <Reveal key={idx} delay={0.1 + (idx * 0.1)} className="h-full">
-                              <div className="group relative w-full h-full aspect-[9/16] bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                              <div className="group relative w-full h-full aspect-[9/16] bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-[transform,shadow] duration-500 hover:-translate-y-1 transform-gpu">
                                 <Image
                                   src={video.poster}
                                   alt={video.title}
                                   fill
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                   loading="lazy"
-                                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.05]"
+                                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.05] transform-gpu"
                                 />
                                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-500 z-[5] pointer-events-none" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
                                 
                                 {/* Centered Play Button Overlay */}
                                 <div className="absolute inset-0 z-[7] flex items-center justify-center pointer-events-none">
-                                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-[#9A0E1F]/90 shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+                                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#050505]/70 flex items-center justify-center transition-[transform,background-color] duration-500 group-hover:scale-110 group-hover:bg-[#9A0E1F]/90 shadow-[0_0_20px_rgba(0,0,0,0.3)] transform-gpu">
                                     <svg className="w-5 h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                       <path d="M8 5v14l11-7z" />
                                     </svg>
                                   </div>
                                 </div>
 
-                                <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end z-10 pointer-events-none transition-transform duration-500 group-hover:-translate-y-2">
+                                <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end z-10 pointer-events-none transition-transform duration-500 group-hover:-translate-y-2 transform-gpu">
                                   <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{video.cat}</p>
                                   <h4 className="text-white font-bold text-lg md:text-xl tracking-tight drop-shadow-lg leading-tight">{video.title}</h4>
                                 </div>
@@ -685,27 +684,28 @@ export default function LandingPage() {
                           <div className={`lg:col-span-5 flex flex-col gap-4 md:gap-6 ${isAlternate ? 'md:order-1 lg:order-1' : 'md:order-2 lg:order-2'}`}>
                             {sideVideos.map((video, idx) => (
                               <Reveal key={idx} delay={0.15 + (idx * 0.1)} className="flex-1 h-full">
-                                <div className="group relative w-full h-full min-h-[220px] aspect-video lg:aspect-auto bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                <div className="group relative w-full h-full min-h-[220px] aspect-video lg:aspect-auto bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-[transform,shadow] duration-500 hover:-translate-y-1 transform-gpu">
                                   <Image
                                     src={video.poster}
                                     alt={video.title}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                                     loading="lazy"
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.05]"
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.05] transform-gpu"
                                   />
                                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-500 z-[5] pointer-events-none" />
                                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
 
                                   {/* Centered Play Button Overlay */}
                                   <div className="absolute inset-0 z-[7] flex items-center justify-center pointer-events-none">
-                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-[#9A0E1F]/90 shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#050505]/70 flex items-center justify-center transition-[transform,background-color] duration-500 group-hover:scale-110 group-hover:bg-[#9A0E1F]/90 shadow-[0_0_20px_rgba(0,0,0,0.3)] transform-gpu">
                                       <svg className="w-5 h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z" />
                                       </svg>
                                     </div>
                                   </div>
 
-                                  <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-10 pointer-events-none transition-transform duration-500 group-hover:-translate-y-2">
+                                  <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-10 pointer-events-none transition-transform duration-500 group-hover:-translate-y-2 transform-gpu">
                                     <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{video.cat}</p>
                                     <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight drop-shadow-lg">{video.title}</h4>
                                   </div>
@@ -878,7 +878,7 @@ const HERO_TESTIMONIALS = [
   "Finally, creative marketing that converts into real business.",
 ];
 
-function TestimonialRotation({ isMobile = false }: { isMobile?: boolean }) {
+function TestimonialRotation({ isMobile = false, textColor = "text-white" }: { isMobile?: boolean; textColor?: string }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -897,7 +897,8 @@ function TestimonialRotation({ isMobile = false }: { isMobile?: boolean }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0.001, y: -8 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className={`text-white font-bold italic ${isMobile ? "text-[13px]" : "text-[15px]"} leading-relaxed tracking-wide opacity-90`}
+          className={`${textColor} font-bold italic ${isMobile ? "text-[13px]" : "text-[15px]"} leading-relaxed tracking-wide opacity-90 transform-gpu`}
+          style={{ willChange: "transform, opacity" }}
         >
           &ldquo;{HERO_TESTIMONIALS[index]}&rdquo;
         </motion.p>

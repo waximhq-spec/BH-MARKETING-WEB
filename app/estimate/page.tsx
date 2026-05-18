@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import PageBgSync from "@/components/PageBgSync";
 
 function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   return (
@@ -47,6 +48,7 @@ const SOCIALS = [
 export default function ContactPage() {
   return (
     <main className="bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       {/* Hero */}
       <section data-theme="light" className="relative pt-36 md:pt-52 pb-20 md:pb-32 bg-white overflow-hidden">
         <div className="container relative z-10">

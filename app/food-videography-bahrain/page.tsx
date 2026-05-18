@@ -31,11 +31,14 @@ function Reveal({
   );
 }
 
+import PageBgSync from "@/components/PageBgSync";
+
 export default function FoodVideographyPage() {
   const { openProjectModal } = useModal();
 
   return (
     <main className="bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
       <VisualHiddenSEO>
         <h1>Food Videography Services in Bahrain: Cinematic Culinary Content</h1>

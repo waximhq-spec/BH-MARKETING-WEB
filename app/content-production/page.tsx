@@ -32,6 +32,8 @@ function Reveal({
   );
 }
 
+import PageBgSync from "@/components/PageBgSync";
+
 export default function ContentProductionPage() {
   const { openProjectModal } = useModal();
 
@@ -46,6 +48,7 @@ export default function ContentProductionPage() {
 
   return (
     <main className="bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       <VisualHiddenSEO>
         <h1>Cinematic Content Production Agency in Bahrain</h1>
         <p>Premium video production, photography, and creative campaigns for modern brands. High-end commercials, social reels, and dynamic media.</p>

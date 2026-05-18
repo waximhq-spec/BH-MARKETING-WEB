@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
+import PageBgSync from "@/components/PageBgSync";
 
 function Reveal({
   children,
@@ -28,6 +29,7 @@ function Reveal({
 export default function WorkPage() {
   return (
     <main className="bg-[#fafafa] min-h-screen text-[#1a1a1a] selection:bg-[#9A0E1F] selection:text-white pb-32">
+      <PageBgSync bg="white" />
       {/* ── SEO CONTENT LAYER ── */}
       <VisualHiddenSEO>
         <h1>Our Portfolio: Selected Cinematic Work by Cinmach Productions</h1>

@@ -31,11 +31,14 @@ function Reveal({
   );
 }
 
+import PageBgSync from "@/components/PageBgSync";
+
 export default function VideoProductionPage() {
   const { openProjectModal } = useModal();
 
   return (
     <main className="bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
       <VisualHiddenSEO>
         <h1>Video Production Company Bahrain: High-End Cinematic Content</h1>

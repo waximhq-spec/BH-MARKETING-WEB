@@ -55,11 +55,22 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
 
-/* iOS overscroll background — prevents white bounce flash */
-html {
-  background: #000000;
-  overscroll-behavior: none;
+/* ── iOS Navigation Flash Fix ────────────────────────────
+   When Next.js navigates client-side, iOS Safari shows 1 frame of the
+   html/body background before the page content paints. We sync the html
+   bg-color to the destination page's bg-color to eliminate this flash.
+   Pages set html[data-page-bg] via a useEffect in layout. */
+html[data-page-bg="white"] {
+  background-color: #ffffff !important;
 }
+html[data-page-bg="black"] {
+  background-color: #000000 !important;
+}
+/* Default: black for the homepage/dark pages */
+html {
+  background-color: #000000;
+}
+
 body {
   overscroll-behavior-y: none;
   touch-action: pan-y;
@@ -263,12 +274,13 @@ body {
 @supports (-webkit-touch-callout: none) {
   /* Ensure html + body always have solid backgrounds — prevents white flash on overscroll */
   html {
-    background-color: #000000 !important;
+    /* Do NOT force #000 here — it fights our data-page-bg dynamic sync */
     /* Keep overflow-x: clip but do NOT set overflow-y here — that breaks sticky */
   }
 
   body {
-    background-color: #000000 !important;
+    /* Keep transparent so the html background shows through correctly */
+    background-color: transparent !important;
     /* NO transform on body — it breaks sticky and creates global stacking context */
   }
 

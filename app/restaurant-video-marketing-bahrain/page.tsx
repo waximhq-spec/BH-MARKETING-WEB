@@ -1,9 +1,12 @@
 import Link from "next/link";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 
+import PageBgSync from "@/components/PageBgSync";
+
 export default function RestaurantVideoMarketingPage() {
   return (
     <main className="bg-white min-h-screen text-black pt-32 pb-24">
+      <PageBgSync bg="white" />
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
       <VisualHiddenSEO>
         <h1>The Ultimate Guide to Restaurant Video Marketing in Bahrain</h1>

@@ -86,11 +86,14 @@ const SERVICES = [
   }
 ];
 
+import PageBgSync from "@/components/PageBgSync";
+
 export default function ServicesPage() {
   const { openProjectModal } = useModal();
 
   return (
     <main className="bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       {/* ── SEO Layer ── */}
       <VisualHiddenSEO>
         <h1>Creative Marketing Agency Services in Bahrain</h1>

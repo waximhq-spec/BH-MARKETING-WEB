@@ -5,6 +5,7 @@ import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import Link from "next/link";
 import Image from "next/image";
+import PageBgSync from "@/components/PageBgSync";
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -33,6 +34,7 @@ export default function BrandIdentityPage() {
 
   return (
     <main className="bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       <VisualHiddenSEO>
         <h1>Brand Identity & Logo Design Agency in Bahrain</h1>
         <p>Premium branding, visual identity systems, and market positioning for ambitious businesses.</p>

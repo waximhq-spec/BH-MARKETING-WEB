@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import Image from "next/image";
+import PageBgSync from "@/components/PageBgSync";
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -31,6 +32,7 @@ export default function PaidAdvertisingPage() {
 
   return (
     <main className="bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       <VisualHiddenSEO>
         <h1>Paid Advertising & Performance Marketing in Bahrain</h1>
         <p>Meta ads, growth campaigns, and performance marketing systems that scale revenue.</p>

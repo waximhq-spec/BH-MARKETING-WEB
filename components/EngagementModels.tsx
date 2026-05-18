@@ -87,8 +87,8 @@ export default function EngagementModels() {
 
       <div className="container relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ y: 16 }}
-          whileInView={{ y: 0 }}
+          initial={{ opacity: 0.85, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center max-w-3xl mx-auto mb-20"
@@ -113,8 +113,8 @@ export default function EngagementModels() {
           {models.map((pkg, idx) => (
             <motion.div
               key={pkg.id}
-              initial={{ y: 20 }}
-              whileInView={{ y: 0 }}
+              initial={{ opacity: 0.85, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.08 * idx }}
               className={`group flex flex-col h-full relative rounded-3xl overflow-hidden transition-all duration-500 p-8 md:p-10 transform-gpu ${

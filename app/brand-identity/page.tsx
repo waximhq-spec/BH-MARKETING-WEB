@@ -10,8 +10,8 @@ import PageBgSync from "@/components/PageBgSync";
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.div
-      initial={{ y: 16 }}
-      whileInView={{ y: 0 }}
+      initial={{ opacity: 0.85, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
     >

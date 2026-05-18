@@ -59,8 +59,8 @@ function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ y: 16 }}
-      whileInView={{ y: 0 }}
+      initial={{ opacity: 0.85, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       className={className}
@@ -442,15 +442,15 @@ export default function LandingPage() {
                 {/* RIGHT: CONVERSION CARD (Desktop Only) */}
                 <div className="hidden lg:flex lg:col-span-5 flex-col items-end lg:mt-12">
                   <motion.div
-                    initial={{ y: 20 }}
-                    animate={{ y: 0 }}
+                    initial={{ opacity: 0.85, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
                     className="w-full max-w-[400px]"
                   >
                     {/* Trust Signal Testimonial Slider */}
                     <motion.div
-                      initial={{ y: 20 }}
-                      animate={{ y: 0 }}
+                      initial={{ opacity: 0.85, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                       className="w-full bg-[#050505]/95 border border-white/[0.08] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_40px_rgba(154,14,31,0.06)] rounded-[24px]"
                     >

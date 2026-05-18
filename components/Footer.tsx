@@ -87,7 +87,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h4 className="text-white/25 text-[9px] font-mono font-bold tracking-[0.3em] uppercase mb-6">
               Contact
             </h4>
@@ -106,7 +106,7 @@ export default function Footer() {
           </div>
 
           {/* Social */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h4 className="text-white/25 text-[9px] font-mono font-bold tracking-[0.3em] uppercase mb-6">
               Social
             </h4>

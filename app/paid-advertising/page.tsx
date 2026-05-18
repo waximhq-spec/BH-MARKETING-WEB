@@ -8,10 +8,10 @@ import PageBgSync from "@/components/PageBgSync";
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 16 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
     >
       {children}
     </motion.div>
@@ -102,7 +102,7 @@ export default function PaidAdvertisingPage() {
                       fill
                       loading="lazy"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 transform-gpu will-change-transform"
+                      className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 transform-gpu"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-[#050505]/10" />
                   </div>
@@ -168,7 +168,7 @@ export default function PaidAdvertisingPage() {
                 </ul>
                 <button 
                   onClick={() => openProjectModal()}
-                  className="w-full py-4 rounded-xl bg-[#9A0E1F] text-white text-[11px] font-bold tracking-[0.2em] uppercase transition-transform duration-300 hover:-translate-y-1 shadow-[0_8px_30px_rgba(154,14,31,0.3)] hover:shadow-[0_12px_40px_rgba(154,14,31,0.5)] transform-gpu will-change-transform"
+                  className="w-full py-4 rounded-xl bg-[#9A0E1F] text-white text-[11px] font-bold tracking-[0.2em] uppercase transition-transform duration-300 hover:-translate-y-1 shadow-[0_8px_30px_rgba(154,14,31,0.3)] hover:shadow-[0_12px_40px_rgba(154,14,31,0.5)] transform-gpu"
                 >
                   Discuss Your Retainer
                 </button>

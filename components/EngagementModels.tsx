@@ -87,10 +87,10 @@ export default function EngagementModels() {
 
       <div className="container relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center max-w-3xl mx-auto mb-20"
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-6">
@@ -113,11 +113,11 @@ export default function EngagementModels() {
           {models.map((pkg, idx) => (
             <motion.div
               key={pkg.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.1 * idx }}
-              className={`group flex flex-col h-full relative rounded-3xl overflow-hidden transition-all duration-500 p-8 md:p-10 transform-gpu will-change-transform ${
+              transition={{ duration: 0.5, delay: 0.08 * idx }}
+              className={`group flex flex-col h-full relative rounded-3xl overflow-hidden transition-all duration-500 p-8 md:p-10 transform-gpu ${
                 pkg.isPopular 
                   ? "bg-gradient-to-b from-[#0A0A0A] to-[#110507] border border-[#9A0E1F]/30 hover:border-[#9A0E1F]/60 shadow-[0_0_40px_rgba(154,14,31,0.1)] hover:shadow-[0_0_60px_rgba(154,14,31,0.2)]" 
                   : "bg-white/[0.02] border border-white/5 hover:border-white/15 hover:bg-white/[0.04]"
@@ -192,7 +192,7 @@ export default function EngagementModels() {
                 <button
                   onClick={() => openProjectModal()}
                   className={`mt-auto w-full py-4 rounded-xl text-[11px] font-bold tracking-[0.2em] uppercase
-                    transition-all duration-300 ease-out relative overflow-hidden group/cta transform-gpu will-change-transform
+                    transition-all duration-300 ease-out relative overflow-hidden group/cta transform-gpu
                     hover:-translate-y-[2px] active:scale-[0.98]
                     ${pkg.isPopular
                       ? "bg-gradient-to-r from-[#9A0E1F] to-[#c01529] text-white shadow-[0_8px_30px_rgba(154,14,31,0.4)] hover:shadow-[0_12px_40px_rgba(154,14,31,0.6)]"

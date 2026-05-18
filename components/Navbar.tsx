@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useModal } from "@/components/ModalContext";
 
@@ -14,15 +13,15 @@ type NavLink = {
 
 const NAV_LINKS: NavLink[] = [
   { label: "Work", href: "/work" },
-  { 
-    label: "Services", 
+  {
+    label: "Services",
     href: "/services",
     dropdown: [
       { label: "Content Production", href: "/content-production" },
       { label: "Brand Identity", href: "/brand-identity" },
       { label: "Paid Advertising", href: "#", disabled: true },
       { label: "All Services →", href: "/services" },
-    ]
+    ],
   },
   { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
@@ -34,15 +33,15 @@ export default function Navbar() {
   const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing" | "split">("dark");
   const pathname = usePathname();
   const { openProjectModal } = useModal();
-  // Store sections ref to avoid re-querying on every scroll
   const sectionsRef = useRef<Element[]>([]);
   const lastThemeRef = useRef(theme);
   const tickingRef = useRef(false);
+  // Track scroll position before locking so we can restore it
+  const scrollYRef = useRef(0);
 
   // Query sections once after mount/pathname change
   useEffect(() => {
     sectionsRef.current = Array.from(document.querySelectorAll("[data-theme]"));
-    // Set initial theme immediately
     const offset = 64;
     let active: string | null = null;
     sectionsRef.current.forEach((s) => {
@@ -52,7 +51,6 @@ export default function Navbar() {
       }
     });
     if (!active) {
-      // If no section found (top of page), infer from pathname
       active = pathname === "/" ? "dark" : "light";
     }
     setTheme(active as any);
@@ -79,32 +77,60 @@ export default function Navbar() {
         tickingRef.current = false;
       });
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // iOS-safe scroll lock: fix the body in place instead of overflow:hidden
+  // which doesn't work on Mobile Safari
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (menuOpen) {
+      scrollYRef.current = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflowY = "scroll"; // prevent layout shift
+    } else {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflowY = "";
+      // Restore scroll position
+      if (scrollYRef.current > 0) {
+        window.scrollTo(0, scrollYRef.current);
+      }
+    }
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflowY = "";
+    };
   }, [menuOpen]);
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   const isHome = pathname === "/";
   const isLight = theme === "light" || (!isHome && (theme === "red" || theme === "pricing"));
-  
-  // Solid backgrounds only — no rgba, no backdrop-filter, no transitions
+
   const bgColor = isLight ? "#ffffff" : "#000000";
   const textColor = isLight ? "#000000" : "#FAFAFA";
-  const mutedTextColor = isLight ? "rgba(0,0,0,0.5)" : "rgba(250,250,250,0.5)";
   const accentColor = "#9A0E1F";
 
   return (
     <>
+      {/* 
+        GPU-composited header: translate3d(0,0,0) creates a persistent layer 
+        on iOS so the browser never needs to promote it mid-frame (which causes flashes).
+        No transitions on background — color changes are instant to avoid intermediate frames.
+      */}
       <header
         className="relative z-[100]"
-        style={{ background: bgColor, contain: "layout style" }}
+        style={{
+          background: bgColor,
+          WebkitTransform: "translate3d(0,0,0)",
+          transform: "translate3d(0,0,0)",
+        }}
       >
         <div className="container h-14 md:h-16 flex items-center justify-between">
           <Link
@@ -122,10 +148,7 @@ export default function Navbar() {
               alt="Cinmach"
               className="h-[26px] md:h-[32px] w-auto"
               style={{
-                // Pre-compute filter values to avoid triggering layout on change
-                filter: isLight
-                  ? "brightness(0)"
-                  : "brightness(0) invert(1)",
+                filter: isLight ? "brightness(0)" : "brightness(0) invert(1)",
               }}
             />
           </Link>
@@ -134,19 +157,25 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center gap-8 lg:gap-12">
             <div className="flex items-center gap-7 lg:gap-9">
               {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href || (link.dropdown && link.dropdown.some(d => pathname === d.href));
+                const isActive =
+                  pathname === link.href ||
+                  (link.dropdown && link.dropdown.some((d) => pathname === d.href));
                 return (
                   <div key={link.href} className="relative group flex items-center h-full">
                     <Link
                       href={link.href}
                       className="relative py-2 text-[10px] font-medium tracking-[0.18em] uppercase transition-colors flex items-center gap-1.5"
-                      style={{
-                        color: isActive ? accentColor : textColor,
-                      }}
+                      style={{ color: isActive ? accentColor : textColor }}
                     >
                       {link.label}
                       {link.dropdown && (
-                        <svg className="w-2.5 h-2.5 opacity-50 transition-transform duration-300 group-hover:-rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <svg
+                          className="w-2.5 h-2.5 opacity-50 transition-transform duration-300 group-hover:-rotate-180"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={3}
+                        >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                       )}
@@ -161,25 +190,32 @@ export default function Navbar() {
                           {link.dropdown.map((item, idx) => {
                             if (item.disabled) {
                               return (
-                                <div key={item.label} className="px-6 py-4 border-b border-black/5 last:border-0 opacity-50 cursor-not-allowed flex items-center justify-between">
+                                <div
+                                  key={item.label}
+                                  className="px-6 py-4 border-b border-black/5 last:border-0 opacity-50 cursor-not-allowed flex items-center justify-between"
+                                >
                                   <span className="text-[13px] font-medium tracking-tight text-black/80">
                                     {item.label}
                                   </span>
-                                  <span className="text-[9px] font-mono tracking-widest text-[#9A0E1F] uppercase">Coming Soon</span>
+                                  <span className="text-[9px] font-mono tracking-widest text-[#9A0E1F] uppercase">
+                                    Coming Soon
+                                  </span>
                                 </div>
                               );
                             }
                             return (
-                              <Link 
-                                key={item.href} 
+                              <Link
+                                key={item.href}
                                 href={item.href}
                                 className="px-6 py-4 transition-colors hover:bg-black/5 border-b border-black/5 last:border-0"
                               >
-                                <span className={`block ${
-                                  idx === link.dropdown!.length - 1 
-                                    ? "text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#9A0E1F]" 
-                                    : "text-[13px] font-medium tracking-tight text-black/80"
-                                }`}>
+                                <span
+                                  className={`block ${
+                                    idx === link.dropdown!.length - 1
+                                      ? "text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#9A0E1F]"
+                                      : "text-[13px] font-medium tracking-tight text-black/80"
+                                  }`}
+                                >
                                   {item.label}
                                 </span>
                               </Link>
@@ -196,8 +232,8 @@ export default function Navbar() {
             <button
               onClick={() => openProjectModal()}
               className={`h-9 px-5 text-[9px] font-mono font-black tracking-[0.25em] uppercase rounded-full border transition-all duration-300 ${
-                isLight 
-                  ? "bg-black text-white border-transparent hover:bg-black/90" 
+                isLight
+                  ? "bg-black text-white border-transparent hover:bg-black/90"
                   : "bg-white text-black border-transparent hover:bg-white/90"
               }`}
             >
@@ -205,22 +241,26 @@ export default function Navbar() {
             </button>
           </nav>
 
-          {/* Mobile burger */}
+          {/* Mobile burger — always visible on mobile */}
           <button
-            className="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
+            className="md:hidden flex flex-col gap-[5px] p-2 -mr-2 relative z-[201]"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
           >
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className="block w-5 h-px transition-transform duration-250 origin-center"
+                className="block w-5 h-px origin-center"
                 style={{
-                  background: textColor,
+                  background: menuOpen ? "#000000" : textColor,
                   opacity: i === 1 && menuOpen ? 0 : 1,
                   transform:
-                    i === 0 && menuOpen ? "translateY(6px) rotate(45deg)" :
-                    i === 2 && menuOpen ? "translateY(-6px) rotate(-45deg)" : "",
+                    i === 0 && menuOpen
+                      ? "translateY(6px) rotate(45deg)"
+                      : i === 2 && menuOpen
+                      ? "translateY(-6px) rotate(-45deg)"
+                      : "none",
+                  transition: "transform 0.25s ease, opacity 0.25s ease",
                 }}
               />
             ))}
@@ -228,110 +268,234 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile full-screen menu — 100dvh for iOS/Android perfection */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 w-full h-[100dvh] z-[200] flex flex-col bg-white"
+      {/*
+        Mobile full-screen menu — iOS-optimised approach:
+        - Uses CSS opacity + visibility (NO framer-motion) to avoid 
+          mid-frame compositing layer creation that causes white flashes
+        - translate3d(0,0,0) is applied at all times so the layer is 
+          pre-promoted BEFORE the animation starts
+        - pointer-events toggled to prevent ghost clicks when hidden
+      */}
+      <div
+        aria-hidden={!menuOpen}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100dvh",
+          zIndex: 200,
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "#ffffff",
+          // Always GPU-composited — no flash because the layer already exists
+          WebkitTransform: "translate3d(0,0,0)",
+          transform: "translate3d(0,0,0)",
+          // Visibility transition prevents ghost clicks and keeps it in the 
+          // paint tree so iOS doesn't need to create a new layer mid-animation
+          opacity: menuOpen ? 1 : 0,
+          visibility: menuOpen ? "visible" : "hidden",
+          pointerEvents: menuOpen ? "auto" : "none",
+          transition: menuOpen
+            ? "opacity 0.25s ease, visibility 0s linear 0s"
+            : "opacity 0.25s ease, visibility 0s linear 0.25s",
+        }}
+      >
+        {/* Header */}
+        <div
+          style={{
+            width: "100%",
+            height: "56px",
+            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 24px",
+            borderBottom: "1px solid rgba(0,0,0,0.05)",
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <Link href="/" onClick={() => setMenuOpen(false)}>
+            <img
+              src="/HERO-LOGO.svg"
+              alt="Cinmach"
+              style={{ height: "26px", width: "auto", filter: "brightness(0)" }}
+            />
+          </Link>
+          <button
+            onClick={() => setMenuOpen(false)}
+            style={{ padding: "8px", marginRight: "-8px" }}
+            aria-label="Close menu"
           >
-            {/* Header matching main navbar height */}
-            <div className="w-full h-14 shrink-0 flex items-center justify-between px-6 border-b border-black/5 bg-white">
-              <Link href="/" onClick={() => setMenuOpen(false)}>
-                <img
-                  src="/HERO-LOGO.svg"
-                  alt="Cinmach"
-                  className="h-[26px] w-auto"
-                  style={{ filter: "brightness(0)" }}
-                />
-              </Link>
-              <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1.5">
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1.5">
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
 
-            {/* Scrollable Links Area */}
-            <div className="flex-1 overflow-y-auto overscroll-contain bg-white">
-              <nav className="flex flex-col px-8 py-10 gap-8">
-                {NAV_LINKS.map((link) => {
-                  const isActive = pathname === link.href;
-                  return (
-                    <div key={link.href} className="flex flex-col">
-                      <Link
-                        href={link.href}
-                        onClick={(e) => {
-                          if (link.dropdown) e.preventDefault();
-                          else setMenuOpen(false);
-                        }}
-                        className="text-black font-medium tracking-tight flex items-center justify-between"
-                        style={{
-                          fontSize: "36px",
-                          lineHeight: 1,
-                          color: isActive ? accentColor : "#000000",
-                        }}
+        {/* Scrollable links */}
+        <div
+          style={{
+            flex: 1,
+            overflowY: "auto",
+            overscrollBehavior: "contain",
+            WebkitOverflowScrolling: "touch" as any,
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <nav style={{ display: "flex", flexDirection: "column", padding: "40px 32px", gap: "32px" }}>
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <div key={link.href} style={{ display: "flex", flexDirection: "column" }}>
+                  <Link
+                    href={link.href}
+                    onClick={(e) => {
+                      if (link.dropdown) e.preventDefault();
+                      else setMenuOpen(false);
+                    }}
+                    style={{
+                      fontSize: "36px",
+                      lineHeight: 1,
+                      fontWeight: 500,
+                      letterSpacing: "-0.02em",
+                      color: isActive ? accentColor : "#000000",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    {link.label}
+                    {link.dropdown && (
+                      <svg
+                        style={{ width: "24px", height: "24px", opacity: 0.3 }}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
                       >
-                        {link.label}
-                        {link.dropdown && (
-                          <svg className="w-6 h-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                          </svg>
-                        )}
-                      </Link>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    )}
+                  </Link>
 
-                      {/* Render mobile dropdown if exists */}
-                      {link.dropdown && (
-                        <div className="flex flex-col gap-6 mt-8 pl-4 border-l-2 border-black/10">
-                          {link.dropdown.map((item, idx) => {
-                            if (item.disabled) {
-                              return (
-                                <div key={item.label} className="flex flex-wrap items-center gap-3 opacity-50">
-                                  <span className="text-[16px] font-medium tracking-tight text-black/70">{item.label}</span>
-                                  <span className="text-[9px] font-mono font-bold tracking-widest text-[#9A0E1F] uppercase mt-0.5">Coming Soon</span>
-                                </div>
-                              );
-                            }
-                            return (
-                              <Link
-                                key={item.href}
-                                href={item.href}
-                                onClick={() => setMenuOpen(false)}
-                                className={`text-[16px] font-medium tracking-tight text-black/80 ${
-                                  idx === link.dropdown!.length - 1 ? "text-[11px] font-mono font-bold tracking-[0.2em] uppercase !text-[#9A0E1F] pt-2" : ""
-                                }`}
-                              >
+                  {link.dropdown && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "20px",
+                        marginTop: "24px",
+                        paddingLeft: "16px",
+                        borderLeft: "2px solid rgba(0,0,0,0.1)",
+                      }}
+                    >
+                      {link.dropdown.map((item, idx) => {
+                        if (item.disabled) {
+                          return (
+                            <div
+                              key={item.label}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "10px",
+                                opacity: 0.5,
+                              }}
+                            >
+                              <span style={{ fontSize: "16px", fontWeight: 500, color: "rgba(0,0,0,0.7)" }}>
                                 {item.label}
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      )}
+                              </span>
+                              <span
+                                style={{
+                                  fontSize: "9px",
+                                  fontFamily: "monospace",
+                                  fontWeight: 700,
+                                  letterSpacing: "0.2em",
+                                  textTransform: "uppercase",
+                                  color: accentColor,
+                                }}
+                              >
+                                Coming Soon
+                              </span>
+                            </div>
+                          );
+                        }
+                        const isLastItem = idx === link.dropdown!.length - 1;
+                        return (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setMenuOpen(false)}
+                            style={{
+                              fontSize: isLastItem ? "11px" : "16px",
+                              fontWeight: isLastItem ? 700 : 500,
+                              letterSpacing: isLastItem ? "0.2em" : "normal",
+                              textTransform: isLastItem ? "uppercase" : "none",
+                              color: isLastItem ? accentColor : "rgba(0,0,0,0.8)",
+                              fontFamily: isLastItem ? "monospace" : "inherit",
+                              paddingTop: isLastItem ? "8px" : "0",
+                            }}
+                          >
+                            {item.label}
+                          </Link>
+                        );
+                      })}
                     </div>
-                  );
-                })}
-              </nav>
-              <div className="px-8 pb-8 pt-4">
-                <p className="text-black/20 font-mono text-[9px] uppercase tracking-[0.3em]">© 2026 Cinmach Productions</p>
-              </div>
-            </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+          <p
+            style={{
+              padding: "0 32px 32px",
+              color: "rgba(0,0,0,0.2)",
+              fontFamily: "monospace",
+              fontSize: "9px",
+              textTransform: "uppercase",
+              letterSpacing: "0.3em",
+            }}
+          >
+            © 2026 Cinmach Productions
+          </p>
+        </div>
 
-            {/* Fixed Bottom CTA */}
-            <div className="shrink-0 p-6 pb-8 border-t border-black/5 bg-white">
-              <button
-                type="button"
-                onClick={() => { setMenuOpen(false); openProjectModal(); }}
-                className="w-full flex items-center justify-center h-14 rounded-full bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.25em] uppercase shadow-[0_10px_30px_rgba(154,14,31,0.25)] transition-transform active:scale-[0.98]"
-              >
-                GET A QUOTE
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Fixed bottom CTA */}
+        <div
+          style={{
+            flexShrink: 0,
+            padding: "24px 24px 32px",
+            borderTop: "1px solid rgba(0,0,0,0.05)",
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => { setMenuOpen(false); openProjectModal(); }}
+            style={{
+              width: "100%",
+              height: "56px",
+              borderRadius: "999px",
+              backgroundColor: accentColor,
+              color: "#ffffff",
+              fontSize: "11px",
+              fontFamily: "monospace",
+              fontWeight: 900,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              border: "none",
+              cursor: "pointer",
+              boxShadow: "0 10px 30px rgba(154,14,31,0.25)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              WebkitTapHighlightColor: "transparent",
+            }}
+          >
+            GET A QUOTE
+          </button>
+        </div>
+      </div>
     </>
   );
 }

@@ -496,9 +496,9 @@ export default function LandingPage() {
 
                         {/* CTA Button */}
                         <button 
-                          data-cal-link="wasim-ebxvk8/schedule-call"
-                          data-cal-namespace="schedule-call"
-                          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                          data-cal-link="cinmach-productions-re7k86/call-req"
+                          data-cal-namespace="call-req"
+                          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'
                           aria-label="Book a creative strategy call for your shoot in Bahrain"
                           className="relative w-full overflow-hidden group/btn bg-[#9A0E1F] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.35)] active:scale-[0.98] border border-[#9A0E1F]/50"
                         >
@@ -527,9 +527,9 @@ export default function LandingPage() {
                 <div className="lg:hidden flex flex-col items-center gap-3 w-full mt-2 mb-8">
                   <div className="w-full flex justify-center px-4">
                     <button
-                      data-cal-link="wasim-ebxvk8/schedule-call"
-                      data-cal-namespace="schedule-call"
-                      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                      data-cal-link="cinmach-productions-re7k86/call-req"
+                      data-cal-namespace="call-req"
+                      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'
                       aria-label="Book a strategy call for your marketing campaign in Bahrain"
                       className="relative flex items-center justify-center gap-2 w-full max-w-[260px] h-[48px] bg-[#9A0E1F] text-white text-[11px] font-mono font-black tracking-[0.1em] uppercase rounded-full shadow-[0_8px_20px_rgba(154,14,31,0.2)] active:scale-[0.98] transition-transform"
                     >

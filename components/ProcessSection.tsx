@@ -150,8 +150,8 @@ export default function ProcessSection() {
               >
                 {/* Animate small child elements only — not the full step wrapper */}
                 <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 12 }}
+                  whileInView={{ y: 0 }}
                   viewport={{ margin: "-10% 0px", once: true }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                   className="w-full flex flex-col relative z-10"

@@ -1,22 +1,11 @@
 "use client";
+import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 
 import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 
-function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0.85, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+
 
 export default function AboutContent() {
   const { openProjectModal } = useModal();

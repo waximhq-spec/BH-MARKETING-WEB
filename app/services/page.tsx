@@ -1,4 +1,5 @@
 "use client";
+import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 
 import Link from "next/link";
@@ -10,27 +11,7 @@ import Image from "next/image";
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
    ─────────────────────────────────────────────────────────── */
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0.85, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+
 
 /* ─────────────────────────────────────────────────────────────
    Services Data — matches homepage, expanded with details

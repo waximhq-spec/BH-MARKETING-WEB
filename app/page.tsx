@@ -46,30 +46,7 @@ function HeroClock() {
 /* ─────────────────────────────────────────────────────────────
    Scroll-triggered reveal
    ─────────────────────────────────────────────────────────── */
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-  style = {},
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0.85, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={`transform-gpu ${className}`}
-      style={{ ...style, willChange: "transform, opacity" }}
-    >
-      {children}
-    </motion.div>
-  );
-}
+import Reveal from "@/components/Reveal";
 
 /* ─────────────────────────────────────────────────────────────
    Services Table Component (Interactive Accordion)
@@ -386,15 +363,17 @@ export default function LandingPage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-24 items-start">
                 {/* LEFT: CONTENT AREA */}
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left w-full">
-                  <div className="w-min lg:w-full flex flex-col mx-auto lg:mx-0">
+                  <div className="w-full flex flex-col mx-auto lg:mx-0">
                     {/* STATIC LCP ELEMENT: Do not wrap the primary heading in JS animations.
                         This ensures it paints instantly from server HTML, fixing the 3.63s LCP. */}
                     {/* MOBILE HEADLINE */}
-                    <h1 className="md:hidden text-white font-bold leading-[0.9] tracking-tight antialiased uppercase mb-4 text-center mx-auto max-w-[320px]" style={{ fontSize: "12vw", letterSpacing: "-0.02em" }}>
-                      <span className="block text-[0.65em] font-light tracking-normal opacity-90 mb-1 uppercase">
-                        We <span className="font-black">build brands</span> people
+                    <h1 className="md:hidden text-white font-black leading-[1.05] tracking-tight antialiased uppercase mb-6 text-center mx-auto max-w-[340px]" style={{ letterSpacing: "-0.03em" }}>
+                      <span className="block text-[1.4rem] font-light tracking-[0.05em] opacity-90 mb-1.5 uppercase">
+                        WE <span className="font-black">BUILD BRANDS</span> PEOPLE
                       </span>
-                      <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
+                      <span className="text-[#9A0E1F] uppercase block text-[3.2rem] font-extrabold tracking-tighter leading-none mt-1">
+                        REMEMBER.
+                      </span>
                     </h1>
                     {/* DESKTOP HEADLINE (Exactly Unchanged) */}
                     <h1 className="hidden md:block text-white font-bold leading-[0.95] tracking-tight antialiased uppercase mb-5 lg:mb-8" style={{ fontSize: "clamp(3rem, 11.5vw, 7.2rem)", letterSpacing: "-0.03em" }}>
@@ -405,7 +384,7 @@ export default function LandingPage() {
                     </h1>
                     {/* MOBILE PARAGRAPH */}
                     <Reveal delay={0.2} className="w-full md:hidden">
-                      <p className="text-white/60 text-[13px] leading-[1.7] font-light mb-8 text-center max-w-[260px] mx-auto">
+                      <p className="text-white/60 text-[13px] leading-[1.6] font-light mb-8 text-center max-w-[300px] mx-auto">
                         We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
                       </p>
                     </Reveal>

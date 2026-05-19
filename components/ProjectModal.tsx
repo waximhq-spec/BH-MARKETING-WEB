@@ -63,6 +63,7 @@ export default function ProjectModal() {
   const { isProjectModalOpen, closeProjectModal } = useModal();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [activationNotice, setActivationNotice] = useState(false);
   
   const [formData, setFormData] = useState({
     name: "",
@@ -79,6 +80,7 @@ export default function ProjectModal() {
       document.body.style.overflow = "hidden";
       setIsSuccess(false);
       setIsSubmitting(false);
+      setActivationNotice(false);
       setFormData({ name: "", brand: "", whatsapp: "", service: "", industry: "", budget: "", message: "" });
     } else {
       document.body.style.overflow = "";
@@ -88,32 +90,67 @@ export default function ProjectModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Fire the fetch request in the background without blocking the user
-    fetch("https://formsubmit.co/ajax/cinmachproductions@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        _subject: "NEW QUOTE REQUEST: " + formData.brand,
-        Name: formData.name,
-        Brand: formData.brand,
-        WhatsApp: formData.whatsapp,
-        Service: formData.service || "Not specified",
-        Industry: formData.industry || "Not specified",
-        Budget: formData.budget || "Not specified",
-        Message: formData.message || "No additional message",
-        _template: "table"
-      })
-    }).catch((error) => console.error("Form submission error:", error));
+    setActivationNotice(false);
 
-    // Show a fast, snappy simulated loading state for satisfying UX
-    setTimeout(() => {
+    const payload = {
+      _subject: "NEW QUOTE REQUEST: " + formData.brand,
+      Name: formData.name,
+      Brand: formData.brand,
+      WhatsApp: formData.whatsapp,
+      Service: formData.service || "Not specified",
+      Industry: formData.industry || "Not specified",
+      Budget: formData.budget || "Not specified",
+      Message: formData.message || "No additional message",
+      _template: "table",
+      _captcha: "false" // Disable captcha completely to avoid lead limits & verification issues
+    };
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/cinmachproductions@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+
+      const data = await response.json();
+      console.log("FormSubmit AJAX response:", data);
+
+      if (data && (data.success === "false" || (data.message && (data.message.toLowerCase().includes("activate") || data.message.toLowerCase().includes("activation"))))) {
+        // Form needs activation from owner
+        setActivationNotice(true);
+        setIsSuccess(true);
+      } else {
+        // Form successfully submitted
+        setIsSuccess(true);
+      }
+    } catch (error) {
+      console.error("AJAX form submission failed, falling back to standard redirect:", error);
+      
+      // Fallback: standard form POST redirect to ensure the lead is never lost
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "https://formsubmit.co/cinmachproductions@gmail.com";
+      
+      for (const [key, value] of Object.entries(payload)) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 600);
+    }
   };
 
   return (
@@ -274,15 +311,35 @@ export default function ProjectModal() {
                     transition={{ duration: 0.4, ease: EASE }}
                     className="flex flex-col items-center justify-center text-center py-12"
                   >
-                    <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-6">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <h3 className="text-black font-black text-2xl md:text-3xl tracking-tight uppercase mb-3">Request Received</h3>
-                    <p className="text-black/60 text-sm leading-relaxed max-w-xs mb-8">
-                      Thank you for reaching out. Our team will review your inquiry and get back to you within 24 hours.
-                    </p>
+                    {activationNotice ? (
+                      <>
+                        <div className="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mb-6">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <h3 className="text-black font-black text-2xl md:text-3xl tracking-tight uppercase mb-3 text-amber-600">Activation Needed</h3>
+                        <p className="text-black/70 text-sm leading-relaxed max-w-sm mb-8">
+                          First time submitting? FormSubmit has sent an activation email to <strong className="text-black">cinmachproductions@gmail.com</strong>.
+                          <br /><br />
+                          <strong>Please check your inbox (and spam folder) and click the confirmation link</strong> to activate this email. Once done, future submissions will deliver instantly.
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-6">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </div>
+                        <h3 className="text-black font-black text-2xl md:text-3xl tracking-tight uppercase mb-3">Request Received</h3>
+                        <p className="text-black/60 text-sm leading-relaxed max-w-xs mb-8">
+                          Thank you for reaching out. Our team will review your inquiry and get back to you within 24 hours.
+                        </p>
+                      </>
+                    )}
                     <button
                       onClick={closeProjectModal}
                       className="w-full max-w-[200px] h-[48px] border border-black/10 hover:bg-black/5 text-black font-mono font-bold text-[10px] tracking-[0.2em] uppercase rounded-full transition-colors duration-300"

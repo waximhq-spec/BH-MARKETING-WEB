@@ -101,12 +101,9 @@ export default function Comparison() {
           {/* Data Rows */}
           <div className="flex flex-col">
             {COMPARISON_DATA.map((row, i) => (
-              <motion.div 
+              <Reveal 
                 key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 + (i * 0.05), duration: 0.5 }}
+                delay={0.1 + (i * 0.05)}
                 className="grid grid-cols-[1.2fr_1.3fr_1fr_1fr] border-b border-[#EAEAEA] last:border-0 hover:bg-[#F7F7F7] transition-colors duration-300 group"
               >
                 <div className="px-6 py-[26px] flex items-center">
@@ -135,7 +132,7 @@ export default function Comparison() {
                     {row.agency}
                   </span>
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>

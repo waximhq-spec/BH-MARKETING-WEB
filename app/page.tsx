@@ -375,12 +375,27 @@ export default function LandingPage() {
                         REMEMBER.
                       </span>
                     </h1>
-                    {/* DESKTOP HEADLINE (Exactly Unchanged) */}
-                    <h1 className="hidden md:block text-white font-bold leading-[0.95] tracking-tight antialiased uppercase mb-5 lg:mb-8" style={{ fontSize: "clamp(3rem, 11.5vw, 7.2rem)", letterSpacing: "-0.03em" }}>
-                      <span className="block whitespace-nowrap text-[0.42em] font-light tracking-normal opacity-90 mb-1.5 lg:mb-2 uppercase">
-                        We <span className="font-black">build brands</span> people
+                    {/* DESKTOP HEADLINE */}
+                    <h1 className="hidden md:block text-white leading-[1.0] antialiased uppercase mb-6">
+                      <span 
+                        className="block font-light text-white/95 mb-4 uppercase"
+                        style={{ 
+                          fontSize: "clamp(1.1rem, 2.1vw, 2.2rem)", 
+                          letterSpacing: "0.22em",
+                          lineHeight: 1.2
+                        }}
+                      >
+                        WE <span className="font-black text-white">BUILD BRANDS</span> PEOPLE
                       </span>
-                      <span className="text-[#9A0E1F] uppercase block mt-1">REMEMBER.</span>
+                      <span 
+                        className="text-[#9A0E1F] font-black block leading-none"
+                        style={{ 
+                          fontSize: "clamp(3rem, 7.8vw, 6.2rem)", 
+                          letterSpacing: "-0.04em" 
+                        }}
+                      >
+                        REMEMBER.
+                      </span>
                     </h1>
                     {/* MOBILE PARAGRAPH */}
                     <Reveal delay={0.2} className="w-full md:hidden">
@@ -390,7 +405,7 @@ export default function LandingPage() {
                     </Reveal>
                     {/* DESKTOP PARAGRAPH */}
                     <Reveal delay={0.2} className="w-full hidden md:block">
-                      <p className="text-white/80 text-[15px] lg:text-base leading-[1.6] font-light mb-10 text-left">
+                      <p className="text-white/70 text-[15px] lg:text-base leading-[1.7] font-light mb-10 text-left max-w-[500px]">
                         We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
                       </p>
                     </Reveal>

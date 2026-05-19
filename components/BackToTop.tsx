@@ -59,7 +59,7 @@ export default function BackToTop() {
   // dark theme -> Red (Red-600)
   // light theme -> Black
   const isDark = currentTheme === "dark";
-  const bgColor = isDark ? "rgba(220, 38, 38, 0.95)" : "rgba(0, 0, 0, 0.95)";
+  const bgColor = isDark ? "rgba(154, 14, 31, 0.95)" : "rgba(0, 0, 0, 0.95)";
   const iconColor = "text-white";
 
   return (

@@ -17,11 +17,11 @@ const Digit = memo(({ value, isAccent = false }: { value: string | number, isAcc
             ease: [0.23, 1, 0.32, 1] 
           }}
           className={`absolute text-sm sm:text-base font-bold tabular-nums tracking-tighter ${
-            isAccent ? "text-[#D91616]" : "text-white/80"
+            isAccent ? "text-[#9A0E1F]" : "text-white/80"
           }`}
           style={{
             textShadow: isAccent 
-              ? "0 0 12px rgba(217, 22, 22, 0.4)" 
+              ? "0 0 12px rgba(154, 14, 31, 0.4)" 
               : "0 0 10px rgba(255,255,255,0.15)"
           }}
         >
@@ -46,7 +46,7 @@ const ClockSkeleton = memo(() => (
     <span className="text-white/20 text-xs mx-0.5">:</span>
     <div className="w-8 h-6 bg-white/5 rounded-sm animate-pulse" />
     <span className="text-white/20 text-xs mx-0.5">:</span>
-    <div className="w-8 h-6 bg-[#D91616]/10 rounded-sm animate-pulse" />
+    <div className="w-8 h-6 bg-[#9A0E1F]/10 rounded-sm animate-pulse" />
   </div>
 ));
 

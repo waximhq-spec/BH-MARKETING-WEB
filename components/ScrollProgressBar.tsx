@@ -19,10 +19,10 @@ export default function ScrollProgressBar() {
       aria-hidden="true"
     >
       {/* Gradient fill: red → teal to complement both brand accents */}
-      <div className="w-full h-full bg-gradient-to-r from-[#D91616] via-[#D91616] to-[#00A8AB]" />
+      <div className="w-full h-full bg-gradient-to-r from-[#9A0E1F] via-[#9A0E1F] to-[#00A8AB]" />
 
       {/* Subtle glow trail */}
-      <div className="absolute inset-0 opacity-40 bg-gradient-to-r from-[#D91616]/60 via-[#D91616]/40 to-[#00A8AB]/60" />
+      <div className="absolute inset-0 opacity-40 bg-gradient-to-r from-[#9A0E1F]/60 via-[#9A0E1F]/40 to-[#00A8AB]/60" />
     </motion.div>
   );
 }

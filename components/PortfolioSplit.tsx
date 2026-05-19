@@ -88,7 +88,7 @@ function ProjectCard({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="text-[9px] font-bold tracking-[0.25em] uppercase text-[#D91616]/80 border border-[#D91616]/25 px-2 py-0.5 rounded-sm"
+              className="text-[9px] font-bold tracking-[0.25em] uppercase text-[#9A0E1F]/80 border border-[#9A0E1F]/25 px-2 py-0.5 rounded-sm"
             >
               {tag}
             </span>
@@ -122,7 +122,7 @@ export default function PortfolioSplit() {
       {/* ── Top label ── */}
       <div className="w-full flex justify-center pt-32 md:pt-40 pb-12 md:pb-20 px-6">
         <div className="text-center">
-          <p className="type-label text-[#D91616] mb-4" style={{ textShadow: "0 0 18px rgba(217,22,22,0.4)" }}>
+          <p className="type-label text-[#9A0E1F] mb-4" style={{ textShadow: "0 0 18px rgba(154,14,31,0.4)" }}>
             Selected Work
           </p>
           <h2
@@ -159,7 +159,7 @@ export default function PortfolioSplit() {
             />
             {/* Subtle red wash on hover */}
             <div
-              className={`absolute inset-0 bg-[#D91616] mix-blend-color transition-opacity duration-500 ${hovered === "spaces" ? "opacity-15" : "opacity-0"}`}
+              className={`absolute inset-0 bg-[#9A0E1F] mix-blend-color transition-opacity duration-500 ${hovered === "spaces" ? "opacity-15" : "opacity-0"}`}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0d0303]/80 via-transparent to-[#0d0303]/40" />
           </div>
@@ -188,7 +188,7 @@ export default function PortfolioSplit() {
               >
                 <Link
                   href="/work"
-                  className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-[#D91616] hover:text-[#D91616] transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-[#9A0E1F] hover:text-[#9A0E1F] transition-colors duration-300"
                 >
                   Explore Commercials →
                 </Link>
@@ -217,7 +217,7 @@ export default function PortfolioSplit() {
               style={{ filter: "brightness(0.35) saturate(1.1)", aspectRatio: "14/8" }}
             />
             <div
-              className={`absolute inset-0 bg-[#D91616] mix-blend-color transition-opacity duration-500 ${hovered === "tastes" ? "opacity-15" : "opacity-0"}`}
+              className={`absolute inset-0 bg-[#9A0E1F] mix-blend-color transition-opacity duration-500 ${hovered === "tastes" ? "opacity-15" : "opacity-0"}`}
             />
             <div className="absolute inset-0 bg-gradient-to-l from-[#0d0303]/80 via-transparent to-[#0d0303]/10" />
           </div>
@@ -246,7 +246,7 @@ export default function PortfolioSplit() {
               >
                 <Link
                   href="/work"
-                  className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-[#D91616] hover:text-[#D91616] transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-white border-b border-white/30 pb-1 hover:border-[#9A0E1F] hover:text-[#9A0E1F] transition-colors duration-300"
                 >
                   Explore Campaigns →
                 </Link>
@@ -270,7 +270,7 @@ export default function PortfolioSplit() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           <div className="relative z-10 p-8">
-            <p className="type-label text-[#D91616]/70 mb-2">Category 01</p>
+            <p className="type-label text-[#9A0E1F]/70 mb-2">Category 01</p>
             <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.03em" }}>
               COMMERCIALS
             </h3>
@@ -295,7 +295,7 @@ export default function PortfolioSplit() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           <div className="relative z-10 p-8">
-            <p className="type-label text-[#D91616]/70 mb-2">Category 02</p>
+            <p className="type-label text-[#9A0E1F]/70 mb-2">Category 02</p>
             <h3 className="text-white font-black text-4xl mb-2" style={{ letterSpacing: "-0.03em" }}>
               CAMPAIGNS
             </h3>
@@ -319,7 +319,7 @@ export default function PortfolioSplit() {
                 <p className="type-label text-white/25 mb-2">Commercial Production</p>
                 <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.03em" }}>Brand Commercials</h4>
               </div>
-              <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#D91616]/70 hover:text-[#D91616] transition-colors">
+              <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#9A0E1F]/70 hover:text-[#9A0E1F] transition-colors">
                 View All →
               </Link>
             </div>
@@ -337,7 +337,7 @@ export default function PortfolioSplit() {
                 <p className="type-label text-white/25 mb-2">Digital Campaigns</p>
                 <h4 className="text-white font-bold text-xl" style={{ letterSpacing: "-0.03em" }}>Campaigns</h4>
               </div>
-              <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#D91616]/70 hover:text-[#D91616] transition-colors">
+              <Link href="/work" className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#9A0E1F]/70 hover:text-[#9A0E1F] transition-colors">
                 View All →
               </Link>
             </div>

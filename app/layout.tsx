@@ -12,6 +12,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import BackToTop from "@/components/BackToTop";
 import AnnouncementBanner from "@/components/AnnouncementBanner";
 import CalEmbed from "@/components/CalEmbed";
+import CookieConsent from "@/components/CookieConsent";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -146,6 +147,7 @@ export default function RootLayout({
           <SecurityLayer />
           <BackToTop />
           <CalEmbed />
+          <CookieConsent />
         </ModalProvider>
       </body>
     </html>

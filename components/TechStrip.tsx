@@ -51,7 +51,7 @@ export default function TechStrip() {
             >
               {item}
             </span>
-            <span className="inline-block w-1 h-1 rounded-full bg-[#D91616]/60 mx-4 shrink-0" />
+            <span className="inline-block w-1 h-1 rounded-full bg-[#9A0E1F]/60 mx-4 shrink-0" />
           </span>
         ))}
       </div>

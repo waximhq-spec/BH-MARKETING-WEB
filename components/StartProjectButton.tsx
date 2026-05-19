@@ -15,11 +15,11 @@ export default function StartProjectButton() {
         <motion.div
           whileHover={{
             scale: 1.05,
-            boxShadow: "0 0 25px rgba(217,22,22,0.4)",
+            boxShadow: "0 0 25px rgba(154,14,31,0.4)",
           }}
           whileTap={{ scale: 0.97 }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          className="flex items-center gap-2.5 px-5 py-3 bg-[#D91616] text-white rounded-full border border-white/10 shadow-[0_0_15px_rgba(217,22,22,0.2)]"
+          className="flex items-center gap-2.5 px-5 py-3 bg-[#9A0E1F] text-white rounded-full border border-white/10 shadow-[0_0_15px_rgba(154,14,31,0.2)]"
         >
           <span className="w-2 h-2 rounded-full bg-white shrink-0" />
           <span

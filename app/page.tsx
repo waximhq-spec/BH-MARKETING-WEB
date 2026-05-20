@@ -341,7 +341,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="relative h-[calc(100svh-84px)] md:h-[calc(100svh-96px)] lg:h-[calc(100svh-96px)] min-h-[580px] w-full overflow-hidden flex flex-col" id="hero-section">
+        <section data-theme="dark" className="relative h-[calc(100svh-70px)] md:h-[calc(100svh-82px)] lg:h-[calc(100svh-82px)] min-h-[580px] w-full overflow-hidden flex flex-col" id="hero-section">
           <HeroBlurWrapper>
             {/* Background video — no filter, no scale animation, no will-change */}
             <SmartVideo

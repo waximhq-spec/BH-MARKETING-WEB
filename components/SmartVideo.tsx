@@ -21,31 +21,6 @@ export default function SmartVideo({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // HERO / BACKGROUND VIDEOS: Keep as they were (immediate autoplay)
-  if (props.autoPlay) {
-    return (
-      <video
-        key={src}
-        preload="auto"
-        muted
-        playsInline
-        // @ts-ignore — webkit attribute for older iOS
-        webkit-playsinline="true"
-        loop
-        className={className}
-        style={{
-          WebkitBackfaceVisibility: "hidden",
-          backfaceVisibility: "hidden",
-          transform: "translate3d(0, 0, 0)",
-          ...(props.style || {}),
-        }}
-        {...props}
-      >
-        <source src={src} type="video/mp4" />
-      </video>
-    );
-  }
-
   const handleInteraction = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -76,6 +51,30 @@ export default function SmartVideo({
       }
     }
   }, [isActivated]);
+
+  // HERO / BACKGROUND VIDEOS: Keep as they were (immediate autoplay)
+  if (props.autoPlay) {
+    return (
+      <video
+        key={src}
+        preload="auto"
+        muted
+        playsInline
+        {...{ "webkit-playsinline": "true" }}
+        loop
+        className={className}
+        style={{
+          WebkitBackfaceVisibility: "hidden",
+          backfaceVisibility: "hidden",
+          transform: "translate3d(0, 0, 0)",
+          ...(props.style || {}),
+        }}
+        {...props}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    );
+  }
 
   return (
     <div 

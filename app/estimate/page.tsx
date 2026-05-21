@@ -1,8 +1,6 @@
 "use client";
 import Reveal from "@/components/Reveal";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
 import PageBgSync from "@/components/PageBgSync";
 
 

@@ -226,7 +226,7 @@ export default function ProcessSection() {
         <div className="bg-[#fafafa] relative flex flex-col py-16 md:py-24">
           <div className="absolute left-[44px] md:left-[48px] top-24 bottom-24 w-px border-l border-dashed border-black/10 z-0" />
 
-          {STEPS.map((step, index) => (
+          {STEPS.map((step) => (
             <div key={step.num} className="flex flex-col relative z-10 px-6 py-6 md:px-8 group">
               <div className="w-full flex gap-6 md:gap-8 items-start relative">
                 <div className="relative z-10 shrink-0 bg-[#fafafa] py-1">

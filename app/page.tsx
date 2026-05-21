@@ -4,7 +4,6 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useModal } from "@/components/ModalContext";
 import SmartVideo from "@/components/SmartVideo";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import Image from "next/image";
@@ -12,7 +11,6 @@ import Image from "next/image";
 // Lazy load below-the-fold sections for performance
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const EngagementModels = dynamic(() => import("@/components/EngagementModels"));
-const Comparison = dynamic(() => import("@/components/Comparison"));
 
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
 const CTASection = dynamic(() => import("@/components/CTASection"));
@@ -24,8 +22,8 @@ function HeroClock() {
   const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    setTime(new Date());
     const timer = setInterval(() => setTime(new Date()), 1000);
+    setTimeout(() => setTime(new Date()), 0);
     return () => clearInterval(timer);
   }, []);
 
@@ -297,8 +295,6 @@ function ServicesTable() {
 
 
 export default function LandingPage() {
-  const { openProjectModal } = useModal();
-
   return (
     <div className="flex flex-col min-h-screen bg-[#050505]">
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
@@ -316,13 +312,13 @@ export default function LandingPage() {
 
         <h2>FAQ — Creative Agency Services</h2>
         <div>
-          <h3>How does cinematic content help my brand?</h3>
-          <p>Cinematic video content increases engagement, elevates your brand's perceived value, and turns digital views into real business growth.</p>
+          <h3>How does cinematic content help my brand&apos;s growth?</h3>
+          <p>Cinematic video content increases engagement, elevates your brand&apos;s perceived value, and turns digital views into real business growth.</p>
 
           <h3>What is included in a content production project?</h3>
           <p>We handle everything from start to finish: creative concept development, pre-production planning, high-end filming, and professional post-production including cinematic editing, color grading, and sound design.</p>
 
-          <h3>Can you help with my company's branding and logo design?</h3>
+          <h3>Can you help with my company&apos;s branding and logo design?</h3>
           <p>Absolutely. We offer complete Brand Identity design services, including custom logo design, visual positioning, curated color palettes, typography, and professional brand guidelines to make your business memorable.</p>
 
           <h3>Do you produce content optimized for social media?</h3>
@@ -1024,7 +1020,7 @@ function TestimonialWheel() {
           className="absolute inset-0 flex flex-col justify-center"
         >
           <p className="text-black font-medium text-lg md:text-xl lg:text-2xl leading-[1.3] tracking-tight italic mb-5">
-            "{TESTIMONIALS[index].quote}"
+            &ldquo;{TESTIMONIALS[index].quote}&rdquo;
           </p>
           <div className="flex flex-col gap-3">
             <p className="text-black/60 font-mono text-[10px] uppercase tracking-widest font-bold">

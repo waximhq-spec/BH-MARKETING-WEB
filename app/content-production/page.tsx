@@ -3,8 +3,6 @@ import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import Image from "next/image";
 
@@ -17,7 +15,6 @@ const FAQSection = dynamic(() => import("@/components/FAQSection"));
 import PageBgSync from "@/components/PageBgSync";
 
 export default function ContentProductionPage() {
-  const { openProjectModal } = useModal();
 
   const INDUSTRIES = [
     { title: "Restaurants & Cafes", desc: "Mouth-watering food cinematography, viral menu showcases, and atmospheric venue walkthroughs that drive foot traffic.", image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1934&auto=format&fit=crop" },

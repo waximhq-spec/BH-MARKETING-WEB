@@ -1,7 +1,6 @@
 "use client";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
-import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import Image from "next/image";

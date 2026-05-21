@@ -42,7 +42,6 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   const { openProjectModal } = useModal();
-  const sectionsRef = useRef<Element[]>([]);
   const lastThemeRef = useRef(theme);
   const tickingRef = useRef(false);
   // Track scroll position before locking so we can restore it
@@ -76,8 +75,8 @@ export default function Navbar() {
       }
 
       if (activeTheme !== lastThemeRef.current) {
-        lastThemeRef.current = activeTheme as any;
-        setTheme(activeTheme as any);
+        lastThemeRef.current = activeTheme as "dark" | "light" | "red" | "pricing" | "split";
+        setTheme(activeTheme as "dark" | "light" | "red" | "pricing" | "split");
       }
     };
 
@@ -130,8 +129,11 @@ export default function Navbar() {
   }, [menuOpen]);
 
   useEffect(() => {
-    setMenuOpen(false);
-    setServicesDropdownOpen(false);
+    const timer = setTimeout(() => {
+      setMenuOpen(false);
+      setServicesDropdownOpen(false);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   const isHome = pathname === "/";
@@ -379,7 +381,7 @@ export default function Navbar() {
             flex: 1,
             overflowY: "auto",
             overscrollBehavior: "contain",
-            WebkitOverflowScrolling: "touch" as any,
+            WebkitOverflowScrolling: "touch" as const,
             backgroundColor: "#ffffff",
           }}
         >

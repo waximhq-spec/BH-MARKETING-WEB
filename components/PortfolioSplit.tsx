@@ -113,10 +113,6 @@ function ProjectCard({
 
 export default function PortfolioSplit() {
   const [hovered, setHovered] = useState<Side>(null);
-
-  const spacesWidth = hovered === "spaces" ? "65%" : hovered === "tastes" ? "35%" : "50%";
-  const tastesWidth = hovered === "tastes" ? "65%" : hovered === "spaces" ? "35%" : "50%";
-
   return (
     <section className="relative w-full min-h-screen flex flex-col bg-[#0d0303]">
       {/* ── Top label ── */}

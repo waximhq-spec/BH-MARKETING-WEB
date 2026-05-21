@@ -9,7 +9,7 @@ const FAQS = [
     question: "How does cinematic content help my brand?",
     answer: (
       <>
-        High-end visual content elevates your brand's perceived value, increases engagement, and drives targeted conversions. It turns digital views into real business growth. Learn more about our{" "}
+        High-end visual content elevates your brand&apos;s perceived value, increases engagement, and drives targeted conversions. It turns digital views into real business growth. Learn more about our{" "}
         <Link href="/services" className="text-[#9A0E1F] hover:underline">
           Creative Services
         </Link>.

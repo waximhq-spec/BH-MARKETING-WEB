@@ -2,7 +2,6 @@
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 
-import { motion } from "framer-motion";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import PageBgSync from "@/components/PageBgSync";
 

@@ -94,7 +94,7 @@ export default async function BlogPostPage({ params }: Props) {
         <footer className="mt-24 pt-12 border-t border-black/10">
           <div className="bg-[#FAFAFA] p-8 rounded-sm">
             <h4 className="font-bold text-xl mb-4">Ready to elevate your brand?</h4>
-            <p className="text-black/60 mb-6">Cinmach Productions is Bahrain's premier cinematic video agency. We help restaurants and brands turn views into physical footfall.</p>
+            <p className="text-black/60 mb-6">Cinmach Productions is Bahrain&apos;s premier cinematic video agency. We help restaurants and brands turn views into physical footfall.</p>
             <Link 
               href="/restaurant-videography-bahrain"
               className="inline-block px-8 py-4 bg-[#050505] text-[#ffffff] text-[11px] font-mono font-bold tracking-[0.2em] uppercase hover:bg-[#9A0E1F] transition-colors"

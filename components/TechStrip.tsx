@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-
 const TECH_ITEMS = [
   "Color graded in DaVinci Resolve",
   "Shot in Log · S-Log3",
@@ -17,8 +14,6 @@ const TECH_ITEMS = [
 ];
 
 export default function TechStrip() {
-  const tickerRef = useRef<HTMLDivElement>(null);
-
   return (
     <div className="relative w-full overflow-hidden border-y border-white/[0.06] bg-[#0a0202] py-5 select-none h-[52px] min-h-[52px]">
       {/* Left fade */}

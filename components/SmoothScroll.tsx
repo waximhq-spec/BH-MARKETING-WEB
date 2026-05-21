@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, createContext, useContext } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 import Lenis from "lenis";
 
 // Context so children (BackToTop etc.) can call lenis methods
@@ -11,7 +11,7 @@ export function useLenis() {
 }
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
 
   useEffect(() => {
     // Respect user's motion preference
@@ -39,7 +39,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       syncTouch: false,     // let touch devices use native scroll
     });
 
-    lenisRef.current = lenis;
+    const timer = setTimeout(() => {
+      setLenisInstance(lenis);
+    }, 0);
 
     let rafId: number;
     function raf(time: number) {
@@ -49,14 +51,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     rafId = requestAnimationFrame(raf);
 
     return () => {
+      clearTimeout(timer);
       cancelAnimationFrame(rafId);
       lenis.destroy();
-      lenisRef.current = null;
+      setLenisInstance(null);
     };
   }, []);
 
   return (
-    <LenisContext.Provider value={lenisRef.current}>
+    <LenisContext.Provider value={lenisInstance}>
       {children}
     </LenisContext.Provider>
   );

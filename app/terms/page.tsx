@@ -54,7 +54,7 @@ export default function TermsPage() {
               3. Project Inquiries & Quotes
             </h2>
             <p className="text-white/60 text-[15px] leading-[1.8] font-light mb-12">
-              Submitting a request through our "Get a Quote" forms does not constitute a binding contract. Any project proposals, strategy frameworks, or pricing estimates provided by our team are subject to final agreement via a formalized production contract signed by both parties. We reserve the right to decline project requests that do not align with our current capacity or agency direction.
+              Submitting a request through our &quot;Get a Quote&quot; forms does not constitute a binding contract. Any project proposals, strategy frameworks, or pricing estimates provided by our team are subject to final agreement via a formalized production contract signed by both parties. We reserve the right to decline project requests that do not align with our current capacity or agency direction.
             </p>
 
             <h2 className="text-white text-xl md:text-2xl font-bold tracking-tight uppercase mb-6 mt-16">
@@ -68,7 +68,7 @@ export default function TermsPage() {
               5. Limitation of Liability
             </h2>
             <p className="text-white/60 text-[15px] leading-[1.8] font-light mb-12">
-              CINMACH Productions shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from your use of this website, any interruptions to the website's availability, or your reliance on any information provided on the site.
+              CINMACH Productions shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from your use of this website, any interruptions to the website&apos;s availability, or your reliance on any information provided on the site.
             </p>
 
             <h2 className="text-white text-xl md:text-2xl font-bold tracking-tight uppercase mb-6 mt-16">

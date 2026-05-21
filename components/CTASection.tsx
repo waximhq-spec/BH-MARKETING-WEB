@@ -32,7 +32,7 @@ export default function CTASection() {
           </h2>
 
           <p className="text-black/60 text-[15px] md:text-[17px] max-w-2xl mx-auto font-light leading-relaxed mb-12">
-            Let's build a tailored visual strategy and premium cinematic assets designed specifically to accelerate your growth.
+            Let&apos;s build a tailored visual strategy and premium cinematic assets designed specifically to accelerate your growth.
           </p>
 
           <button

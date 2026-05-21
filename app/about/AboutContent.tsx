@@ -2,13 +2,7 @@
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 
-import { motion } from "framer-motion";
-import { useModal } from "@/components/ModalContext";
-
-
-
 export default function AboutContent() {
-  const { openProjectModal } = useModal();
 
   return (
     <main className="bg-white min-h-screen text-black">

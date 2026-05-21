@@ -1,7 +1,6 @@
 "use client";
 import Reveal from "@/components/Reveal";
 
-import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import SmartVideo from "@/components/SmartVideo";
@@ -26,7 +25,7 @@ export default function FoodVideographyPage() {
         <p>At Cinmach Productions, we specialize in high-end food videography services across Bahrain. From mouth-watering slow-motion shots to dynamic social media reels, our expert team in Manama captures the essence of your culinary creations.</p>
         
         <h2>Why Professional Food Videography Matters</h2>
-        <p>In today's digital landscape, people eat with their eyes first. High-quality food videography is essential for restaurants, FMCG brands, and hospitality businesses in Bahrain to stand out. It builds anticipation, showcases the quality of ingredients, and directly drives sales.</p>
+        <p>In today&apos;s digital landscape, people eat with their eyes first. High-quality food videography is essential for restaurants, FMCG brands, and hospitality businesses in Bahrain to stand out. It builds anticipation, showcases the quality of ingredients, and directly drives sales.</p>
         
         <h2>Our Food Videography Services</h2>
         <ul>
@@ -89,7 +88,7 @@ export default function FoodVideographyPage() {
                   PEOPLE EAT<br />WITH THEIR EYES.
                 </h2>
                 <p className="text-black/60 text-lg md:text-xl font-light leading-relaxed mb-12 max-w-xl">
-                  In Bahrain's highly competitive food scene, average visuals don't cut it. Our food videography services are designed to trigger cravings, highlight your culinary expertise, and drive direct engagement across all digital platforms.
+                  In Bahrain&apos;s highly competitive food scene, average visuals don&apos;t cut it. Our food videography services are designed to trigger cravings, highlight your culinary expertise, and drive direct engagement across all digital platforms.
                 </p>
               </Reveal>
               
@@ -149,7 +148,7 @@ export default function FoodVideographyPage() {
           <div className="flex flex-col gap-8">
             <Reveal delay={0.1}>
               <h3 className="font-bold text-xl mb-2">What makes food videography different from regular videography?</h3>
-              <p className="text-black/60 leading-relaxed">Food videography requires specialized equipment like macro lenses and specific lighting modifiers to make the food look appetizing. It also involves an understanding of food styling, timing (shooting before food wilts or melts), and capturing the "hero" moment of a dish.</p>
+              <p className="text-black/60 leading-relaxed">Food videography requires specialized equipment like macro lenses and specific lighting modifiers to make the food look appetizing. It also involves an understanding of food styling, timing (shooting before food wilts or melts), and capturing the &ldquo;hero&rdquo; moment of a dish.</p>
             </Reveal>
             <Reveal delay={0.2}>
               <h3 className="font-bold text-xl mb-2">Do we need a food stylist?</h3>

@@ -1,7 +1,6 @@
 "use client";
 import Reveal from "@/components/Reveal";
 
-import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import SmartVideo from "@/components/SmartVideo";
@@ -35,7 +34,7 @@ export default function VideoProductionPage() {
         </ul>
 
         <h2>Why Cinmach Productions?</h2>
-        <p>What sets us apart from other video production companies in Bahrain is our obsession with quality. We don't just record video; we design perception. We use cinema-grade equipment and advanced post-production techniques to ensure your brand looks premium, professional, and intentional.</p>
+        <p>What sets us apart from other video production companies in Bahrain is our obsession with quality. We don&apos;t just record video; we design perception. We use cinema-grade equipment and advanced post-production techniques to ensure your brand looks premium, professional, and intentional.</p>
 
         <p>Return to our <Link href="/">homepage</Link> or view our <Link href="/work">portfolio</Link>.</p>
       </VisualHiddenSEO>
@@ -152,7 +151,7 @@ export default function VideoProductionPage() {
             </Reveal>
             <Reveal delay={0.2}>
               <h3 className="font-bold text-xl mb-2">How much does a commercial video cost?</h3>
-              <p className="text-black/60 leading-relaxed">Costs vary widely based on the project's scope, including pre-production planning, days of filming, required crew, and post-production complexity. We offer transparent quoting after an initial discovery call.</p>
+              <p className="text-black/60 leading-relaxed">Costs vary widely based on the project&apos;s scope, including pre-production planning, days of filming, required crew, and post-production complexity. We offer transparent quoting after an initial discovery call.</p>
             </Reveal>
             <Reveal delay={0.3}>
               <h3 className="font-bold text-xl mb-2">How long is the production process?</h3>

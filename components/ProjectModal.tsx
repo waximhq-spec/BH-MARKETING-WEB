@@ -78,10 +78,13 @@ export default function ProjectModal() {
   useEffect(() => {
     if (isProjectModalOpen) {
       document.body.style.overflow = "hidden";
-      setIsSuccess(false);
-      setIsSubmitting(false);
-      setActivationNotice(false);
-      setFormData({ name: "", brand: "", whatsapp: "", service: "", industry: "", budget: "", message: "" });
+      const timer = setTimeout(() => {
+        setIsSuccess(false);
+        setIsSubmitting(false);
+        setActivationNotice(false);
+        setFormData({ name: "", brand: "", whatsapp: "", service: "", industry: "", budget: "", message: "" });
+      }, 0);
+      return () => clearTimeout(timer);
     } else {
       document.body.style.overflow = "";
     }

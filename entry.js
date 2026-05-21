@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Hostinger Optimized Entry Point
  * 

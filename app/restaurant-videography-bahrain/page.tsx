@@ -1,7 +1,6 @@
 "use client";
 import Reveal from "@/components/Reveal";
 
-import { motion } from "framer-motion";
 import { useModal } from "@/components/ModalContext";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import SmartVideo from "@/components/SmartVideo";
@@ -153,7 +152,7 @@ export default function RestaurantVideographyPage() {
             </Reveal>
             <Reveal delay={0.4}>
               <h3 className="font-bold text-xl mb-2">Can you handle social media distribution?</h3>
-              <p className="text-black/60 leading-relaxed">As a comprehensive video production company in Bahrain, we don't just shoot and edit; we also provide strategy. We optimize all content for platforms like Instagram, TikTok, and YouTube, ensuring the aspect ratios and pacing are perfectly tuned for maximum engagement.</p>
+              <p className="text-black/60 leading-relaxed">As a comprehensive video production company in Bahrain, we don&apos;t just shoot and edit; we also provide strategy. We optimize all content for platforms like Instagram, TikTok, and YouTube, ensuring the aspect ratios and pacing are perfectly tuned for maximum engagement.</p>
             </Reveal>
           </div>
         </div>

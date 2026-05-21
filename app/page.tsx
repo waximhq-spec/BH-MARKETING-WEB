@@ -11,6 +11,7 @@ import Image from "next/image";
 
 // Lazy load below-the-fold sections for performance
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const EngagementModels = dynamic(() => import("@/components/EngagementModels"));
 const Comparison = dynamic(() => import("@/components/Comparison"));
 
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
@@ -622,8 +623,6 @@ export default function LandingPage() {
                     { title: "Real Estate", cat: "Property", poster: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" },
                     { title: "Gyms & Fitness", cat: "Health", poster: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" },
                     { title: "Hotels & Resorts", cat: "Lifestyle", poster: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop" },
-                    { title: "E-commerce", cat: "Commercial", poster: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop" },
-                    { title: "Luxury Brands", cat: "Editorial", poster: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop" },
                   ];
 
                   const chunks: (typeof PORTFOLIO_VIDEOS)[] = [];
@@ -794,6 +793,11 @@ export default function LandingPage() {
         <ProcessSection />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            ENGAGEMENT MODELS
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <EngagementModels />
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 6: CALL TO ACTION
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
@@ -806,41 +810,41 @@ export default function LandingPage() {
             SECTION 7: SOCIAL PROOF (REFINED)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <SectionBlurWrapper>
-          <section data-theme="light" className="py-32 md:py-40 bg-white text-black overflow-hidden relative border-t border-black/5">
+          <section data-theme="light" className="py-20 md:py-24 bg-white text-black overflow-hidden relative border-t border-black/20">
             <div className="container relative z-10">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-24">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-20">
 
                 {/* Left: Authority Block */}
                 <div className="max-w-xl">
                   <Reveal>
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full">
                         <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
-                        <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[12px] md:text-[14px] font-bold">Social Proof</span>
+                        <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[11px] md:text-[12px] font-bold">Social Proof</span>
                       </div>
                     </div>
-                    <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight mb-10 uppercase" style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", letterSpacing: "-0.03em" }}>
+                    <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-black to-black/60 font-black leading-[0.85] tracking-tight mb-8 uppercase" style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", letterSpacing: "-0.03em" }}>
                       WHAT OUR<br /><span className="text-black/10">CLIENTS SAY.</span>
                     </h2>
                   </Reveal>
 
-                  <div className="flex gap-12">
+                  <div className="flex gap-10">
                     <Reveal delay={0.1}>
-                      <p className="text-[#9A0E1F] font-bold text-3xl md:text-4xl tracking-tight antialiased uppercase mb-1">+40%</p>
+                      <p className="text-[#9A0E1F] font-bold text-3xl tracking-tight antialiased uppercase mb-1">+40%</p>
                       <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Brand Growth</p>
                     </Reveal>
                     <Reveal delay={0.2}>
-                      <p className="text-black font-bold text-3xl md:text-4xl tracking-tight antialiased uppercase mb-1">100%</p>
+                      <p className="text-black font-bold text-3xl tracking-tight antialiased uppercase mb-1">100%</p>
                       <p className="text-black/30 font-mono uppercase text-[8px] tracking-[0.2em]">Client Trust</p>
                     </Reveal>
                   </div>
                 </div>
 
                 {/* Vertical Divider (Desktop only) */}
-                <div className="hidden lg:block w-px h-32 bg-black/5 shrink-0" />
+                <div className="hidden lg:block w-px h-24 bg-black/5 shrink-0" />
 
                 {/* Right: Testimonial Engine */}
-                <div className="relative flex-1 min-h-[140px] md:min-h-[160px] flex flex-col justify-center">
+                <div className="relative flex-1 min-h-[160px] md:min-h-[180px] flex flex-col justify-center">
                   <TestimonialWheel />
                 </div>
 
@@ -1019,15 +1023,15 @@ function TestimonialWheel() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 flex flex-col justify-center"
         >
-          <p className="text-black font-medium text-xl md:text-2xl lg:text-3xl leading-[1.2] tracking-tight italic mb-8">
+          <p className="text-black font-medium text-lg md:text-xl lg:text-2xl leading-[1.3] tracking-tight italic mb-5">
             "{TESTIMONIALS[index].quote}"
           </p>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <p className="text-black/60 font-mono text-[10px] uppercase tracking-widest font-bold">
               {TESTIMONIALS[index].client}
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-[#9A0E1F]" />
+              <div className="w-1.5 h-1.5 bg-[#9A0E1F]" />
               <p className="text-[#9A0E1F] font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</p>
             </div>
           </div>

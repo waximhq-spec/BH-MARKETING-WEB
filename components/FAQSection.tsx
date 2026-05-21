@@ -79,7 +79,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: React.
 
 export default function FAQSection() {
   return (
-    <section data-theme="light" className="py-32 md:py-48 bg-white text-black border-t border-black/5">
+    <section data-theme="light" className="py-24 md:py-32 bg-white text-black border-t border-black/20">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
           {/* Left Column: Heading */}

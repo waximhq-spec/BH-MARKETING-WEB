@@ -47,48 +47,42 @@ export default function Navbar() {
   const tickingRef = useRef(false);
   // Track scroll position before locking so we can restore it
   const scrollYRef = useRef(0);
+  const headerRef = useRef<HTMLElement>(null);
 
-  // Calculate offsets once on mount and resize, read scrollY on scroll
+  // Dynamic theme detection based on live viewport positions
   useEffect(() => {
-    let sectionData: { top: number; bottom: number; theme: string }[] = [];
-    
-    const calculateOffsets = () => {
-      const sections = Array.from(document.querySelectorAll("[data-theme]"));
-      const scrollY = window.scrollY;
-      sectionData = sections.map((s) => {
-        const rect = s.getBoundingClientRect();
-        return {
-          top: rect.top + scrollY,
-          bottom: rect.bottom + scrollY,
-          theme: s.getAttribute("data-theme") || "dark"
-        };
-      });
-      
-      // Initial check
-      checkTheme();
-    };
-
     const checkTheme = () => {
-      const scrollPos = window.scrollY + 64;
+      const headerEl = headerRef.current || document.querySelector("header");
+      if (!headerEl) return;
+
+      const headerRect = headerEl.getBoundingClientRect();
+      const navbarBottom = headerRect.bottom; // exact bottom edge of the navbar in the viewport
+      
+      const sections = Array.from(document.querySelectorAll("[data-theme]"));
       let activeTheme: string | null = null;
-      for (let i = 0; i < sectionData.length; i++) {
-        if (scrollPos >= sectionData[i].top && scrollPos < sectionData[i].bottom) {
-          activeTheme = sectionData[i].theme;
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        // Section is active if its top has crossed the bottom of the navbar, 
+        // and its bottom is still below the bottom of the navbar.
+        if (rect.top <= navbarBottom && rect.bottom > navbarBottom) {
+          activeTheme = section.getAttribute("data-theme");
           break;
         }
       }
+
       if (!activeTheme) {
         activeTheme = pathname === "/" ? "dark" : "light";
       }
+
       if (activeTheme !== lastThemeRef.current) {
         lastThemeRef.current = activeTheme as any;
         setTheme(activeTheme as any);
       }
     };
 
-    // Delay calculation slightly to ensure layout is settled
-    setTimeout(calculateOffsets, 100);
-    window.addEventListener("resize", calculateOffsets, { passive: true });
+    // Run initial check
+    checkTheme();
 
     const onScroll = () => {
       if (tickingRef.current) return;
@@ -98,12 +92,13 @@ export default function Navbar() {
         tickingRef.current = false;
       });
     };
-    
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    
+    window.addEventListener("resize", checkTheme, { passive: true });
+
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", calculateOffsets);
+      window.removeEventListener("resize", checkTheme);
     };
   }, [pathname]);
 
@@ -157,6 +152,7 @@ export default function Navbar() {
         No transitions on background — color changes are instant to avoid intermediate frames.
       */}
       <header
+        ref={headerRef}
         className="relative z-[100]"
         style={{
           background: bgColor,

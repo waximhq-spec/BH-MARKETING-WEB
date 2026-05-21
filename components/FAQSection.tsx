@@ -41,17 +41,17 @@ function FAQItem({ question, answer, index }: { question: string; answer: React.
     <div className="border-b border-black/10">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-8 flex items-center justify-between text-left group"
+        className="w-full py-5 md:py-6 flex items-center justify-between text-left group"
       >
-        <div className="flex items-start gap-6">
+        <div className="flex items-start gap-4">
           <span className="text-[#9A0E1F] font-mono text-[10px] mt-1.5 font-bold">0{index + 1}</span>
-          <h3 className="text-black font-bold text-xl md:text-2xl tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300">
+          <h3 className="text-black font-bold text-lg md:text-xl tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300">
             {question}
           </h3>
         </div>
         <motion.span
           animate={{ rotate: isOpen ? 45 : 0 }}
-          className="text-2xl font-light text-black/20 group-hover:text-[#9A0E1F] transition-colors"
+          className="text-xl font-light text-black/20 group-hover:text-[#9A0E1F] transition-colors"
         >
           +
         </motion.span>
@@ -65,8 +65,8 @@ function FAQItem({ question, answer, index }: { question: string; answer: React.
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className="pb-8 pl-12 md:pl-16 pr-12">
-              <p className="text-black/50 text-base md:text-lg font-light leading-relaxed max-w-2xl">
+            <div className="pb-5 pl-10 md:pl-12 pr-6">
+              <p className="text-black/50 text-[14px] md:text-[15px] font-light leading-relaxed max-w-2xl">
                 {answer}
               </p>
             </div>
@@ -79,9 +79,9 @@ function FAQItem({ question, answer, index }: { question: string; answer: React.
 
 export default function FAQSection() {
   return (
-    <section data-theme="light" className="py-24 md:py-32 bg-white text-black border-t border-black/20">
+    <section data-theme="light" className="py-16 md:py-24 bg-white text-black border-t border-black/20">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
           {/* Left Column: Heading */}
           <div className="lg:col-span-5">
             <div className="flex items-center gap-4 mb-8">

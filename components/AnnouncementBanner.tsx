@@ -4,9 +4,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const MESSAGES = [
-  "Limited client spots remaining for June",
-  "Creative direction & brand films for elite brands",
-  "Now accepting inquiries for Q3 2026"
+  {
+    desktop: "Limited client spots remaining for June",
+    mobile: "June spots limited"
+  },
+  {
+    desktop: "Creative direction & brand films for elite brands",
+    mobile: "Cinematic brand films"
+  },
+  {
+    desktop: "Now accepting inquiries for Q3 2026",
+    mobile: "Accepting Q3 bookings"
+  }
 ];
 
 export default function AnnouncementBanner() {
@@ -37,9 +46,10 @@ export default function AnnouncementBanner() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -15, opacity: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute text-[9px] md:text-[10px] font-mono tracking-[0.25em] uppercase text-white/90 text-center leading-none"
+              className="absolute text-[9px] md:text-[10px] font-mono tracking-[0.25em] uppercase text-white/90 text-center leading-none whitespace-nowrap"
             >
-              {MESSAGES[index]}
+              <span className="hidden md:inline">{MESSAGES[index].desktop}</span>
+              <span className="inline md:hidden">{MESSAGES[index].mobile}</span>
             </motion.p>
           </AnimatePresence>
         </div>

@@ -16,12 +16,12 @@ export default function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ y: 12 }}
-      whileInView={{ y: 0 }}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0.001, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.02, margin: "0px 0px 50px 0px" }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       className={`transform-gpu ${className}`}
-      style={{ ...style, willChange: "transform" }}
+      style={style}
     >
       {children}
     </motion.div>

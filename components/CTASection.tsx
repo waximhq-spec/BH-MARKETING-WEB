@@ -13,10 +13,10 @@ export default function CTASection() {
 
       <div className="container relative z-10 max-w-5xl mx-auto px-6 text-center">
         <motion.div
-          initial={{ y: 12 }}
-          whileInView={{ y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0.001, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "0px 0px 50px 0px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/5 border border-[#9A0E1F]/20 rounded-full mb-8">
             <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />

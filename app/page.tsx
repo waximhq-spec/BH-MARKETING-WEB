@@ -348,11 +348,12 @@ export default function LandingPage() {
               style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" } as React.CSSProperties}
             />
             {/* Single unified dark overlay for legibility */}
-            <div className="absolute inset-0 bg-[#050505]/90 md:bg-black/60 z-[1]" />
+            <div className="absolute inset-0 bg-[#050505]/80 z-[1]" />
 
-            {/* Desktop-only cinematic accents */}
-            <div className="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,42,42,0.12)_0%,transparent_70%)] z-[2]" />
-            <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 z-[2]" />
+            {/* Cinematic dark linear gradient behind the text & red highlight */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent z-[2]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(229,9,20,0.12)_0%,transparent_50%)] z-[2]" />
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90 z-[2]" />
 
 
             <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-8 md:pb-16 lg:pb-28">
@@ -364,45 +365,59 @@ export default function LandingPage() {
                     {/* STATIC LCP ELEMENT: Do not wrap the primary heading in JS animations.
                         This ensures it paints instantly from server HTML, fixing the 3.63s LCP. */}
                     {/* MOBILE HEADLINE */}
-                    <h1 className="md:hidden text-white font-black leading-[1.05] tracking-tight antialiased uppercase mb-6 text-center mx-auto max-w-[340px]" style={{ letterSpacing: "-0.03em" }}>
-                      <span className="block text-[1.4rem] font-light tracking-[0.05em] opacity-90 mb-1.5 uppercase">
-                        WE <span className="font-black">BUILD BRANDS</span> PEOPLE
+                    <h1 className="md:hidden text-white font-sans leading-none antialiased uppercase mb-8 text-center mx-auto max-w-[340px]">
+                      <span className="block text-[2.2rem] font-bold tracking-[-0.01em] mb-1.5 uppercase leading-[0.9]">
+                        WE MAKE
                       </span>
-                      <span className="text-[#9A0E1F] uppercase block text-[3.2rem] font-extrabold tracking-tighter leading-none mt-1">
-                        REMEMBER.
+                      <span className="block text-[3.2rem] font-black text-white mb-2 uppercase leading-[0.9] tracking-[-0.02em]">
+                        BRANDS
+                      </span>
+                      <span className="text-[#E50914] uppercase block text-[1.8rem] font-black tracking-[-0.03em] mt-0 leading-[1.0]">
+                        UNFORGETTABLE.
                       </span>
                     </h1>
                     {/* DESKTOP HEADLINE */}
-                    <h1 className="hidden md:block text-white leading-[1.0] antialiased uppercase mb-6">
+                    <h1 className="hidden md:block text-white leading-none antialiased uppercase mb-10 font-sans">
                       <span 
-                        className="block font-light text-white/95 mb-4 uppercase"
+                        className="block font-bold text-white uppercase"
                         style={{ 
-                          fontSize: "clamp(1.1rem, 2.1vw, 2.2rem)", 
-                          letterSpacing: "0.22em",
-                          lineHeight: 1.2
+                          fontSize: "clamp(2.5rem, 5.2vw, 5.2rem)", 
+                          letterSpacing: "-0.02em",
+                          lineHeight: 0.9
                         }}
                       >
-                        WE <span className="font-black text-white">BUILD BRANDS</span> PEOPLE
+                        WE MAKE
                       </span>
                       <span 
-                        className="text-[#9A0E1F] font-black block leading-none"
+                        className="block font-black text-white uppercase"
                         style={{ 
-                          fontSize: "clamp(3rem, 7.8vw, 6.2rem)", 
-                          letterSpacing: "-0.04em" 
+                          fontSize: "clamp(3.5rem, 7.2vw, 7.2rem)", 
+                          letterSpacing: "-0.02em",
+                          lineHeight: 0.9
                         }}
                       >
-                        REMEMBER.
+                        BRANDS
+                      </span>
+                      <span 
+                        className="text-[#E50914] font-black block animate-gpu"
+                        style={{ 
+                          fontSize: "clamp(2.2rem, 4.6vw, 4.6rem)", 
+                          letterSpacing: "-0.03em",
+                          lineHeight: 1.0
+                        }}
+                      >
+                        UNFORGETTABLE.
                       </span>
                     </h1>
                     {/* MOBILE PARAGRAPH */}
-                    <Reveal delay={0.2} className="w-full md:hidden">
-                      <p className="text-white/60 text-[13px] leading-[1.6] font-light mb-8 text-center max-w-[300px] mx-auto">
+                    <Reveal delay={0.2} className="w-full md:hidden mt-6">
+                      <p className="text-[#E0E0E0] text-[13px] leading-[1.6] font-light mb-8 text-center max-w-[360px] mx-auto">
                         We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
                       </p>
                     </Reveal>
                     {/* DESKTOP PARAGRAPH */}
-                    <Reveal delay={0.2} className="w-full hidden md:block">
-                      <p className="text-white/70 text-[15px] lg:text-base leading-[1.7] font-light mb-10 text-left max-w-[500px]">
+                    <Reveal delay={0.2} className="w-full hidden md:block mt-8 lg:mt-10">
+                      <p className="text-[#E0E0E0] text-[15px] lg:text-base leading-[1.7] font-light mb-10 text-left max-w-[500px]">
                         We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
                       </p>
                     </Reveal>
@@ -544,27 +559,27 @@ export default function LandingPage() {
                 <div className="container mx-auto border-t border-white/5 pt-5 md:pt-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* LEFT COLUMN: All 3 Metrics */}
-                    <div className="lg:col-span-7 flex flex-row items-end justify-center lg:justify-start gap-8 md:gap-16 lg:gap-20">
+                    <div className="lg:col-span-7 flex flex-row items-end justify-between lg:justify-start md:gap-16 lg:gap-20">
                       <Reveal delay={0.7}>
-                        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                          <span className="text-white/90 font-black text-[15px] md:text-4xl tracking-tighter">GULF</span>
-                          <span className="text-white/30 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Clients</span>
+                        <div className="flex flex-col items-start text-left">
+                          <span className="text-white/90 font-black text-[22px] md:text-4xl tracking-tighter">GULF</span>
+                          <span className="text-white/30 font-mono font-bold text-[9px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Clients</span>
                         </div>
                       </Reveal>
                       <Reveal delay={0.8}>
                         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                          <span className="text-white/90 font-black text-[15px] md:text-4xl tracking-tighter">
+                          <span className="text-white/90 font-black text-[22px] md:text-4xl tracking-tighter">
                             <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
                           </span>
-                          <span className="text-white/30 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Brands Built</span>
+                          <span className="text-white/30 font-mono font-bold text-[9px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Brands Built</span>
                         </div>
                       </Reveal>
                       <Reveal delay={0.9}>
-                        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                          <span className="text-white/90 font-black text-[15px] md:text-4xl tracking-tighter">
+                        <div className="flex flex-col items-end text-right lg:items-start lg:text-left">
+                          <span className="text-white/90 font-black text-[22px] md:text-4xl tracking-tighter">
                             <CountUp start={0} end={300} duration={5} redraw={true} suffix="%" />
                           </span>
-                          <span className="text-white/30 font-mono font-bold text-[7px] md:text-[9px] uppercase tracking-[0.1em] mt-1">More Engagement</span>
+                          <span className="text-white/30 font-mono font-bold text-[9px] md:text-[9px] uppercase tracking-[0.1em] mt-1">More Engagement</span>
                         </div>
                       </Reveal>
                     </div>

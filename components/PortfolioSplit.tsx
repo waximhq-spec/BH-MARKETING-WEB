@@ -62,10 +62,10 @@ function ProjectCard({
 }) {
   return (
     <motion.div
-      initial={{ y: 12 }}
-      whileInView={{ y: 0 }}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0.001, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.02, margin: "0px 0px 50px 0px" }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="group relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/5 cursor-pointer"
     >
       {/* Thumbnail */}

@@ -458,15 +458,13 @@ export default function LandingPage() {
                 {/* RIGHT: CONVERSION CARD (Desktop Only) */}
                 <div className="hidden lg:flex lg:col-span-5 flex-col items-end lg:mt-2">
                   <motion.div
-                    initial={{ opacity: 0.85, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ y: 20 }}
+                    animate={{ y: 0 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-                    className="w-full max-w-[400px] flex flex-col gap-4 transform-gpu will-change-[transform,opacity]"
+                    className="w-full max-w-[400px] flex flex-col gap-4 transform-gpu will-change-transform"
                   >
                     {/* Trust Signal Testimonial Slider */}
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
                       transition={{ delay: 0.8, duration: 0.6 }}
                       className="w-full bg-white border border-black/[0.08] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.06)] rounded-[24px]"
                     >
@@ -902,12 +900,12 @@ function TestimonialRotation({ isMobile = false, textColor = "text-white" }: { i
       <AnimatePresence mode="wait" initial={false}>
         <motion.p
           key={index}
-          initial={{ opacity: 0.001, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0.001, y: -8 }}
+          initial={{ y: 12 }}
+          animate={{ y: 0 }}
+          exit={{ y: -8 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className={`${textColor} font-bold italic ${isMobile ? "text-[13px]" : "text-[15px]"} leading-relaxed tracking-wide opacity-90 transform-gpu`}
-          style={{ willChange: "transform, opacity" }}
+          style={{ willChange: "transform" }}
         >
           &ldquo;{HERO_TESTIMONIALS[index]}&rdquo;
         </motion.p>
@@ -1028,9 +1026,9 @@ function TestimonialWheel() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={index}
-          initial={{ y: 30, opacity: 0.001 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -30, opacity: 0.001 }}
+          initial={{ y: 30 }}
+          animate={{ y: 0 }}
+          exit={{ y: -30 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 flex flex-col justify-center"
         >

@@ -66,15 +66,13 @@ export default function BackToTop() {
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ y: 20 }}
           animate={{ 
-            opacity: 1, 
             y: 0,
             backgroundColor: bgColor
           }}
-          exit={{ opacity: 0, y: 20 }}
+          exit={{ y: 20 }}
           transition={{ 
-            opacity: { duration: 0.3 },
             y: { duration: 0.3 },
             backgroundColor: { duration: 0.6, ease: "easeInOut" }
           }}

@@ -13,8 +13,8 @@ export default function CTASection() {
 
       <div className="container relative z-10 max-w-5xl mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0.001, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "0px 0px 50px 0px" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >

@@ -30,26 +30,27 @@ export default function AnnouncementBanner() {
 
   return (
     <div className="relative w-full bg-[#050505] border-b border-white/[0.06] z-[101]">
-      <div className="max-w-[1400px] mx-auto px-6 py-2.5 flex items-center justify-center gap-3">
-        {/* Glow pulsing red dot */}
-        <div className="relative flex h-2 w-2 items-center justify-center flex-shrink-0">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9A0E1F]/50 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#9A0E1F]"></span>
-        </div>
-
+      <div className="max-w-[1400px] mx-auto px-6 py-2.5 flex items-center justify-center">
         {/* Text Container with overflow hidden for transition height containment */}
         <div className="relative h-4 overflow-hidden flex items-center justify-center min-w-[300px] md:min-w-[450px]">
           <AnimatePresence mode="wait" initial={false}>
             <motion.p
               key={index}
-              initial={{ y: 15, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -15, opacity: 0 }}
+              initial={{ y: 15 }}
+              animate={{ y: 0 }}
+              exit={{ y: -15 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute text-[9px] md:text-[10px] font-mono tracking-[0.25em] uppercase text-white/90 text-center leading-none whitespace-nowrap"
+              className="absolute text-[9px] md:text-[10px] font-mono tracking-[0.25em] uppercase text-white/90 leading-none whitespace-nowrap flex items-center justify-center gap-2"
             >
-              <span className="hidden md:inline">{MESSAGES[index].desktop}</span>
-              <span className="inline md:hidden">{MESSAGES[index].mobile}</span>
+              {/* Glow pulsing red dot */}
+              <span className="relative flex h-2 w-2 items-center justify-center flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9A0E1F]/50 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#9A0E1F]"></span>
+              </span>
+              <span>
+                <span className="hidden md:inline">{MESSAGES[index].desktop}</span>
+                <span className="inline md:hidden">{MESSAGES[index].mobile}</span>
+              </span>
             </motion.p>
           </AnimatePresence>
         </div>

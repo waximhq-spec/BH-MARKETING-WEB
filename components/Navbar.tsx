@@ -17,10 +17,10 @@ const NAV_LINKS: NavLink[] = [
     label: "Services",
     href: "/services",
     dropdown: [
+      { label: "All Services →", href: "/services" },
       { label: "Content Production", href: "/content-production" },
       { label: "Brand Identity", href: "/brand-identity" },
       { label: "Paid Advertising", href: "#", disabled: true },
-      { label: "All Services →", href: "/services" },
     ],
   },
   { label: "Team", href: "/team" },
@@ -257,7 +257,7 @@ export default function Navbar() {
                               >
                                 <span
                                   className={`block ${
-                                    idx === link.dropdown!.length - 1
+                                    item.label.toLowerCase().includes("all services")
                                       ? "text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#9A0E1F]"
                                       : "text-[13px] font-medium tracking-tight text-black/80"
                                   }`}
@@ -496,20 +496,20 @@ export default function Navbar() {
                             </div>
                           );
                         }
-                        const isLastItem = idx === link.dropdown!.length - 1;
+                        const isAllServices = item.label.toLowerCase().includes("all services");
                         return (
                           <Link
                             key={item.href}
                             href={item.href}
                             onClick={() => setMenuOpen(false)}
                             style={{
-                              fontSize: isLastItem ? "11px" : "16px",
-                              fontWeight: isLastItem ? 700 : 500,
-                              letterSpacing: isLastItem ? "0.2em" : "normal",
-                              textTransform: isLastItem ? "uppercase" : "none",
-                              color: isLastItem ? accentColor : "rgba(0,0,0,0.8)",
-                              fontFamily: isLastItem ? "monospace" : "inherit",
-                              paddingTop: isLastItem ? "8px" : "0",
+                              fontSize: isAllServices ? "11px" : "16px",
+                              fontWeight: isAllServices ? 700 : 500,
+                              letterSpacing: isAllServices ? "0.2em" : "normal",
+                              textTransform: isAllServices ? "uppercase" : "none",
+                              color: isAllServices ? accentColor : "rgba(0,0,0,0.8)",
+                              fontFamily: isAllServices ? "monospace" : "inherit",
+                              paddingBottom: isAllServices ? "8px" : "0",
                             }}
                           >
                             {item.label}

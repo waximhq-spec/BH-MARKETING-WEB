@@ -102,7 +102,7 @@ export default function ServicesPage() {
               <Reveal>
                 <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full mb-10 opacity-80">
                   <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
-                  <span className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">What We Do</span>
+                  <span className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">Our Services</span>
                 </div>
               </Reveal>
               <Reveal delay={0.1}>

@@ -17,7 +17,10 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.pexels.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'pixabay.com' },
-      { protocol: 'https', hostname: 'i.pinimg.com' }
+      { protocol: 'https', hostname: 'i.pinimg.com' },
+      { protocol: 'https', hostname: 'drive.google.com' },
+      { protocol: 'https', hostname: '*.googleusercontent.com' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' }
     ],
     minimumCacheTTL: 604800,
   },

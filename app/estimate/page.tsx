@@ -94,10 +94,10 @@ export default function ContactPage() {
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-8 py-8 border-b border-white/6 hover:bg-white/[0.015] transition-all duration-300 px-2 -mx-2"
                     >
-                      <div className="flex items-start gap-5 flex-1">
-                        <span className="text-white/20 font-mono text-[9px] tracking-[0.3em] pt-1 shrink-0">{item.label.toUpperCase()}</span>
-                        <div className="flex flex-col gap-1">
-                          <span className="text-white font-bold text-lg md:text-xl tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300">
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 flex-1 min-w-0">
+                        <span className="text-white/20 font-mono text-[9px] tracking-[0.3em] pt-1 shrink-0 sm:w-24">{item.label.toUpperCase()}</span>
+                        <div className="flex flex-col gap-1 min-w-0">
+                          <span className="text-white font-bold text-[15px] min-[360px]:text-[17px] sm:text-lg md:text-xl tracking-tight group-hover:text-[#9A0E1F] transition-colors duration-300 break-all">
                             {item.value}
                           </span>
                           <span className="text-white/35 text-[12px] font-light">{item.desc}</span>

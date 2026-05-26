@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import SmartVideo from "@/components/SmartVideo";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import Image from "next/image";
+import { FALLBACK_PROJECTS, type Project } from "@/lib/project-types";
+import ProjectLightbox from "@/components/ProjectLightbox";
 
 // Lazy load below-the-fold sections for performance
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
@@ -295,6 +297,21 @@ function ServicesTable() {
 
 
 export default function LandingPage() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [activeTab, setActiveTab] = useState<"ALL" | "VIDEOS" | "PHOTOS">("ALL");
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setProjects(data);
+        }
+      })
+      .catch(err => console.error('Error fetching projects:', err));
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-[#050505]">
       {/* ── SEO CONTENT LAYER (Invisible but Indexable) ── */}
@@ -625,36 +642,65 @@ export default function LandingPage() {
 
           <section data-theme="light" className="pb-32 md:pb-48 bg-white text-black overflow-hidden">
             <div className="container">
+              {/* Tab Filter Switcher */}
+              <div className="flex flex-wrap items-center gap-3 mb-12 border-b border-black/5 pb-8">
+                {(["ALL", "VIDEOS", "PHOTOS"] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-6 py-2 rounded-full font-mono text-[10px] tracking-[0.2em] uppercase transition-all duration-300 border ${
+                      activeTab === tab
+                        ? "bg-[#9A0E1F] text-white border-[#9A0E1F] font-bold shadow-[0_4px_12px_rgba(154,14,31,0.25)]"
+                        : "bg-transparent text-black/60 border-black/10 hover:text-[#9A0E1F] hover:bg-[#9A0E1F]/5 hover:border-[#9A0E1F]/20"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
               <div className="flex flex-col gap-4 md:gap-6">
                 {(() => {
-                  const PORTFOLIO_VIDEOS = [
-                    { title: "Restaurants & Cafes", cat: "Hospitality", poster: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=800&auto=format&fit=crop" },
-                    { title: "Real Estate", cat: "Property", poster: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" },
-                    { title: "Gyms & Fitness", cat: "Health", poster: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" },
-                    { title: "Hotels & Resorts", cat: "Lifestyle", poster: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop" },
-                  ];
+                  const rawProjects = projects.length > 0 ? projects : FALLBACK_PROJECTS;
+                  const displayProjects = rawProjects.filter((project) => {
+                    if (activeTab === "ALL") return true;
+                    if (activeTab === "VIDEOS") return project.hasVideos;
+                    if (activeTab === "PHOTOS") return project.hasPhotos;
+                    return true;
+                  });
 
-                  const chunks: (typeof PORTFOLIO_VIDEOS)[] = [];
-                  for (let i = 0; i < PORTFOLIO_VIDEOS.length; i += 4) {
-                    chunks.push(PORTFOLIO_VIDEOS.slice(i, i + 4));
+                  if (displayProjects.length === 0) {
+                    return (
+                      <div className="py-24 text-center">
+                        <p className="text-black/40 font-mono text-sm">No items found matching the selected filter.</p>
+                      </div>
+                    );
+                  }
+
+                  const chunks: Project[][] = [];
+                  for (let i = 0; i < displayProjects.length; i += 4) {
+                    chunks.push(displayProjects.slice(i, i + 4));
                   }
 
                   return chunks.map((chunk, chunkIdx) => {
                     const isAlternate = chunkIdx % 2 !== 0;
-                    const mainVideos = chunk.slice(0, 2);
-                    const sideVideos = chunk.slice(2, 4);
+                    const mainProjects = chunk.slice(0, 2);
+                    const sideProjects = chunk.slice(2, 4);
 
                     return (
                       <div key={chunkIdx} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6">
 
                         {/* PRIMARY VERTICAL REELS AREA (9:16) */}
                         <div className={`lg:col-span-7 grid grid-cols-2 gap-4 md:gap-6 ${isAlternate ? 'md:order-2 lg:order-2' : 'md:order-1 lg:order-1'}`}>
-                          {mainVideos.map((video, idx) => (
-                            <Reveal key={idx} delay={0.1 + (idx * 0.1)} className="h-full">
-                              <div className="group relative w-full h-full aspect-[9/16] bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-[transform,shadow] duration-500 hover:-translate-y-1 transform-gpu">
+                          {mainProjects.map((project, idx) => (
+                            <Reveal key={project.id} delay={0.1 + (idx * 0.1)} className="h-full">
+                              <button
+                                onClick={() => setActiveProject(project)}
+                                className="group relative block text-left w-full h-full aspect-[9/16] bg-black/5 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-[transform,shadow] duration-500 hover:-translate-y-1 transform-gpu"
+                              >
                                 <Image
-                                  src={video.poster}
-                                  alt={video.title}
+                                  src={project.thumbnail}
+                                  alt={project.title}
                                   fill
                                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                   loading="lazy"
@@ -663,33 +709,43 @@ export default function LandingPage() {
                                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-500 z-[5] pointer-events-none" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
                                 
-                                {/* Centered Play Button Overlay */}
+                                {/* Centered Play or Photo Button Overlay */}
                                 <div className="absolute inset-0 z-[7] flex items-center justify-center pointer-events-none">
                                   <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#050505]/70 flex items-center justify-center transition-[transform,background-color] duration-500 group-hover:scale-110 group-hover:bg-[#9A0E1F]/90 shadow-[0_0_20px_rgba(0,0,0,0.3)] transform-gpu">
-                                    <svg className="w-5 h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                      <path d="M8 5v14l11-7z" />
-                                    </svg>
+                                    {project.hasVideos ? (
+                                      <svg className="w-5 h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                      </svg>
+                                    ) : (
+                                      <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                                      </svg>
+                                    )}
                                   </div>
                                 </div>
 
                                 <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end z-10 pointer-events-none transition-transform duration-500 group-hover:-translate-y-2 transform-gpu">
-                                  <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{video.cat}</p>
-                                  <h4 className="text-white font-bold text-lg md:text-xl tracking-tight drop-shadow-lg leading-tight">{video.title}</h4>
+                                  <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{project.category}</p>
+                                  <h4 className="text-white font-bold text-lg md:text-xl tracking-tight drop-shadow-lg leading-tight">{project.title}</h4>
                                 </div>
-                              </div>
+                              </button>
                             </Reveal>
                           ))}
                         </div>
 
                         {/* SECONDARY SIDE CARDS */}
-                        {sideVideos.length > 0 && (
+                        {sideProjects.length > 0 && (
                           <div className={`lg:col-span-5 flex flex-col gap-4 md:gap-6 ${isAlternate ? 'md:order-1 lg:order-1' : 'md:order-2 lg:order-2'}`}>
-                            {sideVideos.map((video, idx) => (
-                              <Reveal key={idx} delay={0.15 + (idx * 0.1)} className="flex-1 h-full">
-                                <div className="group relative w-full h-full min-h-[220px] aspect-video lg:aspect-auto bg-black/5 rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-[transform,shadow] duration-500 hover:-translate-y-1 transform-gpu">
+                            {sideProjects.map((project, idx) => (
+                              <Reveal key={project.id} delay={0.15 + (idx * 0.1)} className="flex-1 h-full">
+                                <button
+                                  onClick={() => setActiveProject(project)}
+                                  className="group relative block text-left w-full h-full min-h-[220px] aspect-video lg:aspect-auto bg-black/5 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-[transform,shadow] duration-500 hover:-translate-y-1 transform-gpu"
+                                >
                                   <Image
-                                    src={video.poster}
-                                    alt={video.title}
+                                    src={project.thumbnail}
+                                    alt={project.title}
                                     fill
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                                     loading="lazy"
@@ -698,20 +754,27 @@ export default function LandingPage() {
                                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-500 z-[5] pointer-events-none" />
                                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-[6] opacity-90" />
 
-                                  {/* Centered Play Button Overlay */}
+                                  {/* Centered Play or Photo Button Overlay */}
                                   <div className="absolute inset-0 z-[7] flex items-center justify-center pointer-events-none">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#050505]/70 flex items-center justify-center transition-[transform,background-color] duration-500 group-hover:scale-110 group-hover:bg-[#9A0E1F]/90 shadow-[0_0_20px_rgba(0,0,0,0.3)] transform-gpu">
-                                      <svg className="w-5 h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z" />
-                                      </svg>
+                                      {project.hasVideos ? (
+                                        <svg className="w-5 h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                      ) : (
+                                        <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                                        </svg>
+                                      )}
                                     </div>
                                   </div>
 
                                   <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-10 pointer-events-none transition-transform duration-500 group-hover:-translate-y-2 transform-gpu">
-                                    <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{video.cat}</p>
-                                    <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight drop-shadow-lg">{video.title}</h4>
+                                    <p className="text-white/80 font-mono text-[8px] md:text-[9px] tracking-[0.3em] uppercase mb-2 font-bold drop-shadow-md">{project.category}</p>
+                                    <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight drop-shadow-lg">{project.title}</h4>
                                   </div>
-                                </div>
+                                </button>
                               </Reveal>
                             ))}
                           </div>
@@ -738,6 +801,8 @@ export default function LandingPage() {
               </div>
             </div>
           </section>
+
+          <ProjectLightbox project={activeProject} onClose={() => setActiveProject(null)} />
         </SectionBlurWrapper>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -4,7 +4,6 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import SmartVideo from "@/components/SmartVideo";
 import VisualHiddenSEO from "@/components/VisualHiddenSEO";
 import Image from "next/image";
 import { FALLBACK_PROJECTS, type Project } from "@/lib/project-types";
@@ -357,20 +356,17 @@ export default function LandingPage() {
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <section data-theme="dark" className="relative h-[calc(100svh-70px)] md:h-[calc(100svh-82px)] lg:h-[calc(100svh-82px)] min-h-[580px] w-full overflow-hidden flex flex-col" id="hero-section">
           <HeroBlurWrapper>
-            {/* Background video — no filter, no scale animation, no will-change */}
-            <SmartVideo
-              src="/bg-rest.mp4"
-              autoPlay={true}
-              className="absolute inset-0 w-full h-full object-cover z-0"
-              style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" } as React.CSSProperties}
-            />
-            {/* Single unified dark overlay for legibility */}
-            <div className="absolute inset-0 bg-[#050505]/80 z-[1]" />
+            {/* Architectural structural grid overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] pointer-events-none z-[1]" />
 
-            {/* Cinematic dark linear gradient behind the text & red highlight */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent z-[2]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(229,9,20,0.12)_0%,transparent_50%)] z-[2]" />
-            <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90 z-[2]" />
+            {/* Layered premium reddish glows */}
+            <div className="absolute top-[15%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#9A0E1F]/15 blur-[140px] pointer-events-none z-[2]" />
+            <div className="absolute bottom-[20%] left-[20%] w-[500px] h-[500px] rounded-full bg-[#ff2a2a]/10 blur-[120px] pointer-events-none z-[2]" />
+
+            {/* Cinematic vignette and page transition shadow for maximum legibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/75 to-transparent z-[3] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505] z-[3] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent z-[3] pointer-events-none" />
 
 
             <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-8 md:pb-16 lg:pb-28">

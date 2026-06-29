@@ -354,8 +354,19 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="relative h-[calc(100svh-70px)] md:h-[calc(100svh-82px)] lg:h-[calc(100svh-82px)] min-h-[580px] w-full overflow-hidden flex flex-col" id="hero-section">
+        <section data-theme="dark" className="relative h-[100svh] min-h-[650px] -mt-[92px] md:-mt-[100px] pt-[92px] md:pt-[100px] w-full overflow-hidden flex flex-col" id="hero-section">
           <HeroBlurWrapper>
+            {/* Background Video */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover z-0 opacity-85 pointer-events-none"
+            >
+              <source src="https://www.pexels.com/download/video/8396974/" type="video/mp4" />
+            </video>
+
             {/* Architectural structural grid overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] pointer-events-none z-[1]" />
 
@@ -364,8 +375,8 @@ export default function LandingPage() {
             <div className="absolute bottom-[20%] left-[20%] w-[500px] h-[500px] rounded-full bg-[#ff2a2a]/10 blur-[120px] pointer-events-none z-[2]" />
 
             {/* Cinematic vignette and page transition shadow for maximum legibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/75 to-transparent z-[3] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505] z-[3] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/40 via-[#050505]/15 to-transparent z-[3] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/30 via-transparent to-[#050505] z-[3] pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent z-[3] pointer-events-none" />
 
 

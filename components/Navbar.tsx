@@ -34,6 +34,7 @@ export default function Navbar() {
   const [theme, setTheme] = useState<"dark" | "light" | "red" | "pricing" | "split">("dark");
   const pathname = usePathname();
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
@@ -51,6 +52,7 @@ export default function Navbar() {
   // Dynamic theme detection based on live viewport positions
   useEffect(() => {
     const checkTheme = () => {
+      setIsScrolled(window.scrollY > 40);
       const headerEl = headerRef.current || document.querySelector("header");
       if (!headerEl) return;
 
@@ -84,6 +86,7 @@ export default function Navbar() {
     checkTheme();
 
     const onScroll = () => {
+      setIsScrolled(window.scrollY > 40);
       if (tickingRef.current) return;
       tickingRef.current = true;
       requestAnimationFrame(() => {
@@ -142,7 +145,9 @@ export default function Navbar() {
 
   const bgColor = isSplit
     ? "linear-gradient(to right, #050505 0%, #050505 41.666667%, #ffffff 41.666667%, #ffffff 100%)"
-    : (isLight ? "#ffffff" : "#050505");
+    : isLight
+      ? "#ffffff"
+      : (isHome && !isScrolled ? "transparent" : "#050505");
   const textColor = (isLight || isSplit) ? "#000000" : "#FAFAFA";
   const accentColor = "#9A0E1F";
 

@@ -354,7 +354,7 @@ export default function LandingPage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTION 1: HERO (REFINED FOR ALL MOBILES)
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section data-theme="dark" className="relative h-[100svh] min-h-[650px] -mt-[92px] md:-mt-[100px] pt-[92px] md:pt-[100px] w-full overflow-hidden flex flex-col" id="hero-section">
+        <section data-theme="dark" className="relative h-auto lg:h-[100svh] min-h-[100svh] lg:min-h-[650px] -mt-[92px] md:-mt-[100px] pt-[92px] md:pt-[100px] w-full overflow-hidden flex flex-col" id="hero-section">
           <HeroBlurWrapper>
             {/* Background Video */}
             <video
@@ -380,7 +380,7 @@ export default function LandingPage() {
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent z-[3] pointer-events-none" />
 
 
-            <div className="container relative z-[4] flex flex-col h-full justify-center px-5 md:px-0 pb-8 md:pb-16 lg:pb-28">
+            <div className="container relative z-[4] flex flex-col h-auto lg:h-full justify-center px-5 md:px-0 pt-4 pb-32 sm:pb-36 lg:pb-28">
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-24 items-start">
                 {/* LEFT: CONTENT AREA */}
@@ -579,22 +579,22 @@ export default function LandingPage() {
               </div>
 
               {/* Bottom Metrics - Exact Badged Design from Mockup Image */}
-              <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 md:pb-20 lg:pb-16 w-full px-5 md:px-0">
-                <div className="container mx-auto border-t border-white/10 pt-6 md:pt-8">
+              <div className="absolute bottom-0 left-0 right-0 z-10 pb-6 sm:pb-12 md:pb-20 lg:pb-16 w-full px-5 md:px-0">
+                <div className="container mx-auto border-t border-white/10 pt-5 md:pt-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* LEFT COLUMN: All 3 Metrics with Dark Red Icon Badges */}
-                    <div className="lg:col-span-8 flex flex-row items-center justify-between lg:justify-start gap-6 md:gap-12 lg:gap-14">
+                    <div className="lg:col-span-8 flex flex-row items-center justify-between lg:justify-start gap-2.5 sm:gap-6 md:gap-12 lg:gap-14">
                       {/* Metric 1: GULF CLIENTS */}
                       <Reveal delay={0.7}>
-                        <div className="flex items-center gap-3.5">
-                          <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
-                            <svg className="w-5 h-5 text-[#E50914]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1.5 sm:gap-3.5">
+                          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
+                            <svg className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-[#E50914]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
                           </div>
-                          <div className="flex flex-col text-left">
-                            <span className="text-white font-extrabold text-[18px] md:text-2xl tracking-tight uppercase">GULF</span>
-                            <span className="text-white/40 font-mono font-medium text-[9px] md:text-[10px] uppercase tracking-[0.15em]">Clients</span>
+                          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                            <span className="text-white font-extrabold text-[15px] sm:text-[18px] md:text-2xl tracking-tight uppercase">GULF</span>
+                            <span className="text-white/40 font-mono font-medium text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.15em]">Clients</span>
                           </div>
                         </div>
                       </Reveal>
@@ -603,17 +603,17 @@ export default function LandingPage() {
 
                       {/* Metric 2: BRANDS BUILT */}
                       <Reveal delay={0.8}>
-                        <div className="flex items-center gap-3.5">
-                          <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
-                            <svg className="w-5 h-5 text-[#E50914]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1.5 sm:gap-3.5">
+                          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
+                            <svg className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-[#E50914]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
                           </div>
-                          <div className="flex flex-col text-left">
-                            <span className="text-white font-extrabold text-[18px] md:text-2xl tracking-tight">
+                          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                            <span className="text-white font-extrabold text-[15px] sm:text-[18px] md:text-2xl tracking-tight">
                               <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
                             </span>
-                            <span className="text-white/40 font-mono font-medium text-[9px] md:text-[10px] uppercase tracking-[0.15em]">Brands Built</span>
+                            <span className="text-white/40 font-mono font-medium text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.15em]">Brands Built</span>
                           </div>
                         </div>
                       </Reveal>
@@ -622,17 +622,17 @@ export default function LandingPage() {
 
                       {/* Metric 3: MORE ENGAGEMENT */}
                       <Reveal delay={0.9}>
-                        <div className="flex items-center gap-3.5">
-                          <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
-                            <svg className="w-5 h-5 text-[#E50914]" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1.5 sm:gap-3.5">
+                          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
+                            <svg className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-[#E50914]" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                             </svg>
                           </div>
-                          <div className="flex flex-col text-left">
-                            <span className="text-white font-extrabold text-[18px] md:text-2xl tracking-tight">
+                          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                            <span className="text-white font-extrabold text-[15px] sm:text-[18px] md:text-2xl tracking-tight">
                               <CountUp start={0} end={300} duration={5} redraw={true} suffix="%" />
                             </span>
-                            <span className="text-white/40 font-mono font-medium text-[9px] md:text-[10px] uppercase tracking-[0.15em]">More Engagement</span>
+                            <span className="text-white/40 font-mono font-medium text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.15em]">Engagement</span>
                           </div>
                         </div>
                       </Reveal>

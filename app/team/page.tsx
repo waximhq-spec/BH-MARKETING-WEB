@@ -31,103 +31,103 @@ const DEPARTMENTS: Array<{
     img?: string;
   }>;
 }> = [
-  {
-    id: "production",
-    title: "Production Department",
-    badge: "ON-SET & CREATIVE EXECUTION",
-    lead: {
-      name: "Shayan",
-      role: "Lead Videographer & Head of Production",
-      desc: "Leads every production from planning to execution. Oversees creative direction on set, camera operation, shot composition, and ensures every project is captured to Cinmach's quality standards.",
-      img: "/team-img/shayan.png"
+    {
+      id: "production",
+      title: "Production Department",
+      badge: "ON-SET & CREATIVE EXECUTION",
+      lead: {
+        name: "Shayan",
+        role: "Lead Videographer & Head of Production",
+        desc: "Leads every production from planning to execution. Oversees creative direction on set, camera operation, shot composition, and ensures every project is captured to Cinmach's quality standards.",
+        img: "/team-img/shayan.png"
+      },
+      specialists: [
+        {
+          name: "Moomin Shafi",
+          title: "Camera Assistant",
+          img: "/team-img/Moomin.png",
+          skills: [
+            "Camera setup",
+            "Lens management",
+            "Equipment preparation",
+            "Battery & media handling"
+          ]
+        },
+        {
+          name: "Faisal Malik",
+          title: "Lighting & Grip Specialist",
+          skills: [
+            "Lighting setup",
+            "Modifiers & reflectors",
+            "Scene lighting",
+            "On-set equipment"
+          ]
+        },
+        {
+          name: "Iram Nabi",
+          title: "Production Coordinator",
+          skills: [
+            "Client coordination",
+            "Scheduling",
+            "Shot lists",
+            "Logistics",
+            "Location management"
+          ]
+        }
+      ]
     },
-    specialists: [
-      {
-        name: "Moomin Shafi",
-        title: "Camera Assistant",
-        img: "/team-img/Moomin.png",
-        skills: [
-          "Camera setup",
-          "Lens management",
-          "Equipment preparation",
-          "Battery & media handling"
-        ]
+    {
+      id: "post-production",
+      title: "Post-Production Department",
+      badge: "POST-WORKFLOW & FINISHING",
+      lead: {
+        name: "Wasim",
+        role: "Lead Editor & Head of Post-Production",
+        desc: "Leads the complete post-production workflow from storytelling and editing to color grading, sound design, and final delivery.",
+        img: "/team-img/wasim.png"
       },
-      {
-        name: "Faisal Malik",
-        title: "Lighting & Grip Specialist",
-        skills: [
-          "Lighting setup",
-          "Modifiers & reflectors",
-          "Scene lighting",
-          "On-set equipment"
-        ]
-      },
-      {
-        name: "Iram Nabi",
-        title: "Production Coordinator",
-        skills: [
-          "Client coordination",
-          "Scheduling",
-          "Shot lists",
-          "Logistics",
-          "Location management"
-        ]
-      }
-    ]
-  },
-  {
-    id: "post-production",
-    title: "Post-Production Department",
-    badge: "POST-WORKFLOW & FINISHING",
-    lead: {
-      name: "Wasim",
-      role: "Lead Editor & Head of Post-Production",
-      desc: "Leads the complete post-production workflow from storytelling and editing to color grading, sound design, and final delivery.",
-      img: "/team-img/wasim.png"
-    },
-    specialists: [
-      {
-        name: "Mohsin Shafi",
-        title: "Motion Graphics & VFX Artist",
-        img: "/team-img/mohsin.png",
-        skills: [
-          "Motion graphics",
-          "Logo animation",
-          "Visual effects",
-          "Screen replacement"
-        ]
-      },
-      {
-        name: "Omar Farooq",
-        title: "Colorist",
-        skills: [
-          "Color correction",
-          "Color grading",
-          "Skin tone balancing",
-          "Cinematic finishing"
-        ]
-      },
-      {
-        name: "Adil Nazir",
-        title: "Sound Designer",
-        skills: [
-          "Audio cleanup",
-          "Dialogue enhancement",
-          "Sound effects",
-          "Music mixing",
-          "Audio mastering"
-        ]
-      }
-    ]
-  }
-];
+      specialists: [
+        {
+          name: "Mohsin Shafi",
+          title: "Motion Graphics & VFX Artist",
+          img: "/team-img/mohsin.png",
+          skills: [
+            "Motion graphics",
+            "Logo animation",
+            "Visual effects",
+            "Screen replacement"
+          ]
+        },
+        {
+          name: "Omar Farooq",
+          title: "Colorist",
+          skills: [
+            "Color correction",
+            "Color grading",
+            "Skin tone balancing",
+            "Cinematic finishing"
+          ]
+        },
+        {
+          name: "Adil Nazir",
+          title: "Sound Designer",
+          skills: [
+            "Audio cleanup",
+            "Dialogue enhancement",
+            "Sound effects",
+            "Music mixing",
+            "Audio mastering"
+          ]
+        }
+      ]
+    }
+  ];
 
 export default function TeamPage() {
   return (
     <main className="relative overflow-hidden bg-white min-h-screen text-black">
       <PageBgSync bg="white" />
-      
+
       {/* Hero */}
       <section data-theme="light" className="relative pt-36 md:pt-44 pb-10 md:pb-12 bg-transparent overflow-hidden">
         <div className="container relative z-10">
@@ -163,7 +163,7 @@ export default function TeamPage() {
       {/* Main Team Section */}
       <section data-theme="light" className="pt-12 md:pt-16 pb-24 md:pb-36 bg-[#fafafa] text-black border-t border-black/5">
         <div className="container">
-          
+
           {/* Executive Leadership Row (CEO) */}
           <Reveal delay={0}>
             <div className="mb-16 md:mb-20">
@@ -171,9 +171,9 @@ export default function TeamPage() {
                 <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-semibold uppercase">EXECUTIVE LEADERSHIP</span>
                 <div className="h-px flex-1 bg-black/10" />
               </div>
-              
+
               <div className="group relative p-8 md:p-12 lg:p-14 border border-black/10 rounded-3xl bg-white hover:border-[#9A0E1F]/30 hover:shadow-[0_25px_65px_rgba(0,0,0,0.06)] transition-all duration-500 flex flex-col md:flex-row items-center gap-8 md:gap-14 transform-gpu">
-                
+
                 {/* Image Container */}
                 <div className="w-32 h-32 md:w-48 md:h-48 shrink-0 rounded-2xl bg-gradient-to-br from-[#f8f8f8] to-[#ededed] flex items-center justify-center overflow-hidden border border-black/8 group-hover:border-[#9A0E1F]/30 transition-all duration-500 shadow-sm relative">
                   {CEO.img ? (
@@ -232,7 +232,7 @@ export default function TeamPage() {
             {DEPARTMENTS.map((dept, dIdx) => (
               <Reveal key={dept.id} delay={0.15 * (dIdx + 1)}>
                 <div className="group/dept relative p-6 md:p-10 rounded-[2.5rem] bg-white border border-black/10 hover:border-black/20 hover:shadow-[0_25px_70px_rgba(0,0,0,0.04)] transition-all duration-500 flex flex-col h-full">
-                  
+
                   {/* Department Title */}
                   <div className="mb-8 pb-6 border-b border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
@@ -251,7 +251,7 @@ export default function TeamPage() {
                   {/* 1. TOP TEAM LEAD CARD (35-40% larger than specialists) */}
                   <div className="relative group/lead p-7 md:p-9 rounded-3xl bg-gradient-to-br from-[#fafafa] to-[#f4f4f4] border border-black/10 hover:border-[#9A0E1F]/40 hover:shadow-lg transition-all duration-500 z-10">
                     <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6">
-                      
+
                       {/* Lead Avatar Container */}
                       <div className="w-24 h-24 md:w-28 md:h-28 shrink-0 rounded-2xl bg-white flex items-center justify-center overflow-hidden border border-black/10 group-hover/lead:border-[#9A0E1F]/40 shadow-sm transition-all duration-500">
                         {dept.lead.img ? (
@@ -300,7 +300,7 @@ export default function TeamPage() {
 
                         {/* Specialist Card Container */}
                         <div className="p-5 md:p-6 rounded-2xl bg-white border border-black/10 hover:border-[#9A0E1F]/30 hover:shadow-[0_10px_30px_rgba(0,0,0,0.03)] transition-all duration-300 group-hover/sub:translate-x-1">
-                          
+
                           {/* Header with Small Profile Avatar and Name */}
                           <div className="flex items-center gap-3.5 mb-4 pb-3 border-b border-black/5">
                             {/* Small Profile Avatar Container */}
@@ -328,7 +328,7 @@ export default function TeamPage() {
                               </p>
                             </div>
                           </div>
-                          
+
                           {/* Specialist Capabilities Grid */}
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {spec.skills.map((skill) => (

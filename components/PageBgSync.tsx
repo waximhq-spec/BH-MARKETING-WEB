@@ -27,10 +27,10 @@ export default function PageBgSync({ bg }: { bg: "white" | "black" }) {
   if (bg === "white") {
     return (
       <div
-        className="pointer-events-none absolute top-0 right-0 z-0 w-full max-w-[700px] sm:max-w-[850px] lg:max-w-[1050px] h-[500px] sm:h-[650px] lg:h-[800px] overflow-hidden transform-gpu"
+        className="pointer-events-none absolute top-0 right-0 z-0 w-full max-w-[900px] sm:max-w-[1100px] lg:max-w-[1350px] h-[700px] sm:h-[900px] lg:h-[1150px] overflow-hidden transform-gpu"
         style={{
           background:
-            "radial-gradient(circle at 100% 0%, rgba(154, 14, 31, 0.26) 0%, rgba(255, 42, 42, 0.12) 25%, rgba(154, 14, 31, 0.03) 55%, transparent 75%)",
+            "radial-gradient(circle at 100% 0%, rgba(229, 9, 20, 0.55) 0%, rgba(229, 9, 20, 0.3) 28%, rgba(154, 14, 31, 0.12) 58%, rgba(154, 14, 31, 0.03) 72%, transparent 85%)",
           WebkitTransform: "translate3d(0,0,0)",
           transform: "translate3d(0,0,0)",
         }}

@@ -387,14 +387,14 @@ export default function LandingPage() {
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left w-full">
                   <div className="w-full flex flex-col mx-auto lg:mx-0">
                     {/* MOBILE HEADLINE */}
-                    <h1 className="md:hidden text-white font-heading leading-none antialiased uppercase mb-6 text-center mx-auto max-w-[340px]">
+                    <h1 className="md:hidden text-white font-heading leading-none antialiased uppercase mb-6 text-center mx-auto max-w-[360px] w-full">
                       <span className="block text-[2.2rem] font-bold tracking-[-0.02em] mb-1 uppercase leading-[0.9] text-white">
                         WE MAKE
                       </span>
                       <span className="block text-[3.6rem] font-black text-white mb-1 uppercase leading-[0.88] tracking-[-0.03em]">
                         BRANDS
                       </span>
-                      <span className="text-[#E50914] uppercase block text-[2.4rem] font-black tracking-[-0.035em] mt-0 leading-[0.9]">
+                      <span className="text-[#E50914] uppercase block text-[clamp(1.8rem,8.2vw,2.4rem)] font-black tracking-[-0.035em] mt-0 leading-[0.9]">
                         UNFORGETTABLE.
                       </span>
                     </h1>

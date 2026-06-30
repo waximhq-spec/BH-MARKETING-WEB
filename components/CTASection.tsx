@@ -20,24 +20,24 @@ export default function CTASection() {
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/5 border border-[#9A0E1F]/20 rounded-full mb-8">
             <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
-            <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[10px] md:text-[11px] font-bold">Start Your Journey</span>
+            <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[10px] md:text-[11px] font-semibold">Start Your Journey</span>
           </div>
 
           <h2 
-            className="text-black font-bold tracking-tight antialiased uppercase leading-[1.05] mb-8"
+            className="text-black font-extrabold tracking-[-0.03em] antialiased uppercase leading-[0.98] mb-8"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
           >
             Ready to elevate <br />
             <span className="text-black">your brand?</span>
           </h2>
 
-          <p className="text-black/60 text-[15px] md:text-[17px] max-w-2xl mx-auto font-light leading-relaxed mb-12">
+          <p className="text-black/70 text-[15px] md:text-[17px] max-w-2xl mx-auto font-normal leading-relaxed mb-12 tracking-tight">
             Let&apos;s build a tailored visual strategy and premium cinematic assets designed specifically to accelerate your growth.
           </p>
 
           <button
             onClick={() => openProjectModal()}
-            className="group relative inline-flex items-center justify-center gap-4 px-10 py-5 rounded-full bg-black text-white font-mono font-bold text-[12px] md:text-[13px] tracking-[0.2em] uppercase transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transform-gpu will-change-transform cursor-pointer"
+            className="group relative inline-flex items-center justify-center gap-4 px-10 py-5 rounded-full bg-black text-white font-mono font-semibold text-[11px] md:text-[12px] tracking-[0.22em] uppercase transition-all duration-300 hover:scale-[1.02] hover:bg-[#111] hover:shadow-[0_12px_35px_rgba(0,0,0,0.12)] transform-gpu will-change-transform cursor-pointer"
           >
             <span>Get a Quote Now</span>
             <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:bg-white/20 text-[14px]">

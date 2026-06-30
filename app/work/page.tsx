@@ -38,7 +38,7 @@ export default function WorkPage() {
   });
 
   return (
-    <main className="bg-[#fafafa] min-h-screen text-[#1a1a1a] selection:bg-[#9A0E1F] selection:text-white pb-32">
+    <main className="relative overflow-hidden bg-[#fafafa] min-h-screen text-[#1a1a1a] selection:bg-[#9A0E1F] selection:text-white pb-32">
       <PageBgSync bg="white" />
       
       {/* ── SEO CONTENT LAYER ── */}

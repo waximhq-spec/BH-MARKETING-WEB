@@ -1,22 +1,28 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-display), var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
 /* ── Design Tokens ───────────────────────────────────────── */
 :root {
   --bg:        #000000;
   --fg:        #FAFAFA;
   --muted:     rgba(255, 255, 255, 0.75);
   --red:       #ff2a2a;
-  --red-soft:  #b30000;
-  --red-glow:  rgba(255, 0, 0, 0.4);
+  --red-soft:  #9A0E1F;
+  --red-glow:  rgba(154, 14, 31, 0.35);
   --border:    rgba(255, 255, 255, 0.08);
   --glass-bg:  rgba(255, 255, 255, 0.03);
-  --font-sans: var(--font-inter), system-ui, sans-serif;
 
-  /* Type scale - increased for energy */
-  --text-xs:   0.65rem;    /* 10.4px */
+  /* Type scale */
+  --text-xs:   0.6875rem;  /* 11px */
   --text-sm:   0.875rem;   /* 14px */
   --text-base: 1rem;       /* 16px */
-  --text-lg:   1.25rem;    /* 20px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.375rem;   /* 22px */
 
   /* Spacing */
   --section-py: clamp(5rem, 10vw, 7.5rem);
@@ -46,6 +52,8 @@ body {
   /* Improve paint performance */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
+  overscroll-behavior-y: none;
+  touch-action: pan-y;
   /* Do NOT put transform on body — it creates a stacking context that
      breaks sticky positioning and forces recompositing every child layer */
 }
@@ -66,38 +74,37 @@ html[data-page-bg="white"] {
 html[data-page-bg="black"] {
   background-color: #000000 !important;
 }
-/* Default: black for the homepage/dark pages */
-html {
-  background-color: #000000;
-}
-
-body {
-  overscroll-behavior-y: none;
-  touch-action: pan-y;
-}
 
 /* ── Typography ─────────────────────────────────────────── */
+h1, h2, h3, .font-heading {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+}
+
 .label {
+  font-family: var(--font-display);
   font-size: var(--text-xs);
-  font-weight: 700;
-  letter-spacing: 0.35em;
+  font-weight: 600;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
 /* On light (white) sections */
 .label-dark {
+  font-family: var(--font-display);
   font-size: var(--text-xs);
-  font-weight: 700;
-  letter-spacing: 0.35em;
+  font-weight: 600;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #888;
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .label-red {
+  font-family: var(--font-display);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--red-soft);
 }

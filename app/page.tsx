@@ -370,9 +370,9 @@ export default function LandingPage() {
             {/* Architectural structural grid overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] pointer-events-none z-[1]" />
 
-            {/* Layered premium reddish glows */}
-            <div className="absolute top-[15%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#9A0E1F]/15 blur-[140px] pointer-events-none z-[2]" />
-            <div className="absolute bottom-[20%] left-[20%] w-[500px] h-[500px] rounded-full bg-[#ff2a2a]/10 blur-[120px] pointer-events-none z-[2]" />
+            {/* Layered premium reddish glows matching the design mockup */}
+            <div className="absolute top-0 left-0 w-[70%] h-full bg-[radial-gradient(ellipse_at_top_left,rgba(190,15,30,0.5)_0%,rgba(154,14,31,0.25)_45%,transparent_75%)] pointer-events-none z-[2]" />
+            <div className="absolute top-[10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#ff1e27]/20 blur-[130px] pointer-events-none z-[2]" />
 
             {/* Cinematic vignette and page transition shadow for maximum legibility */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/40 via-[#050505]/15 to-transparent z-[3] pointer-events-none" />
@@ -386,26 +386,24 @@ export default function LandingPage() {
                 {/* LEFT: CONTENT AREA */}
                 <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left w-full">
                   <div className="w-full flex flex-col mx-auto lg:mx-0">
-                    {/* STATIC LCP ELEMENT: Do not wrap the primary heading in JS animations.
-                        This ensures it paints instantly from server HTML, fixing the 3.63s LCP. */}
                     {/* MOBILE HEADLINE */}
-                    <h1 className="md:hidden text-white font-sans leading-none antialiased uppercase mb-8 text-center mx-auto max-w-[340px]">
-                      <span className="block text-[2.2rem] font-bold tracking-[-0.01em] mb-1.5 uppercase leading-[0.9]">
+                    <h1 className="md:hidden text-white font-heading leading-none antialiased uppercase mb-6 text-center mx-auto max-w-[340px]">
+                      <span className="block text-[2.2rem] font-bold tracking-[-0.02em] mb-1 uppercase leading-[0.9] text-white">
                         WE MAKE
                       </span>
-                      <span className="block text-[3.2rem] font-black text-white mb-2 uppercase leading-[0.9] tracking-[-0.02em]">
+                      <span className="block text-[3.6rem] font-black text-white mb-1 uppercase leading-[0.88] tracking-[-0.03em]">
                         BRANDS
                       </span>
-                      <span className="text-[#E50914] uppercase block text-[1.8rem] font-black tracking-[-0.03em] mt-0 leading-[1.0]">
+                      <span className="text-[#E50914] uppercase block text-[2.4rem] font-black tracking-[-0.035em] mt-0 leading-[0.9]">
                         UNFORGETTABLE.
                       </span>
                     </h1>
                     {/* DESKTOP HEADLINE */}
-                    <h1 className="hidden md:block text-white leading-none antialiased uppercase mb-10 font-sans">
+                    <h1 className="hidden md:block text-white leading-none antialiased uppercase mb-6 font-heading">
                       <span 
                         className="block font-bold text-white uppercase"
                         style={{ 
-                          fontSize: "clamp(2.5rem, 5.2vw, 5.2rem)", 
+                          fontSize: "clamp(2.5rem, 4.2vw, 4.4rem)", 
                           letterSpacing: "-0.02em",
                           lineHeight: 0.9
                         }}
@@ -415,9 +413,9 @@ export default function LandingPage() {
                       <span 
                         className="block font-black text-white uppercase"
                         style={{ 
-                          fontSize: "clamp(3.5rem, 7.2vw, 7.2rem)", 
-                          letterSpacing: "-0.02em",
-                          lineHeight: 0.9
+                          fontSize: "clamp(4.2rem, 7.5vw, 7.8rem)", 
+                          letterSpacing: "-0.03em",
+                          lineHeight: 0.88
                         }}
                       >
                         BRANDS
@@ -425,24 +423,28 @@ export default function LandingPage() {
                       <span 
                         className="text-[#E50914] font-black block animate-gpu"
                         style={{ 
-                          fontSize: "clamp(2.2rem, 4.6vw, 4.6rem)", 
-                          letterSpacing: "-0.03em",
-                          lineHeight: 1.0
+                          fontSize: "clamp(3.2rem, 5.8vw, 6.2rem)", 
+                          letterSpacing: "-0.035em",
+                          lineHeight: 0.9
                         }}
                       >
                         UNFORGETTABLE.
                       </span>
                     </h1>
+
+                    {/* Red Horizontal Divider Accent Line from Mockup */}
+                    <div className="w-12 h-[2px] bg-[#E50914] my-5 mx-auto lg:mx-0" />
+
                     {/* MOBILE PARAGRAPH */}
-                    <Reveal delay={0.2} className="w-full md:hidden mt-6">
-                      <p className="text-[#E0E0E0] text-[13px] leading-[1.6] font-light mb-8 text-center max-w-[360px] mx-auto">
-                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
+                    <Reveal delay={0.2} className="w-full md:hidden mt-2">
+                      <p className="text-[#E0E0E0] text-[14px] leading-[1.6] font-light mb-8 text-center max-w-[360px] mx-auto">
+                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands that leave a lasting impact.
                       </p>
                     </Reveal>
                     {/* DESKTOP PARAGRAPH */}
-                    <Reveal delay={0.2} className="w-full hidden md:block mt-8 lg:mt-10">
-                      <p className="text-[#E0E0E0] text-[15px] lg:text-base leading-[1.7] font-light mb-10 text-left max-w-[500px]">
-                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands.
+                    <Reveal delay={0.2} className="w-full hidden md:block mt-2">
+                      <p className="text-[#D8D8D8] text-[15px] lg:text-[16px] leading-[1.65] font-light mb-10 text-left max-w-[480px]">
+                        We combine strategy, storytelling, and cinematic production to turn businesses into recognizable brands that leave a lasting impact.
                       </p>
                     </Reveal>
                   </div>
@@ -487,38 +489,38 @@ export default function LandingPage() {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
                     className="w-full max-w-[400px] flex flex-col gap-4 transform-gpu will-change-transform"
                   >
-                    {/* Trust Signal Testimonial Slider */}
+                    {/* Trust Signal Testimonial Slider with Dark Transparent Frosted Glass */}
                     <motion.div
                       transition={{ delay: 0.8, duration: 0.6 }}
-                      className="w-full bg-white border border-black/[0.08] p-6 lg:p-8 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.06)] rounded-[24px]"
+                      className="w-full bg-white/[0.06] backdrop-blur-2xl border border-white/15 p-6 lg:p-8 relative overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.4)] rounded-[24px]"
                     >
                       <div className="flex flex-col gap-3">
                         <div className="flex items-center gap-3">
-                          <div className="h-[1px] w-6 bg-[#9A0E1F]" />
-                          <span className="text-black/60 font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</span>
+                          <div className="h-[1px] w-6 bg-[#E50914]" />
+                          <span className="text-white/60 font-mono text-[9px] uppercase tracking-[0.3em] font-black">What Our Clients Say</span>
                         </div>
                         <div className="relative h-12 flex items-center">
-                          <TestimonialRotation textColor="text-black" />
+                          <TestimonialRotation textColor="text-white" />
                         </div>
                       </div>
                     </motion.div>
 
                     <div
-                      className="relative w-full bg-white border border-black/[0.08] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.06)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-black/20 hover:shadow-[0_40px_80px_rgba(0,0,0,0.1)] transform-gpu overflow-hidden"
+                      className="relative w-full bg-white/[0.06] backdrop-blur-2xl border border-white/15 p-6 lg:p-8 shadow-[0_30px_70px_rgba(0,0,0,0.4)] rounded-[24px] group transition-all duration-700 hover:-translate-y-2 hover:border-white/30 hover:shadow-[0_40px_90px_rgba(0,0,0,0.5)] transform-gpu overflow-hidden"
                     >
                       {/* Soft ambient red glow */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#9A0E1F]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#E50914]/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none" />
                       
                       <div className="relative z-10 flex flex-col items-center text-center">
                         {/* Status Label */}
-                        <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-black/[0.03] border border-black/[0.05] shadow-[0_0_15px_rgba(0,0,0,0.02)]">
-                          <span className="w-1.5 h-1.5 bg-[#9A0E1F] rounded-full shadow-[0_0_8px_#9A0E1F] animate-pulse" />
-                          <span className="text-black/60 font-medium text-[9px] uppercase tracking-[0.2em]">Direct Booking</span>
+                        <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-white/[0.08] border border-white/12 shadow-[0_0_15px_rgba(0,0,0,0.1)]">
+                          <span className="w-1.5 h-1.5 bg-[#E50914] rounded-full shadow-[0_0_8px_#E50914] animate-pulse" />
+                          <span className="text-white/80 font-medium text-[9px] uppercase tracking-[0.2em]">Direct Booking</span>
                         </div>
 
                         {/* Headings */}
-                        <h3 className="text-black font-bold text-xl lg:text-2xl mb-2 tracking-tight uppercase">Start Your Project</h3>
-                        <p className="text-black/60 text-[11px] md:text-[12px] leading-relaxed max-w-[280px] mx-auto mb-6 font-light">
+                        <h3 className="text-white font-bold text-xl lg:text-2xl mb-2 tracking-tight uppercase">Start Your Project</h3>
+                        <p className="text-white/70 text-[11px] md:text-[12px] leading-relaxed max-w-[280px] mx-auto mb-6 font-light">
                           Creative marketing tailored for modern brands.
                         </p>
 
@@ -528,7 +530,7 @@ export default function LandingPage() {
                           data-cal-namespace="call-req"
                           data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'
                           aria-label="Book a creative strategy call for your shoot in Bahrain"
-                          className="relative w-full overflow-hidden group/btn bg-[#9A0E1F] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(154,14,31,0.35)] active:scale-[0.98] border border-[#9A0E1F]/50"
+                          className="relative w-full overflow-hidden group/btn bg-[#E50914] rounded-full h-[50px] flex items-center justify-center gap-3 transition-all duration-500 hover:shadow-[0_10px_35px_rgba(229,9,20,0.45)] active:scale-[0.98] border border-[#E50914]/50"
                         >
                           <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-500 ease-out" />
                           <span className="relative z-10 text-white font-medium text-[11px] tracking-[0.15em] uppercase">
@@ -539,10 +541,10 @@ export default function LandingPage() {
 
                         {/* Footer text */}
                         <div className="mt-4 flex flex-col items-center gap-2">
-                          <p className="text-black/40 text-[9px] font-medium tracking-[0.1em] uppercase">
-                            Response within <span className="text-black/80 font-bold">24 hours</span>
+                          <p className="text-white/50 text-[9px] font-medium tracking-[0.1em] uppercase">
+                            Response within <span className="text-white font-bold">24 hours</span>
                           </p>
-                          <p className="text-[#9A0E1F] text-[8px] font-bold tracking-[0.15em] uppercase">
+                          <p className="text-[#E50914] text-[8px] font-bold tracking-[0.15em] uppercase">
                             Limited client slots available for June
                           </p>
                         </div>
@@ -576,38 +578,68 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Bottom Metrics - Restored with Hardware Acceleration */}
-              <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 md:pb-24 lg:pb-20 w-full px-5 md:px-0">
-                <div className="container mx-auto border-t border-white/5 pt-5 md:pt-8">
+              {/* Bottom Metrics - Exact Badged Design from Mockup Image */}
+              <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 md:pb-20 lg:pb-16 w-full px-5 md:px-0">
+                <div className="container mx-auto border-t border-white/10 pt-6 md:pt-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* LEFT COLUMN: All 3 Metrics */}
-                    <div className="lg:col-span-7 flex flex-row items-end justify-between lg:justify-start md:gap-16 lg:gap-20">
+                    {/* LEFT COLUMN: All 3 Metrics with Dark Red Icon Badges */}
+                    <div className="lg:col-span-8 flex flex-row items-center justify-between lg:justify-start gap-6 md:gap-12 lg:gap-14">
+                      {/* Metric 1: GULF CLIENTS */}
                       <Reveal delay={0.7}>
-                        <div className="flex flex-col items-start text-left">
-                          <span className="text-white/90 font-black text-[22px] md:text-4xl tracking-tighter">GULF</span>
-                          <span className="text-white/30 font-mono font-bold text-[9px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Clients</span>
+                        <div className="flex items-center gap-3.5">
+                          <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
+                            <svg className="w-5 h-5 text-[#E50914]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                          </div>
+                          <div className="flex flex-col text-left">
+                            <span className="text-white font-extrabold text-[18px] md:text-2xl tracking-tight uppercase">GULF</span>
+                            <span className="text-white/40 font-mono font-medium text-[9px] md:text-[10px] uppercase tracking-[0.15em]">Clients</span>
+                          </div>
                         </div>
                       </Reveal>
+
+                      <div className="hidden sm:block h-8 w-px bg-white/10" />
+
+                      {/* Metric 2: BRANDS BUILT */}
                       <Reveal delay={0.8}>
-                        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                          <span className="text-white/90 font-black text-[22px] md:text-4xl tracking-tighter">
-                            <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
-                          </span>
-                          <span className="text-white/30 font-mono font-bold text-[9px] md:text-[9px] uppercase tracking-[0.1em] mt-1">Brands Built</span>
+                        <div className="flex items-center gap-3.5">
+                          <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
+                            <svg className="w-5 h-5 text-[#E50914]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                          </div>
+                          <div className="flex flex-col text-left">
+                            <span className="text-white font-extrabold text-[18px] md:text-2xl tracking-tight">
+                              <CountUp start={0} end={40} duration={5} redraw={true} suffix="+" />
+                            </span>
+                            <span className="text-white/40 font-mono font-medium text-[9px] md:text-[10px] uppercase tracking-[0.15em]">Brands Built</span>
+                          </div>
                         </div>
                       </Reveal>
+
+                      <div className="hidden sm:block h-8 w-px bg-white/10" />
+
+                      {/* Metric 3: MORE ENGAGEMENT */}
                       <Reveal delay={0.9}>
-                        <div className="flex flex-col items-end text-right lg:items-start lg:text-left">
-                          <span className="text-white/90 font-black text-[22px] md:text-4xl tracking-tighter">
-                            <CountUp start={0} end={300} duration={5} redraw={true} suffix="%" />
-                          </span>
-                          <span className="text-white/30 font-mono font-bold text-[9px] md:text-[9px] uppercase tracking-[0.1em] mt-1">More Engagement</span>
+                        <div className="flex items-center gap-3.5">
+                          <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#22070a]/80 border border-[#9A0E1F]/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(154,14,31,0.2)]">
+                            <svg className="w-5 h-5 text-[#E50914]" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                          </div>
+                          <div className="flex flex-col text-left">
+                            <span className="text-white font-extrabold text-[18px] md:text-2xl tracking-tight">
+                              <CountUp start={0} end={300} duration={5} redraw={true} suffix="%" />
+                            </span>
+                            <span className="text-white/40 font-mono font-medium text-[9px] md:text-[10px] uppercase tracking-[0.15em]">More Engagement</span>
+                          </div>
                         </div>
                       </Reveal>
                     </div>
 
-                    {/* RIGHT COLUMN: Empty for now */}
-                    <div className="lg:col-span-5 hidden lg:block" />
+                    {/* RIGHT COLUMN */}
+                    <div className="lg:col-span-4 hidden lg:block" />
                   </div>
                 </div>
               </div>

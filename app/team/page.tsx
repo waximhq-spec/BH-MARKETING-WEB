@@ -3,11 +3,15 @@ import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import PageBgSync from "@/components/PageBgSync";
 
-const CEO = {
+const CEO: {
+  name: string;
+  role: string;
+  desc: string;
+  img?: string;
+} = {
   name: "Suhail Ahmad Goni",
   role: "CO-FOUNDER & CEO",
-  desc: "Suhail leads the company and makes sure everything runs smoothly. He focuses on growing the business and making sure every client gets the best possible results from our team.",
-  img: "/team-img/suhail.png"
+  desc: "Suhail leads the company and makes sure everything runs smoothly. He focuses on growing the business and making sure every client gets the best possible results from our team."
 };
 
 const DEPARTMENTS: Array<{
@@ -121,38 +125,38 @@ const DEPARTMENTS: Array<{
 
 export default function TeamPage() {
   return (
-    <main className="bg-white min-h-screen text-black">
+    <main className="relative overflow-hidden bg-white min-h-screen text-black">
       <PageBgSync bg="white" />
       
       {/* Hero */}
-      <section data-theme="light" className="relative pt-36 md:pt-44 pb-10 md:pb-12 bg-white overflow-hidden">
+      <section data-theme="light" className="relative pt-36 md:pt-44 pb-10 md:pb-12 bg-transparent overflow-hidden">
         <div className="container relative z-10">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
             <div>
               <Reveal>
-                <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/10 border border-[#9A0E1F]/20 rounded-full mb-10 opacity-80">
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#9A0E1F]/5 border border-[#9A0E1F]/20 rounded-full mb-10 opacity-90">
                   <span className="w-2 h-2 rounded-full bg-[#9A0E1F] animate-pulse" />
-                  <span className="text-[#9A0E1F] font-mono tracking-[0.4em] uppercase text-[11px] md:text-[12px] font-bold">The People</span>
+                  <span className="text-[#9A0E1F] font-mono tracking-[0.3em] uppercase text-[10px] md:text-[11px] font-semibold">The People</span>
                 </div>
               </Reveal>
               <Reveal delay={0.1}>
-                <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-[#1a1a1a] to-[#666] font-bold leading-[0.95] tracking-tight antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)", letterSpacing: "-0.03em" }}>
+                <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-[#111111] to-[#555555] font-extrabold leading-[0.95] tracking-[-0.035em] antialiased uppercase" style={{ fontSize: "clamp(2.2rem, 9vw, 7.2rem)" }}>
                   OUR<br />TEAM.
                 </h1>
               </Reveal>
             </div>
             <Reveal delay={0.2}>
               <div className="max-w-[360px] md:mt-28">
-                <h2 className="text-[#1a1a1a] font-medium text-[13px] md:text-[14px] tracking-tight mb-2 antialiased">
+                <h2 className="text-[#111111] font-semibold text-[13px] md:text-[14px] tracking-tight mb-2.5 antialiased uppercase font-mono">
                   Small team. Big results.
                 </h2>
-                <p className="text-black/70 text-[15px] md:text-base leading-relaxed font-light antialiased">
+                <p className="text-black/70 text-[15px] md:text-base leading-relaxed font-normal antialiased tracking-tight">
                   A focused crew of creatives, producers, and strategists who care about making your brand look exceptional.
                 </p>
               </div>
             </Reveal>
           </div>
-          <div className="h-[2px] w-full bg-black/10 mt-10" />
+          <div className="h-[1px] w-full bg-black/10 mt-10" />
         </div>
       </section>
 
@@ -164,16 +168,16 @@ export default function TeamPage() {
           <Reveal delay={0}>
             <div className="mb-16 md:mb-20">
               <div className="flex items-center gap-4 mb-8">
-                <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-bold uppercase">EXECUTIVE LEADERSHIP</span>
+                <span className="text-[#9A0E1F] font-mono text-[10px] tracking-[0.3em] font-semibold uppercase">EXECUTIVE LEADERSHIP</span>
                 <div className="h-px flex-1 bg-black/10" />
               </div>
               
-              <div className="group relative p-8 md:p-12 lg:p-14 border border-black/10 rounded-3xl bg-white hover:border-[#9A0E1F]/30 hover:shadow-[0_20px_60px_rgba(0,0,0,0.04)] transition-all duration-500 flex flex-col md:flex-row items-center gap-8 md:gap-14">
+              <div className="group relative p-8 md:p-12 lg:p-14 border border-black/10 rounded-3xl bg-white hover:border-[#9A0E1F]/30 hover:shadow-[0_25px_65px_rgba(0,0,0,0.06)] transition-all duration-500 flex flex-col md:flex-row items-center gap-8 md:gap-14 transform-gpu">
                 
                 {/* Image Container */}
-                <div className="w-32 h-32 md:w-48 md:h-48 shrink-0 rounded-2xl bg-gradient-to-br from-[#f5f5f5] to-[#eaeaea] flex items-center justify-center overflow-hidden border border-black/5 group-hover:border-[#9A0E1F]/30 transition-all duration-500 shadow-inner relative">
+                <div className="w-32 h-32 md:w-48 md:h-48 shrink-0 rounded-2xl bg-gradient-to-br from-[#f8f8f8] to-[#ededed] flex items-center justify-center overflow-hidden border border-black/8 group-hover:border-[#9A0E1F]/30 transition-all duration-500 shadow-sm relative">
                   {CEO.img ? (
-                    <img src={CEO.img} alt={CEO.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={CEO.img} alt={CEO.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                   ) : (
                     <div className="w-16 h-16 rounded-full bg-black/5 flex items-center justify-center text-black/30 group-hover:scale-110 transition-transform duration-500">
                       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">

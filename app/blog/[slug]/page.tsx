@@ -40,7 +40,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <main className="bg-white min-h-screen text-black pt-32 pb-24">
+    <main className="relative overflow-hidden bg-white min-h-screen text-black pt-32 pb-24">
       <PageBgSync bg="white" />
       <article className="container max-w-3xl mx-auto px-6">
         

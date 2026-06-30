@@ -1,13 +1,15 @@
 "use client";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
+import PageBgSync from "@/components/PageBgSync";
 
 export default function AboutContent() {
 
   return (
-    <main className="bg-white min-h-screen text-black">
+    <main className="relative overflow-hidden bg-white min-h-screen text-black">
+      <PageBgSync bg="white" />
       {/* Hero */}
-      <section data-theme="light" className="relative pt-36 md:pt-44 pb-10 md:pb-12 bg-white overflow-hidden">
+      <section data-theme="light" className="relative pt-36 md:pt-44 pb-10 md:pb-12 bg-transparent overflow-hidden">
         <div className="container relative z-10">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
             <div>
